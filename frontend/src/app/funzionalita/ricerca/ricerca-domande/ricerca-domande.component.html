@@ -1,0 +1,129 @@
+<div class="d-flex flex-column mx-5 my-4">
+  <div class="title">{{ 'RICERCA_DOMANDE.CERCA_DOMANDE' | translate }}</div>
+  <div class="search-table-container">
+    <div class="search-row d-flex justify-content-between">
+      <p-dropdown
+        placeholder="{{ 'RICERCA_DOMANDE.TUTTI_CAMPI' | translate }}"
+        class="greyed a4g-fixed-width-dropdown"
+        [options]="applicationFieldNames"
+        [(ngModel)]="applicationFieldName"
+        [autoDisplayFirst]="false"
+      ></p-dropdown>
+      <input
+        placeholder="{{ 'RICERCA_DOMANDE.CERCA' | translate }}"
+        type="text"
+        class="search-input"
+        [(ngModel)]="searchText"
+        (keyup.enter)="searchDomande()"
+      />
+      <p-dropdown
+        placeholder="{{ 'RICERCA_DOMANDE.STATO' | translate }}"
+        [options]="applicationStates"
+        [(ngModel)]="applicationState"
+        [autoDisplayFirst]="false"
+        class="mr-2 a4g-fixed-width-dropdown"
+      ></p-dropdown>
+      <p-dropdown
+        placeholder="{{ 'RICERCA_DOMANDE.ANNO' | translate }}"
+        [options]="applicationYears"
+        [(ngModel)]="applicationYear"
+        [autoDisplayFirst]="false"
+        class="mr-2 a4g-fixed-width-dropdown"
+      ></p-dropdown>
+      <p-dropdown
+        placeholder="{{ 'RICERCA_DOMANDE.SOSTEGNO' | translate }}"
+        [options]="applicationSupports"
+        [(ngModel)]="applicationSupport"
+        [autoDisplayFirst]="false"
+        class="mr-2 a4g-fixed-width-dropdown"
+      ></p-dropdown>
+      <p-dropdown
+        placeholder="{{ 'RICERCA_DOMANDE.PAGAMENTO' | translate }}"
+        [options]="applicationPayments"
+        [(ngModel)]="applicationPayment"
+        [autoDisplayFirst]="false"
+        class="mr-2 a4g-fixed-width-dropdown"
+      ></p-dropdown>
+      <button pButton type="button" class="search-button" label="{{'RICERCA_DOMANDE.CERCA' | translate }}" (click)="searchDomande()" [disabled]="!applicationFieldName || searchText === ''"></button>
+    </div>
+    <div *ngIf="filters" class="d-flex justify-content-start align-items-center mt-5 pt-3 border-top">
+      <div *ngIf="filters[applicationFieldName]">
+        <span [innerHtml]="'RICERCA_DOMANDE.RISULTATI_FILTRI' | translate: {results: datiDomandaRicercaPage.count, searchText: filters[applicationFieldName]}"></span>
+      </div>
+      <div class="ml-2" *ngIf="filters[applicationFieldName]">
+        <button pButton type="button" label="{{filters[applicationFieldName]}}" class="ui-button-rounded ui-button-secondary a4g-chip" icon="pi pi-times" iconPos="right" (click)="removeFilter(filterFields.SEARCHTEXT)"></button>
+      </div>
+      <div class="ml-2" *ngIf="filters?.statoDomanda">
+        <button pButton type="button" label="{{filters?.statoDomanda | replaceWithSpaceBy:'_' | capitalizeFirstLetterOnly }}" class="ui-button-rounded ui-button-secondary a4g-chip" icon="pi pi-times" iconPos="right" (click)="removeFilter(filterFields.STATODOMANDA)"></button>
+      </div>
+      <div class="ml-2" *ngIf="filters?.campagna">
+        <button pButton type="button" label="{{filters?.campagna}}" class="ui-button-rounded ui-button-secondary a4g-chip" icon="pi pi-times" iconPos="right" (click)="removeFilter(filterFields.CAMPAGNA)"></button>
+      </div>
+      <div class="ml-2" *ngIf="filters?.sostegno">
+        <button pButton type="button" label="{{filters?.sostegno | supportoDescription }}" class="ui-button-rounded ui-button-secondary a4g-chip" icon="pi pi-times" iconPos="right" (click)="removeFilter(filterFields.SOSTEGNO)"></button>
+      </div>
+      <div class="ml-2" *ngIf="filters?.tipo">
+        <button pButton type="button" label="{{filters?.tipo | capitalizeFirstLetterOnly }}" class="ui-button-rounded ui-button-secondary a4g-chip" icon="pi pi-times" iconPos="right" (click)="removeFilter(filterFields.TIPO)"></button>
+      </div>
+    </div>
+    <p-table
+      [value]="datiDomandaRicercaPage.risultati"
+      class="mt-4"
+      [responsive]="true"
+      [rows]="elementiPagina"
+      [paginator]="true"
+      [showCurrentPageReport]="true"
+      [totalRecords]="datiDomandaRicercaPage.count"
+      [lazy]="true"
+      [lazyLoadOnInit]="false"
+      (onLazyLoad)="changePage($event)"
+      currentPageReportTemplate="🔎 {{ 'RICERCA_DOMANDE.RISULTATI_TOTALI' | translate }}: {totalRecords}"
+    >
+      <ng-template *ngIf="columns" pTemplate="header">
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.value" [ngStyle]="{'width': col.width}" >
+            {{ col.name }} {{ col.value ? '⇅' : '' }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-application>
+        <tr *ngIf="columns">
+          <td>{{ application.cuaa }}</td>
+          <td>{{ application.companyDescription }}</td>
+          <td>{{ application.numeroDomanda }}</td>
+          <td>{{ application.year }}</td>
+          <td>{{ application.state | replaceWithSpaceBy:'_' | lowercase}}</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td [attr.colspan]="2" class="related-row-left-column p-0"></td>
+          <td [attr.colspan]="4" class="related-row-right-column p-0">
+            <div class="flex mr-2 justify-content-end">
+              <div class="ml-auto d-flex flex-column ml-auto">
+                <div class="d-flex px-3 py-1 justify-content-between align-items-center" *ngFor="let relate of application.relates; let i=index" [ngClass]="{ 'border-top': i > 0 }">
+                  <div class="related-detail-column">{{ relate.support | supportoDescription }}</div>
+                  <div class="related-detail-column">{{ relate.payment | capitalizeFirstLetterOnly }}</div>
+                  <div *ngIf="application.state === 'IN_ISTRUTTORIA'" class="fs-24 mr-1 related-detail-arrow" routerLink="/funzioniPat/istruttoriaPac1420/{{application.year}}/{{relate?.support.toLowerCase()}}/{{relate?.payment.toLowerCase()}}/istruttoria/{{relate?.idIstruttoria}}/controlliSostegno">➜</div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="columns.length" class="border-0 p-0">
+            <div class="empty-data-message">
+              <div *ngIf="initialState; else noResults">
+                {{ 'RICERCA_DOMANDE.EFFETTUA_RICERCA_RISULTATI' | translate }}
+              </div>
+              <ng-template #noResults
+                >{{ 'RICERCA_DOMANDE.NESSUN_RISULTATO' | translate }}</ng-template
+              >
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

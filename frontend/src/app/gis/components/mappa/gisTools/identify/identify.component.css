@@ -1,0 +1,16 @@
+div#info-panel {
+  right: 55px;
+  top: 272px;
+  max-width: 64vh;
+  font-size: 15px;
+  position: absolute;
+  padding: 0;
+  z-index: 9999;
+  height: 550px;
+  overflow: hidden;
+  }
+  
+  .card-content.onlyIdentify {
+    top: 0px!important;
+    height: inherit!important;
+}

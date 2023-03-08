@@ -1,0 +1,323 @@
+<div
+  *ngIf="title"
+  class="title-table mb-1">
+  <h5 class="p-1 m-0 text-white align-self-center">{{title | uppercase}}</h5>
+</div>
+<div
+  *ngIf="titles?.length"
+  class="title-table mb-1 p-grid mx-0">
+  <ng-container *ngFor="let title of titles; let i = index">
+    <h5
+      class="m-0 text-white align-self-center"
+      [ngClass]="{'text-right': title.align === 'RIGHT', 'text-left': title.align === 'LEFT', 'text-center': title.align === 'CENTER',
+      'border-right-0-5': i%2==0, 'border-left-0-5': i%2!=0  }"
+      [ngStyle]="{width: title.width}">{{title.name | uppercase}}</h5>
+  </ng-container>
+</div>
+
+<p-table
+  [columns]="cols"
+  [value]="values"
+  class="ui-fluid"
+  (sortFunction)="a4gMultiTableService.customSortFn($event)"
+  [customSort]="customSort">
+
+  <!-- template for dynamic width column -->
+  <ng-template
+    pTemplate="colgroup"
+    let-columns>
+    <colgroup>
+      <col
+        *ngFor="let col of columns"
+        [style.width]="col.width">
+    </colgroup>
+  </ng-template>
+
+  <!-- template for header column -->
+  <ng-template
+    *ngIf="cols?.length"
+    pTemplate="header">
+    <tr *ngIf="header?.length">
+      <ng-container *ngFor="let col of cols; let i = index">
+        <ng-container *ngIf="i == 0 then headerTpl else emptyHeaderTpl"></ng-container>
+      </ng-container>
+    </tr>
+    <ng-template #headerTpl>
+      <th>
+        <div class="p-grid">
+          <div
+            *ngFor="let item of header; let i = index"
+            [ngClass]="{'p-col-fixed': i <= 0, 'p-col': i > 0}">
+            <span>{{item.key}}: <strong>{{item.value}}</strong></span>
+          </div>
+        </div>
+      </th>
+    </ng-template>
+    <ng-template #emptyHeaderTpl>
+      <th></th>
+    </ng-template>
+
+    <tr>
+      <th
+        [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-between': col.alignCellHorizontal === 'CENTER' }"
+        *ngFor="let col of cols"
+        [pSortableColumn]="col.field"
+        [pSortableColumnDisabled]="!col.sortable">
+        <div
+          class="p-grid"
+          [ngClass]="{'text-right': col.alignHeader === 'RIGHT', 'text-left': col.alignHeader === 'LEFT', 'text-center': col.alignHeader === 'CENTER' }">
+          <div
+            class="p-col"
+            [ngClass]="{'font-weight-bold': col.font === 'BOLD', 'font-weight-normal': (!col.font || col.font === 'NORMAL') , 
+          'font-weight-light': col.font === 'LIGHT', 'font-italic': col.font === 'ITALIC' }">
+            {{ col.header }}
+            <p-sortIcon
+              *ngIf="col.sortable"
+              [field]="col.field"></p-sortIcon>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+
+  <!-- template of body - based on column types -->
+  <ng-template
+    *ngIf="cols?.length"
+    pTemplate="body"
+    let-element
+    let-columns="columns"
+    let-rowData
+    let-index="rowIndex">
+
+    <!-- 1° template row with colspan -->
+    <tr *ngIf="rowData.colspan">
+      <ng-container *ngFor="let col of columns; let i = index;">
+        <!-- label column -->
+        <td *ngIf="i == 0">
+          <div
+            [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-between': col.alignCellHorizontal === 'CENTER' }"
+            class="p-grid">
+            <div class="p-col-align-center">{{element[col.field]}}</div>
+          </div>
+        </td>
+        <!-- text column -->
+        <td
+          [attr.colspan]="rowData.colspan"
+          *ngIf="i == 1">
+          <div
+            [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-between': col.alignCellHorizontal === 'CENTER' }"
+            class="p-grid">
+            <div class="p-col-align-center p-col-12">
+              <textarea
+                #txtAreaInpuRef
+                pInputTextarea
+                class="w-100"
+                maxlength="500"
+                placeholder="Scrivi qui eventuali note aggiuntive..."
+                [rows]="5"
+                [(ngModel)]="rowData.field"
+                [disabled]="readonly || col.disabled || element.disabled"
+                (blur)="onBlurTextArea(element, txtAreaInpuRef)"
+                (change)="onChangeTextArea($event, txtAreaInpuRef)"></textarea>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+
+    <!-- 2° template row without colspan (standard) -->
+    <tr *ngIf="!rowData.colspan">
+      <td
+        class="ui-resizable-column"
+        *ngFor="let col of columns; let i = index;">
+
+        <!-- template column type: INPUT_NUMBER -->
+        <div *ngIf="col.type == columnType.INPUT_NUMBER">
+          <div
+            [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-between': col.alignCellHorizontal === 'CENTER' }"
+            class="p-grid">
+            <div
+              *ngIf="col.icon"
+              class="p-col-2 p-col-align-center">
+              <button
+                pButton
+                [disabled]="readonly || col.disabled || element.disabled"
+                (click)="onClickIcon($event, element, col)"
+                class="a4g-icon-button"
+                icon="{{col.icon}}"></button>
+            </div>
+            <div
+              [ngClass]="{'p-col-10': col.icon && !col.suffix,
+              'p-col-8': (col.icon && col.suffix || !col.icon && col.suffix), 'p-col-12': !col.icon && !col.suffix}"
+              class="p-col-align-center">
+              <input
+                #inputRef
+                pInputText
+                [maxlength]="col.inputOpts.maxLength"
+                [pattern]="col.inputOpts.pattern"
+                [a4gMaxInputSize]="{size:element[col.inputOpts?.upperLimitField], inputRef:inputRef, row: element, col: col}"
+                [a4gMaxValue]="{max:col.inputOpts?.max, inputRef:inputRef, row: element, col: col}"
+                [disabled]="readonly || col.disabled || element.disabled"
+                (blur)="onBlurInputNumber(element, inputRef)"
+                (change)="onChangeInputNumber($event, inputRef)"
+                [(ngModel)]="element[col.field]">
+            </div>
+            <div
+              [ngClass]="{'p-col-2': col.icon, 'p-col-4': !col.icon}"
+              class="p-col-align-center font-14"
+              *ngIf="col.suffix">
+              {{element[col.suffix] | titlecase}}
+            </div>
+            <div>
+              <p-message
+                *ngIf="inputRef.validity.patternMismatch"
+                severity="error"
+                text="Formato non valido">
+              </p-message>
+              <p-message
+                *ngIf="inputRef.validity.max"
+                severity="error"
+                text="La superficie lavorata non può superare la superficie massima">
+              </p-message>
+              <p-message
+                *ngIf="inputRef.validity.maxVal"
+                severity="error"
+                text="Il valore deve essere inferiore a {{col?.inputOpts?.max}}">
+              </p-message>
+            </div>
+          </div>
+        </div>
+
+        <!-- template column type: INPUT_NUMBER_ACTION -->
+        <div *ngIf="col.type == columnType.INPUT_NUMBER_ACTION">
+          <div
+            [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-between': col.alignCellHorizontal === 'CENTER' }"
+            class="p-grid">
+            <div
+              *ngIf="col.icon"
+              class="p-col-2 p-col-align-center">
+              <button
+                pButton
+                [disabled]="readonly || col.disabled || element.disabled"
+                (click)="onClickIcon($event, element, col)"
+                class="a4g-icon-button"
+                icon="{{col.icon}}"></button>
+            </div>
+            <div
+              [ngClass]="{'p-col-10': col.icon && !col.suffix,
+              'p-col-8': (col.icon && col.suffix || !col.icon && col.suffix), 'p-col-12': !col.icon && !col.suffix}"
+              class="p-col-align-center">
+              <input
+                #inputRef
+                pInputText
+                [maxlength]="col.inputOpts.maxLength"
+                [pattern]="col.inputOpts.pattern"
+                [a4gMaxInputSize]="{size:element[col.inputOpts?.upperLimitField], inputRef:inputRef, row: element, col: col}"
+                [a4gMaxValue]="{max:col.inputOpts?.max, inputRef:inputRef, row: element, col: col}"
+                [disabled]="readonly || col.disabled || element.disabled"
+                (blur)="onBlurInputNumber(element, inputRef)"
+                (change)="onChangeInputNumber($event, inputRef, index, col.inputOpts.action)"
+                [(ngModel)]="element[col.field]">
+            </div>
+            <div
+              [ngClass]="{'p-col-2': col.icon, 'p-col-4': !col.icon}"
+              class="p-col-align-center font-14"
+              *ngIf="col.suffix">
+              {{element[col.suffix] | titlecase}}
+            </div>
+            <div>
+              <p-message
+                *ngIf="inputRef.validity.patternMismatch"
+                severity="error"
+                text="Formato non valido">
+              </p-message>
+              <p-message
+                *ngIf="inputRef.validity.max"
+                severity="error"
+                text="La superficie lavorata non può superare la superficie massima">
+              </p-message>
+              <p-message
+                *ngIf="inputRef.validity.maxVal"
+                severity="error"
+                text="Il numero massimo di mesi che può essere digitato è {{col?.inputOpts?.max}}">
+              </p-message>
+            </div>
+          </div>
+        </div>
+
+        <!-- template column type: READONLY -->
+        <div *ngIf="col?.type == columnType.READONLY">
+          <div
+            [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-center': col.alignCellHorizontal === 'CENTER' }"
+            class="p-grid">
+            <div class="p-col-align-center">{{element[col.field]}}</div>
+            <div
+              *ngIf="col.suffix"
+              class="p-col-align-center p-offset-1 font-14">
+              {{element[col.suffix] | titlecase}}
+            </div>
+          </div>
+        </div>
+
+        <!-- template column type: ICON-BUTTON - Quadrata -->
+        <div *ngIf="col?.type == columnType.ICON_BUTTON_SQUARE">
+          <div [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-center': col.alignCellHorizontal === 'CENTER' }">
+            <div
+              class="text-center"
+              *ngIf="!element[col.buttonOpts.hiddenBy] && !element.hiddenSquare">
+              <button
+                pButton
+                [id]="col.buttonOpts.id"
+                type="button"
+                class="icon-button-square"
+                [icon]="col.buttonOpts.icon"
+                [disabled]="readonly || element.disabled || element[col.buttonOpts.disabledBy]"
+                (click)="onClickButton(element, col)"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- template column type: ICON-BUTTON - Rotonda -->
+        <div *ngIf="col?.type == columnType.ICON_BUTTON_CIRCLE">
+          <div [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-center': col.alignCellHorizontal === 'CENTER' }">
+            <div
+              class="text-center"
+              *ngIf="!element[col.buttonOpts.hiddenBy] && !element.hiddenCircle">
+              <button
+                pButton
+                [id]="col.buttonOpts.id"
+                type="button"
+                class="icon-button-circle"
+                [icon]="col.buttonOpts.icon"
+                [disabled]="readonly || element.disabled || element[col.buttonOpts.disabledBy]"
+                (click)="onClickButton(element, col)"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- template column type: CHECKBOX -->
+        <div *ngIf="col?.type == columnType.CHECKBOX">
+          <div [ngClass]="{'p-justify-end': col.alignCellHorizontal === 'RIGHT', 'p-justify-start': col.alignCellHorizontal === 'LEFT', 'p-justify-center': col.alignCellHorizontal === 'CENTER' }">
+            <div class="text-center">
+              <p-checkbox
+                name="checkbox"
+                [binary]="true"
+                [(ngModel)]="element[col.field]"
+                (onChange)="onChangeCheckbox(element, col)"></p-checkbox>
+            </div>
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  </ng-template>
+
+  <!-- template no Results -->
+  <ng-template
+    pTemplate="emptymessage"
+    let-columns>
+    <tr>
+      <td [attr.colspan]="columns?.length">Nessun risultato trovato.</td>
+    </tr>
+  </ng-template>
+</p-table>

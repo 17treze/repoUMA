@@ -1,0 +1,478 @@
+<div class="ui-g ui-fluid">
+  <p-toast position="center" key="warn-already-uploadedFile" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-messageService pTemplate="messageService">
+      <div style="text-align: center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+        <h3>{{messageService.summary}}</h3>
+        <p>{{messageService.detail}}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="onConfirmHasAlreadyUploadedFile()" label="Si"
+            class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="onRejectHasAlreadyUploadedFile()" label="No"
+            class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <p-toast key="tst" [style]="{ marginTop: '70px' }"></p-toast>
+  <div class="ui-grid-fixed">
+    <div class="boxgrey">
+      <!-- <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast> -->
+      <h3>
+        <span>
+          DOMANDA INTEGRATIVA PER IL SOSTEGNO ACCOPPIATO ZOOTECNIA AI SENSI DELL'ART. 52 DEL REG. (ue) N.1307/2013
+        </span>
+      </h3>
+      <!-- CICLO PER OGNI ALLEVAMENTO -->
+      <!-- <p-accordion *ngFor="let numero of numeri" class="accordion"> -->
+      <p-accordion *ngFor="let allevamento of this.domandaIntegrativa.allevamenti" [activeIndex]="index"
+        class="accordion">
+        <p-accordionTab *ngIf="allevamento.capi.length != 0">
+          <p-header class="row align-items-center">
+            <div class="col-md-4">
+              <div class="flex-center-h-wrapper">
+                <label class="ui-accordion-header__title  ui-accordion-header__label"><span
+                    class="font-weight-bold">{{allevamento.descAllevamento}} -
+                    {{allevamento.descProprietario}}</span></label>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-3  ml-auto">
+                  <div class="flex-center-h-wrapper">
+                    <span class="ui-icon-help top mr-2"></span>
+                    <label class="ui-accordion-header__label"><span
+                        class="font-weight-bold">{{contaNonSelezionati(allevamento)}}</span> non selezionati</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="flex-center-h-wrapper">
+                    <span class="ui-icon-info  ui-icon-alertcustom top mr-2"></span>
+                    <label class="ui-accordion-header__label"><span
+                        class="font-weight-bold">{{contaSelezionatiConSanzione(allevamento)}}</span> selezionati con
+                      anomalia</label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="flex-center-h-wrapper">
+                    <span class="ui-icon-check top mr-2"></span>
+                    <label class="ui-accordion-header__label"><span
+                        class="font-weight-bold">{{contaSelezionatiSenzaSanzione(allevamento)}}</span> selezionati senza
+                      anomalia</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-header>
+          <table class="table table-striped  table-domande">
+            <thead fix-head>
+              <tr class="headerTable">
+                <th class="primaCella" [attr.colspan]="3"></th>
+                <th class="boviniDaLatte" [attr.colspan]="2">
+                  <div class="flex-center-h-wrapper">
+                    <img src="assets/img/svg/BOVINILATTE.svg" class="th-icon" />
+                    <span>BOVINI DA LATTE</span>
+                  </div>
+                </th>
+                <th class="vaccheNutrici" [attr.colspan]="2">
+                  <div class="flex-center-h-wrapper">
+                    <img src="assets/img/svg/VACCHENUTRICI.svg" class="th-icon" />
+                    <span>VACCHE NUTRICI</span>
+                  </div>
+                </th>
+                <th class="boviniMacellati" [attr.colspan]="3">
+                  <div class="flex-center-h-wrapper">
+                    <img src="assets/img/svg/BOVINIMACELLATI.svg" class="th-icon" />
+                    <span>BOVINI MACELLATI</span>
+                  </div>
+                </th>
+                <th class="ovicaprini" [attr.colspan]="2">
+                  <div class="flex-center-h-wrapper">
+                    <img src="assets/img/svg/OVICAPRINI.svg" class="th-icon" />
+                    <span>OVICAPRINI</span>
+                  </div>
+                </th>
+              </tr>
+              <tr class="headerInterventi">
+                <th scope="row">
+                  CAPO
+                </th>
+                <th [attr.colspan]="2" scope="row">SPECIE</th>
+                <th [attr.colspan]="2">
+                  <div class="ui-g-5">
+                    <label class="numeroIntervento1">310</label>
+                  </div>
+                  <div class="ui-g-2">
+                    <strong>+</strong>
+                  </div>
+                  <div class=" ui-g-5">
+                    <label class="numeroIntervento1">311</label>
+                    <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('311')"></span>
+                  </div>
+                </th>
+                <th>
+                  <label class="numeroIntervento1">313</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('313')"></span>
+                </th>
+                <th class="intervento">
+                  <label class="numeroIntervento1">322</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('322')"></span>
+                </th>
+                <th>
+                  <label class="numeroIntervento2">315</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('315')"></span>
+                </th>
+                <th>
+                  <label class="numeroIntervento2">316</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('316')"></span>
+                </th>
+                <th>
+                  <label class="numeroIntervento2">318</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('318')"></span>
+                </th>
+                <th>
+                  <label class="numeroIntervento3">320</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('320')"></span>
+                </th>
+                <th>
+                  <label class="numeroIntervento3">321</label>
+                  <span class="ui-icon-info top  ui-icon-info--top" (click)="getDescIntervento('321')"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- QUI BISOGNA CICLARE TUTTI I CAPI PRESENTI  -->
+              <tr *ngFor="let capo of allevamento.capi">
+                <td class="idCapo">{{capo.codCapo}}</td>
+                <td class="idRazza">
+                  {{capo.codSpecie}}
+                </td>
+                <td class="cellaSanzione">
+                  <span *ngIf="mostraIconaSanzione(capo)"
+                    class="ui-icon-info ui-icon-alertcustom iconaSanzioneRazza"></span>
+                  <span *ngIf="mostraIconaNonSelezionato(capo)" class="ui-icon-help top iconaRazza"></span>
+                </td>
+                <td *ngFor="let intervento of capo.interventi"
+                  [ngStyle]="{'background-color' : intervento.selezionato ? '#D3E7B0' : ''}" [ngClass]="{
+                    'cell--310': intervento.codice === '310',
+                    'cell--311': intervento.codice === '311',
+                    'has-checkbox': intervento.esito
+                  }">
+                  <div *ngIf="intervento.esito" class="checkbox__wrapper">
+                    <p-checkbox #primeCheckBox [disabled]="intervento.esito == 'NON_AMMISSIBILE' || isReadOnly"
+                      name="vaccheNutrici" [(ngModel)]="intervento.selezionato" binary="true"
+                      (onChange)="exclusiveCheckbox(intervento,capo.interventi,$event,primeCheckBox)"></p-checkbox>
+                    <span *ngIf="intervento.esito == 'AMMISSIBILE_CON_SANZIONE'"
+                      class="checkbox__icon  ui-icon-info  ui-icon-alertcustom"
+                      (click)="getEsitoCapo(capo, intervento.codice)"></span>
+                    <span *ngIf="intervento.esito == 'NON_AMMISSIBILE'"
+                      class="checkbox__icon  ui-icon-cancel nonAmmissibile"
+                      (click)="getEsitoCapo(capo, intervento.codice)"></span>
+                  </div>
+                  <div *ngIf="!intervento.esito" class="checkbox__wrapper">
+                    <div *ngIf="intervento.codice === '310' || intervento.codice === '311'" class="dummy-checkbox">
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </p-accordionTab>
+      </p-accordion>
+
+      <table class="table table-striped tabellaTotali mb-0">
+        <thead>
+          <tr class="headerTable">
+            <th class="primaCella" colspan="2"></th>
+            <th class="boviniDaLatte" [attr.colspan]="2">
+              <div class="flex-center-h-wrapper">
+                <img src="assets/img/svg/BOVINILATTE.svg" class="th-icon" />
+                <span>BOVINI DA LATTE</span>
+              </div>
+            </th>
+            <th class="vaccheNutrici" [attr.colspan]="2">
+              <div class="flex-center-h-wrapper">
+                <img src="assets/img/svg/VACCHENUTRICI.svg" class="th-icon" />
+                <span>VACCHE NUTRICI</span>
+              </div>
+            </th>
+            <th class="boviniMacellati" [attr.colspan]="3">
+              <div class="flex-center-h-wrapper">
+                <img src="assets/img/svg/BOVINIMACELLATI.svg" class="th-icon" />
+                <span>BOVINI MACELLATI</span>
+              </div>
+            </th>
+            <th class="ovicaprini" [attr.colspan]="2">
+              <div class="flex-center-h-wrapper">
+                <img src="assets/img/svg/OVICAPRINI.svg" class="th-icon" />
+                <span>OVICAPRINI</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="headerInterventi">
+            <th scope="row" colspan="2">
+              TOTALE ALLEVAMENTI
+            </th>
+            <td [attr.colspan]="2">
+              <div class="ui-g-5">
+                <label class="numeroIntervento1">310</label>
+              </div>
+              <div class="ui-g-2">
+                <strong>+</strong>
+              </div>
+              <div class=" ui-g-5">
+                <label class="numeroIntervento1">311</label>
+                <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('311')"></span>
+              </div>
+            </td>
+            <td>
+              <label class="numeroIntervento1">313</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('313')"></span>
+            </td>
+            <td class="intervento">
+              <label class="numeroIntervento1">322</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('322')"></span>
+            </td>
+            <td>
+              <label class="numeroIntervento2">315</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('315')"></span>
+            </td>
+            <td>
+              <label class="numeroIntervento2">316</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('316')"></span>
+            </td>
+            <td>
+              <label class="numeroIntervento2">318</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('318')"></span>
+            </td>
+            <td>
+              <label class="numeroIntervento3">320</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('320')"></span>
+            </td>
+            <td>
+              <label class="numeroIntervento3">321</label>
+              <span class="ui-icon-info ui-icon-info--top" (click)="getDescIntervento('321')"></span>
+            </td>
+          </tr>
+          <tr class="rigaSelezionatiSenzaSanzione">
+            <td><span class="ui-icon-check top"></span></td>
+            <td>
+              <div class="cellaSelezionatiSenzaSanzione">
+                <strong>{{totali.get('310')[0]+
+                    totali.get('311')[0]+
+                    totali.get('313')[0]+
+                    totali.get('322')[0]+
+                    totali.get('315')[0]+
+                    totali.get('316')[0]+
+                    totali.get('318')[0]+
+                    totali.get('320')[0]+
+                    totali.get('321')[0] }}</strong> - selezionati senza anomalia
+              </div>
+            </td>
+            <td [attr.colspan]="2">
+              <div class="ui-g-5">
+                <strong>{{totali.get('310')[0]}}</strong>
+              </div>
+              <div class="ui-g-2">
+                &nbsp;
+              </div>
+              <div class=" ui-g-5">
+                <strong>{{totali.get('311')[0]}}</strong>
+              </div>
+            </td>
+            <td>
+              <strong>{{totali.get('313')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('322')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('315')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('316')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('318')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('320')[0]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('321')[0]}}</strong>
+            </td>
+          </tr>
+          <tr class="rigaSelezionatiConSanzione">
+            <td>
+              <span class="ui-icon-info  ui-icon-alertcustom top"></span>
+            </td>
+            <td>
+              <div class="cellaSelezionatiConSanzione">
+                <strong>{{totali.get('310')[1]+
+                    totali.get('311')[1]+
+                    totali.get('313')[1]+
+                    totali.get('322')[1]+
+                    totali.get('315')[1]+
+                    totali.get('316')[1]+
+                    totali.get('318')[1]+
+                    totali.get('320')[1]+
+                    totali.get('321')[1] }}</strong> - selezionati con anomalia
+              </div>
+            </td>
+            <td [attr.colspan]="2">
+              <div class="ui-g-5">
+                <strong>{{totali.get('310')[1]}}</strong>
+              </div>
+              <div class="ui-g-2">
+                &nbsp;
+              </div>
+              <div class=" ui-g-5">
+                <strong>{{totali.get('311')[1]}}</strong>
+              </div>
+            </td>
+            <td>
+              <strong>{{totali.get('313')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('322')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('315')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('316')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('318')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('320')[1]}}</strong>
+            </td>
+            <td>
+              <strong>{{totali.get('321')[1]}}</strong>
+            </td>
+          </tr>
+          <tr class="rigaNonSelezionati">
+            <td>
+              <span class="ui-icon-help top"></span>
+            </td>
+            <td colspan="10">
+              <div class="cellaNonSelezionati">
+                <strong>{{numeroCapiNonSelezionati}}</strong> - non selezionati
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <p class="actions__info">
+          E' possibile salvare una copia temporanea della domanda integrativa anche con alcuni capi non
+          impegnati utilizzando il pulsante salva. Per poter confermare definitivamente la domanda tutti
+          i capi ammissibilo anomali devono essere impegnati su un intervento.
+          Una volta confermata la domanda integrativa dovrà essere stampata,
+          fatta firmare con firma autografa e ricaricata in formato .pdf con allegato documento di
+          identità del firmatario (dimensione massima del file 2Mb)
+        </p>
+        <div class="flex-center-h-wrapper action__buttons">
+          <button pButton [disabled]="domandaIntegrativa.stato != 'PRESENTATA' || !btnStampa" appDebounceClick
+            label="Stampa" (debounceClick)="stampaDomanda()" class="action__button--stampa">
+            <span class="ui-icon-print mr-1"></span>
+          </button>
+          <div>
+            <button pButton type="button" icon="{{icon}}" label="Carica" (click)="verifyUploadFile()"
+              class="action__button--stampa"></button>
+            <input type="file" style="display:none" #upFileDI id="upFileDI" name="upFileDI" accept="{{fileExt}}"
+              (change)="uploadFile($event)" />
+          </div>
+          <button pButton type="button" icon="{{iconDownload}}" label="Scarica" (click)="downloadRicevutaDomandaIntegrativa()"
+            class="action__button--stampa" [disabled]="icon == 'ui-icon-file-upload'"></button>
+          <button *ngIf="domandaIntegrativa.stato != 'PRESENTATA'" pButton
+            [disabled]="domandaIntegrativa.stato == 'PRESENTATA' && finestraChiusa" appDebounceClick label="Salva"
+            (debounceClick)="salvaDomanda()" class="action__button--salva">
+            <span class="ui-icon-save mr-1"></span>
+          </button>
+          <button *ngIf="domandaIntegrativa.stato == 'PRESENTATA'" pButton
+            [disabled]="this.btnModificaDomanda || finestraChiusa" appDebounceClick label="Modifica" label="Modifica"
+            (debounceClick)="modificaDomanda()" class="action__button--salva">
+            <span class="ui-icon-save mr-1"></span>
+          </button>
+          <button pButton
+            [disabled]="!this.btnPresentaDomanda && domandaIntegrativa.stato == 'PRESENTATA' || finestraChiusa"
+            appDebounceClick label="PRESENTA DOMANDA" (debounceClick)="presentaDomanda()"
+            class="action__button--presenta"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- popup informazioni interevnto-->
+<p-dialog [(visible)]="displayPopupInfoIntervento" [responsive]="true" showEffect="fade" [modal]="true"
+  [closable]="false" class="dialog-domanda-integrativa">
+  <div>
+    <p-header>
+      <strong>INTERVENTO</strong> <label class="numeroIntervento1 ml-1">{{this.codiceAgeaPopUp}}</label> <br>
+    </p-header>
+
+    <!-- desc intervento-->
+    <div>
+      <label class="my-3">{{this.descInterventoBrevePopUp}}</label>
+      <p>{{this.descInterventoLungaPopUp}}</p> <br>
+      <div class="flex-center-h-wrapper mt-5">
+        <button type="button" pButton class="ui-button-text ui-clickable ml-auto" (click)="chiudiPopupDescIntervento()"
+          label="{{labels.CHIUDI}}"></button>
+      </div>
+    </div>
+  </div>
+</p-dialog>
+
+
+
+<!-- popup informazioni capo-->
+<p-dialog [(visible)]="displayPopupInfoCapo" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false"
+  class="dialog-domanda-integrativa">
+  <div>
+    <p-header>
+      <strong>CAPO</strong> <span class="mx-2">{{this.codiceCapo}}</span><span> {{this.popupCodiceSpecie}}</span>
+    </p-header>
+
+    <!-- motivazione della sanzione-->
+    <div>
+      <label>{{this.esitoCapo}} </label> all'intervento <label
+        class="numeroIntervento1 ml-1">{{this.popupCodiceIntervento}}</label>
+      <p class="mt-3"><strong>Motivazione dell'anomalia:</strong><br />{{this.popupMessaggio}}</p>
+    </div>
+    <div class="flex-center-h-wrapper mt-5">
+      <button type="button" pButton class="ui-button-text ui-clickable ml-auto" (click)="chiudiPopup()"
+        label="{{labels.CHIUDI}}"></button>
+    </div>
+  </div>
+</p-dialog>
+
+<!--Toast modifica domanda-->
+<p-toast position="center" key="checkModificaDomanda" (onClose)="onRejectCheckModificaDomanda()" [modal]="true"
+  [baseZIndex]="6000">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+      <h5>{{message.summary}}</h5>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="onConfirmCheckModificaDomanda()" label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="onRejectCheckModificaDomanda()" label="No"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

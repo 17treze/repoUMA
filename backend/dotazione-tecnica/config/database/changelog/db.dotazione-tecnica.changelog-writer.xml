@@ -1,0 +1,95 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="DOTAZIONETECNICA_WRT_51.0" author="Bruno Conetta" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING_VALIDAZIONE FOR ${user.superuser}.A4GT_LOGGING_VALIDAZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_51.1" author="Antonio Avitabile" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FASCICOLO FOR ${user.superuser}.A4GT_FASCICOLO;
+			CREATE OR REPLACE SYNONYM A4GD_TIPOLOGIA_MACCHINARIO FOR ${user.superuser}.A4GD_TIPOLOGIA_MACCHINARIO;
+			CREATE OR REPLACE SYNONYM A4GD_SOTTOTIPO_MACCHINARIO FOR ${user.superuser}.A4GD_SOTTOTIPO_MACCHINARIO;
+			CREATE OR REPLACE SYNONYM A4GT_MACCHINA FOR ${user.superuser}.A4GT_MACCHINA;
+			CREATE OR REPLACE SYNONYM A4GT_MACCHINA_MOTORIZZATA FOR ${user.superuser}.A4GT_MACCHINA_MOTORIZZATA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_57.1" author="Antonio Avitabile" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GD_TIPOLOGIA_MACCHINARIO;
+			DROP SYNONYM A4GD_SOTTOTIPO_MACCHINARIO;
+			
+			CREATE OR REPLACE SYNONYM A4GD_TIPOLOGIA FOR ${user.superuser}.A4GD_TIPOLOGIA;
+			CREATE OR REPLACE SYNONYM A4GD_SOTTOTIPO FOR ${user.superuser}.A4GD_SOTTOTIPO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_WRT_57.2" author="Antonio Avitabile" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FABBRICATO FOR ${user.superuser}.A4GT_FABBRICATO;
+			CREATE OR REPLACE SYNONYM A4GT_FABBRICATO_CATASTO FOR ${user.superuser}.A4GT_FABBRICATO_CATASTO;
+			CREATE OR REPLACE SYNONYM A4GT_FABBRICATO_SERRE FOR ${user.superuser}.A4GT_FABBRICATO_SERRE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_60.0" author="Antonio Avitabile" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+       		DROP SYNONYM A4GT_FABBRICATO_CATASTO;
+       		DROP SYNONYM A4GT_FABBRICATO_SERRE;
+       	
+			CREATE OR REPLACE SYNONYM A4GT_STRUMENTALI FOR ${user.superuser}.A4GT_STRUMENTALI;
+			CREATE OR REPLACE SYNONYM A4GT_SERRE FOR ${user.superuser}.A4GT_SERRE;
+			CREATE OR REPLACE SYNONYM A4GT_STOCCAGGIO FOR ${user.superuser}.A4GT_STOCCAGGIO;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_61.0" author="Giustino De Vincentiis" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GD_MAPPING_MACCHINA_AGS FOR ${user.superuser}.A4GD_MAPPING_MACCHINA_AGS;
+        </sql>
+    </changeSet>
+
+    <changeSet id="DOTAZIONETECNICA_WRT_62.0" author="Giustino De Vincentiis" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GD_MAPPING_MACCHINA_AGS;
+			CREATE OR REPLACE SYNONYM A4GD_MAPPING_AGS FOR ${user.superuser}.A4GD_MAPPING_AGS;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_62.1" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_DATI_CATASTALI FOR ${user.superuser}.A4GT_DATI_CATASTALI;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="DOTAZIONETECNICA_WRT_64.0" author="Bruno Conetta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_CONTROLLO_COMPLETEZZA FOR ${user.superuser}.A4GT_CONTROLLO_COMPLETEZZA;
+        </sql>
+    </changeSet>
+    <changeSet id="DOTAZIONETECNICA_WRT_64.1" author="Bruno Conetta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+        </sql>
+    </changeSet>
+    
+	<changeSet id="DOTAZIONETECNICA_WRT_1N.2" author="Attilio Salaris" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM A4GD_CLASSE_FUNZIONALE FOR ${user.superuser}.A4GD_CLASSE_FUNZIONALE;
+        </sql>
+    </changeSet>  
+    
+   	<changeSet id="DOTAZIONETECNICA_WRT_FIX_1" author="Alessio Siravo" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM A4GD_MAPPING_FABBRICATI_AGS FOR ${user.superuser}.A4GD_MAPPING_FABBRICATI_AGS;
+        </sql>
+    </changeSet>  
+</databaseChangeLog>

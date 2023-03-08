@@ -1,0 +1,93 @@
+{
+  "id": 8200,
+  "version": 1,
+  "datiDichiarazione": {
+    "richiedente": {
+      "nome": "CRISTIAN",
+      "cognome": "TORRESANI",
+      "codiceFiscale": "TRRCST78B08C794X",
+      "comuneNascita": "CLES",
+      "provinciaNascita": "TN",
+      "dataNascita": "08/02/1978",
+      "sesso": "M",
+      "residenza": {
+        "indirizzo": "FRAZIONE LANZA 25/B",
+        "comune": "RUMO",
+        "provincia": "TN",
+        "CAP": "38020"
+      },
+      "carica": "TITOLARE FIRMATARIO",
+      "dtInizioCarica": "ND",
+      "dtFineCarica": "ND"
+    },
+    "dettaglioImpresa": {
+      "formaGiuridicaCodice": "DI",
+      "formaGiuridicaDescrizione": "IMPRESA INDIVIDUALE",
+      "denominazione": "TORRESANI CRISTIAN",
+      "sedeLegale": "VIA LANZA 25/B 38020 RUMO TRENTO",
+      "estremiCCIAA": {
+        "sede": "TN",
+        "numeroIscrizione": "173710",
+        "dataIscrizione": "09/05/2001"
+      },
+      "codiceFiscale": "TRRCST78B08C794X",
+      "partitaIva": "01696010220",
+      "indirizzoPEC": "cristian.torresani@pec.agritel.it",
+      "dettaglioPersonaGiuridica": {
+        "formaGiuridica": "IMPRESA INDIVIDUALE",
+        "estremiCostituzione": "",
+        "capitaleSociale": "Dato non disponibile",
+        "durata": ""
+      },
+      "soggettiImpresa": [
+        {
+          "nome": "CRISTIAN",
+          "cognome": "TORRESANI",
+          "codiceFiscale": "TRRCST78B08C794X",
+          "comuneNascita": "CLES",
+          "provinciaNascita": "TN",
+          "dataNascita": "08/02/1978",
+          "sesso": "M",
+          "indirizzoResidenza": "FRAZIONE LANZA 25/B",
+          "comuneResidenza": "RUMO",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38020",
+          "carica": [
+            {
+              "codice": "TIT",
+              "tipologia": "TITOLARE FIRMATARIO",
+              "dataInizio": "09/05/2001",
+              "dataFine": "",
+              "selezionato": true,
+              "dichiarazione": false
+            }
+          ],
+          "estremiCCIAA": "CLES"
+        }
+      ],
+      "aziendeCollegate": []
+    }
+  },
+  "dtGenerazionePdf": null,
+  "dtInizioCompilazione": "2018-11-30",
+  "dtUltimoAggiornamento": null,
+  "dtUploadPdfFirmato": null,
+  "dtFine": null,
+  "idProtocollo": null,
+  "pdfFirmato": null,
+  "pdfGenerato": null,
+  "pdfFirmatoName": null,
+  "dtProtocollazione": null,
+  "a4gtAllegatoDicAntimafias": [],
+  "stato": {
+    "id": 11,
+    "identificativo": "BOZZA",
+    "descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+  },
+  "azienda": {
+    "id": 1,
+    "cuaa": "TRRCST78B08C794X"
+  },
+  "assenzaDt": true,
+  "allegatoFamiliariConviventi": null
+}

@@ -1,0 +1,42 @@
+<app-fascicolo-aperto></app-fascicolo-aperto>
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="ui-grid-fixed mt-4">
+  <h2 class="richiesta-title">{{ getTitle() | translate }}</h2>
+  <div class="p-col p-0">
+    <div class="boxgrey">
+      <form [formGroup]="richiedenteForm">
+        <div class="p-grid">
+          <div class="p-col-12 p-md-2 align-self-center">
+            <label
+              class="m-0"
+              id="basic-addon1">
+              {{ 'UMA.CF_RICHIEDENTE' | translate }}
+            </label>
+          </div>
+          <div class="p-col-12 p-md-8 align-self-center">
+            <select
+              formControlName="richiedente"
+              class="custom-select"
+              style="height: 47px;">
+              <option
+                [ngValue]="soggetto"
+                *ngFor="let soggetto of soggetti">
+                {{soggetto?.denominazione}} - {{soggetto?.carica}}
+              </option>
+            </select>
+          </div>
+          <div class="p-col-12 p-md-2 align-self-center">
+            <button
+              class="w-100"
+              appDebounceClick
+              pButton
+              [label]="getLabel() | translate"
+              (debounceClick)="onClick()"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

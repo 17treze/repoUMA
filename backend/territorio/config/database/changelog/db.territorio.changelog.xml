@@ -1,0 +1,680 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="TERRITORIO_49NF.0" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id = "TERRITORIO_49NF.1" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+				START WITH 1
+				MAXVALUE 999999999999999999999999999
+				MINVALUE 1
+				NOCYCLE
+				NOCACHE
+				ORDER;
+
+			CREATE TABLE A4GT_LOGGING (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				UTENTE ${string.type}(500 CHAR) NOT NULL,
+				TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+				TABELLA ${string.type}(4000) NOT NULL,
+				ID_ENTITA NUMBER(19) NOT NULL,
+				DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+				CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		GRANT SELECT ON NXTNBR TO ${user.writer};
+		GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id = "TERRITORIO_49NF.2" author="Massimo Nascivera">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_EVENTSTORED"/>
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true"/>
+			</column>
+			<column name="USER_NAME" type="${string.type}(100)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="TERRITORIO_49NF.3" author="Massimo Nascivera">
+		<createTable tableName="A4GT_CONTROLLO_COMPLETEZZA">
+			<column name="ID" type="${id.number.type}"></column>
+			<column name="VERSIONE" type="${version.number.type}"
+					defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPO_CONTROLLO" type="${string.type}(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ESITO" type="${id.number.type}">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID_CONTROLLO" type="${id.number.type}">
+				<constraints nullable="true"/>
+			</column>
+			<column name="DATA_ESECUZIONE" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="UTENTE" type="${string.type}(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="ID"
+					   constraintName="PK_CONTROLLO_COMPLETEZZA"
+					   tableName="A4GT_CONTROLLO_COMPLETEZZA"
+					   tablespace="${tablespace.index}"/>
+		<addUniqueConstraint columnNames="ID, CUAA"
+							 constraintName="UIDX_CONTROLLO_ID_CUAA"
+							 tableName="A4GT_CONTROLLO_COMPLETEZZA"/>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.writer};
+			GRANT SELECT ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.reader};
+		</sql>
+	</changeSet>
+	<changeSet id="TERRITORIO_49NF.4" author="Massimo Nascivera">
+		<dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="DATA_ESECUZIONE"/>
+	</changeSet>
+	<changeSet id="TERRITORIO_49NF.5" author="Massimo Nascivera">
+		<dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="ESITO"/>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.0" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_SOTTOTIPO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_SOTTOTIPO"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="AMBITO" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DESCRIZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_SOTTOTIPO TO
+			${user.writer};
+			GRANT
+			SELECT ON A4GT_SOTTOTIPO TO ${user.reader};
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'PROPRIETA', 'PROPRIETA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'PROPRIETA', 'IRREPERIBILITA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'PROPRIETA', 'COMPROPRIETA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'PROPRIETA', 'CONFERIMENTO DI SUPERFICI DA PARTE DI UN SOCIO');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'PROPRIETA', 'NUDA PROPRIETA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'AFFITTO', 'AFFITTO A "GIOVANI AGRICOLTORI"');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'AFFITTO', 'AFFITTO');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'ENFITEUSI');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'AFFRANCAZIONE DELL''ENFITEUSI');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'USI CIVICI');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'USUFRUTTO - PERSONE FISICHE');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'COMODATO');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'CONCESSIONE E LOCAZIONE DI BENI IMMOBILI DEMANIALI');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'COMUNIONE DEI BENI FRA CONIUGI');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'USUCAPIONE');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'CUSTODIA GIUDIZIARIA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'GODIMENTO CONFERITO NELLA COSTITUZIONE DELLA SOCIETA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'COMPARTECIPAZIONE');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'USUFRUTTO - PERSONA GIURIDICA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'CONTRATTO PRELIMINARE DI VENDITA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'CONTRATTO CONTO TERZI (AZIENDE AGROMECCANICHE)');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'USO OGGETTIVO');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'ALTRO', 'CONDUZIONE PARTICELLA DI ESTENSIONE INF. A 5.000 MQ RICADENTE IN COMUNE MONTANO (DL.24/06/2014 N.91)');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'MEZZADRIA', 'MEZZADRIA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'MEZZADRIA', 'COLONIA PARZIARIA');
+			INSERT INTO A4GT_SOTTOTIPO VALUES (NXTNBR.NEXTVAL, 0, 'MEZZADRIA', 'SOCCIDA');
+		</sql>
+	</changeSet>
+	
+	<changeSet id="TERRITORIO_62NF.1" author="Gabriele Ninfa">
+		<createTable tableName="A4GD_TIPO_DOCUMENTO_CONDUZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_TIPO_DOCUMENTO_CONDUZIONE"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DESCRIZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="SOTTOTIPO_ID" type="${id.number.type}">
+				<constraints
+					foreignKeyName="FK_TIPO_DOC_CONDUZ_SOTTOTIPO"
+					referencedTableName="A4GT_SOTTOTIPO" referencedColumnNames="ID"
+					nullable="false" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GD_TIPO_DOCUMENTO_CONDUZIONE TO
+			${user.writer};
+			GRANT SELECT ON A4GD_TIPO_DOCUMENTO_CONDUZIONE TO
+			${user.reader};
+		</sql>
+		
+		<createIndex indexName="IDX_TIPO_DOC_COND_SOTTOTIPO" tableName="A4GD_TIPO_DOCUMENTO_CONDUZIONE">
+		      <column name="SOTTOTIPO_ID"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.2" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_FASCICOLO">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_FASCICOLO" tableName="A4GT_FASCICOLO"
+			tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.3" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_CONDUZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE"
+				type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="SOTTOTIPO_ID" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CONDUZIONE_SOTTOTIPO"
+					referencedTableName="A4GT_SOTTOTIPO" referencedColumnNames="ID"
+					nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_CONDUZIONE" tableName="A4GT_CONDUZIONE"
+			tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE"
+			baseTableName="A4GT_CONDUZIONE"
+			constraintName="FK_CONDUZIONE_FASCICOLO"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_FASCICOLO" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_CONDUZIONE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_CONDUZIONE TO ${user.reader};
+		</sql>
+
+		<createIndex indexName="IDX_CONDUZIONE_FASCICOLO"
+			tableName="A4GT_CONDUZIONE">
+			<column name="FASCICOLO_ID" />
+			<column name="FASCICOLO_ID_VALIDAZIONE" />
+		</createIndex>
+
+		<createIndex indexName="IDX_CONDUZIONE_SOTTOTIPO"
+			tableName="A4GT_CONDUZIONE">
+			<column name="SOTTOTIPO_ID" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.4" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_DOCUMENTO_CONDUZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE"
+				defaultValueDate="sysdate">
+				<constraints nullable="false" />
+			</column>
+			<column name="DOCUMENTO" type="BLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO_VALIDITA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_FINE_VALIDITA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="CONDUZIONE_ID" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CONDUZIONE_ID_VALIDAZIONE"
+				type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPO_DOCUMENTO_ID" type="${id.number.type}">
+				<constraints foreignKeyName="FK_DOC_COND_TIPO_DOCUMENTO"
+					referencedTableName="A4GD_TIPO_DOCUMENTO_CONDUZIONE"
+					referencedColumnNames="ID" nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_DOCUMENTO_CONDUZIONE"
+			tableName="A4GT_DOCUMENTO_CONDUZIONE"
+			tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="CONDUZIONE_ID, CONDUZIONE_ID_VALIDAZIONE"
+			baseTableName="A4GT_DOCUMENTO_CONDUZIONE"
+			constraintName="FK_DOCUMENTO_COND_CONDUZIONE"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_CONDUZIONE" />
+		
+		<createIndex indexName="IDX_DOC_COND_CONDUZIONE"
+			tableName="A4GT_DOCUMENTO_CONDUZIONE">
+			<column name="CONDUZIONE_ID" />
+			<column name="CONDUZIONE_ID_VALIDAZIONE" />
+		</createIndex>
+
+		<createIndex indexName="IDX_DOC_COND_TIPO_DOC"
+			tableName="A4GT_DOCUMENTO_CONDUZIONE">
+			<column name="TIPO_DOCUMENTO_ID" />
+		</createIndex>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DOCUMENTO_CONDUZIONE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_DOCUMENTO_CONDUZIONE TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.5" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_PARTICELLE_FONDIARIE">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="SUPERFICIE_CONDOTTA" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="PARTICELLA" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="SUB" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="SEZIONE" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="COMUNE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CONDUZIONE_ID" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CONDUZIONE_ID_VALIDAZIONE"
+				type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_PARTICELLE_FONDIARIE"
+			tableName="A4GT_PARTICELLE_FONDIARIE"
+			tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="CONDUZIONE_ID, CONDUZIONE_ID_VALIDAZIONE"
+			baseTableName="A4GT_PARTICELLE_FONDIARIE"
+			constraintName="FK_PARTICELLE_CONDUZIONE"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_CONDUZIONE" />
+		
+		<createIndex indexName="IDX_PARTICELLE_FONDIARIE_COND"
+			tableName="A4GT_PARTICELLE_FONDIARIE">
+			<column name="CONDUZIONE_ID" />
+			<column name="CONDUZIONE_ID_VALIDAZIONE" />
+		</createIndex>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_PARTICELLE_FONDIARIE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_PARTICELLE_FONDIARIE TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.6" author="Gabriele Ninfa">
+		<renameTable newTableName="A4GD_SOTTOTIPO" oldTableName="A4GT_SOTTOTIPO" />
+	</changeSet>
+	
+	<changeSet id="TERRITORIO_62NF.7" author="Gabriele Ninfa">
+		<modifyDataType tableName="A4GD_TIPO_DOCUMENTO_CONDUZIONE"
+			columnName="DESCRIZIONE" newDataType="${string.type}(2000)" />
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF.8" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'VISURA CATASTALE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'PROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO DI PROPRIETA'' IN ORIGINALE O COPIA AUTENTICATA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'PROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICH. SOST. ATTESTANTE IRREPERIBILITA'' DEI COMPROPRIETARI E CHE IL DICHIARANTE E'' L''UNICO A CONDURRE IL TERRENO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'IRREPERIBILITA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO DI NOTORIETA'' DA PARTE DELL''INTERESSATO RELATIVA ALLA CONDUZIONE DEL FONDO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'IRREPERIBILITA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO DI PROPRIETA'' IN ORIGINALE O COPIA AUTENTICATA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'COMPROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICH. SOST. ATTO DI NOTORIETA'' ATTESTANTE IL CONSENSO DEGLI ALTRI COMPROPRIETARI A CONDURRE IL TERRENO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'COMPROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'VISURA CATASTALE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'COMPROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DOMANDA DI AMMISSIONE A SOCIO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'CONFERIMENTO DI SUPERFICI DA PARTE DI UN SOCIO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'AUTODICHIARAZIONE DEL SOCIO CON LA QUALE QUESTI DICHIARA L''AVVENUTO CONFERIMENTO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'CONFERIMENTO DI SUPERFICI DA PARTE DI UN SOCIO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DELIBERA DEL CDA CON CUI E'' STATA ACCOLTA LA MEDESIMA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'CONFERIMENTO DI SUPERFICI DA PARTE DI UN SOCIO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'VISURA CATASTALE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'NUDA PROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO DI PROPRIETA'' IN ORIGINALE O COPIA AUTENTICATA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'PROPRIETA' AND DESCRIZIONE = 'NUDA PROPRIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI AFFITTO (SCRITTURA PRIVATA AUTENTICATA O ATTO PUBBLICO) REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO A "GIOVANI AGRICOLTORI"'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI AFFITTO IN ORIGINALE O COPIA AUTENTICATA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO A "GIOVANI AGRICOLTORI"'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA ATTESTANTE IL RAPPORTO DI AFFITTO VERBALE E DICHIARAZIONE DI REGISTRAZIONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI AFFITTO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'COPIA DELLA DICHIARAZIONE UNILATERALE DI REGISTRAZIONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO NOTORIO ATTESTANTE L''ESISTENZA DEL RAPPORTO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'AFFITTO' AND DESCRIZIONE = 'AFFITTO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO COSTITUTIVO DI ENFITEUSI REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'ENFITEUSI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'PROVVEDIMENTO DEL GIUDICE COMPETENTE CHE ACCOGLIE LA RICHIESTA DELL''ENFITEUTA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'AFFRANCAZIONE DELL''ENFITEUSI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICH. DI AMMINISTRAZ./ENTE PUBBLICO/PRIVATO COMP. A LIVELLO TERRITORIALE CON RIF. CATASTALI E QUOTA PARTE DELLE SUP. ATTRIB. AL PRODUTTORE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USI CIVICI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CERTIFICAZ. DEL COMUNE CON SUP. TOT. CONCESSA IN FIDA PASCOLO A TUTTI GLI AGRICOLTORI, NUM. CAPI AUTORIZZATI, SUP. E/O CAPI ASSEGNATI ALL''AGRICOLTORE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USI CIVICI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI COSTITUZIONE DELL''USUFRUTTO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USUFRUTTO - PERSONE FISICHE'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO NOTORIO DEGLI EVENTUALI ALTRI USUFRUTTUARI ATTESTANTE IL CONSENSO DEGLI STESSI PER CONDURRE INTERAMENTE IL FONDO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USUFRUTTO - PERSONE FISICHE'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI COMODATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMODATO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO NOTORIO ATTESTANTE LA QUALITA'' DEL COMODATARIO, GLI ESTREMI DEL FONDO E LE GENERALITA'' DEL PROPRIETARIO COMODANTE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMODATO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO DI CONCESSIONE O DI LOCAZIONE CON INDICAZIONE DI SOPRALLUOGO DELL''UFFICIO TECNICO ERARIALE, ASSENSO DELLA COMMISSIONE, INDICAZIONE DEL CANONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CONCESSIONE E LOCAZIONE DI BENI IMMOBILI DEMANIALI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'PLANIMETRIA CATASTALE CON INDICAZIONE DEL TERRENO DEMANIALE DATO IN CONCESSIONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CONCESSIONE E LOCAZIONE DI BENI IMMOBILI DEMANIALI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICH. SOSTITUTIVA ATTESTANTE L''ESISTENZA DI UNA CONCESSIONE SCRITTA CON INDICAZIONE DEGLI ESTREMI DEL VERBALE DI AGGIUDICAZIONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CONCESSIONE E LOCAZIONE DI BENI IMMOBILI DEMANIALI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO DI NOTORIETA'' DI CHI PRESENTA DOMANDA DI AIUTO ATTESTANTE IL CONSENSO DELL''ALTRO CONIUGE A CONDURRE IL TERRENO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMUNIONE DEI BENI FRA CONIUGI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'ATTO DI PROPRIETA'' IN ORIGINALE O COPIA AUTENTICATA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMUNIONE DEI BENI FRA CONIUGI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'VISURA CATASTALE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMUNIONE DEI BENI FRA CONIUGI'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'RICHIESTA ISTANZA DI USUCAPIONE', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USUCAPIONE'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'SENTENZA PER LA CUSTODIA GIUDIZIARIA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CUSTODIA GIUDIZIARIA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'GODIMENTO CONFERITO NELLA COSTITUZIONE DELLA SOCIETA''', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'GODIMENTO CONFERITO NELLA COSTITUZIONE DELLA SOCIETA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI COMPARTECIPAZIONE AGRARIA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'COMPARTECIPAZIONE'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI COSTITUZIONE DELL''USUFRUTTO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USUFRUTTO - PERSONA GIURIDICA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DI ATTO NOTORIO DEGLI EVENTUALI ALTRI USUFRUTTUARI ATTESTANTE IL CONSENSO DEGLI STESSI PER CONDURRE INTERAMENTE IL FONDO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USUFRUTTO - PERSONA GIURIDICA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO PRELIMINARE DI VENDITA', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CONTRATTO PRELIMINARE DI VENDITA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO CONTO TERZI REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'CONTRATTO CONTO TERZI (AZIENDE AGROMECCANICHE)'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE DEL PRODUTTORE CHE LE SUPERFICI SONO ESCLUSIVAMENTE ED EFFETTIVAMENTE CONDOTTE DAL MEDESIMO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'ALTRO' AND DESCRIZIONE = 'USO OGGETTIVO'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI MEZZADRIA REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'MEZZADRIA' AND DESCRIZIONE = 'MEZZADRIA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI COLONIA PARZIARIA REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'MEZZADRIA' AND DESCRIZIONE = 'COLONIA PARZIARIA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'DICHIARAZIONE SOSTITUTIVA DELL''ATTO DI NOTORIETA'' SOTTOSCRITTA DA ENTRAMBE LE PARTI', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'MEZZADRIA' AND DESCRIZIONE = 'SOCCIDA'));
+			INSERT INTO A4GD_TIPO_DOCUMENTO_CONDUZIONE VALUES (NXTNBR.NEXTVAL, 0, 'CONTRATTO DI SOCCIDA REGISTRATO', (SELECT ID FROM A4GD_SOTTOTIPO WHERE AMBITO = 'MEZZADRIA' AND DESCRIZIONE = 'SOCCIDA'));
+		</sql>
+	</changeSet>
+	
+	<changeSet id="TERRITORIO_62NF.9" author="Gabriele Ninfa">
+		<modifyDataType tableName="A4GT_PARTICELLE_FONDIARIE"
+			columnName="PARTICELLA" newDataType="${string.type}(10)" />
+		<modifyDataType tableName="A4GT_PARTICELLE_FONDIARIE"
+			columnName="SUB" newDataType="${string.type}(10)" />
+		<modifyDataType tableName="A4GT_PARTICELLE_FONDIARIE"
+			columnName="SEZIONE" newDataType="${string.type}(10)" />
+		<modifyDataType tableName="A4GT_PARTICELLE_FONDIARIE"
+			columnName="COMUNE" newDataType="${string.type}(50)" />
+	</changeSet>
+	
+	<changeSet id="TERRITORIO_62NF.10" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_PARTICELLE_FONDIARIE">
+			<column name="FOGLIO" type="NUMBER(4)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_62NF." author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_LOGGING_VALIDAZIONE (
+													  ID ${id.number.type} NOT NULL,
+													  ID_VALIDAZIONE ${version.number.type},
+													  VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+													  UTENTE ${string.type}(500 CHAR) NOT NULL,
+													  TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+													  TABELLA ${string.type}(4000) NOT NULL,
+													  ID_ENTITA NUMBER(19) NOT NULL,
+													  DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+													  CONSTRAINT A4GT_LOGGING_VALIDAZIONE_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING_VALIDAZIONE TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="TERRITORIO_62NF.12" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FASCICOLO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_FASCICOLO TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	
+	<changeSet id="TERRITORIO_4N.0" author="Antonio Colagrande">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA TIPOLOGIE TITOLI CONDUZIONE
+			
+			CREATE TABLE A4GD_TIPO_CONDUZIONE (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				CODICE ${string.type} (10) UNIQUE NOT NULL,
+				DESCRIZIONE ${string.type} (50),
+				CONSTRAINT PK_TIPO_CONDUZIONE PRIMARY KEY ("ID")
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GD_TIPO_CONDUZIONE TO ${user.writer};
+			GRANT SELECT ON A4GD_TIPO_CONDUZIONE TO ${user.reader};
+		</sql>
+		<rollback>
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GD_TIPO_CONDUZIONE;
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<changeSet id="TERRITORIO_4N.1" author="Antonio Colagrande">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA SOTTOTIPO TITOLI CONDUZIONE
+			
+			CREATE TABLE A4GD_SOTTOTIPO_CONDUZIONE (
+				ID ${id.number.type} NOT NULL,
+				ID_TIPO_CONDUZIONE NUMBER(20,0) NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				CODICE ${string.type} (10) UNIQUE NOT NULL,
+				DESCRIZIONE ${string.type} (50),
+				CONSTRAINT PK_SOTTOTIPO_CONDUZIONE PRIMARY KEY ("ID"),
+				CONSTRAINT FK_ID_TIPO_CONDUZIONE FOREIGN KEY (ID_TIPO_CONDUZIONE) REFERENCES
+								A4GD_TIPO_CONDUZIONE (ID)
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GD_SOTTOTIPO_CONDUZIONE TO ${user.writer};
+			GRANT SELECT ON A4GD_SOTTOTIPO_CONDUZIONE TO ${user.reader};
+		</sql>
+		<rollback>
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GD_SOTTOTIPO_CONDUZIONE;
+			</sql>
+		</rollback>
+	</changeSet>
+
+	<include file="config/database/changelog/definizioni/db.territorio.A4GD_TIPO_CONDUZIONE.changelog.xml"/>
+	<include file="config/database/changelog/definizioni/db.territorio.A4GD_SOTTOTIPO_CONDUZIONE.changelog.xml"/>
+
+	<changeSet id="TERRITORIO_4N.4" author="Antonio Colagrande">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA DOCUMENTO TITOLI CONDUZIONE
+
+			CREATE TABLE A4GD_DOCUMENTO_CONDUZIONE (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				CODICE ${string.type} (10) UNIQUE NOT NULL,
+				DESCRIZIONE ${string.type} (250),
+				CONSTRAINT PK_A4GD_DOCUMENTO_CONDUZIONE PRIMARY KEY ("ID")
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GD_DOCUMENTO_CONDUZIONE TO ${user.writer};
+			GRANT SELECT ON A4GD_DOCUMENTO_CONDUZIONE TO ${user.reader};
+		</sql>
+		<rollback>
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GD_DOCUMENTO_CONDUZIONE;
+			</sql>
+		</rollback>
+	</changeSet>
+	<changeSet id="TERRITORIO_4N.5" author="Antonio Colagrande">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA RELAZIONE TRA SOTTOTIPO TITOLI CONDUZIONE E DOCUMENTO TITOLI CONDUZIONE
+
+			CREATE TABLE A4GR_SOTTOTIPO_DOCUMENTO (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_SOTTOTIPO_CONDUZIONE NUMBER DEFAULT 0 NOT NULL,
+				ID_DOCUMENTO_CONDUZIONE NUMBER DEFAULT 0 NOT NULL,
+				TIPO ${string.type} (1 CHAR) CHECK( TIPO IN ('P','S') ),
+				OBBLIGATORIO NUMBER (1),
+				CONSTRAINT PK_A4GR_SOTTOTIPO_DOCUMENTO PRIMARY KEY ("ID"),
+				CONSTRAINT FK_ID_SOTTOTIPO_CONDUZIONE FOREIGN KEY (ID_SOTTOTIPO_CONDUZIONE) REFERENCES
+								A4GD_SOTTOTIPO_CONDUZIONE (ID),
+				CONSTRAINT FK_ID_DOCUMENTO_CONDUZIONE FOREIGN KEY (ID_DOCUMENTO_CONDUZIONE) REFERENCES
+								A4GD_DOCUMENTO_CONDUZIONE (ID)
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GR_SOTTOTIPO_DOCUMENTO TO ${user.writer};
+			GRANT SELECT ON A4GR_SOTTOTIPO_DOCUMENTO TO ${user.reader};
+		</sql>
+		<rollback>
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GR_SOTTOTIPO_DOCUMENTO;
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<include file="config/database/changelog/definizioni/db.territorio.A4GD_DOCUMENTO_CONDUZIONE.changelog.xml"/>
+	<include file="config/database/changelog/definizioni/db.territorio.A4GR_SOTTOTIPO_DOCUMENTO.changelog.xml"/>
+	
+		<changeSet id="TERRITORIO_4N.9" author="Antonio Colagrande">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA RELAZIONE TRA SOTTOTIPO TITOLI CONDUZIONE E DOCUMENTO TITOLI CONDUZIONE
+
+			CREATE TABLE A4GR_DOCUMENTO_DIPENDENZA (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_SOTTOTIPO_DOCUMENTO_P NUMBER DEFAULT 0 NOT NULL,
+				ID_SOTTOTIPO_DOCUMENTO_S NUMBER DEFAULT 0 NOT NULL,
+				CONSTRAINT PK_A4GR_DOCUMENTO_DIPENDENZA PRIMARY KEY ("ID"),
+				CONSTRAINT FK_ID_SOTTOTIPO_DOCUMENTO_P FOREIGN KEY (ID_SOTTOTIPO_DOCUMENTO_P) REFERENCES
+								A4GR_SOTTOTIPO_DOCUMENTO (ID),
+				CONSTRAINT FK_ID_SOTTOTIPO_DOCUMENTO_S FOREIGN KEY (ID_SOTTOTIPO_DOCUMENTO_S) REFERENCES
+								A4GR_SOTTOTIPO_DOCUMENTO (ID)
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GR_DOCUMENTO_DIPENDENZA TO ${user.writer};
+			GRANT SELECT ON A4GR_DOCUMENTO_DIPENDENZA TO ${user.reader};
+		</sql>
+		<rollback>
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GR_DOCUMENTO_DIPENDENZA;
+			</sql>
+		</rollback>
+	</changeSet>
+	
+	<include file="config/database/changelog/definizioni/db.territorio.A4GR_DOCUMENTO_DIPENDENZA.changelog.xml"/>
+	
+</databaseChangeLog>

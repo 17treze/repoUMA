@@ -1,0 +1,90 @@
+<p-toast
+  key="tst-generaXml"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<p-dialog
+  #dialog
+  id="dialog-generaXml"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="false"
+  [blockScroll]="true"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden','max-height':'90%', 'height':'auto'}"
+  header="GENERA FILE PER CUP"
+  styleClass="x-medium-dialog">
+  <form
+    #f="ngForm"
+    *ngIf="csvFormGroup"
+    class="ui-fluid"
+    [formGroup]="csvFormGroup">
+
+    <div class="p-grid">
+      <div class="p-col-8 text-uppercase">
+        <label for="documento">
+          {{ fileName }}
+        </label>
+      </div>
+      <div
+        class="p-col-4">
+        <div class="p-grid">
+          <div class="p-col">
+            <button
+              pButton
+              type="button"
+              label="Carica"
+              (click)="uploadFile('documento')"
+              class="ui-button-text-only font-weight-normal">
+            </button>
+            <input
+              #myDocumento
+              type="file"
+              style="display:none"
+              id="documento"
+              name="documento"
+              accept="{{fileExt}}"
+              (change)="onFileChange($event)">
+          </div>
+        </div>
+      </div>
+      <!-- <div class="p-col-4">
+        <div class="p-grid">
+          <div class="p-col">
+            <button
+              pButton
+              type="button"
+              label="Visualizza"
+              (click)="downloadFile()"
+              [disabled]="!uploadCsv"
+              class="button-custom-bar-dark">
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- Separatore -->
+    <br>
+
+    <!-- Button Bar -->
+    <div class="p-grid">
+      <div class="p-col-6">
+        <button
+          pButton
+          class="ui-button-secondary font-weight-normal"
+          type="button"
+          label="Annulla"
+          (click)="annulla()"></button>
+      </div>
+      <div class="p-col-6">
+        <button
+          pButton
+          class="ui-button-text-only font-weight-normal"
+          type="button"
+          [disabled]="!uploadCsv"
+          label="Scarica file per CUP"
+          (click)="scaricaFilePerCup()"></button>
+      </div>
+    </div>
+  </form>
+</p-dialog>

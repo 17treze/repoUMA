@@ -1,0 +1,245 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Dettaglio completo impresa",
+        "esito": "OK"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": {
+            "estremiimpresa": {
+                "denominazione": "AZIENDA AGRICOLA MASO FRANZ DI D'ALFONSO FRANCESCO E NERVO ILARIA SOCIETA' SEMPLICE AGRICOLA",
+                "codicefiscale": "02480020227",
+                "partitaiva": "02480020227",
+                "formagiuridica": {
+                    "cformagiuridica": "SE",
+                    "descrizione": "SOCIETA' SEMPLICE"
+                },
+                "datiiscrizioneri": {
+                    "numerori": "TN-2017-21089",
+                    "data": "20171017",
+                    "sezioni": {
+                        "sezione": [
+                            {
+                                "csezione": "S",
+                                "descrizione": "SOCIETA SEMPLICE",
+                                "dtiscrizione": "20171017",
+                                "coltdiretto": null
+                            },
+                            {
+                                "csezione": "G",
+                                "descrizione": "IMPRESA AGRICOLA",
+                                "dtiscrizione": "20171120",
+                                "coltdiretto": null
+                            }
+                        ]
+                    }
+                },
+                "datiiscrizionerea": [
+                    {
+                        "nrea": "227723",
+                        "cciaa": "TN",
+                        "flagsede": "SI",
+                        "itrasferimentosede": null,
+                        "faggiornamento": null,
+                        "data": "20171005",
+                        "dtultaggiornamento": "20180321",
+                        "cfonte": "RI",
+                        "cessazione": null
+                    }
+                ],
+                "elemento": null
+            },
+            "oggettosociale": "OGGETTO SOCIALE:L'ESERCIZIO ESCLUSIVO DI IMPRESA AGRICOLA AI SENSI DELL' ARTICOLO 2135 C. C.IN TERRENI DI SUA O ALTRUI PROPRIETA' E QUINDI DI ESERCITARE LE ATTIVITA'DIRETTE ALLA COLTIVAZIONE DI TERRENI, SILVICOLTURA, ALLEVAMENTO DEL BESTIAME EALLE ATTIVITA' CONNESSE CON PARTICOLARE RIFERIMENTO ALL'ATTIVITA'FRUTTI-VITICOLA NONCHE' A TUTTE LE ALTRE ATTIVITA' PREVISTE DALL' ARTICOLO 2135CODICE CIVILE, COMPRESO L'AGRITURISMO.TALI ATTIVITA' POTRANNO ESSERE ESERCITATE SUI TERRENI DI PROPRIETA' DELLASOCIETA', DEI SINGOLI SOCI E/ O SU ALTRI DI CUI, A QUALSIASI TITOLO, LASOCIETA' POTRA' AVERNE LA DISPONIBILITA'.LA SOCIETA' POTRA' GESTIRE, OLTRE ALL' ATTIVITA' AGRICOLA TRADIZIONALMENTEINTESA, ANCHE, IN VIA ACCESSORIA E COMPLEMENTARE, LE ATTIVITA' CONNESSEPREVISTE DALL'ART. 2135 C. C.PER IL RAGGIUNGIMENTO DI DETTO SCOPO SOCIALE, LA SOCIETA' POTRA' SVOLGERE,INOLTRE, TUTTE LE OPERAZIONI MOBILIARI, IMMOBILIARI, COMMERCIALI, INDUSTRIALI,FINANZIARIE, POTRA' PRESTARE FIDEJUSSIONI, AVALLI E GARANZIE, PURCHE' TALIATTIVITA' NON VENGANO ESERCITATE NEI CONFRONTI DEL PUBBLICO E CON ESCLUSIONE DITUTTE QUELLE ATTIVITA' ESPRESSAMENTE RISERVATE AI SENSI DEL TUB E DEL TUF.POTRA' ASSUMERE O CEDERE PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA', AVENTISCOPO ANALOGO OD AFFINE AL PROPRIO AL SOLO FINE DEL CONSEGUIMENTO DELL'OGGETTOSOCIALE E PURCHE' NON NEI CONFRONTI DEL PUBBLICO, NONCHE' COSTITUIRE OPARTECIPARE ALLA COSTITUZIONE DI ASSOCIAZIONI TEMPORANEE DI IMPRESA.LE ATTIVITA' SOPRA DETTE NON POTRANNO ESSERE ESERCITATE CONTEMPORANEAMENTE OVESUSSISTANO INCOMPATIBILITA' FISSATE DALLA LEGGE; SONO COMUNQUE ESPRESSAMENTEESCLUSE DALL'OGGETTO SOCIALE LE ATTIVITA' PROFESSIONALI PROTETTE DA SPECIFICHENORME DI LEGGE E COMUNQUE TUTTE LE ATTIVITA' RISERVATE A SOGGETTI MUNITI DIPARTICOLARI REQUISITI NON POSSEDUTI DALLA SOCIETA'.",
+            "dtfondazione": null,
+            "codiceformaammv": null,
+            "descformaammv": null,
+            "duratasocieta": {
+                "dtcostituzione": "20171005",
+                "dttermine": "20501231",
+                "durataillimitata": null,
+                "scadenzeesercizi": {
+                    "dtprimoesercizio": "20171231",
+                    "dtsuccessive": null
+                }
+            },
+            "capitali": null,
+            "capitaleinvestito": null,
+            "informazionisede": {
+                "insegna": null,
+                "indirizzo": {
+                    "provincia": "TRENTO",
+                    "comune": "CINTE TESINO",
+                    "ccomune": "022059",
+                    "toponimo": "PIAZZA",
+                    "via": "PLEBISCITO",
+                    "ncivico": "7",
+                    "cap": "38050",
+                    "stato": null,
+                    "frazione": null,
+                    "altreindicazioni": null,
+                    "stradario": null,
+                    "telefono": null,
+                    "fax": null,
+                    "indirizzopec": "MASO.FRANZ@CIA.LEGALMAIL.IT"
+                },
+                "attivita": "",
+                "infoattivita": {
+                    "dtinizioattivita": "20171020",
+                    "statoattivita": null
+                },
+                "codiciistat02": null,
+                "codiceatecoul": {
+                    "attivitaistat": [
+                        {
+                            "cattivita": "0125",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazione di altri alberi da frutta, frutti di bosco e in guscio",
+                            "cimportanza": "I",
+                            "dtinizioattivita": null
+                        },
+                        {
+                            "cattivita": "0125",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazione di altri alberi da frutta, frutti di bosco e in guscio",
+                            "cimportanza": "P",
+                            "dtinizioattivita": null
+                        },
+                        {
+                            "cattivita": "0128",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazione di spezie, piante aromatiche e farmaceutiche",
+                            "cimportanza": "S",
+                            "dtinizioattivita": null
+                        }
+                    ]
+                },
+                "ruoliloc": null,
+                "datiartigiani": null,
+                "commerciodettaglio": null,
+                "cessazione": null,
+                "procedureconcorsuali": null
+            },
+            "personesede": {
+                "persona": [
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "227723",
+                            "progressivopersona": "1",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "NERVO",
+                            "nome": "ILARIA",
+                            "sesso": "FEMMINILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19781010"
+                            },
+                            "codicefiscale": "NRVLRI78R50L378B",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "PIEVE TESINO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "DI CAMPESTRIN",
+                                "ncivico": "12",
+                                "cap": "38050",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIO",
+                                    "ccarica": "COM",
+                                    "dtinizio": "20171005",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "SI",
+                        "elemento": "1"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "227723",
+                            "progressivopersona": "2",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "D'ALFONSO",
+                            "nome": "FRANCESCO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "VARESE",
+                                "comune": "BUSTO ARSIZIO",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19830811"
+                            },
+                            "codicefiscale": "DLFFNC83M11B300E",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "CINTE TESINO",
+                                "ccomune": null,
+                                "toponimo": "PIAZZA",
+                                "via": "PLEBISCITO",
+                                "ncivico": "7",
+                                "cap": "38050",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIO",
+                                    "ccarica": "COM",
+                                    "dtinizio": "20171005",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "SI",
+                        "elemento": "2"
+                    }
+                ],
+                "totale": "2"
+            },
+            "localizzazioni": []
+        },
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": null
+    }
+}

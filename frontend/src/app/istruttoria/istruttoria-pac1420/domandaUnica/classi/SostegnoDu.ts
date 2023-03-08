@@ -1,0 +1,5 @@
+export enum SostegnoDu {
+    DISACCOPPIATO = 'DISACCOPPIATO',
+    SUPERFICIE = 'SUPERFICIE',
+    ZOOTECNIA = 'ZOOTECNIA'
+}

@@ -1,0 +1,150 @@
+<div class="ui-g ui-fluid">
+  <p-toast
+    position="center"
+    key="warn-already-uploadedFile-pat"
+    [modal]="true"
+    [baseZIndex]="5000">
+    <ng-template
+      let-messageService
+      pTemplate="messageService">
+      <div style="text-align: center">
+        <i
+          class="pi pi-exclamation-triangle"
+          style="font-size: 3em"></i>
+        <h3>{{messageService.summary}}</h3>
+        <p>{{messageService.detail}}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmHasAlreadyUploadedFile()"
+            label="Si"
+            class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onRejectHasAlreadyUploadedFile()"
+            label="No"
+            class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <div class="ui-g-12 ui-lg-12">
+    <p-panel [toggleable]="true">
+      <p-header>
+        {{title}}
+        <button
+          pButton
+          type="button"
+          icon="ui-icon-close"
+          title="Elimina"
+          class="remove-btn"
+          (click)="removeMe()"></button>
+      </p-header>
+      <form
+        #f="ngForm"
+        (ngSubmit)="onSubmit(f)">
+        <fieldset>
+          <div>
+            <div class="ui-g-2">
+              <label>Matricola *</label>
+            </div>
+            <div class="ui-g-4">
+              <input
+                type="text"
+                [(ngModel)]="matricola"
+                name="matricola"
+                required
+                pInputText>
+            </div>
+            <div class="ui-g-2">
+              <label>Struttura *</label>
+            </div>
+            <div class="ui-g-4">
+              <p-autoComplete
+                name="dipartimento"
+                [(ngModel)]="dipartimento"
+                [suggestions]="filteredDipartimentiSingle"
+                (completeMethod)="filterDipartimentoSingle($event)"
+                [size]="30"
+                [minLength]="1"
+                [forceSelection]="true"
+                emptyMessage="--Nessun Dipartimento trovato--"
+                [required]="true"></p-autoComplete>
+            </div>
+            <div class="ui-g-2">
+              <label>Dirigente *</label>
+            </div>
+            <div class="ui-g-4">
+              <input
+                type="text"
+                [(ngModel)]="dirigente"
+                name="dirigente"
+                required
+                pInputText>
+            </div>
+            <div class="ui-g-2">
+              <label>
+                {{ 'RICHIESTE_ACCESSO.motivazioneRichiesta' | translate }} *
+              </label>
+            </div>
+            <div class="ui-g-4">
+              <input
+                type="text"
+                [(ngModel)]="note"
+                name="note"
+                required
+                pInputText>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+              <div class="ui-g-12 ui-md-12">
+                <label>Autorizzazione</label>
+                <button
+                  pButton
+                  type="button"
+                  icon="ui-icon-file-download"
+                  label="Scarica Modello Autorizzazione"
+                  (click)="downloadFile()"></button>
+                <button
+                  pButton
+                  type="button"
+                  icon="{{icon}}"
+                  label="Carica Autorizzazione Firmata"
+                  (click)="verifyUploadFile();"
+                  [disabled]="!(matricola && dirigente)"></button>
+                <input
+                  type="file"
+                  style="display:none"
+                  #upFilePAT
+                  id="upFilePAT"
+                  name="upFilePAT"
+                  accept="{{fileExt}}"
+                  (change)="uploadFile($event)">
+              </div>
+            </div>
+            <div class="ui-g-12">
+              <p-fieldset align="justify">
+                <p-header>Attenzione</p-header>
+                Digitare la struttura di appartenenza selezionandola dalla lista e il nominativo del Responsabile della
+                stessa.
+                <br>
+                Scaricare e compilare il modulo per l'autorizzazione (premere il pulsante Scarica Modello
+                Autorizzazione).
+                <br>
+                Importare tale documento firmato dal Responsabile con allegato, in formato PDF, il documento d'identità
+                dello stesso (premere il pulsante Carica Autorizzazione Firmata).
+                <br>
+                Digitare il campo Motivazione della richiesta.
+              </p-fieldset>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </p-panel>
+  </div>
+</div>

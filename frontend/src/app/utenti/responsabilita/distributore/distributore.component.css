@@ -1,0 +1,12 @@
+:host ::ng-deep .ui-picklist li.ui-picklist-item {
+    padding: 0 0.5rem;
+}
+:host ::ng-deep .ui-picklist-source-controls.ui-picklist-buttons {
+    display: none;
+}
+:host ::ng-deep .ui-picklist-target-controls.ui-picklist-buttons {
+    display: none;
+}
+:host ::ng-deep .ui-picklist {
+    display: block;
+}

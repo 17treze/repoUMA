@@ -1,0 +1,34 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed boxgrey">
+    <div class="layout-actionmenu">
+      <h3><span>Lista Fascicoli</span></h3>
+      <p-table [columns]="cols" selectionMode="single" [value]="this.fascicoli" dataKey="cuaa"
+        [(selection)]="selectedFascicolo" [paginator]="true" [rows]="5" [responsive]="true"
+        (onRowSelect)="onRowSelect($event)">
+        <!-- <ng-template pTemplate="caption">
+          Lista Fascicoli
+        </ng-template>-->
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template ngFor let-fascicolo [ngForOf]="this.fascicoli" pTemplate="body">
+          <tr [pSelectableRow]="fascicolo">
+            <td>
+              {{fascicolo.cuaa}}
+            </td>
+            <td>
+              {{fascicolo.denominazione}}
+            </td>
+            <td><span class="ui-button ui-state-default ui-button-success small">Seleziona</span></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

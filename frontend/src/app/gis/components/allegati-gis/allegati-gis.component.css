@@ -1,0 +1,136 @@
+.tab100{
+    max-width: 100px;
+}
+.tab15{
+    max-width: 15%;
+}
+.tab20{
+    max-width: 20%;
+}
+.tab25{
+    max-width: 25%;
+}
+span.download-allegato {
+    font-weight: 600;
+    color: #139561;
+    cursor: pointer;
+}
+.no-allegati{
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: 700;
+    color: #9c9c9c;
+}
+allegati-gis > p-table > div > div > table > tbody > tr > td {
+    font-size: 13px;
+}
+
+.descrizioneTab, .allegatoTab{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ui-table-scrollable-wrapper {
+    margin-bottom: 50px;
+}
+
+.thead-allegati {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00985b;
+    padding: 5px;
+}
+.col.col-tb {
+    font-size: 14px;
+    margin: auto;
+    padding: 8px 16px;
+}
+.tbody-allegati .row {
+    border-bottom: 2px solid #e8ebee;
+}
+.col.col-tb.td-download {
+    width: 100px;
+    overflow: hidden !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.col.col-tb.td-descrizione {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Scrollbar */
+.content-allegati::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+.content-allegati::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+.content-allegati::-webkit-scrollbar {
+    width: 7px;
+}
+body .ui-table .ui-table-thead > tr > th {
+    border: 0!important;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+}
+body .ui-table .ui-table-thead {
+    border-top: none!important;
+    border-bottom: solid 2px #0d5f3f !important;
+}
+
+.ui-table-scrollable-body{
+overflow-x: hidden;
+}
+
+.content-allegati {
+    height: 275px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+p-confirmdialog.ng-tns-c2-1 {
+    display: none;
+}
+
+#alertDelete > div {
+    z-index: 10000!important;
+}
+
+p-confirmdialog#alertDelete > .ui-dialog.ui-dialog.ui-confirmdialog .ui-dialog-footer button {
+    margin-right: 5px;
+}
+
+#alertDelete > div > div.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top > span {
+    padding: 0 65px;
+}
+
+#alertDelete > div > div.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top  {
+    width: 100%;
+}
+
+#overlayAllegati {
+  position: fixed;
+  top: 0;
+  left: -1000px;
+  height: 4000px;
+  width: 9000px;
+  z-index: 9998;
+  background-color: #171717b8;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}

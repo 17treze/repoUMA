@@ -1,0 +1,43 @@
+:host {
+  ::ng-deep button.ui-datepicker-trigger.ui-calendar-button {
+    width: 5.5em !important;
+    height: 5.5em !important;
+    background: transparent !important;
+    position: absolute;
+  }
+
+  ::ng-deep label.ui-chkbox-label {
+    margin: 0;
+    padding-left: 1px;
+  }
+
+  .left {
+    text-align: left;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .p-25 {
+    margin-top: 25px;
+  }
+
+  ::ng-deep p-dropdown.small-font {
+    .ui-dropdown-label-container > span.ui-dropdown-label.ui-inputtext {
+      font-size: 1em;
+    }
+  }
+
+  ::ng-deep p-dropdown.small-width {
+    .ui-dropdown {
+      min-width: 4.5em !important;
+    }
+  }
+}
+
+

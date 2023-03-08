@@ -1,0 +1,201 @@
+<gis-externalWindow *ngIf="elementiWorkspace" [elementiWorkspace]="elementiWorkspace"></gis-externalWindow>
+<!-- Sezione dedicata al header della tabella, gestisce l'abilita modifica delle celle-->
+<div *ngIf="contextView === undefined || contextView !== 'readOnly'" class="workspaceDiv">
+  <div *ngIf="lavorazioniEvent.editaCelleWorkSpace" class="grid-workspace">
+    <div *ngIf="lavorazioniEvent.stato==='IN_CORSO'">
+      <div class="p-col" style="float: right;">
+        <p-inputSwitch (onChange)="onChangeModificaMultipla($event)" [(ngModel)]="val"
+          [disabled]="lavorazioniEvent.readOnly"
+          pTooltip="{{!flagModificaMultiFeature ? 'Abilita modifica multipla' : 'Disabilita modifica multipla'}}"
+          tooltipPosition="right"></p-inputSwitch>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sezione dedicata alla tabella -->
+<div *ngIf="elementiWorkspace" [ngClass]="{'adlOverflow': elementiWorkspace.length}">
+  <p-table class="tablePoligoniWorkspace" sortField="multiSelectedOrd" sortMode="single" id="tablePoligoniWorkspace"
+    dataKey="id" selectionMode="single" [value]="elementiWorkspace"
+    [ngClass]="windowsEvent.fromWindow ? 'workspace-window': null" [customSort]="true"
+    (sortFunction)="customSort($event)" [scrollable]="true" scrollHeight="425px" [loading]="loading" [autoLayout]="true"
+    [responsive]="true">
+    <ng-template pTemplate="header">
+
+      <th class="contentHeaderTable" *ngFor="let col of columns" [style.width]="col.width" [pSortableColumn]="col.field"
+        [ngClass]="col.class">
+        {{col.header}}
+      </th>
+      <tr *ngIf="lavorazioniEvent.editaCelleWorkSpace && flagModificaMultiFeature">
+        <th style="padding: 0; width: 11%;">
+          <!-- ID columns-->
+        </th>
+        <th style="padding: 0; width: 25%;">
+          <!-- CodUso columns-->
+          <p-autoComplete field="codUso" id="autoCompleteMultiFeature" [dropdown]="true"
+            *ngIf="lavorazioniEvent.editaCelleWorkSpace && flagModificaMultiFeature"
+            [suggestions]="filterPoligoniWorkspace" [(ngModel)]="codUsoMultiFeature"
+            (completeMethod)="filterAutoCompleteCodUso($event)" (onSelect)="applicaModifichePoligoniWorkspace()">
+            <ng-template let-codUsoObj pTemplate="item">
+              <div class="codUsoObj-item">
+                <div>{{codUsoObj.codUso}} - {{codUsoObj.codUsoDesc}}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </th>
+        <th style="padding-left: 5px; width: 25%;">
+          <!-- StatoColt columns-->
+          <p-autoComplete field="statoColt" id="autoCompleteMultiFeature" [dropdown]="true"
+            *ngIf="lavorazioniEvent.editaCelleWorkSpace && flagModificaMultiFeature "
+            [suggestions]="filterPoligoniWorkspace" [(ngModel)]="statoColtMultiFeature"
+            (completeMethod)="filterAutoCompleteStatoColt($event)" (onSelect)="applicaModifichePoligoniWorkspace()">
+            <ng-template let-statoColtObj pTemplate="item">
+              <div class="statoColtObj-item">
+                <div>{{statoColtObj.statoColt}} - {{statoColtObj.statoColtDesc}}</div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </th>
+        <th style="padding: 0; width: 40%;">
+          <!-- Area columns-->
+        </th>
+        <th class="table-icona">
+          <!-- Icona -->
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-poligono let-ri="rowIndex">
+      <tr [ngClass]="{'multiClickActived' : multiClickActived}">
+        <td class="table-id" (mouseover)="onRowHover($event, poligono)"
+          (mouseleave)="cleanHighLigtStyleNoMultiSelected()"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <div id="lavorazioneWorkspace-id">
+            <span *ngIf="poligono.id && (contextView === undefined || contextView !== 'readOnly') "
+              (click)="zoomElementoInMappa(poligono.featureID);" pTooltip="{{poligono.id}}" tooltipPosition="top">
+              <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            </span>
+            <span *ngIf="poligono.id && (contextView != undefined && contextView === 'readOnly') "
+              (click)="centerMap(poligono);" pTooltip="{{poligono.id}}" tooltipPosition="top">
+              <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            </span>
+          </div>
+        </td>
+        <td class="table-uso"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <p-autoComplete field="codUso" id="autoCompleteCodUso"
+            *ngIf="lavorazioniEvent.editaCelleWorkSpace && !flagModificaMultiFeature" pTooltip="{{poligono.codUso.codUsoDesc}}" tooltipPosition="top"
+            [disabled]="lavorazioniEvent.readOnly" [(ngModel)]="poligono.codUso" [suggestions]="filterPoligoniWorkspace"
+            (completeMethod)="filterAutoCompleteCodUso($event)" (onSelect)="changeRow(poligono.id)" [dropdown]="true">
+            <ng-template let-codUsoObj pTemplate="item">
+              <div class="codUsoObj-item" style="text-align: center;">
+                <div>
+                  {{codUsoObj.codUso}} - {{codUsoObj.codUsoDesc}}
+                </div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+
+          <span *ngIf="!lavorazioniEvent.editaCelleWorkSpace || flagModificaMultiFeature"
+            pTooltip="{{poligono.codUso.codUsoDesc}}" tooltipPosition="top">
+            {{poligono.codUso.codUso}}
+          </span>
+        </td>
+        <td class="table-stato"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <p-autoComplete field="statoColt" id="autoCompleteStatoColt"  pTooltip="{{poligono.statoColt.statoColtDesc}}" tooltipPosition="top"
+            *ngIf="lavorazioniEvent.editaCelleWorkSpace && !flagModificaMultiFeature" [required]="true"
+            [(ngModel)]="poligono.statoColt" [suggestions]="filterPoligoniWorkspace"
+            (completeMethod)="filterAutoCompleteStatoColt($event)" [dropdown]="true"
+            [disabled]="lavorazioniEvent.readOnly" (onSelect)="changeRow(poligono.id)">
+            <ng-template let-statoColtObj pTemplate="item">
+              <div class="statoColtObj-item">
+                <div>
+                  {{statoColtObj.statoColt}} - {{statoColtObj.statoColtDesc}}
+                </div>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+          <span *ngIf="(!lavorazioniEvent.editaCelleWorkSpace || flagModificaMultiFeature) && poligono.statoColt "
+            pTooltip="{{poligono.statoColt.statoColtDesc}}" tooltipPosition="top">
+            {{poligono.statoColt.statoColt}}</span>
+        </td>
+        <td class="table-area"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>{{ poligono.area | areaFormatPipe}}</span>
+        </td>
+        <td class="table-icona"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <div class="row checkbox--top-level">
+            <input type="checkbox" id="{{poligono.id}}checkboxMultiSelection"
+              [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}"
+              [checked]="poligono.multiSelected"
+              [disabled]="lavorazioniEvent.stato !=='IN_CORSO' || lavorazioniEvent.readOnly"
+              (change)="onMultiRowSelect($event,null,poligono)" />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<!-- Tabella in finestra -->
+<div *ngIf="elementiWorkspace && windowsEvent.fromWindow">
+  <p-table class="tablePoligoniWorkspace tablePoligoniWorkspaceExt"
+    [ngClass]="windowsEvent.fromWindow ? 'workspace-window' : null" selectionMode="single" dataKey="vin"
+    [value]="elementiWorkspace" (sortFunction)="customSort($event)" dataKey="id" [customSort]="true" [scrollable]="true"
+    scrollHeight="380px" [loading]="loading" [autoLayout]="true">
+    <ng-template pTemplate="header">
+      <th class="contentHeaderTable" *ngFor="let col of windowColumns" [style.width]="col.width"
+        [pSortableColumn]="col.field" [ngClass]="col.class">
+        {{col.header}}
+      </th>
+    </ng-template>
+    <ng-template pTemplate="body" let-poligono let-ri="rowIndex">
+      <tr [pSelectableRow]="poligono" style="text-align: center;">
+        <td class="zoom-td" (mouseover)="onRowHover($event, poligono)"
+          (mouseleave)="cleanHighLigtStyleNoMultiSelected()"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <div>
+            <span (onRowSelect)="onRowSelect($event)"
+              *ngIf="poligono.id && (contextView === undefined || contextView !== 'readOnly') "
+              (click)="zoomElementoInMappa(poligono.featureID);">
+              <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            </span>
+            <span *ngIf="poligono.id && (contextView != undefined && contextView === 'readOnly') "
+              (click)="centerMap(poligono);">
+              <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            </span>
+          </div>
+        </td>
+        <td class="id-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>
+            {{poligono.id}}</span>
+        </td>
+        <td class="codUso-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>
+            {{poligono.codUso.codUso}}</span>
+        </td>
+        <td class="codUsoDesc-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>
+            {{poligono.codUso.codUsoDesc}}</span>
+        </td>
+        <td class="statoColt-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>
+            {{poligono.statoColt.statoColt}}</span>
+        </td>
+        <td class="statoColtDesc-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>
+            {{poligono.statoColt.statoColtDesc}}</span>
+        </td>
+        <td class="area-td td-pad"
+          [ngClass]="{'selectedFeature': poligono.selectedFeature, 'multiSelection' : poligono.multiSelected}">
+          <span>{{ poligono.area | areaFormatPipe}}</span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,105 @@
+[
+  {
+    "id": 20137,
+    "version": 5,
+    "datiDichiarazione": {
+      "richiedente": {
+        "nome": "NATALINO",
+        "cognome": "SIGNORETTI",
+        "codiceFiscale": "SGNNLN54T28A3724",
+        "comuneNascita": "ARCO",
+        "provinciaNascita": "TN",
+        "dataNascita": "28/12/1954",
+        "sesso": "M",
+        "residenza": {
+          "indirizzo": "LOCALITA' BRUTTAGOSTO 4 INT 3",
+          "comune": "ARCO",
+          "provincia": "TN",
+          "CAP": "38062"
+        },
+        "carica": "TITOLARE",
+        "dtInizioCarica": "ND",
+        "dtFineCarica": "ND"
+      },
+      "dettaglioImpresa": {
+        "formaGiuridicaCodice": "DI",
+        "formaGiuridicaDescrizione": "IMPRESA INDIVIDUALE",
+        "denominazione": "MASO PRAEL DI SIGNORETTI NATALINO",
+        "sedeLegale": "LOCALITA' BRUTTAGOSTO 4 38062 ARCO TRENTO",
+        "sede": {
+          "provincia": "TRENTO",
+          "comune": "ARCO",
+          "ccomune": "022006",
+          "toponimo": "LOCALITA'",
+          "via": "BRUTTAGOSTO",
+          "ncivico": "4",
+          "cap": "38062"
+        },
+        "estremiCCIAA": {
+          "sede": "TN",
+          "numeroIscrizione": "156273",
+          "dataIscrizione": "04/12/1996"
+        },
+        "codiceFiscale": "SGNNLN54T28A3724",
+        "partitaIva": "00540990223",
+        "indirizzoPEC": "masoprael.signoretti@pec.agritel.it",
+        "dettaglioPersonaGiuridica": {
+          "formaGiuridica": "IMPRESA INDIVIDUALE",
+          "estremiCostituzione": "",
+          "capitaleSociale": "Dato non disponibile",
+          "durata": ""
+        },
+        "soggettiImpresa": [
+          {
+            "nome": "NATALINO",
+            "cognome": "SIGNORETTI",
+            "codiceFiscale": "SGNNLN54T28A3724",
+            "comuneNascita": "ARCO",
+            "provinciaNascita": "TN",
+            "dataNascita": "28/12/1954",
+            "sesso": "M",
+            "indirizzoResidenza": "LOCALITA' BRUTTAGOSTO 4 INT 3",
+            "comuneResidenza": "ARCO",
+            "provinciaResidenza": "TN",
+            "capResidenza": "38062",
+            "carica": [
+              {
+                "codice": "TI",
+                "tipologia": "TITOLARE",
+                "dataInizio": "04/12/1996",
+                "dataFine": "",
+                "href": "/antimafia/20137/allegatoFamiliariConviventi/20140",
+                "selezionato": true,
+                "dichiarazione": true
+              }
+            ],
+            "estremiCCIAA": "ARCO"
+          }
+        ],
+        "aziendeCollegate": []
+      }
+    },
+    "dtGenerazionePdf": null,
+    "dtInizioCompilazione": "2019-05-30T08:41:11.000+0000",
+    "dtUltimoAggiornamento": "2019-05-30T08:42:39.000+0000",
+    "dtUploadPdfFirmato": "2019-05-30T08:41:59.000+0000",
+    "dtFine": null,
+    "idProtocollo": "PAT_TEST/RFS151-30/05/2019-0001359",
+    "pdfFirmato": null,
+    "pdfGenerato": null,
+    "pdfFirmatoName": null,
+    "dtProtocollazione": "2019-05-30T08:42:39.000+0000",
+    "a4gtAllegatoDicAntimafias": [],
+    "stato": {
+      "id": 8435,
+      "identificativo": "CONTROLLATA",
+      "descrizione": "Stato che identifica che il processo di controllo domanda antimafia andato a buon fine"
+    },
+    "azienda": {
+      "id": 20135,
+      "cuaa": "SGNNLN54T28A372J"
+    },
+    "assenzaDt": true,
+    "allegatoFamiliariConviventi": null
+  }
+]

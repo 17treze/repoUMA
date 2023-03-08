@@ -1,0 +1,44 @@
+:host {
+    .auto-cursor {
+      cursor: auto;
+    }
+  
+    .w-10m {
+      width: 10em;
+    }
+  
+    .cell {
+      border: 1px solid #cacaca;
+      cursor: pointer;
+    }
+  
+    .cell.disabled > .cell-content {
+      opacity: 0.5;
+      cursor: auto;
+    }
+  
+    div.ui-header-sezioni-uma {
+      background-color: #fff;
+      border-top: 2px solid #4caf50;
+      border-left: 1px solid #cacaca;
+      border-right: 1px solid #cacaca;
+      font-size: 1em;
+    }
+  
+    .block-100 {
+      width: 100%;
+      display: block;
+    }
+  
+    .button-accent-alt {
+      border: 2px solid #01985a;
+      color: #01985a !important;
+      font-weight: bold;
+  
+      & > ::ng-deep span.ui-button-icon-right.ui-clickable.pi.pi-trash {
+        color: #01985a;
+        font-size: x-large;
+      }
+    }
+  }
+  

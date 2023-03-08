@@ -1,0 +1,45 @@
+<p-toast
+  position="top-center"
+  key="generic"
+  [baseZIndex]="50000"></p-toast>
+<br>
+<br>
+<div class="ui-grid-fixed">
+  <h2 class="richiesta-title">{{ 'ANTIMAFIA.richiestaCerificazioneAntimafia' | translate }}</h2>
+  <div class="ui-g">
+    <div class="boxgrey">
+      <div *ngIf="rappresentantiLegali">
+        <div class="ui-g-12 ui-md-2">
+          <label
+            style="margin-top: 10px;"
+            id="basic-addon1">
+            {{ 'ANTIMAFIA.codiceFiscaleRichiedente' | translate }}
+          </label>
+        </div>
+        <div class="ui-g-12 ui-md-8">
+          <select
+            class="custom-select"
+            name="selectCUAA"
+            style="height: 47px;"
+            [(ngModel)]="selectedCUAADD">
+            <option
+              [value]="rappresentanteLegali.codiceFiscale"
+              *ngFor="let rappresentanteLegali of rappresentantiLegali">
+              {{ rappresentanteLegali.dati }}
+            </option>
+          </select>
+        </div>
+        <div class="ui-g-12 ui-md-2 searchbutton">
+          <button
+            appDebounceClick
+            pButton
+            label="Crea Domanda"
+            style="width: 100%;"
+            (debounceClick)="Save()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast> -->

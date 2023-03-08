@@ -1,0 +1,186 @@
+<div class="ui-g ui-fluid">
+  <p-toast
+    position="center"
+    key="warn-already-uploadedFile-consulente"
+    [modal]="true"
+    [baseZIndex]="5000">
+    <ng-template
+      let-messageService
+      pTemplate="messageService">
+      <div style="text-align: center">
+        <i
+          class="pi pi-exclamation-triangle"
+          style="font-size: 3em"></i>
+        <h3>{{messageService.summary}}</h3>
+        <p>{{messageService.detail}}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmHasAlreadyUploadedFile()"
+            label="Si"
+            class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onRejectHasAlreadyUploadedFile()"
+            label="No"
+            class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <div class="ui-g-12 ui-lg-12">
+    <p-panel [toggleable]="true">
+      <p-header>
+        {{title}}
+        <button
+          pButton
+          type="button"
+          icon="ui-icon-close"
+          title="Elimina"
+          class="remove-btn"
+          (click)="removeMe()"></button>
+      </p-header>
+      <form
+        #f="ngForm"
+        (ngSubmit)="onSubmit(f)">
+        <fieldset>
+          <div>
+            <div class="ui-g-2">
+              <label>Ordine di appartenenza *</label>
+            </div>
+            <div class="ui-g-4">
+              <input
+                type="text"
+                [(ngModel)]="ordine"
+                name="ordine"
+                required
+                pInputText>
+            </div>
+            <div class="ui-g-2">
+              <label>Numero di Iscrizione *</label>
+            </div>
+            <div class="ui-g-4">
+              <input
+                type="text"
+                [(ngModel)]="iscrizione"
+                name="iscrizione"
+                required
+                pInputText>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-5">
+              <span class>
+                <label>CUAA *</label>
+                <input
+                  type="text"
+                  [(ngModel)]="cuaa"
+                  name="cuaa"
+                  #cuaaInput="ngModel"
+                  [ngClass]="{'is-invalid': cuaaInput.invalid && (cuaaInput.touched|| f.submitted)}"
+                  pInputText
+                  appValidaCuaaCompleto
+                  (input)="cuaachange($event)"
+                  [readonly]="!(ordine && iscrizione)">
+                <div *ngIf="cuaaInput.errors"><p
+                    *ngIf="cuaaInput.errors?.cuaaErratoCompleto"
+                    class="ui-message ui-messages-error ui-corner-all">
+                    {{cuaaInput.errors.cuaaErratoCompleto}}
+                  </p>
+                </div>
+              </span>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+              <br>
+              <button
+                pButton
+                type="submit"
+                [disabled]="!f.valid || submitted || !this.cuaa"
+                label="Cerca"
+                (click)="caricaRappresentantiLegali(f)"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-5">
+              <span class>
+                <label>Descrizione Impresa</label>
+                <input
+                  type="text"
+                  [(ngModel)]="denominazione"
+                  name="denominazione"
+                  #denominazioneInput="ngModel"
+                  [ngClass]="{'is-invalid': denominazioneInput.invalid}"
+                  [readonly]="true"
+                  pInputText
+                  appValidadenominazione>
+              </span>
+            </div>
+            <div class="ui-g-2">
+              <label>Rappresentante Legale *</label>
+            </div>
+            <div class="ui-g-12 ui-md-8">
+              <select
+                class="custom-select"
+                name="rappresentante"
+                style="height: 47px;"
+                [(ngModel)]="selectedCUAADD">
+                <option
+                  [value]="rappresentanteLegali.dati"
+                  *ngFor="let rappresentanteLegali of rappresentantiLegali">
+                  {{ rappresentanteLegali.dati }}
+                </option>
+              </select>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+              <div class="ui-g-12 ui-md-12">
+                <label>Autorizzazione</label>
+                <button
+                  pButton
+                  type="button"
+                  icon="ui-icon-file-download"
+                  label="Scarica Modello Autorizzazione"
+                  (click)="downloadFile()"></button>
+                <button
+                  pButton
+                  type="button"
+                  icon="{{icon}}"
+                  label="Carica Autorizzazione Firmata"
+                  (click)="verifyUploadFile();"
+                  [disabled]="!(ordine && iscrizione && cuaa && denominazione)"></button>
+                <input
+                  type="file"
+                  style="display:none"
+                  #upFileLPC
+                  id="upFileLPC"
+                  name="upFileLPC"
+                  multiple="false"
+                  accept="{{fileExt}}"
+                  (change)="uploadFile($event)">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <div>
+          <p-fieldset align="justify">
+            <p-header>Attenzione</p-header>
+            Digitare l'ordine di appartenenza e il numero di iscrizione.
+            <br>
+            Digitare il CUAA relativo all'impresa per la quale si chiede il mandato (l'autorizzazione ad operare per
+            conto dell’azienda) e premere il pulsante Cerca.
+            <br>
+            Digitare il Rappresentante Legale selezionandolo dalla lista.
+            <br>
+            Scaricare e compilare il modulo per l'autorizzazione (premere il pulsante Scarica Modello
+            Autorizzazione).
+            <br>
+            Importare tale documento firmato dal Responsabile con allegato, in formato PDF, il documento d'identità
+            dello stesso (premere il pulsante Carica Autorizzazione Firmata)
+          </p-fieldset>
+        </div>
+
+      </form>
+    </p-panel>
+  </div>
+</div>

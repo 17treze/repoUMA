@@ -1,0 +1,101 @@
+<p-toast
+  key="tst-fas-ap"
+  [baseZIndex]="50000"></p-toast>
+
+<div class="ui-g ui-fluid">
+  <div class="tophome riepilogo">
+    <div class="ui-grid-fixed">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4>{{ title }}</h4>
+      </div>
+      <div class="subhome">
+        <ng-container>
+          <div *ngIf="fascicoloCorrente">
+            <div class="row">
+              <div class="col-2">
+                <h6 class="mb-0">Cuaa:</h6>
+                <span class="fw-700">
+                  {{ cuaa }}
+                </span>
+              </div>
+              <div class="col-7 border-r">
+                <h6 class="mb-0">Denominazione Fascicolo:</h6>
+                <span class="fw-700">
+                  {{ denominazione }}
+                </span>
+              </div>
+              <div class="col-3">
+                <h6 class="mb-0 mr-2">Stato fascicolo:</h6>
+                <span
+                  *ngIf="stato"
+                  class="border border-light py-1 px-2 mt-2 d-inline-block">
+                  {{stato.split('_').join(' ') }}
+                </span>
+              </div>
+            </div>
+            <div class="col-9">
+              <hr class="hr-white">
+            </div>
+            <div class="row">
+              <div class="col-2">
+                <h6 class="mb-0">Organismo pagatore:</h6>
+                <span class="fw-700">
+                  {{ organismoPagatore }}
+                </span>
+              </div>
+              <div class="col-7 border-r">
+                <h6 class="mb-0">Centro Assistenza Agricola:</h6>
+                <span class="fw-700">
+                  {{ caa }}
+                </span>
+                <br>
+                <br>
+                <h6 class="mb-0">Sportello:</h6>
+                <span class="fw-700 d-block">
+                  {{ sportello }}
+                </span>
+              </div>
+
+              <div class="col-3">
+                <h6 class="font-italic mt-2 mb-0">
+                  <b>ID {{ idFascicolo }}</b>
+                </h6>
+
+                <div class="box-border-bottom">
+                  <h6 class="mb-0">Costituzione</h6>
+                  <time class="fw-700">
+                    {{
+                      dataInizio
+                        | date: "dd/MM/yyyy"
+                    }}
+                  </time>
+                </div>
+
+                <div class="box-border-bottom">
+                  <h6 class="mb-0">Ultimo aggiornamento</h6>
+                  <time class="fw-700">
+                    {{
+                      dataUltimoAggiornamento
+                      | date: "dd/MM/yyyy"
+                    }}
+                  </time>
+                </div>
+
+                <div class="box-border-bottom">
+                  <h6 class="mb-0">Ultima validazione</h6>
+                  <time class="fw-700">
+                    {{
+                      dataUltimaValidazione
+                      | date: "dd/MM/yyyy"
+                    }}
+                  </time>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

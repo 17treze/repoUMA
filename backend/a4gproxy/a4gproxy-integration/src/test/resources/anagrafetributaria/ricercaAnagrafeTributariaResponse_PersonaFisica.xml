@@ -1,0 +1,91 @@
+		<ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll xmlns="http://cooperazione.sian.it/schema/interscambio/" xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/">
+	<ns1:risposta>
+		<ns1:persona>
+			<ns1:dittaIndividuale>
+				<ns1:attivita>
+					<ns1:codice>A.01.41.00</ns1:codice>
+					<ns1:descrizione>ALLEVAMENTO DI BOVINI E BUFALE DA LATTE, PRODUZIONE DI LATTE CRUDO</ns1:descrizione>
+					<ns1:infoDate>
+						<ns1:dataInizio>2018-01-01T00:00:00+00:00</ns1:dataInizio>
+					</ns1:infoDate>
+				</ns1:attivita>
+				<ns1:attivita>
+					<ns1:codice>A.01.21.0</ns1:codice>
+					<ns1:descrizione>COLTIVAZIONE DI UVA</ns1:descrizione>
+					<ns1:infoDate>
+						<ns1:dataInizio>2018-01-01T00:00:00+00:00</ns1:dataInizio>
+					</ns1:infoDate>
+				</ns1:attivita>
+				<ns1:attivita>
+					<ns1:codice>D.35.11.00</ns1:codice>
+					<ns1:descrizione>PRODUZIONE DI ENERGIA ELETTRICA</ns1:descrizione>
+					<ns1:infoDate>
+						<ns1:dataInizio>2018-01-01T00:00:00+00:00</ns1:dataInizio>
+					</ns1:infoDate>
+				</ns1:attivita>
+				<ns1:attivita>
+					<ns1:codice>A.01.21.0</ns1:codice>
+					<ns1:descrizione>ALLEVAMENTO DI BOVINI E BUFALINI, PRODUZIONE DI LATTE CRUDO</ns1:descrizione>
+					<ns1:infoDate>
+						<ns1:dataInizio>2003-01-01T00:00:00+00:00</ns1:dataInizio>
+					</ns1:infoDate>
+				</ns1:attivita>
+				<ns1:attivita>
+					<ns1:codice>A.01.41</ns1:codice>
+					<ns1:descrizione>ALLEVAMENTO DI BOVINI DA LATTE</ns1:descrizione>
+					<ns1:infoDate>
+						<ns1:dataInizio>2001-04-13T00:00:00+01:00</ns1:dataInizio>
+					</ns1:infoDate>
+				</ns1:attivita>
+				<ns1:domicilioFiscale>
+					<ns1:ubicazione>
+						<ns1:cap>38020</ns1:cap>
+						<ns1:comune>RUMO</ns1:comune>
+						<ns1:provincia>TN</ns1:provincia>
+						<ns1:toponimo>FRAZIONE LANZA 25/B</ns1:toponimo>
+					</ns1:ubicazione>
+				</ns1:domicilioFiscale>
+				<ns1:partitaIva>
+					<ns1:date>
+						<ns1:dataInizio>2000-05-16T00:00:00+01:00</ns1:dataInizio>
+					</ns1:date>
+					<ns1:piva>01696010220</ns1:piva>
+				</ns1:partitaIva>
+				<ns1:sede>
+					<ns1:ubicazione>
+						<ns1:cap>38020</ns1:cap>
+						<ns1:comune>RUMO</ns1:comune>
+						<ns1:provincia>TN</ns1:provincia>
+						<ns1:toponimo>FRAZIONE LANZA 25/B</ns1:toponimo>
+					</ns1:ubicazione>
+				</ns1:sede>
+				<ns1:denominazione>TORRESANI                CRISTIAN</ns1:denominazione>
+			</ns1:dittaIndividuale>
+			<ns1:personaFisica>
+				<ns1:cognome>TORRESANI</ns1:cognome>
+				<ns1:datiNascita>
+					<ns1:comune>CLES</ns1:comune>
+					<ns1:data>1978-02-08T00:00:00+00:00</ns1:data>
+					<ns1:provincia>TN</ns1:provincia>
+				</ns1:datiNascita>
+				<ns1:nome>CRISTIAN</ns1:nome>
+				<ns1:codiceFiscale>TRRCST78B08C794X</ns1:codiceFiscale>
+				<ns1:sesso>
+					<ns1:valore>M</ns1:valore>
+				</ns1:sesso>
+				<ns1:domicilioFiscale>
+					<ns1:ubicazione>
+						<ns1:cap>38020</ns1:cap>
+						<ns1:comune>RUMO</ns1:comune>
+						<ns1:provincia>TN</ns1:provincia>
+						<ns1:toponimo>FRAZIONE LANZA 25/B</ns1:toponimo>
+					</ns1:ubicazione>
+				</ns1:domicilioFiscale>
+			</ns1:personaFisica>
+		</ns1:persona>
+	</ns1:risposta>
+	<ns1:esito>
+		<ns1:codice xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/globals">012</ns1:codice>
+		<ns2:descrizione xmlns:ns2="http://cooperazione.sian.it/schema/interscambio/globals">Operazione correttamente eseguita (RicercaAnagrafica)</ns2:descrizione>
+	</ns1:esito>
+</ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll>

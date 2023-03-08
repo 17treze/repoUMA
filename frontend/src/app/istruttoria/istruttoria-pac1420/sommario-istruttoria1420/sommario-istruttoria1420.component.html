@@ -1,0 +1,122 @@
+<app-popup-dati-aggregati-zootecnia *ngIf="annoCampagna && popupCapiInterventoZootecniaVisibile"
+    [popupVisibile]="popupCapiInterventoZootecniaVisibile" (chiudiPopup)="closePopupCapiInterventoZootecnia()">
+</app-popup-dati-aggregati-zootecnia>
+<app-popup-dati-aggregati-istruttoria
+    *ngIf="annoCampagna && tipoIstruttoria && annoCampagna && popupDatiAggregatiVisibile"
+    [tipoSostegno]="tipoSostegno" [tipoIstruttoria]="tipoIstruttoria" [(popupVisibile)]="popupDatiAggregatiVisibile"
+    [annoCampagna]="annoCampagna" (chiudiPopup)="closePopupDatiAggregati()">
+</app-popup-dati-aggregati-istruttoria>
+<app-popup-dati-aggregati-disaccoppiato-istruttoria
+    *ngIf="annoCampagna && popupDatiAggregatiDisaccoppiatoVisibile"
+    [(popupVisibile)]="popupDatiAggregatiDisaccoppiatoVisibile" [annoCampagna]="annoCampagna"
+    (chiudiPopup)="closePopupDatiAggregatiDisaccoppiato()">
+</app-popup-dati-aggregati-disaccoppiato-istruttoria>
+<app-popup-dati-aggregati-superficie-intervento *ngIf="annoCampagna && popupDatiAggregatiSuperficieVisibile"
+    [popupVisibile]="popupDatiAggregatiSuperficieVisibile" [annoCampagna]="annoCampagna"
+    (chiudiPopup)="closePopupDatiAggregatiSuperficie()">
+</app-popup-dati-aggregati-superficie-intervento>
+
+<div class="tophome">
+    <div class="ui-grid-fixed">
+        <h4>{{ 'ISTRUTTORIA_PAC.INTESTAZIONE' | translate }}</h4>
+    </div>
+</div>
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed layout-actionmenu">
+    <div style="margin-top:30px; text-align: center;">
+        <div class="d-flex align-items-center bg-primary px-4 py-3">
+            <h4 class="mb-0 text-white fs-16 fw-700">{{ 'ISTRUTTORIA_PAC.DOMANDA_UNICA' | translate }}</h4>
+            <p-dropdown class="ml-2 dropdown-custom" style [options]="itemsCampagna" [ngModel]="annoCampagna"
+                (onChange)="manageCambioAnno($event)">
+            </p-dropdown>
+            <p-message class="ml-auto  mr-3  message-custom" [severity]="warnIco" [text]="msgText"></p-message>
+            <p-menubar [model]="itemsMenuDatiAggregati" class="dropdown-custom mr-3"></p-menubar>
+            <p-menubar [model]="itemsStatistiche" class="dropdown-custom  mr-3"></p-menubar>
+            <p-menubar [model]="itemsSincronizzazione" class="dropdown-custom  mr-3"></p-menubar>
+            <p-button class="button-custom" label="GESTISCI" icon="pi pi-cog" iconPos="right"
+                (click)="apriConfigIstruttoria()">
+            </p-button>
+        </div>
+    </div>
+</div>
+<div class="card no-margin" class="boxgrey" style="padding-top:50px; display: table">
+    <div class="ui-grid-fixed">
+        <!-- nel value della ptable ci andrà l'istruttoria scelta nella dropdown sopra la tabella -->
+        <p-table [value]="istruttoria" class="table-custom">
+            <!--  <p-table> -->
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>SOSTEGNO</th>
+                    <th class="text-center">ANTICIPO</th>
+                    <th class="text-center">SALDO</th>
+                    <th class="text-center">INTEGRAZIONE</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+                <tr>
+                    <td align="left"><img src="assets/img/icon_disaccoppiato.png"><strong
+                            class="ml-2">DISACCOPPIATO</strong></td>
+                    <td align="right">
+                        <div class="d-flex  align-items-center  justify-content-end"
+                            *ngIf="numberBeforeButtonDscAnt!==0">
+                            <strong *ngIf="istruttoria[0].anticipoDisaccoppiato"
+                                class="fs-22  mr-3">{{numberBeforeButtonDscAnt}}</strong>
+                            <button pButton type="button"
+                                class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+                                (click)="redirectCruscotto(istruttoria[0].anticipoDisaccoppiato)"
+                                *ngIf="istruttoria[0].anticipoDisaccoppiato">CRUSCOTTO</button>
+                        </div>
+                    </td>
+                    <td align="right">
+                        <div class="d-flex  align-items-center  justify-content-end">
+                            <strong class="fs-22  mr-3">{{numberBeforeButtonDsc}}</strong>
+                            <button pButton type="button"
+                                class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+                                (click)="redirectCruscotto(istruttoria[0].saldoDisaccoppiato)">CRUSCOTTO</button>
+                        </div>
+                    </td>
+                    <td align="right">
+                        <div class="d-flex  align-items-center  justify-content-end">
+                            <strong class="fs-22  mr-3">{{numberBeforeButtonDscInt}}</strong>
+                            <button pButton type="button"
+                                class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+                                (click)="redirectCruscotto(istruttoria[0].integrazioneDisaccoppiato)">CRUSCOTTO</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left"><img src="assets/img/icon_acz.png"><strong class="ml-2">ACCOPPIATO
+                            ZOOTECNIA</strong></td>
+                    <td></td>
+                    <td align="right">
+                        <div class="d-flex  align-items-center  justify-content-end">
+                            <strong class="fs-22  mr-3">{{numberBeforeButtonAcz}}</strong>
+                            <button pButton type="button"
+                                class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+                                (click)="redirectCruscotto(istruttoria[0].saldoAcz)">CRUSCOTTO</button>
+                        </div>
+                    </td>
+                    <td align="right"></td>
+                </tr>
+                <tr>
+                    <td align="left"><img src="assets/img/icon_acs.png"><strong class="ml-2">ACCOPPIATO
+                            SUPERFICI</strong></td>
+                    <td></td>
+                    <td align="right">
+                        <div class="d-flex  align-items-center  justify-content-end">
+                            <strong class="fs-22  mr-3">{{numberBeforeButtonAcs}}</strong>
+                            <button pButton type="button"
+                                class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty  button-responsive"
+                                (click)="redirectCruscotto(istruttoria[0].saldoAcs)">CRUSCOTTO</button>
+                        </div>
+                    </td>
+                    <td align="right"></td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div class="ui-g-12" class="layout-actionmenu">
+            <app-processi-di-controllo *ngIf="processiDaControllare" [processiDaControllare]="processiDaControllare">
+            </app-processi-di-controllo>
+        </div>
+    </div>
+</div>

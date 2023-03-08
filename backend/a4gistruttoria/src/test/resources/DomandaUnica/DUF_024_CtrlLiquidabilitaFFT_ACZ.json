@@ -1,0 +1,38 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "PRRRED82B02F839P",
+        "ragioneSociale": "SALVATORE DE LUCA",
+        "numeroDomanda": 300005,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-13T15:37:59.000+0200",
+        "codEnteCompilatore": "4",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 003",
+        "dataProtocollazione": "2018-04-13T15:38:46.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": false,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": true
+        }
+    },
+    "infoLiquidabilita": {
+        "ibanValido": false,
+        "titolareDeceduto": false,
+        "domandaSospesaAgea": true,
+        "iban": ""
+    }
+}

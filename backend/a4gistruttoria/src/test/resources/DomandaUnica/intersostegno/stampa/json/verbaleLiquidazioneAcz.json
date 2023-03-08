@@ -1,0 +1,50 @@
+{
+	"dataElenco": "2018-06-14",
+	"codiceElenco": "009-801-20190513-9999999",
+	"campagna": "2018",
+	"tipoPagamento": "INTEGRAZIONE",
+	"intervento": "ACCOPPIATO ZOOTECNIA",
+	"elencoDomande": [
+		{
+			"counter": 1,
+			"numeroDomanda": "300000",
+			"numeroProtocollo": null,
+			"nome": "SALVATORE DE LUCA",
+			"cuaa": "ORRRED82B02F839O",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioAcz310": "1.562,62",
+			"quotaPremioAcz311": "1.163,15",
+			"quotaPremioAcz313": "377,14",
+			"quotaPremioAcz322": null,
+			"quotaPremioAcz315": null,
+			"quotaPremioAcz316": null,
+			"quotaPremioAcz318": "789,58",
+			"quotaPremioAcz320": null,
+			"quotaPremioAcz321": null,
+			"totalePremio": "3.892,49"
+		},
+		{
+			"counter": 2,
+			"numeroDomanda": "300002",
+			"numeroProtocollo": null,
+			"nome": "SALVATORE DE LUCA",
+			"cuaa": "YRRRED82B02F839Y",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioAcz310": "1.069,67",
+			"quotaPremioAcz311": "534,25",
+			"quotaPremioAcz313": "1.322,67",
+			"quotaPremioAcz322": "124,45",
+			"quotaPremioAcz315": "465,69",
+			"quotaPremioAcz316": "789,58",
+			"quotaPremioAcz318": "852,25",
+			"quotaPremioAcz320": "36,25",
+			"quotaPremioAcz321": null,
+			"totalePremio": "5.194,81"
+		}
+	],
+	"totaleElencoLiquidazione": "9.087,30"
+}

@@ -1,0 +1,54 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    height: 200px;
+    border-radius: 5px; /* 5px rounded corners */
+}
+
+
+
+/* Add rounded corners to the top left and the top right corner of the image */
+.imgcard {
+    border-radius: 5px 5px 0 0;
+}
+
+.imagecontainer {
+    width: 200px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.ui-dialog-visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > ::ng-deep div {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    
+    // .ui-dialog-mask
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+
+    // .ui-widget-overlay
+    background-color: rgba(88, 87, 92, 0.8);
+    opacity: 1;
+
+    & > ::ng-deep div.ui-confirmdialog {
+      top: 0;
+      left: 0;
+    }
+  }
+}

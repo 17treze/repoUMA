@@ -1,0 +1,191 @@
+<!-- Menu -->
+<div id="menu-gis">
+    <div class="pattern-menu"></div>
+    <!-- Icona pannello di ricerca richieste modifiche suolo-->
+    <span pTooltip="Ricerca Richieste Modifiche Suolo" tooltipPosition="right">
+        <i (click)="openPanelRicercaRichiesteModificaSuolo();" id="search-gis" class="pi pi-search"></i>
+    </span>
+
+    <!-- Icona pannello dei risultati di ricerca richieste modifiche suolo-->
+    <i (click)="showResults = true" *ngIf="searchResults && !panelEvent.searchLavorazioni" id="search-gis"
+        class="pi pi-ellipsis-h"></i>
+
+    <hr class="sidebar-separatore">
+
+    <!-- Icona pannello crea una nuova lavorazione-->
+    <span pTooltip="Crea una nuova Lavorazione Suolo" tooltipPosition="right">
+        <i (click)="apriNuovaLavorazione(null); display = false;"
+            [hidden]="profiloUtente.profilo === 'caa' || lavorazioniEvent.idLavorazione" id="search-gis"
+            class="pi pi-plus"></i>
+    </span>
+
+    <!-- Icona pannello della lavorazione aperta-->
+    <span pTooltip="Apri lavorazione" tooltipPosition="right">
+        <i (click)="apriNuovaLavorazione(lavorazioniEvent.objectLavorazione); display = false;"
+            [hidden]="profiloUtente.profilo === 'caa' || !lavorazioniEvent.idLavorazione" id="search-gis"
+            class="pi pi-plus-circle"></i>
+    </span>
+
+
+    <!-- Icona pannello delle MIE LAVORAZIONI-->
+    <div [hidden]="profiloUtente.profilo === 'caa'">
+        <span pTooltip="Le mie Lavorazioni" tooltipPosition="right">
+            <i class="bookmark-lavorazioni"
+                (click)="totalsMyLavorazioniSuoli == 0 ? null : openLeMieLavorazioni(); display = false;"
+                id="search-gis" class="pi pi-bookmark"></i>
+            <div class="lavorazioni-count">{{totalsMyLavorazioniSuoli}}
+            </div>
+        </span>
+    </div>
+</div>
+
+<!-- Dialogs -->
+<dialogs-gis [closeLavorazioneStep3]="stepper.closeLavorazioneStep3" [lavorazioneSuoloInput]="lavorazioneSuoloInput"
+    [profiloUtente]="profiloUtente" [detailResults]="detailResults"></dialogs-gis>
+
+<!-- Pannelli -->
+<div class="map-content">
+    <p-toast position="top-right"></p-toast>
+
+    <!-- Context RichiestaModificaSuolo -->
+    <div *ngIf="currentSession.context === 'contextRichiestaModificaSuolo'">
+        <p-sidebar [(visible)]="display" [(dismissible)]="dismissible" [(blockScroll)]="blockScroll" position="left">
+            <h1>Ricerca</h1>
+
+            <div class="card-content">
+                <gis-search [profiloUtente]="profiloUtente"></gis-search>
+            </div>
+        </p-sidebar>
+
+        <!-- RISULTATI RICERCA RICHIESTE MODIFICA SUOLO -->
+        <p-sidebar class="sidebar-results"
+            [ngClass]="{'fixPositionRes': !display, 'noShowing': !showResults || panelEvent.searchLavorazioni}"
+            (onHide)="closeResults()" [(visible)]="showResults && !panelEvent.searchLavorazioni"
+            [(dismissible)]="dismissible" [(blockScroll)]="blockScroll" position="left">
+            <h1 style="text-transform: none!important;">Richiesta modifica uso suolo</h1>
+            <div>
+                <results-gis [totals]="totalsSearchRichieste" [searchFormParams]="searchFormParams"
+                    [searchResults]="searchResults" [showDetail]="showDetail"></results-gis>
+            </div>
+        </p-sidebar>
+
+        <!-- PANNELLO RISULTATI RICERCA LAVORAZIONI -->
+        <p-sidebar class="sidebar-results"
+            [ngClass]="{'fixPositionRes': !display, 'noShowing': showResults || !panelEvent.searchLavorazioni}"
+            [(visible)]="panelEvent.searchLavorazioni && !showResults" *ngIf="panelEvent.searchLavorazioni"
+            (onHide)="collapseLemieLavorazioni()" [(dismissible)]="dismissible" [(blockScroll)]="blockScroll"
+            position="left">
+            <h1 class="bo-text">Lavorazioni &nbsp; </h1>
+            <div class="card-content">
+                <div class="content-scroll" style="border-bottom: 1px solid #d8d8d8;">
+                    <label for="Risultati">{{totalsSearchLavorazioni}} risultati</label>
+                </div>
+                <gis-le-mie-lavorazioni id="ricercaLavorazioni" [tipo]="'ricercaLavorazioni'"
+                    [mylavorazioniSuolo]="lavorazioniResults" [totalsMyLavorazioniSuolo]="totalsSearchLavorazioni"
+                    (openStepLavorazione)="openStepLavorazione($event)">
+                </gis-le-mie-lavorazioni>
+            </div>
+        </p-sidebar>
+    </div>
+
+    <div *ngIf="(currentSession.context === 'contextRichiestaModificaSuolo' || currentSession.context === 'contextLavorazioneSuolo') || panelEvent.searchLavorazioni"
+        [hidden]="currentSession.context === 'contextLavorazioneSuolo' && !panelEvent.showDettaglioLavorazione">
+        <!-- DETTAGLI RICERCA RICHIESTE MODIFICA SUOLO -->
+        <p-sidebar class="sidebar-detail"
+            [(visible)]="panelEvent.comeFromRicerca && !panelEvent.searchLavorazioni || panelEvent.comeFromLavorazione && !panelEvent.searchLavorazioni"
+            (onHide)="closeDetail()"
+            [ngClass]="{'search-detail': (panelEvent.comeFromRicerca && display && !showResults || panelEvent.comeFromLavorazione && panelEvent.nuovaLavorazione && !panelEvent.openPoligoniDichiarato),
+         'fixPositionDet': (panelEvent.comeFromRicerca && !display && showResults) || (currentSession.context === 'contextLavorazioneSuolo' && panelEvent.nuovaLavorazione && !poligoniDichiarati), 
+         'noShowing': !showDetail || panelEvent.searchLavorazioni, 'onlyDetail': (panelEvent.comeFromRicerca && !display && !showResults && currentSession.context !== 'contextLavorazioneSuolo')}"
+            [(dismissible)]="dismissible" [(blockScroll)]="blockScroll" position="left">
+            <detail-gis [detailResults]="detailResults" [detailIndex]="detailIndex" [showDetail]="showDetail"
+                [allegatiCount]="allegatiCount" [profiloUtente]="profiloUtente" [searchResults]="searchResults"
+                [display]="display" [showResults]="showResults">
+            </detail-gis>
+        </p-sidebar>
+    </div>
+
+    <!-- Context LavorazioneSuolo -->
+    <div *ngIf="currentSession.context === 'contextLavorazioneSuolo'">
+        <!-- Creazione lavorazione -->
+        <p-sidebar id="creaLavorazione" [(visible)]="panelEvent.nuovaLavorazione" (onHide)="collapseLavorazione()"
+            [(dismissible)]="dismissible" [(blockScroll)]="blockScroll" position="left">
+
+            <h1 class="bo-text"><span class="headerLavorazione">{{lavorazioniEvent.headerLavorazione}} &nbsp; </span><i
+                    class="exit-lavorazione-x pi pi-times" (click)="closeLavorazione()" id="search-gis"></i> </h1>
+            <div class="elimina-lavorazione">
+                <div class="ui-g stato-container" style="display: block;">
+                    <div class="ui-g-6">
+                        <label class="lavorazione-id">ID {{lavorazioniEvent.idLavorazione}}</label>
+                    </div>
+                    <div class="ui-g-6">
+                        <div class="stato-content" style="float: inherit;margin: 0;">
+                            <div for="TAG" class="label-stato" [ngClass]="lavorazioniEvent.stato">
+                                <span>{{lavorazioniEvent.statoMappato}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <gis-anno-campagna-lavorazione [lavorazione]="lavorazioniEvent.objectLavorazione"
+                    (openStepLavorazione)="openStepLavorazione($event)">
+                </gis-anno-campagna-lavorazione>
+                <gis-toolbar-lavorazione (deleteLavorazioneEmit)="deleteLavorazione();"
+                    (openStepLavorazione)="openStepLavorazione($event)">
+                </gis-toolbar-lavorazione>
+            </div>
+            <div class="card-content">
+                <gis-wizard-component (stepEvent)="receiveStep($event)" [refreshStep]="stepper.refreshStep"
+                    (lavorazioneChangedOutput)="receiveFormStep3($event)"
+                    [totalsPoligoniDichiaratoInLavorazione]="totalsSearchSuoliDichiaratiAssociatiLavorazione"
+                    [searchFormParamsLavorazione]="searchFormParamsLavorazione" [resetStep]="stepper.resetStep"
+                    [profiloUtente]="profiloUtente" [poligoniById]="poligoniById"></gis-wizard-component>
+            </div>
+        </p-sidebar>
+
+        <!-- PANNELLO RISULTATI RICERCA SUOLI DICHIARATI -->
+        <p-sidebar id="creaLavorazione" class="sidebar-results"
+            [ngClass]="{'fixPositionRes': !panelEvent.nuovaLavorazione, 'noShowing': !poligoniDichiarati}"
+            [(visible)]="poligoniDichiarati && panelEvent.openPoligoniDichiarato" [(dismissible)]="dismissible"
+            [(blockScroll)]="blockScroll" position="left">
+            <h1>Suolo dichiarato </h1>
+            <results-gis [inputPoligoniById]="poligoniById" [totals]="totalsSearchSuoliDichiarati"
+                [poligoniDichiarati]="poligoniDichiarati" [profiloUtente]="profiloUtente"
+                [searchFormParamsLavorazione]="searchFormParamsLavorazione"></results-gis>
+        </p-sidebar>
+
+        <!-- PANNELLO DETTAGLIO RICHIESTA MODIFICA SUOLO -->
+        <p-sidebar id="dettaglioLavorazione" class="sidebar-detail"
+            [(visible)]="contextPanel==='contextLavorazioneSuolo' && showDetail && !display"
+            (onHide)="collapseDettaglioLavorazione()" [ngClass]="{'fixPositionDet': !panelEvent.nuovaLavorazione && poligoniDichiarati,'noShowing': !panelEvent.showDettaglioLavorazione, 'onlyDetail': !panelEvent.nuovaLavorazione && !poligoniDichiarati,
+            'search-detail':panelEvent.nuovaLavorazione && !poligoniDichiarati}" [(dismissible)]="dismissible"
+            [(blockScroll)]="blockScroll" position="left">
+            <detail-gis [detailIndex]="detailIndex" [showDetail]="showDetail" [detailResults]="detailResults"
+                [allegatiCount]="allegatiCount" [profiloUtente]="profiloUtente">
+            </detail-gis>
+
+        </p-sidebar>
+
+        <!-- PANNELLO ESITO LAVORAZIONE -->
+        <gis-esito-validazione-lavorazione
+            [refreshView]="esitoValidazioneEvent.refreshViewValidazioneLavorazioneInCorso">
+        </gis-esito-validazione-lavorazione>
+    </div>
+
+    <!-- Context Le mie lavorazioni -->
+    <div *ngIf="currentSession.context === 'contextLemieLavorazioni'">
+        <p-sidebar id="leMieLavorazioni" [(visible)]="leMieLavorazioni" *ngIf="leMieLavorazioni"
+            (onHide)="collapseLemieLavorazioni()" [(dismissible)]="dismissible" [(blockScroll)]="blockScroll"
+            position="left">
+            <h1 class="bo-text">Le mie lavorazioni &nbsp; </h1>
+            <div class="card-content">
+                <gis-le-mie-lavorazioni [tipo]="'leMieLavorazioni'" [mylavorazioniSuolo]="mylavorazioniSuolo"
+                    [totalsMyLavorazioniSuolo]="totalsMyLavorazioniSuoli"
+                    (openStepLavorazione)="openStepLavorazione($event)">
+                </gis-le-mie-lavorazioni>
+            </div>
+        </p-sidebar>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" xmlns:auth="http://www.autorizzazione.regione.taa.it/AutorizzazioneType/schemas">
+  <xs:import namespace="http://www.autorizzazione.regione.taa.it/AutorizzazioneType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6_7_8_9_10.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene i tipi che specializzano le logiche autorizzative per i servizi del catasto</xs:documentation>
+  </xs:annotation>
+  <xs:complexType final="restriction" name="InfoAutorizzativeCatastoType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni autorizzative specifiche per i servizi del Catasto che richiedono il Richiedente.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="auth:AutorizzazioniType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="OperationListType">
+    <xs:annotation>
+      <xs:documentation>Dichiara le possibili operazioni esposte per il Catasto</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="ImmobileService.GetImmobile"/>
+      <xs:enumeration value="TitolareImmobileService.GetTitolariImmobile"/>
+      <xs:enumeration value="TitolaritaImmobileService.GetImmobiliPersonaFisica"/>
+      <xs:enumeration value="TitolaritaImmobileService.GetImmobiliPersonaGiuridica"/>
+      <xs:enumeration value="PlanimetriaService.GetElaboratoPlanimetrico"/>
+      <xs:enumeration value="PlanimetriaService.GetPlanimetriaImmobile"/>
+      <xs:enumeration value="DatoMetricoService.GetDatiMetriciImmobile"/>
+      <xs:enumeration value="ParticellaService.GetParticella"/>
+      <xs:enumeration value="TitolariParticellaService.GetTitolariParticella"/>
+      <xs:enumeration value="ParticellaSoggettoService.GetParticelleTitolareFisico"/>
+      <xs:enumeration value="ParticellaSoggettoService.GetParticelleTitolareGiuridico"/>
+      <xs:enumeration value="PrenotazioneFrazionamentiService.GetFrazionamentiPrenotati"/>
+      <xs:enumeration value="FrazionamentoService.GetFrazionamento"/>
+      <xs:enumeration value="MappaFrazionamentoService.GetMappaBloccoFrazionamento"/>
+      <xs:enumeration value="MappaParticellaService.GetMappaParticella"/>
+      <xs:enumeration value="DatiCatastaliPuntoService.GetParticellePunto"/>
+      <xs:enumeration value="DatiCatastaliPoligonoService.GetParticellePoligono"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

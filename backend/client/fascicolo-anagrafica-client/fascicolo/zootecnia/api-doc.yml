@@ -1,0 +1,427 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "A4G - Zootecnia",
+        "description": "Modulo per Zootecnia",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/fascicolo/zootecnia",
+            "description": "Generated server url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "ZootecniaPrivateController",
+            "description": "API privata per zootecnia"
+        },
+        {
+            "name": "ZootecniaController",
+            "description": "API per zootecnia"
+        }
+    ],
+    "paths": {
+        "/api/v1/zootecnia/{cuaa}/anagrafica-allevamenti": {
+            "get": {
+                "tags": [
+                    "ZootecniaController"
+                ],
+                "summary": "Permette di ottenere la lista di allevamenti di un certo detentore",
+                "operationId": "getAllevamenti",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idValidazione",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnagraficaAllevamentoDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/{cuaa}/anagrafica-allevamenti/aggiorna": {
+            "put": {
+                "tags": [
+                    "ZootecniaController"
+                ],
+                "summary": "Aggiorna la lista di allevamenti e strutture associate per il proprietario alla data richiesta",
+                "description": "utilizzare il formato YYYY-MM-dd",
+                "operationId": "aggiornaAllevamenti",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "dataRichiesta",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "description": "utilizzare il formato yyyy-mm-dd",
+                            "format": "date",
+                            "example": "2020-12-31"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/{cuaa}/controllo-completezza": {
+            "get": {
+                "tags": [
+                    "ZootecniaController"
+                ],
+                "operationId": "getControlloCompletezzaFascicolo",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/private/{cuaa}/{idValidazione}/validazione": {
+            "put": {
+                "tags": [
+                    "ZootecniaPrivateController"
+                ],
+                "operationId": "startValidazioneFascicolo",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idValidazione",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/private/{cuaa}/controllo-completezza": {
+            "get": {
+                "tags": [
+                    "ZootecniaPrivateController"
+                ],
+                "operationId": "getControlloCompletezzaFascicolo_1",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/private/{cuaa}/fascicolo-completo/anagrafica-allevamenti": {
+            "get": {
+                "tags": [
+                    "ZootecniaPrivateController"
+                ],
+                "summary": "Permette di ottenere la lista di allevamenti di un certo detentore,ritorna un errore se il fascicolo non supera i controlli di completezza",
+                "operationId": "getAllevamentiFascicoloCompleto",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idValidazione",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AnagraficaAllevamentoDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/zootecnia/private/{cuaa}/{idValidazione}/fine-validazione": {
+            "put": {
+                "tags": [
+                    "ZootecniaPrivateController"
+                ],
+                "operationId": "invioEventoFineValidazione",
+                "parameters": [
+                    {
+                        "name": "cuaa",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "idValidazione",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/v1/framework/events/{idEvent}/reprocess": {
+            "get": {
+                "tags": [
+                    "event-store-controller"
+                ],
+                "operationId": "reprocessEvent",
+                "parameters": [
+                    {
+                        "name": "idEvent",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AnagraficaAllevamentoDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "identificativo": {
+                        "type": "string"
+                    },
+                    "identificativoFiscale": {
+                        "type": "string"
+                    },
+                    "specie": {
+                        "type": "string"
+                    },
+                    "tipoProduzione": {
+                        "type": "string"
+                    },
+                    "orientamentoProduttivo": {
+                        "type": "string"
+                    },
+                    "autorizzazioneSanitariaLatte": {
+                        "type": "string"
+                    },
+                    "dtAperturaAllevamento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dtChiusuraAllevamento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "cfProprietario": {
+                        "type": "string"
+                    },
+                    "denominazioneProprietario": {
+                        "type": "string"
+                    },
+                    "cfDetentore": {
+                        "type": "string"
+                    },
+                    "denominazioneDetentore": {
+                        "type": "string"
+                    },
+                    "dtInizioDetenzione": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dtFineDetenzione": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "soccida": {
+                        "type": "string"
+                    },
+                    "fascicolo": {
+                        "$ref": "#/components/schemas/FascicoloDto"
+                    },
+                    "tipologiaAllevamento": {
+                        "type": "string"
+                    },
+                    "strutturaAllevamentoDto": {
+                        "$ref": "#/components/schemas/StrutturaAllevamentoDto"
+                    }
+                }
+            },
+            "FascicoloDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "cuaa": {
+                        "type": "string"
+                    }
+                }
+            },
+            "StrutturaAllevamentoDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "identificativo": {
+                        "type": "string"
+                    },
+                    "indirizzo": {
+                        "type": "string"
+                    },
+                    "cap": {
+                        "type": "string"
+                    },
+                    "localita": {
+                        "type": "string"
+                    },
+                    "comune": {
+                        "type": "string"
+                    },
+                    "latitudine": {
+                        "type": "string"
+                    },
+                    "longitudine": {
+                        "type": "string"
+                    },
+                    "foglioCatastale": {
+                        "type": "string"
+                    },
+                    "sezione": {
+                        "type": "string"
+                    },
+                    "particella": {
+                        "type": "string"
+                    },
+                    "subalterno": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

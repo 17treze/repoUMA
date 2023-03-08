@@ -1,0 +1,224 @@
+button.closeWindow {
+    float: left;
+    width: 100%;
+    font-size: 12px;
+    background: #3d3d3d;
+    text-align: right;
+}
+#poligoniWorkspace > div.ui-accordion-content-wrapper.ng-trigger.ng-trigger-tabContent > div {
+    padding: 10px 0px!important;
+}
+#poligoniWorkspace > div.ui-accordion-content-wrapper.ng-trigger.ng-trigger-tabContent > div > gis-lavorazioneworkspace > p-table > div > div > div >
+ div.ui-table-scrollable-header.ui-widget-header > div > table > thead {
+    border-bottom: 0!important;
+    border-top: 1px solid #e8e8e8!important;
+    height: 25px;
+    padding-right:0!important;
+}
+.workspaceLabel{
+    color: #FFFFFF !important;
+    font-weight: 400!important;
+    margin: 2px 5px;
+    font-size: 15px;
+    cursor:pointer;
+}
+.workspaceDiv{
+    background-color: #027a48;
+    padding-left: 5px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#poligoniWorkspace > p-table > div {
+    border: 1px solid;
+}
+
+gis-lavorazioneworkspace > p-table > div > div > div > div.ui-table-scrollable-header.ui-widget-header > div {
+    margin: 0!important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+::-webkit-scrollbar  {
+    width: 7px;
+}
+
+.ui-table-loading-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    margin-top: -1em;
+    margin-left: -1em;
+}
+
+.ui-table-scrollable-footer.ui-widget-header.ng-star-inserted{
+    background-color: #e9ecef;
+    border: none;
+}
+#autoCompleteCodUso > span > input ,#autoCompleteStatoColt > span > input  {
+    padding: 0px !important;
+}
+
+#autoCompleteStatoColt > span > div > ul > li {
+    width: 250px;
+    white-space: break-spaces;
+}
+
+#autoCompleteStatoColt > span > div {
+    left: -90px !important;
+    position: absolute;
+}
+
+
+#autoCompleteCodUso > span > div > ul > li {
+    width: 250px;
+    white-space: break-spaces;
+}
+
+#autoCompleteCodUso > span > div {
+    left: -25px !important;
+    position: absolute;
+}
+#lavorazioneWorkspace-id > span > i{
+    margin: 0 3px !important;
+    color: #00985b !important;
+    font-size: 22px!important;
+    background-color: transparent!important;
+    cursor: pointer;
+}
+
+
+#autoCompleteCodUso > span > button, #autoCompleteStatoColt > span > button{
+    left: 30px;
+}
+
+
+.selectedFeature, .ui-state-highlight td.selectedFeature{
+    background-color: #00ff0b7a !important;
+    color: #000000 !important;
+    cursor: default;
+}
+
+.multiSelection, .ui-state-highlight td.multiSelection{
+    background-color: #d7d770 !important;
+    color: #000000 !important;
+    cursor: default;
+}
+
+.multiClickActived, tr.ui-selectable-row.ng-star-inserted.multiClickActived.ui-state-highlight {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+
+.ui-table-scrollable-body {
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+tr.ng-star-inserted.ui-state-highlight{
+    background-color: #e9ecef!important;
+    color: #333333 !important;
+    font-weight: 400 !important;
+}
+
+.ui-table-scrollable-footer.ui-widget-header {
+    border: white;
+}
+
+/* nasconde la tabella della finestra */
+gis-lavorazioneworkspace > div > p-table.tablePoligoniWorkspaceExt {
+    display: none;
+}
+#body-external-window > gis-lavorazioneworkspace > div:nth-child(3) > p-table#tablePoligoniWorkspace {
+    display: none;
+}
+#autoCompleteMultiFeature > span > div {
+    left: 14px !important;
+    position: fixed;
+    top: initial!important;
+    display: block!important;
+    min-width: 260px !important;
+}
+
+#autoCompleteMultiFeature > span > div > ul  {
+    width: 260px;
+}
+
+#autoCompleteMultiFeature > span > div > ul > li {
+    width: 250px;
+    white-space: break-spaces;
+}
+
+#autoCompleteMultiFeature > span > input{
+    padding: 0px !important;
+}
+
+#autoCompleteMultiFeature > span > input {
+    padding: 0px !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+#autoCompleteStatoColt > span,
+#autoCompleteCodUso > span,
+#autoCompleteMultiFeature > span {
+    height: 20px!important;
+}
+.adlOverflow > p-table.tablePoligoniWorkspace > div > div > div > div.ui-table-scrollable-body {
+    overflow: visible!important;
+}
+
+.ui-table.ui-table-hoverable-rows .ui-table-tbody > tr:not(.ui-state-highlight):not(.ui-contextmenu-selected):hover{
+    cursor: auto!important;
+}
+
+.ui-table-thead-lav-ord-multi-sel {
+    padding: 4px!important;
+}
+#tablePoligoniWorkspace > div > div > div > div.ui-table-scrollable-header.ui-widget-header > .ui-table-scrollable-header-box {
+    padding: 0!important;
+}
+#tablePoligoniWorkspace > div > div > div > div.ui-table-scrollable-header.ui-widget-header > div > table > thead {
+    border-top: solid 1px #ffffff !important;
+}
+.grid-workspace {
+    display: grid;
+    height: 30px;
+}
+.table-id {
+    width: 10%;
+    padding: 0!important;
+}
+.table-uso {
+    width: 22%;
+}
+.table-stato {
+    width: 20%;
+}
+.table-area {
+    width: 40%;
+}
+td.table-icona {
+    padding: 0!important;
+}
+td.table-icona div {
+    margin: 0;
+}
+td.table-icona div input {
+    width: 25px;
+}
+
+#autoCompleteStatoColt > span > input:disabled,
+#autoCompleteCodUso > span > input:disabled {
+    opacity: initial;
+}

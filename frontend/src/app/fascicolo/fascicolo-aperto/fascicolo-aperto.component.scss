@@ -1,0 +1,40 @@
+app-fascicolo-riepilogo
+  button.fs-16.ui-button-raised.ui-button {
+  font-size: 16px !important;
+  background: #00985a !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.tophome.riepilogo.tophome.riepilogo {
+  margin-bottom: 122px;
+}
+
+.box-border-bottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+
+    width: 100%;
+
+    border-bottom: 1px dashed #ffffff;
+  }
+
+  * {
+    position: relative;
+    z-index: 1;
+
+    display: inline-block;
+    padding: 2px;
+
+    background-color: #0d5f3f;
+  }
+}

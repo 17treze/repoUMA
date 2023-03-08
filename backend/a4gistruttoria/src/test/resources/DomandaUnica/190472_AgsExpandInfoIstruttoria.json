@@ -1,0 +1,245 @@
+{  
+   "infoGeneraliDomanda":{  
+      "pac":"PAC1420",
+      "tipoDomanda":"DU",
+      "campagna":2018,
+      "modulo":"PAGAMENTI DIRETTI",
+      "codModulo":"BPS_2018",
+      "cuaaIntestatario":"01917270223",
+      "ragioneSociale":"AZIENDA AGRICOLA TROIANI ANDREA E SABRINA-SOCIETA' SEMPLICE AGRICOLA",
+      "numeroDomanda":190472,
+      "numeroDomandaRettificata":null,
+      "dataPresentazione":"2018-06-13T11:25:26.000+0200",
+      "codEnteCompilatore":"6",
+      "enteCompilatore":"CAA COLDIRETTI DEL TRENTINO - 005",
+      "dataProtocollazione":"2018-06-13T11:26:29.000+0200",
+      "dataPresentazOriginaria":null,
+      "dataProtocollazOriginaria":null
+   },
+   "controlliPresentazione":{  
+      "aggiornamentoFascicolo":"S",
+      "visioneAnomalie":"S",
+      "firmaDomanda":"S",
+      "archiviazioneDomanda":"S"
+   },
+   "richieste":{  
+      "sintesiRichieste":{  
+         "richiestaDisaccoppiato":true,
+         "richiestaSuperfici":true,
+         "richiestaZootecnia":false
+      }
+   },
+   "infoIstruttoriaDomanda":{  
+      "datiEleggibilita":[  
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2746742,
+               "comune":"ALA - ALA (TN)",
+               "codNazionale":"P363",
+               "foglio":9999,
+               "particella":"00729",
+               "sub":" "
+            },
+            "codColtura3":"210-163-194",
+            "codColtura5":"410-009-000-000-194",
+            "superficieGis":850,
+            "superficieSigeco":0,
+            "idParcella":665081,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2377360,
+               "comune":"MORI - PANNONE (TN)",
+               "codNazionale":"P505",
+               "foglio":9999,
+               "particella":"00994",
+               "sub":"1"
+            },
+            "codColtura3":"360-441-000",
+            "codColtura5":"044-005-000-000-000",
+            "superficieGis":4410,
+            "superficieSigeco":0,
+            "idParcella":665080,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2746751,
+               "comune":"ALA - ALA (TN)",
+               "codNazionale":"P363",
+               "foglio":9999,
+               "particella":"00728",
+               "sub":" "
+            },
+            "codColtura3":"210-163-000",
+            "codColtura5":"410-009-000-000-000",
+            "superficieGis":26171,
+            "superficieSigeco":0,
+            "idParcella":665082,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2746751,
+               "comune":"ALA - ALA (TN)",
+               "codNazionale":"P363",
+               "foglio":9999,
+               "particella":"00728",
+               "sub":" "
+            },
+            "codColtura3":"210-163-000",
+            "codColtura5":"410-009-000-000-000",
+            "superficieGis":1292,
+            "superficieSigeco":0,
+            "idParcella":665081,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2854787,
+               "comune":"CAPRINO VERONESE (VR)",
+               "codNazionale":"B709",
+               "foglio":36,
+               "particella":"00291",
+               "sub":" "
+            },
+            "codColtura3":"040-400-000",
+            "codColtura5":"666-000-000-000-000",
+            "superficieGis":11705,
+            "superficieSigeco":0,
+            "idParcella":665085,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3854000,
+               "comune":"VILLA BARTOLOMEA (VR)",
+               "codNazionale":"L912",
+               "foglio":27,
+               "particella":"00068",
+               "sub":" "
+            },
+            "codColtura3":"040-001-000",
+            "codColtura5":"001-011-000-000-000",
+            "superficieGis":8044,
+            "superficieSigeco":0,
+            "idParcella":665086,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3606820,
+               "comune":"ORTE (VT)",
+               "codNazionale":"G135",
+               "foglio":55,
+               "particella":"00147",
+               "sub":" "
+            },
+            "codColtura3":"040-840-053",
+            "codColtura5":"840-002-053-043-000",
+            "superficieGis":3720,
+            "superficieSigeco":0,
+            "idParcella":665084,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3606820,
+               "comune":"ORTE (VT)",
+               "codNazionale":"G135",
+               "foglio":55,
+               "particella":"00147",
+               "sub":" "
+            },
+            "codColtura3":"040-840-053",
+            "codColtura5":"840-002-053-043-000",
+            "superficieGis":165,
+            "superficieSigeco":0,
+            "idParcella":665083,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2746751,
+               "comune":"ALA - ALA (TN)",
+               "codNazionale":"P363",
+               "foglio":9999,
+               "particella":"00728",
+               "sub":" "
+            },
+            "codColtura3":"360-441-000",
+            "codColtura5":"044-005-000-000-000",
+            "superficieGis":2072,
+            "superficieSigeco":0,
+            "idParcella":665082,
+            "livello":121
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"CPROT",
+            "particella":{  
+               "idParticella":3606820,
+               "comune":"ORTE (VT)",
+               "codNazionale":"G135",
+               "foglio":55,
+               "particella":"00147",
+               "sub":" "
+            },
+            "codColtura3":"040-840-053",
+            "codColtura5":"840-002-053-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":665070,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"CPROT",
+            "particella":{  
+               "idParticella":3606820,
+               "comune":"ORTE (VT)",
+               "codNazionale":"G135",
+               "foglio":55,
+               "particella":"00147",
+               "sub":" "
+            },
+            "codColtura3":"040-840-053",
+            "codColtura5":"840-002-053-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":665069,
+            "livello":111
+         }
+      ]
+   }
+}

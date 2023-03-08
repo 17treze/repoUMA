@@ -1,0 +1,505 @@
+{  
+   "infoGeneraliDomanda":{  
+      "pac":"PAC1420",
+      "tipoDomanda":"DU",
+      "campagna":2018,
+      "modulo":"PAGAMENTI DIRETTI",
+      "codModulo":"BPS_2018",
+      "cuaaIntestatario":"MRCNTN53A16A372C",
+      "ragioneSociale":"MARCABRUNI ANTONIO",
+      "numeroDomanda":189690,
+      "numeroDomandaRettificata":null,
+      "dataPresentazione":"2018-06-08T15:54:50.000+0200",
+      "codEnteCompilatore":"7",
+      "enteCompilatore":"CAA COLDIRETTI DEL TRENTINO - 006",
+      "dataProtocollazione":"2018-06-08T15:55:19.000+0200",
+      "dataPresentazOriginaria":null,
+      "dataProtocollazOriginaria":null
+   },
+   "controlliPresentazione":{  
+      "aggiornamentoFascicolo":"S",
+      "visioneAnomalie":"S",
+      "firmaDomanda":"S",
+      "archiviazioneDomanda":"S"
+   },
+   "richieste":{  
+      "sintesiRichieste":{  
+         "richiestaDisaccoppiato":true,
+         "richiestaSuperfici":true,
+         "richiestaZootecnia":false
+      }
+   },
+   "infoIstruttoriaDomanda":{  
+      "datiEleggibilita":[  
+         {  },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078841,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03713",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615667
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2089867,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"01901",
+               "sub":"2"
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615662
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086721,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00423",
+               "sub":"1"
+            },
+            "codColtura3":"210-163-000",
+            "codColtura5":"410-009-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615660
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086728,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00418",
+               "sub":"1"
+            },
+            "codColtura3":"210-163-000",
+            "codColtura5":"410-009-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615659
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078841,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03713",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615667
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078841,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03713",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615667
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078845,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03716",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615670
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078891,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03875",
+               "sub":" "
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078891,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03875",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078944,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03877",
+               "sub":" "
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078957,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03878",
+               "sub":" "
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078894,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03879",
+               "sub":" "
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078894,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03879",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078894,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03879",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615666
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078696,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03882",
+               "sub":" "
+            },
+            "codColtura3":"080-336-052",
+            "codColtura5":"336-002-052-044-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615668
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078696,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03882",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615668
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078748,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03895",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615669
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2078740,
+               "comune":"ARCO - ARCO (TN)",
+               "codNazionale":"P369",
+               "foglio":9999,
+               "particella":"03896",
+               "sub":" "
+            },
+            "codColtura3":"120-542-000",
+            "codColtura5":"492-005-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615669
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086248,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00275",
+               "sub":"12"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615661
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086259,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00275",
+               "sub":"13"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615661
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086309,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00336",
+               "sub":"1"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615665
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":2086176,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00383",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615664
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_DISC",
+            "particella":{  
+               "idParticella":2086248,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00275",
+               "sub":"12"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615675
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_DISC",
+            "particella":{  
+               "idParticella":2086309,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00336",
+               "sub":"1"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615677
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_DISC",
+            "particella":{  
+               "idParticella":2086259,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00275",
+               "sub":"13"
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615675
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_DISC",
+            "particella":{  
+               "idParticella":2086176,
+               "comune":"ARCO - OLTRESARCA (TN)",
+               "codNazionale":"P370",
+               "foglio":9999,
+               "particella":"00383",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":615676
+         }
+      ]
+   }
+}

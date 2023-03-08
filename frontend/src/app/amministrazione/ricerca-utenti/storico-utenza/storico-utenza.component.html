@@ -1,0 +1,104 @@
+<div class="ui-g  ui-fluid  page-ricerca-utenti">
+
+
+    <div class="tophome">
+        <div class="ui-grid-fixed">
+            <div class="ui-g">
+                <div class="ui-g-2">
+                    <h4>{{ utente?.nome }} {{ utente?.cognome }} </h4>
+                </div>
+                <div class="ui-g-6">
+                    <h6>codice fiscale {{ utente?.codiceFiscale }} </h6>
+                </div>
+                <div class="ui-g-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui-grid-fixed boxgrey">
+        <h3 class="mb-3">{{ 'STORICO_UTENZA' | translate}}</h3>
+
+        <div *ngIf="istruttorie">
+
+            <p-table [value]="istruttorie" [autoLayout]="true"
+                     [responsive]="true" class="table--gestione-utenze">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th style="width:15%">{{intestazioni.data}}</th>
+                        <th style="width:15%">{{intestazioni.OPE}}</th>
+                        <th style="width:25%">{{intestazioni.PROF}}</th>
+                        <th style="width:25%">{{intestazioni.SEDI_CUAA_DIST}}</th>
+                        <th style="width:20%">{{intestazioni.VAR_RICH_MOT_DISATT}}</th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-istr>
+                    <tr>
+                        <td>{{istr.dataTermineIstruttoria | date: DATE_FORMAT}}</td>
+                        <td>{{istr.istruttore.nome}} {{istr.istruttore.cognome}}</td>
+                        <td>
+                          <ng-container *ngIf="istr.profili && istr.profili.length>0">
+                              <ul>
+                                  <li *ngFor="let profilo of istr.profili">
+                                      <span [ngClass]="(profilo.disabled)? 'disabled':'enabled'">{{profilo.descrizione}}
+                                          <i *ngIf="profilo.disabled" class="material-icons ng-star-inserted icon-disabled"> lock </i>
+                                      </span>
+                                  </li>
+                              </ul>
+                          </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="istr.sedi && istr.sedi.length>0">
+                                <span>{{intestazioni.SEDI}}</span>
+                                <ul>
+                                    <li *ngFor="let sede of istr.sedi">
+                                        <span>{{sede.descrizione}}</span>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                            <ng-container *ngIf="istr.aziende && istr.aziende.length>0">
+                                <span>{{intestazioni.CUAA}}</span>
+                                <ul>
+                                    <li *ngFor="let azienda of istr.aziende">
+                                        <span>{{azienda.cuaa}}</span>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                            <ng-container *ngIf="istr.distributori && istr.distributori.length>0">
+                                <span>{{intestazioni.DIST}}</span>
+                                <ul>
+                                    <li *ngFor="let distributore of istr.distributori">
+                                        <span>{{ distributore.denominazioneAzienda }}</span>
+                                    </li>
+                                </ul>
+                            </ng-container>
+                        </td>
+                        <td>
+                            <div>{{istr.variazioneRichiesta}}</div>
+                            <div *ngIf="istr.motivazioneDisattivazione">
+                                <br>{{motiviDisattivazione[istr.motivazioneDisattivazione]}}
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td [attr.colspan]="5">
+                            {{ intestazioni.noStoricoContent }}
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+

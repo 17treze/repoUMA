@@ -1,0 +1,64 @@
+.ui-g.stato-container .ui-g-6 {
+    padding: 0;
+}
+
+.ui-g.stato-container .ui-g-6 .stato-content {
+    margin-top: 3px !important;
+    margin-right: 10px !important;
+    float: right !important;
+}
+
+.toolbar-lavorazione {
+    background: #ffffff;
+}
+
+.toolbar-lavorazione>.p-grid>.p-col {
+    text-align: center;
+    padding: 5px;
+}
+
+.toolbar-lavorazione>.p-grid>.p-col>label,
+.action-valida {
+    font-size: 15px;
+    color: #027a48 !important;
+    cursor: pointer;
+    border-radius: 25px;
+    background: #f5f5f5;
+    padding: 5px;
+    width: 35px;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.toolbar-lavorazione>.p-grid>.p-col>label:hover,
+.action-valida:hover {
+    background: #027a48;
+    transition: 0.5s;
+    color: #dfdfdf !important;
+}
+
+.btnDisabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.toolbar-lavorazione>.p-grid>.p-col.btnDisabled>label,
+.btnDisabled>esito-validazione-lavorazione-button>label {
+    pointer-events: none !important;
+    background: #c4c9c9;
+    color: #606060 !important;
+}
+
+body .ui-splitbutton>.ui-button {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+gis-toolbar-lavorazione p-splitbutton>div>button.ui-splitbutton-menubutton.ui-button-icon-only {
+    height: 29px !important;
+}
+
+#combo-campagna>div>div {
+    padding: 0;
+}

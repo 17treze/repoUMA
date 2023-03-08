@@ -1,0 +1,277 @@
+<!-- WIZARD STEP 1 -->
+<div [hidden]="stepper.currentStepLavorazione != 1">
+  <div>
+    <div class="p-grid headerStep">
+      <div class="p-col-10" style="padding: 5px 0px 0px 0px">
+        <div class="box">
+          <label for="tipoRicerca">1/3 Suolo Dichiarato</label>
+        </div>
+      </div>
+      <div class="p-col" style="width: 100px; padding-bottom: 0" *ngIf="!lavorazioniEvent.readOnly">
+        <gis-selezione-dichiarato [idLavorazione]="lavorazioniEvent.idLavorazione"
+          (ricaricaSuoloEmitter)="ricaricaSuoloDichiarato()"></gis-selezione-dichiarato>
+      </div>
+    </div>
+    <label class="small-label noMargin">
+      Seleziona in mappa o effettua una ricerca</label>
+  </div>
+  <p-accordion>
+    <p-accordionTab id="dichiarazioniSuolo" class="accordion-title" header="Ricerca poligoni dichiarato"
+      [selected]="true" *ngIf="!lavorazioniEvent.readOnly">
+      <gis-search [profiloUtente]="profiloUtente" [idLavorazione]="lavorazioniEvent.idLavorazione">
+      </gis-search>
+    </p-accordionTab>
+
+    <p-accordionTab class="accordion-title" id="dichiaratoInseriti" [selected]="lavorazioniEvent.readOnly" header="Poligoni dichiarati: {{
+        totalsPoligoniDichiaratoInLavorazione > -1
+          ? totalsPoligoniDichiaratoInLavorazione
+          : ''
+      }}">
+      <p-progressSpinner id="spinnerCreazione" *ngIf="totalsPoligoniDichiaratoInLavorazione < 0"></p-progressSpinner>
+      <div class="no-poligoni" [hidden]="poligoniById && poligoniById.length > 0">
+        nessun poligono inserito selezionalo direttamente sulla mappa o fai una
+        ricerca e aggiungilo dalla lista risultati
+      </div>
+      <div class="for-poligoni fixed-height" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        [immediateCheck]="true" [scrollWindow]="false">
+        <div *ngFor="let n of poligoniById; let i = index">
+          <div class="content-scroll" [hidden]="!n.visible"
+            [ngClass]="{ activeElement: panelEvent.showDettaglioLavorazione }">
+            <!-- SUOLO DICHIARATO CARD-->
+            <gis-suolo-dichiarato [activeOpenPanelDettaglioRichiesta]="'true'" [suoloDichiarato]="n" [index]="i"
+              (actionSuoloDichiarato)="receiveActionSuoloDichiarato($event)" [contextAction]="'remove'">
+            </gis-suolo-dichiarato>
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+</div>
+
+<!-- WIZARD STEP 2 -->
+<div [hidden]="stepper.currentStepLavorazione != 2">
+  <div>
+    <div class="p-grid headerStep">
+      <div class="p-col-10" style="padding: 0px">
+        <div class="box">
+          <label for="tipoRicerca" style="margin-bottom: 0">2/3 Suolo vigente</label>
+        </div>
+      </div>
+    </div>
+    <p-tabView class="toolbar-poligoni" [activeIndex]="tabIndex" (onChange)="handleTabChange($event)">
+      <p-tabPanel header="Seleziona poligoni interi" id="poligoni-interi">
+        <div style="margin: 5px 0" *ngIf="!lavorazioniEvent.readOnly">
+          <div class="small-label" style="float: left">
+            Seleziona in mappa i poligoni suolo da lavorare
+          </div>
+          <div style="float: right; width: 26px">
+            <gis-selezione-suolo [idLavorazione]="lavorazioniEvent.idLavorazione"
+              (ricaricaSuoloEmitter)="ricaricaSuolo($event)"></gis-selezione-suolo>
+          </div>
+        </div>
+        <div class="poligoni-suolo" style="margin: 10px 0" *ngIf="!lavorazioniEvent.readOnly">
+          <button type="submit" id="calcolaPoligoni" class="gis-button btn-alt-no-right-padding mgTop15" pButton
+            label="Calcola poligoni da dichiarato" (click)="ricalcolaPoligoniSuolo()"></button>
+        </div>
+        <p-accordion id="poligoni-suolo">
+          <p-accordionTab class="accordion-title" header="Suoli inseriti: {{
+              totalsPoligoniSuolo > -1 ? totalsPoligoniSuolo : ''
+            }}">
+            <p-progressSpinner id="spinnerCreazione" *ngIf="totalsPoligoniSuolo < 0"></p-progressSpinner>
+            <div class="for-poligoni" style="max-height: 415px" infiniteScroll [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="50" [immediateCheck]="true" [scrollWindow]="false">
+              <div class="p-field" *ngFor="let n of poligoniSuolo; let i = index">
+                <div class="content-scroll" [ngClass]="{
+                    activeElement: panelEvent.showDettaglioLavorazione
+                  }">
+                  <!-- SUOLO VIGENTE CARD-->
+                  <gis-suolo-vigente [suoloVigente]="n" [index]="i"
+                    (actionSuoloVigente)="receiveActionSuoloVigente($event)" [contextAction]="'remove'">
+                  </gis-suolo-vigente>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </p-tabPanel>
+      <p-tabPanel header="Disegna area di lavoro" id="poligoni-area">
+        <selezione-suolo-area *ngIf="!lavorazioniEvent.readOnly"></selezione-suolo-area>
+        <div class="poligoni-suolo" style="margin: 10px 0" *ngIf="!lavorazioniEvent.readOnly">
+          <button type="submit" id="calcolaPoligoniAdl" class="gis-button btn-alt-no-right-padding mgTop15" pButton
+            label="Calcola poligoni da adl"
+            [disabled]="!lavorazioniEvent.calcoloAdlActived && lavorazioniEvent.totalsPoligoniDaAdl > 0"
+            [ngClass]="{
+              adlWarning: (lavorazioniEvent.calcoloAdlActived && lavorazioniEvent.stackAdl && lavorazioniEvent.featureAdl) || 
+              (!lavorazioniEvent.stackAdl && lavorazioniEvent.totalsPoligoniDaAdl === 0 && lavorazioniEvent.featureAdl)}" (click)="ricalcolaPoligoniDaAdl()" style="width: 100%; margin: 0"></button>
+        </div>
+        <p-accordion id="poligoni-suolo">
+          <p-accordionTab class="accordion-title" style="text-align: left" header="Suoli calcolati da Adl: {{
+              lavorazioniEvent.totalsPoligoniDaAdl
+            }}">
+            <p-progressSpinner id="spinnerCreazione"></p-progressSpinner>
+            <div class="for-poligoni" style="max-height: 415px" infiniteScroll [infiniteScrollDistance]="2"
+              [infiniteScrollThrottle]="50" [immediateCheck]="true" [scrollWindow]="false">
+              <div class="p-field" *ngFor="
+                  let poligono of lavorazioniEvent.poligoniDaAdl;
+                  let i = index
+                ">
+                <div class="content-scroll" [ngClass]="{
+                    activeElement: panelEvent.showDettaglioLavorazione
+                  }">
+                  <!-- SUOLO VIGENTE CARD-->
+                  <gis-suolo-vigente-da-adl [suoloVigenteDaAdl]="poligono" [index]="i">
+                  </gis-suolo-vigente-da-adl>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+
+<!-- WIZARD STEP 3 -->
+<div *ngIf="lavorazioneSuolo" [hidden]="stepper.currentStepLavorazione != 3">
+  <div class="p-field">
+    <label for="tipoRicerca">3/3 Dati anagrafici</label>
+    <label class="small-label"> Assegna un nome alla tua lavorazione</label>
+  </div>
+  <div class="p-field lavorazione-step-3">
+    <div class="lavorazione-content">
+      <label class="dett-lavorazione-label" for="ID"><span>LAVORAZIONE</span></label>
+      <label class="result-lav-light"><span> {{ lavorazioneSuolo.id }} </span></label>
+    </div>
+    <div class="lavorazione-content">
+      <label class="dett-lavorazione-label" for="ID"><span>UTENTE</span></label>
+      <label class="result-lav-light"><span> {{ lavorazioneSuolo.utente }} </span>
+      </label>
+    </div>
+    <div class="lavorazione-content">
+      <label class="dett-lavorazione-label" for="ID"><span>INIZIO</span></label>
+      <label class="result-lav-light"><span>
+          {{
+            lavorazioneSuolo.dataInizioLavorazione | date: "dd/MM/yyyy"
+          }}</span>
+      </label>
+    </div>
+  </div>
+  <hr />
+  <div class="gis-form">
+    <div class="p-field">
+      <label for="Titolo">Titolo lavorazione</label>
+      <span class="p-input-icon-left">
+        <input type="text" class="form-control" [(ngModel)]="lavorazioniEvent.titoloLavorazione" (change)="
+            formStep3Change('titolo', lavorazioniEvent.titoloLavorazione)
+          " maxlength="100" placeholder="Titolo" [disabled]="lavorazioniEvent.readOnly" />
+      </span>
+    </div>
+    <div class="p-field">
+      <label for="Note">Note</label>
+      <span class="p-input-icon-left">
+        <textarea type="text" class="form-control fixed-area" [(ngModel)]="lavorazioniEvent.noteLavorazione"
+          (change)="formStep3Change('note', lavorazioniEvent.noteLavorazione)" maxlength="4000" placeholder="Note"
+          [disabled]="lavorazioniEvent.readOnly"></textarea>
+      </span>
+    </div>
+  </div>
+</div>
+<!-- WIZARD STEP 4 -->
+<div *ngIf="lavorazioneSuolo && stepper.currentStepLavorazione == 4">
+  <p-accordion (onClose)="onTabStep4Close($event)" (onOpen)="onTabStep4Open($event)">
+    <p-accordionTab class="accordion-title" header="Dati lavorazione">
+      <div class="gis-form">
+        <div class="p-field">
+          <label for="Titolo">Titolo lavorazione</label>
+          <span class="p-input-icon-left">
+            <input type="text" class="form-control" [(ngModel)]="lavorazioniEvent.titoloLavorazione"
+              [disabled]="lavorazioniEvent.readOnly || lavorazioniEvent.objectLavorazione.stato === statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO"
+              (change)="formStep3Change('titolo', lavorazioniEvent.titoloLavorazione)" maxlength="100"
+              placeholder="Titolo" />
+          </span>
+        </div>
+        <div class="p-field">
+          <label for="Note">Note</label>
+          <span class="p-input-icon-left">
+            <textarea type="text" class="form-control fixed-area" [(ngModel)]="lavorazioniEvent.noteLavorazione"
+              (change)="formStep3Change('note', lavorazioniEvent.noteLavorazione)" maxlength="4000" placeholder="Note"
+              [disabled]="lavorazioniEvent.readOnly || lavorazioniEvent.objectLavorazione.stato === statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO"></textarea>
+          </span>
+        </div>
+        <div class="p-field" style="height: 75px">
+          <button type="submit" *ngIf="lavorazioneChanged || !lavorazioniEvent.readOnly"
+            class="gis-button btn-salva-frm mgTop15" [hidden]="stepper.currentStepLavorazione == 1 
+            || lavorazioniEvent.objectLavorazione.stato === statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO"
+            (click)="salvataggioStep4()" pButton label="Salva"></button>
+        </div>
+      </div>
+    </p-accordionTab>
+    <p-accordionTab class="accordion-title" id="dichiaratoInseriti">
+
+      <p-header>
+        <span>Poligoni dichiarati:
+          {{totalsPoligoniDichiaratoInLavorazione>-1 ? totalsPoligoniDichiaratoInLavorazione  : '' }}</span>
+        <button id="triggerNewWin" class="extWindow button-header-tab2 ng-star-inserted">
+          <i class="extWindow fa fa-external-link-alt" (click)="openDialogDichiarati();"></i>
+        </button>
+      </p-header>
+
+      <p-progressSpinner id="spinnerCreazione" *ngIf="totalsPoligoniDichiaratoInLavorazione<0"></p-progressSpinner>
+      <div class="no-poligoni" [hidden]="poligoniById && poligoniById.length > 0">
+        nessun poligono inserito selezionalo direttamente sulla mappa o fai una
+        ricerca e aggiungilo dalla lista risultati
+      </div>
+      <div class="for-poligoni" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        [immediateCheck]="true" [scrollWindow]="false">
+        <div class="p-field" *ngFor="let n of poligoniById; let i = index">
+          <div for="TAG" class="label-esito" [hidden]="
+              lavorazioneSuolo.esito !== 'IN_CORSO' &&
+              poligoniById &&
+              poligoniById.length === 0
+            " [ngClass]="poligoniById[i].esito">
+            <span>{{
+              poligoniById[i].esito | decodeEnumPipe: listaEsitoLavorazione
+            }}</span>
+          </div>
+          <div class="content-scroll" [hidden]="!n.visible"
+            [ngClass]="{ activeElement: panelEvent.showDettaglioLavorazione }">
+            <!-- SUOLO DICHIARATO CARD-->
+            <gis-suolo-dichiarato [activeOpenPanelDettaglioRichiesta]="'true'" [suoloDichiarato]="n" [index]="i"
+              (actionSuoloDichiarato)="receiveActionSuoloDichiarato($event)" [contextAction]="'none'">
+            </gis-suolo-dichiarato>
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab class="accordion-title" id="poligoniSuolo" header="Suoli inseriti: {{
+        totalsPoligoniSuolo > -1 ? totalsPoligoniSuolo : ''
+      }}">
+      <p-progressSpinner id="spinnerCreazione" *ngIf="totalsPoligoniSuolo < 0"></p-progressSpinner>
+      <div class="for-poligoni" style="max-height: 485px" infiniteScroll [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50" [immediateCheck]="true" [scrollWindow]="false">
+        <div class="p-field" *ngFor="let n of poligoniSuolo; let i = index">
+          <div class="content-scroll" [ngClass]="{ activeElement: panelEvent.showDettaglioLavorazione }">
+            <!-- SUOLO VIGENTE CARD-->
+            <gis-suolo-vigente [suoloVigente]="n" [index]="i" (actionSuoloVigente)="receiveActionSuoloVigente($event)"
+              [contextAction]="'none'">
+            </gis-suolo-vigente>
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+
+    <p-accordionTab id="poligoniWorkspace" class="accordion-title" header="POLIGONI ADL: {{
+        totalsPoligoniWorkspace > -1 ? totalsPoligoniWorkspace : ''
+      }}" [selected]="true">
+      <p-progressSpinner id="spinnerWorkspaceLavorazione" *ngIf="totalsPoligoniWorkspace < 0"></p-progressSpinner>
+      <gis-lavorazioneWorkspace [idLavorazione]="lavorazioniEvent.idLavorazione" id="lavorazioneWorkspace"
+        (totalsPoligoniWorkspaceOutput)="receiveTotalsPoligoniWorkspace($event)" [tabAccordionWorkspaceStep4]="
+          tabAccordionWorkspaceStep4 &&
+          panelEvent.nuovaLavorazione &&
+          !toolBarService.toolEditActive
+        ">
+      </gis-lavorazioneWorkspace>
+    </p-accordionTab>
+  </p-accordion>
+</div>

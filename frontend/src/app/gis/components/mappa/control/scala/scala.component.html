@@ -1,0 +1,16 @@
+<div class="select-scale">
+  <label>Scala</label> 
+  <p-autoComplete [(ngModel)]="selectedScale" [suggestions]="filteredScales" (keyup.enter)="onChangeScaleInput(selectedScale)"
+  (onSelect)="doOnSelect($event)" (completeMethod)="filterScales($event)" field="label" [dropdown]="true" maxlength="10">
+    <ng-template let-scala pTemplate="item">
+      <div class="scala-item">
+        <div>{{scala.label}}</div>
+      </div>
+    </ng-template>
+  </p-autoComplete>
+</div> 
+<!--
+<div style="left: 80px;; bottom: 120px; position: fixed; z-index: 2147483647;">
+  <label>Scala Sferica</label>
+  <input type="text" pInputText [(ngModel)]="labelSphere" (keyup.enter)="onChangeSphere()">
+</div>-->

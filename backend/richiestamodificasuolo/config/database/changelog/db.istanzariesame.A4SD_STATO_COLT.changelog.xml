@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTANZARIESAME_S14.07" author="Bettina Irler" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('1','0','GENERICO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Coltura ordinaria');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('2','1','COLTIVAZIONE IN ATTO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,null);
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('3','2','STOPPIE',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,null);
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('4','3','ARATO CON RESIDUO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,null);
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('5','4','SECONDO RACCOLTO CON RESIDUO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,null);
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('6','5','COLTURA NON ORDINARIA',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,null);
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('7','6','VENDEMMIA VERDE MANUALE',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Vendemmia Verde eseguita in modalità manuale rilevata su vigneti (codice GIS 410) richiesti a premio per la Vendemmia Verde e verificati a tal fine');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('8','7','FOTOINTERPRETAZIONE NON CONGRUENTE CON LA FOTO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Variazioni di suolo derivanti da istanze di riesame successive e non riscontrabili rispetto alla data dell’ultima ortofoto disponibile');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('9','8','VENDEMMIA VERDE MECCANICA',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Vendemmia Verde eseguita in modalità meccanica rilevata su vigneti (codice GIS 410) richiesti a premio per la Vendemmia Verde e verificati a tal fine');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('10','9','VENDEMMIA VERDE CHIMICA',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Vendemmia Verde eseguita in modalità chimica rilevata su vigneti (codice GIS 410) richiesti a premio per la Vendemmia Verde e verificati a tal fine');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('11','10','MANCATO MANTENIMENTO',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Introdotto nel 2015 per gestire il mancato mantenimento delle superfici agricole rilevato dai controlli oggettivi (Riforma PAC 2014/2020)');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('12','11','MANCATO RISPETTO DIVIETO PPP',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Introdotto nel 2018 per gestire il mancato rispetto del divieto di utilizzo di prodotti fitosanitari (PPP) su alcune superfici agricole dichiarate ai fini EFA (rilevato dai controlli oggettivi) ');
+			Insert into A4SD_STATO_COLT (ID,STATO_COLT,DESCRIZIONE,DESC_BREVE,DATA_INIZIO,DATA_FINE,DATA_AGGIORNAMENTO,NOTE) values ('13','12','SCHEDARIO PASCOLI',null,to_date('13-05-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'),null,'Introdotto nel 2019 per contrassegnare i suoli che ricadono nello Schedario Pascoli della Provincia Autonoma di Trento');
+       </sql>
+    </changeSet>
+	</databaseChangeLog>

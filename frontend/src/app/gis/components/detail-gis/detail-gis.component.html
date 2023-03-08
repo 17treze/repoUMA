@@ -1,0 +1,76 @@
+<div class="p-field" style="margin-bottom: 0px;">
+  <div class="ui-g">
+    <div class="ui-g-3" style="padding-top: 3px;">
+
+      <img style="cursor:pointer" alt="Allegati" src="assets/img/icons/allegati.png" (click)="showDialog();" />
+      <div>
+        <div class="notifications-count">{{allegatiEvent.allegatiCount}}</div>
+      </div>
+    </div>
+    <div class="ui-g" style="padding-top: 0px;">
+      <div id="button-green-card" class="p-col">
+        <span (click)="centerMap(detailResults['extent'])" pTooltip="Centra in mappa" tooltipPosition="right">
+          <i class="fa fa-crosshairs" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card-content">
+  <form [formGroup]="detailForm" class="gis-form" (ngSubmit)="submitData()">
+    <div class="p-field" style="margin-top: 5px;" *ngIf="showDetail && detailResults">
+      <div class="stato-content">
+        <div for="STATO" class="label-stato" [ngClass]="detailResults.stato"><span>{{
+            detailResults['statoRichiestaMappato'] }}</span>
+        </div>
+      </div>
+
+      <label class="result-label" for="ID" style="float: right;"><span>ID</span> {{ detailResults.id }}</label>
+      <label class="result-label" for="DATA"><span>INSERIMENTO</span> {{ detailResults.data | date:
+        'dd/MM/yyyy'}}</label>
+      <label class="result-label label-azienda" for="AZIENDA"><span>AZIENDA</span> {{
+        detailResults.aziendaAgricola.ragioneSociale }}</label>
+      <label class="result-label-light" for="CUAA"><span>CUAA</span> {{ detailResults.aziendaAgricola.cuaa }}</label>
+      <label class="result-label lista-comuni" for="COMUNI">
+        <span>COMUNI CATASTALI INTERESSATI</span>
+        <span>
+          <p *ngFor="let c of detailResults.comuniMapped; let i = index">{{ c.denominazione }} &nbsp;</p>
+        </span>
+      </label>
+      <div>
+        <div>
+          <label *ngIf="profiloUtente.profilo === 'caa' && detailResults.stato === statiRichiesta.APERTA"
+            class="switch-label-light" for="LAVORABILE">
+            <span>Lavorabile </span>
+            <p-inputSwitch formControlName="statoLavorabile" [(ngModel)]="statoLavorabile"
+              [disabled]="profiloUtente.profilo !== 'caa'"></p-inputSwitch>
+          </label>
+        </div>
+        <div class="p-field"
+          [hidden]="profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && detailResults.stato != statiRichiesta.APERTA)">
+          <button type="submit" [disabled]="!this.statoLavorabile" class="gis-button"
+            style="padding: 5px 10px;padding: 5px 10px; margin-left: 75%; float: inherit;" pButton
+            label="Salva"></button>
+        </div>
+      </div>
+      <div>
+        <p-accordion>
+          <div>
+            <p-accordionTab class="accordion-title" id="dichiaratoInseriti" header="Poligoni dichiarati"
+              [selected]="true">
+              <gis-poligoni-dichiarati-table (loadAllegatiDichiarato)="loadAllegatiDichiarato(idDichiarato)"
+                [detailResults]="detailResults">
+              </gis-poligoni-dichiarati-table>
+            </p-accordionTab>
+          </div>
+          <div>
+            <p-accordionTab class="accordion-title" id="messaggi" header="Messaggi richiesta">
+              <messaggi-gis [utenteCollegato]="utenteLoggato" [detailResults]="detailResults" [showDetail]="showDetail"
+                [profiloUtente]="profiloUtente"></messaggi-gis>
+            </p-accordionTab>
+          </div>
+        </p-accordion>
+      </div>
+    </div>
+  </form>
+</div>

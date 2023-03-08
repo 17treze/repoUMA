@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>it.tndigitale.a4g</groupId>
+		<artifactId>client-sdk</artifactId>
+		<version>2.8.54</version>
+	</parent>
+
+    <artifactId>client-sdk-dotazionetecnica</artifactId>
+    <version>2.8.54</version>
+    <name>a4g-sdk-client-dotazionetecnica</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <module.fascicolo.anagrafica.exclude>false</module.fascicolo.anagrafica.exclude>
+		<module.proxy.exclude>false</module.proxy.exclude>
+    </properties>
+	<build>
+    	<pluginManagement>
+    		<plugins>
+    			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    			<plugin>
+    				<groupId>org.eclipse.m2e</groupId>
+    				<artifactId>lifecycle-mapping</artifactId>
+    				<version>1.0.0</version>
+    				<configuration>
+    					<lifecycleMappingMetadata>
+    						<pluginExecutions>
+    							<pluginExecution>
+    								<pluginExecutionFilter>
+    									<groupId>org.openapitools</groupId>
+										<artifactId>openapi-generator-maven-plugin</artifactId>
+    									<versionRange>
+    										[4.3.1,)
+    									</versionRange>
+    									<goals>
+    										<goal>generate</goal>
+    									</goals>
+    								</pluginExecutionFilter>
+    								<action>
+    									<ignore></ignore>
+    								</action>
+    							</pluginExecution>
+    						</pluginExecutions>
+    					</lifecycleMappingMetadata>
+    				</configuration>
+    			</plugin>
+    		</plugins>
+    	</pluginManagement>
+    </build>
+</project>

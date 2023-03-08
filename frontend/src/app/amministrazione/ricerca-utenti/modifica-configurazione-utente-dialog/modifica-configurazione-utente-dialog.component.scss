@@ -1,0 +1,23 @@
+.dialog-config {
+    padding: 0.5rem;
+    border: 1px solid #dedede;
+    border-top: 0;
+}
+
+.ng-dirty.ng-invalid {
+    border-color: red;
+}
+
+.profile-checkbox {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+    justify-content: space-between;
+}
+
+.multiprofile-disable-button {
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+    justify-content: flex-end;
+}

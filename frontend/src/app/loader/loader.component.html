@@ -1,0 +1,13 @@
+<!--div [class.loader-hidden]="!show">
+    <div class="loader-overlay">
+            <div>
+                <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+            </div>
+    </div>
+</div-->
+
+
+    <div class="loading-indicator" [class.hidden]="!show || (panelEvent.bufferSpinnerLoading && panelEvent.bufferSpinnerLoading.length>0)">
+      <!---div *ngIf="show" class="loader"></div-->
+      <p-progressSpinner [style]="{width: '65px', height: '65px'}" strokeWidth="6" fill="transparent"></p-progressSpinner>       
+    </div>

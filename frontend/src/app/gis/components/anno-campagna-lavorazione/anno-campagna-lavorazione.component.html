@@ -1,0 +1,8 @@
+<div class="ui-g stato-container" style="display: block;">
+  <select [disabled]="stepper.currentStepLavorazione==3 || !checkStatoLavorazione()" p-dropdown
+    class="form-control full annolavorazione" [(ngModel)]="annoCampagnaSelezionato" (change)="cambioAnnoCampagna()"
+    [ngStyle]="{'outline-color': changeYearColor(),
+    'background-color': changeYearColor()}">
+    <option class="campagna-option" *ngFor="let anno of anno_campagna" [ngValue]="anno.value">{{anno.label}} </option>
+  </select>
+</div>

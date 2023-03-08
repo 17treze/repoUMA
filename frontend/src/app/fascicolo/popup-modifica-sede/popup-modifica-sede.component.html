@@ -1,0 +1,164 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"
+  [baseZIndex]="50000"></p-toast>
+<p-dialog
+  #dialog
+  id="dialog-modifica-sportello"
+  [(visible)]="popupVisibile"
+  [focusOnShow]="false"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="false"
+  [blockScroll]="true"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden','max-height':'90%', 'height':'auto'}"
+  styleClass="x-medium-dialog">
+  <div class="p-grid boxpopup">
+    <div class="p-col">
+      <p-header>{{'FAS_ANA.DATI_CAA' | translate}}</p-header>
+    </div>
+  </div>
+  <form
+    [formGroup]="modificaSedeForm"
+    (ngSubmit)="conferma()">
+    <div class="form-group boxgrey p-grid m-1">
+      <div class="p-col">
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'DENOMINAZIONE' | translate}}:</strong>
+          </div>
+          <div class="p-col-6">
+            {{  caa?.denominazione? caa.denominazione : 'ND' | translate }}
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'CODICE_FISCALE' | translate }}:</strong>
+          </div>
+          <div class="p-col-6">
+            {{ caa?.codiceFiscale || 'ND' | translate }}
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'PARTITA_IVA' | translate }}:</strong>
+          </div>
+          <div class="p-col-6">
+            {{ caa?.codiceFiscale || 'ND' | translate }}
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'ATTO_CAA' | translate}}:</strong>
+          </div>
+          <div class="p-col-6">
+            determinazione del Dirigente del Servizio Vigilanza e Promozione delle Attività Agricole n. 284 del 25 agosto
+        2011
+          </div>
+        </div>
+        <!-- <div class="ui-g-6">
+        <strong>{{'SOCIETA_SERVIZI' | translate}}:</strong>
+      </div>
+      <div class="ui-g-6">
+        {{ caa?.societaServizi || 'ND' | translate }}
+      </div> -->
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'SEDE_SPORTELLO_CAA' | translate }}:</strong>
+          </div>
+          <div class="p-col-6">
+            <p-dropdown
+              [options]="sportelloOptions"
+              placeholder="Seleziona Sportello CAA"
+              optionLabel="denominazione"
+              formControlName="sedeSportello">
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'LOCALITA_SPORTELLO_CAA' | translate}}</strong>
+          </div>
+          <div class="p-col-6">
+            {{ modificaSedeForm.value.sedeSportello?.comune || 'ND' | translate }}
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-6">
+            <strong>{{'FAS_ANA.DT_MODIFICA_SEDE_SPORTELLO_CAA' | translate}}</strong>
+          </div>
+          <div class="pl-2">
+            <p-calendar
+              class="form-control"
+              appendTo="body"
+              formControlName="data"
+              [locale]="calendarService.localeITA"
+              [showIcon]="true"
+              dateFormat="dd/mm/yy"
+              required>
+            </p-calendar>
+            <div
+              *ngIf="modificaSedeForm.controls['data'].invalid && (modificaSedeForm.controls['data'].dirty || modificaSedeForm.controls['data'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="modificaSedeForm.controls['data'].errors.required">
+                {{'ANTIMAFIA.CAMPO_OBBLIGATORIO' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-grid pt-4">
+          <div class="p-col-6">
+            <strong>{{ 'FAS_ANA.MOTIVAZIONE' | translate}}</strong>
+          </div>
+          <div class="p-col-6">
+            <textarea
+              rows="3"
+              cols="30"
+              pInputTextarea
+              id="input"
+              type="text"
+              formControlName="motivazione"
+              style="width: -webkit-fill-available"
+              autoResize="true"
+              required>
+            </textarea>
+            <div
+              *ngIf="modificaSedeForm.controls['motivazione'].invalid && (modificaSedeForm.controls['motivazione'].dirty || modificaSedeForm.controls['motivazione'].touched)"
+              class="alert alert-danger">
+              <div *ngIf="modificaSedeForm.controls['motivazione'].errors.required">
+                {{'ANTIMAFIA.CAMPO_OBBLIGATORIO' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="p-grid m-1 w-100">
+    <div class="p-col">
+      <div class="p-grid p-justify-between">
+        <div>
+          <button
+            pButton
+            type="button"
+            label="{{ 'NuovoFascicolo.ANNULLA' | translate }}"
+            (click)="annulla()"
+            class="btn-green"
+            style="min-height:42px; box-shadow:none">
+          </button>
+        </div>
+        <div>
+          <button
+            pButton
+            type="submit"
+            [disabled]="modificaSedeForm.invalid"
+            (click)="conferma()"
+            label="{{ 'NuovoFascicolo.CONFERMA' | translate }}"
+            class="btn-green"
+            style="min-height:42px; box-shadow:none;">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

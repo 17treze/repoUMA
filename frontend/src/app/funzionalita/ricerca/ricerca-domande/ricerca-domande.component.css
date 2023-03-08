@@ -1,0 +1,157 @@
+.title {
+  color: #0d5f3f;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.search-table-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #F4F4F4;
+    padding: 2rem;
+}
+
+.search-row {
+  display: flex;
+  width: 100%;
+}
+
+::ng-deep span.ui-dropdown-label {
+  height: 49px;
+  display: flex !important;
+  align-items: center;
+  padding-left: 15px;
+}
+
+::ng-deep .greyed span.ui-dropdown-label.ui-inputtext {
+  background: #F4F4F4;
+}
+
+.search-input {
+  padding-left: 15px;
+  background: white;
+  border: solid 1px #E3E3E4;
+  outline: none;
+  margin-right: 0.5rem;
+  width: 30%;
+  max-width: 400px;
+  min-width: 100px;
+  height: 50px;
+}
+
+.search-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  background: url('../../../../assets/img/icons/icon-clear-input.png') no-repeat 50% 50%;
+  opacity: .5;
+  background-size: contain;
+}
+
+.search-input::-webkit-search-cancel-button:hover {
+  opacity: 1;
+}
+
+.search-button {
+  background-color: #01985A;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: white;
+  width: 30%;
+  max-width: 175px;
+  height: 50px;
+  margin-left: auto;
+  border-radius: 0px;
+}
+
+.empty-data-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px #D3D3D3;
+  padding: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+::ng-deep .ui-dropdown {
+  min-width: 7rem;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.action-button {
+  background-color: #4CAF50;
+  border-radius: 2px;
+  width: 60px;
+  height: 32px;
+  font-size: 24px;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+td {
+  overflow: hidden;
+}
+
+::ng-deep .ui-dropdown-label.ui-inputtext {
+  margin-right: 6px;
+}
+
+::ng-deep .ui-dropdown-trigger.ui-state-default.ui-corner-right {
+  top: 6px;
+  right: 1px;
+}
+
+::ng-deep .ui-paginator-current {
+  color: #0d5f3f;
+}
+
+.related-detail-column {
+  flex-basis: 33%;
+}
+
+.related-detail-arrow {
+  color: #01985A
+}
+
+.related-detail-arrow:hover {
+  cursor: pointer;
+}
+
+td.related-row-left-column {
+  border-right: none !important;
+}
+
+td.related-row-right-column {
+  border-left: none !important;
+}
+
+.a4g-chip {
+  background-color: #8C9FA4 !important;
+  color: white !important;
+  height: 24px !important;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+::ng-deep .a4g-chip > .ui-button-icon-right {
+  color: white !important;
+  padding-left: 3px !important;
+  font-size: 18px !important;
+}
+
+.a4g-fixed-width-dropdown {
+  width: 15rem !important;
+}

@@ -1,0 +1,64 @@
+<div style="padding-right:40px;">
+  <h3>
+    FILTRA PER
+  </h3>
+  <div class="">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div>
+        <p-autoComplete [(ngModel)]="inputRicerca.cuaa" placeholder="CUAA" name="cuaa" appValidaCuaaCompleto
+          #cuaaInput="ngModel" [ngClass]="{'is-invalid': cuaaInput.invalid}" [suggestions]="cuaaS"
+          (completeMethod)="filterCUAA($event)">
+        </p-autoComplete>
+        <!-- <div *ngIf="cuaaInput.errors">
+          <p *ngIf="cuaaInput.errors?.cuaaErratoCompleto" class="ui-message ui-messages-error ui-corner-all">
+            {{cuaaInput.errors.cuaaErratoCompleto}}
+          </p>
+        </div> -->
+      </div>
+      <br />
+      <div>
+        <p-autoComplete [(ngModel)]="inputRicerca.denominazione" placeholder="Descrizione Impresa" name="denominazione"
+          [suggestions]="denominazioneS" (completeMethod)="filterDenominazione($event)">
+        </p-autoComplete>
+      </div>
+      <br />
+      <div>
+        <input style="width:100%" placeholder="Numero Domanda" type="text" [(ngModel)]="inputRicerca.numero_domanda"
+          name="numero_domanda" #numeroDomandaInput="ngModel" pInputText>
+      </div>
+      <!-- da riattivare dopo correzione del recupero campione
+        <br />
+      <div>
+        <label class="labelricerca">Campione</label>
+        <p-dropdown optionLabel="title" [options]="campioni" [(ngModel)]="selectedCampione"
+          name="selectedCampione"></p-dropdown>
+      </div>
+    -->
+      <br />
+      <div>
+        <label class="labelricerca">Settore</label>
+        <p-multiSelect [filter]="false" [options]="settori" [(ngModel)]="selectedSettori" name="selectedSettori"
+          multiple="multiple" checkbox="checkbox" optionLabel="title" defaultLabel="Seleziona settore/i"
+          [disabled]="filtroSettoreDisabled()">
+        </p-multiSelect>
+      </div>
+      <br />
+      <div>
+        <label class="labelricerca">
+          Risultati:
+          <span class="colori-per-numeri">
+            {{this.filtroAccoppiati.elencoDomande.paginaDomande.elementiTotali}}
+          </span>
+        </label>
+      </div>
+      <br />
+      <div>
+        <div class="searchbutton">
+          <button pButton type="button" class="ui-button-success" type="submit" style="background: #0e5f3f"
+            [disabled]="!f.valid">APPLICA
+            FILTRI</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

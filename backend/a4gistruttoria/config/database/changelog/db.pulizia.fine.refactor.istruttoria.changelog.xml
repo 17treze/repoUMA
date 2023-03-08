@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<changeSet id="ISTRUTTORIA_RIF26.14" author="Salvatore Caccia">
+		   <dropTable cascadeConstraints="true"
+		            tableName="A4GT_DATI_ISTRUTTORIA"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_RIF16.1" author="Elisabetta Freschi">
+		<dropColumn tableName="A4GT_ANOM_DOMANDA_SOSTEGNO" columnName="ID_DOMANDA" />
+		<dropColumn tableName="A4GT_ANOM_DOMANDA_SOSTEGNO" columnName="ID_SOSTEGNO" />
+	</changeSet>	
+	<changeSet id="ISTRUTTORIA_RIF16.2" author="Elisabetta Freschi">
+		<renameTable newTableName="A4GT_ISTRUTTORIA" oldTableName="A4GT_LAVORAZIONE_SOSTEGNO"/>
+	</changeSet>
+		
+	<changeSet id="ISTRUTTORIA_RIF16.1" author="Lorenzo Martinelli">
+		<renameTable newTableName="A4GT_TRANSIZIONE_ISTRUTTORIA" oldTableName="A4GT_TRANSIZIONE_SOSTEGNO"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF16.2" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_TRANSIZIONE_ISTRUTTORIA" columnName="ID_DOMANDA"/>
+		<dropColumn tableName="A4GT_TRANSIZIONE_ISTRUTTORIA" columnName="ID_SOSTEGNO"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF16.3" author="Lorenzo Martinelli">
+		<addNotNullConstraint 
+			tableName="A4GT_TRANSIZIONE_ISTRUTTORIA"
+            columnName="ID_ISTRUTTORIA"
+            constraintName="A4GT_ISTRUTTORIA_FK"
+            validate="true"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF17.1" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_ELENCO_LIQUIDAZIONE" columnName="COD_TIPO_ELENCO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF31.5" author="Fabio Strada">
+		<addNotNullConstraint tableName="A4GD_REG_OLIO_NAZIONALE"
+							  columnName="INIZIO_CAMPAGNA"/>
+		<addNotNullConstraint tableName="A4GD_REG_OLIO_NAZIONALE"
+							  columnName="FINE_CAMPAGNA"/>
+		<dropColumn tableName="A4GD_REG_OLIO_NAZIONALE"
+					columnName="ID_DATI_SETTORE" />
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF17.2" author="Lorenzo Martinelli">
+		<renameTable newTableName="A4GT_PASSO_TRANSIZIONE" oldTableName="A4GT_PASSI_LAV_SOSTEGNO"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF17.3" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_PASSO_TRANSIZIONE" columnName="MSG_ERRORE"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_RIF17.4" author="GianFilippo Autellitano">
+			   <dropTable cascadeConstraints="true"
+		            tableName="A4GT_TITOLO_DU"/>
+	</changeSet>	
+	<changeSet id="ISTRUTTORIA_RIF17.5" author="GianFilippo Autellitano">
+		<addNotNullConstraint tableName="A4GD_REG_OLIO_QUALITA"
+							  columnName="INIZIO_CAMPAGNA"/>
+		<addNotNullConstraint tableName="A4GD_REG_OLIO_QUALITA"
+							  columnName="FINE_CAMPAGNA"/>
+		<dropColumn tableName="A4GD_REG_OLIO_QUALITA"
+					columnName="ID_DATI_SETTORE" />
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.1" author="Lorenzo Martinelli">
+		<renameTable newTableName="A4GT_IMPORTO_UNITARIO" oldTableName="A4GD_INTERVENTO_DU_PREMIO"/>
+		<renameTable newTableName="A4GT_CONF_ISTR_ZOOTECNIA" oldTableName="A4GD_SOSTEGNO_DU_DI"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.2" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_IMPORTO_UNITARIO" columnName="ANNO_CAMPAGNA"/>
+		<addNotNullConstraint tableName="A4GT_CONF_ISTR_ZOOTECNIA" columnName="ANNO_CAMPAGNA"/>
+
+		<dropColumn tableName="A4GT_IMPORTO_UNITARIO" columnName="ID_DATI_SETTORE"/>
+
+		<dropColumn tableName="A4GT_CONF_ISTR_ZOOTECNIA" columnName="ID_DATI_SETTORE"/>
+		<dropColumn tableName="A4GT_CONF_ISTR_ZOOTECNIA" columnName="ID_SOSTEGNO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.3" author="Antonio Trombetta">
+		<dropColumn tableName="A4GD_CAPITOLO_SPESA" columnName="ID_SETTORE"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.4" author="Antonio Trombetta">
+		<dropColumn tableName="A4GT_ANALISI_LATTE" columnName="ID_DATI_SETTORE"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.5" author="Antonio Trombetta">
+		<dropColumn tableName="A4GT_PRODUZIONE_LATTE" columnName="ID_DATI_SETTORE"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.6" author="Antonio Trombetta">
+		<dropUniqueConstraint constraintName="A4GT_REG_ALPEGGIO_UIDX"
+							  tableName="A4GT_REG_ALPEGGIO"
+							  uniqueColumns="CUAA, ID_DATI_SETTORE"/>
+		<dropColumn tableName="A4GT_REG_ALPEGGIO" columnName="ID_DATI_SETTORE"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF18.0" author="Salvatore Cacccia">
+		<dropColumn tableName="A4GT_ESITO_CONTROLLO" columnName="ID_TIPO_CONTROLLO"/>
+		<addNotNullConstraint tableName="A4GT_ESITO_CONTROLLO" columnName="TIPOLOGIA_CONTROLLO"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_RIF28.0" author="Marco Dalla Torre">
+		<dropTable cascadeConstraints="true" tableName="A4GT_STAMPA_DOMANDA"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_RIF18.1" author="Salvatore Cacccia">
+		<dropColumn tableName="A4GT_ELENCO_LIQUIDAZIONE" columnName="ID_SOSTEGNO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.7" author="Antonio Trombetta">
+		<dropColumn tableName="A4GT_DOMANDA" columnName="ID_DATI_SETTORE"/>
+		<addNotNullConstraint tableName="A4GT_DOMANDA" columnName="ANNO_CAMPAGNA"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.8" author="Antonio Trombetta">
+		<addNotNullConstraint tableName="A4GT_ANALISI_LATTE" columnName="ANNO_CAMPAGNA"/>
+		<addNotNullConstraint tableName="A4GT_PRODUZIONE_LATTE" columnName="ANNO_CAMPAGNA"/>
+		<addNotNullConstraint tableName="A4GT_REG_ALPEGGIO" columnName="ANNO_CAMPAGNA"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.3" author="Lorenzo Martinelli">
+		<renameTable newTableName="A4GT_ERRORE_RICEVIBILITA" oldTableName="A4GT_ESITO_CONTROLLO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF18.8" author="Elisabetta Freschi">
+		<dropColumn tableName="A4GT_ELENCO_LIQUIDAZIONE" columnName="ID_DATI_SETTORE"/>
+		<dropColumn tableName="A4GT_ELENCO_LIQUIDAZIONE" columnName="TIPO_PAGAMENTO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.4" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_DATI_PARTICELLA_COLTURA" columnName="ID_DOMANDA"/>
+		<dropColumn tableName="A4GT_DATI_PARTICELLA_COLTURA" columnName="ID_SOSTEGNO"/>
+		<addNotNullConstraint tableName="A4GT_DATI_PARTICELLA_COLTURA" columnName="ID_ISTRUTTORIA"/>
+	</changeSet>
+
+	<!-- 3. A4GT_PASCOLO_PARTICELLA vanno rimosse ID_SOSTEGNO ESITO_MAN DATI_INPUT e DATI_OUTPUT -->
+	<changeSet id="ISTRUTTORIA_RIF27.5" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_PASCOLO_PARTICELLA" columnName="ID_SOSTEGNO"/>
+		<dropColumn tableName="A4GT_PASCOLO_PARTICELLA" columnName="ESITO_MAN"/>
+		<dropColumn tableName="A4GT_PASCOLO_PARTICELLA" columnName="DATI_INPUT"/>
+		<dropColumn tableName="A4GT_PASCOLO_PARTICELLA" columnName="DATI_OUTPUT"/>
+		<addNotNullConstraint tableName="A4GT_PASCOLO_PARTICELLA" columnName="ID_DOMANDA"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_RIF27.6" author="Lorenzo Martinelli">
+		<dropTable cascadeConstraints="true" tableName="A4GD_TIPO_CONTROLLO"/>
+	</changeSet>
+
+	<!--
+	5. In A4GT_ERRORE_RICEVIBILITA ci sono dati mai letti: DT_ESECUZIONE e MESSAGGIO_ERRORE : che famo? TIPOLOGIA_CONTROLLO
+	secondo me è più che sufficiente visto che c'è una mappatura uno a uno col testo. Infine trovo ridicolo pure ESITO CONTROLLO
+	un boolean mappato come bigdecimal: siccome le insert le faccio in caso di errore è sempre zero....Io terrei solo la data se proprio proprio.
+	-->
+	<changeSet id="ISTRUTTORIA_RIF27.7" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_ERRORE_RICEVIBILITA" columnName="MESSAGGIO_ERRORE"/>
+		<dropColumn tableName="A4GT_ERRORE_RICEVIBILITA" columnName="ESITO_CONTROLLO"/>
+	</changeSet>
+
+	<!-- 2. A4GT_DATI_PASCOLO va eliminata? Se si dobbiamo anche eliminare codice -->
+	<!-- <changeSet id="ISTRUTTORIA_RIF27.x" author="Lorenzo Martinelli">
+		<dropTable cascadeConstraints="true" tableName="A4GT_DATI_PASCOLO"/>
+	</changeSet> -->
+
+	<changeSet id="ISTRUTTORIA_RIF27.8" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_ISTRUTTORIA" columnName="TIPOLOGIA"/>
+		<addNotNullConstraint tableName="A4GT_ISTRUTTORIA" columnName="ID_DOMANDA"/>
+	</changeSet>
+
+</databaseChangeLog>

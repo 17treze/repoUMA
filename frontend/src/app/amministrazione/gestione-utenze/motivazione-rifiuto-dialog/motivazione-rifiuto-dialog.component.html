@@ -1,0 +1,42 @@
+<div id="confirm" *ngIf="richiestaAccessoCorrente && istruttoriaDomandaCorrente">
+  <p-dialog [(visible)]="display" header="DOMANDA RIFIUTATA" [dismissableMask]="true" width="710" [modal]="true"
+    appendTo="body" [closable]="true" #dialog [closeOnEscape]="true">
+    <div class="popup-approvazione  popup--custom">
+      <div class="mb-4">
+        <h6>Domanda di
+          <strong>
+            {{ richiestaAccessoCorrente.datiAnagrafici.nome.toUpperCase() }}
+            {{ richiestaAccessoCorrente.datiAnagrafici.cognome.toUpperCase() }}
+          </strong>
+          (Prot. {{ richiestaAccessoCorrente.idProtocollo }}
+          <strong>
+            rifiutata
+          </strong>
+          in data {{ richiestaAccessoCorrente.dataProtocollazione | date : 'dd/MM/yyyy' }})
+        </h6>
+      </div>
+      <div class="boxgrey  p-3  mb-3">
+        <h6 class="mb-3"><strong>Per quale motivo la domanda è stata rifiutata?</strong></h6>
+        <input id="motivazione" type="text" pInputText [(ngModel)]="motivazioneRifiuto"
+          style="width: -webkit-fill-available; background-color: white;" autoResize="true" readonly />
+      </div>
+      <div class="boxgrey  p-3  mb-3">
+        <h6 class="mb-3"><strong>Testo della mail</strong></h6>
+        <textarea rows="6" cols="30" pInputTextarea id="testoMail" type="text" [(ngModel)]="testoMail"
+          style="width: -webkit-fill-available" autoResize="true" readonly>
+        </textarea>
+      </div>
+      <div class="boxgrey  p-3  mb-3">
+        <h6 class="mb-3"><strong>Note</strong></h6>
+        <textarea pInputTextarea id="note" type="text" [(ngModel)]="note" style="width: -webkit-fill-available"
+          autoResize="true" readonly>
+        </textarea>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-end">
+        <button pButton icon="fa ui-icon-close" type="submit" [label]="labels.CHIUDI" class="button--success"
+          (click)="onClose()"></button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

@@ -1,0 +1,170 @@
+label.orderBy {
+    cursor: pointer;
+}
+
+label.orderBy>i:hover {
+    font-weight: 900;
+}
+
+.for-mie-lavorazioni {
+    overflow-y: scroll;
+    max-height: 655px;
+    border-radius: 4px;
+    overflow-x: hidden;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+label.mie-lavorazioni-label span {
+    color: #9A9A9A;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 600 !important;
+    display: flex;
+}
+
+.content-scroll {
+    padding: 5px 5px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.action-richiesta {
+    color: #01985A !important;
+    font-size: 15px !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.action-richiesta-cancellata {
+    color: #ff0015 !important;
+    font-size: 15px !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* labels stati */
+.stato-content {
+    margin: 0 2px 0 10px;
+    float: right;
+    right: 0px;
+    left: 60%;
+    font-weight: bold;
+    font-size: 13px;
+    color: #30373d;
+    width: 125px;
+    text-align: center;
+}
+
+.label-stato {
+    border-radius: 10px;
+}
+
+.label-stato span {
+    margin: 0 10px;
+    text-transform: lowercase;
+}
+
+label.mie-lavorazioni-label {
+    color: #30373D;
+    font-size: 14px;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.IN_LAVORAZIONE,
+.IN_CREAZIONE {
+    background: #66CA9E;
+}
+
+.SOSPESA,
+.CONSOLIDAMENTO_IN_CORSO {
+    background: #ffbc18;
+    float: right;
+    min-width: 160px;
+}
+
+.CHIUSA,
+.CONSOLIDATA_SU_AGS {
+    background: #424242;
+    float: right;
+    color: #ffffff;
+}
+
+.APERTA,
+.IN_CORSO {
+    background: #92D5EF;
+    /*   float: right;*/
+}
+
+.LAVORABILE,
+.CONSOLIDATA_SU_A4S {
+    background: #88c47e;
+    float: right;
+}
+
+.label-stato.ERRORE_CONSOLIDAMENTO,
+.CONSOLIDATA_AGS_PROBLEMI_SUOLO,
+.CONSOLIDATA_AGS_PROBLEMI_PARTICELLE {
+    background: #ffffff;
+    color: #9b0101;
+    min-width: 155px;
+    float: right;
+    border: 1px solid;
+    top: -1px;
+    position: relative;
+}
+
+.IN_MODIFICA {
+    background: #bee9d8;
+}
+
+.CANCELLATA {
+    background: #ff0015;
+    float: right;
+}
+
+.anno-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.badge-anno {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 100%;
+    font-size: 100%;
+    outline: 1px solid;
+}
+
+.ui-dialog-titlebar-icons {
+    z-index: 99999;
+    position: relative;
+}
+
+body .ui-dialog .ui-dialog-footer .ui-button .pi {
+    color: #ffffff;
+}
+
+/* Scrollbar */
+.for-mie-lavorazioni::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.for-mie-lavorazioni::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+
+.for-mie-lavorazioni::-webkit-scrollbar {
+    width: 7px;
+}
+
+#ricercaLavorazioni>div.p-field label.orderBy {
+    position: absolute;
+    top: 52px;
+    right: 10px;
+}

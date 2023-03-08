@@ -1,0 +1,27 @@
+package it.tndigitale.a4gistruttoria.repository.model;
+
+public enum CodiceInterventoAgs {
+	BPS,
+	GREE,
+	GIOV,
+	SOIA,
+	GDURO,
+	CPROT,
+	LEGUMIN,
+	RISONE,
+	POMOD,
+	OLIO,
+	OLIVE_PEND75,
+	OLIVE_DISC,
+	LATTE,
+	LATTE_BMONT,
+	LATTE_BUFAL,
+	BOVINI_VAC,
+	BOVINI_VAC_SEL,
+	BOVINI_VAC_NO_ISCR,
+	BOVINI_MAC,
+	BOVINI_MAC_12M,
+	BOVINI_MAC_ETIC,
+	OVICAP_AGN,
+	OVICAP_MAC;
+}

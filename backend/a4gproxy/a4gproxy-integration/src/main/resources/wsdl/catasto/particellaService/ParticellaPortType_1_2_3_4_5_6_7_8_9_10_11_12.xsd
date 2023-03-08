@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.locale.regione.taa.it/LocaleType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.locale.regione.taa.it/LocaleType/schemas">
+  <xs:complexType name="DescrizioneLinguaType">
+    <xs:annotation>
+      <xs:documentation>Modella una descrizione data in una certa lingua.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="lingua" type="tns:LanguageType" use="required">
+          <xs:annotation>
+            <xs:documentation>Lingua con cui e' scritta la descrizione</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DescrizioneMultilinguaType">
+    <xs:annotation>
+      <xs:documentation>Modella una descrizione data in piu' lingue.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="descrizione" type="tns:DescrizioneLinguaType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="LanguageType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="IT"/>
+      <xs:enumeration value="DE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

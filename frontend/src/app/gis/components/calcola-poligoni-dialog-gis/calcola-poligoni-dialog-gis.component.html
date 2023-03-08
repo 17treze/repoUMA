@@ -1,0 +1,9 @@
+<p-dialog id="custom-dialog-csv" header="{{titoloDialog}}" [(visible)]="panelEvent.showPoligoniSuoloTable"
+  [modal]="true" [responsive]="true" [style]="{'width': '750px', 'minWidth': '300px'}" [draggable]="false"
+  [dismissableMask]="true" [baseZIndex]="10000">
+  <gis-poligoni-suolo-table
+    *ngIf="lavorazioniEvent.poligoniSuoloOccupati && lavorazioniEvent.poligoniSuoloOccupati.length>0"
+    [hidden]="!panelEvent.showPoligoniSuoloTable" [tableValue]="lavorazioniEvent.poligoniSuoloOccupati"
+    [titoloDialog]="panelEvent.poligoniSuoloTableType">
+  </gis-poligoni-suolo-table>
+</p-dialog>

@@ -1,0 +1,31 @@
+<div id="confirm">
+  <p-dialog [(visible)]="display" width="710" [modal]="true" appendTo="body" [closable]="false" #dialog>
+    <div class="popup-istruttoria">
+      <h1>IN ISTRUTTORIA</h1>
+      <div class="ui-g" *ngFor="let riepilogo of dettaglioIstruttoria.listaRiepilogoSostegno">
+        <div class="ui-g-6 "><label class="label-color-cruscottoIstruttoria">{{riepilogo.descrizioneSostegno}}</label>
+        </div>
+        <div class="ui-g-2 num-domande">{{riepilogo.counter}}</div>
+        <div class="ui-g-4 text-right">
+          <button pButton type="button" label="Accedi al cruscotto" class="btn-green"
+            style="min-height:42px; box-shadow:none;" (click)="dettaglioIstruttoria.goListaSostegno('RICHIESTO')"
+            [disabled]="riepilogo.counter === 0" *ngIf="riepilogo.descrizioneSostegno === 'SOSTEGNO DISACCOPPIATO'">
+          </button>
+          <button pButton type="button" label="Accedi al cruscotto" class="btn-green"
+            style="min-height:42px; box-shadow:none;" (click)="avviaAccoppiatoZootecnia()"
+            [disabled]="riepilogo.counter === 0"
+            *ngIf="riepilogo.descrizioneSostegno === 'SOSTEGNO ACCOPPIATO ZOOTECNIA'">
+          </button>
+          <button pButton type="button" label="Accedi al cruscotto" class="btn-green"
+            style="min-height:42px; box-shadow:none;" (click)="avviaAccoppiatoSuperficie()"
+            [disabled]="riepilogo.counter === 0"
+            *ngIf="riepilogo.descrizioneSostegno === 'SOSTEGNO ACCOPPIATO SUPERFICI'">
+          </button>
+        </div>
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="button" label="CHIUDI" class="annulla" (click)="onC()"></button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

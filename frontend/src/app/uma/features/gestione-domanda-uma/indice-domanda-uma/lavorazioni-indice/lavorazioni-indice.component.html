@@ -1,0 +1,159 @@
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="lavorazioni-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<div class="p-grid">
+  <!-- Prima riga: Save & Back -->
+  <div class="p-grid w-100">
+    <div class="p-col">
+      <button
+        pButton
+        type="button"
+        class="w-10m"
+        icon="pi pi-chevron-circle-left"
+        iconPos="left"
+        label="INDIETRO"
+        (click)="goPrevStep()"></button>
+    </div>
+    <div class="p-col-fixed p-0">
+      <div class="p-grid m-0">
+        <div class="p-col"></div>
+        <div class="p-col">
+          <button
+            pButton
+            class="w-10m"
+            type="button"
+            icon="pi pi-chevron-circle-right"
+            iconPos="right"
+            label="PROCEDI"
+            (click)="goNextStep()"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seconda riga - Menu Lavorazioni -->
+  <div class="p-grid w-100">
+    <div class="p-col">
+      <div class="p-grid m-0">
+        <p-tabView
+          #tabView
+          [activeIndex]="activeIndex"
+          (onChange)="onChangeTab($event)"
+          class="p-col"
+          orientation="left">
+
+          <!-- Superfici -->
+          <p-tabPanel
+            [cache]="false"
+            [disabled]="(!richiestaCarburante?.haMacchineGasolio && !richiestaCarburante?.haMacchineBenzina) || !richiestaCarburante?.haSuperfici">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-align-center menu-item">
+                <div class="p-col-fixed">
+                  <img src="assets/img/icons/uma-icon/icon-superficie.svg">
+                </div>
+                <div class="p-col">Lavorazioni a superficie</div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-lavorazioni-superficie
+                [richiestaCarburante]="richiestaCarburante"
+                [inCompilazione]="inCompilazione"
+                (changeFabbisogno)="changeFabbisogno($event)"></app-lavorazioni-superficie>
+            </ng-template>
+          </p-tabPanel>
+
+          <!-- Altre Lavorazioni -->
+          <p-tabPanel
+            [cache]="false"
+            [disabled]="!richiestaCarburante?.haMacchineGasolio && !richiestaCarburante?.haMacchineBenzina">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-align-center">
+                <div class="p-col-fixed">
+                  <img src="assets/img/icons/uma-icon/icon-altre.svg">
+                </div>
+                <div class="p-col">Altre lavorazioni</div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-lavorazioni-altre
+                [richiestaCarburante]="richiestaCarburante"
+                [inCompilazione]="inCompilazione"
+                (changeFabbisogno)="changeFabbisogno($event)"></app-lavorazioni-altre>
+            </ng-template>
+          </p-tabPanel>
+
+          <!-- Coltivazioni Sotto Serra -->
+          <p-tabPanel
+            [cache]="false"
+            [disabled]="(!richiestaCarburante?.haMacchineGasolio && !richiestaCarburante?.haMacchineBenzina) || !richiestaCarburante?.haSerre">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-align-center">
+                <div class="p-col-fixed">
+                  <img src="assets/img/icons/uma-icon/icon-fabbricati.svg">
+                </div>
+                <div class="p-col">Lavorazioni coltivazioni sotto serra</div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-lavorazioni-fabbricati
+                [richiestaCarburante]="richiestaCarburante"
+                [inCompilazione]="inCompilazione"
+                [ctx]="fabbricatoEnum.COLTIVAZIONI_SOTTO_SERRA"
+                (changeFabbisogno)="changeFabbisogno($event)"></app-lavorazioni-fabbricati>
+            </ng-template>
+          </p-tabPanel>
+
+          <!-- Trasformazioni prodotti -->
+          <p-tabPanel
+            [cache]="false"
+            [disabled]="(!richiestaCarburante?.haMacchineGasolio && !richiestaCarburante?.haMacchineBenzina) || !richiestaCarburante?.haFabbricati">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-align-center">
+                <div class="p-col-fixed">
+                  <img src="assets/img/icons/uma-icon/icon-farm.svg">
+                </div>
+                <div class="p-col">Lavorazioni trasformazioni prodotti</div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-lavorazioni-fabbricati
+                [richiestaCarburante]="richiestaCarburante"
+                [inCompilazione]="inCompilazione"
+                [ctx]="fabbricatoEnum.TRASFORMAZIONE_PRODOTTI"
+                (changeFabbisogno)="changeFabbisogno($event)"></app-lavorazioni-fabbricati>
+            </ng-template>
+          </p-tabPanel>
+
+          <!-- Zootecnia -->
+          <p-tabPanel
+            [cache]="false"
+            [disabled]="!richiestaCarburante?.haMacchineGasolio && !richiestaCarburante?.haMacchineBenzina">
+            <ng-template pTemplate="header">
+              <div class="p-grid p-align-center">
+                <div class="p-col-fixed">
+                  <img src="assets/img/icons/uma-icon/icon-zootecnia.svg">
+                </div>
+                <div class="p-col">Lavorazioni zootecnia</div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-lavorazioni-zootecnia
+                [richiestaCarburante]="richiestaCarburante"
+                [inCompilazione]="inCompilazione"
+                (changeFabbisogno)="changeFabbisogno($event)"></app-lavorazioni-zootecnia>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

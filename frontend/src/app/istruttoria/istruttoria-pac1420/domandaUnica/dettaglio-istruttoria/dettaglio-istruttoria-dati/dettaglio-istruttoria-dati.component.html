@@ -1,0 +1,283 @@
+<p-confirmDialog header="Conferma" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="boxgrey f18">
+    <div class="ui-g" *ngIf="editable == false">
+        <div class="ui-g-3">
+            <strong>Tipologia domanda</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>{{getIstruttoriaCorrente().descrizionePac}}</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>Descrizione domanda</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().descrizioneDomanda}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Anno di riferimento</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>{{getIstruttoriaCorrente().annoRiferimento}}</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>Data scadenza presentazione domande</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().dtScadenzaDomande | date:'dd/MM/yyyy'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Tipo istruttoria</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>{{getIstruttoriaCorrente().tipoIstruttoria}}</strong>
+        </div>
+        <div class="ui-g-3">
+            <strong>Data scadenza presentazione domande con ritardo</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().dtScadenzaDomandeRitardo |
+            date: 'dd/MM/yyyy'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Data scadenza presentazione domande di ritiro parziale</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().dtScadenzaDomandeRitiroparz
+            | date: 'dd/MM/yyyy'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Data di ricevibilità</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().dtRicevibilita | date:
+            'dd/MM/yyyy'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Greening - Percentuale di incremento del premio</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percIncrementoGreening | percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Giovane - Percentuale di incremento del premio</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percIncrementoGiovane | percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Giovane - Limite ai diritti all'aiuto attivabili</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().limiteGiovane}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Riduzione lineare giovane (art.51, par.2, reg. 1307/2013)</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percRiduzioneLineare1 | percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong> Riduzione lineare giovane (art.51, par.3, reg. 1307/2013)</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percRiduzioneLineare2 | percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Riduzione lineare massimale netto (art. 7, reg. 1307/2013)</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percRiduzioneLineare3 | percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Riduzione titoli</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percRiduzioneTitoli| percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-3">
+            <strong> Percentuale Disciplina Finanziaria</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percDisciplinaFinanziaria | percent : '0.0-6'}}
+        </div>
+        <div class="ui-g-3">
+            <strong>Percentuale pagamento</strong>
+        </div>
+        <div class="ui-g-3">
+            {{getIstruttoriaCorrente().percPagamento| percent : '0.0-4'}}
+        </div>
+        <div class="ui-g-12 text-right"><button pButton type="button" label="Modifica" (click)="modifica()"
+                class="btn-green" style="min-height:42px; box-shadow:none"></button>
+        </div>
+    </div>
+    <div class="ui-g" *ngIf="editable == true">
+        <form [formGroup]="updateForm">
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Tipologia domanda</strong>
+                </div>
+                <div class="ui-g-3">
+                    {{getIstruttoriaCorrente().descrizionePac}}
+                </div>
+                <div class="ui-g-3">
+                    <strong>Descrizione domanda</strong>
+                </div>
+                <div class="ui-g-3">
+                    {{getIstruttoriaCorrente().descrizioneDomanda}}
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Anno di riferimento</strong>
+                </div>
+                <div class="ui-g-3">
+                    {{getIstruttoriaCorrente().annoRiferimento}}
+
+                </div>
+                <div class="ui-g-3">
+                    <strong>Data scadenza presentazione domande</strong>
+                </div>
+                <div class="ui-g-3">
+                    <p-calendar formControlName="dtScadenzaDomande" dateFormat="dd/mm/yy" [locale]="it"
+                        [showIcon]="true"></p-calendar>
+
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Tipo istruttoria</strong>
+                </div>
+                <div class="ui-g-3">
+                    {{getIstruttoriaCorrente().tipoIstruttoria}}
+                </div>
+                <div class="ui-g-3">
+                    <strong>Data scadenza presentazione domande con ritardo</strong>
+                </div>
+                <div class="ui-g-3">
+                    <p-calendar formControlName="dtScadenzaDomandeRitardo" dateFormat="dd/mm/yy" [locale]="it"
+                        [showIcon]="true"></p-calendar>
+
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Data scadenza presentazione domande di ritiro parziale</strong>
+                </div>
+                <div class="ui-g-3">
+                    <p-calendar formControlName="dtScadenzaDomandeRitiroparz" dateFormat="dd/mm/yy" [locale]="it"
+                        [showIcon]="true"></p-calendar>
+
+                </div>
+                <div class="ui-g-3">
+                    <strong>Data di ricevibilità</strong>
+                </div>
+                <div class="ui-g-3">
+                    <p-calendar formControlName="dtRicevibilita" dateFormat="dd/mm/yy" [locale]="it" [showIcon]="true">
+                    </p-calendar>
+
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Greening - Percentuale di incremento del premio</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percIncrementoGreening"
+                        [disabled]="true" />
+                    <div *ngIf="!updateForm.controls['percIncrementoGreening'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+                <div class="ui-g-3">
+                    <strong>Giovane - Percentuale di incremento del premio</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percIncrementoGiovane" />
+                    <div *ngIf="!updateForm.controls['percIncrementoGiovane'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Giovane - Limite ai diritti all'aiuto attivabili</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" pInputText formControlName="limiteGiovane" maxlength="5" />
+                    <div *ngIf="!updateForm.controls['limiteGiovane'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+                <div class="ui-g-3">
+                    <strong>Riduzione lineare giovane (art.51, par.2, reg. 1307/2013)</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percRiduzioneLineare1" />
+                    <div *ngIf="!updateForm.controls['percRiduzioneLineare1'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-3">
+                    <strong>Riduzione lineare giovane (art.51, par.3, reg. 1307/2013)</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percRiduzioneLineare2" />
+                    <div *ngIf="!updateForm.controls['percRiduzioneLineare2'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+                <div class="ui-g-3">
+                    <strong>Riduzione lineare massimale netto (art. 7, reg. 1307/2013)</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percRiduzioneLineare3" />
+                    <div *ngIf="!updateForm.controls['percRiduzioneLineare3'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+            </div>
+            <div>
+                <div class="ui-g-3">
+                    <strong>Riduzioni titoli</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percRiduzioneTitoli" />
+                    <div *ngIf="!updateForm.controls['percRiduzioneTitoli'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+                <div class="ui-g-3">
+                    <strong>Percentuale Disciplina Finanziaria</strong>
+                </div>
+                <div class="ui-g-3">
+                    <input type="text" appValidateInputOtherNumber pInputText
+                        formControlName="percDisciplinaFinanziaria" />
+                    <div *ngIf="!updateForm.controls['percDisciplinaFinanziaria'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+            </div>
+            <div>
+                <div class="ui-g-3">
+                    <strong>Percentuale pagamento</strong>
+                </div>
+                <div class="ui-g-3" *ngIf="getIstruttoriaCorrente().tipoIstruttoria == 'ANTICIPO'">
+                    <input type="text" appValidateInputNumber pInputText formControlName="percPagamento" />
+                    <div *ngIf="!updateForm.controls['percPagamento'].valid"
+                        class="ui-message ui-messages-error ui-corner-all">Numero
+                        non valido</div>
+                </div>
+                <div class="ui-g-3" *ngIf="getIstruttoriaCorrente().tipoIstruttoria == 'SALDO'">
+                    {{getIstruttoriaCorrente().percPagamento * 100}}%
+                </div>
+            </div>
+            <div class="ui-g-12 text-right"><button pButton type="button" label="Salva" (click)="salva()"
+                    class="btn-green" style="min-height:42px; box-shadow:none; margin-right:10px;"></button> <button
+                    pButton type="button" label="Annulla" (click)="annullaModifica()" class="btn-green"
+                    style="min-height:42px; box-shadow:none"></button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="ui-g ui-fluid">
+  <div class="tophome riepilogo">
+    <div class="ui-grid-fixed">
+      <h4>{{title}}</h4>
+      <div class="subhome">
+        <div class="ui-g">
+          <ng-container *ngFor="let dato of this.dati">
+            <div class="ui-md-4 separator-fsc">
+              <strong>{{dato.chiave}}</strong>
+              <br />{{dato.valore}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <div class="funzioni-grid tab-new boxgrey">
+        <p-tabMenu [model]="tabs" [activeItem]="tabs[0]"></p-tabMenu>
+      </div>
+    </div>
+    <div>
+      <div class="ui-g-12">
+        <div class="ui-grid-fixed">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-toast key="tst" [style]="{ marginTop: '70px' }"></p-toast>

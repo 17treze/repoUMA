@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2022.08.29 alle 04:34:23 PM CEST 
+
+  -->
+      
+    <bindings xmlns:tns="http://bdr.izs.it/webservices" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:getAziendaResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAziendaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPersonaResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPersonaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInfoSanitarieResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoSanitarieResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetSoccidariResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSoccidariResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAllevamentoResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAziendaResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAziendaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamentoResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_LatteResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoLatteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviTipologieProduttiveResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviTipologieProduttiveResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiTipologieProduttiveResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiTipologieProduttiveResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimentiUnioneResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimentiUnioneResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiCensimentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiCensimentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAviCensimentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAviCensimentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_AVIResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoAVIResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevamento_AVIResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoAVIResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_ListaAllevamentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetListaAllevamentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetAllevamento_A_LibroResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoALibroResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamentoNelRaggioResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoNelRaggioResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamentoResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento01Response">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamento01Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento_DIFFResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoDIFFResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllev_Tipologie_ProdResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevTipologieProdResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Estrazione_AllevamentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.EstrazioneAllevamentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindControlli_AllevamentoResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindControlliAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_SuiCensimentiResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSuiCensimentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findBloccoMovimentazioniResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindBloccoMovimentazioniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getBloccoMovimentazioniResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetBloccoMovimentazioniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getProrogaMarcaturaResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetProrogaMarcaturaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevProrogaMarcaturaResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevProrogaMarcaturaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getEsitoSieroprevalenzaIBRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetEsitoSieroprevalenzaIBRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findEsitoSieroprevalenzaIBRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindEsitoSieroprevalenzaIBRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_AziendaleResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPascoloAziendaleResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_AziendaleResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindPascoloAziendaleResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAzienda">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAzienda"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SOAPAutenticazione">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.SOAPAutenticazione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAzienda_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAziendaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAzienda_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAziendaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPersona">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPersona"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPersona_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPersonaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPersona_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPersonaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInfoSanitarie">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoSanitarie"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInfoSanitarie_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoSanitarieSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInfoSanitarie_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoSanitarieSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetSoccidari">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSoccidari"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetSoccidari_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSoccidariSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetSoccidari_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSoccidariSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAllevamento">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAllevamento_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAllevamentoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAllevamento_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAllevamentoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAzienda">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAzienda"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAzienda_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAziendaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfoAzienda_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetInfoAziendaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_Latte">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoLatte"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_Latte_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoLatteSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_Latte_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoLatteSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviTipologieProduttive">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviTipologieProduttive"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviTipologieProduttive_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviTipologieProduttiveSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviTipologieProduttive_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviTipologieProduttiveSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiTipologieProduttive">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiTipologieProduttive"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiTipologieProduttive_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiTipologieProduttiveSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiTipologieProduttive_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiTipologieProduttiveSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindOviCensimentiUnione">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindOviCensimentiUnione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiCensimenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiCensimenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiCensimenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiCensimentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindSuiCensimenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindSuiCensimentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAviCensimenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAviCensimenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAviCensimenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAviCensimentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAviCensimenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAviCensimentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_AVI">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoAVI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_AVI_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoAVISTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getAllevamento_AVI_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoAVISTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevamento_AVI">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoAVI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_ListaAllevamenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetListaAllevamenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_ListaAllevamenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetListaAllevamentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_ListaAllevamenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetListaAllevamentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetAllevamento_A_Libro">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoALibro"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetAllevamento_A_Libro_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoALibroSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetAllevamento_A_Libro_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetAllevamentoALibroSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamentoNelRaggio">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoNelRaggio"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamentoNelRaggio_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoNelRaggioSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamentoNelRaggio_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoNelRaggioSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento01">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamento01"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento_DIFF">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoDIFF"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllev_Tipologie_Prod">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevTipologieProd"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllev_Tipologie_Prod_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevTipologieProdSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllev_Tipologie_Prod_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevTipologieProdSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindAllevamento_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevamentoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Estrazione_Allevamenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.EstrazioneAllevamenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Estrazione_Allevamenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.EstrazioneAllevamentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Estrazione_Allevamenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.EstrazioneAllevamentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindControlli_Allevamento_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindControlliAllevamentoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindControlli_Allevamento_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindControlliAllevamentoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindControlli_Allevamento">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindControlliAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_SuiCensimenti">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSuiCensimenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_SuiCensimenti_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSuiCensimentiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_SuiCensimenti_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetSuiCensimentiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findBloccoMovimentazioni">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindBloccoMovimentazioni"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findBloccoMovimentazioni_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindBloccoMovimentazioniSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findBloccoMovimentazioni_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindBloccoMovimentazioniSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getBloccoMovimentazioni_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetBloccoMovimentazioniSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getBloccoMovimentazioni_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetBloccoMovimentazioniSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getBloccoMovimentazioni">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetBloccoMovimentazioni"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getProrogaMarcatura_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetProrogaMarcaturaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getProrogaMarcatura_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetProrogaMarcaturaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getProrogaMarcatura">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetProrogaMarcatura"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevProrogaMarcatura_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevProrogaMarcaturaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevProrogaMarcatura_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevProrogaMarcaturaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findAllevProrogaMarcatura">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindAllevProrogaMarcatura"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getEsitoSieroprevalenzaIBR_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetEsitoSieroprevalenzaIBRSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getEsitoSieroprevalenzaIBR_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetEsitoSieroprevalenzaIBRSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getEsitoSieroprevalenzaIBR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetEsitoSieroprevalenzaIBR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findEsitoSieroprevalenzaIBR_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindEsitoSieroprevalenzaIBRSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findEsitoSieroprevalenzaIBR_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindEsitoSieroprevalenzaIBRSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findEsitoSieroprevalenzaIBR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindEsitoSieroprevalenzaIBR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_Aziendale">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPascoloAziendale"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_Aziendale_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPascoloAziendaleSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_Aziendale_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.GetPascoloAziendaleSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_Aziendale">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindPascoloAziendale"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_Aziendale_STR">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindPascoloAziendaleSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_Aziendale_STRResponse">
+                  
+            <class ref="it.tndigitale.ws.bdn.wsinterrogazioni.wsaziendeqry.FindPascoloAziendaleSTRResponse"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://bdr.izs.it/dsAZIENDE_G.xsd" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.ws.dsaziendeg"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:dsAZIENDE_G">
+                  
+            <class ref="it.tndigitale.ws.dsaziendeg.DsAZIENDEG"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

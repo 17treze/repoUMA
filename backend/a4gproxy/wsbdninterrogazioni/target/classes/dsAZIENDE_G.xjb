@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="2.1" 
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	schemaLocation="xsd/dsAZIENDE_G.xsd">
+
+	<jaxb:bindings node="//xs:schema[@targetNamespace='http://bdr.izs.it/dsAZIENDE_G.xsd']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="it.tndigitale.ws.dsaziendeg" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+	<jaxb:globalBindings>
+        <xjc:javaType adapter="it.tndigitale.a4g.proxy.LocalDateXmlAdapter"
+                      name="java.time.LocalDate" xmlType="xs:date"/>
+        <xjc:javaType adapter="it.tndigitale.a4g.proxy.LocalDateTimeXmlAdapter"
+                      name="java.time.LocalDateTime" xmlType="xs:dateTime"/>
+    </jaxb:globalBindings>	
+	
+</jaxb:bindings>

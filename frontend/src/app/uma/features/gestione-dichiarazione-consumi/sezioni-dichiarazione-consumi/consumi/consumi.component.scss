@@ -1,0 +1,150 @@
+@import "../../../../uma.index.style.scss";
+
+:host {
+  .w-10m {
+    width: 10em;
+  }
+
+  .w-13m {
+    width: 13em;
+  }
+
+  p-dropdown > ::ng-deep .ui-dropdown {
+    label.ui-dropdown-label {
+      height: 100%;
+      font-weight: normal !important;
+    }
+  }
+
+  .font-12 {
+    font-size: 12px;
+  }
+
+  .font-15 {
+    font-size: 15px;
+  }
+
+  input.ui-inputtext:disabled {
+    border-bottom: 1px dotted;
+    opacity: .9;
+    background: $primaryLightestColor; /*lightgray o darkgray*/
+  }
+
+  ::ng-deep a.ui-panel-titlebar-icon >  {
+    span.pi.pi-minus,
+    span.pi.pi-plus {
+      font-size: 1.7em;
+    }
+  }
+
+  .icon-button-square {
+    background-color: $primaryColor !important;
+    border: .5px solid $primaryLightColor;
+    border-radius: unset;
+    height: auto !important;
+    width: 6em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $primaryDarkColor !important;
+    }
+  }
+
+  .testo-vert-centr-11 {
+    margin-top: 11px;
+    margin-left: 0px;
+  }
+
+  .testo-vert-centr-19 {
+    margin-top: 19px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+
+  .icon-button-square-alt {
+    background-color: $accentTextColor !important;
+    border: 2px solid $accentColor;
+    border-radius: unset;
+    height: auto !important;
+    width: 6em !important;
+    opacity: 1;
+
+    & > ::ng-deep span.pi {
+      color: $accentColor !important;
+    }
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $accentHoverColor !important;
+    }
+  }
+
+  ::ng-deep button.ui-datepicker-trigger.ui-calendar-button {
+    width: 5.5em !important;
+    height: 5.5em !important;
+    background: transparent !important;
+    position: absolute;
+  }
+
+  ::ng-deep .ui-dialog-footer {
+    .ui-button-icon-left:before {
+      color: #ffffff;
+    }
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .button-accent-alt {
+    border: 2px solid $accentColor;
+    color: $accentColor !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.ui-button-icon-right.pi {
+      color: $accentColor !important;
+      font-size: x-large !important;
+    }
+  }
+
+  .ui-dialog-visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > ::ng-deep div {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      // .ui-dialog-mask
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      // .ui-widget-overlay
+      background-color: rgba(88, 87, 92, 0.8);
+      opacity: 1;
+
+      & > ::ng-deep div.ui-confirmdialog {
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mittente": {
+    "name": "Nuovo",
+    "surname": "Mittente",
+    "description": "Nuovo mittente inesistente",
+    "vatNumber": "11111111111"
+  },
+  "codiceFascicolo": "3.5-2018-864",
+  "oggetto": "Domanda n. X per la certificazione antimafia",
+  "tipologiaDocumentoPrincipale" : "ANTIMAFIA"
+}

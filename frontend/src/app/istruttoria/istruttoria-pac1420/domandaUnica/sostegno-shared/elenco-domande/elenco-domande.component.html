@@ -1,0 +1,74 @@
+<div>
+  <div class="ui-g ui-fluid">
+    <div class="tophome riepilogo">
+      <div class="ui-grid-fixed">
+        <h4>ISTRUTTORIA</h4>
+        <div class="subhome">
+          <div class="ui-g">
+            <div class="ui-md-3">
+              <strong>PAC</strong>
+              <br>{{ 'ISTRUTTORIA_PAC.INTESTAZIONE' | translate }}
+            </div>
+            <div class="ui-md-3">
+              <strong>Tipologia Domanda</strong>
+              <br>{{ 'ISTRUTTORIA_PAC.DOMANDA_UNICA' | translate }}
+            </div>
+            <div class="ui-md-3">
+              <strong>Anno di riferimento</strong>
+              <br>{{ domandaUnicaFilter.annoCampagna }}
+            </div>
+            <div class="ui-md-3">
+              <strong>Stato</strong>
+              <br>{{ 'StatoDomandaEnum.' + statoDomanda | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-grid-fixed">
+      <div class="ui-g-12">
+        <legend class="richiesta-title" style="padding: 10px 0;">
+          {{ title }}
+        </legend>
+        <div class="table-responsive" margin-top="30px">
+          <p-table #table [columns]="cols" [value]="paginaDomande.risultati" [lazy]="true"
+            (onLazyLoad)="loadData($event)" [paginator]="true" [rows]="paginazione.numeroElementiPagina"
+            [totalRecords]="paginaDomande.count">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field"
+                  [pSortableColumnDisabled]="col.field == null">
+                  <strong>
+                    {{ col.header }}
+                  </strong>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-domanda let-i="rowIndex">
+              <tr>
+                <td>{{domanda.cuaaIntestatario}}</td>
+                <td>{{domanda.ragioneSociale}}</td>
+                <td>{{domanda.numeroDomanda}}</td>
+                <td>{{domanda.descModuloDomanda}}</td>
+                <td>{{domanda.dtPresentazione | date: "dd/MM/yyyy"}}</td>
+                <td>{{domanda.numDomandaRettificata}}</td>
+                <td>{{domanda.dtProtocollazOriginaria | slice:0:10}}</td>
+                <td>{{domanda.descEnteCompilatore}}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td [attr.colspan]="cols.length">
+                  {{ 'DOMANDA_UNICA_RISULTATI.nessunaDomandaTrovata' | translate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<p-toast
+  key="tst-csv"
+  [baseZIndex]="50000"></p-toast>
+
+<div class="ui-grid-fixed">
+  <div class="boxgrey">
+    <div class="p-col">
+      <!-- Gestione Rettifica/Richiesta -->
+      <div class="p-grid py-2 p-align-center p-justify-between">
+        <h5 class="p-col py-4 px-0 m-0 p-col-align-center">
+            <strong>{{"UMA.GESTIONE_RICHIESTA_RETTIFICA" | translate | uppercase}}</strong>
+          </h5>
+        <div
+          *ngIf="isRettificabile"
+          class="p-col-fixed px-0">
+          <div class="p-col px-0">
+            <button
+              class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+              (click)="rettificaDomanda()"
+              pButton
+              icon="ui-icon-undo"
+              iconPos="right"
+              label="RETTIFICA">
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid p-justify-around p-align-center">
+        <!-- Accordion Richieste di carburante / Rettifiche -->
+        <div class="p-col p-0">
+          <app-lista-rettifiche-domande
+            [listaDomande]="datiRichieste"
+            [tipoDomande]="tipoRichiesta"
+            [nrDomande]="nrRichieste"
+            [reset]="tableReset"
+            (aggiornaLista)="aggiornaTabella($event)"></app-lista-rettifiche-domande>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

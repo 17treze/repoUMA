@@ -1,0 +1,48 @@
+{
+	"dataElenco": "2018-06-14",
+	"codiceElenco": "009-801-20190513-9999999",
+	"campagna": "2018",
+	"tipoPagamento": "INTEGRAZIONE",
+	"intervento": "ACCOPPIATO SUPERFICIE",
+	"elencoDomande": [
+		{
+			"counter": 1,
+			"numeroDomanda": "1200000",
+			"numeroProtocollo": null,
+			"nome": "SALVATORE DE LUCA",
+			"cuaa": "RRRRED82B02F83XX",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioAcsM8": "1.562,62",
+			"quotaPremioAcsM9": "1.163,15",
+			"quotaPremioAcsM10": "377,14",
+			"quotaPremioAcsM11": null,
+			"quotaPremioAcsM14": null,
+			"quotaPremioAcsM15": null,
+			"quotaPremioAcsM16": "789,58",
+			"quotaPremioAcsM17": null,
+			"totalePremio": "3.892,49"
+		},
+		{
+			"counter": 2,
+			"numeroDomanda": "1200002",
+			"numeroProtocollo": null,
+			"nome": "SALVATORE DE LUCA",
+			"cuaa": "RRRRED82B02F83YY",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioAcsM8": "1.562,62",
+			"quotaPremioAcsM9": "982,15",
+			"quotaPremioAcsM10": "1.488,25",
+			"quotaPremioAcsM11": "77,00",
+			"quotaPremioAcsM14": "0,86",
+			"quotaPremioAcsM15": "9.536,11",
+			"quotaPremioAcsM16": "6.685,70",
+			"quotaPremioAcsM17": "1.303,25",
+			"totalePremio": "21.635,94"
+		}
+	],
+	"totaleElencoLiquidazione": "25.528,43"
+}

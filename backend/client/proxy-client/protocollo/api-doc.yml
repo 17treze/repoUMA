@@ -1,0 +1,5101 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "RESTServices"
+  },
+  "host": "pisrest-test.pitre.tn.it",
+  "basePath": "/RestServices",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/GetCorrespondent": {
+      "get": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio che permette il reperimento del dettaglio di un corrispondente dato l’id.",
+        "description": "Metodo per il prelievo dei dettagli di un corrispondente a partire dal suo id.",
+        "operationId": "AddressBook_getCorrespondent",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "IdCorrespondent",
+            "in": "query",
+            "description": "Id del corrispondente cercato",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetCorrespondentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/AddCorrespondent": {
+      "put": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio per la creazione di un nuovo corrispondente esterno.",
+        "description": "Metodo per l'aggiunta di un corrispondente esterno in rubrica.\r\n            La richiesta può essere popolata nei seguenti campi\r\n            Description (string): Obbligatorio. Descrizione del corrispondente.<br />\r\n            Code (string): Obbligatorio. Codice del corrispondente ricercabile da rubrica.<br />\r\n            CorrespondentType (string): Obbligatorio. Tipologia del corrispondente. Può assumere i valori “U” nel caso di Unità organizzativa e “P” nel caso di persona.<br />\r\n            City (string): Opzionale. Città del corrispondente.<br />\r\n            Province (string): Opzionale. Provincia del corrispondente.<br />\r\n            Location (string): Opzionale. Località del corrispondente.<br />\r\n            Nation (string): Opzionale. Nazione del corrispondente.<br />\r\n            PhoneNumber (string): Opzionale. Numero di telefono del corrispondente.<br />\r\n            PhoneNumber2 (string): Opzionale. Secondo numero di telefono del corrispondente.<br />\r\n            Fax (string): Opzionale. Numero del fax del corrispondente.<br />\r\n            NationalIdentificationNumber (string): Opzionale.<br />\r\n            Codice fiscale del corrispondente.<br />\r\n            Email (string): Opzionale. Mail del corrispondente.<br />\r\n            AOOCode (string): Opzionale. Codice AOO.<br />\r\n            AdmCode (string): Opzionale. Codice amministrazione.<br />\r\n            Note (string): Opzionale. Note \r\n            Address (string): Opzionale. Indirizzo del corrispondente.<br />\r\n            Cap (string): Opzionale. Cap del corrispondente.<br />\r\n            CodeRegisterOrRF (string): Opzionale. Se il corrispondente deve essere disponibile soltanto per un Registro/RF valorizzare con il codice del Registro/RF.<br />\r\n            PreferredChannel (string): Opzionale. Canale preferenziale del corrispondente.<br />",
+        "operationId": "AddressBook_addCorrespondent",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Correspondent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCorrespondentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetCorrespondentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/EditCorrespondent": {
+      "post": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio per la modifica di un nuovo corrispondente.",
+        "description": "Metodo per l'aggiunta di un corrispondente esterno in rubrica.\r\n            La richiesta può essere popolata nei seguenti campi\r\n            Description (string): Obbligatorio. Descrizione del corrispondente.<br />\r\n            Code (string): Obbligatorio. Codice del corrispondente ricercabile da rubrica.<br />\r\n            CorrespondentType (string): Obbligatorio. Tipologia del corrispondente. Può assumere i valori “U” nel caso di Unità organizzativa e “P” nel caso di persona.<br />\r\n            City (string): Opzionale. Città del corrispondente.<br />\r\n            Province (string): Opzionale. Provincia del corrispondente.<br />\r\n            Location (string): Opzionale. Località del corrispondente.<br />\r\n            Nation (string): Opzionale. Nazione del corrispondente.<br />\r\n            PhoneNumber (string): Opzionale. Numero di telefono del corrispondente.<br />\r\n            PhoneNumber2 (string): Opzionale. Secondo numero di telefono del corrispondente.<br />\r\n            Fax (string): Opzionale. Numero del fax del corrispondente.<br />\r\n            NationalIdentificationNumber (string): Opzionale.<br />\r\n            Codice fiscale del corrispondente.<br />\r\n            Email (string): Opzionale. Mail del corrispondente.<br />\r\n            AOOCode (string): Opzionale. Codice AOO.<br />\r\n            AdmCode (string): Opzionale. Codice amministrazione.<br />\r\n            Note (string): Opzionale. Note \r\n            Address (string): Opzionale. Indirizzo del corrispondente.<br />\r\n            Cap (string): Opzionale. Cap del corrispondente.<br />\r\n            CodeRegisterOrRF (string): Opzionale. Se il corrispondente deve essere disponibile soltanto per un Registro/RF valorizzare con il codice del Registro/RF.<br />\r\n            PreferredChannel (string): Opzionale. Canale preferenziale del corrispondente.<br />",
+        "operationId": "AddressBook_editCorrespondent",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Correspondent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddCorrespondentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetCorrespondentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetCorrespondentFilters": {
+      "get": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio che restituisce la lista dei filtri applicabili alla ricerca corrispondenti.",
+        "description": "Metodo che restituisce la lista dei filtri applicabili alla ricerca corrispondenti.",
+        "operationId": "AddressBook_getCorrespondentFilters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFiltersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetUserFilters": {
+      "get": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio che restituisce la lista dei filtri applicabili alla ricerca utenti.",
+        "description": "Metodo che restituisce la lista dei filtri applicabili alla ricerca utenti.",
+        "operationId": "AddressBook_getUserFilters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFiltersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SearchCorrespondents": {
+      "post": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio per la ricerca di corrispondenti.",
+        "description": "Metodo per la ricerca dei corrispondenti, inserendo nella richiesta i filtri disponibili tramite il metodo GetCorrespondentFilters",
+        "operationId": "AddressBook_searchCorrespondents",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Array di filtri di ricerca.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFiltersOnlyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchCorrespondentsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SearchUsers": {
+      "post": {
+        "tags": [
+          "AddressBook"
+        ],
+        "summary": "Servizio per il reperimento di utenti interni all’applicazione.",
+        "description": "Metodo per la ricerca degli utenti, inserendo nella richiesta i filtri disponibili tramite il metodo GetUserFilters",
+        "operationId": "AddressBook_searchUsers",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Array di filtri di ricerca.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFiltersOnlyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetUsersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetToken": {
+      "post": {
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Servizio per il prelievo del token di autenticazione",
+        "description": "Metodo per il prelievo del token di autenticazione. Fornendo lo username ed il codice amministrazione, viene restituito un token di autenticazione da inserire nelle successive chiamate, in un header \"AuthToken\"",
+        "operationId": "Authenticate_Authenticate",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto AuthenticateRequest, contenente i seguenti parametri <br />\r\n            Username: Username dell'utente. Obbligatorio<br />\r\n            CodeAdm: Codice dell'amministrazione nella quale ci si vuole autenticare. Obbligatorio<br />\r\n            CodeRole: Ruolo con il quale ci si vuole autenticare. Se omesso, viene selezionato il ruolo preferito dell'utente. Opzionale.\r\n            CodeApplication: Identifica l'integrazione che si interfaccia tramite REST",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthenticateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthenticateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetTipiOggetto": {
+      "get": {
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Servizio di test",
+        "description": "Metodo di test per verificare la connessione al DB",
+        "operationId": "Authenticate_GetTipiOggetto",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetActiveClassificationScheme": {
+      "get": {
+        "tags": [
+          "ClassificationSchemes"
+        ],
+        "summary": "Servizio per il reperimento del titolario attivo.",
+        "description": "Metodo per il prelievo del titolario attivo, all'interno del quale possono essere creati i nuovi fascicoli",
+        "operationId": "ClassificationSchemes_getActiveClassificationScheme",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetClassificationSchemeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetAllClassificationSchemes": {
+      "get": {
+        "tags": [
+          "ClassificationSchemes"
+        ],
+        "summary": "Servizio per il reperimento di tutti i titolari.",
+        "description": "Metodo per il prelievo del dettaglio di tutti i titolari",
+        "operationId": "ClassificationSchemes_getAllClassificationSchemes",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetAllClassificationSchemesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetClassificationSchemeById": {
+      "get": {
+        "tags": [
+          "ClassificationSchemes"
+        ],
+        "summary": "Servizio per il reperimento dei dettagli di un titolario dato l’id.",
+        "description": "Metodo per il reperimento del dettaglio di un titolario dato l'id dello stesso",
+        "operationId": "ClassificationSchemes_getClassificationSchemeById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idClassificationScheme",
+            "in": "query",
+            "description": "Id del titolario cercato",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetClassificationSchemeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocumentFilters": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio che restituisce la lista dei filtri applicabili alla ricerca documenti.",
+        "description": "Metodo che restituisce la lista dei filtri applicabili alla ricerca documenti.",
+        "operationId": "Documents_getDocumentFilters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFiltersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocument": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento del dettaglio di un documento.",
+        "description": "Metodo per il reperimento del dettaglio di un documento data la segnatura o l’id.\r\n            Obbligatorio un valore tra id del documento o segnatura.",
+        "operationId": "Documents_getDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto GetDocumentRequest contenente i seguenti campi\r\n            IdDocument (string): id del documento\r\n            Signature (string): segnatura di protocollo del documento, da inserire in alternativa a IdDocument\r\n            GetFile (bool): se vero, preleva i file associati al documento, sia principale che allegati\r\n            GetFileWithSignature (string): se impostato a 1, preleva i file con la busta di firma",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/CreateDocument": {
+      "put": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la creazione di un documento",
+        "description": "Metodo per la creazione di un documento non protocollato, protocollato in arrivo, in uscita, interno oppure un predisposto in arrivo, in uscita oppure interno.<br />\r\n            La richiesta consiste nei parametri:<br />\r\n            Document (Document): Obbligatorio. Documento che deve essere creato. Vedere le tabelle successive per le varie tipologie di documento. <br />\r\n            CodeRegister (String): Opzionale. Codice del registro, obbligatorio nel caso di documenti protocollati. <br />\r\n            CodeRF (String): Opzionale. Codice dell’RF per la segnatura. <br /><br />\r\n            L'oggetto document consiste nei seguenti parametri: (esempio creazione Documento non protocollato)\r\n            DocumentType (String): Obbligatorio. Indica la tipologia del documento. Inserire il valore “G”. <br />\r\n            Object (String): Obbligatorio. Oggetto del documento. <br />\r\n            Note (Note[]): Opzionale. Possibilità di inserire una o più note nel documento. <br />\r\n            Template (Template): Opzionale. Tipologia del documento che si vuole associare al documento con i relativi valori. <br />\r\n            MainDocument (File): Opzionale. Documento principale.",
+        "operationId": "Documents_createDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/CreateDocumentAndAddInProject": {
+      "put": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio che crea un nuovo documento e lo inserisce nel fascicolo indicato",
+        "description": "Metodo per la creazione di un documento non protocollato, protocollato in arrivo, in uscita, interno oppure un predisposto in arrivo, in uscita oppure interno.<br />\r\n            Il metodo procede quindi ad inserirlo nel fascicolo indicato.<br />\r\n            La richiesta consiste nei parametri:<br />\r\n            Document (Document): Obbligatorio. Documento che deve essere creato. Vedere le tabelle successive per le varie tipologie di documento. <br />\r\n            CodeRegister (String): Opzionale. Codice del registro, obbligatorio nel caso di documenti protocollati. <br />\r\n            CodeRF (String): Opzionale. Codice dell’RF per la segnatura. <br />\r\n            CodeProject (string): Opzionale. Codice del fascicolo nel quale fascicolare il documento, il codice prende soltanto i fascicoli nei titolari attivi. Da utilizzare in coppia con ClassificationSchemaId. <br />\r\n            IdProject (string): Opzionale. Id del fascicolo nel quale fascicolare il documento. Alternativo alla coppia CodeProject/ClassificationSchemeId <br />\r\n            ClassificationSchemeId (string): Opzionale. Id del titolario.<br /><br />\r\n            L'oggetto document consiste nei seguenti parametri: (esempio creazione Documento non protocollato)\r\n            DocumentType (String): Obbligatorio. Indica la tipologia del documento. Inserire il valore “G”. <br />\r\n            Object (String): Obbligatorio. Oggetto del documento. <br />\r\n            Note (Note[]): Opzionale. Possibilità di inserire una o più note nel documento. <br />\r\n            Template (Template): Opzionale. Tipologia del documento che si vuole associare al documento con i relativi valori. <br />\r\n            MainDocument (File): Opzionale. Documento principale.",
+        "operationId": "Documents_createDocumentAndAddInPrj",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDocAndAddInPrjRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/UploadFileToDocument": {
+      "put": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il caricamento di un file e/o allegato in un documento",
+        "description": "Metodo per aggiungere un file ad un documento, per creare un allegato o per aggiungere una nuova versione del file.<br />\r\n            L'oggetto Request va popolato nei seguenti campi:<br />\r\n            IdDocument (String): Obbligatorio. DocNumber del documento. <br />\r\n            File (File): Obbligatorio. File da acquisire. <br />\r\n            CreateAttachment (Boolean): Opzionale. Se a true, indica che deve essere creato il documento come nuovo allegato. <br />\r\n            Description (String): Obbligatorio. Descrizione del file da acquisire. <br />\r\n            CovertToPDFA (Boolean): Opzionale. Se a true converte il file in PDF/A. <br />\r\n            AttachmentType (String): Opzionale. Indica il tipo dell’allegato creato quando la proprietà CreateAttachment è true. Se “E”, l’allegato è di tipo esterno, se assente o “U”, l’allegato è di tipo utente. <br />\r\n            HashFile (String): Opzionale. Hash del file da acquisire. Obbligatorio in presenza della configurazione “HASH_OBBLIGATORIO”.\r\n            <br /><br />\r\n            L'oggetto File va popolato nei campi:<br />\r\n            Content (byte[]): Obbligatorio. Contenuto binario del file.\r\n            <br />Name (string): Obbligatorio. Nome del file, con estensione. Il nome deve contenere solo caratteri accettati da file system, e deve avere un'estensione ammessa in amministrazione.",
+        "operationId": "Documents_uploadFileToDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadFileToDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UploadFileToDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetFileDocumentById": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il prelievo di un file",
+        "description": "MEtodo per il reperimento di un file dato un id di un documento/allegato e opzionalmente il numero di versione.",
+        "operationId": "Documents_getFileDocumentById",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "IdDocument",
+            "in": "query",
+            "description": "Id del documento.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VersionId",
+            "in": "query",
+            "description": "Numero della versione. Inserendo la stringa \"SIGNED\" permette di ottenere l'ultima versione comprensiva di busta di firma digitale.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFileDocumentByIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetFileWithSignatureOrStamp": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento di un file con l’aggiunta della segnatura o del timbro",
+        "description": "Metodo per il reperimento di un file con l’aggiunta della segnatura o del timbro. Etichetta PDF o timbro sopraimpressi. Obbligatorio un valore tra id del documento e segnatura.\r\n            Il parametro SignOrStamp va popolato con \"STAMP\" se si desidera il timbro.",
+        "operationId": "Documents_getFileWithSignatureOrStamp",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idDocument",
+            "in": "query",
+            "description": "Id del documento",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Segnatura di protocollo del documento",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "signOrStamp",
+            "in": "query",
+            "description": "Se popolato con STAMP, imprime il timbro sul PDF, altrimenti la segnatura",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFileDocumentByIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/EditDocument": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la modifica di un documento",
+        "description": "Metodo per la modifica di un documento o un protocollo. La richiesta è nella stessa forma di CreateDocument. <br />\r\n            Essendo un metodo di modifica, si consiglia di passare in ingresso un documento prelevato tramite GetDocument",
+        "operationId": "Documents_editDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ProtocolPredisposed": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la protocollazione di un documento predisposto",
+        "description": "Metodo per la protocollazione di un documento predisposto senza modificare ulteriori dati. La richiesta richiede l'id del documento predisposto, il registro di protocollazione e l'eventuale RF. <br />",
+        "operationId": "Documents_protocolPredisposed",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtocolPredisposedRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SearchDocuments": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la ricerca dei documenti",
+        "description": "Metodo per la ricerca dei documenti",
+        "operationId": "Documents_searchDocuments",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request contenente un array di filtri, il numero della pagina ed il numero di elementi interno ad una pagina",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocAccessRights": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il prelievo dei diritti di accesso ad un documento",
+        "description": "Metodo per il prelievo dei diritti di accesso ad un documento.<br />\r\n            L'oggetto ObjectAccessRights ha questi parametri:<br />\r\n            iIdObject (string): Id del documento o fascicolo<br />\r\n            AccessRights (string): Diritti posseduti sul documento. Possibili valori: 63, Scrittura; 45, Lettura; 20, in attesa di accettazione; 0, Utente proprietario; 255, Ruolo proprietario<br />\r\n            AccessRightsType (string): Tipologia dei diritti.<br />\r\n            SubjectDescription (string): Descrizione di chi possiede i diritti (utente o ruolo)<br />\r\n            SubjectCode (string): Codice di chi possiede i diritti (utente o ruolo)<br />\r\n            SubjectType (string): Tipo di chi possiede i diritti (utente o ruolo). \"P\" per utente, \"R\" per ruolo.<br />\r\n            SubjectId (string): Id di chi possiede i diritti (utente o ruolo)<br />\r\n            AccessDate (string): Data di acquisizione dei diritti<br />\r\n            Note (string): Note di acquisizione dei diritti. Non sempre presenti<br />",
+        "operationId": "Documents_getDocAccessRights",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "IdDocument",
+            "in": "query",
+            "description": "Id del documento",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetDocAccessRightsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocumentEvents": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento degli eventi e/o modifiche riguardanti un documento",
+        "description": "Metodo per il reperimento degli eventi e/o modifiche riguardanti un documento. Obbligatorio l'id del documento. <br />\r\n            Il parametro AllEvents da la possibilità di ottenere tutti gli eventi, o di filtrare solo gli eventi che generano modifiche del documento (metadati o file).",
+        "operationId": "Documents_getDocumentEvents",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "IdDocument",
+            "in": "query",
+            "description": "Id documento",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "AllEvents",
+            "in": "query",
+            "description": "Variabile che se impostata a false, restituisce i soli eventi di modifica su di un documento",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetDocumentEventsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetModifiedDocuments": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il prelievo degli id dei documenti modificati in un intervallo di date.",
+        "description": "Metodo per il prelievo degli id dei documenti modificati in un intervallo di date. Le date vanno inserite nel formato dd/mm/yyyy. <br />\r\n            Il parametro modifiedOnly permette di ottenere i soli documenti modificati nell'intervallo di date, non quelli creati.<br />\r\n            Il parametro security permette di ottenere tutti i documenti modificati nell'intervallo di date, a prescindere se siano visibili o meno al ruolo.<br />\r\n            Il parametro allEvents permette di ottenere i documenti che hanno subito qualsiasi evento, oppure solo quelli che hanno subito modifiche ai metadati o file.",
+        "operationId": "Documents_getModifiedDocuments",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Inizio intervallo di date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Fine intervallo di date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modifiedOnly",
+            "in": "query",
+            "description": "Solo documenti modificati nell'intervallo specificato, altrimenti comprende anche quelli creati.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "allEvents",
+            "in": "query",
+            "description": "Tutti i documenti che hanno subito qualsiasi evento, altrimenti restituisce i soli documenti che hanno subito modifiche. Di default è \"false\".",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "security",
+            "in": "query",
+            "description": "Permette la visualizzazione di tutti i documenti, a prescindere che siano visibili al ruolo. Funzionalità consentita solo previa autorizzazione.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ImportPreviousDocument": {
+      "put": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il caricamento di un documento pregresso",
+        "description": "Metodo che permette l'importazione di un documento pregresso.<br />\r\n            La richiesta consiste nei parametri:<br />\r\n            Document (Document): Obbligatorio. Documento che deve essere creato. Vedere le tabelle successive per le varie tipologie di documento. <br />\r\n            CodeRegister (String): Opzionale. Codice del registro, obbligatorio nel caso di documenti protocollati. <br />\r\n            CodeRF (String): Opzionale. Codice dell’RF per la segnatura. <br /><br />\r\n            L'oggetto document consiste nei seguenti parametri: (esempio creazione Documento non protocollato)\r\n            DocumentType (String): Obbligatorio. Indica la tipologia del documento. Inserire il valore “G”. <br />\r\n            Object (String): Obbligatorio. Oggetto del documento. <br />\r\n            Note (Note[]): Opzionale. Possibilità di inserire una o più note nel documento. <br />\r\n            Template (Template): Opzionale. Tipologia del documento che si vuole associare al documento con i relativi valori. <br />\r\n            MainDocument (File): Opzionale. Documento principale.\r\n            ProtocolNumber (string): Opzionale. Numero di protocollo del documento pregresso.<br />\r\n            ProtocolYear (string): Opzionale. Anno di protocollo del documento pregresso<br />\r\n            ProtocolDate (string): Opzionale. Data di protocollo del documento pregresso<br />",
+        "operationId": "Documents_importPreviousDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "OggettoRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateDocumentResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocumentTemplate": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento del dettaglio di una tipologia di documento",
+        "description": "Servizio per il reperimento del dettaglio di una tipologia di documento dato il nome o l’id. Obbligatorio un valore tra descrizione o id della tipologia.",
+        "operationId": "Documents_getTemplateDoc",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "descriptionTemplate",
+            "in": "query",
+            "description": "Descrizione della tipologia",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idTemplate",
+            "in": "query",
+            "description": "Id della tipologia",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTemplateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocumentTemplates": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento di tutte le tipologie di documenti.",
+        "description": "Metodo per il reperimento di tutte le tipologie di documenti visibili al ruolo dell'utente che esegue la richiesta.",
+        "operationId": "Documents_getDocumentTemplates",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTemplatesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/AddDocInProject": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per aggiungere un documento in un fascicolo.",
+        "description": "Metodo per l'inserimento di un documento in un fascicolo. E' necessario inserire un solo parametro tra idProject e CodeProject. Per effettuare l’inserimento del documento in un sottofascicolo, bisogna inserire nella richiesta nel parametro in ingresso CodeProject il codice del fascicolo, inserendo quindi i\r\n            caratteri separatori “//”, e di seguito la descrizione del sottofascicolo. Un esempio di stringa accettabile può essere “6.2-2014//SottoFasc1”.Per inserire il documento in un sottofascicolo non di primo livello bisogna inserire nel parametro tutto il percorso per arrivare alla cartella desiderata. Esempio “6.2-2014//SottoFasc1//SottoFasc2”.",
+        "operationId": "Documents_addDocInProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request:<br />\r\n            IdDocument (string): Obbligatorio. Id del documento.<br />\r\n            IdProject (string): Opzionale. Id del fascicolo<br />\r\n            CodeProject (string): Opzionale. Codice del fascicolo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddDocInProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocumentsInProject": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento dei documenti contenuti in un fascicolo.",
+        "description": "Metodo per il reperimento dei documenti contenuti in un fascicolo. Obbligatorio l’id del fascicolo oppure la coppia codice e id del titolario.<br />\r\n            L'oggetto request ha i seguenti parametri:<br />\r\n            CodeProject (string): Opzionale. Codice del fascicolo.<br />\r\n            ClassificationSchemeId (string): Opzionale. Id del titolario.<br />\r\n            PageNumber (string): Opzionale. Numero di pagina da visualizzare.<br />\r\n            ElementsInPage (string): Opzionale. Numero di elementi per pagina.<br />\r\n            IdProject (string): Opzionale. Id del fascicolo.",
+        "operationId": "Documents_getDocumentsInProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDocumentsInProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchDocumentsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/EditDocStateDiagram": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per modificare lo stato del diagramma associato ad un documento.",
+        "description": "Metodo per modificare lo stato del diagramma associato ad un documento. Obbligatorio un valore tra id del documento e segnatura.<br />\r\n            Il parametro stateOfDiagram deve essere popolato con la descrizione di uno stato successivo a quello attuale del documento. In caso contrario viene restituito errore.",
+        "operationId": "Documents_editDocStateDiagram",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request: <br />StateOfDiagram (string): Obbligatorio. Stato in cui avanzare il documento. <br />\r\n            IdDocument (string): Opzionale. Id del documento<br />\r\n            Signature (string): Opzionale. Segnatura del documento",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditDocStateDiagramRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetDocStateDiagram": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il prelievo dello stato del diagramma di un documento",
+        "description": "Metodo per il prelievo dello stato del diagramma di un documento. Solo un parametro obbligatorio tra idDocument e signature.<br />\r\n            Se al documento non è associato un diagramma di stato viene restituito errore.",
+        "operationId": "Documents_getDocumentStateDiagram",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idDocument",
+            "in": "query",
+            "description": "Id del documento",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Segnatura del documento",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetStateOfDiagramResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SendDocument": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la spedizione di un documento.",
+        "description": "Metodo per la spedizione di un documento verso i destinatari esterni del protocollo. Obbligatorio un valore tra id del documento e segnatura. <br />\r\n            Il metodo utilizza la mail di default del registro visibile al ruolo dell'utente.",
+        "operationId": "Documents_sendDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendDocRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SendDocumentAdvanced": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per la spedizione avazata di un documento.",
+        "description": "Metodo per la spedizione di un documento permettendo la scelta del registro, della mail dalla quale inviare e dei destinatari.<br />\r\n            Restituisce la lista degli esiti spedizione per ogni destinatario.<br />\r\n            L'oggetto request va popolato con i seguenti parametri: <br />\r\n            IdDocument (string): Opzionale. Id del documento da cancellare. E’ obbligatorio inserire uno tra idDocument e Signature. <br />\r\n            Signature (string): Opzionale. Segnatura del documento. E’ obbligatorio inserire uno tra idDocument e Signature. <br />\r\n            CodeRegister (string): Opzionale. Codice del registro dal quale si spedisce. E’ obbligatorio inserire uno tra CodeRegister e IdRegister. <br />\r\n            IdRegister (string): Opzionale. Id del registro dal quale si spedisce. E’ obbligatorio inserire uno tra CodeRegister e IdRegister. <br />\r\n            SenderMail (string): Opzionale. Mail dalla quale si spedisce: se omessa utilizza la mail default del registro. <br />\r\n            Recipients (Correspondent[]): Opzionale. Array dei corrispondenti da inserire come destinatari della spedizione. Se omesso spedisce a tutti i destinatari.",
+        "operationId": "Documents_sendDocumentAdvanced",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendDocAdvRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SendDocAdvResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetStampAndSignature": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Servizio per il reperimento dei dati di segnatura e timbro del documento",
+        "description": "Metodo per il reperimento dei dati di segnatura e timbro del documento. Solo un parametro obbligatorio tra idDocument e signature.<br />",
+        "operationId": "Documents_getStampAndSignature",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idDocument",
+            "in": "query",
+            "description": "Id del documento",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Segnatura del documento",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetStampResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProjectFilters": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio che restituisce la lista dei filtri applicabili alla ricerca dei fascicoli.",
+        "description": "Metodo che restituisce la lista dei filtri applicabili alla ricerca dei fascicoli.",
+        "operationId": "Projects_getDocumentFilters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFiltersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProject": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il reperimento dei dati di un fascicolo",
+        "description": "Servizio per il reperimento dei dati di un fascicolo dato un codice o l’id. Obbligatorio l’id del fascicolo oppure la coppia codice e id del titolario.",
+        "operationId": "Projects_getProject",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idProject",
+            "in": "query",
+            "description": "Id del fascicolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "codeProject",
+            "in": "query",
+            "description": "Codice del fascicolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "classificationSchemeId",
+            "in": "query",
+            "description": "Id del titolario",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetProjectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/CreateProject": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio che permette la creazione di un fascicolo.",
+        "description": "Metodo che permette la creazione di un fascicolo.<br />\r\n             L'oggetto request va popolato nei seguenti campi:<br />\r\n             CodeNodeClassification (string): Obbligatorio. Nodo del titolario nel quale creare il fascicolo. <br />\r\n            ClassificationScheme (string): Obbligatorio. Id del titolario oin cui creare il fascicolo. <br />\r\n            Description (string): Obbligatorio. Descrizione del fascicolo. <br />\r\n            Template (Template): Opzionale. Tipologia del fascicolo. <br />\r\n            Paper (Boolean): Opzionale. Indica se il fascicolo è cartaceo. <br />\r\n            CollocationDate (string): Opzionale. Indica la data di collocazione del fascicolo. <br />\r\n            PhysicsCollocation (string): Opzionale. Indica la collocazione fisica del fascicolo (inserire il system id). <br />\r\n            Private (Boolean): Opzionale. Se true indica che il fascicolo è privato. <br />\r\n            Note (Note): Opzionale. Nota del fascicolo.",
+        "operationId": "Projects_createProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetProjectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/EditProject": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per la modifica di un fascicolo",
+        "description": "Metodo per la modifica di un fascicolo. La richiesta è nella stessa forma di CreateProject. <br />\r\n            Essendo un metodo di modifica, si consiglia di passare in ingresso un fascicolo prelevato tramite GetProject",
+        "operationId": "Projects_editProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetProjectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SearchProjects": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio che permette la ricerca di fascicoli.",
+        "description": "Metodo per la ricerca dei fascicoli",
+        "operationId": "Projects_searchProjects",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request contenente un array di filtri, il numero della pagina ed il numero di elementi interno ad una pagina",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchProjectsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProjectTemplates": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il reperimento di tutte le tipologie di fascicoli.",
+        "description": "Metodo per il reperimento di tutte le tipologie di fascicoli visibili al ruolo dell'utente che esegue la richiesta.",
+        "operationId": "Projects_getProjectTemplates",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTemplatesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetTemplateProject": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il reperimento del dettaglio di una tipologia di fascicolo",
+        "description": "Servizio per il reperimento del dettaglio di una tipologia di fascicolo dato il nome o l’id. Obbligatorio un solo valore tra descrizione o id della tipologia.",
+        "operationId": "Projects_getTemplateProject",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "descriptionTemplate",
+            "in": "query",
+            "description": "Descrizione della tipologia",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idTemplate",
+            "in": "query",
+            "description": "Id della tipologia",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTemplateResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProjectsByDocument": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il reperimento dei fascicoli in cui è inserito un documento.",
+        "description": "Metodo per il reperimento dei fascicoli in cui è fascicolato un documento. Obbligatorio l’id o la segnatura del documento.",
+        "operationId": "Projects_getProjectsByDocument",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idDocument",
+            "in": "query",
+            "description": "Id del documento",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "Segnatura di protocollo del documento",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SearchProjectsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/EditPrjStateDiagram": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per modificare lo stato del diagramma associato ad un documento.",
+        "description": "Metodo per modificare lo stato del diagramma associato ad un fascicolo. Obbligatorio l’id del fascicolo oppure la coppia codice e id del titolario.<br />\r\n            Il parametro stateOfDiagram deve essere popolato con la descrizione di uno stato successivo a quello attuale del fascicolo. In caso contrario viene restituito errore.",
+        "operationId": "Projects_editPrjStateDiagram",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request: <br /> StateOfDiagram (string): Obbligatorio. Stato in cui avanzare il fascicolo.<br />\r\n            IdProject (string): Opzionale. Id del fascicolo<br />\r\n            CodeProject (string): Opzionale. Codice del fascicolo<br />\r\n            ClassificationSchemeId (string): Opzionale. Id del titolario",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditPrjStateDiagramRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProjectStateDiagram": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il prelievo dello stato del diagramma di un documento",
+        "description": "Metodo per il prelievo dello stato del diagramma di un fascicolo. Obbligatorio l’id del fascicolo oppure la coppia codice e id del titolario.<br />\r\n            Se al fascicolo non è associato un diagramma di stato viene restituito errore.",
+        "operationId": "Projects_getProjectStateDiagram",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idProject",
+            "in": "query",
+            "description": "Id del fascicolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "classificationSchemeId",
+            "in": "query",
+            "description": "Id del titolario",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "codeProject",
+            "in": "query",
+            "description": "Codice del fascicolo",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetStateOfDiagramResponse"
+            }
+          }
+        }
+      }
+    },
+    "/CreateFolder": {
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per la creazione di un sottofascicolo.",
+        "description": "Metodo per la creazione di un sottofascicolo. <br />\r\n            L'oggetto request va popolato nei seguenti campi:<br />\r\n            IdProject (string): Opzionale. Id del fascicolo nel quale si vuole creare il sottofascicolo. Uno e solo uno tra IdProject e CodeProject è un parametro obbligatorio. <br />\r\n            CodeProject (string): Opzionale. Codice del fascicolo nel quale si vuole creare il sottofascicolo. Uno e solo uno tra IdProject e CodeProject è un parametro obbligatorio. <br />\r\n            ClassificationSchemeId (string): Opzionale. Id del titolario. Diviene obbligatorio in caso di immissione di CodeProject. <br />\r\n            FolderDescription (string): Obbligatorio. Descrizione del sottofascicolo. <br />\r\n            IdParentFolder (string): Opzionale. Id del fascicolo/sottofascicolo padre. Necessario per la creazione di un sottofascicolo non di primo livello.",
+        "operationId": "Projects_createFolder",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateFolderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFolderResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetProjectFolders": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per il prelievo dei sottofascicoli all’interno di un fascicolo.",
+        "description": "Metodo per il prelievo dei sottofascicoli all'interno di un fascicolo.",
+        "operationId": "Projects_getProjectFolders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idProject",
+            "in": "query",
+            "description": "Id del fascicolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "classificationSchemeId",
+            "in": "query",
+            "description": "Id del titolario",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "codeProject",
+            "in": "query",
+            "description": "Codice del fascicolo",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetProjectFoldersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/OpenCloseProject": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Servizio per aprire o chiudere un fascicolo.",
+        "description": "Metodo per aprire o chiudere un fascicolo.<br />\r\n            Essendo un metodo di modifica, si consiglia di passare in ingresso un fascicolo prelevato tramite GetProject",
+        "operationId": "Projects_openCloseProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OpenCloseProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetProjectResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetRegisterOrRF": {
+      "get": {
+        "tags": [
+          "Registers"
+        ],
+        "summary": "Servizio per il reperimento del dettaglio di un registro/RF dato il codice del registro/RF o l’id.",
+        "description": "Metodo per il prelievo dei dettagli di un registro a partire dal suo codice o dall'id. Almeno uno dei 2 parametri è obbligatorio.",
+        "operationId": "Registers_getRegisterOrRFResponse",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "codeRegister",
+            "in": "query",
+            "description": "Codice del registro",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idRegister",
+            "in": "query",
+            "description": "Id del registro",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetRegisterOrRFResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetRegistersOrRF": {
+      "get": {
+        "tags": [
+          "Registers"
+        ],
+        "summary": "Servizio per il reperimento di tutti gli RF o i registri disponibili per un ruolo",
+        "description": "Metodo utilizzato per il prelievo del dettaglio dei registri o RF disponibili per un ruolo. Almeno un parametro tra codeRole e idRole è obbligatorio. I risultati possono essere filtrati con il parametro RefOrRF.",
+        "operationId": "Registers_getRegistersOrRFResponse",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "codeRole",
+            "in": "query",
+            "description": "Codice del ruolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idRole",
+            "in": "query",
+            "description": "Id del ruolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "RegOrRF",
+            "in": "query",
+            "description": "Permette di filtrare i risultati. Popolato con REG, restituisce i soli registri; con RF, i soli RF. Se altro valore oppure omesso, restituisce entrambi",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetRegistersOrRFResponse"
+            }
+          }
+        }
+      }
+    },
+    "/RouteRestRequest": {
+      "get": {
+        "tags": [
+          "RESTRouter"
+        ],
+        "summary": "Servizio di routing",
+        "description": "Metodo di routing. \r\n            Sono necessari gli header:<br />\r\n            ROUTED_ACTION: nome del metodo che si vuole invocare<br />\r\n            CODE_ADM: codice dell'amministrazione<br />\r\n            L'header APPLICATION_NAME viene automaticamente prelevato dal proxy e viene valorizzato con il CN del certificato con il quale è configurato il client<br />\r\n            L'header AuthToken è obbligatorio per tutti i metodi, tranne per quello di prelievo del token<br />\r\n            La richiesta da inserire è formattata secondo quella richiesta dal metodo inserito in ROUTED_ACTION<br />\r\n            La risposta sarà quella del metodo inserito in ROUTED_ACTION",
+        "operationId": "RESTRouter_RouteRestRequestGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "description": "Richiesta json formattata secondo il metodo desiderato",
+            "required": false,
+            "type": "object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RESTRouter"
+        ],
+        "summary": "Servizio di routing",
+        "description": "Metodo di routing. \r\n            Sono necessari gli header:<br />\r\n            ROUTED_ACTION: nome del metodo che si vuole invocare<br />\r\n            CODE_ADM: codice dell'amministrazione<br />\r\n            L'header APPLICATION_NAME viene automaticamente prelevato dal proxy e viene valorizzato con il CN del certificato con il quale è configurato il client<br />\r\n            L'header AuthToken è obbligatorio per tutti i metodi, tranne per quello di prelievo del token<br />\r\n            La richiesta da inserire è formattata secondo quella richiesta dal metodo inserito in ROUTED_ACTION<br />\r\n            La risposta sarà quella del metodo inserito in ROUTED_ACTION",
+        "operationId": "RESTRouter_RouteRestRequestPut",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "description": "Richiesta json formattata secondo il metodo desiderato",
+            "required": true,
+            "type": "object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "RESTRouter"
+        ],
+        "summary": "Servizio di routing",
+        "description": "Metodo di routing. \r\n            Sono necessari gli header:<br />\r\n            ROUTED_ACTION: nome del metodo che si vuole invocare<br />\r\n            CODE_ADM: codice dell'amministrazione<br />\r\n            L'header APPLICATION_NAME viene automaticamente prelevato dal proxy e viene valorizzato con il CN del certificato con il quale è configurato il client<br />\r\n            L'header AuthToken è obbligatorio per tutti i metodi, tranne per quello di prelievo del token<br />\r\n            La richiesta da inserire è formattata secondo quella richiesta dal metodo inserito in ROUTED_ACTION<br />\r\n            La risposta sarà quella del metodo inserito in ROUTED_ACTION",
+        "operationId": "RESTRouter_RouteRestRequestPost",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "description": "Richiesta json formattata secondo il metodo desiderato",
+            "required": true,
+            "type": "object"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/GetRole": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Servizio per il reperimento dei dettagli di un ruolo dato il codice del ruolo o l’id.",
+        "description": "Metodo per il prelievo dei dettagli di un ruolo dato il codice del ruolo o l’id. Almeno uno dei due parametri è obbligatorio. Restituisce il dettaglio del ruolo.",
+        "operationId": "Roles_getRole",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "codeRole",
+            "in": "query",
+            "description": "Codice del ruolo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idRole",
+            "in": "query",
+            "description": "Id del Ruolo",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetRoleResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetRoles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Servizio per il reperimento di tutti i ruoli disponibili ad un utente.",
+        "description": "Metodo per il reperimento di tutti i ruoli disponibili per un utente. Restituisce la lista dei ruoli dell'utente",
+        "operationId": "Roles_getRoles",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Username dell'utente di cui si vogliono conoscere i ruoli",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetRolesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetRolesForEnabledActions": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Servizio per il prelievo dei ruoli dato un utente ed una funzione richiesta.",
+        "description": "Metodo per il prelievo dei ruoli di un utente che hanno una determinata funzione. Restituisce la lista dei ruoli.",
+        "operationId": "Roles_getRolesForEnabledActions",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Username dell'utente di cui si vogliono conoscere i ruoli",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "codeFunction",
+            "in": "query",
+            "description": "Codice della funzione secondo la quale filtrare i ruoli",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetRolesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetUsersInRole": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "Servizio per il reperimento degli utenti in un ruolo.",
+        "description": "Metodo per il prelievo degli utenti presenti in un determinato ruolo, a partire dal codice del ruolo. Restituisce la lista degli utenti.",
+        "operationId": "Roles_getUsersInRole",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "codeRole",
+            "in": "query",
+            "description": "Codice del ruolo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetUsersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetInstanceSearchFilters": {
+      "get": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per ottenere la lista dei filtri per la ricerca delle istanze di firma.",
+        "description": "Metodo per ottenere la lista dei filtri utilizzabile nel metodo SearchSignProcessInstances.",
+        "operationId": "SignBook_getInstanceSearchFilters",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetFiltersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetSignatureProcess": {
+      "get": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per ottenere il dettaglio di un processo di firma",
+        "description": "Servizio per ottenere un processo di firma a partire dal sui Id.",
+        "operationId": "SignBook_getSignatureProcess",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idProcess",
+            "in": "query",
+            "description": "Id del processo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetSignatureProcessResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetSignatureProcesses": {
+      "get": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio che restituisce la lista dei processi",
+        "description": "Metodo che restituisce la lista dei processi o dei modelli di processo visibili e quindi utilizzabili dal ruolo.",
+        "operationId": "SignBook_getSignatureProcesses",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetSignatureProcessesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetSignProcessInstance": {
+      "get": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per ottenere una istanza dei processo di firma",
+        "description": "Servizio per ottenere una istanza dei processo a partire dal sui Id istanza.",
+        "operationId": "SignBook_getSignProcessInstance",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idProcessInstance",
+            "in": "query",
+            "description": "Id dell'istanza",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetSignProcessInstanceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/SearchSignProcessInstances": {
+      "post": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per la ricerca delle istanze di processo di firma",
+        "description": "Metodo per ricercare e quindi monitorare lo stato delle istanze di processi  di firma visibili ad un determinato ruolo, a seconda dei filtri inseriti.",
+        "operationId": "SignBook_searchSignProcessInstances",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Lista dei filtri con i quali ricercare le istanze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetSignProcessInstancesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/StartSignatureProcess": {
+      "post": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per inserire un documento in un processo di Libro Firma",
+        "description": "Servizio per inserire un documento in un processo di Libro Firma, avviando il processo stesso.\r\n            La request consiste nei seguenti parametri:<br /><br />\r\n            IdDocument (string): Obbligatorio. Id del documento che si desidera utilizzare per inserirlo nel processo del Libro firma. (id documento è ottenibile con i servizi SearchDocument o in risposta ai i servizi come CreateDocument) <br />\r\n            EndGeneratesNote (boolean): Opzionale.  Se True, Abilita la ricezione delle notifiche al ruolo passato in input con CodeRoleLogin di conclusione processo.<br />\r\n            InterruptionGeneratesNote (boolean): Opzionale. Se True, abilita la ricezione delle notifiche al ruolo passato in input  come CodeRoleLogin di interruzione del processo.<br />\r\n            Note (string): Opzionale. Permette di aggiungere delle note al processo che saranno poi visibili nel libro firma.<br />\r\n            SignatureProcess (SignatureProcess): Processo di Libro firma in cui inserire il documento <br />\r\n            EndGeneratesNote (boolean): Opzionale.  Se True, Abilita la ricezione delle notifiche al ruolo passato in input con CodeRoleLogin di conclusione processo.<br />\r\n            InterruptionGeneratesNote (boolean): Opzionale. Se True, abilita la ricezione delle notifiche al ruolo passato in input  come CodeRoleLogin di interruzione del processo.<br />\r\n            Note (string): Opzionale. Permette di aggiungere delle note al processo che saranno poi visibili nel libro firma.<br /><br />\r\n            L'oggetto SignatureProcess è strutturato come segue:<br /><br />\r\n            AuthorRoleId (string): Id ruolo del ruolo creatore  del Libro Firma.<br />\r\n            AuthorRoleId (string): Id people del utente creatore del Libro Firma.<br />\r\n            IdProcess (string): Id univoco del processo di firma<br />\r\n            IsProcessModel (boolean): Se true allora si tratta di un modello di processo<br />\r\n            Name (string): Nome del processo<br />\r\n            SignatureStep (SignatureStep[]): Passi del processo<br /><br />\r\n            L'oggetto SignatureStep è strutturato come segue:<br /><br />\r\n            IdProcess (string):  Id univoco del processo di firma<br />\r\n            IdStep (string): Id univoco del passo del processo di firma<br />\r\n            InvolvedRole (Role): Ruolo coinvolto nel passo, Ruolo che deve effettuare il passo<br />\r\n            InvolvedUser (User): Utente coinvolto nel passo, Utente che deve effettuare il passo<br />\r\n            IsModel (boolean): Indica se è un passo di modello<br />\r\n            SequenceNumber (integer): Numero di sequenza del passo<br />\r\n            Note (string): Note del passo<br />",
+        "operationId": "SignBook_startSignatureProcess",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StartSignatureProcessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/InterruptSignatureProcess": {
+      "post": {
+        "tags": [
+          "SignBook"
+        ],
+        "summary": "Servizio per interrompere una istanza di processo di firma",
+        "description": "Metodo per interrompere una istanza dei processo a partire dal sui Id istanza.<br />\r\n            Nella richiesta è possibile inserire una nota di interruzione.",
+        "operationId": "SignBook_interruptSignatureProcess",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InterruptSignatureProcessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ExecuteTransmDocModel": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per la trasmissione di un documento tramite un modello di trasmissione",
+        "description": "Metodo per la trasmissione di un documento tramite un modello di trasmissione.<br />\r\n            Restituisce un messaggio di avvenuta trasmissione in caso di successo.",
+        "operationId": "Transmissions_executeTransmDocModel",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request da popolare nei parametri:<br />\r\n            IdModel (string): Obbligatorio. Id del modello di trasmissione<br />\r\n            DocumentId (string): Obbligatorio. Id del documento da trasmettere.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransmDocModelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransmissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ExecuteTransmPrjModel": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per la trasmissione di un fascicolo tramite un modello di trasmissione",
+        "description": "Metodo per la trasmissione di un fascicolo tramite un modello di trasmissione.<br />\r\n            Restituisce un messaggio di avvenuta trasmissione in caso di successo.",
+        "operationId": "Transmissions_executeTransmPrjModel",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request da popolare nei parametri:<br />\r\n            IdModel (string): Obbligatorio. Id del modello di trasmissione<br />\r\n            IdProject (string): Obbligatorio. Id del fascicolo da trasmettere.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransmPrjModelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransmissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ExecuteTransmissionDocument": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per la trasmissione singola di un documento",
+        "description": "Metodo per la trasmissione singola di un documento senza l’utilizzo di un modello di trasmissione.<br />\r\n            La richiesta va popolata nei campi:\r\n            IdDocument (String): Obbligatorio. Id del documento che si desidera trasmettere.<br />\r\n            Receiver (Correspondent): Obbligatorio. Destinatario della trasmissione. E’ obbligatorio l’inserimento della sua proprietà Id o Code.<br />\r\n            TransmissionReason (String): Obbligatorio. Codice della ragione di trasmissione con la quale si invia il documento.<br />\r\n            CodeReg (String): Opzionale. Codice del registro. <br />\r\n            Notify (Boolean): Opzionale. Se true, notifica gli utenti della trasmissione. Se false o non inserito, non invia le notifiche.<br />\r\n            TransmissionType (String): Opzionale. Definisce il tipo di trasmissione: Se “T”, la trasmissione è di tipo “Tutti”. Qualsiasi altro valore (compreso nullo) la trasmissione è di tipo “Uno”",
+        "operationId": "Transmissions_executeTransmissionDocument",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransmissionDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransmissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/ExecuteTransmissionProject": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per la trasmissione singola di un fascicolo",
+        "description": "Metodo per la trasmissione singola di un fascicolo senza l’utilizzo di un modello di trasmissione.<br />\r\n            La richiesta va popolata nei campi:\r\n            IdProject (String): Obbligatorio. Id del fascicolo che si desidera trasmettere.<br />\r\n            Receiver (Correspondent): Obbligatorio. Destinatario della trasmissione. E’ obbligatorio l’inserimento della sua proprietà Id o Code.<br />\r\n            TransmissionReason (String): Obbligatorio. Codice della ragione di trasmissione con la quale si invia il documento.<br />\r\n            CodeReg (String): Opzionale. Codice del registro. <br />\r\n            Notify (Boolean): Opzionale. Se true, notifica gli utenti della trasmissione. Se false o non inserito, non invia le notifiche.<br />\r\n            TransmissionType (String): Opzionale. Definisce il tipo di trasmissione: Se “T”, la trasmissione è di tipo “Tutti”. Qualsiasi altro valore (compreso nullo) la trasmissione è di tipo “Uno”",
+        "operationId": "Transmissions_executeTransmissionProject",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecuteTransmissionProjectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransmissionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetTransmissionModel": {
+      "get": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per il reperimento del dettaglio di un modello di trasmissione",
+        "description": "Metodo per il reperimento del dettaglio di un modello di trasmissione dato il codice o l’id del modello. Obbligatorio almeno un valore tra codice e id.",
+        "operationId": "Transmissions_getTransmissionModel",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "idModel",
+            "in": "query",
+            "description": "Id del modello di trasmissione",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "codeModel",
+            "in": "query",
+            "description": "Codice del modello di trasmissione",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTransmModelResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GetTransmissionModels": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per il reperimento di tutti i modelli di trasmissione per documenti o fascicoli.",
+        "description": "Metodo per il reperimento di tutti i modelli di trasmissione per documenti o fascicoli.<br />\r\n           La richiesta deve essere popolata nei campi:<br />\r\n           Type (string): Obbligatorio. Inserire “D” per i modelli dei documenti, “F” per i modelli dei fascicoli.<br />\r\n           Registers (Register[]): Obbligatorio. Array di oggetti Register. Obbligatorio almeno un codice di un registro.",
+        "operationId": "Transmissions_getTransmissionModels",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto Request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetTransmModelsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetTransmModelsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/GiveUpRights": {
+      "post": {
+        "tags": [
+          "Transmissions"
+        ],
+        "summary": "Servizio per la cessione del diritto di scrittura/lettura su un oggetto",
+        "description": "Metodo per la cessione del diritto di scrittura/lettura su un documento o fascicolo.",
+        "operationId": "Transmissions_giveUpRights",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Oggetto request: <br /> \r\n            RightToKeep (string): Obbligatorio. Diritto da mantenere. Può avere 3 valori: WRITE, READ e NONE. <br />\r\n            IdObject (string): Obbligatorio. Id dell’oggetto sul quale si vogliono cedere i diritti",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GiveUpRightsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetCorrespondentResponse": {
+      "type": "object",
+      "properties": {
+        "Correspondent": {
+          "$ref": "#/definitions/Correspondent"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Correspondent": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del corrispondente",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del corrispondente",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Codice rubrica",
+          "type": "string"
+        },
+        "Address": {
+          "description": "Indirizzo",
+          "type": "string"
+        },
+        "Cap": {
+          "description": "Cap",
+          "type": "string"
+        },
+        "City": {
+          "description": "Citta",
+          "type": "string"
+        },
+        "Province": {
+          "description": "Provincia",
+          "type": "string"
+        },
+        "Location": {
+          "description": "Località",
+          "type": "string"
+        },
+        "Nation": {
+          "description": "Nazione",
+          "type": "string"
+        },
+        "PhoneNumber": {
+          "description": "Telefono",
+          "type": "string"
+        },
+        "PhoneNumber2": {
+          "description": "Telefono",
+          "type": "string"
+        },
+        "Fax": {
+          "description": "Fax",
+          "type": "string"
+        },
+        "NationalIdentificationNumber": {
+          "description": "Codice Fiscale",
+          "type": "string"
+        },
+        "VatNumber": {
+          "description": "Partita.iVA",
+          "type": "string"
+        },
+        "Email": {
+          "description": "Email",
+          "type": "string"
+        },
+        "OtherEmails": {
+          "description": "Altre email",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AOOCode": {
+          "description": "Codice AOO",
+          "type": "string"
+        },
+        "AdmCode": {
+          "description": "Codice amministrazione",
+          "type": "string"
+        },
+        "Note": {
+          "description": "Note",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Tipo di corrispondente: I Interno / E Esterno",
+          "type": "string"
+        },
+        "CodeRegisterOrRF": {
+          "description": "Codice del registro o dell'RF",
+          "type": "string"
+        },
+        "CorrespondentType": {
+          "description": "Tipo del corrispondente: U UO/R Roles/P People/O Occasional/L List/F RF",
+          "type": "string"
+        },
+        "PreferredChannel": {
+          "description": "Canale preferenziale",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Nome",
+          "type": "string"
+        },
+        "Surname": {
+          "description": "Cognome",
+          "type": "string"
+        },
+        "IsCommonAddress": {
+          "description": "Indica se il corrispondente è memorizzato nella rubrica comune",
+          "type": "boolean"
+        }
+      }
+    },
+    "AddCorrespondentRequest": {
+      "type": "object",
+      "properties": {
+        "Correspondent": {
+          "$ref": "#/definitions/Correspondent"
+        }
+      }
+    },
+    "GetFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "Filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "Filter": {
+      "description": "Filtro di ricerca",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "Nome del filtro",
+          "type": "string"
+        },
+        "Value": {
+          "description": "Valore del filtro",
+          "type": "string"
+        },
+        "Template": {
+          "$ref": "#/definitions/Template",
+          "description": "Nel caso di template popolare il template con i campi di interesse"
+        },
+        "Description": {
+          "description": "Descrizione del filtro",
+          "type": "string"
+        },
+        "Type": {
+          "format": "int32",
+          "description": "Tipo filtro",
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del template",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Nome del template",
+          "type": "string"
+        },
+        "Fields": {
+          "description": "Campi del template",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          }
+        },
+        "StateDiagram": {
+          "$ref": "#/definitions/StateDiagram",
+          "description": "Diagramma di stato associato"
+        },
+        "Type": {
+          "description": "D per documenti F per fascicoli",
+          "type": "string"
+        }
+      }
+    },
+    "Field": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del campo profilato",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Descrizione del campo profilato",
+          "type": "string"
+        },
+        "Required": {
+          "description": "Indica se il campo è obbligatorio oppure no",
+          "type": "boolean"
+        },
+        "Value": {
+          "description": "Valore del campo profilato",
+          "type": "string"
+        },
+        "MultipleChoice": {
+          "description": "Valori multiplo nel caso delle caselle di selezione",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Type": {
+          "description": "Tipologia del campo profilato",
+          "type": "string"
+        },
+        "CounterToTrigger": {
+          "description": "Se true indica al contatore che deve scattare",
+          "type": "boolean"
+        },
+        "CodeRegisterOrRF": {
+          "description": "Id del registro o dell'RF del contatore da far scattare",
+          "type": "string"
+        },
+        "Rights": {
+          "description": "Diritti che il ruolo dell'utente connesso ha sul campo.",
+          "type": "string"
+        }
+      }
+    },
+    "StateDiagram": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del diagramma",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del diagramma",
+          "type": "string"
+        },
+        "StateOfDiagram": {
+          "description": "Stati del diagramma",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StateOfDiagram"
+          }
+        }
+      }
+    },
+    "StateOfDiagram": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "Id dello stato del diagramma",
+          "type": "string"
+        },
+        "DiagramId": {
+          "description": "Id del diagramma dello stato",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione dello stato del diagramma",
+          "type": "string"
+        },
+        "InitialState": {
+          "description": "Con valore true se è uno stato iniziale",
+          "type": "boolean"
+        },
+        "FinaleState": {
+          "description": "Con valore true se è uno stato finale",
+          "type": "boolean"
+        }
+      }
+    },
+    "SearchFiltersOnlyRequest": {
+      "type": "object",
+      "properties": {
+        "Filters": {
+          "description": "Filtri di ricerca",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        }
+      }
+    },
+    "SearchCorrespondentsResponse": {
+      "type": "object",
+      "properties": {
+        "Correspondents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Correspondent"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetUsersResponse": {
+      "type": "object",
+      "properties": {
+        "Users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "Id dell'utente (idPeople)",
+          "type": "string"
+        },
+        "UserId": {
+          "description": "Codice dell'utente",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione con nome e cognome",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Nome",
+          "type": "string"
+        },
+        "Surname": {
+          "description": "Cognome",
+          "type": "string"
+        },
+        "NationalIdentificationNumber": {
+          "description": "Codice fiscale/p.iva",
+          "type": "string"
+        }
+      }
+    },
+    "AuthenticateRequest": {
+      "type": "object",
+      "properties": {
+        "Username": {
+          "type": "string"
+        },
+        "CodeRole": {
+          "type": "string"
+        },
+        "CodeApplication": {
+          "type": "string"
+        },
+        "CodeAdm": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthenticateResponse": {
+      "type": "object",
+      "properties": {
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "Token": {
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "GetClassificationSchemeResponse": {
+      "type": "object",
+      "properties": {
+        "ClassificationScheme": {
+          "$ref": "#/definitions/ClassificationScheme"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "ClassificationScheme": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del titolario",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del titolario",
+          "type": "string"
+        },
+        "Active": {
+          "description": "Indica se il titolario è attivo",
+          "type": "boolean"
+        }
+      }
+    },
+    "GetAllClassificationSchemesResponse": {
+      "type": "object",
+      "properties": {
+        "ClassificationSchemes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationScheme"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "description": "Id del documento",
+          "type": "string"
+        },
+        "Signature": {
+          "description": "Segnatura del documento",
+          "type": "string"
+        },
+        "GetFile": {
+          "description": "Se true oltre ai metadati restituisce anche il contenuto del file principale e allegati",
+          "type": "boolean"
+        },
+        "GetFileWithSignature": {
+          "description": "Se pari a uno, restituisce il file con l'estensione della firma (p7m)",
+          "type": "string"
+        }
+      }
+    },
+    "GetDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "Document": {
+          "$ref": "#/definitions/Document"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del documento",
+          "type": "string"
+        },
+        "DocNumber": {
+          "description": "Docnumber del documento",
+          "type": "string"
+        },
+        "Object": {
+          "description": "Valore dell'oggetto del documento",
+          "type": "string"
+        },
+        "CreationDate": {
+          "description": "Data di creazione del documento",
+          "type": "string"
+        },
+        "DocumentType": {
+          "description": "Tipo del documento A/P/I/G",
+          "type": "string"
+        },
+        "PrivateDocument": {
+          "description": "Indica se il documento è privato",
+          "type": "boolean"
+        },
+        "PersonalDocument": {
+          "description": "Indica se il documento è personale",
+          "type": "boolean"
+        },
+        "IsAttachments": {
+          "description": "Indica se il documento è un allegato",
+          "type": "boolean"
+        },
+        "Predisposed": {
+          "description": "Indica se il documento è un predispoto",
+          "type": "boolean"
+        },
+        "Signature": {
+          "description": "Segnatura del protocollo",
+          "type": "string"
+        },
+        "Annulled": {
+          "description": "Indica se il protocollo è stato annullato",
+          "type": "boolean"
+        },
+        "MeansOfSending": {
+          "description": "Indica la descrizione del mezzo di spedizione",
+          "type": "string"
+        },
+        "InBasket": {
+          "description": "Indica se il documento è nel cestino",
+          "type": "boolean"
+        },
+        "ProtocolDate": {
+          "description": "Indica la data di protocollazione",
+          "type": "string"
+        },
+        "ProtocolNumber": {
+          "type": "string"
+        },
+        "ProtocolYear": {
+          "type": "string"
+        },
+        "ConsolidationState": {
+          "description": "Indica, se il documento è consolidato, lo stato",
+          "type": "string"
+        },
+        "ProtocolSender": {
+          "description": "Indica il protocollo mittente nel caso di un protocollo in arrivo",
+          "type": "string"
+        },
+        "DataProtocolSender": {
+          "description": "Indica la data del protocollo mittente",
+          "type": "string"
+        },
+        "ArrivalDate": {
+          "description": "Indica la data di arrivo nel caso di un protocollo in arrivo",
+          "type": "string"
+        },
+        "Sender": {
+          "$ref": "#/definitions/Correspondent",
+          "description": "Mittente nel caso di protocollo"
+        },
+        "Recipients": {
+          "description": "Destinatari del protocollo",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Correspondent"
+          }
+        },
+        "RecipientsCC": {
+          "description": "Destinatari in conoscenza",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Correspondent"
+          }
+        },
+        "MultipleSenders": {
+          "description": "Mittenti mnultipli",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Correspondent"
+          }
+        },
+        "Template": {
+          "$ref": "#/definitions/Template",
+          "description": "Template associato al documento"
+        },
+        "Note": {
+          "description": "Note del documentos",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          }
+        },
+        "MainDocument": {
+          "$ref": "#/definitions/MainDocument",
+          "description": "Documento principale"
+        },
+        "Attachments": {
+          "description": "Allegati del documento",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MainDocument"
+          }
+        },
+        "Register": {
+          "$ref": "#/definitions/Register",
+          "description": "Nel caso di protocollo registro in cui è protocollato"
+        },
+        "IdParent": {
+          "description": "Nel caso il documento sia un allegato è l'id del documento al quale è associato l'allegato",
+          "type": "string"
+        },
+        "ParentDocument": {
+          "$ref": "#/definitions/LinkedDocument"
+        },
+        "LinkedDocuments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedDocument"
+          }
+        }
+      }
+    },
+    "Note": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id della nota",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione della nota",
+          "type": "string"
+        },
+        "User": {
+          "$ref": "#/definitions/User",
+          "description": "Utente proprietario della nota"
+        }
+      }
+    },
+    "MainDocument": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del documento",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del file",
+          "type": "string"
+        },
+        "Content": {
+          "format": "byte",
+          "description": "Contenuto del file",
+          "type": "string"
+        },
+        "MimeType": {
+          "description": "Mime del file",
+          "type": "string"
+        },
+        "VersionId": {
+          "description": "Id della versione del file",
+          "type": "string"
+        },
+        "Name": {
+          "description": "Nome del file",
+          "type": "string"
+        }
+      }
+    },
+    "Register": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "Id del registro",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Codice del registro",
+          "type": "string"
+        },
+        "IsRF": {
+          "description": "Indica del il registro è un rf",
+          "type": "boolean"
+        },
+        "State": {
+          "description": "Indica lo stato del registro chiuso/aperto/giallo",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Indica la descrizione del registro/rf",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedDocument": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        },
+        "Object": {
+          "type": "string"
+        },
+        "DocumentType": {
+          "type": "string"
+        },
+        "LinkType": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "CodeRegister": {
+          "description": "Nel caso di protocollo specificare il registro",
+          "type": "string"
+        },
+        "Document": {
+          "$ref": "#/definitions/Document",
+          "description": "Documento che si vuole creare"
+        },
+        "CodeRF": {
+          "description": "Codice dell'RF in cui si vuole protocollare (opzionale)",
+          "type": "string"
+        }
+      }
+    },
+    "CreateDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "Document": {
+          "$ref": "#/definitions/Document"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateDocAndAddInPrjRequest": {
+      "type": "object",
+      "properties": {
+        "CodeRegister": {
+          "description": "Nel caso di protocollo specificare il registro",
+          "type": "string"
+        },
+        "Document": {
+          "$ref": "#/definitions/Document",
+          "description": "Documento che si vuole creare"
+        },
+        "CodeRF": {
+          "description": "Codice dell'RF in cui si vuole protocollare (opzionale)",
+          "type": "string"
+        },
+        "CodeProject": {
+          "description": "Codice del fascicolo nel quale fascicolare il documento, il codice prende soltanto i fascicoli nei titolari attivi",
+          "type": "string"
+        },
+        "IdProject": {
+          "description": "Id del fascicolo nel quale fascicolare il documento",
+          "type": "string"
+        },
+        "ClassificationSchemeId": {
+          "description": "Id del titolario",
+          "type": "string"
+        }
+      }
+    },
+    "UploadFileToDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "description": "DocNumber del documento a cui associare il documento o una nuova versione",
+          "type": "string"
+        },
+        "File": {
+          "$ref": "#/definitions/MainDocument",
+          "description": "File da acquisire"
+        },
+        "CreateAttachment": {
+          "description": "Se true indica la creazione di un nuovo allegato per il documento",
+          "type": "boolean"
+        },
+        "Description": {
+          "description": "Descrizione in caso di nuovo allegato",
+          "type": "string"
+        },
+        "CovertToPDFA": {
+          "description": "Se true converte il file in pdf/a",
+          "type": "boolean"
+        },
+        "HashFile": {
+          "description": "Hash del file passato nell'attributo Domain.File File",
+          "type": "string"
+        },
+        "AttachmentType": {
+          "description": "Tipo di Attachment Esterno=E ; Utente=U; se null o Empy  = U",
+          "type": "string"
+        }
+      }
+    },
+    "UploadFileToDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "ResultMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "GetFileDocumentByIdResponse": {
+      "type": "object",
+      "properties": {
+        "File": {
+          "$ref": "#/definitions/MainDocument"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolPredisposedRequest": {
+      "type": "object",
+      "properties": {
+        "CodeRegister": {
+          "description": "Nel caso di protocollo specificare il registro",
+          "type": "string"
+        },
+        "CodeRF": {
+          "description": "Codice dell'RF in cui si vuole protocollare (opzionale)",
+          "type": "string"
+        },
+        "IdDocument": {
+          "description": "Documento che si vuole creare",
+          "type": "string"
+        }
+      }
+    },
+    "SearchRequest": {
+      "type": "object",
+      "properties": {
+        "Filters": {
+          "description": "Filtri di ricerca",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "PageNumber": {
+          "format": "int32",
+          "description": "Pagina che si desidera visualizzare",
+          "type": "integer"
+        },
+        "ElementsInPage": {
+          "format": "int32",
+          "description": "Quanti elementi sono presenti nella pagina se la ricerca è paginata",
+          "type": "integer"
+        }
+      }
+    },
+    "SearchDocumentsResponse": {
+      "type": "object",
+      "properties": {
+        "Documents": {
+          "description": "Documenti cercati",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "TotalDocumentsNumber": {
+          "format": "int32",
+          "description": "Numero totale dei documenti trovati",
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetDocAccessRightsResponse": {
+      "type": "object",
+      "properties": {
+        "AccessRights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectAccessRight"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "ObjectAccessRight": {
+      "type": "object",
+      "properties": {
+        "IdObject": {
+          "type": "string"
+        },
+        "AccessRights": {
+          "type": "string"
+        },
+        "AccessRightsType": {
+          "type": "string"
+        },
+        "SubjectDescription": {
+          "type": "string"
+        },
+        "SubjectCode": {
+          "type": "string"
+        },
+        "SubjectType": {
+          "type": "string"
+        },
+        "SubjectId": {
+          "type": "string"
+        },
+        "AccessDate": {
+          "type": "string"
+        },
+        "Note": {
+          "type": "string"
+        }
+      }
+    },
+    "GetDocumentEventsResponse": {
+      "type": "object",
+      "properties": {
+        "Events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogEvent"
+          }
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "LogEvent": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "ActionDate": {
+          "type": "string"
+        },
+        "OperatorUsername": {
+          "type": "string"
+        },
+        "OperatorPeopleID": {
+          "type": "string"
+        },
+        "OperatorGroupID": {
+          "type": "string"
+        },
+        "AdministrationId": {
+          "type": "string"
+        },
+        "ObjectDescription": {
+          "type": "string"
+        },
+        "ActionCode": {
+          "type": "string"
+        },
+        "OperationExecuted": {
+          "type": "string"
+        },
+        "OperatorDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "GetTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "Template": {
+          "$ref": "#/definitions/Template"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetTemplatesResponse": {
+      "type": "object",
+      "properties": {
+        "Templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "AddDocInProjectRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "type": "string"
+        },
+        "IdProject": {
+          "type": "string"
+        },
+        "CodeProject": {
+          "type": "string"
+        }
+      }
+    },
+    "MessageResponse": {
+      "type": "object",
+      "properties": {
+        "ResultMessage": {
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetDocumentsInProjectRequest": {
+      "type": "object",
+      "properties": {
+        "CodeProject": {
+          "description": "Codice del fascicolo",
+          "type": "string"
+        },
+        "ClassificationSchemeId": {
+          "description": "Id del titolario",
+          "type": "string"
+        },
+        "PageNumber": {
+          "format": "int32",
+          "description": "Pagina che si desidera visualizzare",
+          "type": "integer"
+        },
+        "ElementsInPage": {
+          "format": "int32",
+          "description": "Quanti elementi sono presenti nella pagina se la ricerca è paginata",
+          "type": "integer"
+        },
+        "IdProject": {
+          "description": "System id del fascicolo",
+          "type": "string"
+        }
+      }
+    },
+    "EditDocStateDiagramRequest": {
+      "type": "object",
+      "properties": {
+        "StateOfDiagram": {
+          "type": "string"
+        },
+        "IdDocument": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        }
+      }
+    },
+    "GetStateOfDiagramResponse": {
+      "type": "object",
+      "properties": {
+        "StateOfDiagram": {
+          "$ref": "#/definitions/StateOfDiagram"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "SendDocRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        }
+      }
+    },
+    "SendDocAdvRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        },
+        "IdRegister": {
+          "type": "string"
+        },
+        "CodeRegister": {
+          "type": "string"
+        },
+        "SenderMail": {
+          "type": "string"
+        },
+        "Recipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Correspondent"
+          }
+        }
+      }
+    },
+    "SendDocAdvResponse": {
+      "type": "object",
+      "properties": {
+        "ResultMessage": {
+          "type": "string"
+        },
+        "SendingResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SendingResult"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "SendingResult": {
+      "type": "object",
+      "properties": {
+        "CorrespondentId": {
+          "type": "string"
+        },
+        "CorrespondentDescription": {
+          "type": "string"
+        },
+        "Mail": {
+          "type": "string"
+        },
+        "PrefChannel": {
+          "type": "string"
+        },
+        "SendResult": {
+          "type": "string"
+        }
+      }
+    },
+    "GetStampResponse": {
+      "type": "object",
+      "properties": {
+        "Stamp": {
+          "$ref": "#/definitions/Stamp"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Stamp": {
+      "type": "object",
+      "properties": {
+        "StampValue": {
+          "type": "string"
+        },
+        "SignatureValue": {
+          "description": "Segnatura del protocollo",
+          "type": "string"
+        },
+        "CodeAdministration": {
+          "description": "Codice Amministrazione",
+          "type": "string"
+        },
+        "CodeRegister": {
+          "description": "Codice Registro",
+          "type": "string"
+        },
+        "CodeUO": {
+          "description": "Codice Unità Organizzativa",
+          "type": "string"
+        },
+        "Year": {
+          "description": "Anno del protocollo",
+          "type": "string"
+        },
+        "DataProtocol": {
+          "description": "Data protocollazione",
+          "type": "string"
+        },
+        "TimeProtocol": {
+          "description": "Ora di protocollazione",
+          "type": "string"
+        },
+        "TypeProtocol": {
+          "description": "Tipo di protocollo",
+          "type": "string"
+        },
+        "NumberProtocol": {
+          "description": "Numero di protocollo",
+          "type": "string"
+        },
+        "CodeRf": {
+          "description": "Codice dell'RF",
+          "type": "string"
+        },
+        "NumberAtthachements": {
+          "description": "Numero allegati",
+          "type": "string"
+        },
+        "Classifications": {
+          "description": "Classificazioni",
+          "type": "string"
+        },
+        "DocNumber": {
+          "description": "DocNumber",
+          "type": "string"
+        }
+      }
+    },
+    "GetProjectResponse": {
+      "type": "object",
+      "properties": {
+        "Project": {
+          "$ref": "#/definitions/Project"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del fascicolo",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Codice del fascicolo",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del fascicolo",
+          "type": "string"
+        },
+        "Private": {
+          "description": "Indica se il fascicolo è privato",
+          "type": "boolean"
+        },
+        "Paper": {
+          "description": "Indica se il fascicolo è cartaceo",
+          "type": "boolean"
+        },
+        "CollocationDate": {
+          "description": "Indica la data di collocazione",
+          "type": "string"
+        },
+        "PhysicsCollocation": {
+          "description": "Indica la collocazione fisica del fascicolo",
+          "type": "string"
+        },
+        "CreationDate": {
+          "description": "Indica la data di creazione del fascicolo",
+          "type": "string"
+        },
+        "OpeningDate": {
+          "description": "Indica la data di apertura del fascicolo",
+          "type": "string"
+        },
+        "ClosureDate": {
+          "description": "Indica la data di chiusura",
+          "type": "string"
+        },
+        "Open": {
+          "description": "Indica se il fascicolo è aperto",
+          "type": "boolean"
+        },
+        "IdParent": {
+          "description": "Id del fascicolo padre",
+          "type": "string"
+        },
+        "ClassificationScheme": {
+          "$ref": "#/definitions/ClassificationScheme",
+          "description": "Titolario in cui è classificato il fascicolo"
+        },
+        "Template": {
+          "$ref": "#/definitions/Template",
+          "description": "Template del fascicolo"
+        },
+        "Note": {
+          "description": "Note del fascicolo",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          }
+        },
+        "Type": {
+          "description": "Tipo del documento G Generale P Procedimentale",
+          "type": "string"
+        },
+        "Number": {
+          "description": "Numero del fascicolo",
+          "type": "string"
+        },
+        "Controlled": {
+          "description": "Indica se il fascicolo è controllato",
+          "type": "boolean"
+        },
+        "CodeNodeClassification": {
+          "description": "Codice del nodo generale in cui è presente il fascicolo",
+          "type": "string"
+        },
+        "Register": {
+          "$ref": "#/definitions/Register",
+          "description": "Registro"
+        }
+      }
+    },
+    "CreateProjectRequest": {
+      "type": "object",
+      "properties": {
+        "Project": {
+          "$ref": "#/definitions/Project"
+        }
+      }
+    },
+    "SearchProjectsResponse": {
+      "type": "object",
+      "properties": {
+        "Projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Project"
+          }
+        },
+        "TotalProjectsNumber": {
+          "format": "int32",
+          "description": "Numero totale dei fascicoli trovati",
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "EditPrjStateDiagramRequest": {
+      "type": "object",
+      "properties": {
+        "StateOfDiagram": {
+          "type": "string"
+        },
+        "IdProject": {
+          "type": "string"
+        },
+        "ClassificationSchemeId": {
+          "type": "string"
+        },
+        "CodeProject": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateFolderRequest": {
+      "type": "object",
+      "properties": {
+        "IdProject": {
+          "description": "Id del fascicolo di provenienza",
+          "type": "string"
+        },
+        "ClassificationSchemeId": {
+          "description": "Id del titolario",
+          "type": "string"
+        },
+        "CodeProject": {
+          "description": "Codice del fascicolo",
+          "type": "string"
+        },
+        "IdParentFolder": {
+          "description": "Id della cartella parent. Se omesso inserisce come sottofascicolo del fascicolo principale.\r\nAltrimenti della cartella indicata.",
+          "type": "string"
+        },
+        "FolderDescription": {
+          "description": "Descrizione della sottocartella",
+          "type": "string"
+        }
+      }
+    },
+    "GetFolderResponse": {
+      "type": "object",
+      "properties": {
+        "Folder": {
+          "$ref": "#/definitions/Folder"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Folder": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "IdParent": {
+          "type": "string"
+        },
+        "IdProject": {
+          "type": "string"
+        },
+        "CreationDate": {
+          "type": "string"
+        }
+      }
+    },
+    "GetProjectFoldersResponse": {
+      "type": "object",
+      "properties": {
+        "IdProject": {
+          "type": "string"
+        },
+        "ProjectDescription": {
+          "type": "string"
+        },
+        "Folders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Folder"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "OpenCloseProjectRequest": {
+      "type": "object",
+      "properties": {
+        "IdProject": {
+          "description": "Id del fascicolo di provenienza",
+          "type": "string"
+        },
+        "ClassificationSchemeId": {
+          "description": "Id del titolario",
+          "type": "string"
+        },
+        "CodeProject": {
+          "description": "Codice del fascicolo",
+          "type": "string"
+        },
+        "Action": {
+          "description": "Codice del fascicolo",
+          "type": "string"
+        }
+      }
+    },
+    "GetRegisterOrRFResponse": {
+      "type": "object",
+      "properties": {
+        "Register": {
+          "$ref": "#/definitions/Register"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetRegistersOrRFResponse": {
+      "type": "object",
+      "properties": {
+        "Registers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Register"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetRoleResponse": {
+      "type": "object",
+      "properties": {
+        "Role": {
+          "$ref": "#/definitions/Role"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "System id del ruolo (id gruppo no id corr globali)",
+          "type": "string"
+        },
+        "Code": {
+          "description": "Codice del ruolo",
+          "type": "string"
+        },
+        "Description": {
+          "description": "Descrizione del ruolo",
+          "type": "string"
+        },
+        "Registers": {
+          "description": "Registri associati al ruolo",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Register"
+          }
+        }
+      }
+    },
+    "GetRolesResponse": {
+      "type": "object",
+      "properties": {
+        "Roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetSignatureProcessResponse": {
+      "type": "object",
+      "properties": {
+        "SignatureProcess": {
+          "$ref": "#/definitions/SignatureProcess"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "SignatureProcess": {
+      "type": "object",
+      "properties": {
+        "IdProcess": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "AuthorRoleId": {
+          "type": "string"
+        },
+        "AuthorUserId": {
+          "type": "string"
+        },
+        "Steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignatureStep"
+          }
+        },
+        "isInvalidated": {
+          "type": "boolean"
+        },
+        "IsProcessModel": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SignatureStep": {
+      "type": "object",
+      "properties": {
+        "IdStep": {
+          "type": "string"
+        },
+        "IdProcess": {
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Event": {
+          "$ref": "#/definitions/Event"
+        },
+        "InvolvedRoleTypeIdAmm": {
+          "type": "string"
+        },
+        "InvolvedRoleTypeCode": {
+          "type": "string"
+        },
+        "InvolvedRoleType": {
+          "type": "string"
+        },
+        "InvolvedRole": {
+          "$ref": "#/definitions/Role"
+        },
+        "InvolvedUser": {
+          "$ref": "#/definitions/User"
+        },
+        "Note": {
+          "type": "string"
+        },
+        "EventsToNotifyIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExpirationDate": {
+          "type": "string"
+        },
+        "Invalidated": {
+          "type": "string"
+        },
+        "IsModel": {
+          "type": "boolean"
+        },
+        "ToUpdate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "IdEvent": {
+          "type": "string"
+        },
+        "CodeAction": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "EventType": {
+          "type": "string"
+        },
+        "Group": {
+          "type": "string"
+        }
+      }
+    },
+    "GetSignatureProcessesResponse": {
+      "type": "object",
+      "properties": {
+        "Processes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignatureProcess"
+          }
+        },
+        "TotalProcessesNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GetSignProcessInstanceResponse": {
+      "type": "object",
+      "properties": {
+        "ProcessInstance": {
+          "$ref": "#/definitions/SignatureProcessInstance"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "SignatureProcessInstance": {
+      "type": "object",
+      "properties": {
+        "IdProcessInstance": {
+          "type": "string"
+        },
+        "IdProcess": {
+          "type": "string"
+        },
+        "ProcessState": {
+          "type": "string"
+        },
+        "AttachmentDoc": {
+          "type": "string"
+        },
+        "DocNumber": {
+          "type": "string"
+        },
+        "CreationDate": {
+          "type": "string"
+        },
+        "ProtocolNumber": {
+          "type": "string"
+        },
+        "ProtocolDate": {
+          "type": "string"
+        },
+        "RepertorySignature": {
+          "type": "string"
+        },
+        "Object": {
+          "type": "string"
+        },
+        "VersionId": {
+          "type": "string"
+        },
+        "ActiovationDate": {
+          "type": "string"
+        },
+        "ClosureDate": {
+          "type": "string"
+        },
+        "AttachmentNumber": {
+          "type": "string"
+        },
+        "ProposerRole": {
+          "$ref": "#/definitions/Role"
+        },
+        "ProposerUser": {
+          "$ref": "#/definitions/User"
+        },
+        "DelegateUserDescription": {
+          "type": "string"
+        },
+        "VersionNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "InterruptedNotification": {
+          "type": "boolean"
+        },
+        "EndingNotification": {
+          "type": "boolean"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "SignStepInstances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignStepInstance"
+          }
+        },
+        "StartingNote": {
+          "type": "string"
+        },
+        "RefusalReason": {
+          "type": "string"
+        },
+        "InterruptedBy": {
+          "type": "string"
+        },
+        "Truncated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SignStepInstance": {
+      "type": "object",
+      "properties": {
+        "IdStepInstance": {
+          "description": "System id dell'istanza di passo",
+          "type": "string"
+        },
+        "IdProcessInstance": {
+          "description": "System id dell'istanza di processo di firma",
+          "type": "string"
+        },
+        "IdStep": {
+          "description": "System id del passo",
+          "type": "string"
+        },
+        "StepState": {
+          "description": "System id dello stato passo",
+          "type": "string"
+        },
+        "StepStateDescription": {
+          "description": "Descrizione dello stato passo",
+          "type": "string"
+        },
+        "SignatureType": {
+          "description": "Tipo firma (Elettronica/Digitale/Pades)",
+          "type": "string"
+        },
+        "EventTypeId": {
+          "description": "system id del tipo evento associato al passo",
+          "type": "string"
+        },
+        "EventTypeCode": {
+          "description": "Codice tipo evento presente anche in DPA_LOG",
+          "type": "string"
+        },
+        "ExecutionDate": {
+          "description": "Data in cui è stato eseguito il passo",
+          "type": "string"
+        },
+        "ExpirationDate": {
+          "description": "Data entro cui poter eseguito il passo",
+          "type": "string"
+        },
+        "RefusalReason": {
+          "description": "Descriznoe motivo del respingimento",
+          "type": "string"
+        },
+        "InvolvedRole": {
+          "$ref": "#/definitions/Role",
+          "description": "Ruolo titolare del passo"
+        },
+        "InvolvedUser": {
+          "$ref": "#/definitions/User",
+          "description": "Utente titolare del passo"
+        },
+        "ExecutedNotificationId": {
+          "description": "System id della notifica relativa all'avanzamento di passo",
+          "type": "string"
+        },
+        "SequenceNumber": {
+          "format": "int32",
+          "description": "Numero relativo all'ordine del passo",
+          "type": "integer"
+        },
+        "Note": {
+          "description": "Note relative al passo",
+          "type": "string"
+        }
+      }
+    },
+    "GetSignProcessInstancesResponse": {
+      "type": "object",
+      "properties": {
+        "SignatureProcessInstances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignatureProcessInstance"
+          }
+        },
+        "TotalNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "StartSignatureProcessRequest": {
+      "type": "object",
+      "properties": {
+        "SignatureProcess": {
+          "$ref": "#/definitions/SignatureProcess"
+        },
+        "IdDocument": {
+          "type": "string"
+        },
+        "Note": {
+          "type": "string"
+        },
+        "InterruptionGeneratesNote": {
+          "type": "boolean"
+        },
+        "EndGeneratesNote": {
+          "type": "boolean"
+        }
+      }
+    },
+    "InterruptSignatureProcessRequest": {
+      "type": "object",
+      "properties": {
+        "IdSignProcessInstance": {
+          "type": "string"
+        },
+        "InterruptionNote": {
+          "type": "string"
+        }
+      }
+    },
+    "ExecuteTransmDocModelRequest": {
+      "type": "object",
+      "properties": {
+        "IdModel": {
+          "type": "string"
+        },
+        "DocumentId": {
+          "description": "Id del documento",
+          "type": "string"
+        }
+      }
+    },
+    "TransmissionResponse": {
+      "type": "object",
+      "properties": {
+        "TransmMessage": {
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "ExecuteTransmPrjModelRequest": {
+      "type": "object",
+      "properties": {
+        "IdModel": {
+          "description": "I del modello di trasmissione",
+          "type": "string"
+        },
+        "IdProject": {
+          "description": "Id del fascciolo",
+          "type": "string"
+        }
+      }
+    },
+    "ExecuteTransmissionDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "IdDocument": {
+          "description": "Id del documento da trasmettere",
+          "type": "string"
+        },
+        "TransmissionReason": {
+          "description": "Ragione di trasmissione",
+          "type": "string"
+        },
+        "Receiver": {
+          "$ref": "#/definitions/Correspondent",
+          "description": "Destinatario"
+        },
+        "Notify": {
+          "description": "Indica se la trasmissione viene inserita nella todoList.",
+          "type": "boolean"
+        },
+        "CodeReg": {
+          "description": "Codice del registro",
+          "type": "string"
+        },
+        "TransmissionType": {
+          "description": "Tipo Trasmissione. S= Uno, T=tutti",
+          "type": "string"
+        }
+      }
+    },
+    "ExecuteTransmissionProjectRequest": {
+      "type": "object",
+      "properties": {
+        "IdProject": {
+          "description": "Id del fascicolo da trasmettere",
+          "type": "string"
+        },
+        "TransmissionReason": {
+          "description": "Ragione di trasmissione",
+          "type": "string"
+        },
+        "Receiver": {
+          "$ref": "#/definitions/Correspondent",
+          "description": "destinatario"
+        },
+        "Notify": {
+          "description": "Indica se la trasmissione viene inserita nella todoList.",
+          "type": "boolean"
+        },
+        "CodeReg": {
+          "description": "Codice del registro",
+          "type": "string"
+        },
+        "TransmissionType": {
+          "description": "Tipo Trasmissione. S= Uno, T=tutti",
+          "type": "string"
+        }
+      }
+    },
+    "GetTransmModelResponse": {
+      "type": "object",
+      "properties": {
+        "TransmissionModel": {
+          "$ref": "#/definitions/TransmissionModel"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "TransmissionModel": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Code": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      }
+    },
+    "GetTransmModelsRequest": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "Registers": {
+          "description": "Registri sui quali sono disponibili i modelli",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Register"
+          }
+        }
+      }
+    },
+    "GetTransmModelsResponse": {
+      "type": "object",
+      "properties": {
+        "TransmissionModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransmissionModel"
+          }
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "Code": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "GiveUpRightsRequest": {
+      "type": "object",
+      "properties": {
+        "RightToKeep": {
+          "type": "string"
+        },
+        "IdObject": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "AuthToken": {
+      "type": "apiKey",
+      "description": "API Key Authentication",
+      "name": "AuthToken",
+      "in": "header"
+    }
+  }
+}

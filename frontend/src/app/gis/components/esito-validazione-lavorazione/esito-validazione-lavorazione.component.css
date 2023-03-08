@@ -1,0 +1,93 @@
+#esitoLavorazione > div {
+    margin: auto;
+    margin-left: 356px!important;
+    margin-top: 1px;
+    background: #fcfcfceb;
+    z-index: 999 !important;
+}
+
+.sidebar-esito.onlyValida > div{
+    left: -300px!important;
+}
+
+.sidebar-esito.fixPositionDet > div {
+    left: -300px!important;
+}
+
+.sidebar-esito.noShowing > div {
+    z-index: -1!important;
+    margin-left: 0px !important
+}
+
+.button-problem-esito {
+    color: #027a48 !important;
+    font-size: 17px !important;
+    border-radius: 4px!important;
+    cursor: pointer;
+}
+
+.button-problem-esito-active {
+    background-color: #c95b0c;
+    color: white;
+}
+
+span.badge.rounded-pill.badge-notification.bg-danger {
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 25px;
+    background-color: #70b8d5 !important;
+    color: white;
+    border: 1px solid;
+    text-align: center;
+}
+
+#ui-tabpanel{
+    padding: 0px;
+    margin-left: 5px;
+}
+
+
+span.ui-tabview-title.ng-star-inserted {
+    position: absolute;
+    margin-top: -6px;
+    margin-left: -6px;
+    background-color: #c95b0c!important;
+    color: white;
+    border: 1px solid;
+    text-align: center;
+    border-radius: 50rem !important;
+    height: 23px;
+    width: 23px;
+    font-size: 12px;
+}
+
+#no_esito_const > div , #attributi_mancanti_const > div ,#richiesta_cancellat_const > div ,#poligoni_sovrapposizioni_const > div, #poligoni_errori_oracle_const> div{
+    padding: 0px;
+    margin-left: 5px;
+}
+
+.ui-tabview.ui-widget.ui-widget-content.ui-corner-all.ui-tabview-top{
+    background: transparent!important;
+}
+#esitoLavorazione > div > div > p-tabview > div > ul > li {
+    margin: 0px 2px !important;
+    text-align: center;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+/* nasconde pulsante finestra */
+#ui-tabpanel-1 > div > gis-lavorazioneworkspace > gis-externalwindow > button {
+    display: none;
+}
+#esitoLavorazione > div > div > p-tabview > div > ul > li a {
+    background: whitesmoke;
+    border-radius: 25px;
+    margin: 5px 10px;
+    text-align: center;
+    padding: 7px;
+    width: 35px;
+}
+#esitoLavorazione > div > div > p-tabview > div > ul > li a:hover {
+    background: #e1c1a9;
+    transition: 0.5s;
+}

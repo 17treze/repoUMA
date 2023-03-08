@@ -1,0 +1,544 @@
+{
+	"header": {
+		"esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+		"servizio": "Dettaglio completo impresa",
+		"esito": "OK"
+	},
+	"dati": {
+		"listaimprese": null,
+		"datiimpresa": {
+			"estremiimpresa": {
+				"denominazione": "CONSORZIO LA TRENTINA - SOCIETA' CONSORTILE COOPERATIVA",
+				"codicefiscale": "01567880222",
+				"partitaiva": "01567880222",
+				"formagiuridica": {
+					"cformagiuridica": "SC",
+					"descrizione": "SOCIETA' COOPERATIVA"
+				},
+				"datiiscrizioneri": {
+					"numerori": "TN-1997-144053",
+					"data": "19970820",
+					"sezioni": {
+						"sezione": [{
+								"csezione": "O",
+								"descrizione": "ORDINARIA",
+								"dtiscrizione": "19960219",
+								"coltdiretto": null
+							}
+						]
+					}
+				},
+				"datiiscrizionerea": [{
+						"nrea": "138617",
+						"cciaa": "TN",
+						"flagsede": "SI",
+						"itrasferimentosede": null,
+						"faggiornamento": null,
+						"data": "19940922",
+						"dtultaggiornamento": "20120201",
+						"cfonte": "RI",
+						"cessazione": {
+							"dtcancellazione": "20120201",
+							"dtcessazione": "20111230",
+							"dtdenunciacess": "20120117",
+							"causale": "CHIUSURA DELLA LIQUIDAZIONE"
+						}
+					}
+				],
+				"elemento": null
+			},
+			"oggettosociale": "LA PREDISPOSIZIONE, LA GESTIONE E L'ORGANIZZAZIONE DEI MEZZITECNICO-AMMINISTRATIVI E DEGLI STRUMENTI, MEZZI, STRUTTURE, MACCHINARI,APPARECCHI E TECNOLOGIA NECESSARI AL FINE DI:- STUDIARE LE PROBLEMATICHE RELATIVE ALL'AMBIENTE NEL SUO INSIEME E PROBLEMIDI INQUINAMENTO DI QUALSIASI GENERE;- CONSENTIRE LO STUDIO E LA PROGETTAZIONE NEL SETTORE DELLE OPERE PUBBLICHE EPRIVATE ED IMPIANTI INDUSTRIALI E RELATIVI COLLAUDI;- CONSENTIRE MONOTORAGGI ED ISPEZIONI DI OPERE, INDAGINI, RILIEVI E PROVEMATERIALI, STUDI DI IMPATTO AMBIENTALE E DI RENDERING FOTOGRAFICO E FILMATO;- ATTUARE CONSULENZE INFORMATICHE ED ELABORAZIONI DI DATI CONTO TERZI,PLOTTAGGI E STAMPE, LA PRODUZIONE, LA VENDITA E LA COMMERCIALIZZAZIONE DISOFTWARE ED HARDWARE PERSONALIZZATO, VOLTO ALLA RISOLUZIONE DI SPECIFICHETEMATICHE;- CONSENTIRE LA INDUSTRIALIZZAZIONE DI PROTOTIPI LAY-OUT DI FABBRICA, LO STUDIODI FLUSSO ED OTTIMIZZAZIONE DELLE RISORSE.RESTA IN OGNI CASO FERMA LA PERSONALE RESPONSABILITA' DEI PROFESSIONISTI PER ISINGOLI ATTI DI PROGETTAZIONE CHE LE LEGGI ED I REGOLAMENTI PROFESSIONALIRISERVANO LORO IN VIA ESCLUSIVA.PER IL RAGGIUNGIMENTO DI DETTO SCOPO SOCIALE LA SOCIETA' POTRA' COMPIEREQUALSIASI OPERAZIONE INDUSTRIALE, COMMERCIALE, FINANZIARIA, ESCLUSI L'ESERCIZIODEL CREDITO E LA RACCOLTA DEL RISPARMIO BANCARIO MOBILIARE ED IMMOBILIARE,COMUNQUE CONNESSA CON LO SCOPO SOCIALE, IVI COMPRESO IL RILASCIO DIFIDEJUSSIONI, AVALLI, GARANZIE REALI E PERSONALI ANCHE A FAVORE DI TERZI.POTRA' INOLTRE ASSUMERE PARTECIPAZIONI IN ALTRE SOCIETA' O ENTI, COSTITUITI OCOSTITUENDI, AVENTI OGGETTO ANALOGO O AFFINE CON IL PROPRIO.",
+			"dtfondazione": null,
+			"codiceformaammv": null,
+			"descformaammv": null,
+			"duratasocieta": {
+				"dtcostituzione": "19940805",
+				"dttermine": "20501231",
+				"durataillimitata": null,
+				"scadenzeesercizi": {
+					"dtprimoesercizio": "19941231",
+					"dtsuccessive": "31/12"
+				}
+			},
+			"capitali": {
+				"fondoconsortile": null,
+				"totalequote": null,
+				"capitalesociale": {
+					"deliberato": "30000",
+					"sottoscritto": "30000",
+					"versato": "30000",
+					"tipoconferimenti": null,
+					"valuta": "EURO"
+				}
+			},
+			"capitaleinvestito": null,
+			"informazionisede": {
+				"insegna": null,
+				"indirizzo": {
+					"provincia": "TRENTO",
+					"comune": "TRENTO",
+					"ccomune": "022205",
+					"toponimo": "VIA",
+					"via": "GOCCIADORO",
+					"ncivico": "31",
+					"cap": "38122",
+					"stato": null,
+					"frazione": null,
+					"altreindicazioni": null,
+					"stradario": null,
+					"telefono": null,
+					"fax": null,
+					"indirizzopec": "APICETN.IT@PEC.IT"
+				},
+				"attivita": "STUDIO DI PROBLEMATICHE RELATIVE ALL'AMBIENTE NEL SUO INSIEME, PROGETTAZIONE DIMASSIMA E PROGETTAZIONE ESECUTIVE NEI SETTORI DI OPERE PUBBLICHE, IVI COMPRESII CALCOLI STATICI E LA DIREZIONE DEI LAVORI, SIA DA ESSA PROGETTATI CHE DITERZE PARTI, COLLAUDI DI OPERE CIVILI ED INDUSTRIALI, DI STRUTTURE E DIIMPIANTI, STUDI DI FATTIBILITA' TECNICO-ECONOMICA, CONSULENZE INFORMATICHEED ELABORAZIONE DATI PER CONTO TERZI, PRODUZIONE DI SOFTWARE E HARDWAREPERSONALIZZATO, INGEGNERIZZAZIONE DI PROTOTIPI, LAY-OUT DI FABBRICA, STUDI DIFLUSSO ED OTTIMIZZAZIONE DELLE RISORSE (DAL 5.8.1994); MISURAZIONIFONOMETRICHE ED ELABORAZIONI PAGHE (DAL 20.02.2002)",
+				"infoattivita": {
+					"dtinizioattivita": "19940805",
+					"statoattivita": null
+				},
+				"codiciistat02": null,
+				"codiceatecoul": {
+					"attivitaistat": [{
+							"cattivita": "262",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Fabbricazione di computer e unita' periferiche",
+							"cimportanza": "S",
+							"dtinizioattivita": "19940805"
+						}, {
+							"cattivita": "6201",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Produzione di software non connesso all'edizione",
+							"cimportanza": "S",
+							"dtinizioattivita": "19940805"
+						}, {
+							"cattivita": "63111",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Elaborazione dati",
+							"cimportanza": "S",
+							"dtinizioattivita": "19960202"
+						}, {
+							"cattivita": "69201",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Attivita' degli studi commerciali, tributari e revisione contabile",
+							"cimportanza": "S",
+							"dtinizioattivita": "19940805"
+						}, {
+							"cattivita": "711",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Attivita' degli studi di architettura, ingegneria ed altri studi tecnici",
+							"cimportanza": "P",
+							"dtinizioattivita": "19940805"
+						}, {
+							"cattivita": "711",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Attivita' degli studi di architettura, ingegneria ed altri studi tecnici",
+							"cimportanza": "S",
+							"dtinizioattivita": "19960202"
+						}, {
+							"cattivita": "71201",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Collaudi ed analisi tecniche di prodotti",
+							"cimportanza": "S",
+							"dtinizioattivita": "20020220"
+						}
+					]
+				},
+				"ruoliloc": null,
+				"datiartigiani": null,
+				"commerciodettaglio": null,
+				"cessazione": {
+					"dtcancellazione": null,
+					"dtcessazione": "20111230",
+					"dtdenunciacess": "20120117",
+					"causale": "CHIUSURA DELLA LIQUIDAZIONE"
+				},
+				"procedureconcorsuali": {
+					"proceduraconcorsuale": [{
+							"codicepc": "SL",
+							"descpc": "SCIOGLIMENTO E LIQUIDAZIONE",
+							"dtiniziopc": "20110331",
+							"dtterminepc": null,
+							"dtomologazionepc": null,
+							"dtaccertamentopc": null,
+							"dtcessazionepc": null,
+							"dtchiusurapc": null,
+							"dtesecuzionepc": null,
+							"dtrisoluzionepc": null,
+							"dtrevocapc": null
+						}
+					]
+				}
+			},
+			"personesede": {
+				"persona": [{
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "138617",
+							"progressivopersona": "2",
+							"progressivoloc": "0"
+						},
+						"personafisica": {
+							"cognome": "OSELE",
+							"nome": "CLAUDIO",
+							"sesso": "MASCHILE",
+							"estreminascita": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"stato": null,
+								"data": "19500321"
+							},
+							"codicefiscale": "SLOCLD50C21L378D",
+							"cittadinanza": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"toponimo": "VIA",
+								"via": "GOCCIADORO",
+								"ncivico": "31",
+								"cap": "38122",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"personagiuridica": null,
+						"cariche": {
+							"carica": [{
+									"descrizione": "LIQUIDATORE",
+									"ccarica": "LI",
+									"dtinizio": "20110331",
+									"dtfine": null
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": "SI",
+						"elemento": "1"
+					},
+					{
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "138617",
+							"progressivopersona": "2",
+							"progressivoloc": "0"
+						},
+						"personafisica": {
+							"cognome": "OSELE",
+							"nome": "CLAUDIO",
+							"sesso": "MASCHILE",
+							"estreminascita": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"stato": null,
+								"data": "19500321"
+							},
+							"codicefiscale": "NDRLLN40R56I042K",
+							"cittadinanza": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"toponimo": "VIA",
+								"via": "GOCCIADORO",
+								"ncivico": "31",
+								"cap": "38122",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"personagiuridica": null,
+						"cariche": {
+							"carica": [{
+									"descrizione": "LIQUIDATORE",
+									"ccarica": "LI",
+									"dtinizio": "20110331",
+									"dtfine": null
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": "SI",
+						"elemento": "1"
+					},
+					{
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "27",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "MI",
+                            "niscrizionerea": "1602581",
+                            "denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+                            "codicefiscale": "CF NON CORRISPONDENTE",
+                            "dtcostituzione": "19991210",
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MONTE ROSA",
+                                "ncivico": null,
+                                "cap": "20149",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIETA' DI REVISIONE",
+                                    "ccarica": "SDR",
+                                    "dtinizio": "20160506",
+                                    "dtfine": "20300506"
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "10"
+                    },
+					{
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "27",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "MI",
+                            "niscrizionerea": "1602581",
+                            "denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+                            "codicefiscale": "00110640225",
+                            "dtcostituzione": "19991210",
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MONTE ROSA",
+                                "ncivico": null,
+                                "cap": "20149",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIETA' DI REVISIONE",
+                                    "ccarica": "SDR",
+                                    "dtinizio": "20160506",
+                                    "dtfine": "20300506"
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "10"
+                    },
+					{
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "27",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "MI",
+                            "niscrizionerea": "1602581",
+                            "denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+                            "codicefiscale": "00110640224",
+                            "dtcostituzione": "19991210",
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MONTE ROSA",
+                                "ncivico": null,
+                                "cap": "20149",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIETA' DI REVISIONE",
+                                    "ccarica": "SDR",
+                                    "dtinizio": "20160506",
+                                    "dtfine": "20160506"
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "10"
+                    },
+										{
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "27",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "MI",
+                            "niscrizionerea": "1602581",
+                            "denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+                            "codicefiscale": "12979880155",
+                            "dtcostituzione": "19991210",
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MONTE ROSA",
+                                "ncivico": null,
+                                "cap": "20149",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIETA' DI REVISIONE",
+                                    "ccarica": "ALTROCODICE",
+                                    "dtinizio": "20160506",
+                                    "dtfine": "20000506"
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "10"
+                    }
+				],
+				"totale": "6"
+			},
+			"localizzazioni": [{
+					"localizzazione": [{
+							"numerotipo": {
+								"cciaa": "TN",
+								"nrea": "138617",
+								"numero": "1",
+								"tipo1": null,
+								"tipo2": null,
+								"tipo3": null,
+								"tipo4": null,
+								"tipo5": null
+							},
+							"denominazione": null,
+							"insegna": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"toponimo": "VIA",
+								"via": "LUNELLI",
+								"ncivico": "21",
+								"cap": "38100",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": "00784",
+								"telefono": "0461829767",
+								"fax": null,
+								"indirizzopec": null
+							},
+							"dtapertura": "19960202",
+							"attivita": "ELABORAZIONE DATI E PROGETTAZIONE INGEGNERIA CIVILE",
+							"codiciistat02": null,
+							"codiceatecoul": {
+								"attivitaistat": [{
+										"cattivita": "63111",
+										"tcodifica": "07",
+										"cfonte": null,
+										"descattivita": "Elaborazione dati",
+										"cimportanza": "P",
+										"dtinizioattivita": "19960202"
+									}, {
+										"cattivita": "711",
+										"tcodifica": "07",
+										"cfonte": null,
+										"descattivita": "Attivita' degli studi di architettura, ingegneria ed altri studi tecnici",
+										"cimportanza": "S",
+										"dtinizioattivita": "19960202"
+									}
+								]
+							},
+							"ruoliloc": null,
+							"datiartigiani": null,
+							"commerciodettaglio": null,
+							"personeloc": null,
+							"cessazioneloc": {
+								"dtcessazione": "20010301",
+								"dtdenunciacess": "20010305",
+								"causale": "TRASFORMAZIONE IN SEDE LEGALE"
+							},
+							"elemento": "1"
+						}
+					],
+					"elemento": "1",
+					"provincia": "TN"
+				}
+			]
+		},
+		"listaul": null,
+		"schedaul": null,
+		"listapersone": null,
+		"schedapersona": null,
+		"errore": null
+	}
+}

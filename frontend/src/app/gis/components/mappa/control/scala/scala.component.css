@@ -1,0 +1,51 @@
+.select-scale{
+    left: 65px;
+    bottom: 25px;
+    z-index: 99999;
+}
+span.ui-autocomplete.ui-widget.ui-autocomplete-dd {
+    background: #fefefe40!important;
+}
+button.ui-autocomplete-dropdown.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only {
+    background: transparent!important;
+}
+.ui-autocomplete .ui-autocomplete-dropdown.ui-button.ui-button-icon-only .pi {
+    color: #000000!important;
+    margin-top: -10px;
+}
+gis-scala > div > p-autocomplete > span > div > ul > li.ui-autocomplete-list-item.ui-corner-all {
+    padding: 5px !important;
+}
+gis-scala > div > p-autocomplete > span > div > ul > li.ui-autocomplete-list-item.ui-corner-all:hover {
+    background: #525252!important;
+    color: #fff!important;
+}
+.select-scale label {
+    color: #0d5f3fb8 !important;
+    font-size: 16px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    color: black;
+    padding: 0 10px;
+    border: 2px solid transparent;
+    border-radius: 10px 0px 0px 10px;
+    font-weight: 300!important;
+    float: left;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold!important;
+}
+gis-scala > div > p-autocomplete > span.ui-autocomplete.ui-widget.ui-autocomplete-dd {
+    background: #fefefe78!important;
+    width: 120px!important;
+    height: 26px!important;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+gis-scala > div > p-autocomplete > span > input,
+gis-scala > div > p-autocomplete > span > button {
+    height: 25px!important;
+}
+gis-scala > div > p-autocomplete > span > input {
+    max-width: 120px;
+    font-weight: bold
+}

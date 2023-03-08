@@ -1,0 +1,3070 @@
+{
+	"id": 10237,
+	"version": 4,
+	"datiDichiarazione": {
+		"richiedente": {
+			"nome": "MATTEO BRUNO",
+			"cognome": "LUNELLI",
+			"codiceFiscale": "LNLMTB74A31F205S",
+			"comuneNascita": "MILANO",
+			"provinciaNascita": "MI",
+			"dataNascita": "31/01/1974",
+			"sesso": "M",
+			"residenza": {
+				"indirizzo": "VIA MALPAGA 9",
+				"comune": "TRENTO",
+				"provincia": "TN",
+				"CAP": "38122"
+			},
+			"carica": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+			"dtInizioCarica": "04/05/2018",
+			"dtFineCarica": "ND"
+		},
+		"dettaglioImpresa": {
+			"formaGiuridicaCodice": "AU",
+			"formaGiuridicaDescrizione": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+			"denominazione": "FERRARI F.LLI LUNELLI S.P.A (IN BREVE FERRARI S.P.A.)",
+			"sedeLegale": "VIA DEL PONTE 15 38123 TRENTO TRENTO",
+			"estremiCCIAA": {
+				"sede": "TN",
+				"numeroIscrizione": "76693",
+				"dataIscrizione": "16/11/1970"
+			},
+			"oggettoSociale": "- LA PRODUZIONE, LA TRASFORMAZIONE E IL COMMERCIO DI PRODOTTI AGRICOLI EALIMENTARI IN GENERE ED IN PARTICOLARE, A SOLO TITOLO ESEMPLIFICATIVO, DI UVA,VINI, MOSTI, LIQUORI, SPUMANTI, DISTILLATI, DOLCIUMI E CAFFE' E L'ATTIVITA' DIIMPORT ED EXPORT DEI MEDESIMI PRODOTTI E LE ATTIVITA' CONNESSE;- L'ACQUISTO, LA VENDITA, LA PERMUTA E LA LOCAZIONE DI TERRENI AGRICOLI E NON;- L'ACQUISTO, LA VENDITA, LA PERMUTA, LA COSTRUZIONE E/O LA RISTRUTTURAZIONE DIBENI IMMOBILI, A SCOPO DI STABILE INVESTIMENTO CURANDONE ANCHE LA RELATIVAGESTIONE;- LA PRESTAZIONE DI SERVIZI DI ORGANIZZAZIONE AZIENDALE, AMMINISTRATIVA,COMMERCIALE E DI MARKETING NEI CONFRONTI DELLE SOCIETA' PARTECIPATE E NEICONFRONTI DELLE SOCIETA' DEL GRUPPO DI APPARTENENZA;- L'ASSUNZIONE O LA CESSIONE DI PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA',ITALIANE O ESTERE, A SCOPO DI STABILE INVESTIMENTO, PER GESTIONE E GODIMENTO,NON PROFESSIONALMENTE, NE' NEI CONFRONTI DEL PUBBLICO, BENSI' OCCASIONALMENTE EPER CONTO PROPRIO, NONCHE' COSTITUIRE O PARTECIPARE ALLA COSTITUZIONE DIASSOCIAZIONI TEMPORANEE DI IMPRESA;- LA GESTIONE DI RISTORANTI, ALBERGHI E/O COMUNQUE DI ATTIVITA' RICETTIVE;- L'ACQUISTO DI CREDITI D'IMPRESA NEI CONFRONTI DI CLIENTI, DALLA CONTROLLANTE,DA SOCIETA' CONTROLLATE E COLLEGATE E COMUNQUE DA SOCIETA' FACENTI PARTE DELLOSTESSO GRUPPO DI APPARTENENZA. IL TUTTO COME DISCIPLINATO DALLE NORME DEL CODICECIVILE.SEMPRE PER IL RAGGIUNGIMENTO DELL'OGGETTO SOCIALE, LA SOCIETA' POTRA' ALTRESI'COMPIERE OGNI OPERAZIONE COMMERCIALE, INDUSTRIALE ED IMMOBILIARE; A TALE FINEPOTRA' ALTRESI' COMPIERE IN VIA NON PREVALENTE E CON ESPRESSA ESCLUSIONE DIQUALSIASI ATTIVITA' SVOLTA NEI CONFRONTI DEL PUBBLICO, OPERAZIONI FINANZIARIE EMOBILIARI, CONCEDERE FINANZIAMENTI, ONEROSI E NON, NEI CONFRONTI DELLE SOCIETA'DEL GRUPPO DI APPARTENENZA, CONCEDERE FIDEJUSSIONI, AVALLI, CAUZIONI, GARANZIEANCHE A FAVORE DI TERZI.",
+			"codiceFiscale": "00123890220",
+			"partitaIva": "00123890220",
+			"indirizzoPEC": "INFO@PEC.CANTINEFERRARI.IT",
+			"dettaglioPersonaGiuridica": {
+				"formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+				"estremiCostituzione": "07/11/1970",
+				"capitaleSociale": "Dato non disponibile",
+				"durata": "31/12/2040"
+			},
+			"soggettiImpresa": [{
+					"nome": "LUIGI",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLLGU39D14L378O",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "14/04/1939",
+					"sesso": "M",
+					"indirizzoResidenza": "PIAZZA DUOMO N 9",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"href": "/antimafia/10237/allegatoFamiliariConviventi/10239",
+							"selezionato": true,
+							"dichiarazione": true
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MARCELLO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLMCL67R20L378W",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "20/10/1967",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MILANO 144",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "RE",
+							"tipologia": "RESPONSABILE",
+							"dataInizio": "31/10/2006",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}, {
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}, {
+							"codice": "VPA",
+							"tipologia": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+							"dataInizio": "13/06/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "PIETRO",
+					"cognome": "MONTI",
+					"codiceFiscale": "MNTPTR43L17A694C",
+					"comuneNascita": "BASELGA DI PINE'",
+					"provinciaNascita": "TN",
+					"dataNascita": "17/07/1943",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA BELLAVISTA SECONDA 21",
+					"comuneResidenza": "ROVERETO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38068",
+					"carica": [{
+							"codice": "SIS",
+							"tipologia": "SINDACO SUPPLENTE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BASELGA DI PINE'"
+				}, {
+					"nome": "MATTEO BRUNO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLMTB74A31F205S",
+					"comuneNascita": "MILANO",
+					"provinciaNascita": "MI",
+					"dataNascita": "31/01/1974",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MALPAGA 9",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}, {
+							"codice": "PCA",
+							"tipologia": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}, {
+							"codice": "AMD",
+							"tipologia": "AMMINISTRATORE DELEGATO",
+							"dataInizio": "13/06/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MILANO"
+				}, {
+					"nome": "EZIO",
+					"cognome": "GOBBI",
+					"codiceFiscale": "GBBZEI52H07L378V",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "07/06/1952",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA GUIDO BETTINAZZI 30 INT 5",
+					"comuneResidenza": "ARCO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38062",
+					"carica": [{
+							"codice": "SIE",
+							"tipologia": "SINDACO",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MAURIZIO",
+					"cognome": "POSTAL",
+					"codiceFiscale": "PSTMRZ57L03L378Z",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "03/07/1957",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MARZOLA 74",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "PCS",
+							"tipologia": "PRESIDENTE DEL COLLEGIO SINDACALE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "CAMILLA",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLCLL75M70L378A",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "30/08/1975",
+					"sesso": "F",
+					"indirizzoResidenza": "VIA DELLA RESISTENZA N 56",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MAURIZIO",
+					"cognome": "SCOZZI",
+					"codiceFiscale": "SCZMRZ60B28B180Y",
+					"comuneNascita": "BRINDISI",
+					"provinciaNascita": "BR",
+					"dataNascita": "28/02/1960",
+					"sesso": "M",
+					"indirizzoResidenza": "STRADA DELLE TABARELLE, 25",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "SIS",
+							"tipologia": "SINDACO SUPPLENTE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BRINDISI"
+				}, {
+					"nome": "ALESSANDRO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLLSN78S05L378V",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "05/11/1978",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA DON GIUSEPPE GRAZIOLI N 77",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MARIA TERESA",
+					"cognome": "BERNELLI",
+					"codiceFiscale": "BRNMTR50M48F351V",
+					"comuneNascita": "MONDOVI'",
+					"provinciaNascita": "CN",
+					"dataNascita": "08/08/1950",
+					"sesso": "F",
+					"indirizzoResidenza": "VIA QUATTRO NOVEMBRE 29",
+					"comuneResidenza": "CAVEDINE",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38073",
+					"carica": [{
+							"codice": "SIE",
+							"tipologia": "SINDACO",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MONDOVI'"
+				}, {
+					"nome": "ARMANDO",
+					"cognome": "BRANCHINI",
+					"codiceFiscale": "BRNRND45R30A944H",
+					"comuneNascita": "BOLOGNA",
+					"provinciaNascita": "BO",
+					"dataNascita": "30/10/1945",
+					"sesso": "M",
+					"indirizzoResidenza": "FRAZ CASA STEFANONE 15",
+					"comuneResidenza": "ZAVATTARELLO",
+					"provinciaResidenza": "PV",
+					"capResidenza": "27059",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BOLOGNA"
+				}, {
+					"nome": "LINO",
+					"cognome": "BENASSI",
+					"codiceFiscale": "BNSLNI43T02L378J",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "02/12/1943",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA AL MASO LIBRAR 11",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38121",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "BENIAMINO",
+					"cognome": "GAROFALO",
+					"codiceFiscale": "GRFBMN70E20C361R",
+					"comuneNascita": "CAVA DE' TIRRENI",
+					"provinciaNascita": "SA",
+					"dataNascita": "20/05/1970",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA SANTA CROCE 2",
+					"comuneResidenza": "MILANO",
+					"provinciaResidenza": "MI",
+					"capResidenza": "20122",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "CAVA DE' TIRRENI"
+				}, {
+					"nome": "RUGGERO ETTORE ANTONIO MARIA",
+					"cognome": "BRUGNARA",
+					"codiceFiscale": "BRGRGR52L18F205N",
+					"comuneNascita": "MILANO",
+					"provinciaNascita": "MI",
+					"dataNascita": "18/07/1952",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA TORINO 7",
+					"comuneResidenza": "SEGRATE",
+					"provinciaResidenza": "MI",
+					"capResidenza": "20090",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MILANO"
+				}, {
+					"nome": "CLAUDIO",
+					"cognome": "DIMARCO",
+					"codiceFiscale": "DMRCLD74S10E986P",
+					"comuneNascita": "MARTINA FRANCA",
+					"provinciaNascita": "TA",
+					"dataNascita": "10/11/1974",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA DELLA RESISTENZA N 46",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MARTINA FRANCA"
+				}, {
+					"nome": "LORENZO",
+					"cognome": "LORO",
+					"codiceFiscale": "LROLNZ70L11H612I",
+					"comuneNascita": "ROVERETO",
+					"provinciaNascita": "TN",
+					"dataNascita": "11/07/1970",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA ARDARO 28/A",
+					"comuneResidenza": "RIVA DEL GARDA",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38066",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "ROVERETO"
+				}, {
+					"nome": "RENZO",
+					"cognome": "SANTATO",
+					"codiceFiscale": "SNTRNZ64E10H620A",
+					"comuneNascita": "ROVIGO",
+					"provinciaNascita": "RO",
+					"dataNascita": "10/05/1964",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA GAETANO TACCHI 3",
+					"comuneResidenza": "ROVERETO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38068",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "ROVIGO"
+				}
+			],
+			"aziendeCollegate": [{
+					"cciaa": "TN",
+					"denominazione": "LUNELLI S.P.A.",
+					"codiceFiscale": "00598990224",
+					"comuneSede": "TRENTO",
+					"indirizzoSede": "VIA DEL PONTE",
+					"nCivico": "",
+					"provinciaSede": "TRENTO",
+					"capSede": "38123",
+					"carica": [{
+							"codice": "SOU",
+							"tipologia": "SOCIO UNICO",
+							"dataInizio": "29/07/2003",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"selezionato": false,
+					"dettaglioImpresa": {
+						"formaGiuridicaCodice": "SP",
+						"formaGiuridicaDescrizione": "SOCIETA' PER AZIONI",
+						"denominazione": "LUNELLI S.P.A.",
+						"sedeLegale": "VIA CONSERVATORIO 22 20122 MILANO MILANO",
+						"estremiCCIAA": {
+							"sede": "MI",
+							"numeroIscrizione": "1176001",
+							"dataIscrizione": "18/02/1985"
+						},
+						"oggettoSociale": "LA SOCIETA' HA PER OGGETTO L'ESERCIZIO DI ATTIVITA' FINANZIARIE INDIRIZZATEALLA COSTITUZIONE,PARTECIPAZIONI E SVILUPPO DI INIZIATIVE INDUSTRIALI,COMMERCIALI AGRICOLE,IMMOBILIARI, ASSICURATIVE E BANCARIE. PER ILRAGGIUNGIMENTO DELL'OGGETTO SOCIALE LA SOCIETA' POTRA' PARTECIPARE ALLACOSTITUZIONE DI SOCIETA' OPERANTI NEI SETTORI INDICATI, AMMINISTRARE LEPARTECIPAZIONI POSSEDUTE, SOTTOSCRIVERE AUMENTI DI CAPITALE, SOTTOSCRIVEREPRESTITI OBBLIGAZIONARI CONVERTIBILI O NON, PROVVEDERE AL COORDINAMENTO TECNICO-FINANZIARIO - AMMINISTRATIVO - CONTABILE DELLE SOCIETA' PARTECIPATE. RIENTRANELL'OGGETTO SOCIALE L'ESPLICAZIONE DI TUTTE LE OPERAZIONI COMMERCIALI,MOBILIARI ED IMMOBILIARI, NECESSARIE ED UTILI PER IL CONSEGUIMENTO DELL'OGGETTOSOCIALE, CHE SIANO AD ESSE DIRETTAMENTE O INDIRETTAMENTE CONNESSE. ESSA POTRA'ACCORDARE AVALLI, FIDEJUSSIONI E GARANZIE CHIROGRAFARIE O REALI ANCHE A FAVOREDI TERZI.",
+						"codiceFiscale": "00598990224",
+						"partitaIva": "07700850154",
+						"dettaglioPersonaGiuridica": {
+							"formaGiuridica": "SOCIETA' PER AZIONI",
+							"estremiCostituzione": "06/10/1983",
+							"capitaleSociale": "Dato non disponibile",
+							"durata": "31/12/2100"
+						},
+						"soggettiImpresa": [{
+								"nome": "LUIGI",
+								"cognome": "LUNELLI",
+								"codiceFiscale": "LNLLGU39D14L378O",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "14/04/1939",
+								"sesso": "M",
+								"indirizzoResidenza": "PIAZZA DUOMO N 9",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38122",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "PCA",
+										"tipologia": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "CARLA",
+								"cognome": "LUNELLI",
+								"codiceFiscale": "LNLCRL45P68L378Y",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "28/09/1945",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA DON GIUSEPPE GRAZIOLI N 106",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38122",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "MATTEO BRUNO",
+								"cognome": "LUNELLI",
+								"codiceFiscale": "LNLMTB74A31F205S",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "31/01/1974",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MALPAGA 9",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38122",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "VPA",
+										"tipologia": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "AMD",
+										"tipologia": "AMMINISTRATORE DELEGATO",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "MASSIMO",
+								"cognome": "GIACONIA",
+								"codiceFiscale": "GCNMSM59L22B428H",
+								"comuneNascita": "CALTAGIRONE",
+								"provinciaNascita": "CT",
+								"dataNascita": "22/07/1959",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MASCHERONI N 5",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20123",
+								"carica": [{
+										"codice": "SIE",
+										"tipologia": "SINDACO",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CALTAGIRONE"
+							}, {
+								"nome": "MAURIZIO",
+								"cognome": "POSTAL",
+								"codiceFiscale": "PSTMRZ57L03L378Z",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "03/07/1957",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MARZOLA 74",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38123",
+								"carica": [{
+										"codice": "SIE",
+										"tipologia": "SINDACO",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "EZIO",
+								"cognome": "GOBBI",
+								"codiceFiscale": "GBBZEI52H07L378V",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "07/06/1952",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GUIDO BETTINAZZI 30 INT 5",
+								"comuneResidenza": "ARCO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38062",
+								"carica": [{
+										"codice": "SIS",
+										"tipologia": "SINDACO SUPPLENTE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "MAURIZIO",
+								"cognome": "SCOZZI",
+								"codiceFiscale": "SCZMRZ60B28B180Y",
+								"comuneNascita": "BRINDISI",
+								"provinciaNascita": "BR",
+								"dataNascita": "28/02/1960",
+								"sesso": "M",
+								"indirizzoResidenza": "STRADA DELLE TABARELLE, 25",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38123",
+								"carica": [{
+										"codice": "SIS",
+										"tipologia": "SINDACO SUPPLENTE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BRINDISI"
+							}, {
+								"nome": "MARCELLO",
+								"cognome": "LUNELLI",
+								"codiceFiscale": "LNLMCL67R20L378W",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "20/10/1967",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MILANO 144",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38122",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "CAMILLA",
+								"cognome": "LUNELLI",
+								"codiceFiscale": "LNLCLL75M70L378A",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "30/08/1975",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA DELLA RESISTENZA N 56",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38123",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "INNOCENZO",
+								"cognome": "CIPOLLETTA",
+								"codiceFiscale": "CPLNCN41T08H501O",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "08/12/1941",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA ADIGE 30 SC UN INT 24",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00198",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "LINO",
+								"cognome": "BENASSI",
+								"codiceFiscale": "BNSLNI43T02L378J",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "02/12/1943",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA AL MASO LIBRAR 11",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38121",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "MARIA TERESA",
+								"cognome": "BERNELLI",
+								"codiceFiscale": "BRNMTR50M48F351V",
+								"comuneNascita": "MONDOVI'",
+								"provinciaNascita": "CN",
+								"dataNascita": "08/08/1950",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA QUATTRO NOVEMBRE 29",
+								"comuneResidenza": "CAVEDINE",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38073",
+								"carica": [{
+										"codice": "PCS",
+										"tipologia": "PRESIDENTE DEL COLLEGIO SINDACALE",
+										"dataInizio": "16/06/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MONDOVI'"
+							}
+						],
+						"aziendeCollegate": [{
+								"cciaa": "MI",
+								"denominazione": "PRICE WATER HOUSE COOPERS SPA",
+								"codiceFiscale": "12979880155",
+								"comuneSede": "MILANO",
+								"indirizzoSede": "VLE MONTE ROSA",
+								"nCivico": "",
+								"provinciaSede": "MILANO",
+								"capSede": "20149",
+								"carica": [{
+										"codice": "SDR",
+										"tipologia": "SOCIETA' DI REVISIONE",
+										"dataInizio": "06/07/2010",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"selezionato": false
+							}
+						]
+					}
+				}, {
+					"cciaa": "MI",
+					"denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+					"codiceFiscale": "12979880155",
+					"comuneSede": "MILANO",
+					"indirizzoSede": "VIA MONTE ROSA",
+					"nCivico": "",
+					"provinciaSede": "MILANO",
+					"capSede": "20149",
+					"carica": [{
+							"codice": "SDR",
+							"tipologia": "SOCIETA' DI REVISIONE",
+							"dataInizio": "06/05/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"selezionato": false,
+					"dettaglioImpresa": {
+						"formaGiuridicaCodice": "SP",
+						"formaGiuridicaDescrizione": "SOCIETA' PER AZIONI",
+						"denominazione": "PRICEWATERHOUSECOOPERS S.P.A. IN BREVE \"PWC\"",
+						"sedeLegale": "VIALE MONTE ROSA 91 20149 MILANO MILANO",
+						"estremiCCIAA": {
+							"sede": "TN",
+							"numeroIscrizione": "169307",
+							"dataIscrizione": "16/02/2000"
+						},
+						"oggettoSociale": "LA REVISIONE, NONCHE' OGNI ALTRA ATTIVITA', ANCHE CONSULENZIALE, INERENTE,COLLEGATA O CORRELATA ALLA REVISIONE O ALLE QUESTIONI DI NATURA O CONTENUTOCONTABILE; LA SOCIETA' SVOLGE TALE ATTIVITA' NEL RISPETTO DELLE NORME DI LEGGEVIGENTI IN MATERIA E NEL CONTESTO DELL'ORGANIZZAZIONE DELLA RETE INTERNAZIONALEPRICEWATERHOUSECOOPERS (QUI DI SEGUITO IL \"NETWORK\"), ADERENDO PERTANTO ALLEREGOLE DI FUNZIONAMENTO DI TALE RETE.2.2. LA SOCIETA' PUO' INOLTRE SVOLGERE TUTTE LE ATTIVITA' CHE LE NORME TEMPOPER TEMPO VIGENTI PREVEDONO POSSANO ESSERE ESEGUITE DA UNA SOCIETA' DIREVISIONE (IVI INCLUSI LA REVISIONE LEGALE DEI CONTI, LA REDAZIONE DI PARERI,PERIZIE, VALUTAZIONI, INDAGINI DI NATURA CONTABILE O AMMINISTRA-TIVA, ANCHE SURICHIESTA DELL'AUTORITA' GIUDIZIARIA), NONCHE' COMPIERE TUTTI GLI ATTINECESSARI O UTILI PER IL CONSEGUIMENTO DELL'OGGETTO SOCIALE, NEI LIMITI DELLENORME APPLICABILI, COMPRESI A TITOLO ESEMPLIFICATIVO:A) L'ASSISTENZA NEL CAMPO DELLA RESPONSABILITA' SOCIALE D'IMPRESA E DELCORPORATE REPORTING SU DATI E INFORMAZIONI NON FINANZIARI;B) L'ASSISTENZA NELL'ANALISI, IMPLEMENTAZIONE E MONITORAGGIO DI MODELLIORGANIZZATIVI CHE RI-SPONDANO A LOGICHE DI COMPLIANCE CON NORME GIURIDICHE E/OPOLICY AZIENDALI NAZIONALI E INTER-NAZIONALI.2.3. AL FINE DEL RAGGIUNGIMENTO DELL'OGGETTO SOCIALE, POSSONO VENIRE POSTE INESSERE LE SEGUENTI OPERAZIONI PURCHE' CIO' ABBIA LUOGO NON NEI CONFRONTI DELPUBBLICO:A) ASSUMERE MUTUI E RICORRERE A QUALSIASI ALTRA FORMA DI CREDITO EFINANZIAMENTO, RILASCIARE GARANZIE REALI E PERSONALI, PER OBBLIGAZIONI PROPRIEE DI SOGGETTI O ORGANIZZAZIONI ADERENTI AL NETWORK, COMPIERE QUALSIASI ALTRAOPERAZIONE DI NATURA FINANZIARIA, COMMERCIALE, MOBILIARE ED IMMOBILIARE;B) ASSUMERE, SIA DIRETTAMENTE CHE INDIRETTAMENTE, INTERESSENZE E PARTECIPAZIONIDI CON-TROLLO IN ALTRE SOCIETA', COSTITUITE SIA IN ITALIA CHE ALL'ESTERO,EVENTUALMENTE APERTE ANCHE AD ALTRI SOCI;C) ASSUMERE, SIA DIRETTAMENTE CHE INDIRETTAMENTE, INTERESSENZE E PARTECIPAZIONIDI MINO-RANZA IN ALTRE SOCIETA', COSTITUITE SIA IN ITALIA CHE ALL'ESTERO,APERTE ANCHE AD ALTRI SOCI.",
+						"codiceFiscale": "12979880155",
+						"partitaIva": "12979880155",
+						"indirizzoPEC": "spa@pec-pwc.it",
+						"dettaglioPersonaGiuridica": {
+							"formaGiuridica": "SOCIETA' PER AZIONI",
+							"estremiCostituzione": "10/12/1999",
+							"capitaleSociale": "Dato non disponibile",
+							"durata": "30/06/2050"
+						},
+						"soggettiImpresa": [{
+								"nome": "ETTORE",
+								"cognome": "CORNO",
+								"codiceFiscale": "CRNTTR58S15F205G",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "15/11/1958",
+								"sesso": "M",
+								"indirizzoResidenza": "VLE GRANDI A 1",
+								"comuneResidenza": "BRESSO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20091",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "CARMINE ELIO",
+								"cognome": "CASALINI",
+								"codiceFiscale": "CSLCMN62C22F839H",
+								"comuneNascita": "NAPOLI",
+								"provinciaNascita": "NA",
+								"dataNascita": "22/03/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA KAGOSHIMA 20 INT 16",
+								"comuneResidenza": "NAPOLI",
+								"provinciaResidenza": "NA",
+								"capResidenza": "80127",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "NAPOLI"
+							}, {
+								"nome": "CORRADO",
+								"cognome": "APRICO",
+								"codiceFiscale": "PRCCRD65M31L049M",
+								"comuneNascita": "TARANTO",
+								"provinciaNascita": "TA",
+								"dataNascita": "31/08/1965",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PLINIO 89",
+								"comuneResidenza": "TARANTO",
+								"provinciaResidenza": "TA",
+								"capResidenza": "74121",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TARANTO"
+							}, {
+								"nome": "GIAN PAOLO",
+								"cognome": "DI LORENZO",
+								"codiceFiscale": "DLRGPL63M06H501N",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "06/08/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GIUSEPPE SAREDO 6 SC D",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00173",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "GABRIELE MARIA",
+								"cognome": "MATRONE",
+								"codiceFiscale": "MTRGRL64C14H501U",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "14/03/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA NEMORENSE 72 SC UN INT 6",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00199",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "ANDREA",
+								"cognome": "ALESSANDRI",
+								"codiceFiscale": "LSSNDR63R26A944S",
+								"comuneNascita": "BOLOGNA",
+								"provinciaNascita": "BO",
+								"dataNascita": "26/10/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE MARTESANA N 167",
+								"comuneResidenza": "VIMODRONE",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20090",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BOLOGNA"
+							}, {
+								"nome": "ANTONIO CARLO",
+								"cognome": "DOGLIOTTI",
+								"codiceFiscale": "DGLNNC64C09L304U",
+								"comuneNascita": "TORTONA",
+								"provinciaNascita": "AL",
+								"dataNascita": "09/03/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA VITTORIO VENETO 31",
+								"comuneResidenza": "VALENZA",
+								"provinciaResidenza": "AL",
+								"capResidenza": "15048",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TORTONA"
+							}, {
+								"nome": "MASSIMO",
+								"cognome": "GRIFANTINI",
+								"codiceFiscale": "GRFMSM63C22H501B",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "22/03/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA TIRANA 10",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00144",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "GIOVANNI ANDREA",
+								"cognome": "TOSELLI",
+								"codiceFiscale": "TSLGNN64S21B201K",
+								"comuneNascita": "BRONI",
+								"provinciaNascita": "PV",
+								"dataNascita": "21/11/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA ROSELLINI IPPOLITO 26",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20124",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "27/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "PCA",
+										"tipologia": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+										"dataInizio": "27/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BRONI"
+							}, {
+								"nome": "SCOTT EDWARD",
+								"cognome": "CUNNINGHAM",
+								"codiceFiscale": "CNNSTT64M23Z404W",
+								"comuneNascita": "STATI UNITI D'AMERICA",
+								"provinciaNascita": "EE",
+								"dataNascita": "23/08/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "L GO TENENTE BELLINI 1",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00197",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "STATI UNITI D'AMERICA"
+							}, {
+								"nome": "MASSIMO",
+								"cognome": "DAL LAGO",
+								"codiceFiscale": "DLLMSM63M23F464C",
+								"comuneNascita": "MONTECCHIO MAGGIORE",
+								"provinciaNascita": "VI",
+								"dataNascita": "23/08/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PARADISO N 24 INT 8",
+								"comuneResidenza": "VERONA",
+								"provinciaResidenza": "VR",
+								"capResidenza": "37129",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MONTECCHIO MAGGIORE"
+							}, {
+								"nome": "PIERO",
+								"cognome": "DE LORENZI",
+								"codiceFiscale": "DLRPRI63R23A145F",
+								"comuneNascita": "ALBENGA",
+								"provinciaNascita": "SV",
+								"dataNascita": "23/10/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "FRAZIONE VALLE TANARO N 215",
+								"comuneResidenza": "ASTI",
+								"provinciaResidenza": "AT",
+								"capResidenza": "14100",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ALBENGA"
+							}, {
+								"nome": "MAURIZIO",
+								"cognome": "LONATI",
+								"codiceFiscale": "LNTMRZ62L14F205A",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "14/07/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PREDABISSI FRANCESCO 2",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20131",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "ANDREA CRISTIANO",
+								"cognome": "MARTINELLI",
+								"codiceFiscale": "MRTNRC62E11F205S",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "11/05/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA BOCCACCIO GIOVANNI 34",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20123",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "EDOARDO",
+								"cognome": "ORLANDONI",
+								"codiceFiscale": "RLNDRD58L13G337P",
+								"comuneNascita": "PARMA",
+								"provinciaNascita": "PR",
+								"dataNascita": "13/07/1958",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DELLA RONDELLA 46",
+								"comuneResidenza": "LESIGNANO DE' BAGNI",
+								"provinciaResidenza": "PR",
+								"capResidenza": "43037",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PARMA"
+							}, {
+								"nome": "MARCO MICHELE OBEDIANO",
+								"cognome": "PALUMBO",
+								"codiceFiscale": "PLMMCM62R29F205C",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "29/10/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PREVIATI GAETANO 74",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20149",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "LORENZO",
+								"cognome": "PINI PRATO",
+								"codiceFiscale": "PNPLNZ66C19D969S",
+								"comuneNascita": "GENOVA",
+								"provinciaNascita": "GE",
+								"dataNascita": "19/03/1966",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA CARLO POMA 4 SC E INT 8",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00195",
+								"carica": [{
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "27/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "AMD",
+										"tipologia": "AMMINISTRATORE DELEGATO",
+										"dataInizio": "28/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "GENOVA"
+							}, {
+								"nome": "CORRADO",
+								"cognome": "TESTORI",
+								"codiceFiscale": "TSTCRD60D30H501B",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "30/04/1960",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA OMBRONE 12",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00198",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "GIORGIO",
+								"cognome": "GRECO",
+								"codiceFiscale": "GRCGRG62D06H612U",
+								"comuneNascita": "ROVERETO",
+								"provinciaNascita": "TN",
+								"dataNascita": "06/04/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DON LUIGI GUANELLA 5",
+								"comuneResidenza": "SARONNO",
+								"provinciaResidenza": "VA",
+								"capResidenza": "21047",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROVERETO"
+							}, {
+								"nome": "ALESSANDRO",
+								"cognome": "PARRINI",
+								"codiceFiscale": "PRRLSN66B10D612H",
+								"comuneNascita": "FIRENZE",
+								"provinciaNascita": "FI",
+								"dataNascita": "10/02/1966",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA IL PRATO N 15",
+								"comuneResidenza": "FIRENZE",
+								"provinciaResidenza": "FI",
+								"capResidenza": "50123",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "FIRENZE"
+							}, {
+								"nome": "SERGIO",
+								"cognome": "PIZZARELLI",
+								"codiceFiscale": "PZZSRG63R11H037I",
+								"comuneNascita": "PREMOSELLO-CHIOVENDA",
+								"provinciaNascita": "NO",
+								"dataNascita": "11/10/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA CITTA' DI LIMA 7",
+								"comuneResidenza": "DOMODOSSOLA",
+								"provinciaResidenza": "VB",
+								"capResidenza": "28845",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PREMOSELLO-CHIOVENDA"
+							}, {
+								"nome": "MAURIZIO ANGELO FRANCESCO",
+								"cognome": "DONVITO",
+								"codiceFiscale": "DNVMZN64C01F205V",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "01/03/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MATTEOTTI 4",
+								"comuneResidenza": "VEDANO AL LAMBRO",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20854",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "MARCO",
+								"cognome": "SALA",
+								"codiceFiscale": "SLAMRC61S19F205P",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "19/11/1961",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA CASTELVETRO LODOVICO 14",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20154",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "CON",
+										"tipologia": "CONSIGLIERE",
+										"dataInizio": "27/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}, {
+										"codice": "VPA",
+										"tipologia": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+										"dataInizio": "28/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "PAOLO",
+								"cognome": "CACCINI",
+								"codiceFiscale": "CCCPLA63M11D332I",
+								"comuneNascita": "DOMODOSSOLA",
+								"provinciaNascita": "NO",
+								"dataNascita": "11/08/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA LIPARI 6",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20144",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "DOMODOSSOLA"
+							}, {
+								"nome": "ELISABETTA",
+								"cognome": "CALDIROLA",
+								"codiceFiscale": "CLDLBT58L71F205E",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "31/07/1958",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA BONI GIACOMO 37",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20144",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "GIOVANNI",
+								"cognome": "FERRAIOLI",
+								"codiceFiscale": "FRRGNN67E18F205V",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "18/05/1967",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA SOLARI ANDREA 47",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20144",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "FRANCESCO",
+								"cognome": "FERRARA",
+								"codiceFiscale": "FRRFNC67B01E625R",
+								"comuneNascita": "LIVORNO",
+								"provinciaNascita": "LI",
+								"dataNascita": "01/02/1967",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA TOMMASO GROSSI 15",
+								"comuneResidenza": "MONZA",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20900",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "LIVORNO"
+							}, {
+								"nome": "MATTIA",
+								"cognome": "MOLARI",
+								"codiceFiscale": "MLRMTT64M22L219I",
+								"comuneNascita": "TORINO",
+								"provinciaNascita": "TO",
+								"dataNascita": "22/08/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GOVERNOLO 5",
+								"comuneResidenza": "TORINO",
+								"provinciaResidenza": "TO",
+								"capResidenza": "10128",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TORINO"
+							}, {
+								"nome": "ROBERTO",
+								"cognome": "SOLLEVANTI",
+								"codiceFiscale": "SLLRRT69C11E256A",
+								"comuneNascita": "GUBBIO",
+								"provinciaNascita": "PG",
+								"dataNascita": "11/03/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GARIBALDI 3",
+								"comuneResidenza": "BOLOGNA",
+								"provinciaResidenza": "BO",
+								"capResidenza": "40124",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "GUBBIO"
+							}, {
+								"nome": "LIA LUCILLA MARIE LO",
+								"cognome": "TURRI",
+								"codiceFiscale": "TRRLCL67T47Z110U",
+								"comuneNascita": "FRANCIA",
+								"provinciaNascita": "EE",
+								"dataNascita": "07/12/1967",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA MATILDE SERAO 7",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20144",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "FRANCIA"
+							}, {
+								"nome": "ALESSANDRO",
+								"cognome": "VINCENZI",
+								"codiceFiscale": "VNCLSN67T23L781P",
+								"comuneNascita": "VERONA",
+								"provinciaNascita": "VR",
+								"dataNascita": "23/12/1967",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GIUSEPPE CORSO N 10 INT 10",
+								"comuneResidenza": "VERONA",
+								"provinciaResidenza": "VR",
+								"capResidenza": "37131",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "06/07/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "VERONA"
+							}, {
+								"nome": "PIERFRANCESCO",
+								"cognome": "ANGLANI",
+								"codiceFiscale": "NGLPFR68L22G187K",
+								"comuneNascita": "OSTUNI",
+								"provinciaNascita": "BR",
+								"dataNascita": "22/07/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA BARZINI LUIGI 12",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20125",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "OSTUNI"
+							}, {
+								"nome": "STEFANO",
+								"cognome": "BRAVO",
+								"codiceFiscale": "BRVSFN68P21F205S",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "21/09/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PARINI 16",
+								"comuneResidenza": "VEDANO AL LAMBRO",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20854",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "LEDA",
+								"cognome": "CIAVARELLA",
+								"codiceFiscale": "CVRLDE66R47H501W",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "07/10/1966",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA LAGO DI LESINA 35 SC UN INT 8",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00199",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "MATTEO GAETANO",
+								"cognome": "COLOMBO",
+								"codiceFiscale": "CLMMTG69E30F205W",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "30/05/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA YURI GAGARIN 15/A",
+								"comuneResidenza": "MEDA",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20821",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "ANDREA",
+								"cognome": "CRESPI",
+								"codiceFiscale": "CRSNDR68P05F205D",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "05/09/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA LATTANZIO 16",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20137",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "ALESSANDRO",
+								"cognome": "MAZZETTI",
+								"codiceFiscale": "MZZLSN70M16B157U",
+								"comuneNascita": "BRESCIA",
+								"provinciaNascita": "BS",
+								"dataNascita": "16/08/1970",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA TORRICELLA 12",
+								"comuneResidenza": "PORDENONE",
+								"provinciaResidenza": "PN",
+								"capResidenza": "33170",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BRESCIA"
+							}, {
+								"nome": "ANDREA FRANCO LUIGI",
+								"cognome": "RIZZARDI",
+								"codiceFiscale": "RZZNRF68D12F205L",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "12/04/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA BRONZINO 6",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20133",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "MASSIMO FRANCESCO MARIA",
+								"cognome": "ROTA",
+								"codiceFiscale": "RTOMSM65B19F205J",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "19/02/1965",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE PICENO 2",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20129",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "PIER LUIGI",
+								"cognome": "VITELLI",
+								"codiceFiscale": "VTLPLG67T21F839O",
+								"comuneNascita": "NAPOLI",
+								"provinciaNascita": "NA",
+								"dataNascita": "21/12/1967",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GIULIA GONZAGA 18",
+								"comuneResidenza": "NAPOLI",
+								"provinciaResidenza": "NA",
+								"capResidenza": "80125",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "NAPOLI"
+							}, {
+								"nome": "PAOLO",
+								"cognome": "VESENTINI",
+								"codiceFiscale": "VSNPLA66T23E349R",
+								"comuneNascita": "ISOLA DELLA SCALA",
+								"provinciaNascita": "VR",
+								"dataNascita": "23/12/1966",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA SARTORARI MATILDE N 1",
+								"comuneResidenza": "ZEVIO",
+								"provinciaResidenza": "VR",
+								"capResidenza": "37059",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/06/2007",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ISOLA DELLA SCALA"
+							}, {
+								"nome": "GIANNI",
+								"cognome": "BENDANDI",
+								"codiceFiscale": "BNDGNN68H13H199O",
+								"comuneNascita": "RAVENNA",
+								"provinciaNascita": "RA",
+								"dataNascita": "13/06/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA FELISATTI GIROLAMO 4",
+								"comuneResidenza": "RAVENNA",
+								"provinciaResidenza": "RA",
+								"capResidenza": "48123",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2008",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "RAVENNA"
+							}, {
+								"nome": "ALBERTO",
+								"cognome": "BUSCAGLIA",
+								"codiceFiscale": "BSCLRT66C14L750B",
+								"comuneNascita": "VERCELLI",
+								"provinciaNascita": "VC",
+								"dataNascita": "14/03/1966",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MARIO ALBERTO 18",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20149",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2008",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "VERCELLI"
+							}, {
+								"nome": "ALFREDO ANTONIO",
+								"cognome": "GALLISTRU",
+								"codiceFiscale": "GLLLRD65T02B300W",
+								"comuneNascita": "BUSTO ARSIZIO",
+								"provinciaNascita": "VA",
+								"dataNascita": "02/12/1965",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA LUCANIA 12",
+								"comuneResidenza": "MONZA",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20900",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2008",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BUSTO ARSIZIO"
+							}, {
+								"nome": "GIULIO",
+								"cognome": "GRANDI",
+								"codiceFiscale": "GRNGLI69R11A794I",
+								"comuneNascita": "BERGAMO",
+								"provinciaNascita": "BG",
+								"dataNascita": "11/10/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA EVARISTO BASCHENIS 10",
+								"comuneResidenza": "BERGAMO",
+								"provinciaResidenza": "BG",
+								"capResidenza": "24122",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2008",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BERGAMO"
+							}, {
+								"nome": "ALBERTO",
+								"cognome": "BERETTA",
+								"codiceFiscale": "BRTLRT68L07D969I",
+								"comuneNascita": "GENOVA",
+								"provinciaNascita": "GE",
+								"dataNascita": "07/07/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GREPPI 17",
+								"comuneResidenza": "BUCCINASCO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20090",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "18/06/2009",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "GENOVA"
+							}, {
+								"nome": "LUCA",
+								"cognome": "BONVINO",
+								"codiceFiscale": "BNVLCU69D12H501M",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "12/04/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "V VITTORIO CAPRIOLI 62 SC C INT 12",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00139",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "18/06/2009",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "ANDREA",
+								"cognome": "BRANDUARDI",
+								"codiceFiscale": "BRNNDR69C04F205F",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "04/03/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE MARTESANA N 11",
+								"comuneResidenza": "VIMODRONE",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20090",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "18/06/2009",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "ANDREA GERARDO",
+								"cognome": "BRIVIO",
+								"codiceFiscale": "BRVNRG68S08F704J",
+								"comuneNascita": "MONZA",
+								"provinciaNascita": "MI",
+								"dataNascita": "08/11/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA E DA MONZA 29",
+								"comuneResidenza": "MONZA",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20900",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "18/06/2009",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MONZA"
+							}, {
+								"nome": "ALESSANDRA",
+								"cognome": "MINGOZZI",
+								"codiceFiscale": "MNGLSN72L60A192W",
+								"comuneNascita": "ALGHERO",
+								"provinciaNascita": "SS",
+								"dataNascita": "20/07/1972",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA CHIESA N 48 C",
+								"comuneResidenza": "VIGONZA",
+								"provinciaResidenza": "PD",
+								"capResidenza": "35010",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "18/06/2009",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ALGHERO"
+							}, {
+								"nome": "LAURA",
+								"cognome": "IEMMI",
+								"codiceFiscale": "MMILRA69S66F205S",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "26/11/1969",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA VINCENZO ALLIATA 14",
+								"comuneResidenza": "SARONNO",
+								"provinciaResidenza": "VA",
+								"capResidenza": "21047",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "24/06/2010",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "ALEXANDER FRANZ",
+								"cognome": "MAYR",
+								"codiceFiscale": "MYRLND71H27A952N",
+								"comuneNascita": "BOLZANO .BOZEN.",
+								"provinciaNascita": "BZ",
+								"dataNascita": "27/06/1971",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA LIVENZA 25 TENCAROLA",
+								"comuneResidenza": "SELVAZZANO DENTRO",
+								"provinciaResidenza": "PD",
+								"capResidenza": "35030",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "24/06/2010",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BOLZANO .BOZEN."
+							}, {
+								"nome": "GIORGIO",
+								"cognome": "GHIZZONI",
+								"codiceFiscale": "GHZGRG47L16F205U",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "16/07/1947",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA CORREGGIO 20",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20149",
+								"carica": [{
+										"codice": "SIS",
+										"tipologia": "SINDACO SUPPLENTE",
+										"dataInizio": "06/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "MARIA-CRISTINA",
+								"cognome": "LANDRO",
+								"codiceFiscale": "LNDMCR61E44L483B",
+								"comuneNascita": "UDINE",
+								"provinciaNascita": "UD",
+								"dataNascita": "04/05/1961",
+								"sesso": "F",
+								"indirizzoResidenza": "PIAZZA GIACOMO MATTEOTTI 16",
+								"comuneResidenza": "UDINE",
+								"provinciaResidenza": "UD",
+								"capResidenza": "33100",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "02/01/2006",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "UDINE"
+							}, {
+								"nome": "MONICA",
+								"cognome": "BICCARI",
+								"codiceFiscale": "BCCMNC73L55F839B",
+								"comuneNascita": "NAPOLI",
+								"provinciaNascita": "NA",
+								"dataNascita": "15/07/1973",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA COPENHAGEN N 6 EDI SC B",
+								"comuneResidenza": "FIUMICINO",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00054",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "01/07/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "NAPOLI"
+							}, {
+								"nome": "ALBERTO",
+								"cognome": "MICHELOTTI",
+								"codiceFiscale": "MCHLRT73B10C794E",
+								"comuneNascita": "CLES",
+								"provinciaNascita": "TN",
+								"dataNascita": "10/02/1973",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DELLA MANTOVANA 8 ABIT INT 6",
+								"comuneResidenza": "TRENTO",
+								"provinciaResidenza": "TN",
+								"capResidenza": "38122",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "01/07/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CLES"
+							}, {
+								"nome": "STEFANO",
+								"cognome": "PAVESI",
+								"codiceFiscale": "PVSSFN71S29D150M",
+								"comuneNascita": "CREMONA",
+								"provinciaNascita": "CR",
+								"dataNascita": "29/11/1971",
+								"sesso": "M",
+								"indirizzoResidenza": "CORSO SEMPIONE 62",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20154",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "01/07/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CREMONA"
+							}, {
+								"nome": "CHRISTIAN",
+								"cognome": "SARTORI",
+								"codiceFiscale": "SRTCRS71A14L407H",
+								"comuneNascita": "TREVISO",
+								"provinciaNascita": "TV",
+								"dataNascita": "14/01/1971",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DEGLI AVOGADRO 5",
+								"comuneResidenza": "NOVARA",
+								"provinciaResidenza": "NO",
+								"capResidenza": "28100",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "01/07/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TREVISO"
+							}, {
+								"nome": "CARLO",
+								"cognome": "ROSSI",
+								"codiceFiscale": "RSSCRL64A07L682F",
+								"comuneNascita": "VARESE",
+								"provinciaNascita": "VA",
+								"dataNascita": "07/01/1964",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA TONALE 44",
+								"comuneResidenza": "VARESE",
+								"provinciaResidenza": "VA",
+								"capResidenza": "21100",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/10/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "VARESE"
+							}, {
+								"nome": "MARCO",
+								"cognome": "D'ALIA",
+								"codiceFiscale": "DLAMRC71D08G273G",
+								"comuneNascita": "PALERMO",
+								"provinciaNascita": "PA",
+								"dataNascita": "08/04/1971",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PITEA DA MARSIGLIA 17",
+								"comuneResidenza": "PALERMO",
+								"provinciaResidenza": "PA",
+								"capResidenza": "90149",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/10/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PALERMO"
+							}, {
+								"nome": "LUIGI",
+								"cognome": "LODIGIANI",
+								"codiceFiscale": "LDGLGU70D14H501S",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "14/04/1970",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DEL CORSO 28",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00186",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/10/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "DINO",
+								"cognome": "PONGHETTI",
+								"codiceFiscale": "PNGDNI70D26A479K",
+								"comuneNascita": "ASTI",
+								"provinciaNascita": "AT",
+								"dataNascita": "26/04/1970",
+								"sesso": "M",
+								"indirizzoResidenza": "LOCAL PENNA 12",
+								"comuneResidenza": "VILLA SAN SECONDO",
+								"provinciaResidenza": "AT",
+								"capResidenza": "14020",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/10/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ASTI"
+							}, {
+								"nome": "CHRISTIAN JORGE",
+								"cognome": "ALESSANDRINI",
+								"codiceFiscale": "LSSCRS74B27Z600N",
+								"comuneNascita": "ARGENTINA",
+								"provinciaNascita": "EE",
+								"dataNascita": "27/02/1974",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE CORTINA D AMPEZZO 178 SC UN",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00135",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "25/10/2011",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ARGENTINA"
+							}, {
+								"nome": "NADIA",
+								"cognome": "SCAVUZZO",
+								"codiceFiscale": "SCVNDA68S50Z121I",
+								"comuneNascita": "MALTA",
+								"provinciaNascita": "EE",
+								"dataNascita": "10/11/1968",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA FILIPPO JUVARRA 1",
+								"comuneResidenza": "TORINO",
+								"provinciaResidenza": "TO",
+								"capResidenza": "10122",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "21/06/2012",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MALTA"
+							}, {
+								"nome": "RODRIGUE GABRIEL",
+								"cognome": "SCHUBELIN",
+								"codiceFiscale": "SCHRRG79A28Z110H",
+								"comuneNascita": "FRANCIA",
+								"provinciaNascita": "EE",
+								"dataNascita": "28/01/1979",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA VOLTURNO 7 SC C",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00185",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "21/06/2012",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "FRANCIA"
+							}, {
+								"nome": "ALESSANDRO",
+								"cognome": "TURRIS",
+								"codiceFiscale": "TRRLSN70T04C773S",
+								"comuneNascita": "CIVITAVECCHIA",
+								"provinciaNascita": "RM",
+								"dataNascita": "04/12/1970",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GALILEO GALILEI N 30",
+								"comuneResidenza": "PALADINA",
+								"provinciaResidenza": "BG",
+								"capResidenza": "24030",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "21/06/2012",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CIVITAVECCHIA"
+							}, {
+								"nome": "FILIPPO",
+								"cognome": "ZAGAGNIN",
+								"codiceFiscale": "ZGGFPP72S18L736I",
+								"comuneNascita": "VENEZIA",
+								"provinciaNascita": "VE",
+								"dataNascita": "18/11/1972",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA FELICE CAVALLOTTI (MESTRE) 65",
+								"comuneResidenza": "VENEZIA",
+								"provinciaResidenza": "VE",
+								"capResidenza": "30171",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "21/06/2012",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "VENEZIA"
+							}, {
+								"nome": "ADRIANO",
+								"cognome": "ANTONINI",
+								"codiceFiscale": "NTNDRN72A19H501P",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "19/01/1972",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PRINCIPE EUGENIO 51",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20155",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "24/06/2013",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "NICOLA",
+								"cognome": "FIERRO",
+								"codiceFiscale": "FRRNCL70H22A284A",
+								"comuneNascita": "ANDRETTA",
+								"provinciaNascita": "AV",
+								"dataNascita": "22/06/1970",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA ARDIGO ROBERTO 34",
+								"comuneResidenza": "MONZA",
+								"provinciaResidenza": "MB",
+								"capResidenza": "20900",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "24/06/2013",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ANDRETTA"
+							}, {
+								"nome": "ANDREA",
+								"cognome": "MANCHELLI",
+								"codiceFiscale": "MNCNDR74D20E463A",
+								"comuneNascita": "LA SPEZIA",
+								"provinciaNascita": "SP",
+								"dataNascita": "20/04/1974",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE ASPROMONTE 14/5",
+								"comuneResidenza": "GENOVA",
+								"provinciaResidenza": "GE",
+								"capResidenza": "16128",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "24/06/2013",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "LA SPEZIA"
+							}, {
+								"nome": "GIANLUCA",
+								"cognome": "CERESA",
+								"codiceFiscale": "CRSGLC62C15A010H",
+								"comuneNascita": "ABBIATEGRASSO",
+								"provinciaNascita": "MI",
+								"dataNascita": "15/03/1962",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MORANDI R 1",
+								"comuneResidenza": "ABBIATEGRASSO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20081",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "09/10/2013",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ABBIATEGRASSO"
+							}, {
+								"nome": "LUIGI",
+								"cognome": "NECCI",
+								"codiceFiscale": "NCCLGU72B09H501D",
+								"comuneNascita": "ROMA",
+								"provinciaNascita": "RM",
+								"dataNascita": "09/02/1972",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA CASSIA                     713",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00189",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "27/06/2014",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "ROMA"
+							}, {
+								"nome": "NICOLA",
+								"cognome": "MADURERI",
+								"codiceFiscale": "MDRNCL73R05G337C",
+								"comuneNascita": "PARMA",
+								"provinciaNascita": "PR",
+								"dataNascita": "05/10/1973",
+								"sesso": "M",
+								"indirizzoResidenza": "STRADA CAVAGNARI 8",
+								"comuneResidenza": "PARMA",
+								"provinciaResidenza": "PR",
+								"capResidenza": "43126",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "01/12/2014",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PARMA"
+							}, {
+								"nome": "RODOLFO",
+								"cognome": "PESATI",
+								"codiceFiscale": "PSTRLF69B28F205Z",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "28/02/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MARIO ALBERTO 6",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20149",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "27/01/2015",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "DARIO",
+								"cognome": "TROJA",
+								"codiceFiscale": "TRJDRA72C09L219Q",
+								"comuneNascita": "TORINO",
+								"provinciaNascita": "TO",
+								"dataNascita": "09/03/1972",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA BALTIMORA 47 INT 4",
+								"comuneResidenza": "TORINO",
+								"provinciaResidenza": "TO",
+								"capResidenza": "10137",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "22/06/2015",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TORINO"
+							}, {
+								"nome": "VERONICA",
+								"cognome": "POGGI",
+								"codiceFiscale": "PGGVNC74P61D612R",
+								"comuneNascita": "FIRENZE",
+								"provinciaNascita": "FI",
+								"dataNascita": "21/09/1974",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA CAPO DI MONDO N 54",
+								"comuneResidenza": "FIRENZE",
+								"provinciaResidenza": "FI",
+								"capResidenza": "50136",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "20/10/2015",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "FIRENZE"
+							}, {
+								"nome": "LUCA",
+								"cognome": "SICILIANO",
+								"codiceFiscale": "SCLLCU74R29G273B",
+								"comuneNascita": "PALERMO",
+								"provinciaNascita": "PA",
+								"dataNascita": "29/10/1974",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PALASCIANO FERDINANDO 4",
+								"comuneResidenza": "PALERMO",
+								"provinciaResidenza": "PA",
+								"capResidenza": "90146",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "20/10/2015",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PALERMO"
+							}, {
+								"nome": "GIORGIO",
+								"cognome": "SIMONELLI",
+								"codiceFiscale": "SMNGRG76A31L407Y",
+								"comuneNascita": "TREVISO",
+								"provinciaNascita": "TV",
+								"dataNascita": "31/01/1976",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DEGLI EX INTERNATI 13 I 6",
+								"comuneResidenza": "CARBONERA",
+								"provinciaResidenza": "TV",
+								"capResidenza": "31030",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "20/10/2015",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TREVISO"
+							}, {
+								"nome": "FABIO",
+								"cognome": "CHIERICO",
+								"codiceFiscale": "CHRFBA75A19B988P",
+								"comuneNascita": "CASORATE PRIMO",
+								"provinciaNascita": "PV",
+								"dataNascita": "19/01/1975",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA GUGLIELMONE 9",
+								"comuneResidenza": "ZIBIDO SAN GIACOMO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20080",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "27/06/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CASORATE PRIMO"
+							}, {
+								"nome": "RAFFAELLA",
+								"cognome": "PREZIOSI",
+								"codiceFiscale": "PRZRFL77E60A509C",
+								"comuneNascita": "AVELLINO",
+								"provinciaNascita": "AV",
+								"dataNascita": "20/05/1977",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA BASSI PAOLO 15",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20159",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "27/06/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "AVELLINO"
+							}, {
+								"nome": "JACOPO",
+								"cognome": "MARCHESE",
+								"codiceFiscale": "MRCJCP86S21G388S",
+								"comuneNascita": "PAVIA",
+								"provinciaNascita": "PV",
+								"dataNascita": "21/11/1986",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA BOZZO COSTA 144",
+								"comuneResidenza": "RAPALLO",
+								"provinciaResidenza": "GE",
+								"capResidenza": "16035",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "12/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PAVIA"
+							}, {
+								"nome": "CARLO",
+								"cognome": "DE VILAS",
+								"codiceFiscale": "DVLCRL54P30L378R",
+								"comuneNascita": "TRENTO",
+								"provinciaNascita": "TN",
+								"dataNascita": "30/09/1954",
+								"sesso": "M",
+								"indirizzoResidenza": "CORSO SEMPIONE 62",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20154",
+								"carica": [{
+										"codice": "PCS",
+										"tipologia": "PRESIDENTE DEL COLLEGIO SINDACALE",
+										"dataInizio": "06/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TRENTO"
+							}, {
+								"nome": "LUIGI",
+								"cognome": "MANELLI",
+								"codiceFiscale": "MNLLGU54L26E437W",
+								"comuneNascita": "LANDRIANO",
+								"provinciaNascita": "PV",
+								"dataNascita": "26/07/1954",
+								"sesso": "M",
+								"indirizzoResidenza": "CASCINA ZANAROCCA 1",
+								"comuneResidenza": "LANDRIANO",
+								"provinciaResidenza": "PV",
+								"capResidenza": "27015",
+								"carica": [{
+										"codice": "SIE",
+										"tipologia": "SINDACO",
+										"dataInizio": "06/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "LANDRIANO"
+							}, {
+								"nome": "ANDREA",
+								"cognome": "BIGNAMI",
+								"codiceFiscale": "BGNNDR69E25E648X",
+								"comuneNascita": "LODI",
+								"provinciaNascita": "MI",
+								"dataNascita": "25/05/1969",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA S CHIARA 9",
+								"comuneResidenza": "CREMA",
+								"provinciaResidenza": "CR",
+								"capResidenza": "26013",
+								"carica": [{
+										"codice": "SIE",
+										"tipologia": "SINDACO",
+										"dataInizio": "06/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "LODI"
+							}, {
+								"nome": "MARCO ANTONIO EMANUELE",
+								"cognome": "MEULEPAS",
+								"codiceFiscale": "MLPMCN68T25F205H",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "25/12/1968",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA SENOFONTE 2 B",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20145",
+								"carica": [{
+										"codice": "SIS",
+										"tipologia": "SINDACO SUPPLENTE",
+										"dataInizio": "06/10/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "STEFANO",
+								"cognome": "AMICONE",
+								"codiceFiscale": "MCNSFN75S04G482Z",
+								"comuneNascita": "PESCARA",
+								"provinciaNascita": "PE",
+								"dataNascita": "04/11/1975",
+								"sesso": "M",
+								"indirizzoResidenza": "VIALE AMERIGO VESPUCCI 190",
+								"comuneResidenza": "PESCARA",
+								"provinciaResidenza": "PE",
+								"capResidenza": "65126",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "22/12/2016",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PESCARA"
+							}, {
+								"nome": "PAOLO",
+								"cognome": "BERSANI",
+								"codiceFiscale": "BRSPLA63R10L219K",
+								"comuneNascita": "TORINO",
+								"provinciaNascita": "TO",
+								"dataNascita": "10/10/1963",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA FELICE CORDERO DI PAMPARATO 25",
+								"comuneResidenza": "TORINO",
+								"provinciaResidenza": "TO",
+								"capResidenza": "10143",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "12/06/2017",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TORINO"
+							}, {
+								"nome": "MONICA",
+								"cognome": "MAGGIO",
+								"codiceFiscale": "MGGMNC75D55L219C",
+								"comuneNascita": "TORINO",
+								"provinciaNascita": "TO",
+								"dataNascita": "15/04/1975",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA PIETRO COSSA 134",
+								"comuneResidenza": "TORINO",
+								"provinciaResidenza": "TO",
+								"capResidenza": "10146",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "12/06/2017",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "TORINO"
+							}, {
+								"nome": "DANIELE",
+								"cognome": "MAGNONI",
+								"codiceFiscale": "MGNDNL76M20F205P",
+								"comuneNascita": "MILANO",
+								"provinciaNascita": "MI",
+								"dataNascita": "20/08/1976",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA DEL FUTURISMO 27",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20138",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "12/06/2017",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "MILANO"
+							}, {
+								"nome": "PIERPAOLO",
+								"cognome": "MOSCA",
+								"codiceFiscale": "MSCPPL76S10F839Z",
+								"comuneNascita": "NAPOLI",
+								"provinciaNascita": "NA",
+								"dataNascita": "10/11/1976",
+								"sesso": "M",
+								"indirizzoResidenza": "V FERNANDO COLOMBO 16 SC UN INT 18",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00154",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "29/06/2017",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "NAPOLI"
+							}, {
+								"nome": "FRANCESCO",
+								"cognome": "RONCO",
+								"codiceFiscale": "RNCFNC77P12B885X",
+								"comuneNascita": "CASALE MONFERRATO",
+								"provinciaNascita": "AL",
+								"dataNascita": "12/09/1977",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA SALENTO 1",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20141",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "29/06/2017",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "CASALE MONFERRATO"
+							}, {
+								"nome": "MICHELE",
+								"cognome": "COLZANI",
+								"codiceFiscale": "CLZMHL73H25I625N",
+								"comuneNascita": "SEREGNO",
+								"provinciaNascita": "MI",
+								"dataNascita": "25/06/1973",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA FRANCO SANTAMBROGIO 1",
+								"comuneResidenza": "CABIATE",
+								"provinciaResidenza": "CO",
+								"capResidenza": "22060",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "09/02/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "SEREGNO"
+							}, {
+								"nome": "SABRINA",
+								"cognome": "CHINELLO",
+								"codiceFiscale": "CHNSRN79A68D912X",
+								"comuneNascita": "GARBAGNATE MILANESE",
+								"provinciaNascita": "MI",
+								"dataNascita": "28/01/1979",
+								"sesso": "F",
+								"indirizzoResidenza": "VIA MONTE SABOTINO 77 ABIT",
+								"comuneResidenza": "PADERNO DUGNANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20037",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "GARBAGNATE MILANESE"
+							}, {
+								"nome": "FABRIZIO",
+								"cognome": "DE DOMINICIS",
+								"codiceFiscale": "DDMFRZ77H22G288W",
+								"comuneNascita": "PALMI",
+								"provinciaNascita": "RC",
+								"dataNascita": "22/06/1977",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA MACEDONIA 10 SC UN",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00179",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PALMI"
+							}, {
+								"nome": "GIUSEPPE",
+								"cognome": "ERMOCIDA",
+								"codiceFiscale": "RMCGPP76D29A542U",
+								"comuneNascita": "BADOLATO",
+								"provinciaNascita": "CZ",
+								"dataNascita": "29/04/1976",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA VENEZIA 12 INT 7",
+								"comuneResidenza": "SAN LAZZARO DI SAVENA",
+								"provinciaResidenza": "BO",
+								"capResidenza": "40068",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BADOLATO"
+							}, {
+								"nome": "FRANCESCO",
+								"cognome": "FORZONI",
+								"codiceFiscale": "FRZFNC79H06A851G",
+								"comuneNascita": "BIBBIENA",
+								"provinciaNascita": "AR",
+								"dataNascita": "06/06/1979",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA PIER CAPPONI N 79",
+								"comuneResidenza": "FIRENZE",
+								"provinciaResidenza": "FI",
+								"capResidenza": "50132",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "BIBBIENA"
+							}, {
+								"nome": "MASSIMILIANO",
+								"cognome": "LOFFREDO",
+								"codiceFiscale": "LFFMSM74C10A509Q",
+								"comuneNascita": "AVELLINO",
+								"provinciaNascita": "AV",
+								"dataNascita": "10/03/1974",
+								"sesso": "M",
+								"indirizzoResidenza": "PZA TOLOSETTO FARINATI DEGLI UBER 3",
+								"comuneResidenza": "ROMA",
+								"provinciaResidenza": "RM",
+								"capResidenza": "00122",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "AVELLINO"
+							}, {
+								"nome": "GIAN PAOLO",
+								"cognome": "MANFRE'",
+								"codiceFiscale": "MNFGPL77L12G888U",
+								"comuneNascita": "PORDENONE",
+								"provinciaNascita": "PN",
+								"dataNascita": "12/07/1977",
+								"sesso": "M",
+								"indirizzoResidenza": "PIAZZA MONDADORI ARNOLDO 3",
+								"comuneResidenza": "MILANO",
+								"provinciaResidenza": "MI",
+								"capResidenza": "20122",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "26/06/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "PORDENONE"
+							}, {
+								"nome": "EZIO",
+								"cognome": "BASSI",
+								"codiceFiscale": "BSSZEI60H14C933R",
+								"comuneNascita": "COMO",
+								"provinciaNascita": "CO",
+								"dataNascita": "14/06/1960",
+								"sesso": "M",
+								"indirizzoResidenza": "VIA S GIOVNANI DA MEDA 2",
+								"comuneResidenza": "COMO",
+								"provinciaResidenza": "CO",
+								"capResidenza": "22100",
+								"carica": [{
+										"codice": "PC",
+										"tipologia": "PROCURATORE",
+										"dataInizio": "28/09/2018",
+										"dataFine": "",
+										"selezionato": false,
+										"dichiarazione": false
+									}
+								],
+								"estremiCCIAA": "COMO"
+							}
+						],
+						"aziendeCollegate": []
+					}
+				}
+			]
+		}
+	},
+	"dtGenerazionePdf": null,
+	"dtInizioCompilazione": "2019-01-02",
+	"dtUltimoAggiornamento": "2019-01-02",
+	"dtUploadPdfFirmato": "2019-01-02",
+	"dtFine": null,
+	"idProtocollo": null,
+	"pdfFirmato": null,
+	"pdfGenerato": null,
+	"pdfFirmatoName": null,
+	"dtProtocollazione": "02/01/2019",
+	"a4gtAllegatoDicAntimafias": [],
+	"stato": {
+		"id": 11,
+		"identificativo": "BOZZA",
+		"descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+	},
+	"azienda": {
+		"id": 8,
+		"cuaa": "00123890220"
+	},
+	"assenzaDt": null,
+	"allegatoFamiliariConviventi": null
+}

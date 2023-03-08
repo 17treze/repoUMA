@@ -1,0 +1,1168 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="DOTAZIONETECNICA_51.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+			START
+			WITH 1
+			MAXVALUE 999999999999999999999999999
+			MINVALUE 1
+			NOCYCLE
+			NOCACHE
+			ORDER;
+
+			CREATE TABLE A4GT_LOGGING (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			UTENTE ${string.type}(500 CHAR) NOT NULL,
+			TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+			TABELLA ${string.type}(4000) NOT NULL,
+			ID_ENTITA NUMBER(19) NOT NULL,
+			DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+			CONSTRAINT A4GT_LOGGING_PK
+			PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+
+			CREATE TABLE A4GT_LOGGING_VALIDAZIONE (
+			ID ${id.number.type} NOT NULL,
+			ID_VALIDAZIONE ${version.number.type},
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			UTENTE ${string.type}(500 CHAR) NOT NULL,
+			TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+			TABELLA ${string.type}(4000) NOT NULL,
+			ID_ENTITA NUMBER(19) NOT NULL,
+			DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+			CONSTRAINT A4GT_LOGGING_VALIDAZIONE_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT
+			SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO
+			${user.writer};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON
+			NXTNBR TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON
+			A4GT_LOGGING TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON
+			A4GT_LOGGING_VALIDAZIONE TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_51.1"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_FASCICOLO
+			(
+			ID NUMBER(20, 0) NOT NULL,
+			VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+			ID_VALIDAZIONE INTEGER DEFAULT 0 NOT NULL,
+			CUAA VARCHAR2(16) NOT NULL,
+			DT_AGGIORNAMENTO_FONTI_ESTERNE DATE,
+			CONSTRAINT PK_FASCICOLO PRIMARY KEY (ID, ID_VALIDAZIONE)
+			);
+			CREATE UNIQUE INDEX IDU_CUAA ON
+			A4GT_FASCICOLO (ID_VALIDAZIONE, CUAA);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FASCICOLO TO ${user.writer};
+			GRANT SELECT ON A4GT_FASCICOLO TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_51.2"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE
+			A4GD_TIPOLOGIA_MACCHINARIO (
+			ID NUMBER(20,0) NOT NULL,
+			VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+			DESCRIZIONE VARCHAR2(50),
+			DATA_INIZIO DATE,
+			DATA_FINE DATE,
+			CONSTRAINT PK_TIPOLOGIA_MACCHINARIO PRIMARY KEY ("ID")
+			);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GD_TIPOLOGIA_MACCHINARIO TO
+			${user.writer};
+			GRANT SELECT ON A4GD_TIPOLOGIA_MACCHINARIO TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_51.3"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE
+			A4GD_SOTTOTIPO_MACCHINARIO (
+			ID NUMBER(20,0) NOT NULL,
+			VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+			DESCRIZIONE VARCHAR2(50),
+			ID_TIPOLOGIA NUMBER(20,0) NOT NULL,
+			DATA_INIZIO DATE,
+			DATA_FINE DATE,
+			CONSTRAINT PK_SOTTOTIPOLOGIA_MACCHINARIO PRIMARY KEY ("ID"),
+			CONSTRAINT FK_TIPOLOGIA FOREIGN KEY (ID_TIPOLOGIA) REFERENCES
+			A4GD_TIPOLOGIA_MACCHINARIO (ID)
+			);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GD_SOTTOTIPO_MACCHINARIO TO
+			${user.writer};
+			GRANT SELECT ON A4GD_SOTTOTIPO_MACCHINARIO TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_51.4"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_MACCHINA (
+			ID NUMBER(20,0) NOT NULL,
+			VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+			ID_VALIDAZIONE NUMBER(20,0) NOT NULL,
+			ID_FASCICOLO NUMBER(20,0) NOT NULL,
+			ID_VALIDAZIONE_FASCICOLO NUMBER(20,0) NOT NULL,
+			ID_SOTTOTIPO NUMBER(20,0) NOT NULL,
+			MARCA VARCHAR2(50),
+			MODELLO VARCHAR2(50),
+			NUMERO_MATRICOLA VARCHAR2(50),
+			NUMERO_TELAIO VARCHAR2(50),
+			ANNO_DI_COSTRUZIONE NUMBER(4),
+			TIPO_POSSESSO VARCHAR2(50),
+			DOCUMENTO_POSSESSO BLOB,
+			TARGA VARCHAR2(50),
+			DATA_IMMATRICOLAZIONE DATE,
+			PROPRIETARIO_NOME VARCHAR2(50),
+			PROPRIETARIO_COGNOME VARCHAR2(50),
+			PROPRIETARIO_DENOMINAZIONE VARCHAR2(50),
+			PROPRIETARIO_CODICE_FISCALE VARCHAR2(16),
+			PROPRIETARIO_VIA VARCHAR2(50),
+			PROPRIETARIO_COMUNE VARCHAR2(50),
+			PROPRIETARIO_CAP VARCHAR2(50),
+			CONSTRAINT PK_MACCHINA PRIMARY KEY (ID,
+			ID_VALIDAZIONE),
+			CONSTRAINT FK_FASCICOLO FOREIGN KEY (ID_FASCICOLO,
+			ID_VALIDAZIONE_FASCICOLO) REFERENCES A4GT_FASCICOLO(ID,
+			ID_VALIDAZIONE),
+			CONSTRAINT FK_SOTTOTIPO FOREIGN KEY (ID_SOTTOTIPO)
+			REFERENCES A4GD_SOTTOTIPO_MACCHINARIO (ID)
+			);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_MACCHINA TO ${user.writer};
+			GRANT
+			SELECT ON A4GT_MACCHINA TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_51.5"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE
+			A4GT_MACCHINA_MOTORIZZATA (
+			ID NUMBER(20,0) NOT NULL,
+			ID_VALIDAZIONE NUMBER(20,0) NOT NULL,
+			VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+			MARCA_MOTORE VARCHAR2(50),
+			TIPO_MOTORE VARCHAR2(50),
+			ALIMENTAZIONE VARCHAR2(50),
+			POTENZA NUMBER(20, 0),
+			MATRICOLA VARCHAR2(50),
+			CONSTRAINT PK_MACCHINA_MOTORIZZATA PRIMARY KEY (ID, ID_VALIDAZIONE),
+			CONSTRAINT FK_MACCHINA FOREIGN KEY (ID, ID_VALIDAZIONE) REFERENCES
+			A4GT_MACCHINA (ID, ID_VALIDAZIONE)
+			);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_MACCHINA_MOTORIZZATA TO
+			${user.writer};
+			GRANT SELECT ON A4GT_MACCHINA_MOTORIZZATA TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+	<include
+		file="config/database/changelog/definizioni/db.dotazione-tecnica.tipologie.xml" />
+
+	<changeSet id="DOTAZIONETECNICA_56.0"
+		author="Antonio Avitabile">
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_NOME" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_COGNOME" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_DENOMINAZIONE" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_CODICE_FISCALE" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_VIA" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_COMUNE" />
+		<dropColumn tableName="A4GT_MACCHINA"
+			columnName="PROPRIETARIO_CAP" />
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_57.0"
+		author="Antonio Avitabile">
+		<renameTable newTableName="A4GD_TIPOLOGIA" oldTableName="A4GD_TIPOLOGIA_MACCHINARIO"/>
+        <renameTable newTableName="A4GD_SOTTOTIPO" oldTableName="A4GD_SOTTOTIPO_MACCHINARIO"/>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_57.1"
+		author="Antonio Avitabile">
+		<addColumn tableName="A4GD_TIPOLOGIA">
+			<column name="AMBITO" type="${string.type}(20)" value="MACCHINE">
+			</column>
+		</addColumn>
+		<addNotNullConstraint tableName="A4GD_TIPOLOGIA" columnName="AMBITO" />
+	</changeSet>
+	
+	<include file="config/database/changelog/definizioni/db.dotazione-tecnica.tipologie.fabbricati.xml" />
+
+	<changeSet id="DOTAZIONETECNICA_57.3"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+		CREATE TABLE A4GT_FABBRICATO
+   			(ID NUMBER(20,0) NOT NULL , 
+			VERSIONE NUMBER(10,0) DEFAULT 0 NOT NULL, 
+			ID_VALIDAZIONE NUMBER(20,0) NOT NULL, 
+			ID_FASCICOLO NUMBER(20,0) NOT NULL, 
+			ID_VALIDAZIONE_FASCICOLO NUMBER(20,0) NOT NULL, 
+			ID_SOTTOTIPO NUMBER(20,0) NOT NULL,
+			DENOMINAZIONE VARCHAR2(50),
+			INDIRIZZO VARCHAR2(50) NOT NULL,
+			COMUNE VARCHAR2(50) NOT NULL,
+			VOLUME NUMBER(10,0), 
+			SUPERFICIE NUMBER(20,0), 
+			DESCRIZIONE VARCHAR2(100),
+		CONSTRAINT A4GT_FABBRICATO_PK PRIMARY KEY (ID, ID_VALIDAZIONE), 
+		CONSTRAINT FK_FASCICOLO_FABBRICATO FOREIGN KEY (ID_FASCICOLO, ID_VALIDAZIONE_FASCICOLO)
+		 REFERENCES A4GT_FASCICOLO (ID, ID_VALIDAZIONE) , 
+		CONSTRAINT FK_SOTTOTIPO_FABBRICATO FOREIGN KEY (ID_SOTTOTIPO)
+	 	REFERENCES A4GD_SOTTOTIPO (ID)
+	);
+	  
+		CREATE TABLE A4GT_FABBRICATO_CATASTO (
+				ID NUMBER(20,0) NOT NULL,
+				ID_VALIDAZIONE NUMBER(20,0) NOT NULL,
+				VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+				SUPERFICIE_COPERTA NUMBER(20,0),
+				SUPERFICIE_SCOPERTA NUMBER(20,0),
+				COMUNE_CATASTALE VARCHAR2(50),
+				SEZIONE VARCHAR2(50),
+				FOGLIO VARCHAR2(50),
+				PARTICELLA VARCHAR2(50),
+				SUBALTERNO VARCHAR2(50),
+		CONSTRAINT PK_FABBRICATO_CATASTO PRIMARY KEY (ID, ID_VALIDAZIONE),
+		CONSTRAINT FK_FABBRICATO_CATASTO FOREIGN KEY (ID, ID_VALIDAZIONE) REFERENCES A4GT_FABBRICATO (ID, ID_VALIDAZIONE)
+		);
+		
+		CREATE TABLE A4GT_FABBRICATO_SERRE (
+				ID NUMBER(20,0) NOT NULL,
+				ID_VALIDAZIONE NUMBER(20,0) NOT NULL,
+				VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+				IMPIANTO_RISCALDAMENTO NUMBER(1,0),
+				ANNO_COSTRUZIONE NUMBER(4,0),
+				TIPOLOGIA_MATERIALE VARCHAR2(50),
+				ANNO_ACQUISTO NUMBER(4,0),
+				TITOLO_CONFORMITA_URBANISTICA VARCHAR2(50),
+		CONSTRAINT PK_FABBRICATO_SERRE PRIMARY KEY (ID, ID_VALIDAZIONE),
+		CONSTRAINT FK_FABBRICATO_SERRE FOREIGN KEY (ID, ID_VALIDAZIONE) REFERENCES A4GT_FABBRICATO (ID, ID_VALIDAZIONE)
+		);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBRICATO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_FABBRICATO TO
+			${user.reader};
+			
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBRICATO_CATASTO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_FABBRICATO_CATASTO TO
+			${user.reader};
+			
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBRICATO_SERRE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_FABBRICATO_SERRE TO
+			${user.reader};
+		</sql>
+	</changeSet>
+
+<include
+		file="config/database/changelog/definizioni/db.dotazione-tecnica.tipologie.fabbricati.refactor.xml" />
+
+<changeSet id="DOTAZIONETECNICA_60.1"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+		--FABBRICATI E SERRE RENAME
+ALTER TABLE A4GT_FABBRICATO_CATASTO RENAME TO A4GT_STRUMENTALI;
+ALTER TABLE A4GT_FABBRICATO_SERRE RENAME TO A4GT_SERRE;
+--MODIFICA CAMPI FABBRICATI E SERRE
+ALTER TABLE A4GT_FABBRICATO MODIFY DENOMINAZIONE VARCHAR2(100);
+ALTER TABLE A4GT_FABBRICATO MODIFY DESCRIZIONE VARCHAR2(200);
+ALTER TABLE A4GT_SERRE MODIFY TIPOLOGIA_MATERIALE VARCHAR2(100);
+-- RIMOZIONE CAMPI IN PIU DA STRUMENTALI
+ALTER TABLE A4GT_STRUMENTALI DROP COLUMN COMUNE_CATASTALE;
+ALTER TABLE A4GT_STRUMENTALI DROP COLUMN SEZIONE;
+ALTER TABLE A4GT_STRUMENTALI DROP COLUMN FOGLIO;
+ALTER TABLE A4GT_STRUMENTALI DROP COLUMN PARTICELLA;
+ALTER TABLE A4GT_STRUMENTALI DROP COLUMN SUBALTERNO;
+--AGGIUNTA CAMPO TIPO CONDUZIONE A FABBRICATO
+ALTER TABLE A4GT_FABBRICATO ADD TIPO_CONDUZIONE VARCHAR2(50);
+--AGGIUNTA DATI CATASTALI A FABBRICATO
+ALTER TABLE A4GT_FABBRICATO ADD COMUNE_CATASTALE VARCHAR2(50);
+ALTER TABLE A4GT_FABBRICATO ADD SEZIONE VARCHAR2(50);
+ALTER TABLE A4GT_FABBRICATO ADD FOGLIO VARCHAR2(50);
+ALTER TABLE A4GT_FABBRICATO ADD PARTICELLA VARCHAR2(50);
+ALTER TABLE A4GT_FABBRICATO ADD SUBALTERNO VARCHAR2(50);
+		</sql>
+
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_60.2"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+-- CREAZIONE TABELLA A4GT_STOCCAGGIO
+CREATE TABLE A4GT_STOCCAGGIO (
+				ID NUMBER(20,0) NOT NULL,
+				ID_VALIDAZIONE NUMBER(20,0) NOT NULL,
+				VERSIONE NUMBER(10) DEFAULT 0 NOT NULL,
+				COPERTURA VARCHAR2(50),
+				ALTEZZA NUMBER(20,0),
+		CONSTRAINT PK_STOCCAGGIO PRIMARY KEY (ID, ID_VALIDAZIONE),
+		CONSTRAINT FK_STOCCAGGIO FOREIGN KEY (ID, ID_VALIDAZIONE) REFERENCES A4GT_FABBRICATO (ID, ID_VALIDAZIONE)
+		);
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_STOCCAGGIO TO ${user.writer};
+			GRANT SELECT ON A4GT_STOCCAGGIO TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_60.3"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+-- Indirizzo non obbligatorio
+ALTER TABLE A4GT_FABBRICATO MODIFY INDIRIZZO VARCHAR2(50) NULL;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_60.4"
+		author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+		DELETE FROM A4GD_SOTTOTIPO WHERE ID_TIPOLOGIA IN (SELECT ID FROM A4GD_TIPOLOGIA WHERE DESCRIZIONE = 'AREE_SCOPERTE');
+INSERT INTO A4GD_SOTTOTIPO (ID, VERSIONE, ID_TIPOLOGIA, DESCRIZIONE, DATA_INIZIO, DATA_FINE)
+VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GD_TIPOLOGIA WHERE DESCRIZIONE = 'AREE_SCOPERTE'), 'PADDOCK_IMPERMEABILIZZATO_SCOPERTO', TIMESTAMP '2022-03-16 00:00:00.000000', NULL);
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_60.5" author="Paolo Cristofaro">
+		<modifyDataType tableName="A4GT_SERRE"
+			columnName="TITOLO_CONFORMITA_URBANISTICA" newDataType="${string.type}(100)" />
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_60.6" author="Paolo Cristofaro">
+		<modifyDataType tableName="A4GT_FABBRICATO"
+			columnName="DENOMINAZIONE" newDataType="${string.type}(200)" />
+		<modifyDataType tableName="A4GT_FABBRICATO"
+			columnName="INDIRIZZO" newDataType="${string.type}(100)" />
+		<modifyDataType tableName="A4GT_FABBRICATO"
+			columnName="COMUNE" newDataType="${string.type}(100)" />
+		<modifyDataType tableName="A4GT_FABBRICATO"
+			columnName="DESCRIZIONE" newDataType="${string.type}(400)" />
+		<modifyDataType tableName="A4GT_FABBRICATO"
+			columnName="COMUNE_CATASTALE" newDataType="${string.type}(100)" />
+		<modifyDataType tableName="A4GT_SERRE"
+			columnName="TIPOLOGIA_MATERIALE" newDataType="${string.type}(200)" />
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_61.0" author="Giustino De Vincentiis">
+		<createTable tableName="A4GD_MAPPING_MACCHINA_AGS">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+							 primaryKeyName="PK_MAPPING_MACCHINA_AGS"
+							 primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="ID_SOTTOTIPO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_MAPPING_SOTTOTIPO"
+							 referencedTableName="A4GD_SOTTOTIPO"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+			<column name="CODICE_AGS" type="${string.type}(6)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="SOTTO_CODICE_AGS" type="${string.type}(6)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GD_MAPPING_MACCHINA_AGS TO
+			${user.writer};
+			GRANT SELECT ON A4GD_MAPPING_MACCHINA_AGS TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_61.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO a4gd_sottotipo VALUES (nxtnbr.nextval, 0, 'MOTORANGHINATORE', (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione, '_', ' ')) = 'MACCHINE SEMOVENTI'), SYSDATE, NULL);
+			INSERT INTO a4gd_sottotipo VALUES (nxtnbr.nextval, 0, 'VENDEMMIATRICE', (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione, '_', ' ')) = 'MACCHINE SEMOVENTI'), SYSDATE, NULL);
+			INSERT INTO a4gd_sottotipo VALUES (nxtnbr.nextval, 0, 'TRINCIATUTTO FORESTALE', (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione, '_', ' ')) = 'ATTREZZATURE PORTATE'), SYSDATE, NULL);
+			
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICE A RUOTE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICI')), '000012','000088');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICE CINGOLATA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICI')), '000012','000003');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICE SNODATA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICI')), '000012','000117');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOAGRICOLA CON STRUTTURA RIGIDA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOAGRICOLE')), '000005','000054');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRATTRICE CON PIANALE CARICO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOAGRICOLE')), '000005','000090');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO RACCOLTA FRUTTA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000064');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO RACCOLTA FRUTTA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000139');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO RACCOLTA FRUTTA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000115');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO RACCOLTA FRUTTA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000130');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO RACCOLTA FRUTTA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000084');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO TRINCIA MISCELATORE SEMOVENTE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000110');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ESCAVATORE/CARICATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000025');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MIETITREBBIATRICI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000008','000056');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOBARCA DISERBO CANALI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000040');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOCOLTIVATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000006','000041');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOFALCIATRICI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000007','000042');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTORANGHINATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000050');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOZAPPATRICI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000009','000058');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PALA MECCANICA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000124');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PALA MECCANICA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000006');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TERNA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000102');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PIATTAFORMA ELEVATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000045');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RACCOGLITRICI VERDURE O TUBERI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000079');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RACCOGLITRICI VERDURE O TUBERI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000085');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'VENDEMMIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINE SEMOVENTI')), '000001','000094');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATOMIZZATORE/POLVERIZZATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000013','000103');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO BOTTE DI PESO FINO A 15 Q.LI 1 ASSE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000013','000019');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO BOTTE DI PESO FINO A 15 Q.LI 2 ASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000013','000020');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO MISCELATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000001','000005');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO MISCELATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000001','000126');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO AGRICOLO - PIANALE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI FINO A 15 QLI')), '000013','000113');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATOMIZZATORE/POLVERIZZATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000001','000012');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO BOTTE DI PESO SUP. A 15 Q.LI 1 ASSE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000015');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO BOTTE DI PESO SUP. A 15 Q.LI 2 ASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000016');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO BOTTE DI PESO SUP. A 15 Q.LI 3 ASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000017');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARRO MISCELATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000005');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO CARICA FORAGGIO AUTOCARICANTE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000066');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO DI PESO SUP. A 15 Q.LI 1 ASSE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000067');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO DI PESO SUP. A 15 Q.LI 2 ASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000069');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO DI PESO SUP. A 15 Q.LI 3 ASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000071');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHIO SPANDILETAME' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIMORCHI SUP. A 15 QLI')), '000010','000068');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ANDANATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000145');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ARGANO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000164');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATOMIZZATORE/POLVERIZZATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000011','000122');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BARRA FALCIANTE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000140');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CARICABALLE PORTATO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000013','000024');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ELEVATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000010','000120');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ERPICE STRIGLIATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000167');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ESTIRPATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000168');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FASCIATORE PER BALLE CILINDRICHE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000096');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FRESA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000166');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'IMBALLATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000100');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'IMPOLVERATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000162');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'LAMA SGOMBRANEVE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000155');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINA PER DISERBO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000160');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINA PER SRAMATURA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000157');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MACCHINA RACCOLTA LEGNO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000156');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MINI-ESCAVATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000097');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MINI-PALA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000101');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PACCIAMATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000059');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PACCIAMATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000060');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PIANTA TUBERI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000062');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'POTATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000158');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RACCOGLI OLIVE-CILIEGE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000078');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RACCOGLI-IMBALLATRICE O PRESSA-RACCOGLITRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000063');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RACCOGLISASSI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000169');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RIPUNTATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000163');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ROTOFALCIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000007','000134');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ROTOFALCIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000148');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RULLO IDRAULICO SNODATO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000131');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SEMINATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000013');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SEMINATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000047');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SFOGLIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000150');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SFOGLIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000165');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SPANDIVOLTAFIENO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000144');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SPOLLONATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000159');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRINCIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000149');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TRINCIATUTTO FORESTALE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000105');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ZOLLATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ATTREZZATURE PORTATE')), '000001','000132');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'APPARECCHIO ANTIBRINA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000004','000007');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'AUTOPOMPA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000118');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BOLLITORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000021');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BRUCIASTERPAGLIE E LANCIAFIAMME PER DISERBO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000023');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BRUCIATORE PER ESSICCAZIONE FIENO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000076');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BRUCIATORE PER RISCALDAMENTO ACQUA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000022');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'BRUCIATORE PER RISCALDAMENTO ARIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000109');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'DECESPUGLIATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000030');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ESSICCATORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000104');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'GENERATORE AD ARIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000119');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'GENERATORE DI ACQUA CALDA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000107');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'GENERATORE DI VAPORE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000036');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'GRUPPO ELETTROGENO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000035');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'IDROPULITRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000099');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'IMPIANTO RISCALDAMENTO LOCALI PER ALLEVAM.' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000083');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'INCUBATRICE - ALLEVATRICE PER POLLAME' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000037');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'LAVAGGIO BOTTIGLIE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000038');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOCARRIOLA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000141');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOPOMPA IRRIGAZIONE O IRRORAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000004','000043');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOSEGA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000004','000052');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MOTOTRIVELLA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000053');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MUNGITRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000002');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'MUNGITRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000004','000057');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PIGIATRICE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000061');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RASAERBA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000146');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RISCALDAMENTO ALIMENTI PER ALLEVAMENTI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000075');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RISCALDAMENTO SERRE GENERATORE ARIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000011','000082');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TELEFERICA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000004','000089');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TELEFERICA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000001','000154');
+			INSERT INTO a4gd_mapping_macchina_ags VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'TOSASIEPI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'ALTRE ATTREZZATURE')), '000007','000133');
+		</sql>
+	</changeSet>
+
+	<changeSet id="DOTAZIONETECNICA_62.0" author="Giustino De Vincentiis">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE "A4GD_MAPPING_MACCHINA_AGS" RENAME TO "A4GD_MAPPING_AGS";
+			ALTER INDEX "PK_MAPPING_MACCHINA_AGS" RENAME TO "PK_MAPPING_AGS";
+			ALTER TABLE A4GD_MAPPING_AGS MODIFY (SOTTO_CODICE_AGS NULL);
+			
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CANTINA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000011');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CASEIFICIO E LATTERIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000023');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ESSICCATOIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000012');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO AD USO AGRITURISTICO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000021');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO AL PERNOTTAMENTO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000020');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA COMMERCIALIZZAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000017');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA  MACELLAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000015');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA RISTORAZIONE AGRITURISTICA (SALE DA PRANZO E CUCINE)' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000019');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA TRASFORMAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000016');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ORTOFRUTTICOLO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000026');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO PER LO STOCCAGGIO E CONSERVAZIONE DEI PRODOTTI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000018');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FIENILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000009');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FRANTOIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000025');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FUNGAIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000022');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FUNGAIA - PREPARAZIONE COMPOST' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000024');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RICOVERO MACCHINE E/O ATTREZZI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000008');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA CON COPERTURA FLESSIBILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000052');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA CON COPERTURA RIGIDA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000050');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA E ATTREZZATURE CONNESSE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000007');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA OMBRARIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000056');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA TUNNEL' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000054');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000001');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PORCILAIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000004');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'OVILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000005');
+			INSERT INTO A4GD_MAPPING_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RICOVERO PER ANIMALI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000006');
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_62.1" author="Gabriele Ninfa">
+		<dropColumn tableName="A4GT_FABBRICATO"
+			columnName="COMUNE_CATASTALE" />
+		<dropColumn tableName="A4GT_FABBRICATO"
+			columnName="SEZIONE" />
+		<dropColumn tableName="A4GT_FABBRICATO"
+			columnName="FOGLIO" />
+		<dropColumn tableName="A4GT_FABBRICATO"
+			columnName="PARTICELLA" />
+		<dropColumn tableName="A4GT_FABBRICATO"
+			columnName="SUBALTERNO" />
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_62.2" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_DATI_CATASTALI">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPOLOGIA" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="PARTICELLA" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINATORE" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="IN_TRENTINO" type="${id.number.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="SEZIONE" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="FOGLIO" type="${id.number.type}(4)">
+				<constraints nullable="true" />
+			</column>
+			<column name="COMUNE" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="SUB" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="INDIRIZZO" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="SUPERFICIE" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="CONSISTENZA" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CATEGORIA" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="NOTE" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+			<column name="FABBRICATO_ID" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FABBRICATO_ID_VALIDAZIONE"
+				type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_DATI_CATASTALI"
+			tableName="A4GT_DATI_CATASTALI"
+			tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint
+			baseColumnNames="FABBRICATO_ID, FABBRICATO_ID_VALIDAZIONE"
+			baseTableName="A4GT_DATI_CATASTALI"
+			constraintName="FK_DATI_CATASTALI_FABBRICATO"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_FABBRICATO" />
+		
+		<createIndex indexName="IDX_DATI_CATASTALI_FABBRICATO"
+			tableName="A4GT_DATI_CATASTALI">
+			<column name="FABBRICATO_ID" />
+			<column name="FABBRICATO_ID_VALIDAZIONE" />
+		</createIndex>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_CATASTALI TO
+			${user.writer};
+			GRANT SELECT ON A4GT_DATI_CATASTALI TO
+			${user.reader};
+		</sql>
+	</changeSet>
+	<changeSet id="DOTAZIONETECNICA_63.0" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_MACCHINA_MOTORIZZATA ADD POTENZA_NEW NUMBER(20, 4);
+			UPDATE A4GT_MACCHINA_MOTORIZZATA SET POTENZA_NEW = POTENZA;
+			ALTER TABLE A4GT_MACCHINA_MOTORIZZATA DROP COLUMN POTENZA;
+			ALTER TABLE A4GT_MACCHINA_MOTORIZZATA RENAME COLUMN POTENZA_NEW TO POTENZA;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_63.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO a4gd_mapping_ags VALUES (nxtnbr.nextval, (SELECT id_sottotipo FROM a4gd_mapping_ags WHERE codice_ags = '000001' AND sotto_codice_ags IS NULL), '000002', NULL);
+			INSERT INTO a4gd_mapping_ags VALUES (nxtnbr.nextval, (SELECT id_sottotipo FROM a4gd_mapping_ags WHERE codice_ags = '000001' AND sotto_codice_ags IS NULL), '000003', NULL);
+			INSERT INTO a4gd_mapping_ags VALUES (nxtnbr.nextval, (SELECT id_sottotipo FROM a4gd_mapping_ags WHERE codice_ags = '000050' AND sotto_codice_ags IS NULL), '000051', NULL);
+			INSERT INTO a4gd_mapping_ags VALUES (nxtnbr.nextval, (SELECT id_sottotipo FROM a4gd_mapping_ags WHERE codice_ags = '000052' AND sotto_codice_ags IS NULL), '000053', NULL);
+			INSERT INTO a4gd_mapping_ags VALUES (nxtnbr.nextval, (SELECT id_sottotipo FROM a4gd_mapping_ags where codice_ags = '000054' and sotto_codice_ags is null), '000055', null);
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_64.0" author="Bruno Conetta">
+		<createTable tableName="A4GT_CONTROLLO_COMPLETEZZA">
+			<column name="ID" type="${id.number.type}"></column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPO_CONTROLLO" type="${string.type}(100)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ESITO" type="${id.number.type}">
+				<constraints nullable="true"/>
+			</column>
+			<column name="ID_CONTROLLO" type="${id.number.type}">
+				<constraints nullable="true"/>
+			</column>
+			<column name="DATA_ESECUZIONE" type="DATE">
+				<constraints nullable="true"/>
+			</column>
+			<column name="UTENTE" type="${string.type}(100)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="ID"
+					   constraintName="PK_CONTROLLO_COMPLETEZZA"
+					   tableName="A4GT_CONTROLLO_COMPLETEZZA"
+					   tablespace="${tablespace.index}"/>
+		<addUniqueConstraint columnNames="ID, CUAA"
+							 constraintName="UIDX_CONTROLLO_ID_CUAA"
+							 tableName="A4GT_CONTROLLO_COMPLETEZZA"/>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.writer};
+			GRANT SELECT ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.reader};
+		</sql>
+	</changeSet>
+	<changeSet id = "DOTAZIONETECNICA_64.1" author="Bruno Conetta">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_EVENTSTORED"/>
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true"/>
+			</column>
+			<column name="USER_NAME" type="${string.type}(100)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_65.0" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_DATI_CATASTALI">
+			<column name="ESITO" type="${string.type}(20)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	
+	<changeSet id="DOTAZIONETECNICA_1N.0" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+		-- DROP VINCOLO SOTTOTIPO SU MACCHINE
+			
+			ALTER TABLE A4GT_MACCHINA DROP CONSTRAINT FK_SOTTOTIPO;
+		
+		-- RINOMINARE CAMPO SOTTOTIPO SU MACCHINE
+			
+			ALTER TABLE A4GT_MACCHINA RENAME COLUMN ID_SOTTOTIPO TO ID_SOTTOTIPO_OLD; 
+
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.1" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+		
+		-- CREARE NUOVO CAMPO SOTTOTIPO VUOTO SU MACCHINE
+			
+			ALTER TABLE A4GT_MACCHINA ADD ID_SOTTOTIPO NUMBER(20,0);
+			
+		-- RINOMINARE CAMPO SOTTOTIPO SU MACCHINE
+			
+			ALTER TABLE A4GD_SOTTOTIPO ADD ID_CLASSE_FUNZIONALE NUMBER(20,0);
+			
+		-- RENDIAMO NULLABLE IL CAMPO TIPOLOGIA DI SOTTOTIPO
+			
+			ALTER TABLE A4GD_SOTTOTIPO MODIFY (ID_TIPOLOGIA NULL); 
+
+		</sql>
+	</changeSet>
+	
+	
+	<changeSet id="DOTAZIONETECNICA_1N.2" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- CREATE TABELLA CLASSI FUNZIONALI MACCHINE
+			
+			CREATE TABLE A4GD_CLASSE_FUNZIONALE (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				DESCRIZIONE ${string.type} (50),
+				ID_TIPOLOGIA NUMBER(20,0) NOT NULL,
+				DATA_INIZIO DATE,
+				DATA_FINE DATE,
+				CONSTRAINT PK_CLASSE_FUNZIONALE PRIMARY KEY ("ID"),
+				CONSTRAINT FK_TIPOLOGIA_CLF FOREIGN KEY (ID_TIPOLOGIA) REFERENCES
+				a4gd_tipologia (ID)
+			) TABLESPACE ${tablespace.data};
+
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON A4GD_CLASSE_FUNZIONALE TO ${user.writer};
+			GRANT SELECT ON A4GD_CLASSE_FUNZIONALE TO ${user.reader};
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.3" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- ADD CHIAVE ESTERNA CLASSE FUNZIONALE 
+		
+			ALTER TABLE A4GD_SOTTOTIPO ADD CONSTRAINT FK_CLASSE_FUNZIONALE FOREIGN KEY (ID_CLASSE_FUNZIONALE) REFERENCES A4GD_CLASSE_FUNZIONALE (ID);	
+
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.4" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+
+		-- RIMOZIONE NUOVO CAMPO ID_SOTTOTIPO
+		
+			ALTER TABLE A4GT_MACCHINA DROP COLUMN ID_SOTTOTIPO;
+			
+		-- RINOMINARE CAMPO SOTTOTIPO SU MACCHINE
+			
+			ALTER TABLE A4GT_MACCHINA RENAME COLUMN ID_SOTTOTIPO_OLD TO ID_SOTTOTIPO; 
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.5" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+		
+		-- DROP VINCOLO SOTTOTIPO SU FABBRICATI (DA RIPRISTINARE)
+			
+			ALTER TABLE A4GT_FABBRICATO DROP CONSTRAINT FK_SOTTOTIPO_FABBRICATO;			
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.6" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+		
+		-- DELETE DATI DALLE MACCHINE
+
+			DELETE FROM A4GT_MACCHINA_MOTORIZZATA;		
+			DELETE FROM A4GT_MACCHINA;
+			
+		-- DELETE DATI STOCCAGGIO
+		
+			DELETE FROM A4GT_STOCCAGGIO;
+			
+		-- DELETE DATI DEI FABBRICATI
+		
+			DELETE FROM A4GT_DATI_CATASTALI;
+			DELETE FROM A4GT_STRUMENTALI;
+			DELETE FROM A4GT_SERRE;
+			DELETE FROM A4GT_FABBRICATO;			
+
+		</sql>
+				
+	</changeSet>	
+	
+	<changeSet id="DOTAZIONETECNICA_1N.7" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+					
+
+		-- DELETE DATI DELLE SOTTOTIPOLOGIE 
+			
+			DELETE FROM a4gd_sottotipo where id_tipologia IN (SELECT ID FROM a4gd_tipologia WHERE ambito = 'MACCHINA');
+			
+		-- DELETE DATI TIPOLOGIA WHERE AMBITO = MACCHINA
+			
+			DELETE FROM a4gd_tipologia where ambito = 'MACCHINA';				
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.8" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- DELETE DATI MAPPING AGS 					
+			DELETE FROM A4GD_MAPPING_AGS where id_sottotipo IN (SELECT ID FROM a4gd_sottotipo WHERE id_tipologia IN (SELECT ID FROM a4gd_tipologia WHERE ambito = 'MACCHINE'));
+					
+		-- CORREZIONE ERRORE QUERY PRECEDENTI
+		-- DELETE DATI DELLE SOTTOTIPOLOGIE 
+			
+			DELETE FROM a4gd_sottotipo where id_tipologia IN (SELECT ID FROM a4gd_tipologia WHERE ambito = 'MACCHINE');
+			
+		-- DELETE DATI TIPOLOGIA WHERE AMBITO = MACCHINA
+			
+			DELETE FROM a4gd_tipologia where ambito = 'MACCHINE';				
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.9" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- ALTER TABLE a4gd_tipologia CAMPO DESCRIZIONE		
+			
+			ALTER TABLE a4gd_tipologia MODIFY DESCRIZIONE VARCHAR2( 150 );
+
+		</sql>
+				
+	</changeSet>	
+	
+	<include file="config/database/changelog/db.dotazione-tecnica.A4GD_TIPOLOGIE.changelog.xml"/>
+	
+	<include file="config/database/changelog/db.dotazione-tecnica.A4GD_CLASSE_FUNZIONALE.changelog.xml"/>
+	
+	
+	
+	<changeSet id="DOTAZIONETECNICA_1N.12" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- ALTER TABLE a4gd_sottotipo CAMPO DESCRIZIONE		
+			
+			ALTER TABLE a4gd_sottotipo MODIFY DESCRIZIONE VARCHAR2( 200 );
+
+		</sql>
+				
+	</changeSet>
+	
+	<include file="config/database/changelog/db.dotazione-tecnica.A4GD_SOTTOTIPOLOGIA.changelog.xml"/>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.14" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+		
+		-- RIPRISTINO VINCOLO SOTTOTIPO SU MACCHINE
+			
+			ALTER TABLE A4GT_MACCHINA ADD CONSTRAINT FK_SOTTOTIPO FOREIGN KEY (ID_SOTTOTIPO) REFERENCES A4GD_SOTTOTIPO (ID);
+			
+		-- RIPRISTINO VINCOLO SOTTOTIPO SU FABBRICATI
+		
+			ALTER TABLE A4GT_FABBRICATO ADD CONSTRAINT FK_SOTTOTIPO_FABBRICATO FOREIGN KEY (ID_SOTTOTIPO) REFERENCES A4GD_SOTTOTIPO (ID);
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_1N.15" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- DELETE TIPOLOGIA DA TABELLA SOTTOTIPO		
+			
+			update a4gd_sottotipo set id_tipologia = null where id_classe_funzionale is not null;
+
+		</sql>
+				
+	</changeSet>
+	
+	<include file="config/database/changelog/db.dotazione-tecnica.A4GD_MAPPING_AGS.changelog.xml"/>
+	
+   	<changeSet id="DOTAZIONETECNICA_2N.6" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunta Foreign key a ID_TIPOLOGIA
+			
+			ALTER TABLE A4GD_MAPPING_AGS ADD CONSTRAINT FK_TIPOLOGIA_MAPPING FOREIGN KEY (ID_TIPOLOGIA) REFERENCES A4GD_TIPOLOGIA(ID);
+
+		</sql>
+				
+	</changeSet>
+	
+   	<changeSet id="DOTAZIONETECNICA_2N.7" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunta Foreign key a ID_CLASSE_FUNZIONALE
+			
+			ALTER TABLE A4GD_MAPPING_AGS ADD CONSTRAINT FK_CLASSE_FUNZIONALE_MAPPING FOREIGN KEY (ID_CLASSE_FUNZIONALE) REFERENCES A4GD_CLASSE_FUNZIONALE(ID);
+
+		</sql>
+				
+	</changeSet>
+	
+   	<changeSet id="DOTAZIONETECNICA_2N.8" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunta Foreign key a ID_SOTTOTIPO
+			
+			ALTER TABLE A4GD_MAPPING_AGS ADD CONSTRAINT FK_SOTTOTIPO_MAPPING FOREIGN KEY (ID_SOTTOTIPO) REFERENCES A4GD_SOTTOTIPO(ID);
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_2N.9" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunta Primary key a ID
+			
+			ALTER TABLE A4GD_MAPPING_AGS ADD CONSTRAINT PK_ID_MAPPING PRIMARY KEY (id);
+
+		</sql>
+				
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_2N.10" author="Attilio Salaris">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunti campi CF e Denominazione a A4GT_MACCHINA
+			
+			ALTER TABLE A4GT_MACCHINA ADD CF_PROPRIETARIO VARCHAR2(16);
+			
+			ALTER TABLE A4GT_MACCHINA ADD DENOMINAZIONE VARCHAR2(150);
+
+		</sql>
+				
+	</changeSet>	
+
+	<changeSet id="DOTAZIONETECNICA_FIX_1" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+		
+			CREATE TABLE A4GD_MAPPING_FABBRICATI_AGS (
+				ID ${id.number.type},
+				ID_SOTTOTIPO NUMBER(20),
+				CODICE_AGS VARCHAR2(50),
+				CONSTRAINT PK_MAPPING_AGS PRIMARY KEY (ID)
+			);
+			
+			GRANT SELECT ON A4GD_MAPPING_FABBRICATI_AGS TO ${user.writer};
+			
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CANTINA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000011');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'CASEIFICIO E LATTERIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000023');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'ESSICCATOIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000012');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO AD USO AGRITURISTICO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000021');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO AL PERNOTTAMENTO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000020');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA COMMERCIALIZZAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000017');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA  MACELLAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000015');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA RISTORAZIONE AGRITURISTICA (SALE DA PRANZO E CUCINE)' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000019');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ADIBITO ALLA TRASFORMAZIONE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000016');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO ORTOFRUTTICOLO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000026');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATO PER LO STOCCAGGIO E CONSERVAZIONE DEI PRODOTTI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000018');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FIENILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000009');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FRANTOIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000025');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FUNGAIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000022');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'FUNGAIA - PREPARAZIONE COMPOST' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000024');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RICOVERO MACCHINE E/O ATTREZZI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'FABBRICATI STRUMENTALI')), '000008');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA CON COPERTURA FLESSIBILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000052');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA CON COPERTURA RIGIDA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000050');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA E ATTREZZATURE CONNESSE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000007');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA OMBRARIO' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000056');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRA TUNNEL' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'SERRE E PROTEZIONI')), '000054');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000001');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'PORCILAIA' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000004');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'OVILE' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000005');
+			INSERT INTO A4GD_MAPPING_FABBRICATI_AGS (ID, ID_SOTTOTIPO, CODICE_AGS) VALUES (nxtnbr.nextval, (SELECT ID FROM a4gd_sottotipo WHERE trim(REPLACE(descrizione,'_',' ')) = 'RICOVERO PER ANIMALI' AND id_tipologia = (SELECT ID FROM a4gd_tipologia WHERE trim(REPLACE(descrizione,'_',' ')) = 'STALLE')), '000006');
+			commit;
+		</sql>	
+	</changeSet>
+
+<changeSet id="DOTAZIONETECNICA_4N.1" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		-- Aggiunto campo FLAG_MIGRATO
+			
+			ALTER TABLE A4GT_MACCHINA ADD FLAG_MIGRATO NUMBER(1);
+
+		</sql>
+	</changeSet>
+	
+	<changeSet id="DOTAZIONETECNICA_4N.2" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+						
+		UPDATE A4GT_MACCHINA m SET m.ID_SOTTOTIPO = (
+			SELECT st.ID FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+			AND ID_CLASSE_FUNZIONALE = (
+				SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+				WHERE cf.ID_TIPOLOGIA = (
+					SELECT t.ID FROM A4GD_TIPOLOGIA t
+					WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+				) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+			) AND st.DESCRIZIONE = 'CARICA POLLI' AND ID = (
+				SELECT MAX(st.ID) FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+				AND ID_CLASSE_FUNZIONALE = (
+					SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+					WHERE cf.ID_TIPOLOGIA = (
+						SELECT t.ID FROM A4GD_TIPOLOGIA t
+						WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+					) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+				) AND st.DESCRIZIONE = 'CARICA POLLI')
+		)
+		WHERE m.ID_SOTTOTIPO IN (
+			SELECT st.ID FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+			AND ID_CLASSE_FUNZIONALE = (
+				SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+				WHERE cf.ID_TIPOLOGIA = (
+					SELECT t.ID FROM A4GD_TIPOLOGIA t
+					WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+				) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+			) AND st.DESCRIZIONE = 'CARICA POLLI' AND ID = (
+				SELECT MIN(st.ID) FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+				AND ID_CLASSE_FUNZIONALE = (
+					SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+					WHERE cf.ID_TIPOLOGIA = (
+						SELECT t.ID FROM A4GD_TIPOLOGIA t
+						WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+					) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+				) AND st.DESCRIZIONE = 'CARICA POLLI')
+		);
+		
+		DELETE FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+			AND ID_CLASSE_FUNZIONALE = (
+				SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+				WHERE cf.ID_TIPOLOGIA = (
+					SELECT t.ID FROM A4GD_TIPOLOGIA t
+					WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+				) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+			) AND st.DESCRIZIONE = 'CARICA POLLI' AND ID = (
+				SELECT MIN(st.ID) FROM A4GD_SOTTOTIPO st WHERE ID_CLASSE_FUNZIONALE IS NOT NULL
+				AND ID_CLASSE_FUNZIONALE = (
+					SELECT cf.ID FROM A4GD_CLASSE_FUNZIONALE cf
+					WHERE cf.ID_TIPOLOGIA = (
+						SELECT t.ID FROM A4GD_TIPOLOGIA t
+						WHERE t.AMBITO = 'MACCHINE' AND DESCRIZIONE = 'MACCHINE OPERATRICI ADIBITE E ATTREZZATE PERMANENTEMENTE PER LAVORI AGRICOLI'
+					) AND cf.DESCRIZIONE = 'ALLEVAMENTI ZOOTECNICI'
+				) AND st.DESCRIZIONE = 'CARICA POLLI');
+
+
+		</sql>
+	</changeSet>
+
+	<changeSet  author="Lorenzo Martinelli"  id="MACCHINARI_5N_5">
+		<modifyDataType columnName="MODELLO" newDataType="VARCHAR2(100)" tableName="A4GT_MACCHINA"/>
+	</changeSet>
+	
+</databaseChangeLog>

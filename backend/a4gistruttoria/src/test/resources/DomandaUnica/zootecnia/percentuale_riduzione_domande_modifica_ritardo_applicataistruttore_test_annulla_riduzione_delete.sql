@@ -1,0 +1,7 @@
+delete FROM a4gt_istruttore_zootecnia where ID = 777777777;
+
+delete FROM A4GT_ISTRUTTORIA where ID = 144144145;
+
+delete FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = 'FLMWFG75M12C794H';
+
+COMMIT;

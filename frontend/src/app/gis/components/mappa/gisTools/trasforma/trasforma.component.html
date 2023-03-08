@@ -1,0 +1,8 @@
+<div id="trasformaTool" class="right-separator" (click)="enableTool()" [class.active-tool]="isActive()" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <button 
+  pTooltip="Trasforma" tooltipPosition="top"
+  type="button"
+  [disabled]="!canUseTool" 
+  class='btn btn-primary'
+><i class="fa fa-vector-square"></i></button>
+</div>

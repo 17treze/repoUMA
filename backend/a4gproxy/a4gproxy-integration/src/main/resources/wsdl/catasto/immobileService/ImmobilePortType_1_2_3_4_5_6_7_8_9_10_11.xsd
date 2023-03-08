@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/PersonaType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/PersonaType/schemas" xmlns:pers="http://www.anagrafica.regione.taa.it/PersonaType/schemas">
+  <xs:import namespace="http://www.anagrafica.regione.taa.it/PersonaType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6_7_8_9_10_11_12.xsd"/>
+  <xs:annotation>
+    <xs:documentation xml:lang="it">Contiene le specializzazioni che descrivono una persona fisica e una persona giuridica nel contesto del catasto</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="PersonaCatastaleType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni identificative di una persona sia essa fisica o giuridica</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element name="personaFisica" type="pers:ChiavePersonaFisicaType"/>
+      <xs:element name="personaGiuridica" type="pers:ChiavePersonaGiuridicaType"/>
+    </xs:choice>
+    <xs:attribute name="matricola" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">Identifica quel soggetto
+				univocamente per il sistema informativo del servizio libro fondiario:
+				non garantisce da eventuali casi in cui tale soggetto e' stato
+				schedato piu' volte nell'archivio del sistema</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="GruppoProTemporeType"/>
+</xs:schema>

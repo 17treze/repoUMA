@@ -1,0 +1,90 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="TERRITORIO_WRT_49NF.0" author="Massimo Nascivera" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+            CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+        </sql>
+    </changeSet>
+
+    <changeSet id="TERRITORIO_WRT_49NF.1" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_CONTROLLO_COMPLETEZZA FOR ${user.superuser}.A4GT_CONTROLLO_COMPLETEZZA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_62NF.0" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_SOTTOTIPO FOR ${user.superuser}.A4GT_SOTTOTIPO;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_62NF.1" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GD_TIPO_DOCUMENTO_CONDUZIONE FOR ${user.superuser}.A4GD_TIPO_DOCUMENTO_CONDUZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_62NF.2" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_FASCICOLO FOR ${user.superuser}.A4GT_FASCICOLO;
+        </sql>
+    </changeSet>
+
+	<changeSet id="TERRITORIO_WRT_62NF.3" author="Gabriele Ninfa"
+		dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONDUZIONE FOR ${user.superuser}.A4GT_CONDUZIONE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="TERRITORIO_WRT_62NF.4" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_DOCUMENTO_CONDUZIONE FOR ${user.superuser}.A4GT_DOCUMENTO_CONDUZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_62NF.5" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_PARTICELLE_FONDIARIE FOR ${user.superuser}.A4GT_PARTICELLE_FONDIARIE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_62NF.6" author="Gabriele Ninfa" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_SOTTOTIPO;
+			CREATE OR REPLACE SYNONYM A4GD_SOTTOTIPO FOR ${user.superuser}.A4GD_SOTTOTIPO;
+		</sql>
+	</changeSet>
+
+    <changeSet id="TERRITORIO_WRT_62NF.7" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_LOGGING_VALIDAZIONE FOR ${user.superuser}.A4GT_LOGGING_VALIDAZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_4N.0" author="Alessandro Porcu" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GD_TIPO_CONDUZIONE FOR ${user.superuser}.A4GD_TIPO_CONDUZIONE;
+            CREATE OR REPLACE SYNONYM A4GD_SOTTOTIPO_CONDUZIONE FOR ${user.superuser}.A4GD_SOTTOTIPO_CONDUZIONE;            
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_4N.1" author="Alessandro Porcu" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GD_DOCUMENTO_CONDUZIONE FOR ${user.superuser}.A4GD_DOCUMENTO_CONDUZIONE;
+            CREATE OR REPLACE SYNONYM A4GR_SOTTOTIPO_DOCUMENTO FOR ${user.superuser}.A4GR_SOTTOTIPO_DOCUMENTO;            
+        </sql>
+    </changeSet>
+    
+    <changeSet id="TERRITORIO_WRT_4N.2" author="Alessandro Porcu" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GR_DOCUMENTO_DIPENDENZA FOR ${user.superuser}.A4GR_DOCUMENTO_DIPENDENZA;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

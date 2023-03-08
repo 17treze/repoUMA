@@ -1,0 +1,258 @@
+ <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+ <p-dialog [(visible)]="dialogVisibile" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}">
+  <div class="p-grid boxpopup">
+    <p-header>
+      {{'ANNO_CAMPAGNA' | translate | uppercase}}
+    </p-header>
+    <div *ngFor="let anno of campagne; let i = index " class="ui-g-12">
+      <p-radioButton name="annoDiCampagna" value="{{anno}}" label="{{anno}}"
+        [(ngModel)]="selectedCampagna" inputId="{{anno}}">
+      </p-radioButton>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="ui-g-6 text-left">
+      <button pButton type="button" label="{{ 'NuovoFascicolo.ANNULLA' | translate }}"
+        (click)="annullaImportPsrSuperficie()" class="btn-green" style="min-height:42px; box-shadow:none">
+      </button>
+    </div>
+    <div class="ui-g-6 text-right">
+      <button [disabled]="selectedCampagna.length === 0" pButton type="submit" (click)="checkMassiveExport ? confermaExportFileCSV() : confermaImportPsrSuperficie()"
+        label="{{ 'NuovoFascicolo.CONFERMA' | translate }}" class="btn-green"
+        style="min-height:42px; box-shadow:none; margin-right:10px;">
+      </button>
+    </div>
+  </div>
+</p-dialog>
+
+<div class="ui-grid-fixed">
+  <p-toast position="top-center" key="generic" [baseZIndex]="50000"></p-toast>
+  <div class="boxgrey layout-actionmenu">
+    <h3>{{ textTitle }}</h3>
+    <div class="globalfilter">
+      <i class="material-icons">search</i>
+      <input type="text" pInputText size="50" placeholder="Ricerca..."
+        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+    <!-- A4G TABLE -->
+    <app-a4g-paged-table #dt [columns]="cols" [value]="certificazioniControllate" [totalRecords]="elementiTotali"
+      [(selectedItems)]="certificazioneProtocollateSelezionate" [(isSelectedAll)]="isSelectedAll"
+      (onLazyLoadPage)="loadData($event)" [lazy]="true" [sizeArray]="intestazioni.sizePerPagina">
+      <!-- HEADER -->
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em">
+            <app-a4g-paged-table-checkbox></app-a4g-paged-table-checkbox>
+          </th>
+          <th *ngFor="let col of columns" [pSortableColumnWrapper]="col.field"
+            [pSortableColumnDisabled]="col.field == null">
+            {{ col.header }}
+            <p-sortIcon-wrapper [field]="col.field">
+            </p-sortIcon-wrapper>
+          </th>
+          <th style="width: 3em">
+            {{this.intestazioni.collegate}}
+          </th>
+          <th style="width: 3em">
+            {{this.intestazioni.azioni}}
+          </th>
+        </tr>
+      </ng-template>
+      <!-- BODY -->
+      <ng-template pTemplate="body" let-cert let-i="rowIndex">
+        <tr [pSelectableRowWrapper]="cert">
+          <td>
+            <p-tableCheckbox-wrapper [value]="cert"></p-tableCheckbox-wrapper>
+          </td>
+          <td>{{ cert.datiDichiarazione.dettaglioImpresa.codiceFiscale }}</td>
+          <td>{{ cert.datiDichiarazione.dettaglioImpresa.denominazione }}</td>
+          <td>{{ cert.dtProtocollazione | date: "dd/MM/yyyy" }}</td>
+          <td>{{ cert.idProtocollo }}</td>
+          <td>
+            <div class="ui-g">
+              <div class="pallinoVerde" *ngIf="cert.esito === 'OK'" [pTooltip]="buildDescrizioneTooltip(cert)">
+              </div>
+              <div class="pallinoRosso" *ngIf="cert.esito === 'KO'" [pTooltip]="buildDescrizioneTooltip(cert)">
+              </div>
+            </div>
+          </td>
+          <td style="width:200px;">
+            <div class="ui-g icon-action">
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaSuperficie.length > 0 ? false : true"
+                  title="{{intestazioni.DOMANDE_SUPERFICIE_EU}}" icon="fa ui-icon-tab" iconPos="center"
+                  (onClick)="visualizzaDettaglioDomanda(cert,0)"></p-button>
+              </div>
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaStrutturale.length > 0 ? false : true"
+                  title="{{intestazioni.DOMANDE_STRUTTURALI_EU}}" icon="fa ui-icon-developer-board" iconPos="center"
+                  (onClick)="visualizzaDettaglioDomanda(cert,1)"></p-button>
+              </div>
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaDu.length > 0 ? false : true"
+                  title="{{intestazioni.DOMANDE_UNICHE}}" icon="fa ui-icon-description" iconPos="center"
+                  (onClick)="visualizzaDettaglioDomanda(cert,2)">
+                </p-button>
+              </div>
+            </div>
+          </td>
+          <td>
+            <action-menu #actionMenu [item]="menuAction" (click)="onDropdownMenuOpen(actionMenu, cert, i)">
+            </action-menu>
+          </td>
+        </tr>
+      </ng-template>
+      <!-- EMPTY -->
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length + 3">
+            {{ intestazioni.noTableContent }}
+          </td>
+        </tr>
+      </ng-template>
+    </app-a4g-paged-table>
+    <div class="ui-g">
+      <!-- BOX 1 - Acquisizione dati domande -->
+      <div class="ui-g-3 box-padded">
+        <div class="ui-g-11 ">
+          <h5>{{intestazioni.ACQUISIZIONE_DATI_DOMANDE}}</h5>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <!-- <p-button class="ui-fluid" label="{{intestazioni.IMPORTA_DATI_PSR_SUPERFICIE_EU}}"
+            (onClick)="importSuperficieEU()"></p-button> -->
+          <p-button class="ui-fluid" label="{{intestazioni.IMPORTA_DATI_PSR_SUPERFICIE_EU}}" (onClick)="openDialog(false)">
+          </p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.IMPORTA_DATI_PSR_STRUTTURALI_EU}}"
+            (onClick)="importStrutturaliEU()"></p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.IMPORTA_DATI_DOMANDA_UNICA}}"
+            (onClick)="openSOConsole('du')"></p-button>
+          <input type="file" #file onclick="this.value = null" (change)="uploadFileCsv($event)" accept=".csv"
+            class="inputUploadFile" style="display: none">
+        </div>
+      </div>
+      <!-- BOX 2 - Esportazioni Massive Dati BDNA -->
+      <div class="ui-g-3 box-padded">
+        <div class="ui-g-11 ">
+          <h5>{{intestazioni.ESPORTATIONI_MASSIVE_DATI_BDNA}}</h5>
+        </div>
+        <!-- <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ESPORTA_DATI_PSR_SUPERFICIE_EU}}"
+            (onClick)="exportFileCSV(tipoDomanda.PSR_SUPERFICIE_EU)"></p-button>
+        </div> -->
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ESPORTA_DATI_PSR_SUPERFICIE_EU}}"
+            (onClick)="openDialog(true)"></p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ESPORTA_DATI_PSR_STRUTTURALI_EU}}"
+            (onClick)="exportFileCSV(tipoDomanda.PSR_STRUTTURALI_EU)"></p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ESPORTA_DATI_DOMANDA_UNICA}}"
+            (onClick)="exportFileCSV(tipoDomanda.DOMANDA_UNICA)"></p-button>
+        </div>
+      </div>
+      <!-- BOX 3 - Conferma Importazione BDNA -->
+      <div class="ui-g-3 box-padded">
+        <div class="ui-g-11 ">
+          <h5>{{intestazioni.CONFERMA_IMPORTAZIONE_BDNA}}</h5>
+        </div>
+        <div class="ui-g-11 ui-fluid">
+          <p-dropdown [disabled]="this.elencoCsvDaConfermare.length == 0 ? true : false"
+            [options]="elencoCsvDaConfermare" [(ngModel)]="trasmissioneBdnaSelected"
+            placeholder="Seleziona CSV" name="trasmissioneBdnaSelected"></p-dropdown>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.CONFERMA}}" [disabled]="!this.trasmissioneBdnaSelected"
+            (onClick)="conferma()"></p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ANNULLA}}" [disabled]="!this.trasmissioneBdnaSelected"
+            (onClick)="annulla()"></p-button>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.SCARICA}}" [disabled]="!this.trasmissioneBdnaSelected"
+            (onClick)="scarica()"></p-button>
+        </div>
+      </div>
+      <!-- BOX 4 - Importazione Esiti BDNA -->
+      <div class="ui-g-3 box-padded">
+        <div class="ui-g-11 ">
+          <h5>{{intestazioni.IMPORTANZIONE_ESITI_BDNA}}</h5>
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.IMPORTA_ESITI_BDNA}}" (onClick)="openSOConsole('bdna')">
+          </p-button>
+          <input type="file" #file onclick="this.value = null" (change)="uploadFileCsv($event)" accept=".csv"
+            class="inputUploadFile" style="display: none">
+        </div>
+        <div class="ui-g-11 box-padded">
+          <p-button class="ui-fluid" label="{{intestazioni.ESPORTA_ESITI_BDNA}}" (onClick)="exportEsitiBdna()">
+          </p-button>
+          <input type="file" #file onclick="this.value = null" (change)="uploadFileCsv($event)" accept=".csv"
+            class="inputUploadFile" style="display: none">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-toast position="center" key="aggiorna-stato" (onClose)="onRejectAggiornaStato()" [modal]="true" [baseZIndex]="5000"
+    sticky="true">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+        <h3>{{message.summary}}</h3>
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="onConfirmAggiornaStato()" label="Si"
+            class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="onRejectAggiornaStato()" label="No"
+            class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+
+  <p-dialog [(visible)]="displayPopup" width="710" [modal]="true" appendTo="body" [closable]="true"
+    [focusOnShow]="false" #dialog>
+    <div class="popup-istruttoria">
+      <h1>ESITI IMPORTA DOMANDE</h1>
+      <table class="table table-striped" style="text-align: center">
+        <tr>
+          <th>Cuaa Domande aggiornate <span
+              class="badgesGreen">{{esitiBdna.domandeAggiornate ? esitiBdna.domandeAggiornate.length : 0}}</span></th>
+          <th>Cuaa Domande con errori <span
+              class="badgesGreen">{{esitiBdna.domandeConErrori ? esitiBdna.domandeConErrori.length : 0}}</span></th>
+        </tr>
+        <tr>
+          <td>
+            <div *ngFor="let domAgg of esitiBdna.domandeAggiornate">
+              {{domAgg}}
+            </div>
+          </td>
+          <td>
+            <div *ngFor="let domErr of esitiBdna.domandeConErrori">
+              {{domErr}}
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="ui-g-12">
+        <button pButton type="button" label="CHIUDI" class="annulla" (click)="onC()"></button>
+      </div>
+    </div>
+  </p-dialog>
+
+
+  <app-popup-rifiuta-domanda [dichiarazioneAntimafia]="domandaAntimafiaSelezionataFromMenuAction"
+    (event)="loadList(0, null)">
+  </app-popup-rifiuta-domanda>

@@ -1,0 +1,113 @@
+div.layout-topbar > div > div > div > h1{
+    font-size: 24px !important;
+    color: #00985a;
+    margin: 0px;
+    line-height: 25px;
+    margin-top: 5px;
+    font-weight: 700;
+}
+div.layout-topbar > div > div > div > span {
+    font-size: 18px;
+    color: #0d5f3f;
+}
+#gis-topbar {
+    background: #00985b;
+    padding: 15px 20px;
+    margin: 0;
+}
+.left{
+    float: left;
+}
+
+#gis-topbar li {
+    list-style: none;
+}
+
+#gis-topbar li span {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+#gis-topbar li span:hover, a:hover{
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+#gis-topbar li span.ui-icon-person {
+    vertical-align: middle;
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+#gis-layout{
+    padding: 0px 0px 0px 15px !important;
+    height: auto;
+}
+
+div.cont-breadcrumb .ui-grid-fixed {
+    width: 100% !important;
+    margin: 0px 0px !important;
+    height: 30px!important;
+}
+
+.cont-breadcrumb {
+    border-bottom: 1px solid #666666;
+}
+
+#gis-layout > div > div > div.menu-btn-wrapper > #gis-topbar {
+    padding: 8px;
+}
+
+.cont-breadcrumb {
+    min-height: initial!important;
+}
+.ui-breadcrumb.ui-widget.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+    padding: 1px!important;
+    min-height: inherit!important;
+}
+.ui-breadcrumb ul {
+    margin-left: 10px;
+}
+/*margin*/
+.mgTop5{
+    margin-top: 5px!important;
+}
+.mgTop10{
+    margin-top: 10px;
+}
+.mgTop15{
+    margin-top: 15px;
+}
+.mgBot15{
+    margin-bottom: 15px;
+}
+.mgTop45{
+    margin-top: 45px !important;
+}
+.mgTop55{
+    margin-top: 55px !important;
+}
+.mgTopX{
+    margin-top: 255px !important;
+}
+.mgLeft10{
+    margin-left: 10px;
+}
+.noPad{
+    padding: 0!important;
+}
+
+#dialogUtente>div>div.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top {
+    width: 100%;
+}
+#dialogUtente>div>div.ui-dialog-titlebar.ui-widget-header.ui-helper-clearfix.ui-corner-top>span {
+    padding: 0 65px;
+}
+#dialogUtente > div > div.ui-dialog-content.ui-widget-content > i {
+    width: 60px;
+}
+#dialogUtente > div > div.ui-dialog-footer.ui-widget-content > button {
+    margin: 0 5px;
+}

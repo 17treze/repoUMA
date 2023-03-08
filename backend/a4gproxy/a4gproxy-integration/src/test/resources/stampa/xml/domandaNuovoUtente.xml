@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domandaNuovoUtente>
+	<nome>Mario</nome>
+	<cognome>Rossi</cognome>
+	<codiceFiscale>RSS MRI 70H01 E625Z</codiceFiscale>
+	<telefono>0461 800111</telefono>
+	<email>elisabetta.freschi@infotn.it</email>
+	<sistemi>
+		<sistema a4g="true" srt="true" />
+	</sistemi>
+	<qualita>
+		<titolareIndividuale />
+		<legaleRappresentante>
+			<denominazione>Pinco Pallino</denominazione>
+			<cuaa>0123456789012345</cuaa>
+		</legaleRappresentante>
+		<liberoProfessionista>
+			<ordineAppartenenza>Rappresentante pomodori</ordineAppartenenza>
+			<niscrizione>54321</niscrizione>
+			<cuaa>0123456789012345</cuaa>
+			<denominazione>Pinco Pallino SpA</denominazione>
+			<rappresentante>Pinco Pallino</rappresentante>
+		</liberoProfessionista>
+		<pat>
+			<matricola>pr54321</matricola>
+			<struttura>S110 - Autonomie Locali</struttura>
+			<dirigente>Gino Verdi</dirigente>
+		</pat>
+		<caa>
+			<ente>CAA ACLI TRENTO</ente>
+			<sede>Sede 01 di Trento</sede>
+			<responsabile>Pippo Pluto</responsabile>
+		</caa>
+		<ente>
+			<denominazione>Pinco Pallino</denominazione>
+			<piva>0123456789012345</piva>
+			<responsabile>Pippo Pluto</responsabile>
+		</ente>
+	</qualita>
+	<data>11/10/2018</data>
+	<luogo>Trento</luogo>
+</domandaNuovoUtente>

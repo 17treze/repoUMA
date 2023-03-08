@@ -1,0 +1,19 @@
+<div class="groupTool" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <div class="number-input" [hidden]="!isActive()">
+    <button (click)="setLati('decrease', numLati)" [disabled]="numLati==1" class="decrease">
+      <i class="fa fa-chevron-left"></i>    
+    </button>
+    <span class="numLati">
+      <input type="text" id="numLati" [(ngModel)]="numLati" class="inputNumLati" maxlength="2" (ngModelChange)="onChange($event)" appOnlynumber>
+      <span class="pts"> pts </span>
+    </span>
+    <button (click)="setLati('increase', numLati)" class="increase">
+      <i class="fa fa-chevron-right"></i>    
+    </button>
+  </div>
+  <div id="drawRegularElTool" (click)="enableTool()" [class.active-tool]="isActive()">
+    <button pTooltip="Crea poligono regolare" tooltipPosition="top" type="button" [disabled]="!canUseTool" class='btn btn-primary'><i
+        class="fa fa-shapes"></i></button>
+  </div>
+
+</div>

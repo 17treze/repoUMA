@@ -1,0 +1,120 @@
+#poligoniDichiaratiTableExt>p-table>div>div>div>div.ui-table-scrollable-header.ui-widget-header>div>table>thead>tr>th,
+#poligoniDichiaratiTableExt>div>div>div>div.ui-table-scrollable-body.ng-star-inserted>table>tbody>tr>td {
+    padding: 2px;
+}
+
+#poligoniDichiaratiTableExt>p-table>div>div>div>div.ui-table-scrollable-header.ui-widget-header>div>table>thead {
+    border: none !important;
+}
+
+.custom-select.tableEstesa {
+    background: #ffffff url(./../../../../../assets/img/icons/down-arrow.png) no-repeat right 0.75rem center/13px 13px !important;
+}
+
+div.double-date>p-calendar.interv>span>input {
+    max-width: 100px;
+    cursor: pointer;
+    background: #ffffff url(./../../../../../assets/img/icons/calendar.png) no-repeat left 0.25rem center/15px 17px !important;
+    padding-left: 25px;
+}
+
+select.form-control.custom-select.tableEstesa.full.no-click {
+    background-color: #e9ecef !important;
+}
+
+.double-date>p-calendar.interv>span>input {
+    padding-left: 38px;
+}
+
+.double-date {
+    background: #ffffff;
+    border-radius: 5px;
+    min-height: 33px;
+    border: 1px solid #ced4da;
+}
+
+div.double-date>p-calendar.ui-inputwrapper-filled>span>input {
+    max-width: 100px;
+    cursor: pointer;
+}
+
+div.double-date>p-calendar.ui-inputwrapper-filled>span {
+    max-width: 100px;
+    vertical-align: sub;
+}
+
+#tablePoligoniDichiarati>div>div>div>div.ui-table-scrollable-body {
+    min-height: 200px;
+}
+
+.td-icon {
+    width: 35px !important;
+    padding: 0 !important;
+}
+
+.td-suolo-ext {
+    width: 100px !important;
+}
+
+.td-stato-ext {
+    width: 150px !important;
+}
+
+#double-date>p-calendar.interv>span>div>div.ui-monthpicker>a {
+    width: inherit;
+}
+
+#poligoniDichiaratiTableExt>p-table>div>div>div>div.ui-table-scrollable-body.ng-star-inserted>table>tbody>tr>td>div>p-calendar.interv.ui-inputwrapper-filled.ng-dirty>span>div {
+    width: inherit;
+}
+
+#double-date>p-calendar.interv>span>div {
+    width: 170px;
+}
+
+#double-date>p-calendar.interv>span>div>div>div {
+    padding: 5px 0px;
+}
+
+#double-date>p-calendar.interv>span>div>div.ui-monthpicker {
+    margin: 0;
+}
+
+#poligoniDichiaratiTableExt>p-table>div>div>div>div.ui-table-scrollable-body {
+    overflow-x: hidden;
+}
+
+div.double-date>p-calendar.interv>span>input:disabled,
+.double-date.no-click {
+    background-color: #e9ecef !important;
+}
+
+#tablePoligoniDichiarati>div>div>div>div.ui-table-scrollable-body>table>tbody>tr.ui-state-highlight td {
+    background: #d9ffd2;
+}
+
+.data-content {
+    border: 2px solid #7c7c7c;
+    margin: 0px 10px;
+}
+
+div#selectedData {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+.vincoloAttivo {
+    border-color: red;
+}
+
+/* MESSAGGI */
+#messaggi-dichiarato>messaggi-gis>div>div>div>div>div.message-expanded {
+    left: inherit !important;
+    width: 260px;
+}
+
+#messaggi-dichiarato>messaggi-gis>div>div>div>div>div.message-expanded textarea {
+    height: 100px;
+    width: 250px;
+}

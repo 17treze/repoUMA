@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2022.08.29 alle 04:34:57 PM CEST 
+
+  -->
+      
+    <bindings xmlns:tns="http://bdr.izs.it/webservices" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiereResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findFieraResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindFieraResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getFieraResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetFieraResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriFieraResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriFieraResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascoloResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_DetenResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoDetenResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_DetenResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoDetenResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ElencoSpecieMattatoioResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoSpecieMattatoioResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascoloResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascoloResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriPascoloResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindMattatoioResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMattatoioResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMattatoioResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMattatoioResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMacellazioniSuineResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMacellazioniSuineResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findMacellazioneSuinaResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMacellazioneSuinaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfo_StruttureResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetInfoStruttureResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiereResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascoloResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_AziendaleResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_AziendaleResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_AziendaleResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_CodResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_PeriodoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodPeriodoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_DetenResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodDetenResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_DetenResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodDetenResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_DetenResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoDetenResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_MacellatiResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Ovini_MacellatiResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiOviniMacellatiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Equidi_MacellatiResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEquidiMacellatiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovi_Partite_MacellatiResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOviPartiteMacellatiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_Da_AllevamentoResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiDaAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRichiestaTransumanzaResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRichiestaTransumanzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findRichiestaTransumanzaResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindRichiestaTransumanzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiere"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SOAPAutenticazione">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.SOAPAutenticazione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriFiere_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriFiereCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findFiera">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindFiera"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findFiera_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindFieraSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findFiera_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindFieraSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getFiera">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetFiera"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getFiera_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetFieraSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getFiera_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetFieraSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriFiera">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriFiera"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriFiera_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriFieraSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriFiera_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriFieraSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_Deten">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoDeten"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_Deten_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoDetenSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_Deten_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoDetenSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_Deten">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoDeten"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_Deten_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoDetenSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_Deten_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoDetenSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ElencoSpecieMattatoio">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoSpecieMattatoio"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ElencoSpecieMattatoio_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoSpecieMattatoioSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:ElencoSpecieMattatoio_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoSpecieMattatoioSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindPascoloSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findPascolo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindPascoloSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetPascoloSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getPascolo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetPascoloSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriPascolo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriPascolo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriPascoloSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRegistriPascolo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRegistriPascoloSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindMattatoio">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMattatoio"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindMattatoio_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMattatoioSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:FindMattatoio_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMattatoioSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMattatoio">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMattatoio"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMattatoio_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMattatoioSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMattatoio_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMattatoioSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMacellazioniSuine">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMacellazioniSuine"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMacellazioniSuine_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMacellazioniSuineSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getMacellazioniSuine_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetMacellazioniSuineSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findMacellazioneSuina">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMacellazioneSuina"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findMacellazioneSuina_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMacellazioneSuinaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findMacellazioneSuina_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindMacellazioneSuinaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfo_Strutture">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetInfoStrutture"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfo_Strutture_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetInfoStruttureSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getInfo_Strutture_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetInfoStruttureSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiere"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriFiere_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriFiereCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendale"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Aziendale_Cod_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloAziendaleCodPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendale"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Aziendale_Cod_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloAziendaleCodPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendale"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCod"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_Periodo">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodPeriodo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_Periodo_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodPeriodoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Aziendale_Cod_Periodo_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloAziendaleCodPeriodoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Deten">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodDeten"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Deten_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodDetenSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_RegistriPascolo_Cod_Deten_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoRegistriPascoloCodDetenSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_Deten">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodDeten"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_Deten_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodDetenSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_EQUI_RegistriPascolo_Cod_Deten_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEQUIRegistriPascoloCodDetenSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_Deten">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoDeten"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_Deten_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoDetenSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_OVI_RegistriPascolo_Cod_Periodo_Deten_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOVIRegistriPascoloCodPeriodoDetenSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellati"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Ovini_Macellati">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiOviniMacellati"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Ovini_Macellati_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiOviniMacellatiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Ovini_Macellati_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiOviniMacellatiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Equidi_Macellati">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEquidiMacellati"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Equidi_Macellati_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEquidiMacellatiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Equidi_Macellati_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoEquidiMacellatiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovi_Partite_Macellati">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOviPartiteMacellati"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovi_Partite_Macellati_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOviPartiteMacellatiSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovi_Partite_Macellati_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoOviPartiteMacellatiSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_Da_Allevamento">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiDaAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_Da_Allevamento_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiDaAllevamentoSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Capi_Bovini_Macellati_Da_Allevamento_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.ElencoCapiBoviniMacellatiDaAllevamentoSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRichiestaTransumanza">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRichiestaTransumanza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRichiestaTransumanza_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRichiestaTransumanzaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:getRichiestaTransumanza_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.GetRichiestaTransumanzaSTRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findRichiestaTransumanza">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindRichiestaTransumanza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findRichiestaTransumanza_STR">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindRichiestaTransumanzaSTR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findRichiestaTransumanza_STRResponse">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.wsStrutture.FindRichiestaTransumanzaSTRResponse"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://bdr.izs.it/dsEQUI_REGISTRI_PASCOLI_G.xsd" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.a4g.proxy.ws.bdn.dsequiregistripascolig"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:dsEQUI_REGISTRI_PASCOLI_G">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.dsequiregistripascolig.DsEQUIREGISTRIPASCOLIG"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://bdr.izs.it/dsOVI_REGISTRI_PASCOLI_G.xsd" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.a4g.proxy.ws.bdn.dsoviregistripascolig"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:dsOVI_REGISTRI_PASCOLI_G">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.dsoviregistripascolig.DsOVIREGISTRIPASCOLIG"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://bdr.izs.it/dsREGISTRI_PASCOLI_G.xsd" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.tndigitale.a4g.proxy.ws.bdn.dsregistripascolig"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:dsREGISTRI_PASCOLI_G">
+                  
+            <class ref="it.tndigitale.a4g.proxy.ws.bdn.dsregistripascolig.DsREGISTRIPASCOLIG"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

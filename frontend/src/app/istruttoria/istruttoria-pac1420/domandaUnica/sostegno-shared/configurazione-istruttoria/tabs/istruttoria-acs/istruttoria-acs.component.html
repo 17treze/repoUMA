@@ -1,0 +1,68 @@
+<form *ngIf="importiForm" [formGroup]="importiForm" (ngSubmit)="onSubmit()">
+
+<p-toast position="center" key="checkSalvataggio" [modal]="true" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="confermaSalvataggio()" label="Si" class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="rejectSalvataggio()" label="No" class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<div class="boxgrey">
+  <div class="d-flex  align-items-center">
+    <span class="icon  icon--p  icon--dark  icon--l  mr-3">
+      <span class="icon__img">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="35" viewBox="0 0 48 35">
+          <path fill="#FFF" d="M47.167 17.539c0-.654-.396-1.248-1.008-1.516l-3.536-1.546 3.537-1.547c.611-.267 1.007-.862 1.007-1.515 0-.654-.396-1.248-1.008-1.516l-14.636-6.4-.036-.015L24.616.479c-.445-.194-.954-.194-1.398 0L1.673 9.899c-.611.268-1.006.862-1.006 1.516 0 .653.395 1.248 1.007 1.516l3.536 1.546-3.536 1.546c-.612.268-1.007.862-1.007 1.516 0 .653.395 1.248 1.007 1.516l3.638 1.59-3.639 1.591c-.611.268-1.006.863-1.006 1.516S1.062 25 1.674 25.268l21.544 9.42c.222.097.46.145.699.145.238 0 .476-.048.698-.145l21.545-9.42c.611-.268 1.007-.863 1.007-1.516 0-.654-.396-1.248-1.008-1.516l-3.637-1.59 3.638-1.591c.611-.268 1.007-.863 1.007-1.516zM16.929 6.138l3.704 1.62-3.98 1.74-3.65-1.643 3.926-1.717zm7.03 3.074l4.028 1.761-4.028 1.814-4.028-1.814 4.028-1.761zm10.914-1.339l-3.608 1.624-3.98-1.74 3.662-1.6 3.926 1.716zm-14.162 6.375l-4.617 2.079-4.203-1.838 4.745-2.075 4.075 1.834zm3.248 1.462l4.528 2.038-4.57 1.999-4.528-1.98 4.57-2.057zm7.822.598l-4.575-2.06 4.076-1.834 4.703 2.057-4.204 1.837zm7.53-3.292l-4.751-2.078 3.608-1.625 4.805 2.102-3.662 1.6zM23.917 3.082l3.703 1.62-3.66 1.6-3.704-1.619 3.66-1.6zM9.707 9.295l3.651 1.643-4.794 2.096-3.704-1.62 4.848-2.119zm33.266 14.457l-19.056 8.332L4.86 23.752 8.638 22.1l14.581 6.375c.222.097.46.146.698.145.238 0 .476-.048.698-.145l14.58-6.375 3.778 1.652zm-19.056 2.12L4.86 17.538l3.676-1.608 14.682 6.42c.222.097.46.145.699.145.238 0 .476-.048.698-.145l14.682-6.42 3.676 1.608-19.056 8.332z"/>
+        </svg>
+      </span>
+    </span>
+    <h3 class="mr-auto  mb-0  pb-0">Configurazione Accoppiato superfici</h3>
+    <button *ngIf="!edit" type="button" class="btn  btn-white  w-auto  fs-16  mb-0" (click)="modifica()">MODIFICA</button>
+    <button *ngIf="edit" type="button" class="btn btn-green fs-16  mr-2" (click)="annulla()">ANNULLA</button>
+    <button *ngIf="edit" type="submit" class="btn btn-green fs-16" (click)="salva()"
+      [disabled]="!importiForm.valid">SALVA</button>
+  </div>
+
+  <hr size="6" color="green">
+  <h4 class="fs-16  fw-700  my-3">{{ 'CONFIGURAZIONE_ISTRUTTORIA.interventiRichiesti' | translate }}</h4>
+  <!-- <div class="cols-2" formArrayName="importi"> -->
+  <div class="row  row--cols" formArrayName="importi">
+      <ng-template ngFor let-intervento [ngForOf]="importiForm.controls.importi?.controls" let-i="index">
+        <ng-container [formGroupName]="i">
+          <div class="col-6">
+            <div class="row  row--edit">
+              <div class="col-12">
+                <div class="row  align-items-center">
+                  <div class="col-2">
+                    <img src="assets/img/intervento-{{intervento.value.codiceAgea}}.jpg" />
+                  </div>
+                  <div class="col-2">
+                    <strong>{{intervento.value.codiceAgea}}</strong>
+                  </div>
+                  <div class="col-6">
+                    <span>{{'CONFIGURAZIONE_ISTRUTTORIA.SUPERFICI.'+intervento.value.codiceAgea | translate}}</span>
+                  </div>
+                  <div class="col-2  text-right">
+                    <span *ngIf="!edit">{{ intervento.value.valoreUnitarioIntervento }}</span>
+                    <input *ngIf="edit" type="text" pInputText formControlName="valoreUnitarioIntervento" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-template>
+  </div>
+</div>
+</form>

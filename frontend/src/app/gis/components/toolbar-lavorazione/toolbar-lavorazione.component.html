@@ -1,0 +1,76 @@
+<div class="toolbar-lavorazione">
+  <div class="p-grid" style="margin-top: inherit!important;"
+    *ngIf="lavorazioniEvent.stato !== statoLavorazioneSuolo.CONSOLIDATA_SU_AGS">
+    <!-- Modifica -->
+    <div class="p-col"
+      [ngClass]="{'btnDisabled': (lavorazioniEvent.stato !== statoLavorazioneSuolo.IN_CORSO) || lavorazioniEvent.readOnly === true}">
+      <label class="action-modifica" (click)="modificaLavorazione(lavorazioniEvent.idLavorazione)" pTooltip="Modifica"
+        tooltipPosition="bottom">
+        <i class="fas fa-edit"></i>
+      </label>
+    </div>
+    <!-- Valida -->
+    <div class="p-col"
+      [ngClass]="{'btnDisabled': (lavorazioniEvent.stato !== statoLavorazioneSuolo.IN_CORSO) || lavorazioniEvent.readOnly === true}">
+      <esito-validazione-lavorazione-button>
+      </esito-validazione-lavorazione-button>
+    </div>
+    <!-- Consolida in A4S -->
+    <div class="p-col"
+      *ngIf="lavorazioniEvent.stato !== statoLavorazioneSuolo.CONSOLIDATA_SU_A4S && lavorazioniEvent.stato !== statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO && lavorazioniEvent.stato !== statoLavorazioneSuolo.ERRORE_CONSOLIDAMENTO "
+      [ngClass]="{'btnDisabled': (lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_AGS ||
+      lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_A4S  ||
+      lavorazioniEvent.stato === statoLavorazioneSuolo.IN_CREAZIONE ||
+      lavorazioniEvent.stato === statoLavorazioneSuolo.IN_MODIFICA ) || lavorazioniEvent.readOnly === true}">
+      <label class="action-consolida" (click)="consolidaLavorazioneSuA4SPopup(lavorazioniEvent.idLavorazione)"
+        pTooltip="Consolida" tooltipPosition="bottom">
+        <i class="fas fa-cloud"></i>
+      </label>
+    </div>
+    <!-- Consolida in AGS-->
+    <div class="p-col"
+      *ngIf="(lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_A4S || lavorazioniEvent.stato === statoLavorazioneSuolo.ERRORE_CONSOLIDAMENTO) && lavorazioniEvent.readOnly === false">
+      <label class="action-consolida" (click)="consolidaLavorazioneAGS(lavorazioniEvent.idLavorazione)"
+        pTooltip="Consolida in AGS" tooltipPosition="bottom">
+        <i class="fas fa-cloud"></i>
+      </label>
+    </div>
+    <!-- Refresh lavorazione-->
+    <div class="p-col" *ngIf="lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO">
+      <label class=" action-consolida" (click)="refreshStatoLavorazione(lavorazioniEvent.idLavorazione)"
+        pTooltip="Aggiorna" tooltipPosition="bottom">
+        <i class="fas fa-sync"></i>
+      </label>
+    </div>
+    <!-- Sospendi -->
+    <div class="p-col"
+      [ngClass]="{'btnDisabled': (lavorazioniEvent.stato !== statoLavorazioneSuolo.IN_CORSO) || lavorazioniEvent.readOnly === true}">
+      <label class="action-sospendi" pTooltip="Sospendi" tooltipPosition="bottom">
+        <i class="fas fa-pause"></i>
+      </label>
+    </div>
+    <!-- Elimina -->
+    <div class="p-col" [ngClass]="{'btnDisabled': lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_AGS ||
+    lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDAMENTO_IN_CORSO ||  
+    lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_A4S  || 
+    lavorazioniEvent.stato === statoLavorazioneSuolo.ERRORE_CONSOLIDAMENTO ||
+    lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_AGS_PROBLEMI_SUOLO ||
+    lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_AGS_PROBLEMI_PARTICELLE ||
+    lavorazioniEvent.readOnly === true
+   }">
+      <label class="action-elimina" (click)="triggerDeleteLavorazione()" pTooltip="Elimina" tooltipPosition="bottom">
+        <i class="fas fa-trash-alt"></i>
+      </label>
+    </div>
+  </div>
+  <div class="p-grid" style="margin-top: inherit!important;"
+    *ngIf="lavorazioniEvent.stato === statoLavorazioneSuolo.CONSOLIDATA_SU_AGS">
+    <div class="p-col">
+      <p-splitButton id="combo-campagna" [showTransitionOptions]="'1ms'" [hideTransitionOptions]="'0ms'"
+        (onDropdownClick)="copiaDaSelectList(null)" label="Copia Lavorazione" icon="fa fa-copy"
+        pTooltip="Campagna: {{annoCampagnaLav}}" tooltipPosition="right" (onClick)="copiaLavorazione(annoCampagnaLav)"
+        [model]="items">
+      </p-splitButton>
+    </div>
+  </div>
+</div>

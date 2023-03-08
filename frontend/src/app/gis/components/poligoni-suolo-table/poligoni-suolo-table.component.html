@@ -1,0 +1,39 @@
+<div class="alert-custom-dialog">
+    <span>
+        <strong>Attenzione! </strong>
+        non è possibile associare alla lavorazione i seguenti poligoni suolo perchè già inclusi in altre lavorazioni
+    </span>
+
+
+</div>
+
+<div class="content-suolo-table mgTop15">
+    <div class="table-suolo-table mgTop10">
+        <div class="thead-suolo-table">
+            <div class="row">
+                <div class="col col-th tab80">ID SUOLO</div>
+                <div class="col col-th tab120">ID LAVORAZIONE</div>
+                <div class="col col-th tab200">UTENTE</div>
+                <div class="col col-th ">DATA ULTIMA MODIFICA</div>
+                <div *ngIf="titoloDialog != 'ADL'" class="col col-th">ID SUOLI DICHIARATI</div>
+            </div>
+        </div>
+
+
+
+        <div class="tbody-suolo-table">
+            <div class="row" *ngFor="let suolo of suoloVigente ; let i = index">
+                <div class="col col-tb tab80"> {{suolo['ID SUOLO']}} </div>
+                <div class="col col-tb tab120"> {{suolo['ID LAVORAZIONE']}} </div>
+                <div class="col col-tb tab200 truncate-text" title="{{suolo['UTENTE']}}">
+                    {{suolo['UTENTE']}} </div>
+                <div class="col col-tb ">
+                    {{suolo['DATA ULTIMA MODIFICA'] | date: 'dd/MM/yyyy'}} </div>
+                <div *ngIf="titoloDialog != 'ADL'" class="col col-tb td-descrizione"><span
+                        title="{{suolo.idSuoloDichiarato}}"> {{suolo['ID SUOLI DICHIARATI']}} </span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="submit" class="gis-button btn-alt  mgTop15" pButton label="Scarica elenco non associabili"
+    (click)="downloadFileCsv(suoloVigente)"></button>

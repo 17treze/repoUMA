@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" xmlns:ex="http://www.regione.taa.it/FaultType/schemas">
+  <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="ParticellaPortType.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene le eccezioni specifiche dei servizi del libro fondiario</xs:documentation>
+  </xs:annotation>
+  <xs:complexType final="restriction" name="AssenzaDelegatoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il client non specifica il delegato che sta richiamando il servizio, ovvero il soggetto che utilizza il sistema per reperire le informazioni, ovvero l'utente che accede al suo applicativo abilitato a richiamare i servizi.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssenzaDelegatoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:AssenzaDelegatoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

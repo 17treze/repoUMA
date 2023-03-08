@@ -1,0 +1,109 @@
+<p-dialog
+  [(visible)]="display"
+  [responsive]="true"
+  header="{{ 'FAS_ANA.VERIFICA_VALIDITA' | translate }}"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  (onHide)="close()">
+  <div class="p-grid  p-jc-between text-center">
+    <div class="p-col-12">
+      <div class="p-grid p-jc-start">
+        <div class="p-col">
+          <div class="button-image">
+            <button
+              *ngIf="!isStatoControlliInCorso(); else controlliInCorso"
+              pButton
+              [class]="'button-custom-bar-dark'"
+              class="w-eye"
+              [disabled]="!isStatoInAggiornamento()"
+              (click)="startControlloCompletezza()"
+              label="{{ 'FAS_ANA.CONTROLLA' | translate }}">
+            </button>
+            <ng-template #controlliInCorso>
+              <button
+                pButton
+                [class]="'button-custom-bar-dark'"
+                class="w-eye"
+                (click)="getEsitiControlloCompletezza()"
+                label="{{ 'AGGIORNA' | translate }}"
+                icon="pi pi-refresh">
+              </button>
+              <br>
+              <span>{{ 'FAS_ANA.CONTROLLI_IN_CORSO' | translate }}</span>
+            </ng-template>
+          </div>
+        </div>
+        <div class="p-col">
+          <div class="button-image">
+            <button
+              pButton
+              [class]="'button-custom-bar-dark'"
+              [disabled]="!isFascicoloStatoIdoneoPerDownloadScheda"
+              (click)="getSchedaValidazione()"
+              label="{{ 'SCHEDA_VALIDAZIONE_DLG.SCHEDA_VALIDAZIONE' | translate }}"
+              icon="pi pi-download">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div
+      class="p-col-12"
+      *ngIf="keys && keys.length > 0; else noCheckList">
+      <span class="p-col-12">
+        <strong>{{ 'FAS_ANA.ULTIMI_CONTROLLI_ESEGUITI' | translate }}:</strong>
+      </span>
+      <ul>
+        <li *ngFor="let k of keys">
+          <em
+            class="pi"
+            [ngClass]="{'pi-times-circle control-fail': checkList[k].esito === -3, 'pi-check-circle control-ok': checkList[k].esito !== -3}">
+          </em>
+          {{'FAS_ANA.CONTROLLI_COMPLETEZZA_OK.' + k | translate}}
+        </li>
+      </ul>
+      <p-accordion [multiple]="true">
+        <p-accordionTab [selected]="true">
+          <p-header>
+            <strong>{{ "ERRORI" | translate }}</strong>
+          </p-header>
+          <div *ngIf="erroriList && erroriList.length > 0; else empty">
+            <ul>
+              <li *ngFor="let errore of erroriList">
+                  {{ errore }}
+                </li>
+            </ul>
+          </div>
+          <ng-template #empty>
+            <span>{{ 'FAS_ANA.ERRORI_AVVERTENZE_EMPTY' | translate }}</span>
+          </ng-template>
+        </p-accordionTab>
+        <br>
+        <p-accordionTab [selected]="true">
+          <p-header>
+            <strong>{{ "AVVERTENZE" | translate }}</strong>
+          </p-header>
+          <div *ngIf="avvertenzeList && avvertenzeList.length > 0; else empty">
+            <ul>
+              <li *ngFor="let avvertenza of avvertenzeList">
+                  {{ avvertenza }}
+                </li>
+            </ul>
+          </div>
+          <ng-template #empty>
+            <span>{{ 'FAS_ANA.ERRORI_AVVERTENZE_EMPTY' | translate }}</span>
+          </ng-template>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+    <ng-template #noCheckList>
+      <div class="p-col-12">
+        <span> {{ 'FAS_ANA.NESSUN_CONTROLLO_ESEGUITO' | translate }} </span>
+      </div>
+    </ng-template>
+  </div>
+</p-dialog>

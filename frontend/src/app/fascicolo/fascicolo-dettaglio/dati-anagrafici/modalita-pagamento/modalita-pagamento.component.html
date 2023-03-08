@@ -1,0 +1,175 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <em
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></em>
+    <img src="assets/img/ico-anagraf.jpg">
+    <span class="ml-2">
+      {{ "FascicoloAziendale.DATI_ANAGRAFICI_E_FISCALI" | translate }}
+    </span>
+  </a>
+  <br>
+  <h3 class="mb-3">{{ 'Modalità di pagamento' }}</h3>
+  <div style="text-align:left">
+    <button
+      type="button"
+      pButton
+      icon="pi pi-plus"
+      (click)="showDialogToAdd()"
+      [disabled]="!fascicoloEditable()"
+      label="Aggiungi"></button>
+  </div>
+  <p-table
+    [columns]="cols"
+    [value]="listaModalitaPagamento"
+    [autoLayout]="true"
+    [(selection)]="selectedModalitaPagamento">
+    <ng-template
+      pTemplate="header"
+      let-columns>
+      <tr>
+        <th style="display:none;">ID</th>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon
+            *ngIf="col.field"
+            [field]="col.field"></p-sortIcon>
+        </th>
+        <th>Azioni</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td style="display:none;">{{rowData.id}}</td>
+        <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+        <td>
+          <button
+            type="button"
+            pButton
+            title="Rimuovi modalità di pagamento"
+            style="background-color: red"
+            icon="pi pi-trash"
+            (click)="cancellaIBAN(rowData.id, rowData.iban)"
+            [disabled]="!fascicoloEditable()"
+            label="{{ 'ELIMINA' | translate }}"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="summary"
+      let-rowData>
+      <div class="p-d-flex p-ai-center p-jc-between">{{footerTabella()}}</div>
+    </ng-template>
+  </p-table>
+  <p-dialog
+    class="dialog-modalita-pagamento"
+    [(visible)]="displayDialog"
+    *ngIf="displayDialog"
+    [responsive]="true"
+    showEffect="fade"
+    [modal]="true">
+    <p-header>
+      {{ 'MODALITA_PAGAMENTO.INSERISCI_MODALITA_PAGAMENTO' | translate }}
+    </p-header>
+    <p-toast
+      key="tst-dialog"
+      [style]="{marginTop: '70px'}"></p-toast>
+    <form
+      *ngIf="modalitaPagamentoFormGroup"
+      class="ui-fluid"
+      [formGroup]="modalitaPagamentoFormGroup">
+      <div class="p-grid">
+        <div class="p-col-4 text-uppercase">
+          <label for="iban">
+            {{ 'MODALITA_PAGAMENTO.IBAN' | translate }} *
+          </label>
+        </div>
+        <div class="p-col-8">
+          <div>
+            <input
+              #inputRef
+              maxlength="40"
+              pInputText
+              [a4gIban]="{inputRef: inputRef}"
+              id="iban"
+              formControlName="iban">
+          </div>
+          <div *ngIf="modalitaPagamentoFormGroup.get('iban').invalid && (modalitaPagamentoFormGroup.get('iban').dirty || modalitaPagamentoFormGroup.get('iban').touched)">
+            <p-message
+              *ngIf="modalitaPagamentoFormGroup.get('iban').errors?.required"
+              class="font-12"
+              severity="error"
+              text="{{ 'MODALITA_PAGAMENTO.IBAN_OBBLIGATORIO' | translate }}">
+            </p-message>
+            <p-message
+              *ngIf="modalitaPagamentoFormGroup.get('iban').errors?.iban"
+              class="font-12"
+              severity="error"
+              text="{{ 'MODALITA_PAGAMENTO.IBAN_NOT_VALID' | translate }}">
+            </p-message>
+          </div>
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button
+          pButton
+          icon="fa ui-icon-check"
+          type="submit"
+          label="Aggiungi"
+          class="button--success"
+          (click)="save()"
+          [disabled]="!modalitaPagamentoEditable()"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>
+
+<p-toast
+  position="center"
+  key="cancellaModalitaPagamento"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid p-formgrid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="deleteRow()"
+          [disabled]="!fascicoloEditable()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="annulla()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

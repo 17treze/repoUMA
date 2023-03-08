@@ -1,0 +1,45 @@
+<div class="layout-actionmenu">
+  <!--
+  <table #totaliDatiAggregati>
+    <tr>
+      <td>{{'IstruttorieDatiAggregati.totalePagamentoAutorizzatoDisaccoppiato' | translate }}</td>
+      <td>{{datiTotali.pagamentoAutorizzato | number:'1.0-4':'it'}}</td>
+    </tr><tr>
+      <td>{{'IstruttorieDatiAggregati.totaleCalcolatoDisaccoppiato' | translate}}</td>
+      <td>{{datiTotali.totaleCalcolato | number:'1.0-4':'it'}}</td>
+    </tr><tr>
+      <td>{{'IstruttorieDatiAggregati.percentualePagamentoDisaccoppiato' | translate}}</td>
+      <td>{{datiTotali.percentualePagamento}}</td>
+    </tr>
+  </table>
+  -->
+  <!--
+  <li>{{'IstruttorieDatiAggregati.totalePagamentoAutorizzatoDisaccoppiato' | translate }}: {{datiTotali.pagamentoAutorizzato | number:'1.0-4':'it'}}</li>
+  <li>{{'IstruttorieDatiAggregati.totaleCalcolatoDisaccoppiato' | translate}}: {{datiTotali.totaleCalcolato | number:'1.0-4':'it'}}</li>
+  <li>{{'IstruttorieDatiAggregati.totaleCalcolatoDisaccoppiato' | translate}}: {{datiTotali.percentualePagamento}}</li>
+  -->
+  <p-table #totaliDatiAggregati [columns]="columnsModel" [value]="tableModel">
+    <ng-template pTemplate="caption">
+      <button type="button" pButton icon="pi pi-file" iconPos="left" label="{{ 'EXPORT_CSV' | translate }}"
+        (click)="totaliDatiAggregati.exportCSV()" style="margin-right: 0.5em;">
+      </button>
+      <button type="button" pButton icon="pi pi-file" iconPos="left" label="{{ 'EXPORT_PDF' | translate }}"
+        (click)="exportPdf(totaliDatiAggregati)" style="margin-right: 0.5em;">
+      </button>
+    </ng-template>
+    <ng-template pTemplate="header" let-defColonne>
+      <tr>
+        <th *ngFor="let col of defColonne">
+          {{col | translate}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-datoTotale>
+      <tr>
+        <td>{{datoTotale.pagamentoAutorizzato | number:'1.0-4':'it'}}</td>
+        <td>{{datoTotale.totaleCalcolato | number:'1.0-4':'it'}}</td>
+        <td>{{datoTotale.percentualePagamento | number:'1.0-2':'it'}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

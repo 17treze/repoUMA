@@ -1,0 +1,135 @@
+{
+  "id": 7945,
+  "version": 7,
+  "datiDichiarazione": {
+    "richiedente": {
+      "nome": "GUIDO",
+      "cognome": "MICHELON",
+      "codiceFiscale": "MCHGDU38B23E500I",
+      "comuneNascita": "LAVIS",
+      "provinciaNascita": "TN",
+      "dataNascita": "23/02/1938",
+      "sesso": "M",
+      "residenza": {
+        "indirizzo": "VIA DI SAN FLORIANO 7",
+        "comune": "GIOVO",
+        "provincia": "TN",
+        "CAP": "38030"
+      },
+      "carica": "TITOLARE FIRMATARIO",
+      "dtInizioCarica": "ND",
+      "dtFineCarica": "ND"
+    },
+    "dettaglioImpresa": {
+      "formaGiuridicaCodice": "DI",
+      "formaGiuridicaDescrizione": "IMPRESA INDIVIDUALE",
+      "denominazione": "MICHELON GUIDO",
+      "sedeLegale": "38030 GIOVO TRENTO",
+      "estremiCCIAA": {
+        "sede": "TN",
+        "numeroIscrizione": "65369",
+        "dataIscrizione": "08/05/1964"
+      },
+      "codiceFiscale": "MCHGDU38B23E500I",
+      "partitaIva": "00167220227",
+      "indirizzoPEC": "GUIDO.MICHELON@PEC.AGRITEL.IT",
+      "dettaglioPersonaGiuridica": {
+        "formaGiuridica": "IMPRESA INDIVIDUALE",
+        "estremiCostituzione": "",
+        "capitaleSociale": "Dato non disponibile",
+        "durata": ""
+      },
+      "soggettiImpresa": [
+        {
+          "nome": "GUIDO",
+          "cognome": "MICHELON",
+          "codiceFiscale": "MCHGDU38B23E500I",
+          "comuneNascita": "LAVIS",
+          "provinciaNascita": "TN",
+          "dataNascita": "23/02/1938",
+          "sesso": "M",
+          "indirizzoResidenza": "VIA DI SAN FLORIANO 7",
+          "comuneResidenza": "GIOVO",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38030",
+          "carica": [
+            {
+              "codice": "TIT",
+              "tipologia": "TITOLARE FIRMATARIO",
+              "dataInizio": "08/05/1964",
+              "dataFine": "",
+              "href": "/antimafia/7945/allegatoFamiliariConviventi/7949",
+              "selezionato": true,
+              "dichiarazione": false
+            }
+          ],
+          "familiariConviventi": [
+            {
+              "nome": "NATALINA",
+              "cognome": "DALPIAZ",
+              "codiceFiscale": "DLPNLN43T65F187W",
+              "comuneNascita": "MEZZOLOMBARDO",
+              "provinciaNascita": "TN",
+              "dataNascita": "-821149200000",
+              "sesso": "F",
+              "residenza": {
+                "indirizzo": "VIA ROMA 23",
+                "comune": "CONTA'",
+                "provincia": "TN",
+                "CAP": "38093"
+              },
+              "gradoParentela": "Figlio"
+            }
+          ],
+          "estremiCCIAA": "LAVIS"
+        },
+        {
+          "nome": "ENZO",
+          "cognome": "MICHELON",
+          "codiceFiscale": "MCHNZE69R18L378R",
+          "comuneNascita": "TRENTO",
+          "provinciaNascita": "TN",
+          "dataNascita": "18/10/1969",
+          "sesso": "M",
+          "indirizzoResidenza": "VIA DI S FLORIANO 5",
+          "comuneResidenza": "GIOVO",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38030",
+          "carica": [
+            {
+              "codice": "DT",
+              "tipologia": "DIRETTORE TECNICO",
+              "dataInizio": "03/01/2005",
+              "dataFine": "",
+              "selezionato": true,
+              "dichiarazione": true
+            }
+          ],
+          "estremiCCIAA": "TRENTO"
+        }
+      ],
+      "aziendeCollegate": []
+    }
+  },
+  "dtGenerazionePdf": null,
+  "dtInizioCompilazione": null,
+  "dtUltimoAggiornamento": "2018-11-27",
+  "dtUploadPdfFirmato": "2018-11-15",
+  "idProtocollo": null,
+  "pdfFirmato": null,
+  "pdfGenerato": null,
+  "pdfFirmatoName": null,
+  "dtProtocollazione": "2018-11-23T14:37:43.303+0000",
+  "a4gtAllegatoDicAntimafias": [],
+  "stato": {
+    "id": 11,
+    "identificativo": "BOZZA",
+    "descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+  },
+  "azienda": {
+    "id": 128,
+    "cuaa": "MCHGDU38B23E500I"
+  },
+  "assenzaDt": null,
+  "allegatoFamiliariConviventi": null
+}

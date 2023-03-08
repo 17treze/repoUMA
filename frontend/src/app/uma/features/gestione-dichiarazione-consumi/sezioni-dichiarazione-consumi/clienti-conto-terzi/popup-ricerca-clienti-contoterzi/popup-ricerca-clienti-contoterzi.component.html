@@ -1,0 +1,105 @@
+<p-dialog
+  #dialog
+  id="popup-ricerca-clienti-contoterzi"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  [dismissableMask]="true"
+  [contentStyle]="{'overflow':'auto'}"
+  (onHide)="onHideDialog()"
+  header="{{ 'UMA.DICHIARAZIONE_CONSUMI.RICERCA_CLIENTI' | translate | uppercase }}">
+  <p-toast
+    key="tst-dialog"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <p-toast
+    key="tst-ricerca-clienti"
+    [style]="{marginTop: '70px'}"
+    (onClose)="onCloseToastRicercaClienti()"></p-toast>
+  <div class="ui-grid">
+    <div class="ui-g-12 ui-md-12 w-100">
+      <div class="ui-inputgroup">
+        <input
+          type="text"
+          placeholder="Cerca cliente"
+          id="testoRicerca"
+          [(ngModel)]="testoRicerca"
+          size="60">
+        <button
+          pButton
+          class="icon-button-square"
+          type="button"
+          icon="pi pi-search"
+          [disabled]="isNotValidText(testoRicerca)"
+          (click)="onClickButton('CERCA',testoRicerca, 0)"></button>
+      </div>
+    </div>
+    <div
+      class="ui-g-12 ui-md-12 w-100 boxgrey table-container"
+      *ngIf="datasource?.risultati?.length">
+      <p-table
+        #table
+        [autoLayout]="true"
+        [value]="datasource?.risultati"
+        [paginator]="true"
+        [rows]="elementiPerPagina"
+        [scrollable]="true"
+        [resetPageOnSort]="true"
+        [first]="first"
+        [totalRecords]="totalElements"
+        [lazy]="true"
+        (onLazyLoad)="changePage($event, testoRicerca)">
+        <ng-template
+          pTemplate="header"
+          let-columns>
+          <tr>
+            <th [ngStyle]="{'width': '20%'}">CUAA</th>
+            <th
+              [ngStyle]="{'width': '70%'}"
+              pSortableColumn="denominazione">
+              DENOMINAZIONE
+              <p-sortIcon field="denominazione"></p-sortIcon>
+            </th>
+            <th [ngStyle]="{'width': '10%', 'text-align': 'center'}">AZIONI</th>
+          </tr>
+        </ng-template>
+        <ng-template
+          pTemplate="body"
+          let-cliente>
+          <tr>
+            <td [ngStyle]="{'width': '20%'}">{{cliente.cuaa}}</td>
+            <td [ngStyle]="{'width': '70%'}">{{cliente.denominazione | uppercase}}</td>
+            <td [ngStyle]="{'width': '10%', 'text-align': 'center'}">
+              <button
+                pButton
+                class="icon-button-square"
+                icon="pi pi-plus"
+                (click)="onClickButton('AGGIUNGI', cliente.cuaa, cliente.idAgs)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <!-- template no Results -->
+        <ng-template
+          pTemplate="emptymessage"
+          let-columns>
+          <tr>
+            <td [attr.colspan]="4">Nessun risultato trovato.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="ui-grid">
+    <div class="ui-g-4">
+      <button
+        pButton
+        class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal"
+        type="button"
+        label="Chiudi"
+        (click)="chiudiDialog($event)"></button>
+    </div>
+  </div>
+</p-dialog>

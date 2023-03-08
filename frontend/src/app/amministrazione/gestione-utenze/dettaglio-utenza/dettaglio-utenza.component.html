@@ -1,0 +1,253 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}" [baseZIndex]="50000"></p-toast>
+<assegnazione-configurazioni-dialog
+  #assegnazioneConfigurazioneDialog (displayChange)="onDialogConfigurazioneToggle($event)">
+</assegnazione-configurazioni-dialog>
+<app-rifiuto-dialog #rifiutoDialog
+  [richiestaAccessoCorrente]="richiestaAccessoCorrente">
+</app-rifiuto-dialog>
+<div class="ui-g ui-fluid">
+  <div class="tophome">
+    <div class="ui-grid-fixed">
+      <h4 *ngIf="datiDomanda && datiDomanda.idProtocollo && datiDomanda.dataProtocollazione">
+        {{ 'gestioneUtenze.richiesta' | translate }} {{ datiDomanda.idProtocollo }} | {{ datiDomanda.dataProtocollazione | date: DATE_FORMAT }}
+      </h4>
+    </div>
+  </div>
+  <div class="ui-grid-fixed">
+    <div class="ui-g-12">
+      <form #f="ngForm" *ngIf="datiDomanda">
+        <div class="accordion-wrapper" *ngIf="datiDomanda.datiAnagrafici">
+          <p-accordion>
+            <p-accordionTab header="Anagrafica" [selected]="true">
+              <fieldset [disabled]="false" tooltipPosition="top">
+                <div class="boxgrey-user">
+                  <div class="ui-g-2">
+                    <label>{{'cognome' | translate}}</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input type="text" name="cognome" pInputText [(ngModel)]="datiDomanda.datiAnagrafici.cognome"
+                      [readonly]="true">
+                  </div>
+                  <div class="ui-g-2">
+                    <label>{{'nome' | translate}}</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input type="text" name="nome" pInputText [(ngModel)]="datiDomanda.datiAnagrafici.nome"
+                      [readonly]="true">
+                  </div>
+                  <div class="ui-g-2">
+                    <label>{{'cf' | translate}}</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input type="text" name="codiceFiscale" pInputText
+                      [(ngModel)]="datiDomanda.datiAnagrafici.codiceFiscale" [readonly]="true">
+                  </div>
+                  <div class="ui-g-2">
+                    <label>{{'INDIRIZZO_PEC' | translate}}</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input type="text" name="email" pInputText [(ngModel)]="datiDomanda.datiAnagrafici.email"
+                      [readonly]="true">
+                  </div>
+                  <div class="ui-g-12"></div>
+                  <div class="ui-g-2">
+                    <label>{{'RECAPITO_TELEFONICO' | translate}}</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input type="text" name="telefono" pInputText [(ngModel)]="datiDomanda.datiAnagrafici.telefono"
+                      [readonly]="true">
+                  </div>
+                  <div class="ui-g-6"></div>
+                </div>
+              </fieldset>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="accordion-wrapper" *ngIf="datiDomanda.responsabilitaRichieste">
+          <p-accordion>
+            <p-accordionTab header="Responsabilit&agrave;" [selected]="true">
+              <div class="boxgrey">
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaTitolare?.length > 0">
+                  <h5><strong>{{'titolare' | translate}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaTitolare">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{'cuaa' | translate}}</strong></th>
+                        <th><strong>{{'gestioneUtenze.descrizioneImpresa' | translate}}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>{{ responsabilita.cuaa }}</td>
+                        <td>{{ responsabilita.denominazione }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container
+                  *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaLegaleRappresentante?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{labels.legaleRappresentante}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaLegaleRappresentante">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{ 'cuaa' | translate}}</strong></th>
+                        <th><strong>{{ 'gestioneUtenze.descrizioneImpresa' | translate}}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>{{ responsabilita.cuaa }}</td>
+                        <td>{{ responsabilita.denominazione }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaConsulente?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{labels.liberoProfessionistaConsulente}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaConsulente">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{'gestioneUtenze.ordineDiAppartenenza' | translate}}</strong></th>
+                        <th><strong>{{'NUMERO_RI' | translate}}</strong></th>
+                        <th><strong>{{'cuaa' | translate}}</strong></th>
+                        <th><strong>{{'gestioneUtenze.descrizioneImpresa' | translate}}</strong></th>
+                        <th><strong>{{'RAPPR' | translate}}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>{{ responsabilita.ordine }}</td>
+                        <td>{{ responsabilita.iscrizione }}</td>
+                        <td>{{ responsabilita.cuaa }}</td>
+                        <td>{{ responsabilita.denominazione }}</td>
+                        <td>{{ responsabilita.rappresentante }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaPat?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{ 'gestioneUtenze.dipendenteCollaboratorePat' | translate }}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaPat">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{'gestioneUtenze.matricola' | translate}}</strong></th>
+                        <th><strong>{{'gestioneUtenze.struttura' | translate}}</strong></th>
+                        <th><strong>{{'gestioneUtenze.dirigente' | translate}}</strong></th>
+                        <th><strong>{{ 'RICHIESTE_ACCESSO.motivazioneRichiesta' | translate }}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>{{ responsabilita.matricola }}</td>
+                        <td>{{ responsabilita.dipartimento }}</td>
+                        <td>{{ responsabilita.dirigente }}</td>
+                        <td>{{ responsabilita.note }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaCaa?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{'gestioneUtenze.dipendenteCollaboratoreCaa' | translate}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaCaa">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{ 'gestioneUtenze.caaSedi' | translate }}</strong></th>
+                        <th><strong>{{ 'gestioneUtenze.responsabile' | translate }}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>
+                          <ng-container *ngIf="responsabilita.sedi?.length > 0">
+                            <div *ngFor="let sede of responsabilita.sedi;">
+                              {{ sede.descrizione }}
+                            </div>
+                          </ng-container>
+                        </td>
+                        <td>{{ responsabilita.responsabile }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaAltriEnti?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{'gestioneUtenze.collaboratoreAltriEnti' | translate}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaAltriEnti">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{'denominazioneEnte' | translate}}</strong></th>
+                        <th><strong>{{'PARTITA_IVA' | translate}}</strong></th>
+                        <th><strong>{{'gestioneUtenze.responsabile' | translate}}</strong></th>
+                        <th><strong>{{ 'RICHIESTE_ACCESSO.motivazioneRichiesta' | translate }}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>{{ responsabilita.denominazione }}</td>
+                        <td>{{ responsabilita.piva }}</td>
+                        <td>{{ responsabilita.dirigente }}</td>
+                        <td>{{ responsabilita.note }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+                <ng-container *ngIf="datiDomanda.responsabilitaRichieste.responsabilitaDistributore?.length > 0">
+                  <h5 class="sezione-responsabili"><strong>{{'gestioneUtenze.dipendenteCollaboratoreDistributore' | translate}}</strong></h5>
+                  <p-table [value]="datiDomanda.responsabilitaRichieste.responsabilitaDistributore">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th><strong>{{ 'gestioneUtenze.distributori' | translate }}</strong></th>
+                        <th><strong>{{ 'gestioneUtenze.responsabile' | translate }}</strong></th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-responsabilita>
+                      <tr>
+                        <td>
+                          <ng-container *ngIf="responsabilita.distributori?.length">
+                            <div *ngFor="let distributor of responsabilita.distributori;">
+                              {{ distributor.denominazioneAzienda }} -
+                              {{ distributor.comune }}
+                            </div>
+                          </ng-container>
+                        </td>
+                        <td>{{ responsabilita.responsabile }}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </ng-container>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="accordion-wrapper">
+          <p-accordion>
+            <p-accordionTab header="Applicativi" [selected]="true">
+              <div class="boxgrey">
+                <ng-container *ngIf="datiDomanda.servizi?.length > 0">
+                  <div *ngFor="let service of datiDomanda.servizi">
+                    <strong>{{applicativi[service]}}</strong>
+                  </div>
+                </ng-container>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="ui-g-6"></div>
+        <div class="ui-g-3">
+          <div class="next-button">
+            <button pButton icon="ui-icon-clear" type="button" label="RIFIUTA DOMANDA" pButton
+              [disabled]="datiDomanda.stato!='IN_LAVORAZIONE'" (click)="showDialogRifiutoDomandaRichiestaUtente(datiDomanda)">
+            </button>
+          </div>
+        </div>
+        <div class="ui-g-3">
+          <div class="next-button">
+            <button pButton icon="ui-icon-check" type="button" label="{{ 'RICHIESTE_ACCESSO.dettaglioUtente' | translate }}" pButton
+              (click)="showDialogConfigurazioneUtente()"
+              [disabled]="datiDomanda.stato!='IN_LAVORAZIONE'">
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

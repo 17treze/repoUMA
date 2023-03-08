@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT CUP (CUP_GENERAZIONE*, CUP_CHIUSURA_REVOCA*)+>
+<!ELEMENT CUP_GENERAZIONE (DATI_GENERALI_PROGETTO, MASTER?, LOCALIZZAZIONE+, DESCRIZIONE, ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007?, FINANZIAMENTO, ERRORE?)>
+<!ATTLIST CUP_GENERAZIONE
+          soggetto_titolare CDATA #IMPLIED
+          uo_soggetto_titolare CDATA #IMPLIED
+          user_titolare CDATA #IMPLIED
+          id_progetto CDATA #REQUIRED>
+<!ELEMENT DATI_GENERALI_PROGETTO EMPTY>
+<!ATTLIST DATI_GENERALI_PROGETTO
+          anno_decisione CDATA #REQUIRED
+          cumulativo (N | S) "N"
+          codifica_locale CDATA #IMPLIED
+          natura CDATA #REQUIRED
+          tipologia CDATA #REQUIRED
+          settore CDATA #REQUIRED
+          sottosettore CDATA #REQUIRED
+          categoria CDATA #REQUIRED
+          cpv1 CDATA #IMPLIED
+          cpv2 CDATA #IMPLIED
+          cpv3 CDATA #IMPLIED
+          cpv4 CDATA #IMPLIED
+          cpv5 CDATA #IMPLIED
+          cpv6 CDATA #IMPLIED
+          cpv7 CDATA #IMPLIED>
+<!ELEMENT MASTER EMPTY>
+<!ATTLIST MASTER
+          cup_master CDATA #IMPLIED
+          id_master CDATA #IMPLIED
+          ragioni_collegamento CDATA #IMPLIED>
+<!ELEMENT LOCALIZZAZIONE EMPTY>
+<!ATTLIST LOCALIZZAZIONE
+          stato CDATA #REQUIRED
+          regione CDATA #REQUIRED
+          provincia CDATA #REQUIRED
+          comune CDATA #REQUIRED>
+<!ELEMENT DESCRIZIONE (LAVORI_PUBBLICI | CONCESSIONE_INCENTIVI_UNITA_PRODUTTIVE | REALIZZ_ACQUISTO_SERVIZI_RICERCA | REALIZZ_ACQUISTO_SERVIZI_FORMAZIONE | REALIZZ_ACQUISTO_SERVIZI_NO_FORMAZIONE_RICERCA | ACQUISTO_BENI | PARTECIP_AZIONARIE_CONFERIM_CAPITALE | CONCESSIONE_CONTRIBUTI_NO_UNITA_PRODUTTIVE | CUP_CUMULATIVO)>
+<!ELEMENT LAVORI_PUBBLICI EMPTY>
+<!ATTLIST LAVORI_PUBBLICI
+          nome_str_infrastr CDATA #REQUIRED
+          str_infrastr_unica (SI | NO) #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          descrizione_intervento CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT CONCESSIONE_INCENTIVI_UNITA_PRODUTTIVE EMPTY>
+<!ATTLIST CONCESSIONE_INCENTIVI_UNITA_PRODUTTIVE
+          denominazione_impresa_stabilimento CDATA #REQUIRED
+          partita_iva CDATA #REQUIRED
+          denominazione_impresa_stabilimento_prec CDATA #IMPLIED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          descrizione_intervento CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT REALIZZ_ACQUISTO_SERVIZI_RICERCA EMPTY>
+<!ATTLIST REALIZZ_ACQUISTO_SERVIZI_RICERCA
+          denominazione_progetto CDATA #REQUIRED
+          ente CDATA #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #IMPLIED
+          ind_area_rifer CDATA #IMPLIED
+          descrizione_intervento CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT REALIZZ_ACQUISTO_SERVIZI_FORMAZIONE EMPTY>
+<!ATTLIST REALIZZ_ACQUISTO_SERVIZI_FORMAZIONE
+          denom_progetto CDATA #REQUIRED
+          denom_ente_corso CDATA #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          obiett_corso CDATA #REQUIRED
+          mod_intervento_frequenza CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #REQUIRED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT REALIZZ_ACQUISTO_SERVIZI_NO_FORMAZIONE_RICERCA EMPTY>
+<!ATTLIST REALIZZ_ACQUISTO_SERVIZI_NO_FORMAZIONE_RICERCA
+          nome_str_infrastr CDATA #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          servizio CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT ACQUISTO_BENI EMPTY>
+<!ATTLIST ACQUISTO_BENI
+          nome_str_infrastr CDATA #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          bene CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT PARTECIP_AZIONARIE_CONFERIM_CAPITALE EMPTY>
+<!ATTLIST PARTECIP_AZIONARIE_CONFERIM_CAPITALE
+          ragione_sociale CDATA #REQUIRED
+          partita_iva CDATA #IMPLIED
+          ragione_sociale_prec CDATA #IMPLIED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          finalita CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #REQUIRED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT CONCESSIONE_CONTRIBUTI_NO_UNITA_PRODUTTIVE EMPTY>
+<!ATTLIST CONCESSIONE_CONTRIBUTI_NO_UNITA_PRODUTTIVE
+          beneficiario CDATA #REQUIRED
+          partita_iva CDATA #REQUIRED
+          struttura CDATA #REQUIRED
+          tipo_ind_area_rifer (01 | 02 | 03 | 04 | 05) #REQUIRED
+          ind_area_rifer CDATA #REQUIRED
+          desc_intervento CDATA #REQUIRED
+          strum_progr CDATA #REQUIRED
+          desc_strum_progr CDATA #IMPLIED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT CUP_CUMULATIVO EMPTY>
+<!ATTLIST CUP_CUMULATIVO
+          atto_amministr CDATA #REQUIRED
+          scopo_intervento CDATA #REQUIRED
+          altre_informazioni CDATA #IMPLIED
+          flagLeggeObiettivo CDATA #IMPLIED
+          numDeliberaCipe CDATA #IMPLIED
+          annoDelibera CDATA #IMPLIED>
+<!ELEMENT ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 EMPTY>
+<!ATTLIST ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007
+          sezione CDATA #IMPLIED
+          divisione CDATA #IMPLIED
+          gruppo CDATA #IMPLIED
+          classe CDATA #IMPLIED
+          categoria CDATA #IMPLIED
+          sottocategoria CDATA #IMPLIED>
+<!ELEMENT FINANZIAMENTO (CODICE_TIPOLOGIA_COP_FINANZ+)>
+<!ATTLIST FINANZIAMENTO
+          sponsorizzazione (N | P | T) #IMPLIED
+          finanza_progetto (A | N | P) #IMPLIED
+          costo CDATA #REQUIRED
+          finanziamento CDATA #REQUIRED>
+<!ELEMENT CODICE_TIPOLOGIA_COP_FINANZ (#PCDATA)*>
+<!ELEMENT ERRORE EMPTY>
+<!ELEMENT CUP_CHIUSURA_REVOCA (CODICE_CUP, ERRORE?)>
+<!ATTLIST CUP_CHIUSURA_REVOCA
+          tipo_operazione (C | R) #REQUIRED
+          id_progetto CDATA #REQUIRED>
+<!ELEMENT CODICE_CUP (#PCDATA)*>

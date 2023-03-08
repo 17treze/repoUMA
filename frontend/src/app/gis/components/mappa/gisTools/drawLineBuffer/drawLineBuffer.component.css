@@ -1,0 +1,53 @@
+.inputNumInput {
+    vertical-align: 4px;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    width: 50px;
+}
+.number-input {
+    /* display: none!important; */
+    margin-top: 0px;
+    position: absolute;
+    bottom: 50px;
+    left: 65px; 
+    background: #f0f7f0c4;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 1px #212529;
+}
+
+span.pts {
+    vertical-align: 4px;
+    margin-left: -5px;
+}
+
+button.decrease, button.increase {
+    height: 35px;
+    vertical-align: bottom;
+}
+
+button.decrease:focus, button.increase:focus {
+    outline: none!important;
+}
+
+button.decrease > i, button.increase > i {
+    font-size: 20px;
+    vertical-align: 6px;
+}
+input#numInput {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input#numInput::-webkit-inner-spin-button,
+input#numInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+button.decrease, button.increase {
+    width: 30px!important;
+    height: 35px!important;
+}

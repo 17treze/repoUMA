@@ -1,0 +1,777 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>it.tndigitale.a4g</groupId>
+    <artifactId>client-sdk</artifactId>
+    <version>2.8.57</version>
+    <name>a4g-client-sdk</name>
+    <packaging>pom</packaging>
+
+
+    <url>http://maven.apache.org</url>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+    </parent>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <!-- <springfox-swagger.version>2.9.2</springfox-swagger.version> -->
+		<springfox-swagger.version>2.8.0</springfox-swagger.version>
+		<openapi-generator-version>4.3.1</openapi-generator-version>
+
+		<!-- Configurazione release stabili di client e framework
+		In fase di developing è possibile sovrascriverle con 
+		mvn -Da4g.client.version=1.1.0-SNAPSHOT
+		-->
+		<a4g.framework.version>1.1.0</a4g.framework.version>
+		
+        <module.fascicolo.exclude>true</module.fascicolo.exclude>
+        <module.mediator.exclude>true</module.mediator.exclude>
+		<module.fascicolo.anagrafica.exclude>true</module.fascicolo.anagrafica.exclude>
+		<module.fascicolo.zootecnia.exclude>true</module.fascicolo.zootecnia.exclude>
+		<module.fascicolo.dotazionetecnica.exclude>true</module.fascicolo.dotazionetecnica.exclude>
+		<module.fascicolo.territorio.exclude>true</module.fascicolo.territorio.exclude>
+        <module.istruttoria.exclude>true</module.istruttoria.exclude>
+        <module.proxy.exclude>true</module.proxy.exclude>
+		<module.bdn.exclude>true</module.bdn.exclude>
+        <module.utente.exclude>true</module.utente.exclude>
+        <module.ags.exclude>true</module.ags.exclude>
+        <module.srt.exclude>true</module.srt.exclude>
+		<module.soc.exclude>true</module.soc.exclude>
+		<module.protocollo.exclude>true</module.protocollo.exclude>
+		<module.uma.exclude>true</module.uma.exclude>
+		<module.richiestamodificasuolo.exclude>true</module.richiestamodificasuolo.exclude>
+    </properties>
+	
+	<modules>
+		<module>fascicolo-client</module>
+		<module>fascicolo-anagrafica-client</module>
+		<module>dotazionetecnica-client</module>
+		<module>istruttoria-client</module>
+		<module>bdn-client</module>
+		<module>utente-client</module>
+		<module>ags-client</module>
+		<module>soc-client</module>
+		<module>proxy-client</module>
+		<module>uma-client</module>
+		<module>zootecnia-client</module>
+		<module>richiestamodificasuolo-client</module>
+		<module>territorio-client</module>
+		<module>mediator-client</module>
+  	</modules>
+	
+	<dependencies>
+		<dependency>
+			<groupId>it.tndigitale.a4g</groupId>
+			<artifactId>framework</artifactId>
+			<version>${a4g.framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger.version}</version>
+		</dependency> 
+		<!-- openapi -->
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator</artifactId>
+			<version>${openapi-generator-version}</version>
+		</dependency>
+	</dependencies>
+
+    <build>
+        <plugins>
+			<!-- plugin per generazione client basato su standard openapi 2.x -->
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>2.4.11</version>
+                <executions>
+                    <execution>
+                        <id>client-fascicolo</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.fascicolo.exclude}</skip>
+							<inputSpec>${project.basedir}/fascicolo/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/a4gfascicolo/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.fascicolo.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.fascicolo.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.fascicolo.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-fascicolo-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.basedir}/target/generated-sources/fascicolo/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+								<!--
+								<importMapping>PersonaDto=it.tndigitale.a4g.client.proxy.model.PersonaDto</importMapping>
+								<importMapping>PersonaFisicaDto=it.tndigitale.a4g.client.proxy.model.PersonaFisicaDto</importMapping>
+								<importMapping>PersonaGiuridicaDto=it.tndigitale.a4g.client.proxy.model.PersonaGiuridicaDto</importMapping>
+								
+								<importMapping>AnagraficaDto=it.tndigitale.a4g.client.proxy.model.AnagraficaDto</importMapping>
+								<importMapping>AttivitaDto=it.tndigitale.a4g.client.proxy.model.AttivitaDto</importMapping>
+								<importMapping>CaricaDto=it.tndigitale.a4g.client.proxy.model.CaricaDto</importMapping>
+								<importMapping>ImportanzaAttivita=it.tndigitale.a4g.client.proxy.model.ImportanzaAttivita</importMapping>
+								
+								<importMapping>Impresa=it.tndigitale.a4g.client.proxy.model.Impresa</importMapping>
+								<importMapping>ImpresaIndividualeDto=it.tndigitale.a4g.client.proxy.model.ImpresaIndividualeDto</importMapping>
+								<importMapping>IndirizzoDto=it.tndigitale.a4g.client.proxy.model.IndirizzoDto</importMapping>
+								<importMapping>IscrizioneRepertorioEconomicoDto=it.tndigitale.a4g.client.proxy.model.IscrizioneRepertorioEconomicoDto</importMapping>
+								
+								<importMapping>PeriodoDto=it.tndigitale.a4g.client.proxy.model.PeriodoDto</importMapping>
+								<importMapping>RappresentanteLegaleDto=it.tndigitale.a4g.client.proxy.model.RappresentanteLegaleDto</importMapping>
+								<importMapping>SedeDto=it.tndigitale.a4g.client.proxy.model.SedeDto</importMapping>
+								<importMapping>Sesso=it.tndigitale.a4g.client.proxy.model.Sesso</importMapping>
+								-->
+								
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-fascicolo-anagrafica</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.fascicolo.anagrafica.exclude}</skip>
+							<inputSpec>${project.basedir}/fascicolo/anagrafica/api-doc.json</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/a4gfascicolo/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.fascicolo.anagrafica.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.fascicolo.anagrafica.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.fascicolo.anagrafica.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-fascicolo-anagrafica-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.basedir}/target/generated-sources/fascicolo/anagrafica/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>client-istruttoria</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.istruttoria.exclude}</skip>
+							<inputSpec>${project.basedir}/istruttoria/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/a4gistruttoria/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.istruttoria.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.istruttoria.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.istruttoria.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-istruttoria-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/istruttoria/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-proxy</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.proxy.exclude}</skip>
+							<inputSpec>${project.basedir}/proxy/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/a4gproxy/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.proxy.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.proxy.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.proxy.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-proxy-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/proxy/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-bdn</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.bdn.exclude}</skip>
+							<inputSpec>${project.basedir}/bdn/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/bdn/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.proxy.bdn.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.proxy.bdn.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.proxy.bdn.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-proxy-bdn-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/bdn/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-utente</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.utente.exclude}</skip>
+							<inputSpec>${project.basedir}/utente/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/a4gutente/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.utente.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.utente.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.utente.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-utente-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/utente/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-ags</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.ags.exclude}</skip>
+							<inputSpec>${project.basedir}/ags/api-doc.yml</inputSpec>
+						
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.ags.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.ags.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.ags.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-ags-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/ags/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-srt</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.srt.exclude}</skip>
+							<inputSpec>${project.basedir}/srt/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/srt/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.srt.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.srt.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.srt.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-srt-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/srt/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-soc</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.soc.exclude}</skip>
+							<inputSpec>${project.basedir}/soc/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://itts55.intra.infotn.it:18080/soc/v2/api-docs</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.soc.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.soc.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.soc.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-soc-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/soc/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+					<execution>
+                        <id>client-protocollo</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <skip>${module.protocollo.exclude}</skip>
+							<inputSpec>${project.basedir}/protocollo/api-doc.yml</inputSpec>
+							<!-- <inputSpec>http://pisrest-test.pitre.tn.it/RestServices/swagger/docs/v1</inputSpec> -->
+                            <language>java</language>
+                            <apiPackage>it.tndigitale.a4g.protocollo.client.api</apiPackage>
+                            <!-- <invokerPackage>it.tndigitale.a4g.protocollo.client.invoker</invokerPackage> -->
+                            <modelPackage>it.tndigitale.a4g.protocollo.client.model</modelPackage>
+
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-protocollo-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <templateDirectory>${project.parent.basedir}/template</templateDirectory>
+                            <output>${project.build.directory}/generated-sources/protocollo/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <library>resttemplate</library>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+			<!-- plugin per generazione client basato su standard openapi 3.x -->
+			 <plugin>
+               <groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator-version}</version>
+				<executions>
+					<execution>
+                        <id>client-uma</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>	
+                            <skip>${module.uma.exclude}</skip>
+							<inputSpec>${project.basedir}/uma/api-doc.yml</inputSpec>
+							<!-- deprecated -->
+							<!-- <language>java</language> -->
+							<generatorName>java</generatorName>
+                            <apiPackage>it.tndigitale.a4g.uma.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.uma.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.uma.client.model</modelPackage>
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-uma-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+                            <output>${project.build.directory}/generated-sources/uma/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8-localdatetime</dateLibrary>
+                            </configOptions>
+                            <library>resttemplate</library>
+                        </configuration>
+                </execution>
+				<execution>
+					<id>client-dotazionetecnica</id>
+					<goals>
+						<goal>generate</goal>
+					</goals>
+					<phase>generate-resources</phase>
+					<configuration>
+						<skip>${module.fascicolo.dotazionetecnica.exclude}</skip>
+						<inputSpec>${project.basedir}/fascicolo/dotazionetecnica/api-doc.yml</inputSpec>
+						<!-- deprecated -->
+						<!-- <language>java</language> -->
+						<generatorName>java</generatorName>
+						<apiPackage>it.tndigitale.a4g.fascicolo.dotazionetecnica.client.api</apiPackage>
+						<invokerPackage>it.tndigitale.a4g.fascicolo.dotazionetecnica.client.invoker</invokerPackage>
+						<modelPackage>it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model</modelPackage>
+
+						<groupId>it.tndigitale.a4g</groupId>
+						<artifactId>a4g-fascicolo-dotazionetecnica-api-client</artifactId>
+						<artifactVersion>1.0.0</artifactVersion>
+
+						<generateApiDocumentation>false</generateApiDocumentation>
+						<generateModelDocumentation>false</generateModelDocumentation>
+						<generateModelTests>false</generateModelTests>
+						<!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+						<output>${project.build.directory}/generated-sources/fascicolo/dotazionetecnica/generate</output>
+						<configOptions>
+							<dateLibrary>java8</dateLibrary>
+						</configOptions>
+						<typeMappings>
+							<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+						</typeMappings>
+						<importMappings>
+							<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+						</importMappings>
+						<!-- Use alternative types instead of java.io.File to allow passing bytes without a file on disk. Available on resttemplate library -->
+						<useAbstractionForFiles>true</useAbstractionForFiles>
+						 <templateDirectory>${project.parent.basedir}/template-v3</templateDirectory>
+						<library>resttemplate</library>
+					</configuration>
+				</execution>
+				<execution>
+					<id>client-territorio</id>
+					<goals>
+						<goal>generate</goal>
+					</goals>
+					<phase>generate-resources</phase>
+					<configuration>
+						<skip>${module.fascicolo.territorio.exclude}</skip>
+						<inputSpec>${project.basedir}/fascicolo/territorio/api-doc.json</inputSpec>
+						<!-- deprecated -->
+						<!-- <language>java</language> -->
+						<generatorName>java</generatorName>
+						<apiPackage>it.tndigitale.a4g.fascicolo.territorio.client.api</apiPackage>
+						<invokerPackage>it.tndigitale.a4g.fascicolo.territorio.client.invoker</invokerPackage>
+						<modelPackage>it.tndigitale.a4g.fascicolo.territorio.client.model</modelPackage>
+
+						<groupId>it.tndigitale.a4g</groupId>
+						<artifactId>a4g-fascicolo-territorio-api-client</artifactId>
+						<artifactVersion>1.0.0</artifactVersion>
+
+						<generateApiDocumentation>false</generateApiDocumentation>
+						<generateModelDocumentation>false</generateModelDocumentation>
+						<generateModelTests>false</generateModelTests>
+						<!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+						<output>${project.build.directory}/generated-sources/fascicolo/territorio/generate</output>
+						<configOptions>
+							<dateLibrary>java8</dateLibrary>
+						</configOptions>
+						<typeMappings>
+							<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+						</typeMappings>
+						<importMappings>
+							<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+						</importMappings>
+						<!-- Use alternative types instead of java.io.File to allow passing bytes without a file on disk. Available on resttemplate library -->
+						<useAbstractionForFiles>true</useAbstractionForFiles>
+						 <templateDirectory>${project.parent.basedir}/template-v3</templateDirectory>
+						<library>resttemplate</library>
+					</configuration>
+				</execution>
+				<execution>
+                        <id>client-mediator</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration> 
+                            <skip>${module.mediator.exclude}</skip>
+                            <inputSpec>${project.basedir}/mediator/api-doc.yml</inputSpec>
+                            <!-- deprecated -->
+                            <!-- <language>java</language> -->
+                            <generatorName>java</generatorName>
+                            <apiPackage>it.tndigitale.a4g.mediator.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.mediator.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.mediator.client.model</modelPackage>
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-mediatornagpi-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+                            <output>${project.build.directory}/generated-sources/mediator/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <!-- Use alternative types instead of java.io.File to allow passing bytes without a file on disk. Available on resttemplate library -->
+	                        <useAbstractionForFiles>true</useAbstractionForFiles>
+	                        <templateDirectory>${project.parent.basedir}/template-v3</templateDirectory>
+                            <library>resttemplate</library>
+                        </configuration>
+				</execution>
+				<execution>
+                        <id>client-zootecnia</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration> 
+                            <skip>${module.fascicolo.zootecnia.exclude}</skip>
+                            <inputSpec>${project.basedir}/fascicolo/zootecnia/api-doc.yml</inputSpec>
+                            <!-- deprecated -->
+                            <!-- <language>java</language> -->
+                            <generatorName>java</generatorName>
+                            <apiPackage>it.tndigitale.a4g.fascicolo.zootecnia.client.api</apiPackage>
+                            <invokerPackage>it.tndigitale.a4g.fascicolo.zootecnia.client.invoker</invokerPackage>
+                            <modelPackage>it.tndigitale.a4g.fascicolo.zootecnia.client.model</modelPackage>
+                            <groupId>it.tndigitale.a4g</groupId>
+                            <artifactId>a4g-zootecnia-api-client</artifactId>
+                            <artifactVersion>1.0.0</artifactVersion>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateModelTests>false</generateModelTests>
+                            <!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+                            <output>${project.build.directory}/generated-sources/fascicolo/zootecnia/generate</output>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
+                            <!-- Use alternative types instead of java.io.File to allow passing bytes without a file on disk. Available on resttemplate library -->
+	                        <useAbstractionForFiles>true</useAbstractionForFiles>
+	                        <templateDirectory>${project.parent.basedir}/template-v3</templateDirectory>
+                            <library>resttemplate</library>
+                        </configuration>
+				</execution>
+				<execution>
+					<id>client-richiestamodificasuolo</id>
+					<goals>
+						<goal>generate</goal>
+					</goals>
+					<phase>generate-resources</phase>
+					<configuration>
+						<skip>${module.richiestamodificasuolo.exclude}</skip>
+						<inputSpec>${project.basedir}/richiestamodificasuolo/api-doc.yml</inputSpec>
+						<!-- deprecated -->
+						<!-- <language>java</language> -->
+						<generatorName>java</generatorName>
+						<apiPackage>it.tndigitale.a4g.richiestamodificasuolo.client.api</apiPackage>
+						<invokerPackage>it.tndigitale.a4g.richiestamodificasuolo.client.invoker</invokerPackage>
+						<modelPackage>it.tndigitale.a4g.richiestamodificasuolo.client.model</modelPackage>
+
+						<groupId>it.tndigitale.a4g</groupId>
+						<artifactId>a4g-richiestamodificasuolo-api-client</artifactId>
+						<artifactVersion>1.0.0</artifactVersion>
+
+						<generateApiDocumentation>false</generateApiDocumentation>
+						<generateModelDocumentation>false</generateModelDocumentation>
+						<generateModelTests>false</generateModelTests>
+						<!-- <templateDirectory>${project.parent.basedir}/template</templateDirectory> -->
+						<output>${project.build.directory}/generated-sources/richiestamodificasuolo/generate</output>
+						<configOptions>
+							<dateLibrary>java8</dateLibrary>
+						</configOptions>
+						<typeMappings>
+							<typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+						</typeMappings>
+						<importMappings>
+							<importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+						</importMappings>
+						<!-- Use alternative types instead of java.io.File to allow passing bytes without a file on disk. Available on resttemplate library -->
+						<useAbstractionForFiles>true</useAbstractionForFiles>
+						 <templateDirectory>${project.parent.basedir}/template-v3</templateDirectory>
+						<library>resttemplate</library>
+					</configuration>
+				</execution>
+                </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>io.swagger</groupId>
+        								<artifactId>
+        									swagger-codegen-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[2.4.11,)
+        								</versionRange>
+        								<goals>
+        									<goal>generate</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
+    </build>
+    <repositories>
+        <repository>
+			<id>a4g central tndigit</id>
+			<url>https://maven.infotn.it/nexus/repository/a4g_public/</url>
+		</repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>tndigit-a4g-repo</id>
+            <url>https://maven.infotn.it/nexus/repository/tndigit_a4g_rep/</url>
+        </repository>
+    </distributionManagement>
+</project>

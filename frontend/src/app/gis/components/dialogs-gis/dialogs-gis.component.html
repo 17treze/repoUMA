@@ -1,0 +1,73 @@
+<!-- Confirm Dialog -->
+<p-confirmDialog id="dialogUtente" acceptLabel="Si" rejectLabel="No" width="400" #cd
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Lavorazione" key="closeLavorazioneConfirm"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Lavorazione" key="ricalcoloSuoliVigenti"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<p-confirmDialog acceptLabel="Salva e chiudi" rejectLabel="Chiudi senza salvare" header="Lavorazione"
+    key="closeLavorazioneConfirmStep3" icon="pi pi-exclamation-triangle" width="500"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker">
+    <a href="#" role="button" class="customClose"><span class="pi pi-fw pi-times"></span></a>
+</p-confirmDialog>
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Lavorazione" key="deleteLavorazioneConfirm"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<p-confirmDialog id="alertDelete" key="deleteAllegatoConfirm" acceptLabel="Si" rejectLabel="No" header="Confirmation"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"
+    icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Rilevate modifiche" key="editingLavorazione"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<p-confirmDialog id="alertCancellazioneLavorazione" acceptLabel="Si" rejectLabel="No" header="Lavorazione"
+    key="intersezionePascoli" icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<!-- Confirm Close lavorazione Dialog -->
+<confirm-dialog-gis [closeLavorazioneStep3]="stepper.closeLavorazioneStep3"
+    [lavorazioneSuoloInput]="lavorazioneSuoloInput"></confirm-dialog-gis>
+<!-- Confirm Close ADL Dialog -->
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Poligoni" key="closeAdlConfirm"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+<!-- Confirm lavorazione con anno di campagna differente -->
+<p-confirmDialog acceptLabel="Conferma" rejectLabel="Annulla" header="Anno di campagna diverso"
+    key="closeCambioAnnoConfirm" icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+
+<!-- Ricalcola poligoni Dialog -->
+<calcola-poligoni-dialog-gis></calcola-poligoni-dialog-gis>
+
+<!-- Allegati Dialog -->
+<allegati-dialog-gis [detailResults]="detailResults" [profiloUtente]="profiloUtente"></allegati-dialog-gis>
+
+<!-- Confirm consolida lavorazione su A4S -->
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Lavorazione" key="consolidaLavorazioneSuA4SConfirm"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>
+
+<!-- Modal Upload vettoriali esterni -->
+<div id="carica-vettoriali">
+    <gis-modal-carica-vettoriali></gis-modal-carica-vettoriali>
+</div>
+
+<!-- Dialog poligoni dichiarati -->
+<div id="dialog-dichiarati" *ngIf="poligoniDichiaratiEvent.showDialog">
+    <gis-poligoni-dichiarati-dialog [detailResults]="detailResults" [profiloUtente]="profiloUtente">
+    </gis-poligoni-dichiarati-dialog>
+</div>
+
+<!-- Modal Ricerca Località-->
+<div id="ricerca-localita">
+    <gis-map-navigator-dialog></gis-map-navigator-dialog>
+</div>
+
+<!-- Dialog aggiungi note feature -->
+<div id="aggiungi-note" *ngIf="panelEvent.showNoteFeatures">
+    <gis-aggiungi-note-dialog></gis-aggiungi-note-dialog>
+</div>
+
+<!--Dialog conferma cambio anno campagna lavorazione-->
+<p-confirmDialog acceptLabel="Si" rejectLabel="No" header="Lavorazione" key="cambioAnnoCampagnaLavorazione"
+    icon="pi pi-exclamation-triangle" width="425"
+    maskStyleClass="ui-dialog-mask ui-widget-overlay ui-dialog-visible ui-dialog-mask-scrollblocker"></p-confirmDialog>

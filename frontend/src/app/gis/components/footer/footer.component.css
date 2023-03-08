@@ -1,0 +1,9 @@
+div#gis-footer {
+    padding: 0px 0px 0px 0px;
+    z-index: 10000!important;
+    position: fixed;
+    bottom: 0;
+}
+#gis-footer > div > div > div.ui-g-6.left-col > span > span {
+    font-size: 16px;
+}

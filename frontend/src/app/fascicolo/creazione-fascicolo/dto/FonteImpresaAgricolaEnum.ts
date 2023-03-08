@@ -1,0 +1,4 @@
+export enum FonteImpresaAgricola {
+    REGISTRO_IMPRESE = "REGISTRO_IMPRESE",
+    ANAGRAFE_TRIBUTARIA = "ANAGRAFE_TRIBUTARIA"
+}

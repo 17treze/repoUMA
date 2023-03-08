@@ -1,0 +1,7 @@
+package it.tndigitale.a4g.framework.client.custom;
+
+public enum AnagraficaEnum {
+	CUAA_MISMATCH_ANAGRAFE_TRIBUTARIA_SIAN,
+	CUAA_MISMATCH_ANAGRAFE_TRIBUTARIA_CAMERA_COMMERCIO,
+	CUAA_MISMATCH_ANAGRAFE_TRIBUTARIA_CAA
+}

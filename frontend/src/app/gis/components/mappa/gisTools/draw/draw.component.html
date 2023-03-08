@@ -1,0 +1,10 @@
+<div id="drawNewElTool" (click)="enableTool()" [class.active-tool]="isActive()" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <button 
+  pTooltip="Nuovo poligono" tooltipPosition="top"
+  type="button"
+  [disabled]="!canUseTool" 
+  class='btn btn-primary first-element'
+><i class="fa fa-plus-circle"></i></button>
+</div>
+<p-confirmDialog acceptLabel="Vince il nuovo" rejectLabel="Vince il vecchio" header="Nuovo elemento" key="nuovoPoligono" 
+icon="pi pi-exclamation-triangle" width="425"></p-confirmDialog>

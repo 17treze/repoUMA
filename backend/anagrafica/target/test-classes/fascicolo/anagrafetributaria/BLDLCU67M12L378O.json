@@ -1,0 +1,24 @@
+{
+  "codiceFiscale": "BLDLCU67M12L378O",
+  "anagrafica": {
+    "nome": "LUCA",
+    "cognome": "BALDESSARI",
+    "sesso": "MASCHIO",
+    "dataNascita": "1967-08-12",
+    "comuneNascita": "TRENTO",
+    "provinciaNascita": "TN"
+  },
+  "domicilioFiscale": {
+    "toponimo": null,
+    "via": null,
+    "civico": null,
+    "comune": "TRENTO",
+    "frazione": null,
+    "cap": "38123",
+    "codiceIstat": null,
+    "provincia": "TN",
+    "denominazioneEstesa": "VIA N. FALZOLGHER N 25"
+  },
+  "deceduta": false,
+  "impresaIndividuale": null
+}

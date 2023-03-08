@@ -1,0 +1,174 @@
+/* Messagi */
+div#ui-panel-0-content {
+    /* position: absolute; */
+    height: 700px;
+    width: 277px;
+    top: 55px;
+    background: #e9ecef;
+}
+.messaggi-content {
+    float: left;
+    width: 100%;
+}
+.header-chat{
+    font-size: 15px;
+    font-weight: 600;
+    height: 30px;
+    padding-top: 3px;
+}
+
+.trigger-messaggio {
+    resize: none;
+    max-height: 35px;
+    font-size: 14px;
+    border-radius: 0;
+    padding: 5px 5px;
+}
+
+.insert-text {
+    width: 100%;
+    bottom: 0px;
+    border-top: 2px dashed #adadad;
+}
+.dataMsg{
+    float: right;
+    color: #30373d;
+    font-weight: 700;
+    font-size: 13px;
+    font-style: normal;
+    top: 3px;
+    position: relative;
+    background-color: #e3e3e3;
+    border-radius: 5px;
+    padding: 0px 5px;
+}
+
+.panel-msg {
+    background-color: #e9ecef;
+    padding: 5px 0;
+}
+
+textarea.form-control.messaggio {
+    position: relative;
+    height: 190px;
+    font-size: 14px;
+    resize: none;
+    width: 265px;
+}
+
+
+.message-expanded {
+    position: absolute;
+    background: #e9ecef;
+    width: 275px;
+    left: 10px;
+    bottom: 0px;
+    padding: 5px 0px 5px 5px;
+    animation: slidein 0.35s;
+    box-shadow: -1px -12px 13px 0px #5151514a;
+    border-radius: 5px;
+}
+
+.btn-content {
+    margin: 5px 0;
+}
+
+.grey-btn{
+    background-color: #ced0d1;
+    color: #30373d;
+    float: left;
+    box-shadow: none!important;
+    -o-transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    transition: background-color 0.5s;  
+}
+.grey-btn:hover, .grey-btn:focus{
+    background-color: #747677  !important;
+    color: #ffffff !important;
+    -o-transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    transition: background-color 0.5s;  
+}
+
+.panel-msg .msg {
+    overflow-y: scroll!important;
+    height: 242px;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+
+.riquadroMsg{
+    width: 75%;
+    margin: 5px 0;
+    overflow-y: -moz-hidden-unscrollable !important;
+}
+
+.riquadroMsg.CAA, .riquadroMsg.DIPENDENTE_CAA {
+    border-radius: 0 10px 10px;
+    background-color: #a3d8c3;
+    float: left;
+    padding: 6px;
+    font-size: 14px;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+.riquadroMsg.VITICOLO, .riquadroMsg.BACKOFFICE, .riquadroMsg.DIPENDENTE_PAT  {
+    border-radius: 10px 0 10px 10px;
+    background-color: #afd7ff;
+    float: right;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.riquadroMsg label {
+    display: block;
+    margin: 0;
+    font-size: 14px;
+}
+
+.fixHeight{
+  height: 410px!important;
+}
+
+.fixFromStato{
+  height: 215px!important;
+}
+
+@-webkit-keyframes slidein {
+    from {
+        height: 0;
+    }
+    to {
+        height: 30%;
+    }
+}
+@keyframes slidein {
+    from {
+        height: 0;
+    }
+    to {
+        height: 30%;
+    }
+}
+/* Scrollbar insert */
+.messaggio::-webkit-scrollbar-thumb,
+.panel-msg .msg::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+.messaggio::-webkit-scrollbar-track,
+.panel-msg .msg::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+.messaggio::-webkit-scrollbar ,
+.panel-msg .msg::-webkit-scrollbar {
+    width: 7px;
+}

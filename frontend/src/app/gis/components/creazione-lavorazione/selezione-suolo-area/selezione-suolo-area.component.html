@@ -1,0 +1,8 @@
+<div class="edit-bar-area">
+  <span *ngIf="!lavorazioniEvent.featureAdl" pTooltip="Disegna area" [class.active-tool]="isActive()"
+  (click)="enableTool();" tooltipPosition="top"> 
+    <i class="fa fa-plus-circle"></i>
+  </span>
+  <gis-modify-adl  *ngIf="lavorazioniEvent.featureAdl"></gis-modify-adl>
+  <gis-delete-adl  *ngIf="lavorazioniEvent.featureAdl" ></gis-delete-adl>
+</div>

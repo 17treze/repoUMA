@@ -1,0 +1,76 @@
+<p-toast
+  key="tst-lav-sup"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="p-grid ui-fluid">
+  <form
+    class="p-grid m-0 w-100"
+    novalidate
+    [formGroup]="raggruppamentoForm">
+    <div class="p-col">
+
+      <!-- Prima riga Raggruppamento : Save -->
+      <div class="p-grid">
+        <div class="p-grid p-align-center py-4 w-100">
+          <div class="p-col">
+            <div class="p-grid m-0 p-align-center color-primary">
+              <img src="assets/img/icons/uma-icon/icon-superficie_black.svg">
+              <span class="ml-2">
+              <strong class="fs-20"> {{ 'UMA.LAVORAZIONI_SUPERFICIE' | translate  }} / Raggruppamenti</strong>
+            </span>
+            </div>
+          </div>
+          <div
+            class="p-col-fixed"
+            *ngIf="inCompilazione">
+            <button
+              pButton
+              class="w-10m"
+              type="button"
+              label="SALVA"
+              (click)="saveLavorazioni()"></button>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Accordion -->
+        <div class="p-grid w-100">
+          <div
+            class="p-col"
+            *ngIf="raggruppamenti?.length">
+            <p-accordion
+              #accordion
+              (onOpen)="onSelectAccordion($event)">
+              <ng-container *ngFor="let valore of raggruppamenti; let selectedAccordion = index">
+                <p-accordionTab>
+                  <p-header>
+                    {{valore.indice}} {{valore.nome | uppercase}}
+                    <i
+                      class="accordion-icon pi pi-check"
+                      *ngIf="quantitaLavorata[selectedAccordion]>0"></i>
+                  </p-header>
+                  <div class="p-col-12 align-self-center w-100">
+                    <app-a4g-multi-table
+                      *ngIf="datasourceBase?.length"
+                      [title]="nomeRaggruppamento"
+                      [cols]="colsBase"
+                      [values]="datasourceBase"
+                      [readonly]="!inCompilazione"
+                      (clickIcon)="onClickIcon($event)"
+                      (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                    <div class="mb-1"></div>
+                    <app-a4g-multi-table
+                      *ngIf="datasourceStraordinaria?.length"
+                      [cols]="colsStraordinaria"
+                      [values]="datasourceStraordinaria"
+                      [readonly]="!inCompilazione"
+                      (clickIcon)="onClickIcon($event)"
+                      (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                  </div>
+                </p-accordionTab>
+              </ng-container>
+            </p-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

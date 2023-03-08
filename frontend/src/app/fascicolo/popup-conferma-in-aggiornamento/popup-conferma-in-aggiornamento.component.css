@@ -1,0 +1,10 @@
+div.popup-conferma {
+    width: 440px;
+}
+
+.button-annulla {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+    padding-top: 6px;
+}

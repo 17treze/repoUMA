@@ -1,0 +1,19 @@
+{  
+   "header":{  
+      "esecutore":"PROVINCIA AUTONOMA DI TRENTO",
+      "servizio":"Ricerca persona per codice fiscale in imprese non cessate",
+      "esito":"KO"
+   },
+   "dati":{  
+      "listaimprese":null,
+      "datiimpresa":null,
+      "listaul":null,
+      "schedaul":null,
+      "listapersone":null,
+      "schedapersona":null,
+      "errore":{  
+         "tipo":"CF_PI_errato",
+         "msgerr":"CODICE FISCALE FORMALMENTE SCORRETTO"
+      }
+   }
+}

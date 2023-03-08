@@ -1,0 +1,93 @@
+<p-dialog
+  #dialog
+  id="popup-allegati-clienti-contoterzi"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  width="600"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="top"
+  [contentStyle]="{'overflow':'auto','max-height':'400px'}"
+  header="{{ 'UMA.DICHIARAZIONE_CONSUMI.ALLEGATI' | translate | uppercase }}"
+  [dismissableMask]="true">
+  <p-toast
+    key="tst-dialog"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <p-toast
+    key="tst-allegati-clienti"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <div class="ui-grid">
+    <div class="ui-g-12 ui-md-12 w-100">
+      <div>
+        CUAA: {{cliente?.cuaa}} - ID FASCICOLO: {{cliente?.idFascicolo}}<br><br>
+      </div>
+      <div *ngIf="!READONLY_MODE" class="ui-inputgroup">
+        <button
+          pButton
+          type="button"
+          label="CARICA ALLEGATO"
+          [disabled]="fileAllegati?.length >= 5"
+          (click)="caricaAllegato()"></button>
+      </div>
+      <input
+        type="file"
+        #fileCaricato
+        id="fileCaricato"
+        name="fileCaricato"
+        onclick="this.value = null"
+        (change)="onFileChange($event)"
+        accept="{{ fileExt }}"
+        class="inputUploadFile"
+        style="display: none">
+    </div>
+    <div
+      class="ui-g-12 ui-md-12 w-100">
+      <br>
+      <div
+        class="ui-inputgroup"
+        *ngFor="let allegato of fileAllegati; let index = index;">
+        <div *ngIf="allegato">
+          <h6
+            class="text-confirm"
+            style="padding: 0 !important">
+              <img *ngIf="!READONLY_MODE"
+              class="cursor-pointer"
+              src="assets/img/ico-x.jpg"
+              (click)="eliminaAllegato(index)">
+              <span>
+                <a
+                  class="cursor-pointer p-col"
+                  (click)="visualizzaAllegato(index)"
+                  target="_blank">
+                  {{ allegato.name }}
+                </a>
+              </span>
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="p-grid p-justify-end">
+    <div >
+      <button
+        pButton
+        class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+        type="button"
+        label="Annulla"
+        (click)="annulla()"></button>
+    </div>
+    <div>
+      <button
+        pButton
+        class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-5m"
+        type="button"
+        label="Salva"
+        [disabled]="fileAllegati?.length == 0 || READONLY_MODE"
+        (click)="salva($event)"></button>
+    </div>
+  </div>
+</p-dialog>

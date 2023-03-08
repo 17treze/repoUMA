@@ -1,0 +1,158 @@
+<p-dialog
+  #dialogRecupero
+  id="popup-motivo-recupero"
+  [(visible)]="display"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="false"
+  [blockScroll]="true"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden','max-height':'90%', 'height':'auto'}"
+  header="{{ intestazionePopup }}"
+  styleClass="small-dialog">
+  <p-toast
+    key="tst-dialog"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <p-toast
+    key="tst-allegati"
+    [style]="{marginTop: '70px'}"></p-toast>
+
+  <form
+    novalidate
+    [formGroup]="motivazioneForm">
+
+    <!-- Prima Sezione - Motivazione & Carica Allegato -->
+    <div class="p-grid p-align-center">
+      <div class="p-col">
+
+        <!-- Prima riga - Motivazione -->
+        <div class="p-grid p-align-center">
+          <div class="p-col">
+            <strong>Motivazione</strong>
+            (obbligatoria)
+          </div>
+          <div class="p-grid m-0 px-4">
+            <p-radioButton
+              [disabled]="READONLY_MODE"
+              formControlName="tipo"
+              value="{{motivazioneEnum.FURTO}}"
+              label="Furto"></p-radioButton>
+          </div>
+          <div class="p-grid m-0 px-4">
+            <p-radioButton
+              [disabled]="READONLY_MODE"
+              formControlName="tipo"
+              value="{{motivazioneEnum.UTILIZZO_IMPROPRIO}}"
+              label="Utilizzo improprio"></p-radioButton>
+          </div>
+        </div>
+
+        <!-- Separatore -->
+        <div class="p-grid">
+          <div class="p-col">
+            <hr>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Carica Allegati -->
+        <div
+          *ngIf="motivazioneForm.get('tipo')?.value != null"
+          class="p-grid p-align-center">
+          <div class="p-col">
+            <strong>Allega documentazione</strong>
+            (obbligatoria)
+          </div>
+          <div class="p-col-fixed pr-0_5m">
+            <button
+              pButton
+              type="button"
+              class="w-10m"
+              *ngIf="!READONLY_MODE"
+              [disabled]="motivazioneConsuntiviDto?.allegati?.length > 4"
+              label="CARICA ALLEGATO"
+              (click)="caricaAllegato()"></button>
+            <input
+              type="file"
+              #fileCaricato
+              id="fileCaricato"
+              name="fileCaricato"
+              onclick="this.value = null"
+              (change)="onFileChange($event)"
+              accept="{{ fileConfig.fileExt }}"
+              class="inputUploadFile"
+              style="display: none">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seconda Sezione - Tabella Allegati -->
+    <div class="p-grid p-align-center">
+      <div
+        class="p-col"
+        *ngIf="motivazioneConsuntiviDto?.allegati?.length">
+        <p-table [value]="motivazioneConsuntiviDto.allegati">
+          <ng-template pTemplate="header">
+            <tr>
+              <th
+                *ngIf="!READONLY_MODE"
+                width="5%">
+                <strong></strong>
+              </th>
+              <th width="95%">
+                <strong>File</strong>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-allegato
+            let-index="rowIndex">
+            <tr>
+              <td *ngIf="!READONLY_MODE">
+                <img
+                  class="cursor-pointer"
+                  src="assets/img/ico-x.jpg"
+                  (click)="eliminaAllegato(index, allegato)">
+              </td>
+              <td>
+                <span>
+              <a
+                    class="cursor-pointer p-col"
+                    (click)="visualizzaAllegato(index, allegato)"
+                    target="_blank">
+                    {{ allegato.name }}
+                  </a>
+            </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <!-- Separatore -->
+    <br>
+
+    <!-- Button bar -->
+    <div class="p-grid p-justify-end">
+      <div>
+        <button
+          pButton
+          class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Annulla"
+          (click)="annulla()"></button>
+      </div>
+      <div class="pr-0_5m">
+        <button
+          pButton
+          [disabled]="READONLY_MODE"
+          class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Salva"
+          (click)="salva($event)"></button>
+      </div>
+    </div>
+
+  </form>
+</p-dialog>

@@ -1,0 +1,32 @@
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
+span.pi.pi-caret-down.ui-button-icon-left.ui-clickable {
+  color: #4CAF50;
+}
+
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
+span.pi.pi-caret-down.ui-button-icon-left.ui-clickable :hover {
+    transform: scale(1.2); 
+}
+
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
+span.pi.pi-caret-up.ui-button-icon-left.ui-clickable {
+  color: #4CAF50;
+}
+
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
+span.pi.pi-caret-up.ui-button-icon-left.ui-clickable :hover {
+    transform: scale(1.2); 
+}
+
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left {
+    background: transparent;
+    color: #4CAF50;
+    font-size: smaller;
+    box-shadow: unset;
+    font-weight: bold;
+    
+}
+
+:host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left :hover{
+    transform: scale(1.05); 
+}

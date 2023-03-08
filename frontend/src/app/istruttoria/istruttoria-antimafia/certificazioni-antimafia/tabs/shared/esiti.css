@@ -1,0 +1,15 @@
+.pallinoVerde {
+	border-radius: 50%;
+	background-color: #8DBE26;
+	height: 20px;
+    width: 20px;
+    /* text-align: center; */
+    margin: auto;
+}
+.pallinoRosso{
+	border-radius: 50%;
+	background-color: #F13C3C;
+	height: 20px;
+	width: 20px;
+	margin: auto;
+}

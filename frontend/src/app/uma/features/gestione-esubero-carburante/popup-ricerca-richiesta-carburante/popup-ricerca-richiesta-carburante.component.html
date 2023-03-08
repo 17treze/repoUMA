@@ -1,0 +1,117 @@
+<p-dialog
+  #dialog
+  id="popup-ricerca-richiesta-carburante"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  [dismissableMask]="true"
+  position="center"
+  [contentStyle]="{'overflow':'auto'}"
+  (onHide)="onHideDialog()"
+  header="{{ 'UMA.DICHIARAZIONE_CONSUMI.DESTINATARIO_TRASFERIMENTO' | translate | uppercase }}">
+  <p-toast
+    key="tst-ricerca-richiesta-carburante"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <form
+    class="p-grid"
+    novalidate
+    [formGroup]="searchForm"
+    (ngSubmit)="onClickButton('CERCA', '', '')">
+    <div class="p-col">
+      <div class="p-grid">
+        <div class="p-col">
+          <div class="ui-inputgroup">
+            <input
+              #richiestaRef
+              type="text"
+              placeholder="Inserire ID Richiesta di carburante"
+              id="idRichiesta"
+              pattern="^([0-9])+$"
+              [maxlength]="19"
+              formControlName="idRichiestaDestinatario"
+              size="60">
+            <button
+              pButton
+              class="icon-button-square"
+              type="submit"
+              icon="pi pi-search"
+              [disabled]="richiestaRef.value?.length<3"></button>
+          </div>
+          <div *ngIf="searchForm.get('idRichiestaDestinatario').invalid && (searchForm.get('idRichiestaDestinatario').dirty || searchForm.get('idRichiestaDestinatario').touched)">
+            <div>
+              <p-message
+                *ngIf="searchForm.get('idRichiestaDestinatario').errors?.pattern"
+                class="font-12 extended"
+                severity="error"
+                text="Formato non valido">
+              </p-message>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="p-col boxgrey"
+        *ngIf="datasource">
+        <p-table
+          #table
+          [autoLayout]="true"
+          [value]="datasource"
+          [rows]="1"
+          [scrollable]="false"
+          [resetPageOnSort]="false"
+          [first]="first"
+          [totalRecords]="totalElements"
+          [lazy]="true"
+          (onLazyLoad)="changePage($event, idRichiesta)">
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th [ngStyle]="{'width': '20%'}">CUAA</th>
+              <th [ngStyle]="{'width': '70%'}">DENOMINAZIONE</th>
+              <th [ngStyle]="{'width': '10%', 'text-align': 'center'}">AZIONI</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-azienda>
+            <tr>
+              <td [ngStyle]="{'width': '20%'}">{{azienda.cuaa}}</td>
+              <td [ngStyle]="{'width': '70%'}">{{azienda.denominazione | uppercase}}</td>
+              <td [ngStyle]="{'width': '10%', 'text-align': 'center'}">
+                <button
+                  pButton
+                  class="icon-button-square"
+                  icon="pi pi-plus"
+                  (click)="onClickButton('AGGIUNGI', azienda.cuaa, azienda.denominazione)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <!-- template no Results -->
+          <ng-template
+            pTemplate="emptymessage"
+            let-columns>
+            <tr>
+              <td [attr.colspan]="4">Nessun azienda trovato.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="p-grid">
+        <div class="p-col">
+          <button
+            pButton
+            class="ui-button-secondary ui-button-text-only p-1 text-lowercase shadow-none font-weight-normal"
+            type="button"
+            label="Chiudi"
+            (click)="chiudiDialog($event)"></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-dialog>

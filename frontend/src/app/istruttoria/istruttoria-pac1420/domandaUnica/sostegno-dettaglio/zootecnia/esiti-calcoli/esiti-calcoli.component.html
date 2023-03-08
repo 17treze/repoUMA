@@ -1,0 +1,184 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <div *ngIf="this.dettaglioDomandaAccoppiati.idDomanda">
+        <h3>
+          <span>
+            Sintesi Calcolo
+          </span>
+        </h3>
+        <div class="table-responsive">
+          <p-table #tab [columns]="cols" [value]="this.dettaglioDomandaAccoppiati[this.datiDomanda].sintesiCalcolo"
+            [autoLayout]="true" [responsive]="true">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                  <strong>{{col.header}}</strong>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td>
+                  {{setHeader(rowData.codice)}}
+                </td>
+                <td>
+                  {{rowData.valore}}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="10">
+                  Nessun controllo eseguito
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <br /><br />
+        <h3>
+          <span>
+            Dettaglio Calcolo
+          </span>
+        </h3>
+        <div class="accordion-wrapper dettaglioaccordionmultiple">
+          <div *ngFor="let intervento of this.interventi">
+            <div
+              *ngIf="this.dettaglioDomandaAccoppiati[this.datiDomanda].dettaglioCalcolo[intervento] && this.dettaglioDomandaAccoppiati[this.datiDomanda].dettaglioCalcolo[intervento].input && this.dettaglioDomandaAccoppiati[this.datiDomanda].dettaglioCalcolo[intervento].input.length > 0">
+              <p-accordion>
+                <p-accordionTab header="{{setHeader(intervento)}}" [selected]="false">
+                  <p-table #tab [columns]="colsInput"
+                    [value]="this.dettaglioDomandaAccoppiati[this.datiDomanda].dettaglioCalcolo[intervento].input"
+                    [responsive]="true">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                          <strong>{{col.header}}</strong>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                      <tr *ngIf="rowData.valore">
+                        <td>
+                          {{setHeader(rowData.codice)}}
+                        </td>
+                        <td>
+                          {{rowData.valore}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td [attr.colspan]="10">
+                          Nessun controllo eseguito
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                  <p-table #tab [columns]="colsOutput"
+                    [value]="this.dettaglioDomandaAccoppiati[this.datiDomanda].dettaglioCalcolo[intervento].output"
+                    [responsive]="true">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                          <strong>{{col.header}}</strong>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                      <tr *ngIf="rowData.valore">
+                        <td>
+                          {{setHeader(rowData.codice)}}
+                        </td>
+                        <td>
+                          {{rowData.valore}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td [attr.colspan]="10">
+                          Nessun controllo eseguito
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </p-accordionTab>
+              </p-accordion>
+            </div>
+          </div>
+        </div>
+        <br /><br />
+        <div
+          *ngIf="this.dettaglioDomandaAccoppiati.datiDisciplinaFinanziaria && this.dettaglioDomandaAccoppiati.datiDisciplinaFinanziaria.input && this.dettaglioDomandaAccoppiati.datiDisciplinaFinanziaria.input.length > 0">
+          <h3>
+            <span>
+              Disciplina Finanziaria
+            </span>
+          </h3>
+          <div class="accordion-wrapper dettaglioaccordionmultiple">
+            <p-table #tab [columns]="colsInput"
+              [value]="this.dettaglioDomandaAccoppiati.datiDisciplinaFinanziaria.input" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                    <strong>{{col.header}}</strong>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData>
+                <tr *ngIf="rowData.valore">
+                  <td>
+                    {{setHeader(rowData.codice)}}
+                  </td>
+                  <td>
+                    {{rowData.valore}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td [attr.colspan]="10">
+                    Nessun controllo eseguito
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <p-table #tab [columns]="colsOutput"
+              [value]="this.dettaglioDomandaAccoppiati.datiDisciplinaFinanziaria.output" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                    <strong>{{col.header}}</strong>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData>
+                <tr *ngIf="rowData.valore">
+                  <td>
+                    {{setHeader(rowData.codice)}}
+                  </td>
+                  <td>
+                    {{rowData.valore}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td [attr.colspan]="10">
+                    Nessun controllo eseguito
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!this.dettaglioDomandaAccoppiati.idDomanda">
+        Nessun controllo eseguito
+      </div>
+    </div>
+  </div>
+</div>

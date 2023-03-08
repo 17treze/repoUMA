@@ -1,0 +1,22 @@
+<div class="ui-g-12" style="padding-bottom:0px !important;">
+    <div class="ui-grid-fixed">
+        <div class="funzioni-grid tab-new">
+            <p-tabView *ngIf="activeTab" (onChange)="changeTab($event)">
+                <p-tabPanel *ngFor="let item of menu2" [selected]="activeTab.id == item.id">
+                    <ng-template pTemplate="header">
+                        <span
+                            class="ui-tabview-title ng-star-inserted">{{ 'STATO_LAVORAZIONE_SOSTEGNO.' + item.id | translate }}
+                            <span>{{itemBadgesCount[item.id]}}</span></span>
+                    </ng-template>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>
+<div class="ui-g-12">
+    <div class="card no-margin" class="boxgrey" style="padding-top:50px; display: table">
+        <div class="ui-grid-fixed">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,427 @@
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://bdr.izs.it/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="http://bdr.izs.it/webservices">
+	<wsdl:types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://bdr.izs.it/webservices">
+			<s:element name="get_Elenco_Capi_Premio">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="p_premio"
+							type="tns:clsPremio_Validazione" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="clsPremio_Validazione">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="CUAA" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Id_alle_BDN"
+						type="s:long" />
+					<s:element minOccurs="1" maxOccurs="1" name="Anno_Campagna"
+						type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice_Intervento"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="get_Elenco_Capi_PremioResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="get_Elenco_Capi_PremioResult" type="tns:clsPremio_ValidazioneResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="clsPremio_ValidazioneResponse">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:clsResponse">
+						<s:sequence>
+							<s:element minOccurs="1" maxOccurs="1" name="Numero_Capi"
+								type="s:long" />
+							<s:element minOccurs="0" maxOccurs="1" name="Lista_Capi"
+								type="tns:ArrayOfClsCapo" />
+							<s:element minOccurs="0" maxOccurs="1"
+								name="Lista_Capi_Macellati" type="tns:ArrayOfClsCapoMacellato" />
+							<s:element minOccurs="0" maxOccurs="1"
+								name="Lista_CapiOvicaprini" type="tns:ArrayOfClsCapoOvicaprino" />
+							<s:element minOccurs="0" maxOccurs="1" name="Lista_Vacche"
+								type="tns:ArrayOfClsCapoVacca" />
+						</s:sequence>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:complexType name="clsResponse" abstract="true">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="ErrCod"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="ErrDescr"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfClsCapo">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="clsCapo"
+						nillable="true" type="tns:clsCapo" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="clsCapo">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="Capo_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Sesso" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Nascita"
+						type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Razza_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Inizio_Detenzione"
+						type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Fine_Detenzione"
+						type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Capo_Cod_Madre"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cod_Libro_Madre"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Desc_Libro_Madre"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Azienda_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Allev_Id"
+						type="s:long" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Macellazione"
+						nillable="true" type="s:dateTime" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfClsCapoMacellato">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="clsCapoMacellato"
+						nillable="true" type="tns:clsCapoMacellato" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="clsCapoMacellato">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="Azienda_Latitudine"
+						nillable="true" type="s:double" />
+					<s:element minOccurs="1" maxOccurs="1" name="Azienda_Longitudine"
+						nillable="true" type="s:double" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Ingresso"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Macellazione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cod_Libro"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Descr_Libro"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Com_Autorita_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Inserimento_Bdn_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cuaa" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Com_Autorita_Uscita" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Uscita"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Inserimento_Bdn_Uscita" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Capo_Id"
+						type="s:long" />
+					<s:element minOccurs="1" maxOccurs="1" name="Allev_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Sesso" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Nascita"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Razza_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Inizio_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Fine_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Azienda_Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Delegato_Ingresso" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Ruolo_Utente_Ingresso" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Flag_Delegato_Uscita"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Ruolo_Utente_Uscita"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfClsCapoOvicaprino">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="clsCapoOvicaprino"
+						nillable="true" type="tns:clsCapoOvicaprino" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="clsCapoOvicaprino">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="Capo_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Sesso" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Nascita"
+						type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Razza_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Inizio_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Fine_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Azienda_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Allev_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Genotipo"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Cons_Media"
+						type="s:float" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Macellazione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Com_Macellazione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Registr_Macellazione" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Ultimo_Prel_Profilassi" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Com_Nascita"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Dt_Inserimento_Bdn_Nascita" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Appl_Marchio"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cuaa" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Delegato_Nascita" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Ruolo_Utente_Nascita"
+						type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="ArrayOfClsCapoVacca">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="clsCapoVacca"
+						nillable="true" type="tns:clsCapoVacca" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="clsCapoVacca">
+				<s:sequence>
+					<s:element minOccurs="1" maxOccurs="1" name="Capo_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cod_Libro"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Descr_libro"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Nascita"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Nascita_Vitello"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Razza_Codice"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Codice_Vitello"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Inizio_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1" name="Dt_Fine_Detenzione"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1" name="Azienda_Codice"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Allev_Id"
+						type="s:long" />
+					<s:element minOccurs="1" maxOccurs="1" name="Azienda_Longitudine"
+						nillable="true" type="s:double" />
+					<s:element minOccurs="1" maxOccurs="1" name="Azienda_Latitudine"
+						nillable="true" type="s:double" />
+					<s:element minOccurs="0" maxOccurs="1" name="Flag_IBR"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Rispetto_Prevalenza_IBR" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Sesso_Vitello"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Vacca_Dt_Ingresso"
+						nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vacca_Dt_Com_Autorita_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vacca_Dt_Inserimento_Bdn_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vitello_Dt_Appl_Marchio" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vitello_Dt_Com_Autorita_Nascita" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vitello_Dt_Inserimento_Bdn_Nascita" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Proroga_Marcatura" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Cuaa" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="Sesso" type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1" name="Vitello_Capo_Id"
+						type="s:long" />
+					<s:element minOccurs="0" maxOccurs="1" name="Vitello_Tipo_Origine"
+						type="s:string" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vitello_Dt_Com_Autorita_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="1" maxOccurs="1"
+						name="Vitello_Dt_Inserimento_Bdn_Ingresso" nillable="true" type="s:dateTime" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Delegato_Ingresso_Vacca" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Ruolo_Utente_Ingresso_Vacca" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Delegato_Nascita_Vitello" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Ruolo_Utente_Nascita_Vitello" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Flag_Delegato_Ingresso_Vitello" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1"
+						name="Ruolo_Utente_Ingresso_Vitello" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="SOAPAutenticazione" type="tns:SOAPAutenticazione" />
+			<s:complexType name="SOAPAutenticazione">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="username"
+						type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="password"
+						type="s:string" />
+				</s:sequence>
+				<s:anyAttribute />
+			</s:complexType>
+			<s:element name="get_Elenco_Capi_Premio2">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="p_premio"
+							type="tns:clsPremio_Validazione_PP" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="clsPremio_Validazione_PP">
+				<s:complexContent mixed="false">
+					<s:extension base="tns:clsPremio_Validazione">
+						<s:sequence>
+							<s:element minOccurs="0" maxOccurs="1" name="CUAA2"
+								type="s:string" />
+						</s:sequence>
+					</s:extension>
+				</s:complexContent>
+			</s:complexType>
+			<s:element name="get_Elenco_Capi_Premio2Response">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1"
+							name="get_Elenco_Capi_Premio2Result" type="tns:clsPremio_ValidazioneResponse" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+		</s:schema>
+	</wsdl:types>
+	<wsdl:message name="get_Elenco_Capi_PremioSoapIn">
+		<wsdl:part name="parameters" element="tns:get_Elenco_Capi_Premio" />
+	</wsdl:message>
+	<wsdl:message name="get_Elenco_Capi_PremioSoapOut">
+		<wsdl:part name="parameters" element="tns:get_Elenco_Capi_PremioResponse" />
+	</wsdl:message>
+	<wsdl:message name="get_Elenco_Capi_PremioSOAPAutenticazione">
+		<wsdl:part name="SOAPAutenticazione" element="tns:SOAPAutenticazione" />
+	</wsdl:message>
+	<wsdl:message name="get_Elenco_Capi_Premio2SoapIn">
+		<wsdl:part name="parameters" element="tns:get_Elenco_Capi_Premio2" />
+	</wsdl:message>
+	<wsdl:message name="get_Elenco_Capi_Premio2SoapOut">
+		<wsdl:part name="parameters" element="tns:get_Elenco_Capi_Premio2Response" />
+	</wsdl:message>
+	<wsdl:message name="get_Elenco_Capi_Premio2SOAPAutenticazione">
+		<wsdl:part name="SOAPAutenticazione" element="tns:SOAPAutenticazione" />
+	</wsdl:message>
+	<wsdl:portType name="DomandaUnicaNewSoap">
+		<wsdl:operation name="get_Elenco_Capi_Premio">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Metodo che riporta l'elenco dei capi candidati per un certo premio
+			</wsdl:documentation>
+			<wsdl:input message="tns:get_Elenco_Capi_PremioSoapIn" />
+			<wsdl:output message="tns:get_Elenco_Capi_PremioSoapOut" />
+		</wsdl:operation>
+		<wsdl:operation name="get_Elenco_Capi_Premio2">
+			<wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+				Metodo che riporta l'elenco dei capi candidati per un certo premio
+				rispetto a due CUAA nel caso in cui un produttore subentri ad un
+				altro
+			</wsdl:documentation>
+			<wsdl:input message="tns:get_Elenco_Capi_Premio2SoapIn" />
+			<wsdl:output message="tns:get_Elenco_Capi_Premio2SoapOut" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DomandaUnicaNewSoap" type="tns:DomandaUnicaNewSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="get_Elenco_Capi_Premio">
+			<soap:operation
+				soapAction="http://bdr.izs.it/webservices/get_Elenco_Capi_Premio"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+				<soap:header message="tns:get_Elenco_Capi_PremioSOAPAutenticazione"
+					part="SOAPAutenticazione" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="get_Elenco_Capi_Premio2">
+			<soap:operation
+				soapAction="http://bdr.izs.it/webservices/get_Elenco_Capi_Premio2"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+				<soap:header message="tns:get_Elenco_Capi_Premio2SOAPAutenticazione"
+					part="SOAPAutenticazione" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="DomandaUnicaNewSoap12" type="tns:DomandaUnicaNewSoap">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="get_Elenco_Capi_Premio">
+			<soap12:operation
+				soapAction="http://bdr.izs.it/webservices/get_Elenco_Capi_Premio"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+				<soap12:header message="tns:get_Elenco_Capi_PremioSOAPAutenticazione"
+					part="SOAPAutenticazione" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="get_Elenco_Capi_Premio2">
+			<soap12:operation
+				soapAction="http://bdr.izs.it/webservices/get_Elenco_Capi_Premio2"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+				<soap12:header message="tns:get_Elenco_Capi_Premio2SOAPAutenticazione"
+					part="SOAPAutenticazione" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DomandaUnicaNew">
+		<wsdl:port name="DomandaUnicaNewSoap" binding="tns:DomandaUnicaNewSoap">
+			<soap:address
+				location="http://premi.izs.it/WSDOMANDAUNICA/DomandaUnicaNew.asmx" />
+		</wsdl:port>
+		<wsdl:port name="DomandaUnicaNewSoap12" binding="tns:DomandaUnicaNewSoap12">
+			<soap12:address
+				location="http://premi.izs.it/WSDOMANDAUNICA/DomandaUnicaNew.asmx" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

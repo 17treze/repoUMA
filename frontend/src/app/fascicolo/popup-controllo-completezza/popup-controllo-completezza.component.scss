@@ -1,0 +1,57 @@
+ul {
+    padding-left: 10px;
+    li {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+    
+        em.control-ok {
+            color: green;
+        }
+    
+        em.control-fail {
+            color: red;
+        }
+    }
+}
+
+::ng-deep body {
+    .ui-widget-content {
+        .pi {
+            color: white;
+            padding-right: 30px;
+        }
+    }
+
+    .ui-accordion {
+        .ui-accordion-header {
+            &.ui-state-active {
+                background-color: #4CB050;
+            }
+        }
+    }
+}
+
+.button-custom-bar-dark {
+  background-color: #0e5f3f;
+  right: 0;
+  text-transform: uppercase;
+  text-justify: auto;
+  padding-top: 2px;
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+.button-image {
+  position: relative;
+  display: contents;
+  padding: 0px;
+}
+
+.w-eye {
+  width: 200px;
+}
+
+.img-button {
+  cursor: pointer;
+}

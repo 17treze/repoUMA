@@ -1,0 +1,140 @@
+<p-toast
+  key="tst-csv"
+  [baseZIndex]="50000"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <h3 class="richiesta-title">
+    Consultazione richieste di carburante
+  </h3>
+
+  <div class="p-grid ui-fluid">
+    <div class="p-col p-0 w-100">
+      <form
+        class="w-100"
+        novalidate
+        [formGroup]="ricercaForm">
+        <div class="p-grid">
+          <div class="p-col p-0">
+            <div
+              *ngIf="!consultazioneAsCaa"
+              class="p-grid p-justify-around p-align-center">
+              <div class="p-col">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="idDomanda"
+                  placeholder="ID domanda">
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="cuaa"
+                  placeholder="CUAA">
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  pInputText
+                  formControlName="denominazione"
+                  placeholder="Denominazione">
+              </div>
+            </div>
+            <div
+              *ngIf="!consultazioneAsCaa"
+              class="p-grid p-justify-around p-align-center">
+              <div class="p-col">
+                <p-dropdown
+                  formControlName="anni"
+                  [options]="anni"></p-dropdown>
+              </div>
+              <div class="p-col">
+                <p-dropdown
+                  formControlName="stati"
+                  [options]="stati"></p-dropdown>
+              </div>
+              <div
+                *ngIf="!consultazioneAsCaa"
+                class="p-col">
+                <div class="p-grid m-0 p-justify-between">
+                  <div class="p-col p-0">
+                    <button
+                      pButton
+                      type="submit"
+                      label="Applica Filtri"
+                      (click)="applicaFiltri()"></button>
+                  </div>
+                  <div class="p-col p-0">
+                    <button
+                      pButton
+                      class="ui-button-secondary shadow-none large-icon"
+                      icon="pi pi-times-circle"
+                      iconPos="left"
+                      label="Rimuovi Filtri"
+                      (click)="rimuoviFiltri()"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- I caa vedono solo gli anni -->
+            <div
+              *ngIf="consultazioneAsCaa"
+              class="p-col p-0">
+              <div class="p-grid m-0 p-align-center p-justify-start">
+                <div class="p-col-2">
+                  <p-dropdown
+                    formControlName="anni"
+                    [options]="anni"></p-dropdown>
+                </div>
+                <div class="p-col-2 p-0">
+                  <button
+                    pButton
+                    type="submit"
+                    label="Applica Filtro"
+                    (click)="applicaFiltri()"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="p-col p-0 w-100">
+        <!-- Accordion Richieste di carburante / Rettifiche -->
+        <div
+          *ngIf="!consultazioneAsCaa"
+          class="p-grid m-0">
+          <app-lista-domande
+            class="w-100"
+            [listaDomande]="datiRichiestePartial"
+            [tipoDomande]="tipoRichiesta"
+            [nrDomande]="nrRichieste"
+            [reset]="tableReset"
+            (aggiornaLista)="aggiornaTabella($event)"></app-lista-domande>
+        </div>
+        <!-- Accordion Dichiarazioni -->
+        <div
+          *ngIf="!consultazioneAsCaa"
+          class="p-grid m-0">
+          <app-lista-domande
+            class="w-100"
+            [listaDomande]="datiDichiarazioniPartial"
+            [tipoDomande]="tipoDichiarazione"
+            [nrDomande]="nrDichiarazioni"
+            [reset]="tableReset"
+            (aggiornaLista)="aggiornaTabella($event)"></app-lista-domande>
+        </div>
+        <!-- Accordion in cui sono presenti tutte le dichiarazioni/richieste/rettifiche unificate -->
+        <div
+          *ngIf="consultazioneAsCaa"
+          class="p-grid m-0">
+          <app-lista-domande-caa
+            class="w-100"
+            [listaDomande]="datiUnificatiPartial"
+            [elementiPerPagina]="elementiPerPagina"
+            [nrDomande]="nrDomandeUnificate"
+            [reset]="tableReset"
+            (aggiornaLista)="aggiornaTabella($event)"></app-lista-domande-caa>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

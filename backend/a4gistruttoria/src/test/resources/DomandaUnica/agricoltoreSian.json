@@ -1,0 +1,163 @@
+{
+    "infoAgricoltoreSIAN": {
+        "idRaia": 22872742,
+        "annoCamp": 2018,
+        "codFisc": "CMPCRL76L27H612L",
+        "dataFineAsse": "9999-12-31T23:59:59.000+0100",
+        "dataFinePossRequ": "2018-12-31T00:00:00.000+0100",
+        "dataInizAsse": "2018-05-19T22:17:58.000+0200",
+        "dataInizPossRequ": "2018-01-01T00:00:00.000+0100",
+        "dtlCapxaction": null,
+        "dtlCapxtimestamp": null,
+        "flagAgriAtti": 1,
+        "flagGiovAgri": null,
+        "idOrpa": 160,
+        "idSogg": 2139947
+    },
+    "titoliSIAN": [
+        {
+            "idTitolare": 150362109,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762979",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362111,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762980",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362113,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762981",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362115,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762982",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362117,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762983",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362119,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762984",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362121,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762985",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362123,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762986",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362125,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762987",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362127,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762988",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362129,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762989",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362131,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762990",
+            "valoreTitolo": 130.1,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 150362133,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000003762991",
+            "valoreTitolo": 18.21,
+            "superficieTitolo": 0.14,
+            "dataInizioPossesso": "1970-01-01T06:36:20.602+0100",
+            "dataFinePossesso": "1970-01-02T04:46:31.231+0100",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        }
+    ],
+    "flagAgriAtti": 1
+}

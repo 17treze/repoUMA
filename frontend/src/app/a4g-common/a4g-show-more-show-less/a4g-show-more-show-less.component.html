@@ -1,0 +1,20 @@
+<div class="ui-grid">
+  <ng-container *ngIf="showMoreButton; then truncatedTextTpl else fullTextTpl">{{fullText}}</ng-container>
+  <ng-template #truncatedTextTpl>
+    <div>{{truncatedText}}...</div>
+    <div></div>
+  </ng-template>
+  <ng-template #fullTextTpl>
+    <div>{{fullText}}</div>
+  </ng-template>
+</div>
+<div class="pt-2">
+  <button
+    *ngIf="showMoreButton != null"
+    pButton
+    type="button"
+    [label]="showMoreButton == true ? 'mostra tutto' : 'mostra meno'"
+    (click)="showMoreButton= !showMoreButton"
+    [icon]="showMoreButton == true ? 'pi pi-caret-down' : 'pi pi-caret-up'">
+  </button>
+</div>

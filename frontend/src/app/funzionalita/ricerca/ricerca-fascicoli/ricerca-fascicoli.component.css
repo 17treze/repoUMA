@@ -1,0 +1,7 @@
+.inline {
+    display: inline-block;
+    position: relative;
+    margin-right: 25px;
+    margin-left: 25px;
+    height: auto;
+}

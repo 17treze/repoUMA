@@ -1,0 +1,188 @@
+{  
+   "infoGeneraliDomanda":{  
+      "pac":"PAC1420",
+      "tipoDomanda":"DU",
+      "campagna":2018,
+      "modulo":"PAGAMENTI DIRETTI",
+      "codModulo":"BPS_2018",
+      "cuaaIntestatario":"DRNNTN74E13H929R",
+      "ragioneSociale":"DI RENZO ANTONIO",
+      "numeroDomanda":182814,
+      "numeroDomandaRettificata":null,
+      "dataPresentazione":"2018-04-24T08:30:09.000+0200",
+      "codEnteCompilatore":"18",
+      "enteCompilatore":"CAA CIA - TRENTO - 001",
+      "dataProtocollazione":"2018-04-24T08:30:58.000+0200",
+      "dataPresentazOriginaria":null,
+      "dataProtocollazOriginaria":null
+   },
+   "controlliPresentazione":{  
+      "aggiornamentoFascicolo":"S",
+      "visioneAnomalie":"S",
+      "firmaDomanda":"S",
+      "archiviazioneDomanda":"S"
+   },
+   "richieste":{  
+      "sintesiRichieste":{  
+         "richiestaDisaccoppiato":true,
+         "richiestaSuperfici":true,
+         "richiestaZootecnia":false
+      }
+   },
+   "infoIstruttoriaDomanda":{  
+      "datiEleggibilita":[  
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3397523,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00070",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":5327,
+            "superficieSigeco":5327,
+            "idParcella":235008,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3397521,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00055",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":6681,
+            "superficieSigeco":6681,
+            "idParcella":235009,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3397522,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00068",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":3854,
+            "superficieSigeco":3854,
+            "idParcella":235008,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3397520,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00053",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":14963,
+            "superficieSigeco":14963,
+            "idParcella":235009,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":3397522,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00068",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":235006,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":3397523,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00070",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":235006,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":3397521,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00055",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":235007,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":3397520,
+               "comune":"SAN GIULIANO DI PUGLIA (CB)",
+               "codNazionale":"H929",
+               "foglio":24,
+               "particella":"00053",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":235007,
+            "livello":111
+         }
+      ]
+   }
+}

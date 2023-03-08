@@ -1,0 +1,123 @@
+<app-popup-nuovo-fabbricato
+  #popupNuovoFabbricato
+  (onHideDialog)="onCloseDialog($event)"></app-popup-nuovo-fabbricato>
+
+<p-toast
+  key="tst-fabbricati"
+  [style]="{marginTop: '70px'}"></p-toast>
+
+<div class="ui-grid-fixed boxgrey">
+  <div class="funzioni-grid boxgrey">
+    <div class="p-grid m-0">
+      <div class="p-col p-0">
+        <a
+          [routerLink]
+          (click)="goBack()"
+          class="d-flex align-items-center text-decoration-none color-primary">
+          <i
+            class="pi pi-chevron-left"
+            style="font-size: 2rem; color: black"></i>
+          <img src="assets/img/ico-dotazione.jpg">
+          <span class="ml-2">
+        {{ "FascicoloAziendale.DOTAZIONE_TECNICA" | translate }}
+      </span>
+        </a>
+      </div>
+      <div class="p-col w-100 p-0"></div>
+      <div class="p-col-fixed p-0">
+        <button
+          (click)="aggiungiFabbricato()"
+          [class]="isFascicoloAttuale() ? '' : 'button-custom-grey'"
+          class="w-10m button-large-icon"
+          pButton
+          icon="pi pi-plus-circle"
+          iconPos="right"
+          type="button"
+          [disabled]="readonly"
+          label="AGGIUNGI">
+        </button>
+      </div>
+    </div>
+
+    <br>
+    <div class="accordion-wrapper dettaglioaccordionmultiple">
+      <p-accordion
+        expandIcon
+        collapseIcon>
+        <p-accordionTab
+          header="FABBRICATI"
+          [selected]="true">
+          <p-table
+            #tableUnita
+            [columns]="cols"
+            [value]="listaFabbricati"
+            [autoLayout]="true"
+            [paginator]="false"
+            [responsive]="true"
+            dataKey="identificativo">
+            <ng-template
+              pTemplate="header"
+              let-columns>
+              <tr>
+                <th
+                  *ngIf="!readonly"
+                  class="text-center"
+                  style="width: 3em"></th>
+                <th
+                  class="text-center"
+                  *ngFor="let col of columns"
+                  [pSortableColumn]="col.field"
+                  [pSortableColumnDisabled]="col.field == null">
+                  <strong>{{col.header}}</strong>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th class="text-center">
+                  <strong>Azioni</strong>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-fabbricato
+              let-expanded="expanded"
+              let-columns="columns"
+              let-rowIndex="rowIndex">
+              <tr>
+                <td
+                  class="text-center"
+                  *ngIf="!readonly">
+                  <button
+                    pButton
+                    type="button"
+                    (click)="deleteFabbricato(fabbricato.id)"
+                    class="icon-button-circle"
+                    icon="pi pi-times-circle"></button>
+                </td>
+                <td>{{fabbricato.tipologia}}</td>
+                <td>{{fabbricato.comune}}</td>
+                <td class="text-center">{{fabbricato.volume}}</td>
+                <td class="text-center">{{fabbricato.superficie}}</td>
+                <td class="text-center">
+                  <button
+                    pButton
+                    type="button"
+                    [class]="isFascicoloAttuale() ? '' : 'button-custom-grey'"
+                    class="icon-button-rect"
+                    icon="pi pi-arrow-right"
+                    (click)="dettaglioFabbricato(fabbricato.id)"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="emptymessage"
+              let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length + 2">Nessun contenuto disponibile</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</div>

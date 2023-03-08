@@ -1,0 +1,46 @@
+:host >>> .cont-breadcrumb .p-breadcrumb {
+    color: black;
+    text-emphasis-color: black;
+    background-color: white;
+ }
+  
+:host >>> .ui-breadcrumb ul li .ui-menuitem-link{
+    color: black;
+    text-emphasis-color: black;
+    background-color: white;
+ }
+
+:host >>> .ui-widget-header .pi {
+    color: black;
+}
+
+:host >>> .cont-breadcrumb {
+    min-height: 38px;
+    box-shadow: none;
+    background: white !important;
+}
+
+:host >>> .ui-widget-header {
+    background-color: white;
+    color: #ffffff;
+    border: white;
+}
+
+div.ui-grid.grid-gis {
+    height: 0px;
+}
+
+::ng-deep body div.ui-grid.grid-gis .ui-breadcrumb {
+    padding: 0px 14px !important;
+    min-height: 22px !important;
+    line-height: 0.5;
+    vertical-align: middle;
+}
+
+.cont-breadcrumb-gis {
+    height: 34px;
+    box-shadow: none;
+    background: white !important;
+    padding: 0px;
+    border-bottom: 1px solid black;
+ }

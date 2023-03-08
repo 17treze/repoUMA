@@ -1,0 +1,19 @@
+<div id="dialog-navigator">
+  <p-dialog header="Cercare un luogo o una particella catastale" [(visible)]="panelEvent.showmapNavigator" [draggable]="true" [closable]="false" [resizable]="false" 
+  position="topright" [style]="{'width': '620px', 'height': '75px', 'margin-right': '60px'}" [contentStyle]="{'top': '25px' }">
+    <div id="nav">
+      <p-autoComplete [(ngModel)]="selectedLocation"
+                      [suggestions]="foundedLocations"
+                      [minLength]="3"
+                      (completeMethod) = "ricercaLocalita($event)" 
+                      (onSelect)="printCoordinate()"
+                      field="label"
+                      appendTo="body"
+                      placeholder = "ad es. 'Piazza Dante (Trento)' oppure 'Trento 1950/2' (min. 3 caratteri)">
+        <ng-template let-location pTemplate="item"> <!--utilizzo di onSelect  richiede " value: Selected value " fa "Callback to invoke when a suggestion is selected."-->
+          <div class="location-item">{{location.label}}</div>
+        </ng-template>
+      </p-autoComplete>
+    </div>
+  </p-dialog>
+</div>

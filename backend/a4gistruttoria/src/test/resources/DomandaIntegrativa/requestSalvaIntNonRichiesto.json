@@ -1,0 +1,45 @@
+{
+	"allevamenti": [{
+			"descAllevamento": "123TN025",
+			"descProprietario": "GIRARDELLI MARTINO",
+			"capi": [{
+					"codCapo": "IT022990173684",
+					"codSpecie": "BOVINI",
+					"interventi": [{
+							"codice": "313",
+							"esito": "AMMISSIBILE_CON_SANZIONE",
+							"idEsito": 1529960,
+							"selezionato": true
+						}
+					]
+				}, {
+					"codCapo": "IT022990173683",
+					"codSpecie": "BOVINI",
+					"interventi": []
+				}, {
+					"codCapo": "IT022990173682",
+					"codSpecie": "BOVINI",
+					"interventi": [{
+							"codice": "313",
+							"esito": "AMMISSIBILE_CON_SANZIONE",
+							"idEsito": 1529970,
+							"selezionato": true
+						}
+					]
+				}, {
+					"codCapo": "IT022990130388",
+					"codSpecie": "BOVINI",
+					"interventi": [{
+							"codice": "313",
+							"esito": "AMMISSIBILE_CON_SANZIONE",
+							"idEsito": 1529971,
+							"selezionato": true
+						}
+					]
+				}
+			]
+		}
+	],
+	"stato": "CALCOLATO",
+	"identificativo": "DI_404"
+}

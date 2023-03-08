@@ -1,0 +1,22 @@
+
+<div class="groupTool" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <div id="coverHoleTool" (click)="enableCoverTool()" [class.active-tool]="isActiveCover()">
+    <button 
+    pTooltip="Copri vuoto con poligono" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUseTool" 
+    class='btn btn-primary'
+    ><i class="fa fa-square"></i></button>
+  </div>
+  <div id="closeHoleTool" (click)="enableCloseTool()" [class.active-tool]="isActiveClose()">
+    <button 
+    pTooltip="Elimina buco" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUseTool" 
+    class='btn btn-primary'
+    ><i class="fa fa-times-circle"></i></button>
+  </div>
+</div>
+
+
+

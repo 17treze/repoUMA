@@ -1,0 +1,55 @@
+<p-toast position="top-center" key="generic" [baseZIndex]="50000"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+    <h2 class="richiesta-title">
+        {{ labels.DOMANDE_ANTIMAFIA }}
+    </h2>
+    <div class="boxgrey layout-actionmenu">
+        <p-table [columns]="cols" [value]="dichiarazioniAntimafiaTable" [autoLayout]="true" [paginator]="true"
+            [rows]="5" [responsive]="true">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                        [pSortableColumnDisabled]="col.field == null">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>{{ labels.azioni }}</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-domanda let-i="rowIndex">
+                <tr>
+                    <td>{{ domanda.datiDichiarazione.dettaglioImpresa.codiceFiscale }}</td>
+                    <td>
+                        {{
+                            domanda.datiDichiarazione.dettaglioImpresa.denominazione
+                            ? domanda.datiDichiarazione.dettaglioImpresa.denominazione
+                            : labels.nd
+                        }}
+                    </td>
+                    <td>
+                        {{
+                            domanda.stato.descrizione
+                            ? domanda.stato.descrizione
+                            : labels.nd
+                        }}
+                    </td>
+                    <td>
+                        <p-button label="Crea Domanda" (onClick)="creaDomanda(domanda)"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="5">{{ labels.noDichiarazioneAntimafia }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div>
+        <p-button appDebounceClick
+            [label]="labels.ESTRAI"
+            (debounceClick)="scarica()"
+            [disabled]="!dichiarazioniAntimafiaTable">
+        </p-button>
+    </div>
+</div>

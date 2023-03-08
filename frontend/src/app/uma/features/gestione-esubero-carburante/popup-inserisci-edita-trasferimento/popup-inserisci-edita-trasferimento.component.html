@@ -1,0 +1,65 @@
+<p-dialog
+  #dialog
+  id="popup-visualizza-richiesta-carburante"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="center"
+  [contentStyle]="{'overflow':'auto'}"
+  header="{{ 'UMA.DICHIARAZIONE_CONSUMI.TRASFERIMENTO_CARBURANTE' | translate }}"
+  [dismissableMask]="true">
+
+  <p-toast
+    key="tst-dialog"
+    [baseZIndex]="9999"
+    [style]="{marginTop: '70px'}"></p-toast>
+
+  <div class="p-grid m-0">
+    <div class="p-col">
+      <!-- Prima riga - Dati Destinatario -->
+      <div class="p-grid p-align-center">
+        CUAA: {{cuaa}}
+        <br>
+        DENOMINAZIONE: {{denominazione}}
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seconda Sezione - Tabella Carburante -->
+  <div class="p-grid p-align-center">
+    <div class="p-col">
+      <app-a4g-multi-table
+        [cols]="cols"
+        [values]="datasource"
+        (changedValueForm)="onChangeForm($event)">
+      </app-a4g-multi-table>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="p-grid p-justify-end">
+    <div>
+      <button
+        pButton
+        class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+        type="button"
+        label="Annulla"
+        (click)="annulla()"></button>
+    </div>
+    <div>
+      <button
+        pButton
+        class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-5m"
+        type="button"
+        label="Salva"
+        [disabled]="READONLY_MODE"
+        (click)="salva($event)"></button>
+    </div>
+  </div>
+</p-dialog>

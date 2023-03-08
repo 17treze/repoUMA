@@ -1,0 +1,55 @@
+<div style="padding-right:40px;">
+  <h3>
+    {{ 'DOMANDA_UNICA_FILTRI.FILTRA_PER' | translate }}
+  </h3>
+  <form [formGroup]="filtersFormGroup" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <p-autoComplete formControlName="cuaaFormControl" minLength="3"
+        placeholder="CUAA" name="cuaa"
+        [suggestions]="cuaaS"
+        (completeMethod)="inputFilterCuaaUpdate($event)">
+      </p-autoComplete>
+    </div>
+    <div class="form-group">
+      <p-autoComplete formControlName="denominazioneFormControl" minLength="3" placeholder="Descrizione Impresa" name="denominazione"
+        [suggestions]="denominazioneS" (completeMethod)="inputFilterRagioneSocialeUpdate($event)">
+      </p-autoComplete>
+    </div>
+    <div class="form-group">
+      <input style="width:100%"
+        placeholder="Numero Domanda" type="text"
+        formControlName="numeroDomandaFormControl"
+        name="numero_domanda" #numeroDomandaInput pInputText>
+    </div>
+    <div class="form-group">
+      <label class="labelricerca">Interventi</label>
+      <p-multiSelect [filter]="false" [options]="interventi" formControlName="interventiFormControl" name="selectedInterventi"
+        multiple="multiple" checkbox="checkbox" optionLabel="title" defaultLabel="Seleziona intervento/i">
+      </p-multiSelect>
+    </div>
+    <div class="form-group" *ngIf="isShowBloccato()">
+      <label class="labelricerca">Domande bloccate</label>
+      <p-dropdown [options]="yesNo"
+        formControlName="selectedBloccataBoolFormControl"
+        name="selectedBloccataBool"></p-dropdown>
+    </div>
+    <div class="form-group" *ngIf="isShowErroriCalcolo()">
+      <label class="labelricerca">Errori di Calcolo</label>
+      <p-dropdown [options]="yesNo"
+        formControlName="selectedErroreCalcoloFormControl"
+        name="selectedErroreCalcolo">
+      </p-dropdown>
+    </div>
+    <div class="form-group">
+      <label class="labelricerca">{{ 'DOMANDA_UNICA_FILTRI.Risultati' | translate }}
+        <span class="colori-per-numeri">{{ resultsNumber }}</span>
+      </label>
+    </div>
+    <div class="form-group">
+      <div class="searchbutton">
+        <button pButton type="button" class="ui-button-success" type="submit" style="background: #0e5f3f"
+          [disabled]="false">{{ 'DOMANDA_UNICA_FILTRI.applyFilters' | translate }}</button>
+      </div>
+    </div>
+  </form>
+</div>

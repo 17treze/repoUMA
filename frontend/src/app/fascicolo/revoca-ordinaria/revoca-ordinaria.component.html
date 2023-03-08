@@ -1,0 +1,42 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g ui-grid-fixed boxgrey">
+    <div class="layout-actionmenu w-100">
+      <h2 class="richiesta-title no-text-transform">{{labels.revocaOrdinariaRicerca}}</h2>
+      <form
+        class="ui-g w-100"
+        [formGroup]="revocaForm"
+        novalidate
+        (ngSubmit)="onSubmit($event)">
+        <div class="ui-g w-100">
+          <div class="align-self-center ui-g-12 ui-md-1">
+            <label class="labelricerca">{{labels.cuaaSigla}}</label>
+          </div>
+          <div class="ui-g-12 ui-md-4">
+            <input
+              #cuaaRef
+              type="text"
+              formControlName="cuaa"
+              name="cuaa"
+              pInputText
+              appValidaCuaaCompleto>
+          </div>
+          <div class="ui-g-12 ui-md-3">
+            <div class="searchbutton">
+              <button
+                pButton
+                type="button"
+                class="ui-button-success"
+                type="submit"
+                [disabled]="!revocaForm.valid">
+                {{labels.revoca}}
+              </button>
+            </div>
+          </div>
+          <p-toast
+            key="tst"
+            [style]="{ marginTop: '70px' }"></p-toast>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

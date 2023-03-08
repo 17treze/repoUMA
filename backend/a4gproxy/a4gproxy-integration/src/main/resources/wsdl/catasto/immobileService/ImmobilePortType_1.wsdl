@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ImmobileService" targetNamespace="http://www.catasto.regione.taa.it/Immobile/service" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wrp="http://www.catasto.regione.taa.it/Immobile/schemas" xmlns:tns="http://www.catasto.regione.taa.it/Immobile/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ex="http://www.regione.taa.it/FaultType/schemas" xmlns:cex="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" xmlns:alfex="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" xmlns:aex="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" xmlns:acex="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas">
+  <wsdl:documentation>Contiene il binding del servizio Immobile che permette di ottenere informazioni
+		di dettaglio sull'unita' immobiliare ad una certa data</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/Immobile/definitions" xmlns:tns="http://www.catasto.regione.taa.it/Immobile/definitions">
+      <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="ImmobilePortType.xsd"/>
+      <xs:import namespace="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" schemaLocation="ImmobilePortType_1.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" schemaLocation="ImmobilePortType_1_2.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas" schemaLocation="ImmobilePortType_1_2_3.xsd"/>
+      <xs:import namespace="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" schemaLocation="ImmobilePortType_1_2_3_4.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/Immobile/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AutorizzazioneLocazioneFault">
+    <wsdl:part element="aex:AutorizzazioneLocazioneFault" name="alf"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareSenzaTitolariFault">
+    <wsdl:part element="cex:UnitaImmobiliareSenzaTitolariFault" name="uistf"/>
+  </wsdl:message>
+  <wsdl:message name="AutorizzazioneProprietaFault">
+    <wsdl:part element="acex:AutorizzazioneProprietaFault" name="aprf"/>
+  </wsdl:message>
+  <wsdl:message name="DatiInputObbligatoriMancantiFault">
+    <wsdl:part element="ex:DatiInputObbligatoriMancantiFault" name="dimf"/>
+  </wsdl:message>
+  <wsdl:message name="SoggettoNonTitolareFault">
+    <wsdl:part element="cex:SoggettoNonTitolareFault" name="sntf"/>
+  </wsdl:message>
+  <wsdl:message name="AssenzaRichiedenteFault">
+    <wsdl:part element="acex:AssenzaRichiedenteFault" name="arf"/>
+  </wsdl:message>
+  <wsdl:message name="GetImmobileResponse">
+    <wsdl:part element="wrp:GetImmobileResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareSoppressaFault">
+    <wsdl:part element="cex:UnitaImmobiliareSoppressaFault" name="uisf"/>
+  </wsdl:message>
+  <wsdl:message name="AssenzaDelegatoFault">
+    <wsdl:part element="alfex:AssenzaDelegatoFault" name="adf"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareNonValidaFault">
+    <wsdl:part element="cex:UnitaImmobiliareNonValidaFault" name="uinvf"/>
+  </wsdl:message>
+  <wsdl:message name="WSFault">
+    <wsdl:part element="ex:WSFault" name="fault"/>
+  </wsdl:message>
+  <wsdl:message name="GetImmobileRequest">
+    <wsdl:part element="wrp:GetImmobile" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ImmobilePortType">
+    <wsdl:documentation>Espone il servizio riguardante il dettaglio di un' unita' immobiliare ad una certa data</wsdl:documentation>
+    <wsdl:operation name="GetImmobile">
+      <wsdl:input message="tns:GetImmobileRequest" name="GetImmobile"/>
+      <wsdl:output message="tns:GetImmobileResponse" name="GetImmobileResponse"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSoppressaFault" name="uisf"/>
+      <wsdl:fault message="tns:DatiInputObbligatoriMancantiFault" name="dimf"/>
+      <wsdl:fault message="tns:AssenzaDelegatoFault" name="adf"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSenzaTitolariFault" name="uistf"/>
+      <wsdl:fault message="tns:AssenzaRichiedenteFault" name="arf"/>
+      <wsdl:fault message="tns:UnitaImmobiliareNonValidaFault" name="uinvf"/>
+      <wsdl:fault message="tns:SoggettoNonTitolareFault" name="sntf"/>
+      <wsdl:fault message="tns:WSFault" name="fault"/>
+      <wsdl:fault message="tns:AutorizzazioneLocazioneFault" name="alf"/>
+      <wsdl:fault message="tns:AutorizzazioneProprietaFault" name="aprf"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImmobileBinding" type="tns:ImmobilePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetImmobile">
+      <soap:operation soapAction="http://www.catasto.regione.taa.it/catasto/ImmobileService/GetImmobile"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="uisf">
+        <soap:fault name="uisf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="dimf">
+        <soap:fault name="dimf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="adf">
+        <soap:fault name="adf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uistf">
+        <soap:fault name="uistf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="arf">
+        <soap:fault name="arf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uinvf">
+        <soap:fault name="uinvf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="sntf">
+        <soap:fault name="sntf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="alf">
+        <soap:fault name="alf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="aprf">
+        <soap:fault name="aprf" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImmobileService">
+    <wsdl:port binding="tns:ImmobileBinding" name="ImmobilePort">
+      <soap:address location="https://172.20.1.1:21443/catasto/ImmobileService/ImmobilePortType"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

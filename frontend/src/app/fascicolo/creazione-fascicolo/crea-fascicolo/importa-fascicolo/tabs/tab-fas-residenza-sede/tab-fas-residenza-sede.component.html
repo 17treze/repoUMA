@@ -1,0 +1,60 @@
+<div class="ui-g-12 boxgrey">
+    <div class="ui-g-6">
+        <div class="ui-g-6">
+            <strong>{{'PROVINCIA' | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzo?.provincia? anagrafica.sedeLegale.indirizzo?.provincia : 'ND' | translate}}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'COMUNE' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzo?.comune? anagrafica.sedeLegale.indirizzo?.comune : 'ND' | translate}}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'INDIRIZZO' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{indirizzo? indirizzo : 'ND' | translate}}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'CAP' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzo?.cap? anagrafica.sedeLegale.indirizzo?.cap  : 'ND' | translate }}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'CODICE_ISTAT' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzo?.codiceIstat? anagrafica.sedeLegale.indirizzo?.codiceIstat : 'ND' | translate }}
+        </div>
+    </div>
+    <div class="ui-g-6">
+        <div class="ui-g-6">
+            <strong>{{'FRAZIONE' | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzo?.frazione? anagrafica.sedeLegale.indirizzo?.frazione : 'ND' | translate}}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'RECAPITO_TELEFONICO' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.recTelefonico? anagrafica.sedeLegale.recTelefonico : 'ND' | translate }}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'INDIRIZZO_PEC' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.sedeLegale?.indirizzoPEC? anagrafica.sedeLegale.indirizzoPEC : 'ND' | translate}}
+        </div>
+        <div class="ui-g-6">
+            <strong>{{'FONTE_DATI' | translate}}</strong>
+        </div>
+        <div class="ui-g-6">
+            {{anagrafica?.fonte? (anagrafica.fonte | translate) : 'ND' | translate}}
+        </div>
+    </div>
+</div>

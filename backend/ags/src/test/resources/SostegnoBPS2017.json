@@ -1,0 +1,92 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "BBBFBA66E31F187R",
+        "ragioneSociale": "BEBBER FABIO",
+        "numeroDomanda": 183380,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-26T00:00:00.000+0200",
+        "codEnteCompilatore": "12",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 011",
+        "dataProtocollazione": "2018-04-26T00:00:00.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null,
+        "stato":"IN_ISTRUTTORIA",
+        "dataPassaggioStato":"2018-04-26T00:00:00.000+0200",
+        "dtProtocollazioneUltimaModifica":null,
+        "numeroDomandaUltimaModifica":null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        }
+    },
+    "calcoliSostegno": [
+        {
+            "idCalcolo": 123456,
+            "idDefCalcolo": 151,
+            "codCalcolo": "DU_2017_SALDO_BGG",
+            "variabiliCalcolo": [
+                {
+                    "variabile": "ID_DECR",
+                    "descVariabile": "Riferimento per calcolo",
+                    "valore": "21066",
+                    "codGruppo": "VARI",
+                    "ordine": 1
+                },
+                {
+                    "variabile": "VALMEDTITO",
+                    "descVariabile": "Valore Medio Titoli",
+                    "valore": "74.74",
+                    "codGruppo": "TITO",
+                    "ordine": 2
+                },
+                {
+                    "variabile": "SUPETITO2017",
+                    "descVariabile": "Superficie Totale Titoli Ordinari 2017",
+                    "valore": "3.17",
+                    "codGruppo": "TITO",
+                    "ordine": 3
+               }
+            ]
+        }
+    ],
+    "sostegnoDisaccoppiato":{
+        "bpsRichiesto":true,
+        "greeningRichiesto":true,
+        "giovaneRichiesto":false,
+        "superficieImpegnataLorda":41676,
+        "superficieImpegnataNetta":41676.0
+    },
+    "sostegnoSuperfici":{
+        "superficieRichiestaSoia":0,
+        "superficieRichiestaFrumentoDuro":0,
+        "superficieRichiestaFrumentoProteaginose":0,
+        "superficieRichiestaFrumentoLeguminose":0,
+        "superficieRichiestaPomodoro":0,
+        "superficieRichiestaOlivoNazionale":0,
+        "superficieRichiestaOlivo75":0,
+        "superficieRichiestaOlivoQualita":0,
+        "superficieTotaleRichiesta":0,
+        "sostegnoSoiaRichiesto":false,
+        "sostegnoFrumentoDuroRichiesto":false,
+        "sostegnoFrumentoProteaginoseRichiesto":false,
+        "sostegnoFrumentoLeguminoseRichiesto":false,
+        "sostegnoPomorodoRichiesto":false,
+        "sostegnoOlivoNazionareRichiesto":false,
+        "sostegnoOlivo75Richiesto":false,
+        "sostegnoOlivoQualitaRichiesto":false
+    }
+}

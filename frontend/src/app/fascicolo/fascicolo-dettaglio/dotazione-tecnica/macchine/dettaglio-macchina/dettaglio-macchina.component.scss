@@ -1,0 +1,48 @@
+@import '../../../../../uma/uma.index.style.scss';
+
+:host {
+  .w-10m {
+    width: 10em;
+  }
+
+  .icon-button-rect {
+    background-color: $primaryColor !important;
+    border-radius: unset;
+    height: 5em !important;
+    width: 13em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $primaryDarkColor !important;
+    }
+
+    & > ::ng-deep  span.ui-button-icon-left {
+      font-size: 2.5em;
+    }
+  }
+
+  .icon-button-square {
+    background-color: $primaryColor !important;
+    border: 1px solid $primaryLightColor;
+    border-radius: unset;
+    height: 5em !important;
+    width: 5em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $primaryDarkColor !important;
+    }
+  }
+}

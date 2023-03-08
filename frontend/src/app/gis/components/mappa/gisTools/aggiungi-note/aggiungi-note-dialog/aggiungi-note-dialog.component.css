@@ -1,0 +1,17 @@
+.insert-text {
+    margin-top: 55px;
+}
+
+div.insert-text textarea.form-control {
+    height: 100px !important;
+    resize: none;
+}
+
+div.button-bar-note>button.button-annulla {
+    background: #dcd7d7 !important;
+}
+
+div.button-bar-note>button.button-salva {
+    background: #00985b !important;
+    color: #fff !important;
+}

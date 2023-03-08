@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	Tabella codici NUTS
+	http://www.wikiwand.com/en/NUTS_statistical_regions_of_Italy
+	http://www.aci.it/i-servizi/normative/codice-della-strada/elenco-sigle-province-ditalia.html
+-->
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<changeSet id="ISTRUTTORIA_16.0" author="Daniele Faieta">
+		<createTable tableName="A4GD_NUTS">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GD_NUTS_PK"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUTS_1" type="${string.type}(30)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_1" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUTS_2" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_2" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUTS_3" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_3" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+			<column name="SIGLA_PROVINCIA" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_NUTS TO ${user.writer};
+			GRANT SELECT ON A4GD_NUTS TO ${user.reader};
+		</sql>
+	
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Alessandria"/><column name="CODICE_3" value="ITC18"/><column name="SIGLA_PROVINCIA" value="AL"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Asti"/><column name="CODICE_3" value="ITC17"/><column name="SIGLA_PROVINCIA" value="AT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Biella"/><column name="CODICE_3" value="ITC13"/><column name="SIGLA_PROVINCIA" value="BI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Cuneo"/><column name="CODICE_3" value="ITC16"/><column name="SIGLA_PROVINCIA" value="CN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Novara"/><column name="CODICE_3" value="ITC15"/><column name="SIGLA_PROVINCIA" value="NO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Torino"/><column name="CODICE_3" value="ITC11"/><column name="SIGLA_PROVINCIA" value="TO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Verbano-Cusio-Ossola"/><column name="CODICE_3" value="ITC14"/><column name="SIGLA_PROVINCIA" value="VB"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Piemonte"/><column name="CODICE_2" value="ITC1"/><column name="NUTS_3" value="Vercelli"/><column name="CODICE_3" value="ITC12"/><column name="SIGLA_PROVINCIA" value="VC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Valle d'Aosta"/><column name="CODICE_2" value="ITC2"/><column name="NUTS_3" value="Aosta"/><column name="CODICE_3" value="ITC20"/><column name="SIGLA_PROVINCIA" value="AO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Liguria"/><column name="CODICE_2" value="ITC3"/><column name="NUTS_3" value="Genova"/><column name="CODICE_3" value="ITC33"/><column name="SIGLA_PROVINCIA" value="GE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Liguria"/><column name="CODICE_2" value="ITC3"/><column name="NUTS_3" value="Imperia"/><column name="CODICE_3" value="ITC31"/><column name="SIGLA_PROVINCIA" value="IM"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Liguria"/><column name="CODICE_2" value="ITC3"/><column name="NUTS_3" value="La Spezia"/><column name="CODICE_3" value="ITC34"/><column name="SIGLA_PROVINCIA" value="SP"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Liguria"/><column name="CODICE_2" value="ITC3"/><column name="NUTS_3" value="Savona"/><column name="CODICE_3" value="ITC32"/><column name="SIGLA_PROVINCIA" value="SV"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Bergamo"/><column name="CODICE_3" value="ITC46"/><column name="SIGLA_PROVINCIA" value="BG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Brescia"/><column name="CODICE_3" value="ITC47"/><column name="SIGLA_PROVINCIA" value="BS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Como"/><column name="CODICE_3" value="ITC42"/><column name="SIGLA_PROVINCIA" value="CO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Cremona"/><column name="CODICE_3" value="ITC4A"/><column name="SIGLA_PROVINCIA" value="CR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Lecco"/><column name="CODICE_3" value="ITC43"/><column name="SIGLA_PROVINCIA" value="LC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Lodi"/><column name="CODICE_3" value="ITC49"/><column name="SIGLA_PROVINCIA" value="LO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Mantova"/><column name="CODICE_3" value="ITC4B"/><column name="SIGLA_PROVINCIA" value="MN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Milano"/><column name="CODICE_3" value="ITC45"/><column name="SIGLA_PROVINCIA" value="MI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Pavia"/><column name="CODICE_3" value="ITC48"/><column name="SIGLA_PROVINCIA" value="PV"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Sondrio"/><column name="CODICE_3" value="ITC44"/><column name="SIGLA_PROVINCIA" value="SO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northwest Italy"/><column name="CODICE_1" value="ITC"/><column name="NUTS_2" value="Lombardia"/><column name="CODICE_2" value="ITC4"/><column name="NUTS_3" value="Varese"/><column name="CODICE_3" value="ITC41"/><column name="SIGLA_PROVINCIA" value="VA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Trentino-Alto Adige/Südtirol"/><column name="CODICE_2" value="ITD1"/><column name="NUTS_3" value="South Tyrol"/><column name="CODICE_3" value="ITD10"/><column name="SIGLA_PROVINCIA" value="BZ"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Trentino-Alto Adige/Südtirol"/><column name="CODICE_2" value="ITD2"/><column name="NUTS_3" value="Trento"/><column name="CODICE_3" value="ITD20"/><column name="SIGLA_PROVINCIA" value="TN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Belluno"/><column name="CODICE_3" value="ITD33"/><column name="SIGLA_PROVINCIA" value="BL"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Padova"/><column name="CODICE_3" value="ITD36"/><column name="SIGLA_PROVINCIA" value="PD"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Rovigo"/><column name="CODICE_3" value="ITD37"/><column name="SIGLA_PROVINCIA" value="RO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Treviso"/><column name="CODICE_3" value="ITD34"/><column name="SIGLA_PROVINCIA" value="TV"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Venezia"/><column name="CODICE_3" value="ITD35"/><column name="SIGLA_PROVINCIA" value="VE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Verona"/><column name="CODICE_3" value="ITD31"/><column name="SIGLA_PROVINCIA" value="VR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Veneto"/><column name="CODICE_2" value="ITD3"/><column name="NUTS_3" value="Vicenza"/><column name="CODICE_3" value="ITD32"/><column name="SIGLA_PROVINCIA" value="VI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Friuli-Venezia Giulia"/><column name="CODICE_2" value="ITD4"/><column name="NUTS_3" value="Gorizia"/><column name="CODICE_3" value="ITD43"/><column name="SIGLA_PROVINCIA" value="GO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Friuli-Venezia Giulia"/><column name="CODICE_2" value="ITD4"/><column name="NUTS_3" value="Pordenone"/><column name="CODICE_3" value="ITD41"/><column name="SIGLA_PROVINCIA" value="PN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Friuli-Venezia Giulia"/><column name="CODICE_2" value="ITD4"/><column name="NUTS_3" value="Trieste"/><column name="CODICE_3" value="ITD44"/><column name="SIGLA_PROVINCIA" value="TS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Friuli-Venezia Giulia"/><column name="CODICE_2" value="ITD4"/><column name="NUTS_3" value="Udine"/><column name="CODICE_3" value="ITD42"/><column name="SIGLA_PROVINCIA" value="UD"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Bologna"/><column name="CODICE_3" value="ITD55"/><column name="SIGLA_PROVINCIA" value="BO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Ferrara"/><column name="CODICE_3" value="ITD56"/><column name="SIGLA_PROVINCIA" value="FE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Forlì-Cesena"/><column name="CODICE_3" value="ITD58"/><column name="SIGLA_PROVINCIA" value="FC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Modena"/><column name="CODICE_3" value="ITD54"/><column name="SIGLA_PROVINCIA" value="MO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Parma"/><column name="CODICE_3" value="ITD52"/><column name="SIGLA_PROVINCIA" value="PR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Piacenza"/><column name="CODICE_3" value="ITD51"/><column name="SIGLA_PROVINCIA" value="PC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Ravenna"/><column name="CODICE_3" value="ITD57"/><column name="SIGLA_PROVINCIA" value="RA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Reggio Emilia"/><column name="CODICE_3" value="ITD53"/><column name="SIGLA_PROVINCIA" value="RE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Northeast Italy"/><column name="CODICE_1" value="ITD"/><column name="NUTS_2" value="Emilia-Romagna"/><column name="CODICE_2" value="ITD5"/><column name="NUTS_3" value="Rimini"/><column name="CODICE_3" value="ITD59"/><column name="SIGLA_PROVINCIA" value="RN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Arezzo"/><column name="CODICE_3" value="ITE18"/><column name="SIGLA_PROVINCIA" value="AR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Firenze"/><column name="CODICE_3" value="ITE14"/><column name="SIGLA_PROVINCIA" value="FI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Grosseto"/><column name="CODICE_3" value="ITE1A"/><column name="SIGLA_PROVINCIA" value="GR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Livorno"/><column name="CODICE_3" value="ITE16"/><column name="SIGLA_PROVINCIA" value="LI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Lucca"/><column name="CODICE_3" value="ITE12"/><column name="SIGLA_PROVINCIA" value="LU"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Massa-Carrara"/><column name="CODICE_3" value="ITE11"/><column name="SIGLA_PROVINCIA" value="MS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Pisa"/><column name="CODICE_3" value="ITE17"/><column name="SIGLA_PROVINCIA" value="PI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Pistoia"/><column name="CODICE_3" value="ITE13"/><column name="SIGLA_PROVINCIA" value="PT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Prato"/><column name="CODICE_3" value="ITE15"/><column name="SIGLA_PROVINCIA" value="PO"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Toscana"/><column name="CODICE_2" value="ITE1"/><column name="NUTS_3" value="Siena"/><column name="CODICE_3" value="ITE19"/><column name="SIGLA_PROVINCIA" value="SI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Umbria"/><column name="CODICE_2" value="ITE2"/><column name="NUTS_3" value="Perugia"/><column name="CODICE_3" value="ITE21"/><column name="SIGLA_PROVINCIA" value="PG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Umbria"/><column name="CODICE_2" value="ITE2"/><column name="NUTS_3" value="Terni"/><column name="CODICE_3" value="ITE22"/><column name="SIGLA_PROVINCIA" value="TR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Marche"/><column name="CODICE_2" value="ITE3"/><column name="NUTS_3" value="Ancona"/><column name="CODICE_3" value="ITE32"/><column name="SIGLA_PROVINCIA" value="AN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Marche"/><column name="CODICE_2" value="ITE3"/><column name="NUTS_3" value="Ascoli Piceno"/><column name="CODICE_3" value="ITE34"/><column name="SIGLA_PROVINCIA" value="AP"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Marche"/><column name="CODICE_2" value="ITE3"/><column name="NUTS_3" value="Macerata"/><column name="CODICE_3" value="ITE33"/><column name="SIGLA_PROVINCIA" value="MC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Marche"/><column name="CODICE_2" value="ITE3"/><column name="NUTS_3" value="Pesaro-Urbino"/><column name="CODICE_3" value="ITE31"/><column name="SIGLA_PROVINCIA" value="PU"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Lazio"/><column name="CODICE_2" value="ITE4"/><column name="NUTS_3" value="Frosinone"/><column name="CODICE_3" value="ITE45"/><column name="SIGLA_PROVINCIA" value="FR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Lazio"/><column name="CODICE_2" value="ITE4"/><column name="NUTS_3" value="Latina"/><column name="CODICE_3" value="ITE44"/><column name="SIGLA_PROVINCIA" value="LT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Lazio"/><column name="CODICE_2" value="ITE4"/><column name="NUTS_3" value="Rieti"/><column name="CODICE_3" value="ITE42"/><column name="SIGLA_PROVINCIA" value="RI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Lazio"/><column name="CODICE_2" value="ITE4"/><column name="NUTS_3" value="Roma"/><column name="CODICE_3" value="ITE43"/><column name="SIGLA_PROVINCIA" value="RM"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Central Italy"/><column name="CODICE_1" value="ITE"/><column name="NUTS_2" value="Lazio"/><column name="CODICE_2" value="ITE4"/><column name="NUTS_3" value="Viterbo"/><column name="CODICE_3" value="ITE41"/><column name="SIGLA_PROVINCIA" value="VT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Abruzzo"/><column name="CODICE_2" value="ITF1"/><column name="NUTS_3" value="Chieti"/><column name="CODICE_3" value="ITF14"/><column name="SIGLA_PROVINCIA" value="CH"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Abruzzo"/><column name="CODICE_2" value="ITF1"/><column name="NUTS_3" value="L'Aquila"/><column name="CODICE_3" value="ITF11"/><column name="SIGLA_PROVINCIA" value="AQ"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Abruzzo"/><column name="CODICE_2" value="ITF1"/><column name="NUTS_3" value="Pescara"/><column name="CODICE_3" value="ITF13"/><column name="SIGLA_PROVINCIA" value="PE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Abruzzo"/><column name="CODICE_2" value="ITF1"/><column name="NUTS_3" value="Teramo"/><column name="CODICE_3" value="ITF12"/><column name="SIGLA_PROVINCIA" value="TE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Molise"/><column name="CODICE_2" value="ITF2"/><column name="NUTS_3" value="Campobasso"/><column name="CODICE_3" value="ITF22"/><column name="SIGLA_PROVINCIA" value="CB"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Molise"/><column name="CODICE_2" value="ITF2"/><column name="NUTS_3" value="Isernia"/><column name="CODICE_3" value="ITF21"/><column name="SIGLA_PROVINCIA" value="IS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Campania"/><column name="CODICE_2" value="ITF3"/><column name="NUTS_3" value="Avellino"/><column name="CODICE_3" value="ITF34"/><column name="SIGLA_PROVINCIA" value="AV"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Campania"/><column name="CODICE_2" value="ITF3"/><column name="NUTS_3" value="Benevento"/><column name="CODICE_3" value="ITF32"/><column name="SIGLA_PROVINCIA" value="BN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Campania"/><column name="CODICE_2" value="ITF3"/><column name="NUTS_3" value="Caserta"/><column name="CODICE_3" value="ITF31"/><column name="SIGLA_PROVINCIA" value="CE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Campania"/><column name="CODICE_2" value="ITF3"/><column name="NUTS_3" value="Napoli"/><column name="CODICE_3" value="ITF33"/><column name="SIGLA_PROVINCIA" value="NA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Campania"/><column name="CODICE_2" value="ITF3"/><column name="NUTS_3" value="Salerno"/><column name="CODICE_3" value="ITF35"/><column name="SIGLA_PROVINCIA" value="SA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Puglia"/><column name="CODICE_2" value="ITF4"/><column name="NUTS_3" value="Bari"/><column name="CODICE_3" value="ITF42"/><column name="SIGLA_PROVINCIA" value="BA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Puglia"/><column name="CODICE_2" value="ITF4"/><column name="NUTS_3" value="Brindisi"/><column name="CODICE_3" value="ITF44"/><column name="SIGLA_PROVINCIA" value="BR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Puglia"/><column name="CODICE_2" value="ITF4"/><column name="NUTS_3" value="Foggia"/><column name="CODICE_3" value="ITF41"/><column name="SIGLA_PROVINCIA" value="FG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Puglia"/><column name="CODICE_2" value="ITF4"/><column name="NUTS_3" value="Lecce"/><column name="CODICE_3" value="ITF45"/><column name="SIGLA_PROVINCIA" value="LE"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Puglia"/><column name="CODICE_2" value="ITF4"/><column name="NUTS_3" value="Taranto"/><column name="CODICE_3" value="ITF43"/><column name="SIGLA_PROVINCIA" value="TA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Basilicata"/><column name="CODICE_2" value="ITF5"/><column name="NUTS_3" value="Matera"/><column name="CODICE_3" value="ITF52"/><column name="SIGLA_PROVINCIA" value="MT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Basilicata"/><column name="CODICE_2" value="ITF5"/><column name="NUTS_3" value="Potenza"/><column name="CODICE_3" value="ITF51"/><column name="SIGLA_PROVINCIA" value="PZ"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Calabria"/><column name="CODICE_2" value="ITF6"/><column name="NUTS_3" value="Catanzaro"/><column name="CODICE_3" value="ITF63"/><column name="SIGLA_PROVINCIA" value="CZ"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Calabria"/><column name="CODICE_2" value="ITF6"/><column name="NUTS_3" value="Cosenza"/><column name="CODICE_3" value="ITF61"/><column name="SIGLA_PROVINCIA" value="CS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Calabria"/><column name="CODICE_2" value="ITF6"/><column name="NUTS_3" value="Crotone"/><column name="CODICE_3" value="ITF62"/><column name="SIGLA_PROVINCIA" value="KR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Calabria"/><column name="CODICE_2" value="ITF6"/><column name="NUTS_3" value="Reggio Calabria"/><column name="CODICE_3" value="ITF65"/><column name="SIGLA_PROVINCIA" value="RC"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="South Italy"/><column name="CODICE_1" value="ITF"/><column name="NUTS_2" value="Calabria"/><column name="CODICE_2" value="ITF6"/><column name="NUTS_3" value="Vibo Valentia"/><column name="CODICE_3" value="ITF64"/><column name="SIGLA_PROVINCIA" value="VV"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Agrigento"/><column name="CODICE_3" value="ITG14"/><column name="SIGLA_PROVINCIA" value="AG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Caltanissetta"/><column name="CODICE_3" value="ITG15"/><column name="SIGLA_PROVINCIA" value="CL"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Catania"/><column name="CODICE_3" value="ITG17"/><column name="SIGLA_PROVINCIA" value="CT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Enna"/><column name="CODICE_3" value="ITG16"/><column name="SIGLA_PROVINCIA" value="EN"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Messina"/><column name="CODICE_3" value="ITG13"/><column name="SIGLA_PROVINCIA" value="ME"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Palermo"/><column name="CODICE_3" value="ITG12"/><column name="SIGLA_PROVINCIA" value="PA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Ragusa"/><column name="CODICE_3" value="ITG18"/><column name="SIGLA_PROVINCIA" value="RG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Siracusa"/><column name="CODICE_3" value="ITG19"/><column name="SIGLA_PROVINCIA" value="SR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sicilia"/><column name="CODICE_2" value="ITG1"/><column name="NUTS_3" value="Trapani"/><column name="CODICE_3" value="ITG11"/><column name="SIGLA_PROVINCIA" value="TP"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Cagliari"/><column name="CODICE_3" value="ITG27"/><column name="SIGLA_PROVINCIA" value="CA"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Carbonia-Iglesias"/><column name="CODICE_3" value="ITG2C"/><column name="SIGLA_PROVINCIA" value="CI"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Medio Campidano"/><column name="CODICE_3" value="ITG2B"/><column name="SIGLA_PROVINCIA" value="VS"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Nuoro"/><column name="CODICE_3" value="ITG26"/><column name="SIGLA_PROVINCIA" value="NU"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Ogliastra"/><column name="CODICE_3" value="ITG2A"/><column name="SIGLA_PROVINCIA" value="OG"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Olbia-Tempio"/><column name="CODICE_3" value="ITG29"/><column name="SIGLA_PROVINCIA" value="OT"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Oristano"/><column name="CODICE_3" value="ITG28"/><column name="SIGLA_PROVINCIA" value="OR"/></insert>
+		<insert tableName="A4GD_NUTS"><column name="ID" valueSequenceNext="NXTNBR"/><column name="VERSIONE" value="0"/><column name="NUTS_1" value="Insular Italy"/><column name="CODICE_1" value="ITG"/><column name="NUTS_2" value="Sardegna"/><column name="CODICE_2" value="ITG2"/><column name="NUTS_3" value="Sassari"/><column name="CODICE_3" value="ITG25"/><column name="SIGLA_PROVINCIA" value="SS"/></insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_NUTS_17.0" author="Daniele Faieta">
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_3" value="ITC4C" />
+			<where>SIGLA_PROVINCIA = 'MI'</where>
+		</update>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH1" />
+			<column name="CODICE_3" value="ITH10" />
+			<where>SIGLA_PROVINCIA = 'BZ'</where>
+		</update>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH2" />
+			<column name="CODICE_3" value="ITH20" />
+			<where>SIGLA_PROVINCIA = 'TN'</where>
+		</update>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH31" />
+			<where>SIGLA_PROVINCIA = 'VR'</where>
+		</update>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH36" />
+			<where>SIGLA_PROVINCIA = 'PD'</where>
+		</update>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH55" />
+			<where>SIGLA_PROVINCIA = 'BO'</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_NUTS_36.0" author="Alessandro Fiori">
+		<comment>codifica Nordest con tutti ITH</comment>
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH22" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'BL'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH58" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'FC'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH56" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'FE'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH4" />
+			<column name="CODICE_3" value="ITH43" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'GO'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH54" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'MO'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH51" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'PC'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH4" />
+			<column name="CODICE_3" value="ITH41" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'PN'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH52" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'PR'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH57" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'RA'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH53" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'RE'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH5" />
+			<column name="CODICE_3" value="ITH59" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'RN'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH37" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'RO'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH4" />
+			<column name="CODICE_3" value="ITH44" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'TS'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH34" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'TV'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH4" />
+			<column name="CODICE_3" value="ITH42" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'UD'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH35" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'VE'</where>
+		</update>
+		
+		<update tableName="A4GD_NUTS">
+			<column name="CODICE_1" value="ITH" />
+			<column name="CODICE_2" value="ITH3" />
+			<column name="CODICE_3" value="ITH32" />
+			<where>NUTS_1 = 'Northeast Italy' AND CODICE_1 = 'ITD' and SIGLA_PROVINCIA = 'VI'</where>
+		</update>	
+	</changeSet>
+	
+	
+	
+	
+</databaseChangeLog>

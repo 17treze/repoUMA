@@ -1,0 +1,152 @@
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }">
+</p-toast>
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed">
+    <hr
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-fascicolo.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "FASCICOLO_AZIENDALE.FASCICOLO" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a [routerLink]="['../ricerca-fascicolo-new']">
+                  {{ "FASCICOLO_AZIENDALE.ELENCO_FASCICOLI" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="showLinkCostituisci">
+              <td class="p-col-12">
+                <a [routerLink]="['../fascicolo/crea']">
+                  {{ "FASCICOLO_AZIENDALE.COSTITUISCI" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="showLinkMigra">
+              <td class="p-col-12">
+                <a [routerLink]="['../fascicoliDaMigrare']">
+                  {{ "FASCICOLO_AZIENDALE.MIGRA_FASCICOLO" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr *ngIf="showLinkRiapri">
+              <td class="p-col-12">
+                <a [routerLink]="['../ricercaFascicoliDaRiaprire']">
+                  {{ "FASCICOLO_AZIENDALE.RIAPRI_FASCICOLO_CHIUSO" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <hr *ngIf="showLinkRevoche"
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row" *ngIf="showLinkRevoche">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-fascicolo.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "FASCICOLO_AZIENDALE.REVOCHE" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr *ngIf="showLinkRevocaOrdinaria">
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onRevocaOrdinaria()">
+                  {{ "FASCICOLO_AZIENDALE.REVOCA_ORDINARIA" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-col-12">
+                <a [routerLink]="['../richiesteRevocaMandato']">
+                  {{ "FASCICOLO_AZIENDALE.REVOCA_IMMEDIATA" | translate }}
+                  <span class="badgesGreen">{{this.badgeRichiesteRevocaImmediata}}</span>
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-col-12">
+                <a [routerLink]="['../fascicoloPerAcquisizioneMandato']">
+                  {{ "FASCICOLO_AZIENDALE.REVOCA_IMMEDIATA_ACQUISIZIONE_MANDATO" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <hr *ngIf="showLinkTrasferimenti"
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row" *ngIf="showLinkTrasferimenti">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-fascicolo.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "FASCICOLO_AZIENDALE.TRASFERIMENTI" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a [routerLink]="['../fascicolo/trasferisci']">
+                  {{ "FASCICOLO_AZIENDALE.TRASFERISCI" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-col-12">
+                <a [routerLink]="['../fascicolo/costituisci-trasferisci']">
+                  {{ "FASCICOLO_AZIENDALE.COSTITUISCI_TRASFERISCI" | translate }}
+                  <i class="pi pi-arrow-right" style="float: right;"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

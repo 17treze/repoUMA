@@ -1,0 +1,655 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "A4G - Fascicolo - Dotazione Tecnica",
+		"description": "Modulo per l'erogazione dei servizi relativi alla dotazione tecnica del fascicolo",
+		"version": "1.0.0"
+	},
+	"servers": [{
+			"url": "http://itts55.intra.infotn.it:18080/fascicolo/dotazione-tecnica",
+			"description": "Generated server url"
+		}
+	],
+	"tags": [{
+			"name": "MacchineAgsController",
+			"description": "Gestione macchine agricole fascicolo legacy"
+		}, {
+			"name": "TipologiaMacchinarioController",
+			"description": "Informazioni di dettaglio tipologie di macchinari"
+		}, {
+			"name": "DotazioneTecnicaPrivateController",
+			"description": "API privata per dotazione tecnica"
+		}, {
+			"name": "FabbricatiAgsController",
+			"description": "Gestione fabbricati fascicolo legacy"
+		}, {
+			"name": "MacchineController",
+			"description": "Gestione macchine agricole fascicolo"
+		}
+	],
+	"paths": {
+		"/api/v1/dotazione-tecnica/private/{cuaa}/{idValidazione}/validazione": {
+			"put": {
+				"tags": ["DotazioneTecnicaPrivateController"],
+				"operationId": "startValidazioneFascicolo",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "idValidazione",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/v1/tipologie": {
+			"get": {
+				"tags": ["TipologiaMacchinarioController"],
+				"summary": "Recupera le tipologie di macchinari",
+				"operationId": "getTipologie",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TipologiaDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/tipologie/{id}/sottotipi": {
+			"get": {
+				"tags": ["TipologiaMacchinarioController"],
+				"summary": "Recupera i sottotipi associati ad un tipo di macchinario",
+				"operationId": "getSottotipi",
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/SottotipoDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/fascicolo/{cuaa}/macchine": {
+			"get": {
+				"tags": ["MacchineController"],
+				"summary": "Reperimento dati generici inerenti alle macchine del fascicolo",
+				"operationId": "getMacchine",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MacchinaDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["MacchineController"],
+				"summary": "Inserisce o aggiorna una macchina nel fascicolo",
+				"operationId": "postMacchina",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"documento": {
+										"type": "string",
+										"format": "binary"
+									},
+									"dati": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "integer",
+									"format": "int64"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/fascicolo/{cuaa}/macchine/{id}": {
+			"get": {
+				"tags": ["MacchineController"],
+				"summary": "Reperimento dati di dettaglio di una macchina",
+				"operationId": "getMacchina",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/DettaglioMacchinaDto"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["MacchineController"],
+				"summary": "Elimina un macchinario",
+				"operationId": "cancellaMacchina",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/v1/fascicolo/{cuaa}/macchine/{id}/allegati": {
+			"get": {
+				"tags": ["MacchineController"],
+				"summary": "Recupera il documento di possesso associato ad una macchina",
+				"operationId": "getAllegato",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "string",
+									"format": "binary"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/legacy/fabbricati": {
+			"get": {
+				"tags": ["FabbricatiAgsController"],
+				"summary": "Reperisce Informazioni sui fabbricati del fascicolo",
+				"description": "Utilizzare il seguente formato per il campo data: yyyy-MM-dd'T'HH:mm Inoltre è possibile filtrare per le province di provenienza (Sigle) e il titolo di conduzione. Valori di default per province: TN e BZ",
+				"operationId": "getFabbricati",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "data",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "utilizzare il formato yyyy-MM-dd'T'HH:mm",
+							"format": "date-time"
+						}
+					}, {
+						"name": "province",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"description": "Opzionale - Valori di default TN e BZ",
+							"items": {
+								"type": "string",
+								"description": "Opzionale - Valori di default TN e BZ"
+							}
+						}
+					}, {
+						"name": "titoliConduzione",
+						"in": "query",
+						"description": "Filtro fabbricati in base al titolo di conduzione",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/components/schemas/TitoloConduzioneAgs"
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FabbricatoAgsDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/legacy/macchine": {
+			"get": {
+				"tags": ["MacchineAgsController"],
+				"summary": "Reperisce Informazioni sulle macchine del fascicolo",
+				"description": "Utilizzare il seguente formato per il campo data: yyyy-MM-dd'T'HH:mm",
+				"operationId": "getMacchine_1",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "data",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "utilizzare il formato yyyy-MM-dd'T'HH:mm",
+							"format": "date-time"
+						}
+					}, {
+						"name": "tipiCarburante",
+						"in": "query",
+						"description": "Filtro macchine in base al carburante utilizzato",
+						"required": false,
+						"schema": {
+							"uniqueItems": true,
+							"type": "array",
+							"items": {
+								"$ref": "#/components/schemas/TipoCarburante"
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MacchinaAgsDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/framework/events/{idEvent}/reprocess": {
+			"get": {
+				"tags": ["event-store-controller"],
+				"operationId": "riprocessEvent",
+				"parameters": [{
+						"name": "idEvent",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"TipologiaDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"descrizione": {
+						"type": "string"
+					}
+				}
+			},
+			"SottotipoDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"descrizione": {
+						"type": "string"
+					},
+					"tipologie": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TipologiaDto"
+						}
+					}
+				}
+			},
+			"MacchinaDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"tipologia": {
+						"type": "string"
+					},
+					"modello": {
+						"type": "string"
+					},
+					"targa": {
+						"type": "string"
+					},
+					"alimentazione": {
+						"type": "string",
+						"enum": ["GASOLIO", "BENZINA", "ELETTRICO"]
+					}
+				}
+			},
+			"DettaglioMacchinaDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"sottotipo": {
+						"$ref": "#/components/schemas/SottotipoDto"
+					},
+					"marca": {
+						"type": "string"
+					},
+					"modello": {
+						"type": "string"
+					},
+					"numeroMatricola": {
+						"type": "string"
+					},
+					"numeroTelaio": {
+						"type": "string"
+					},
+					"annoCostruzione": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"tipoPossesso": {
+						"type": "string",
+						"enum": ["COMODATO", "COMPROPRIETA", "IN_USO", "LEASING", "NOLEGGIO", "PROPRIETA"]
+					},
+					"targa": {
+						"type": "string"
+					},
+					"dataImmatricolazione": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"proprietario": {
+						"$ref": "#/components/schemas/ProprietarioDto"
+					},
+					"motore": {
+						"$ref": "#/components/schemas/MotoreDto"
+					}
+				}
+			},
+			"IndirizzoDto": {
+				"type": "object",
+				"properties": {
+					"indirizzo": {
+						"type": "string"
+					},
+					"comune": {
+						"type": "string"
+					},
+					"cap": {
+						"type": "string"
+					}
+				}
+			},
+			"MotoreDto": {
+				"type": "object",
+				"properties": {
+					"marca": {
+						"type": "string"
+					},
+					"tipo": {
+						"type": "string"
+					},
+					"alimentazione": {
+						"type": "string",
+						"enum": ["GASOLIO", "BENZINA", "ELETTRICO"]
+					},
+					"potenza": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"matricola": {
+						"type": "string"
+					}
+				}
+			},
+			"ProprietarioDto": {
+				"type": "object",
+				"properties": {
+					"nome": {
+						"type": "string"
+					},
+					"cognome": {
+						"type": "string"
+					},
+					"codiceFiscale": {
+						"type": "string"
+					},
+					"denominazione": {
+						"type": "string"
+					},
+					"indirizzo": {
+						"$ref": "#/components/schemas/IndirizzoDto"
+					}
+				}
+			},
+			"TitoloConduzioneAgs": {
+				"type": "string",
+				"enum": ["PROPRIETA", "AFFITTO", "MEZZADRIA", "ALTRE_FORME", "NON_CONDOTTA", "NON_DEFINITO", "COMODATO"]
+			},
+			"FabbricatoAgsDto": {
+				"type": "object",
+				"properties": {
+					"idAgs": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"volume": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"tipoFabbricato": {
+						"type": "string"
+					},
+					"tipoFabbricatoCodice": {
+						"type": "string"
+					},
+					"titoloConduzione": {
+						"type": "string"
+					},
+					"particella": {
+						"type": "string"
+					},
+					"subalterno": {
+						"type": "string"
+					},
+					"comune": {
+						"type": "string"
+					},
+					"provincia": {
+						"type": "string"
+					},
+					"siglaProvincia": {
+						"type": "string"
+					}
+				}
+			},
+			"TipoCarburante": {
+				"type": "string",
+				"enum": ["GASOLIO", "BENZINA"]
+			},
+			"MacchinaAgsDto": {
+				"type": "object",
+				"properties": {
+					"idAgs": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"descrizione": {
+						"type": "string"
+					},
+					"targa": {
+						"type": "string"
+					},
+					"classe": {
+						"type": "string"
+					},
+					"marca": {
+						"type": "string"
+					},
+					"alimentazione": {
+						"type": "string",
+						"enum": ["GASOLIO", "BENZINA"]
+					},
+					"possesso": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}

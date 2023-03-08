@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/Particella/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/Particella/schemas" xmlns:pt="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:pref="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" xmlns:bene="http://www.librofondiario.regione.taa.it/BeneType/schemas" xmlns:auth="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas">
+  <xs:import namespace="http://www.catasto.regione.taa.it/ParticellaType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6_7.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6_7_8_9.xsd"/>
+  <xs:import namespace="http://www.librofondiario.regione.taa.it/BeneType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6_7_8_9_10_11.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene i wrapper di ParticellaService</xs:documentation>
+  </xs:annotation>
+  <xs:element name="GetParticella">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Le informazioni per individuare la particella di interesse</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="infoAutorizzative" type="auth:InfoAutorizzativeCatastoType"/>
+        <xs:element name="particella" type="pt:ChiaveParticellaType">
+          <xs:annotation>
+            <xs:documentation xml:lang="it">La chiave della particella di interesse</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element maxOccurs="1" minOccurs="0" name="dataSituazione" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetParticellaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="particella" type="bene:ParticellaTavolareType">
+          <xs:annotation>
+            <xs:documentation xml:lang="it">La descrizione della particella alla data richiesta</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

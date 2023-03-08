@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">	
+
+<!--changeSet per package A4SP_VALIDITA_ORACLE-->
+	<changeSet id="ISTANZARIESAME_S25.02" author="Bettina Irler">
+		<sql endDelimiter="?" splitStatements="true">
+create or replace package SDO_CUSTOM as
+a4s_tol number := 0.005;
+function SDO_INTERSECTION(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+            noException in boolean default false,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+function SDO_INTERSECTION1(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+
+ function SDO_INTERSECTION_LINE(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+            noException in boolean default false,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+        
+          function SDO_FIX(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+function closePolygon (
+				geomIn in sdo_geometry
+			) return sdo_geometry;
+			
+function SDO_FIX_1(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol,
+            se_row_id number default null,
+            codNazionale in varchar2 default null,
+            nomeTabella in varchar2  default null,
+            tipoElaborazione varchar2 default null
+		) return SDO_GEOMETRY deterministic;
+		
+function SDO_FIX_NO_HOLE(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol,
+            bufferSize in number  default a4s_tol
+		) return SDO_GEOMETRY;
+		
+function SDO_UNION(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+	
+function RoundGeomCoordinates(
+		p_geometry IN MDSYS.SDO_GEOMETRY,
+		p_tolerance IN NUMBER default a4s_tol
+	) RETURN MDSYS.SDO_GEOMETRY deterministic;
+	
+function SDO_AREA(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return number deterministic;
+        
+function SDO_AREA_NO_ERR(
+			shape IN SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return number;
+
+function GEOMETRY_CURSOR_UNION(
+			shapeCursor IN SYS_REFCURSOR,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY;
+        
+function SDO_ARRAY_UNION (
+			shapeArr in SDO_GEOMETRY_ARRAY,
+			beginIdx in pls_integer,
+			endIdx in pls_integer,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+
+function SDO_ARRAY_UNION_1 (
+			shapeArr in SDO_GEOMETRY_ARRAY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+
+function convert_collection(
+			geom in sdo_geometry,
+			tolerance in number  default a4s_tol
+		) return sdo_geometry deterministic;
+        
+function SDO_DIFFERENCE(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+        
+function SDO_DIFFERENCE_NO_ERR(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic;
+    function getClearPolygons(
+			geom in sdo_geometry,
+			tolerance in number default a4s_tol
+		) return sdo_geometry deterministic;
+        
+ function SDO_FIX_ALL (
+			geometry in SDO_GEOMETRY,
+			tolerance in number,
+            se_row_id number default null,
+            codNazionale in varchar2 default null,
+            nomeTabella in varchar2  default null,
+            tipoElaborazione varchar2 default null
+		) return SDO_GEOMETRY deterministic;
+
+function dissolve_array (shapeArr SDO_GEOMETRY_ARRAY, tolerance number) return SDO_GEOMETRY deterministic;
+end;
+?
+
+create or replace package body SDO_CUSTOM as
+function SDO_INTERSECTION(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+            noException in boolean default false,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		resShape1 SDO_GEOMETRY;
+        resShape2 SDO_GEOMETRY;
+	begin
+		begin
+			resShape1 := SDO_INTERSECTION1(geometryA, geometryB, tolerance);
+		exception
+			when OTHERS then
+                resShape1 := null;
+		end;
+
+        begin
+			resShape2 := SDO_INTERSECTION1(geometryB, geometryA, tolerance);
+		exception
+			when OTHERS then
+                resShape2 := null;
+		end;
+
+        return convert_collection(sdo_union(resShape1, resShape2), tolerance);
+	end;
+
+    function SDO_INTERSECTION1(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		resShape SDO_GEOMETRY;
+	begin   
+            begin   
+                resShape := SDO_GEOM.SDO_INTERSECTION(geometryA, geometryB, tolerance);
+            exception 
+                when others then 
+                    resShape :=  SDO_GEOM.SDO_INTERSECTION(geometryA, SDO_GEOM.SDO_BUFFER(geometryB, MDSYS.SDO_CONSTRUCT_DIM_ARRAY(geometryB.GET_DIMS(), tolerance), tolerance), tolerance);
+			end;
+
+            if (
+			tolerance &gt; 0.00000001
+			and resShape.SDO_GTYPE = 2006
+			and geometryA.SDO_GTYPE in (2003, 2007)
+			and geometryB.SDO_GTYPE in (2003, 2007)
+		) then
+            begin 
+                return SDO_GEOM.SDO_INTERSECTION(geometryA, geometryB, tolerance/10);
+            exception
+                when others then 
+                    return resShape;
+            end;    
+        end if;
+        return resShape;
+    end;
+    
+    function closePolygon (
+				geomIn in sdo_geometry
+			) return sdo_geometry
+		is
+			geomOut sdo_geometry;
+			cnt number;
+		begin
+			geomOut := geomIn;
+					geomOut.sdo_ordinates.extend(2);
+					cnt := geomOut.sdo_ordinates.count;
+					geomOut.sdo_ordinates(cnt-1) := geomOut.sdo_ordinates(1);
+					geomOut.sdo_ordinates(cnt)   := geomOut.sdo_ordinates(2);
+				return geomOut;
+		end closePolygon;
+    
+    function SDO_INTERSECTION_LINE(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+            noException in boolean default false,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		resShape1 SDO_GEOMETRY;
+	begin
+		begin
+			resShape1 := sdo_geom.SDO_INTERSECTION(geometryA, geometryB, tolerance);
+		exception
+			when OTHERS then
+                resShape1 := null;
+		end;
+        
+        if(resShape1 is not null) then 
+            return resShape1;
+        end if; 
+            
+
+        begin
+			resShape1 := sdo_geom.SDO_INTERSECTION(geometryB, geometryA, tolerance);
+		exception
+			when OTHERS then
+                resShape1 := null;
+		end;
+        
+        return resShape1;
+	end;
+    
+    function SDO_FIX(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+        geom_rd SDO_GEOMETRY;
+		geom_out SDO_GEOMETRY;
+		geom_out2 SDO_GEOMETRY;
+
+		errorType varchar2(10);
+		lastError varchar2(100);
+		firstError varchar2(100);
+	BEGIN
+		if (geometry is not null) then
+			geom_out := geometry;
+
+			if geom_out.sdo_gtype = 2003 and SDO_UTIL.GETNUMRINGS(geom_out) = 1 and SDO_GEOM.VALIDATE_GEOMETRY(geom_out,0.0000000000000001) = '13348' then
+				geom_out := closePolygon(geom_out);
+			end if;
+
+			if (geom_out.sdo_gtype in (2003,2007,2004)) then
+				firstError := SDO_GEOM.VALIDATE_GEOMETRY(geom_out, tolerance);
+
+			   if (firstError in ('13349','13351','13350','13343','13366','13368')) THEN
+					geom_out := SDO_UNION(geom_out, geom_out, tolerance);
+			   elsif (firstError = '13356') THEN
+					geom_out := SDO_UTIL.REMOVE_DUPLICATE_VERTICES(geom_out, tolerance);
+					--SELECT SDO_UTIL.REMOVE_DUPLICATE_VERTICES(geom_input,tol) INTO geom_out FROM DUAL;
+			   elsif (firstError IN ('13367')) then
+					geom_out := SDO_MIGRATE.TO_CURRENT(geom_out, MDSYS.SDO_CONSTRUCT_DIM_ARRAY(geom_out.GET_DIMS(), tolerance));
+                    --geom_out := SDO_UTIL.RECTIFY_GEOMETRY(geom_out, tolerance);               
+			   END IF;
+
+
+			   errorType := SDO_GEOM.VALIDATE_GEOMETRY(geom_out,tolerance);
+
+
+				if (errorType != 'TRUE' AND errorType != 'NULL') THEN
+					if errorType != firstError THEN
+						lastError := errorType;
+						if lastError not in ('13349','13366','13356','13343','13348','13367','13351','13350','13368') then
+							--AABGAD_UTL.DEBUG_OUTPUT('ERRORE ORA-'||lastError||' NON IMPL');
+							geom_out2 := geom_out;
+						else
+							geom_out2 := SDO_FIX(geom_out,tolerance);
+						end if;
+					else
+						geom_out2 := geom_out;
+					end if;
+				else
+					geom_out2 := geom_out;
+				end if;
+
+			   geom_out2 := convert_collection(geom_out2, tolerance);
+			   RETURN nvl(geom_out2,geom_out);
+			elsif geometry.sdo_gtype in (2001, 2002) then
+				return null;
+			else
+			   return geom_out;
+			end if;
+		else
+			return geometry;
+		end if;
+	end;
+    
+    function SDO_FIX_1(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol,
+            se_row_id number default null,
+            codNazionale in varchar2 default null,
+            nomeTabella in varchar2  default null,
+            tipoElaborazione varchar2 default null
+		) return SDO_GEOMETRY deterministic
+	is
+		geom_out SDO_GEOMETRY;
+        geom_out1 SDO_GEOMETRY;
+		geom_out2 SDO_GEOMETRY;
+        geom_out3 SDO_GEOMETRY;
+        
+        areaOut number(15,6);
+        area1 number(15,6);
+        area2 number(15,6);
+        area3 number(15,6);
+        
+        geom_removeDuplicate  SDO_GEOMETRY;
+
+		errorType varchar2(10);
+		lastError varchar2(100);
+		firstError varchar2(100);
+	BEGIN
+		if (geometry is not null) then
+			geom_out := geometry;
+
+            -- step 1 chiudo eventuali poligoni aperti
+			if geom_out.sdo_gtype = 2003 and SDO_UTIL.GETNUMRINGS(geom_out) = 1 and SDO_GEOM.VALIDATE_GEOMETRY(geom_out,0.0000000000000001) = '13348' then
+				geom_out := closePolygon(geom_out);
+			end if;
+
+			if (geom_out.sdo_gtype in (2003,2007,2004)) then
+				firstError := SDO_GEOM.VALIDATE_GEOMETRY(geom_out, tolerance);
+                
+               -- step 2 se il primo errore sono vertici duplicati pulisco, vedo se ci sono errori successivi e per gli errori successivi riparto con geometria originale
+               if (firstError = '13356') THEN
+                 geom_out2 := SDO_UTIL.REMOVE_DUPLICATE_VERTICES(geom_out, tolerance);
+                 if (geom_out2.sdo_gtype in (2003,2007,2004)) then
+                    firstError := SDO_GEOM.VALIDATE_GEOMETRY(geom_out2, tolerance);
+                    if(firstError is null or firstError = 'TRUE') then
+                        firstError := '13356';
+                    end if;    
+                 end if;   
+               end if;
+                 
+
+			   if (firstError in ('13349','13351','13350','13343','13366','13368')) THEN
+                   geom_out1 := sdo_geom.sdo_union(geom_out, geom_out, tolerance);
+                   
+                   area1 := abs(sdo_geom.sdo_area(geom_out1, tolerance));
+                   areaOut := abs(sdo_geom.sdo_area(geom_out, tolerance));
+
+                   -- raise_application_error(-20111, 'area1' || area1 ||' areaOut '|| areaOut );
+
+                   if(abs(area1 - areaOut) &gt; 1) then
+                        begin
+                            geom_out3 := SDO_FIX_NO_HOLE(geom_out, tolerance, tolerance);
+                            area3 := abs(sdo_geom.sdo_area(geom_out3, tolerance));                        
+                         exception
+                         when others then 
+                             insert_error_codNazionale(codNazionale, nomeTabella, tipoElaborazione, 'Error code ' || SQLCODE || ': ' || SQLERRM, se_row_id);
+                       end; 
+                         
+                        if(abs(nvl(area3, 0)-areaOut) &lt;= 10 and abs(area3-areaOut) &lt; abs(area1-areaOut)) then
+                            geom_out := geom_out3;
+                        else
+                            geom_out := geom_out1;
+                        end if;
+                    else
+                        geom_out := geom_out1;
+                    end if;
+                    
+               elsif (firstError = '13356') THEN
+                 geom_out := SDO_UTIL.REMOVE_DUPLICATE_VERTICES(geom_out, tolerance);
+
+			   elsif (firstError IN ('13367')) then
+        			geom_out := SDO_MIGRATE.TO_CURRENT(geom_out, MDSYS.SDO_CONSTRUCT_DIM_ARRAY(geom_out.GET_DIMS(), tolerance));
+                    --geom_out := SDO_UTIL.RECTIFY_GEOMETRY(geom_out, tolerance);               
+			   END IF;
+
+
+			   errorType := SDO_GEOM.VALIDATE_GEOMETRY(geom_out,tolerance);
+
+
+				if (errorType != 'TRUE' AND errorType != 'NULL') THEN
+					if errorType != firstError THEN
+						lastError := errorType;
+						if lastError not in ('13349','13366','13356','13343','13348','13367','13351','13350','13368') then
+							--AABGAD_UTL.DEBUG_OUTPUT('ERRORE ORA-'||lastError||' NON IMPL');
+							geom_out2 := geom_out;
+						else
+							geom_out2 := SDO_FIX(geom_out,tolerance);
+						end if;
+					else
+						geom_out2 := geom_out;
+					end if;
+				else
+					geom_out2 := geom_out;
+				end if;
+
+			   --geom_out2 := convert_collection(geom_out2, tolerance);
+			   RETURN nvl(geom_out2,geom_out);
+			elsif geometry.sdo_gtype in (2001, 2002) then
+				return null;
+			else
+			   return geom_out;
+			end if;
+		else
+			return geometry;
+		end if;
+       
+       exception 
+       when others then 
+         insert_error_codNazionale(codNazionale, nomeTabella, tipoElaborazione, 'Error code ' || SQLCODE || ': ' || SQLERRM, se_row_id);
+         return null;
+	end;
+    
+    function SDO_FIX_NO_HOLE(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol,
+            bufferSize in number default a4s_tol
+		) return SDO_GEOMETRY
+	is
+	begin
+		if (geometry is not null) then
+			declare
+				outVal sdo_geometry;
+                outValTmp sdo_geometry;
+                addArea number := 0;
+				arr SDO_GEOMETRY_ARRAY ;
+                rel varchar2(1000);
+                geomExt sdo_geometry;
+                geomI sdo_geometry;
+                maxEl number;
+                areaTouch number(10,6);
+			begin
+
+              if geometry.sdo_gtype &lt;&gt; 2003 and geometry.sdo_gtype &lt;&gt; 2007 
+                or (geometry.sdo_gtype = 2003 and SDO_UTIL.GETNUMRINGS(geometry) = 1 )
+              then
+                    return geometry;
+              end if;
+
+                  arr := SDO_UTIL.EXTRACT_ALL(geometry, 1);
+                    if (arr is not null and arr.count &gt; 0) then
+                        for i in 1 .. arr.count loop
+                            geomExt := sdo_fix(arr(i), tolerance);
+                            addArea := 0;
+                             for j in 1 .. arr.count loop
+                                geomI := sdo_fix(arr(j), tolerance);
+                                if(i &lt;&gt; j) then 
+                                    select nvl(SDO_GEOM.RELATE(geomExt,'DETERMINE', geomI, tolerance), 'FALSE')  into rel from dual;
+                                     if(rel = 'COVERS' or rel = 'CONTAINS' or rel = 'EQUALS')  then
+                                        --text := text || 'rel '|| rel || ' outval before ' || outVal || ' outval remove ' ||  nvl(SDO_GEOM.sdo_area(geomI, tolerance),0) || ' ';
+                                        outValTmp := sdo_geom.sdo_union(outValTmp, geomI, tolerance);
+                                        --dbms_output.put_line('outval' || outVal);
+                                        addArea := 1;
+                                     end if;
+                                     
+                                      if(rel = 'TOUCH')  then
+                                          select sdo_geom.sdo_area(sdo_geom.sdo_intersection(geomExt,geomI, tolerance), tolerance)  into areaTouch from dual;
+                                          if(areaTouch &gt; tolerance) then
+                                            --text := text || 'rel '|| rel || ' outval before ' || outVal || ' outval remove ' ||  nvl(SDO_GEOM.sdo_area(geomI,tolerance),0) || ' ';
+                                            outValTmp := sdo_geom.sdo_union(outValTmp, geomI, tolerance);
+                                            --dbms_output.put_line('outval' || outVal);
+                                            addArea := 1;
+                                          end if;  
+                                     end if;
+                                     
+                                     --'DISJOINT' 
+                                     
+
+                                     if(rel = 'COVEREDBY' or rel = 'INSIDE')  then
+                                        addArea := -1;
+                                     end if;
+                                end if;       
+                             end loop;
+                             if(addArea = 1) then 
+                                 outVal := sdo_geom.sdo_union(outVal, sdo_geom.sdo_difference(geomExt, SDO_GEOM.SDO_BUFFER(outValTmp, MDSYS.SDO_CONSTRUCT_DIM_ARRAY(outValTmp.GET_DIMS(), tolerance), bufferSize), tolerance), tolerance); 
+                             end if;
+                            if(addArea = 0 ) then 
+                                 outVal := sdo_geom.sdo_union(outVal, geomExt, tolerance); 
+                             end if;
+                        end loop;   
+                    end if;
+                return outVal;
+			end;
+        end if;
+	end;
+    
+      function SDO_UNION_RAISE(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		shape SDO_GEOMETRY;
+	begin
+        shape :=  SDO_UNION(
+			geometryA ,
+			geometryB ,
+			tolerance);
+       if ( shape is null) then 
+            raise_application_error(-20012, 'Errore nell''unione di geometrie -- SDO_UNION_RAISE');	
+       else
+            return shape;
+       end if;
+    end;
+    
+   function SDO_UNION(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		shape SDO_GEOMETRY;
+	begin
+
+		if (geometryA is null and geometryB is null) then
+			return null;
+		elsif (geometryA is null) then
+			return convert_collection(SDO_UNION(geometryB, geometryB, tolerance), tolerance);
+		elsif (geometryB is null) then
+			return convert_collection(SDO_UNION(geometryA, geometryA, tolerance), tolerance);
+		else
+			begin
+				begin
+					shape := SDO_GEOM.sdo_union(geometryA, geometryB, tolerance);
+				exception when others then
+					if sqlcode = -13050 then
+						shape := null;
+					else
+						raise;
+					end if;
+				end;
+				if (shape is null) then
+					begin
+						shape := SDO_GEOM.sdo_union(geometryB, geometryA, tolerance);
+					exception when others then
+						if sqlcode = -13050 then
+							shape := null;
+						else
+                            dbms_output.put_line('Errore nell''esecuzione di SDO_UNION 1: 1 su 2');
+                            raise;
+						end if;
+					end;
+
+					declare
+						tol number := 0;
+					begin 
+						while (shape is null and tol &lt;= 1) loop
+							tol := tol + tolerance;
+							begin
+								shape := SDO_GEOM.sdo_union(
+									RoundGeomCoordinates(geometryA, tol),
+									RoundGeomCoordinates(geometryB, tol),
+									tolerance
+								);
+							exception
+								when OTHERS then
+                                     dbms_output.put_line('Errore nell''esecuzione di SDO_UNION 2: 2 su 1');
+                                    raise;
+							end;
+						end loop;
+					end;
+
+					if (shape is null) then
+						if tolerance &lt; 1 then
+							return SDO_UNION(
+									geometryA,
+									geometryB,
+									(
+										case tolerance
+											when a4s_tol
+												then 0.05
+											when 0.05
+												then 0.5
+											else
+												1
+										end
+									)
+								);
+						else
+							if (SDO_AREA(geometryA, tolerance) &gt; 0 and SDO_AREA(geometryB, tolerance) &gt; 0) then
+								raise_application_error(-20012, 'Errore nell''unione di geometrie 1');				
+							else
+								return null;
+							end if;
+						end if;
+					end if;
+				end if;
+				exception
+					when others then
+						begin
+                            dbms_output.put_line('Errore nell''esecuzione di SDO_UNION 4: '||SUBSTR(SQLERRM, 1, 200));
+                            raise;
+						end;
+			end;
+			return convert_collection(shape, tolerance);
+		end if;
+        
+        exception
+			when others then
+                dbms_output.put_line('Errore nell''esecuzione di SDO_UNION 5: '||SUBSTR(SQLERRM, 1, 200));
+                return null;
+	end;
+    
+    Function RoundGeomCoordinates(
+		p_geometry IN MDSYS.SDO_GEOMETRY,
+		p_tolerance IN NUMBER default a4s_tol
+	) RETURN MDSYS.SDO_GEOMETRY deterministic
+	IS
+		v_dim            number;
+		v_gtype          number;
+		v_geometry       mdsys.sdo_geometry := p_geometry;
+		v_ordinates      mdsys.sdo_ordinate_array;
+		v_round_factor   number;
+	Begin
+		if (p_geometry is not null) then
+			v_gtype := Mod(p_geometry.sdo_gtype,10);
+			v_dim :=  SUBSTR(p_geometry.sdo_gtype,1,1);
+			v_ordinates := p_geometry.sdo_ordinates;
+
+			-- Compute rounding factors
+			v_round_factor := 1/p_tolerance;
+
+			-- If point update differently to other shapes...
+			IF ( v_geometry.sdo_point is not null ) Then
+			  v_geometry.sdo_point.X := trunc((v_geometry.sdo_point.x * v_round_factor)+(1/2))/v_round_factor;
+			  v_geometry.sdo_point.Y := trunc((v_geometry.sdo_point.y * v_round_factor)+(1/2))/v_round_factor;
+			  If v_dim &gt; 2 Then
+				v_geometry.sdo_point.z := trunc((v_geometry.sdo_point.z* v_round_factor)+(1/2))/v_round_factor;
+			  End If;
+			END IF;
+
+			IF ( v_gtype &lt;&gt; 1 ) THEN
+				 FOR i in v_ordinates.FIRST..v_ordinates.LAST LOOP
+					  v_ordinates(i) := trunc((v_ordinates(i)*v_round_factor)+(1/2))/v_round_factor;
+				  END LOOP;
+			 END IF;
+
+			RETURN
+				mdsys.sdo_geometry(v_geometry.sdo_gtype,
+									  v_geometry.sdo_srid,
+									  v_geometry.sdo_point,
+									  v_geometry.sdo_elem_info,
+									  v_ordinates);
+		else
+			return null;
+		end if;
+	END RoundGeomCoordinates;
+    
+    function SDO_AREA(
+			geometry in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return number deterministic
+	is
+	begin
+		if (geometry is not null) then
+			declare
+				outVal number := 0;
+				arr SDO_GEOMETRY_ARRAY := SDO_UTIL.EXTRACT_ALL(geometry, 0);
+			begin
+				if (arr is not null) then
+					for i in 1 .. arr.count loop
+						outVal := outVal + nvl(
+								round(SDO_GEOM.sdo_area(arr(i), tolerance)),
+								0
+							);
+					end loop;
+				end if;
+				return outVal;
+			end;
+		else
+			return 0;
+		end if;
+	end;
+    
+    function SDO_AREA_NO_ERR(
+			shape IN SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return number
+	is   
+	begin
+		return SDO_GEOM.sdo_area(shape, tolerance);
+        exception 
+            when others then return -1;
+	end;
+    
+    
+   function GEOMETRY_CURSOR_UNION(
+			shapeCursor IN SYS_REFCURSOR,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY
+	is
+		shapeArr SDO_GEOMETRY_ARRAY;
+        N NUMBER;
+	begin
+		fetch shapeCursor bulk collect into shapeArr;
+		close shapeCursor;
+        
+		n := shapeArr.count;
+      --  dbms_output.put_line('GEOMETRY_CURSOR_UNION shapeArr.count '||N);
+		if n = 0 then
+			return null;
+		else
+			return SDO_ARRAY_UNION(shapeArr, 1, n, tolerance);
+
+		end if;
+        --return SDO_ARRAY_UNION_1(shapeArr, tolerance);
+	end;
+    
+   function SDO_ARRAY_UNION (
+			shapeArr in SDO_GEOMETRY_ARRAY,
+			beginIdx in pls_integer,
+			endIdx in pls_integer,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		midIdx pls_integer;
+		shape1 SDO_GEOMETRY;
+		shape2 SDO_GEOMETRY;
+	begin
+       -- dbms_output.put_line('beginIdx: '||beginIdx||' endIdx:'||endIdx||' - '||SUBSTR(SQLERRM, 1, 200));
+		if (beginIdx = endIdx) then
+			return shapeArr(beginIdx);
+		elsif (beginIdx &lt; endIdx) then
+			midIdx := trunc(((endIdx-1) + (beginIdx-1)) / 2) + 1;
+			if (beginIdx &lt; midIdx) then
+				shape1 := SDO_ARRAY_UNION(shapeArr, beginIdx, midIdx, tolerance);
+			else
+				shape1 := shapeArr(beginIdx);
+			end if;
+			if (midIdx+1 &lt; endIdx) then
+				shape2 := SDO_ARRAY_UNION(shapeArr, midIdx+1, endIdx, tolerance);
+			else
+				shape2 := shapeArr(endIdx);
+			end if;
+			return SDO_UNION_RAISE(
+					shape1,
+					shape2,
+					tolerance
+				);
+		else
+			raise_application_error(-20012, 'Errore nell''unione di geometrie');
+		end if;
+	end;
+    
+    function SDO_ARRAY_UNION_1 (
+			shapeArr in SDO_GEOMETRY_ARRAY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+		n number;
+	begin
+		n := shapeArr.count;
+		if n = 0 then
+			return null;
+		else
+			return SDO_ARRAY_UNION(shapeArr, 1, n, tolerance);
+		end if;
+	end;
+       
+    function convert_collection(
+			geom in sdo_geometry,
+			tolerance in number
+		) return sdo_geometry deterministic
+	is
+		newgeom sdo_geometry;
+		geomArr SDO_GEOMETRY_ARRAY;
+		i number;
+	begin
+		if (
+			geom is not null
+		) then
+            newGeom := geom;
+
+			if (newGeom.SDO_GTYPE != 2003) then
+				geomArr := SDO_UTIL.EXTRACT_ALL(newgeom, 0);
+				newgeom := null;
+				if (geomArr is not null) then
+					for i in 1..geomArr.count loop
+						if (geomArr(i).SDO_GTYPE = 2003) then
+							newgeom := SDO_UTIL.APPEND(newgeom, geomArr(i));
+						end if;
+					end loop;
+				end if;
+			end if;
+			return newgeom;
+		end if;
+		return NULL;
+	end;
+    
+    function SDO_DIFFERENCE(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+    begin
+		return convert_collection(SDO_GEOM.SDO_DIFFERENCE(geometryA, geometryB, tolerance), tolerance);
+	end;
+    
+     function SDO_DIFFERENCE_NO_ERR(
+			geometryA in SDO_GEOMETRY,
+			geometryB in SDO_GEOMETRY,
+			tolerance in number default a4s_tol
+		) return SDO_GEOMETRY deterministic
+	is
+    begin
+		return convert_collection(SDO_GEOM.SDO_DIFFERENCE(geometryA, geometryB, tolerance), tolerance);
+        exception 
+            when others then
+                return null;
+	end;
+    
+    function getClearPolygons(
+			geom in sdo_geometry,
+			tolerance in number default a4s_tol
+		) return sdo_geometry deterministic
+	is
+		newgeom sdo_geometry;
+		geomArr SDO_GEOMETRY_ARRAY;
+		i number;
+	begin
+		if (
+			geom is not null
+		) then
+			geomArr := SDO_UTIL.EXTRACT_ALL(geom, 0);
+			for i in 1..geomArr.count loop
+				if (geomArr(i).SDO_GTYPE = 2003) then
+					newgeom := SDO_UTIL.APPEND(newgeom, geomArr(i));
+				end if;
+			end loop;
+			return newgeom;
+		end if;
+		return NULL;
+	end;
+    
+ 
+ function SDO_FIX_ALL (
+			geometry in SDO_GEOMETRY,
+			tolerance in number,
+            se_row_id number default null,
+            codNazionale in varchar2 default null,
+            nomeTabella in varchar2  default null,
+            tipoElaborazione varchar2 default null
+		) return SDO_GEOMETRY deterministic
+	is
+		geom_out SDO_GEOMETRY;
+
+        areaOri  number(15,6);
+        areaFix number(15,6);
+        areaFix1 number(15,6);
+        geomFix sdo_geometry;
+        geomFix1 sdo_geometry;
+        
+        firstError varchar2(100);
+	BEGIN
+		if (geometry is not null) then
+                geomFix := sdo_fix(geometry, tolerance);
+
+                areaFix := abs(nvl((sdo_geom.sdo_area(geomFix, tolerance)), 0));
+                areaOri := abs(nvl((sdo_geom.sdo_area(geometry, tolerance)), 0));
+
+                if(abs(areaOri - areaFix) &gt; 1) then 
+                     geomFix1 := sdo_fix_1(geometry, tolerance);
+                     if(geomFix1 is not null) then
+                        areaFix1 := abs(nvl((sdo_geom.sdo_area(geomFix1, tolerance)), 0));
+                     else
+                        areaFix1 := 0;
+                     end if;   
+                end if;
+                
+                 if(abs(areaFix1 - areaOri) &lt;= 10 and abs(areaFix1 - areaOri) &lt; abs(areaFix - areaOri)) then
+                    geom_out := geomFix1;
+                 else
+                    geom_out := geomFix;
+                 end if;
+                 
+                 firstError := SDO_GEOM.VALIDATE_GEOMETRY(geom_out,tolerance);
+
+
+				if (firstError != 'TRUE' AND firstError != 'NULL') THEN
+                    geom_out := SDO_FIX(geom_out, tolerance);
+                end if;   
+                
+                return geom_out;
+		else
+			return geometry;
+		end if;
+	end;
+	
+    function dissolve_array (shapeArr SDO_GEOMETRY_ARRAY, tolerance number) return SDO_GEOMETRY deterministic as
+        n number;
+        shape_Union sdo_GEOMETRY := null;
+    begin
+        n  := shapeArr.count;
+        if n = 0 then
+             return null;
+        elsif n=1 then 
+            shape_Union := shapeArr(1);
+        elsif n=2 then 
+            shape_Union := sdo_union(shapeArr(1),shapeArr(2),tolerance);
+        else
+           shape_Union := SDO_ARRAY_UNION(shapeArr,1,n,tolerance);
+        end if;
+        
+        return shape_Union;
+  exception
+	  when OTHERS then
+        -- dbms_output.put_line('Errore: '||SUBSTR(SQLERRM, 1, 200));
+        return null;
+	 end; 
+end;
+?
+</sql>
+	<sql endDelimiter=";" splitStatements="true">
+		GRANT EXECUTE ON SDO_CUSTOM TO ${user.writer};
+	</sql>
+	</changeSet>
+</databaseChangeLog>

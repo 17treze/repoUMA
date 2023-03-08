@@ -1,0 +1,43 @@
+<div id="confirm" *ngIf="richiestaAccessoCorrente">
+  <p-dialog [(visible)]="display" header="{{ 'RICHIESTE_ACCESSO.rifiutaDomanda' | translate }}"
+    [dismissableMask]="true" width="710" [modal]="true" [focusOnShow]="false"
+    appendTo="body" [closable]="true" #dialog [closeOnEscape]="true">
+
+      <div class="popup-approvazione  popup--custom">
+          <div class="mb-4">
+            <h6>Stai per rifiutare la domanda di
+              <strong>
+                {{ richiestaAccessoCorrente.datiAnagrafici.nome.toUpperCase() }}
+                {{ richiestaAccessoCorrente.datiAnagrafici.cognome.toUpperCase() }}</strong>
+              (Prot. {{ richiestaAccessoCorrente.idProtocollo }} del
+              {{ richiestaAccessoCorrente.dataProtocollazione | date : 'dd/MM/yyyy' }})
+            </h6>
+          </div>
+          <div class="boxgrey  p-3  mb-3">
+              <h6 class="mb-3"><strong>Per quale motivo la domanda è stata rifiutata? *</strong></h6>
+              <div>
+              <p-dropdown [options]="possibiliMorivazioni" [(ngModel)]="motivazioneRifiuto"
+                          name="possibiliMorivazioni">
+              </p-dropdown>
+              </div>
+          </div>
+          <div class="boxgrey  p-3  mb-3">
+              <h6 class="mb-3"><strong>Testo della mail *</strong></h6>
+              <textarea rows="6" cols="30" pInputTextarea id="mail" type="text" [(ngModel)]="testoMail" style="width: -webkit-fill-available"
+                      autoResize="true" required></textarea>
+          </div>
+          <div class="boxgrey  p-3  mb-3">
+              <h6 class="mb-3"><strong>Aggiungi note <em>(opzionale)</em></strong></h6>
+              <textarea pInputTextarea id="note" type="text" [(ngModel)]="note" style="width: -webkit-fill-available"
+                        autoResize="true">
+            </textarea>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-end">
+              <button pButton icon="pi pi-ban" type="submit" label="{{ 'RICHIESTE_ACCESSO.rifiutaDomanda' | translate }}" class="button--rifiuta"
+                      (click)="rifiutaDomanda()"></button>
+          </div>
+
+      </div>
+  </p-dialog>
+</div>

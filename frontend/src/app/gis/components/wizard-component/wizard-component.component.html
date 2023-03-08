@@ -1,0 +1,55 @@
+<div class="wizard-container">
+  <div class="wizard steps">
+    <div class="step1" *ngIf="stepper.currentStepLavorazione === 1">
+      <creazione-lavorazione [totalsPoligoniDichiaratoInLavorazione]="totalsPoligoniDichiaratoInLavorazione"
+        [searchFormParamsLavorazione]="searchFormParamsLavorazione" [profiloUtente]="profiloUtente"
+        [poligoniById]="poligoniById">
+      </creazione-lavorazione>
+    </div>
+
+    <div class="step2" *ngIf="stepper.currentStepLavorazione === 2">
+      <creazione-lavorazione [totalsPoligoniSuolo]="totalsPoligoniSuolo"
+        [searchFormParamsLavorazione]="searchFormParamsLavorazione" [profiloUtente]="profiloUtente"
+        [poligoniSuolo]="poligoniSuolo">
+      </creazione-lavorazione>
+    </div>
+
+    <div class="step3" *ngIf="stepper.currentStepLavorazione === 3">
+      <creazione-lavorazione (lavorazioneChangedOutput)="notifyLavorazioneChanged($event)"
+        [searchFormParamsLavorazione]="searchFormParamsLavorazione" [profiloUtente]="profiloUtente"
+        [lavorazioneSuolo]="lavorazioneSuolo">
+      </creazione-lavorazione>
+    </div>
+
+    <div class="step4" *ngIf="stepper.currentStepLavorazione === 4">
+      <creazione-lavorazione (lavorazioneChangedOutput)="notifyLavorazioneChanged($event)" [poligoniById]="poligoniById"
+        [poligoniSuolo]="poligoniSuolo" [totalsPoligoniSuolo]="totalsPoligoniSuolo"
+        [totalsPoligoniDichiaratoInLavorazione]="totalsPoligoniDichiaratoInLavorazione"
+        [searchFormParamsLavorazione]="searchFormParamsLavorazione" [profiloUtente]="profiloUtente"
+        [lavorazioneSuolo]="lavorazioneSuolo">
+      </creazione-lavorazione>
+    </div>
+
+    <div [hidden]="stepper.currentStepLavorazione === 4" class="p-field fixed-btn"
+      [ngStyle]="{'margin-left' : stepper.currentStepLavorazione == 1 ? '150px' : ''}">
+      <!-- Bottone AVANTI -->
+      <button type="submit" class="gis-button mgTop15"
+        [disabled]="(lavorazioniEvent.calcoloAdlActived && lavorazioniEvent.stackAdl) || (stepper.currentStepLavorazione == 2 && lavorazioniEvent.modalitaAdlTemp == 'DISEGNO_ADL' && lavorazioniEvent.totalsPoligoniDaAdl == 0)"
+        [hidden]="stepper.currentStepLavorazione == 3" (click)="nextStep();" pButton label="Avanti"
+        *ngIf="(!lavorazioniEvent.readOnly) || (lavorazioniEvent.readOnly && stepper.currentStepLavorazione!==2)"></button>
+      <!-- Bottone AVVIA LAVORAZIONE -->
+      <button type="submit" class="gis-button crea-lavorazione mgTop15"
+        [hidden]="stepper.currentStepLavorazione != 3 || lavorazioniEvent.stato == 'IN_MODIFICA'"
+        (click)="avviaLavorazione();" pButton label="Avvia lavorazione" *ngIf="!lavorazioniEvent.readOnly"></button>
+      <!-- Bottone RIPRENDI LAVORAZIONE -->
+      <button type="submit" class="gis-button crea-lavorazione mgTop15"
+        [hidden]="stepper.currentStepLavorazione != 3 || lavorazioniEvent.stato != 'IN_MODIFICA'"
+        (click)="riprendiLavorazione();" pButton label="Riprendi lavorazione"
+        *ngIf="!lavorazioniEvent.readOnly"></button>
+      <!-- Bottone INDIETRO -->
+      <button type="submit" class="gis-button btn-indietro  mgTop15" [hidden]="stepper.currentStepLavorazione == 1"
+        [disabled]="(lavorazioniEvent.calcoloAdlActived && lavorazioniEvent.stackAdl) || (stepper.currentStepLavorazione == 2 && lavorazioniEvent.modalitaAdlTemp == 'DISEGNO_ADL' && lavorazioniEvent.totalsPoligoniDaAdl == 0)"
+        (click)="prevStep();" pButton label="Indietro"></button>
+    </div>
+  </div>
+</div>

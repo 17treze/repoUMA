@@ -1,0 +1,11 @@
+
+<div class="groupTool" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <div id="modifyElTool" (click)="enableTool()" [class.active-tool]="isActive()">
+    <button 
+    pTooltip="Modifica" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUseTool" 
+    class='btn btn-primary'
+  ><i class="fa fa-edit"></i></button>
+  </div>
+</div>

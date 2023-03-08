@@ -1,0 +1,7696 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Servizio di integrazione e colloquio con sistemi esterni ad A4G",
+    "version": "1.0.0",
+    "title": "A4G - Proxy integration"
+  },
+  "host": "itts55.intra.infotn.it:18080",
+  "basePath": "/a4gproxy",
+  "tags": [
+    {
+      "name": "agricoltore-controller",
+      "description": "Agricoltore Controller"
+    },
+    {
+      "name": "anagrafe-tributaria-controller",
+      "description": "Anagrafe Tributaria Controller"
+    },
+    {
+      "name": "anagrafe-tributaria-soap-rest-controller",
+      "description": "Anagrafe Tributaria SOAP Rest Controller"
+    },
+    {
+      "name": "anagrafe-zootecnica-controller",
+      "description": "Anagrafe Zootecnica Controller"
+    },
+    {
+      "name": "anagrafica-impresa-controller",
+      "description": "Anagrafica Impresa Controller"
+    },
+    {
+      "name": "anagrafica-impresa-soap-rest-controller",
+      "description": "Anagrafica Impresa SOAP Rest Controller"
+    },
+    {
+      "name": "anomalie-coordinamento-controller",
+      "description": "Anomalie Coordinamento Controller"
+    },
+    {
+      "name": "basic-error-controller",
+      "description": "Basic Error Controller"
+    },
+    {
+      "name": "esito-antimafia-controller",
+      "description": "Esito Antimafia Controller"
+    },
+    {
+      "name": "event-store-controller",
+      "description": "Event Store Controller"
+    },
+    {
+      "name": "io-italia-controller",
+      "description": "Io Italia Controller"
+    },
+    {
+      "name": "protocollo-controller",
+      "description": "Protocollo Controller"
+    },
+    {
+      "name": "sian-controller",
+      "description": "Sian Controller"
+    },
+    {
+      "name": "sigeco-controller",
+      "description": "Sigeco Controller"
+    },
+    {
+      "name": "sincronizzazione-controller",
+      "description": "Sincronizzazione Controller"
+    },
+    {
+      "name": "stampa-controller",
+      "description": "Stampa Controller"
+    },
+    {
+      "name": "verifica-firma-controller",
+      "description": "Verifica Firma Controller"
+    }
+  ],
+  "paths": {
+    "/api/v1/agricoltore": {
+      "get": {
+        "tags": [
+          "agricoltore-controller"
+        ],
+        "summary": "Servizio per il recupero delle informazioni sincronizzate da SIAN per il codiceFiscale l' annoCampagna indicati nel parametro params.",
+        "operationId": "recuperaAgricoltoreSianUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "description": "params",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgricoltoreSIAN"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/anagrafetributaria/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafe-tributaria-soap-rest-controller"
+        ],
+        "summary": "Restituisce i dati anagrafici di una persona fisica",
+        "operationId": "getAnagrafeTributariaUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codice fiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RispostaRichiestaRispostaSincronaRicercaAnagraficaAll"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/v1/anagraficaimpresa/dettagliPersone/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafica-impresa-soap-rest-controller"
+        ],
+        "summary": "Restituisce i dati di sintesi anagrafici dell'impresa",
+        "operationId": "getPersoneNonCessataUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codice fiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RISPOSTA"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/anagraficaimpresa/dettagliocompleto": {
+      "get": {
+        "tags": [
+          "anagrafica-impresa-soap-rest-controller"
+        ],
+        "summary": "Restituisce i dati completi dell'impresa",
+        "operationId": "getDettaglioCompletoImpresaUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "description": "params",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RISPOSTA"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/v1/anagraficaimpresa/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafica-impresa-soap-rest-controller"
+        ],
+        "summary": "Restituisce i dati di sintesi anagrafici dell'impresa",
+        "operationId": "getAnagraficaImpresaUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codice fiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RISPOSTA"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/v1/anomaliecoordinamento/{idParcella}": {
+      "get": {
+        "tags": [
+          "anomalie-coordinamento-controller"
+        ],
+        "summary": "Recupera il numero di anomalie di coordinamento registrato per una determinata parcella nell'anno richiesto",
+        "operationId": "recuperaAnomalieCoordinamentoUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "idParcella",
+            "in": "path",
+            "description": "Identificativo parcella catastale",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "annoCampagna",
+            "in": "query",
+            "description": "Anno campagna",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/esitoAntimafia/cuaa-list": {
+      "get": {
+        "tags": [
+          "esito-antimafia-controller"
+        ],
+        "summary": "getEsitiAntimafia",
+        "operationId": "getEsitiAntimafiaUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaaList",
+            "in": "query",
+            "description": "cuaaList",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AntimafiaEsitoDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/esitoAntimafia/{cuaa}": {
+      "get": {
+        "tags": [
+          "esito-antimafia-controller"
+        ],
+        "summary": "getEsitoAntimafia",
+        "operationId": "getEsitoAntimafiaUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "cuaa",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AntimafiaEsitoDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/framework/events/{idEvent}/reprocess": {
+      "get": {
+        "tags": [
+          "event-store-controller"
+        ],
+        "summary": "riprocessEvent",
+        "operationId": "riprocessEventUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "idEvent",
+            "in": "path",
+            "description": "idEvent",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/ioitalia/invia-messaggio": {
+      "post": {
+        "tags": [
+          "io-italia-controller"
+        ],
+        "summary": "Invia messaggio ai servizi di IO Italia",
+        "operationId": "inviaMessaggioUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comunication",
+            "description": "comunication",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComunicationDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/protocollo/documenti": {
+      "post": {
+        "tags": [
+          "protocollo-controller"
+        ],
+        "summary": "Crea un nuovo documento protocollato in ingresso, lo aggiunge al fascicolo specificato ed effettua la trasmissione al ruolo. N.B.: se il mittente specificato non è presente in rubrica, viene aggiunto.",
+        "operationId": "createIncomingDocumentRESTUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "info",
+            "description": "Informazioni di creazione del nuovo documento: metadati, file principale, allegati, informazioni sul mittente e fascicolo",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "documento",
+            "in": "formData",
+            "description": "Documento da protocollare",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "allegati",
+            "in": "formData",
+            "description": "Allegati al documento da protocollare",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "file"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/protocollo/getDocumentDownload": {
+      "post": {
+        "tags": [
+          "protocollo-controller"
+        ],
+        "summary": "testGetDocument",
+        "operationId": "testGetDocumentUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "req",
+            "description": "req",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sian/{cuaa}": {
+      "get": {
+        "tags": [
+          "sian-controller"
+        ],
+        "summary": "Visura dei dati anagrafici generali di un fascicolo contenuto nei sistemi SIAN",
+        "operationId": "verificaEsistenzaFascicoloUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "cuaa",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FascicoloSian"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sigeco": {
+      "get": {
+        "tags": [
+          "sigeco-controller"
+        ],
+        "summary": "recuperaControlloSigeco",
+        "operationId": "recuperaControlloSigecoUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "description": "params",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sigeco/flagConv": {
+      "get": {
+        "tags": [
+          "sigeco-controller"
+        ],
+        "summary": "recuperaFlagConv",
+        "operationId": "recuperaFlagConvUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "params",
+            "in": "query",
+            "description": "params",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/antimafia": {
+      "post": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Sincronizzazione dati antimafia verso AGEA",
+        "operationId": "dichiarazioneAntimafiaUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "dichiarazioneAntimafia",
+            "description": "dichiarazioneAntimafia",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/antimafia/{id}": {
+      "get": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Restituisce la dichiarazione antimafia per id",
+        "operationId": "getDatiSincronizzazioneUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificativo della dichiarazione",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dichiarazione"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Aggiorna la dichiarazione antimafia per la sincronizzazione",
+        "operationId": "aggiornaDichiarazioneUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificativo della dichiarazione",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "dichiarazione",
+            "description": "Dati della dichiarazione",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dichiarazione"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Dichiarazione"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/pagamenti": {
+      "post": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Sincronizzazione dati pagamenti verso AGEA",
+        "operationId": "creaDatiPagamentiUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "datiPagamenti",
+            "description": "datiPagamenti",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatiPagamentiDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/pagamenti/pulisci": {
+      "post": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Rimozione completa dati pagamenti per AGEA",
+        "operationId": "pulisciDatiPagamentiUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "annoCampagna",
+            "description": "annoCampagna",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/superfici-accertate": {
+      "post": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Sincronizzazione dati superfici accertate verso AGEA",
+        "operationId": "creaSuperficiAccertateUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "superficiAccertate",
+            "description": "superficiAccertate",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SuperficiAccertateDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/sincronizzazione/superfici-accertate/pulisci": {
+      "post": {
+        "tags": [
+          "sincronizzazione-controller"
+        ],
+        "summary": "Rimozione completa dati superfici accertate per AGEA",
+        "operationId": "pulisciSuperficiAccertateUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "annoCampagna",
+            "description": "annoCampagna",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/stampa": {
+      "post": {
+        "tags": [
+          "stampa-controller"
+        ],
+        "summary": "Produce una stampa nel formato richiesot a partire dal template e dai dati in input",
+        "operationId": "stampaUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "Template docx della stampa",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "dati",
+            "in": "query",
+            "description": "Dati in formato json per produrre la stampa",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "formatoStampa",
+            "in": "query",
+            "description": "Formato di output",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PDF",
+              "PDF_A"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/verificafirma": {
+      "post": {
+        "tags": [
+          "verifica-firma-controller"
+        ],
+        "summary": "Metodo verifica Firma",
+        "operationId": "verificaFirmaUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "documentoFirmato",
+            "in": "formData",
+            "description": "documentoFirmato",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WarningResponseType"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/verificafirma/singola/{codiceFiscale}": {
+      "post": {
+        "tags": [
+          "verifica-firma-controller"
+        ],
+        "summary": "Verifica la firma al documento e se presente controlla che il codice fiscale del firmatario coincida con quello ricevuto in input - restituisce data della firma",
+        "operationId": "verificaFirmaSingolaUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "documentoFirmato",
+            "in": "formData",
+            "description": "documentoFirmato",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codiceFiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InfoVerificaFirma"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/zootecnia/{cuaa}/anagrafica-allevamenti": {
+      "get": {
+        "tags": [
+          "anagrafe-zootecnica-controller"
+        ],
+        "summary": "Permette di ottenere la lista di allevamenti di un certo detentore",
+        "operationId": "getAllevamentiDetenutiUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "Cuaa del detentore di allevamenti",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataRichiesta",
+            "in": "query",
+            "description": "data richiesta nel formato iso 8601 (YYYY-MM-DD o YYYYMMDD)",
+            "required": true,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnagraficaAllevamentoDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/zootecnia/{cuaa}/{campagna}/capi/bovini/lattecarne": {
+      "get": {
+        "tags": [
+          "anagrafe-zootecnica-controller"
+        ],
+        "summary": "Permette di ottenere la lista di detenzioni di vacche da latte di un certo detentore",
+        "operationId": "getBoviniCarneLatteDetenutiUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "cuaa",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "campagna",
+            "in": "path",
+            "description": "campagna",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "cuaaSubentrante",
+            "in": "query",
+            "description": "Cuaa che e' subentrato al richiedente",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idAllevamento",
+            "in": "query",
+            "description": "Identificativo tecnologico di BDN che identifica univocamente i capi con stesso detentore, proprietario nel medesimo allevamento",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "intervento",
+            "in": "query",
+            "description": "Intervento in ambito zootecnico per cui si richiede il premio",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "VACCA_LATTE",
+              "VACCA_LATTE_MONTANA",
+              "VACCA_NUTRICE",
+              "VACCA_NUTRICE_NON_ISCRITTA",
+              "BUFALA_30MESI",
+              "VACCA_DUPLICE_ATTITUDINE"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfClsCapoVacca"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/zootecnia/{cuaa}/{campagna}/capi/bovini/macellati": {
+      "get": {
+        "tags": [
+          "anagrafe-zootecnica-controller"
+        ],
+        "summary": "Permette di ottenere la lista di detenzioni di capi macellati di un certo detentore",
+        "operationId": "getBoviniMacellatiDetenutiUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "cuaa",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "campagna",
+            "in": "path",
+            "description": "campagna",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "cuaaSubentrante",
+            "in": "query",
+            "description": "Cuaa che e' subentrato al richiedente",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idAllevamento",
+            "in": "query",
+            "description": "Identificativo tecnologico di BDN che identifica univocamente i capi con stesso detentore, proprietario nel medesimo allevamento",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "intervento",
+            "in": "query",
+            "description": "Intervento in ambito zootecnico per cui si richiede il premio",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "BOVINO_MACELLATO",
+              "BOVINO_MACELLATO_12MESI",
+              "BOVINO_MACELLATO_ETICHETTATO"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfClsCapoMacellato"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/zootecnia/{cuaa}/{campagna}/capi/ovicaprini": {
+      "get": {
+        "tags": [
+          "anagrafe-zootecnica-controller"
+        ],
+        "summary": "Permette di ottenere la lista di detenzioni di ovicaprini di un certo detentore",
+        "operationId": "getOviCapriniDetenutiUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "cuaa",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "campagna",
+            "in": "path",
+            "description": "campagna",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "cuaaSubentrante",
+            "in": "query",
+            "description": "Cuaa che e' subentrato al richiedente",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "idAllevamento",
+            "in": "query",
+            "description": "Identificativo tecnologico di BDN che identifica univocamente i capi con stesso detentore, proprietario nel medesimo allevamento",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "intervento",
+            "in": "query",
+            "description": "Intervento in ambito zootecnico per cui si richiede il premio",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "AGNELLA",
+              "OVICAPRINO_MACELLATO"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArrayOfClsCapoOvicaprino"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v2/anagrafetributaria/personafisica/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafe-tributaria-controller"
+        ],
+        "summary": "Restituisce i dati anagrafici di una persona fisica reperendoli dall'Anagrfe tributaria",
+        "operationId": "getPersonaFisicaUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codice fiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PersonaFisicaDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v2/anagrafetributaria/personagiuridica/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafe-tributaria-controller"
+        ],
+        "summary": "Restituisce i dati anagrafici di una persona giuridica reperendoli dall'Anagrfe tributaria",
+        "operationId": "getPersonaGiuridicaUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "codice fiscale",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PersonaGiuridicaDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v2/anagraficaimpresa/personafisica/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafica-impresa-controller"
+        ],
+        "summary": "Restituisce i dati anagrafici di una persona fisica reperendoli dalla Camera di commercio",
+        "operationId": "getPersonaFisicaUsingGET_1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "Codice fiscale della persona fisica da ricercare",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provinciaIscrizione",
+            "in": "query",
+            "description": "Provincia di iscrizione di interesse; TN di default",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PersonaFisicaDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v2/anagraficaimpresa/personagiuridica/{codiceFiscale}": {
+      "get": {
+        "tags": [
+          "anagrafica-impresa-controller"
+        ],
+        "summary": "Restituisce i dati anagrafici di una persona giuridica reperendoli dalla Camera di commercio",
+        "operationId": "getPersonaGiuridicaUsingGET_1",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "codiceFiscale",
+            "in": "path",
+            "description": "Codice fiscale della persona giuridica da ricercare",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "provinciaIscrizione",
+            "in": "query",
+            "description": "Provincia di iscrizione di interesse; TN di default",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PersonaGiuridicaDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/error": {
+      "get": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingDELETE",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "basic-error-controller"
+        ],
+        "summary": "error",
+        "operationId": "errorUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ALTRORUOLOCCIAA": {
+      "type": "object",
+      "properties": {
+        "categoria": {
+          "type": "string",
+          "xml": {
+            "name": "CATEGORIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "forma": {
+          "type": "string",
+          "xml": {
+            "name": "FORMA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ALTRORUOLOCCIAA"
+    },
+    "ALTRORUOLOLOC": {
+      "type": "object",
+      "properties": {
+        "altroruolocciaa": {
+          "xml": {
+            "name": "ALTRO_RUOLO_CCIAA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ALTRORUOLOCCIAA"
+        },
+        "altroruolononcciaa": {
+          "xml": {
+            "name": "ALTRO_RUOLO_NON_CCIAA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ALTRORUOLONONCCIAA"
+        },
+        "cruolo": {
+          "type": "string",
+          "xml": {
+            "name": "C_RUOLO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DESCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtiscrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ISCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numero": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ultdescrizione": {
+          "type": "string",
+          "xml": {
+            "name": "ULT_DESCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ALTRORUOLOLOC"
+    },
+    "ALTRORUOLONONCCIAA": {
+      "type": "object",
+      "properties": {
+        "enterilascio": {
+          "type": "string",
+          "xml": {
+            "name": "ENTE_RILASCIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "forma": {
+          "type": "string",
+          "xml": {
+            "name": "FORMA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ALTRORUOLONONCCIAA"
+    },
+    "ATTIVITAISTAT": {
+      "type": "object",
+      "properties": {
+        "cattivita": {
+          "type": "string",
+          "xml": {
+            "name": "C_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cfonte": {
+          "type": "string",
+          "xml": {
+            "name": "C_FONTE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cimportanza": {
+          "type": "string",
+          "xml": {
+            "name": "C_IMPORTANZA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descattivita": {
+          "type": "string",
+          "xml": {
+            "name": "DESC_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtinizioattivita": {
+          "type": "string",
+          "xml": {
+            "name": "DT_INIZIO_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tcodifica": {
+          "type": "string",
+          "xml": {
+            "name": "T_CODIFICA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ATTIVITAISTAT"
+    },
+    "AgricoltoreSIAN": {
+      "type": "object",
+      "properties": {
+        "flagGiovAgri": {
+          "type": "number"
+        },
+        "infoAgricoltoreSIAN": {
+          "$ref": "#/definitions/InfoAgricoltoreSIAN"
+        },
+        "titoliSIAN": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TitoloAgricoltoreSIAN"
+          }
+        }
+      },
+      "title": "AgricoltoreSIAN"
+    },
+    "AnagraficaAllevamentoDto": {
+      "type": "object",
+      "properties": {
+        "autorizzazioneLatte": {
+          "type": "string"
+        },
+        "capiTotali": {
+          "type": "number"
+        },
+        "cfDetentore": {
+          "type": "string"
+        },
+        "cfProprietario": {
+          "type": "string"
+        },
+        "dataCalcoloCapi": {
+          "type": "string",
+          "format": "date"
+        },
+        "denominazione": {
+          "type": "string"
+        },
+        "denominazioneDetentore": {
+          "type": "string"
+        },
+        "denominazioneProprietario": {
+          "type": "string"
+        },
+        "dtFineAttivita": {
+          "type": "string",
+          "format": "date"
+        },
+        "dtFineDetentore": {
+          "type": "string",
+          "format": "date"
+        },
+        "dtInizioAttivita": {
+          "type": "string",
+          "format": "date"
+        },
+        "dtInizioDetentore": {
+          "type": "string",
+          "format": "date"
+        },
+        "identificativo": {
+          "type": "number"
+        },
+        "orientamentoProduttivo": {
+          "type": "string"
+        },
+        "soccida": {
+          "type": "string"
+        },
+        "specie": {
+          "type": "string"
+        },
+        "struttura": {
+          "$ref": "#/definitions/StrutturaAllevamentoDto"
+        },
+        "tipoAllevamentoDescrizione": {
+          "type": "string"
+        },
+        "tipoProduzione": {
+          "type": "string"
+        },
+        "tipologiaAllevamentoCodice": {
+          "type": "string"
+        }
+      },
+      "title": "AnagraficaAllevamentoDto"
+    },
+    "AnagraficaDto": {
+      "type": "object",
+      "required": [
+        "cognome",
+        "dataNascita",
+        "nome",
+        "sesso"
+      ],
+      "properties": {
+        "cognome": {
+          "type": "string",
+          "description": "Cognome della persona",
+          "allowEmptyValue": false
+        },
+        "comuneNascita": {
+          "type": "string",
+          "description": "Comune di nascita della persona della persona",
+          "allowEmptyValue": false
+        },
+        "dataNascita": {
+          "type": "string",
+          "format": "date",
+          "description": "Data di nascita della persona",
+          "allowEmptyValue": false
+        },
+        "nome": {
+          "type": "string",
+          "description": "Nome della persona",
+          "allowEmptyValue": false
+        },
+        "provinciaNascita": {
+          "type": "string",
+          "description": "Provincia di nascita della persona",
+          "allowEmptyValue": false
+        },
+        "sesso": {
+          "type": "string",
+          "description": "Sesso della persona",
+          "allowEmptyValue": false,
+          "enum": [
+            "MASCHIO",
+            "FEMMINA"
+          ]
+        }
+      },
+      "title": "AnagraficaDto"
+    },
+    "AntimafiaEsitoDto": {
+      "type": "object",
+      "properties": {
+        "cuaa": {
+          "type": "string",
+          "description": "Codice Fiscale legato all'esito antimafia",
+          "allowEmptyValue": false
+        },
+        "descrizioneEsito": {
+          "type": "string",
+          "description": "Descrizione dell'esito antimafia",
+          "allowEmptyValue": false
+        },
+        "dtElaborazione": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data di elaborazione dell'esito",
+          "allowEmptyValue": false
+        },
+        "dtValidita": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data di inizio validità della dichiarazione antimafia",
+          "allowEmptyValue": false
+        },
+        "esitoInvioAgea": {
+          "type": "string",
+          "description": "Esito invio ad AGEA",
+          "allowEmptyValue": false
+        },
+        "esitoInvioBdna": {
+          "type": "string",
+          "description": "Esito invio a BDNA",
+          "allowEmptyValue": false
+        },
+        "esitoTrasmissione": {
+          "type": "string",
+          "description": "Valore dell'esito",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "AntimafiaEsitoDto",
+      "description": "Rappresenta gli attributi di un esito antimafia legato a un CUAA"
+    },
+    "ArrayOfClsCapoMacellato": {
+      "type": "object",
+      "properties": {
+        "clsCapoMacellato": {
+          "type": "array",
+          "xml": {
+            "name": "clsCapoMacellato",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ClsCapoMacellato"
+          }
+        }
+      },
+      "title": "ArrayOfClsCapoMacellato",
+      "xml": {
+        "name": "ArrayOfClsCapoMacellato",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ArrayOfClsCapoOvicaprino": {
+      "type": "object",
+      "properties": {
+        "clsCapoOvicaprino": {
+          "type": "array",
+          "xml": {
+            "name": "clsCapoOvicaprino",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ClsCapoOvicaprino"
+          }
+        }
+      },
+      "title": "ArrayOfClsCapoOvicaprino",
+      "xml": {
+        "name": "ArrayOfClsCapoOvicaprino",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ArrayOfClsCapoVacca": {
+      "type": "object",
+      "properties": {
+        "clsCapoVacca": {
+          "type": "array",
+          "xml": {
+            "name": "clsCapoVacca",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ClsCapoVacca"
+          }
+        }
+      },
+      "title": "ArrayOfClsCapoVacca",
+      "xml": {
+        "name": "ArrayOfClsCapoVacca",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "AttivitaDto": {
+      "type": "object",
+      "required": [
+        "codice",
+        "descrizione",
+        "importanza"
+      ],
+      "properties": {
+        "codice": {
+          "type": "string",
+          "description": "Codifica ateco",
+          "allowEmptyValue": false
+        },
+        "descrizione": {
+          "type": "string",
+          "description": "Descrizione dell'attivita",
+          "allowEmptyValue": false
+        },
+        "importanza": {
+          "type": "string",
+          "description": "Indica il livello di importanza dell'attivita",
+          "allowEmptyValue": false,
+          "enum": [
+            "PRIMARIO_IMPRESA",
+            "PRIMARIO",
+            "SECONDARIO"
+          ]
+        }
+      },
+      "title": "AttivitaDto",
+      "description": "Attivita ateco di un'azienda"
+    },
+    "CAPITALEINVESTITO": {
+      "type": "object",
+      "properties": {
+        "ammontare": {
+          "type": "string",
+          "xml": {
+            "name": "AMMONTARE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "valuta": {
+          "type": "string",
+          "xml": {
+            "name": "VALUTA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CAPITALEINVESTITO"
+    },
+    "CAPITALESOCIALE": {
+      "type": "object",
+      "properties": {
+        "deliberato": {
+          "type": "string",
+          "xml": {
+            "name": "DELIBERATO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sottoscritto": {
+          "type": "string",
+          "xml": {
+            "name": "SOTTOSCRITTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipoconferimenti": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_CONFERIMENTI",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "valuta": {
+          "type": "string",
+          "xml": {
+            "name": "VALUTA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "versato": {
+          "type": "string",
+          "xml": {
+            "name": "VERSATO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CAPITALESOCIALE"
+    },
+    "CAPITALI": {
+      "type": "object",
+      "properties": {
+        "capitalesociale": {
+          "xml": {
+            "name": "CAPITALE_SOCIALE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CAPITALESOCIALE"
+        },
+        "fondoconsortile": {
+          "xml": {
+            "name": "FONDO_CONSORTILE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/FONDOCONSORTILE"
+        },
+        "totalequote": {
+          "xml": {
+            "name": "TOTALE_QUOTE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/TOTALEQUOTE"
+        }
+      },
+      "title": "CAPITALI"
+    },
+    "CARICA": {
+      "type": "object",
+      "properties": {
+        "ccarica": {
+          "type": "string",
+          "xml": {
+            "name": "C_CARICA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DESCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtfine": {
+          "type": "string",
+          "xml": {
+            "name": "DT_FINE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtinizio": {
+          "type": "string",
+          "xml": {
+            "name": "DT_INIZIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CARICA"
+    },
+    "CARICHE": {
+      "type": "object",
+      "properties": {
+        "carica": {
+          "type": "array",
+          "xml": {
+            "name": "CARICA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/CARICA"
+          }
+        }
+      },
+      "title": "CARICHE"
+    },
+    "CESSAZIONE": {
+      "type": "object",
+      "properties": {
+        "causale": {
+          "type": "string",
+          "xml": {
+            "name": "CAUSALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcancellazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CANCELLAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcessazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdenunciacess": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DENUNCIA_CESS",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CESSAZIONE"
+    },
+    "CESSAZIONEARTI": {
+      "type": "object",
+      "properties": {
+        "causale": {
+          "type": "string",
+          "xml": {
+            "name": "CAUSALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcessazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdelibera": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DELIBERA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdomanda": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DOMANDA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CESSAZIONEARTI"
+    },
+    "CESSAZIONELOC": {
+      "type": "object",
+      "properties": {
+        "causale": {
+          "type": "string",
+          "xml": {
+            "name": "CAUSALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcessazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdenunciacess": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DENUNCIA_CESS",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CESSAZIONELOC"
+    },
+    "CESSAZIONERUOLO": {
+      "type": "object",
+      "properties": {
+        "causalecessazione": {
+          "type": "string",
+          "xml": {
+            "name": "CAUSALE_CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcessazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdelibera": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DELIBERA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdomanda": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DOMANDA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "CESSAZIONERUOLO"
+    },
+    "CODICEATECOUL": {
+      "type": "object",
+      "properties": {
+        "attivitaistat": {
+          "type": "array",
+          "xml": {
+            "name": "ATTIVITA_ISTAT",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ATTIVITAISTAT"
+          }
+        }
+      },
+      "title": "CODICEATECOUL"
+    },
+    "CODICIISTAT02": {
+      "type": "object",
+      "properties": {
+        "attivitaistat": {
+          "type": "array",
+          "xml": {
+            "name": "ATTIVITA_ISTAT",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ATTIVITAISTAT"
+          }
+        }
+      },
+      "title": "CODICIISTAT02"
+    },
+    "COMMERCIODETTAGLIO": {
+      "type": "object",
+      "properties": {
+        "dtdenuncia": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DENUNCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "settoremerceologico": {
+          "type": "string",
+          "xml": {
+            "name": "SETTORE_MERCEOLOGICO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "superficie": {
+          "type": "string",
+          "xml": {
+            "name": "SUPERFICIE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "COMMERCIODETTAGLIO"
+    },
+    "CaricaDto": {
+      "type": "object",
+      "properties": {
+        "dataInizio": {
+          "type": "string",
+          "format": "date"
+        },
+        "descrizione": {
+          "type": "string"
+        },
+        "identificativo": {
+          "type": "string"
+        }
+      },
+      "title": "CaricaDto"
+    },
+    "ClsCapoMacellato": {
+      "type": "object",
+      "properties": {
+        "allevId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Allev_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Azienda_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaLatitudine": {
+          "type": "number",
+          "format": "double",
+          "xml": {
+            "name": "Azienda_Latitudine",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaLongitudine": {
+          "type": "number",
+          "format": "double",
+          "xml": {
+            "name": "Azienda_Longitudine",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "capoId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Capo_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codLibro": {
+          "type": "string",
+          "xml": {
+            "name": "Cod_Libro",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codice": {
+          "type": "string",
+          "xml": {
+            "name": "Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cuaa": {
+          "type": "string",
+          "xml": {
+            "name": "Cuaa",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrLibro": {
+          "type": "string",
+          "xml": {
+            "name": "Descr_Libro",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtComAutoritaIngresso": {
+          "xml": {
+            "name": "Dt_Com_Autorita_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtComAutoritaUscita": {
+          "xml": {
+            "name": "Dt_Com_Autorita_Uscita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtFineDetenzione": {
+          "xml": {
+            "name": "Dt_Fine_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtIngresso": {
+          "xml": {
+            "name": "Dt_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInizioDetenzione": {
+          "xml": {
+            "name": "Dt_Inizio_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInserimentoBdnIngresso": {
+          "xml": {
+            "name": "Dt_Inserimento_Bdn_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInserimentoBdnUscita": {
+          "xml": {
+            "name": "Dt_Inserimento_Bdn_Uscita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtMacellazione": {
+          "xml": {
+            "name": "Dt_Macellazione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtNascita": {
+          "xml": {
+            "name": "Dt_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtUscita": {
+          "xml": {
+            "name": "Dt_Uscita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "flagDelegatoIngresso": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagDelegatoUscita": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Uscita",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "razzaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Razza_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteIngresso": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteUscita": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Uscita",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sesso": {
+          "type": "string",
+          "xml": {
+            "name": "Sesso",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ClsCapoMacellato",
+      "xml": {
+        "name": "clsCapoMacellato",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ClsCapoOvicaprino": {
+      "type": "object",
+      "properties": {
+        "allevId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Allev_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Azienda_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "capoId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Capo_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codice": {
+          "type": "string",
+          "xml": {
+            "name": "Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "consMedia": {
+          "type": "number",
+          "format": "float",
+          "xml": {
+            "name": "Cons_Media",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cuaa": {
+          "type": "string",
+          "xml": {
+            "name": "Cuaa",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtApplMarchio": {
+          "xml": {
+            "name": "Dt_Appl_Marchio",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtComMacellazione": {
+          "xml": {
+            "name": "Dt_Com_Macellazione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtComNascita": {
+          "xml": {
+            "name": "Dt_Com_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtFineDetenzione": {
+          "xml": {
+            "name": "Dt_Fine_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInizioDetenzione": {
+          "xml": {
+            "name": "Dt_Inizio_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInserimentoBdnNascita": {
+          "xml": {
+            "name": "Dt_Inserimento_Bdn_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtMacellazione": {
+          "xml": {
+            "name": "Dt_Macellazione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtNascita": {
+          "xml": {
+            "name": "Dt_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtRegistrMacellazione": {
+          "xml": {
+            "name": "Dt_Registr_Macellazione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtUltimoPrelProfilassi": {
+          "xml": {
+            "name": "Dt_Ultimo_Prel_Profilassi",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "flagDelegatoNascita": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Nascita",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "genotipo": {
+          "type": "string",
+          "xml": {
+            "name": "Genotipo",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "razzaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Razza_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteNascita": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Nascita",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sesso": {
+          "type": "string",
+          "xml": {
+            "name": "Sesso",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ClsCapoOvicaprino",
+      "xml": {
+        "name": "clsCapoOvicaprino",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ClsCapoVacca": {
+      "type": "object",
+      "properties": {
+        "allevId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Allev_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Azienda_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaLatitudine": {
+          "type": "number",
+          "format": "double",
+          "xml": {
+            "name": "Azienda_Latitudine",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "aziendaLongitudine": {
+          "type": "number",
+          "format": "double",
+          "xml": {
+            "name": "Azienda_Longitudine",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "capoId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Capo_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codLibro": {
+          "type": "string",
+          "xml": {
+            "name": "Cod_Libro",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codice": {
+          "type": "string",
+          "xml": {
+            "name": "Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codiceVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Codice_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cuaa": {
+          "type": "string",
+          "xml": {
+            "name": "Cuaa",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrLibro": {
+          "type": "string",
+          "xml": {
+            "name": "Descr_libro",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtFineDetenzione": {
+          "xml": {
+            "name": "Dt_Fine_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtInizioDetenzione": {
+          "xml": {
+            "name": "Dt_Inizio_Detenzione",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtNascita": {
+          "xml": {
+            "name": "Dt_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dtNascitaVitello": {
+          "xml": {
+            "name": "Dt_Nascita_Vitello",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "flagDelegatoIngressoVacca": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Ingresso_Vacca",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagDelegatoIngressoVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Ingresso_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagDelegatoNascitaVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Delegato_Nascita_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagIBR": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_IBR",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagProrogaMarcatura": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Proroga_Marcatura",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagRispettoPrevalenzaIBR": {
+          "type": "string",
+          "xml": {
+            "name": "Flag_Rispetto_Prevalenza_IBR",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "razzaCodice": {
+          "type": "string",
+          "xml": {
+            "name": "Razza_Codice",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteIngressoVacca": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Ingresso_Vacca",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteIngressoVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Ingresso_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ruoloUtenteNascitaVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Ruolo_Utente_Nascita_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sesso": {
+          "type": "string",
+          "xml": {
+            "name": "Sesso",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sessoVitello": {
+          "type": "string",
+          "xml": {
+            "name": "Sesso_Vitello",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "vaccaDtComAutoritaIngresso": {
+          "xml": {
+            "name": "Vacca_Dt_Com_Autorita_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vaccaDtIngresso": {
+          "xml": {
+            "name": "Vacca_Dt_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vaccaDtInserimentoBdnIngresso": {
+          "xml": {
+            "name": "Vacca_Dt_Inserimento_Bdn_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloCapoId": {
+          "type": "integer",
+          "format": "int64",
+          "xml": {
+            "name": "Vitello_Capo_Id",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "vitelloDtApplMarchio": {
+          "xml": {
+            "name": "Vitello_Dt_Appl_Marchio",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloDtComAutoritaIngresso": {
+          "xml": {
+            "name": "Vitello_Dt_Com_Autorita_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloDtComAutoritaNascita": {
+          "xml": {
+            "name": "Vitello_Dt_Com_Autorita_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloDtInserimentoBdnIngresso": {
+          "xml": {
+            "name": "Vitello_Dt_Inserimento_Bdn_Ingresso",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloDtInserimentoBdnNascita": {
+          "xml": {
+            "name": "Vitello_Dt_Inserimento_Bdn_Nascita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "vitelloTipoOrigine": {
+          "type": "string",
+          "xml": {
+            "name": "Vitello_Tipo_Origine",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ClsCapoVacca",
+      "xml": {
+        "name": "clsCapoVacca",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ComunicationDto": {
+      "type": "object",
+      "properties": {
+        "codiceFiscale": {
+          "type": "string"
+        },
+        "messaggio": {
+          "type": "string"
+        },
+        "oggetto": {
+          "type": "string"
+        },
+        "scadenza": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeToLive": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ComunicationDto"
+    },
+    "Controfirmatario": {
+      "type": "object",
+      "properties": {
+        "firma": {
+          "$ref": "#/definitions/DatiFirmaType"
+        },
+        "marca": {
+          "$ref": "#/definitions/MarcaType"
+        }
+      },
+      "title": "Controfirmatario",
+      "xml": {
+        "name": "Controfirmatario",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "DATI": {
+      "type": "object",
+      "properties": {
+        "datiimpresa": {
+          "xml": {
+            "name": "DATI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DATIIMPRESA"
+        },
+        "errore": {
+          "xml": {
+            "name": "ERRORE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ERRORE"
+        },
+        "listaimprese": {
+          "xml": {
+            "name": "LISTA_IMPRESE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/LISTAIMPRESE"
+        },
+        "listapersone": {
+          "xml": {
+            "name": "LISTA_PERSONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/LISTAPERSONE"
+        },
+        "listaul": {
+          "xml": {
+            "name": "LISTA_UL",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/LISTAUL"
+        },
+        "schedapersona": {
+          "xml": {
+            "name": "SCHEDA_PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/SCHEDAPERSONA"
+        },
+        "schedaul": {
+          "xml": {
+            "name": "SCHEDA_UL",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/SCHEDAUL"
+        }
+      },
+      "title": "DATI"
+    },
+    "DATIARTIGIANI": {
+      "type": "object",
+      "properties": {
+        "cessazionearti": {
+          "xml": {
+            "name": "CESSAZIONE_ARTI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CESSAZIONEARTI"
+        },
+        "dtinizioattivita": {
+          "type": "string",
+          "xml": {
+            "name": "DT_INIZIO_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "iscrizionearti": {
+          "xml": {
+            "name": "ISCRIZIONE_ARTI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ISCRIZIONEARTI"
+        },
+        "naa": {
+          "type": "string",
+          "xml": {
+            "name": "N_AA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "DATIARTIGIANI"
+    },
+    "DATIIMPRESA": {
+      "type": "object",
+      "properties": {
+        "capitaleinvestito": {
+          "xml": {
+            "name": "CAPITALE_INVESTITO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CAPITALEINVESTITO"
+        },
+        "capitali": {
+          "xml": {
+            "name": "CAPITALI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CAPITALI"
+        },
+        "codiceformaammv": {
+          "type": "string",
+          "xml": {
+            "name": "CODICE_FORMA_AMMV",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descformaammv": {
+          "type": "string",
+          "xml": {
+            "name": "DESC_FORMA_AMMV",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtfondazione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_FONDAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "duratasocieta": {
+          "xml": {
+            "name": "DURATA_SOCIETA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DURATASOCIETA"
+        },
+        "estremiimpresa": {
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMIIMPRESA"
+        },
+        "informazionisede": {
+          "xml": {
+            "name": "INFORMAZIONI_SEDE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INFORMAZIONISEDE"
+        },
+        "localizzazioni": {
+          "type": "array",
+          "xml": {
+            "name": "LOCALIZZAZIONI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/LOCALIZZAZIONI"
+          }
+        },
+        "oggettosociale": {
+          "type": "string",
+          "xml": {
+            "name": "OGGETTO_SOCIALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "personesede": {
+          "xml": {
+            "name": "PERSONE_SEDE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERSONESEDE"
+        }
+      },
+      "title": "DATIIMPRESA"
+    },
+    "DATIISCRIZIONEREA": {
+      "type": "object",
+      "properties": {
+        "cciaa": {
+          "type": "string",
+          "xml": {
+            "name": "CCIAA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cessazione": {
+          "xml": {
+            "name": "CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CESSAZIONE"
+        },
+        "cfonte": {
+          "type": "string",
+          "xml": {
+            "name": "C_FONTE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "data": {
+          "type": "string",
+          "xml": {
+            "name": "DATA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtultaggiornamento": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ULT_AGGIORNAMENTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "faggiornamento": {
+          "type": "string",
+          "xml": {
+            "name": "F_AGGIORNAMENTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "flagsede": {
+          "type": "string",
+          "xml": {
+            "name": "FLAG_SEDE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "itrasferimentosede": {
+          "type": "string",
+          "xml": {
+            "name": "I_TRASFERIMENTO_SEDE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "nrea": {
+          "type": "string",
+          "xml": {
+            "name": "NREA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "DATIISCRIZIONEREA"
+    },
+    "DATIISCRIZIONERI": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "xml": {
+            "name": "DATA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numerori": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO_RI",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sezioni": {
+          "xml": {
+            "name": "SEZIONI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/SEZIONI"
+        }
+      },
+      "title": "DATIISCRIZIONERI"
+    },
+    "DURATASOCIETA": {
+      "type": "object",
+      "properties": {
+        "dtcostituzione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_COSTITUZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dttermine": {
+          "type": "string",
+          "xml": {
+            "name": "DT_TERMINE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "durataillimitata": {
+          "type": "string",
+          "xml": {
+            "name": "DURATA_ILLIMITATA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "scadenzeesercizi": {
+          "xml": {
+            "name": "SCADENZE_ESERCIZI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/SCADENZEESERCIZI"
+        }
+      },
+      "title": "DURATASOCIETA"
+    },
+    "DatiFirmaType": {
+      "type": "object",
+      "properties": {
+        "cnCertAuthority": {
+          "type": "string",
+          "xml": {
+            "name": "cnCertAuthority",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "codiceFiscale": {
+          "type": "string",
+          "xml": {
+            "name": "codiceFiscale",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "cognome": {
+          "type": "string",
+          "xml": {
+            "name": "cognome",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "commonName": {
+          "type": "string",
+          "xml": {
+            "name": "commonName",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "dataFineValiditaCert": {
+          "xml": {
+            "name": "dataFineValiditaCert",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dataInizioValiditaCert": {
+          "xml": {
+            "name": "dataInizioValiditaCert",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dataOraFirma": {
+          "xml": {
+            "name": "dataOraFirma",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dataRevocaCertificato": {
+          "xml": {
+            "name": "dataRevocaCertificato",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "digestAlgorithm": {
+          "type": "string",
+          "xml": {
+            "name": "digestAlgorithm",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "distinguishName": {
+          "type": "string",
+          "xml": {
+            "name": "distinguishName",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "nazione": {
+          "type": "string",
+          "xml": {
+            "name": "nazione",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "nome": {
+          "type": "string",
+          "xml": {
+            "name": "nome",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "organizzazione": {
+          "type": "string",
+          "xml": {
+            "name": "organizzazione",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "serialNumber": {
+          "type": "string",
+          "xml": {
+            "name": "serialNumber",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "DatiFirmaType",
+      "xml": {
+        "name": "DatiFirmaType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "DatiPagamentiDto": {
+      "type": "object",
+      "properties": {
+        "annoCampagna": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "codiceIntervento": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cuaa": {
+          "type": "string"
+        },
+        "importoDeterminato": {
+          "type": "number",
+          "format": "double"
+        },
+        "importoLiquidato": {
+          "type": "number",
+          "format": "double"
+        },
+        "importoRichiesto": {
+          "type": "number",
+          "format": "double"
+        },
+        "numeroDomanda": {
+          "type": "string"
+        },
+        "numeroProgressivoLavorazione": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pagamentoAutorizzato": {
+          "type": "boolean"
+        }
+      },
+      "title": "DatiPagamentiDto"
+    },
+    "DettaglioFirmaDigitaleType": {
+      "type": "object",
+      "properties": {
+        "dataVerificaFirma": {
+          "xml": {
+            "name": "dataVerificaFirma",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "datiFirmatari": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirmatarioType"
+          }
+        },
+        "datiGeneraliVerifica": {
+          "type": "string"
+        },
+        "fileMarcato": {
+          "type": "boolean",
+          "xml": {
+            "name": "fileMarcato",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "marcaDetached": {
+          "$ref": "#/definitions/MarcaType"
+        },
+        "parteFirmata": {
+          "$ref": "#/definitions/ParteFirmataType"
+        }
+      },
+      "title": "DettaglioFirmaDigitaleType",
+      "xml": {
+        "name": "DettaglioFirmaDigitaleType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "Dichiarazione": {
+      "type": "object",
+      "properties": {
+        "cuaa": {
+          "type": "string"
+        },
+        "dataAggi": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        },
+        "dataFineVali": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        },
+        "dataInizVali": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        },
+        "dataInse": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        },
+        "dataInviPref": {
+          "type": "string",
+          "example": "yyyy-MM-dd'T'HH:mm:ss.SSSX"
+        },
+        "idAll1": {
+          "type": "number"
+        },
+        "idAll2": {
+          "type": "number"
+        },
+        "idAnti": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "idOrpa": {
+          "type": "number"
+        },
+        "tipoPers": {
+          "type": "number"
+        }
+      },
+      "title": "Dichiarazione"
+    },
+    "DocumentoType": {
+      "type": "object",
+      "properties": {
+        "fileOriginale": {
+          "type": "string",
+          "format": "byte"
+        },
+        "mediaType": {
+          "type": "string",
+          "xml": {
+            "name": "mediaType",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "DocumentoType",
+      "xml": {
+        "name": "DocumentoType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ERRORE": {
+      "type": "object",
+      "properties": {
+        "msgerr": {
+          "type": "string",
+          "xml": {
+            "name": "MSG_ERR",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ERRORE"
+    },
+    "ESTREMIIMPRESA": {
+      "type": "object",
+      "properties": {
+        "codicefiscale": {
+          "type": "string",
+          "xml": {
+            "name": "CODICE_FISCALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "datiiscrizionerea": {
+          "type": "array",
+          "xml": {
+            "name": "DATI_ISCRIZIONE_REA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/DATIISCRIZIONEREA"
+          }
+        },
+        "datiiscrizioneri": {
+          "xml": {
+            "name": "DATI_ISCRIZIONE_RI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DATIISCRIZIONERI"
+        },
+        "denominazione": {
+          "type": "string",
+          "xml": {
+            "name": "DENOMINAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "elemento": {
+          "type": "string",
+          "xml": {
+            "name": "elemento",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "formagiuridica": {
+          "xml": {
+            "name": "FORMA_GIURIDICA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/FORMAGIURIDICA"
+        },
+        "partitaiva": {
+          "type": "string",
+          "xml": {
+            "name": "PARTITA_IVA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ESTREMIIMPRESA"
+    },
+    "ESTREMINASCITA": {
+      "type": "object",
+      "properties": {
+        "ccomune": {
+          "type": "string",
+          "xml": {
+            "name": "C_COMUNE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "comune": {
+          "type": "string",
+          "xml": {
+            "name": "COMUNE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "data": {
+          "type": "string",
+          "xml": {
+            "name": "DATA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "stato": {
+          "type": "string",
+          "xml": {
+            "name": "STATO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ESTREMINASCITA"
+    },
+    "FALLIMENTOPERSONA": {
+      "type": "object",
+      "properties": {
+        "inproprio": {
+          "xml": {
+            "name": "IN_PROPRIO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INPROPRIO"
+        },
+        "perestensione": {
+          "xml": {
+            "name": "PER_ESTENSIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERESTENSIONE"
+        }
+      },
+      "title": "FALLIMENTOPERSONA"
+    },
+    "FONDOCONSORTILE": {
+      "type": "object",
+      "properties": {
+        "ammontare": {
+          "type": "string",
+          "xml": {
+            "name": "AMMONTARE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "valuta": {
+          "type": "string",
+          "xml": {
+            "name": "VALUTA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "FONDOCONSORTILE"
+    },
+    "FORMAGIURIDICA": {
+      "type": "object",
+      "properties": {
+        "cformagiuridica": {
+          "type": "string",
+          "xml": {
+            "name": "C_FORMA_GIURIDICA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DESCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "FORMAGIURIDICA"
+    },
+    "FascicoloSian": {
+      "type": "object",
+      "required": [
+        "cuaa"
+      ],
+      "properties": {
+        "cuaa": {
+          "type": "string",
+          "description": "Codice fiscale azienda agricola",
+          "allowEmptyValue": false
+        },
+        "dataAperturaFascicolo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "data Apertura Fascicolo",
+          "allowEmptyValue": false
+        },
+        "dataChiusuraFascicolo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "data Chiusura Fascicolo",
+          "allowEmptyValue": false
+        },
+        "dataValidazFascicolo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "data Validazione Fascicolo",
+          "allowEmptyValue": false
+        },
+        "detentore": {
+          "type": "string",
+          "description": "Codice di identificazione dell’ufficio presso cui è custodito il fascicolo cartaceo",
+          "allowEmptyValue": false
+        },
+        "organismoPagatore": {
+          "type": "string",
+          "description": "Codice di identificazione dell’OP competente (FEOGA)",
+          "allowEmptyValue": false,
+          "enum": [
+            "APPAG",
+            "ALTRO"
+          ]
+        },
+        "tipoDetentore": {
+          "type": "string",
+          "description": "Codice di riconoscimento della tipologia del detentore",
+          "allowEmptyValue": false,
+          "enum": [
+            "CAA",
+            "OP",
+            "REGIONE"
+          ]
+        }
+      },
+      "title": "FascicoloSian",
+      "description": "DTO del fascicolo recuperato dal SIAN"
+    },
+    "FirmatarioType": {
+      "type": "object",
+      "properties": {
+        "controfirmatario": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Controfirmatario"
+          }
+        },
+        "firmatario": {
+          "$ref": "#/definitions/DatiFirmaType"
+        },
+        "marcaFirma": {
+          "$ref": "#/definitions/MarcaType"
+        }
+      },
+      "title": "FirmatarioType",
+      "xml": {
+        "name": "FirmatarioType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GetDocumentRequest": {
+      "type": "object",
+      "properties": {
+        "GetFile": {
+          "type": "boolean",
+          "example": false,
+          "description": "Se true oltre ai metadati restituisce anche il contenuto del file principale e allegati",
+          "allowEmptyValue": false
+        },
+        "GetFileWithSignature": {
+          "type": "string",
+          "description": "Se pari a uno, restituisce il file con l'estensione della firma (p7m)",
+          "allowEmptyValue": false
+        },
+        "IdDocument": {
+          "type": "string",
+          "description": "Id del documento",
+          "allowEmptyValue": false
+        },
+        "Signature": {
+          "type": "string",
+          "description": "Segnatura del documento",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "GetDocumentRequest"
+    },
+    "HEADER": {
+      "type": "object",
+      "properties": {
+        "esecutore": {
+          "type": "string",
+          "xml": {
+            "name": "ESECUTORE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "esito": {
+          "type": "string",
+          "xml": {
+            "name": "ESITO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "servizio": {
+          "type": "string",
+          "xml": {
+            "name": "SERVIZIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "HEADER"
+    },
+    "IDENTIFICATIVO": {
+      "type": "object",
+      "properties": {
+        "pressocciaa": {
+          "type": "string",
+          "xml": {
+            "name": "PRESSO_CCIAA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "pressonrea": {
+          "type": "string",
+          "xml": {
+            "name": "PRESSO_N_REA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "progressivoloc": {
+          "type": "string",
+          "xml": {
+            "name": "PROGRESSIVO_LOC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "progressivopersona": {
+          "type": "string",
+          "xml": {
+            "name": "PROGRESSIVO_PERSONA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "IDENTIFICATIVO"
+    },
+    "IMPIANTISTILOC": {
+      "type": "object",
+      "properties": {
+        "dtiscrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ISCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "enterilascio": {
+          "type": "string",
+          "xml": {
+            "name": "ENTE_RILASCIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "lettera": {
+          "type": "string",
+          "xml": {
+            "name": "LETTERA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numero": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "IMPIANTISTILOC"
+    },
+    "IMPRESEPULIZIA": {
+      "type": "object",
+      "properties": {
+        "dtdenuncia": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DENUNCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "fascia": {
+          "type": "string",
+          "xml": {
+            "name": "FASCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "volume": {
+          "type": "string",
+          "xml": {
+            "name": "VOLUME",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "IMPRESEPULIZIA"
+    },
+    "INDIRIZZO": {
+      "type": "object",
+      "properties": {
+        "altreindicazioni": {
+          "type": "string",
+          "xml": {
+            "name": "ALTRE_INDICAZIONI",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cap": {
+          "type": "string",
+          "xml": {
+            "name": "CAP",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ccomune": {
+          "type": "string",
+          "xml": {
+            "name": "C_COMUNE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "comune": {
+          "type": "string",
+          "xml": {
+            "name": "COMUNE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "fax": {
+          "type": "string",
+          "xml": {
+            "name": "FAX",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "frazione": {
+          "type": "string",
+          "xml": {
+            "name": "FRAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "indirizzopec": {
+          "type": "string",
+          "xml": {
+            "name": "INDIRIZZO_PEC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "ncivico": {
+          "type": "string",
+          "xml": {
+            "name": "N_CIVICO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "stato": {
+          "type": "string",
+          "xml": {
+            "name": "STATO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "stradario": {
+          "type": "string",
+          "xml": {
+            "name": "STRADARIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "telefono": {
+          "type": "string",
+          "xml": {
+            "name": "TELEFONO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "toponimo": {
+          "type": "string",
+          "xml": {
+            "name": "TOPONIMO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "via": {
+          "type": "string",
+          "xml": {
+            "name": "VIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "INDIRIZZO"
+    },
+    "INFOATTIVITA": {
+      "type": "object",
+      "properties": {
+        "dtinizioattivita": {
+          "type": "string",
+          "xml": {
+            "name": "DT_INIZIO_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "statoattivita": {
+          "type": "string",
+          "xml": {
+            "name": "STATO_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "INFOATTIVITA"
+    },
+    "INFORMAZIONISEDE": {
+      "type": "object",
+      "properties": {
+        "attivita": {
+          "type": "string",
+          "xml": {
+            "name": "ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cessazione": {
+          "xml": {
+            "name": "CESSAZIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CESSAZIONE"
+        },
+        "codiceatecoul": {
+          "xml": {
+            "name": "CODICE_ATECO_UL",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CODICEATECOUL"
+        },
+        "codiciistat02": {
+          "xml": {
+            "name": "CODICI_ISTAT_02",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CODICIISTAT02"
+        },
+        "commerciodettaglio": {
+          "xml": {
+            "name": "COMMERCIO_DETTAGLIO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/COMMERCIODETTAGLIO"
+        },
+        "datiartigiani": {
+          "xml": {
+            "name": "DATI_ARTIGIANI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DATIARTIGIANI"
+        },
+        "indirizzo": {
+          "xml": {
+            "name": "INDIRIZZO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INDIRIZZO"
+        },
+        "infoattivita": {
+          "xml": {
+            "name": "INFO_ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INFOATTIVITA"
+        },
+        "insegna": {
+          "type": "string",
+          "xml": {
+            "name": "INSEGNA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "procedureconcorsuali": {
+          "xml": {
+            "name": "PROCEDURE_CONCORSUALI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PROCEDURECONCORSUALI"
+        },
+        "ruoliloc": {
+          "xml": {
+            "name": "RUOLI_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/RUOLILOC"
+        }
+      },
+      "title": "INFORMAZIONISEDE"
+    },
+    "INPROPRIO": {
+      "type": "object",
+      "properties": {
+        "curatore": {
+          "type": "string",
+          "xml": {
+            "name": "CURATORE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtchiusura": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CHIUSURA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtfallimento": {
+          "type": "string",
+          "xml": {
+            "name": "DT_FALLIMENTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtsentenza": {
+          "type": "string",
+          "xml": {
+            "name": "DT_SENTENZA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "nfallimento": {
+          "type": "string",
+          "xml": {
+            "name": "N_FALLIMENTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "nsentenza": {
+          "type": "string",
+          "xml": {
+            "name": "N_SENTENZA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "organogiudiziario": {
+          "type": "string",
+          "xml": {
+            "name": "ORGANO_GIUDIZIARIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "pvtribunale": {
+          "type": "string",
+          "xml": {
+            "name": "PV_TRIBUNALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tribunale": {
+          "type": "string",
+          "xml": {
+            "name": "TRIBUNALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "INPROPRIO"
+    },
+    "ISAttivitaPro2P": {
+      "type": "object",
+      "properties": {
+        "codice": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "descrizione": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "infoDate": {
+          "$ref": "#/definitions/JAXBElement«ISInfoDatePro2P»"
+        }
+      },
+      "title": "ISAttivitaPro2P",
+      "xml": {
+        "name": "ISAttivitaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISCRIZIONEARTI": {
+      "type": "object",
+      "properties": {
+        "dtdelibera": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DELIBERA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtdomanda": {
+          "type": "string",
+          "xml": {
+            "name": "DT_DOMANDA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "ISCRIZIONEARTI"
+    },
+    "ISCodifica": {
+      "type": "object",
+      "properties": {
+        "codice": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "descrizione": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISCodifica",
+      "xml": {
+        "name": "ISCodifica",
+        "namespace": "http://cooperazione.sian.it/schema/interscambio/globals",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDatiAnagraficiPro2P": {
+      "type": "object",
+      "properties": {
+        "persona": {
+          "$ref": "#/definitions/JAXBElement«ISDatiPersonaFisicaPro2P»"
+        },
+        "segnalazione": {
+          "$ref": "#/definitions/JAXBElement«ISErroreAEPro2P»"
+        },
+        "soggetto": {
+          "$ref": "#/definitions/JAXBElement«ISSoggettoPro2P»"
+        }
+      },
+      "title": "ISDatiAnagraficiPro2P",
+      "xml": {
+        "name": "ISDatiAnagraficiPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDatiNascitaPro2P": {
+      "type": "object",
+      "properties": {
+        "comune": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "data": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "provincia": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISDatiNascitaPro2P",
+      "xml": {
+        "name": "ISDatiNascitaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDatiPersonaFisicaPro2P": {
+      "type": "object",
+      "properties": {
+        "dittaIndividuale": {
+          "$ref": "#/definitions/JAXBElement«ISDittaIndividualePro2P»"
+        },
+        "personaFisica": {
+          "$ref": "#/definitions/JAXBElement«ISPersonaFisicaPro2P»"
+        }
+      },
+      "title": "ISDatiPersonaFisicaPro2P",
+      "xml": {
+        "name": "ISDatiPersonaFisicaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDecessoPro2P": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "fonte": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISDecessoPro2P",
+      "xml": {
+        "name": "ISDecessoPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDenominazionePro2P": {
+      "type": "object",
+      "properties": {
+        "denominazione": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "info": {
+          "$ref": "#/definitions/JAXBElement«ISInfoDatePro2P»"
+        },
+        "naturaGiuridica": {
+          "$ref": "#/definitions/JAXBElement«ISCodifica»"
+        },
+        "sigla": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISDenominazionePro2P",
+      "xml": {
+        "name": "ISDenominazionePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISDittaIndividualePro2P": {
+      "type": "object",
+      "properties": {
+        "attivita": {
+          "type": "array",
+          "xml": {
+            "name": "attivita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ISAttivitaPro2P"
+          }
+        },
+        "denominazione": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "depositario": {
+          "$ref": "#/definitions/JAXBElement«ISRiferimentoPro2P»"
+        },
+        "domicilioFiscale": {
+          "$ref": "#/definitions/JAXBElement«ISLuogoPro2P»"
+        },
+        "partitaIva": {
+          "$ref": "#/definitions/JAXBElement«ISPartitaIvaPro2P»"
+        },
+        "rappresentante": {
+          "$ref": "#/definitions/JAXBElement«ISRappresentantePro2P»"
+        },
+        "sede": {
+          "$ref": "#/definitions/JAXBElement«ISLuogoPro2P»"
+        }
+      },
+      "title": "ISDittaIndividualePro2P",
+      "xml": {
+        "name": "ISDittaIndividualePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISErroreAEPro2P": {
+      "type": "object",
+      "properties": {
+        "esito": {
+          "xml": {
+            "name": "esito",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ISCodifica"
+        }
+      },
+      "title": "ISErroreAEPro2P",
+      "xml": {
+        "name": "ISErroreAEPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISEstinzionePro2P": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "estinto": {
+          "type": "boolean"
+        }
+      },
+      "title": "ISEstinzionePro2P",
+      "xml": {
+        "name": "ISEstinzionePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISInfoDatePro2P": {
+      "type": "object",
+      "properties": {
+        "dataFine": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "dataInizio": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "fonte": {
+          "$ref": "#/definitions/JAXBElement«ISCodifica»"
+        }
+      },
+      "title": "ISInfoDatePro2P",
+      "xml": {
+        "name": "ISInfoDatePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISLuogoPro2P": {
+      "type": "object",
+      "properties": {
+        "infoDate": {
+          "$ref": "#/definitions/JAXBElement«ISInfoDatePro2P»"
+        },
+        "ubicazione": {
+          "$ref": "#/definitions/JAXBElement«ISUbicazionePro2P»"
+        }
+      },
+      "title": "ISLuogoPro2P",
+      "xml": {
+        "name": "ISLuogoPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISOnlusPro2P": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/JAXBElement«XMLGregorianCalendar»"
+        },
+        "denoninazione": {
+          "$ref": "#/definitions/JAXBElement«ISCodifica»"
+        },
+        "socCooperativa": {
+          "type": "boolean"
+        }
+      },
+      "title": "ISOnlusPro2P",
+      "xml": {
+        "name": "ISOnlusPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISPartitaIvaPro2P": {
+      "type": "object",
+      "properties": {
+        "confluenzaPiva": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "date": {
+          "$ref": "#/definitions/JAXBElement«ISInfoDatePro2P»"
+        },
+        "motivoCessazione": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "piva": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "stato": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISPartitaIvaPro2P",
+      "xml": {
+        "name": "ISPartitaIvaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISPersonaFisicaPro2P": {
+      "type": "object",
+      "properties": {
+        "codiceFiscale": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "cognome": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "datiNascita": {
+          "$ref": "#/definitions/JAXBElement«ISDatiNascitaPro2P»"
+        },
+        "decesso": {
+          "$ref": "#/definitions/JAXBElement«ISDecessoPro2P»"
+        },
+        "domicilioFiscale": {
+          "$ref": "#/definitions/JAXBElement«ISLuogoPro2P»"
+        },
+        "nome": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "sesso": {
+          "$ref": "#/definitions/JAXBElement«ISSessoAEPro2P»"
+        }
+      },
+      "title": "ISPersonaFisicaPro2P",
+      "xml": {
+        "name": "ISPersonaFisicaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISRappresentantePro2P": {
+      "type": "object",
+      "properties": {
+        "carica": {
+          "$ref": "#/definitions/JAXBElement«ISCodifica»"
+        },
+        "dateRif": {
+          "$ref": "#/definitions/JAXBElement«ISInfoDatePro2P»"
+        },
+        "rappresentante": {
+          "$ref": "#/definitions/JAXBElement«ISRiferimentoPro2P»"
+        }
+      },
+      "title": "ISRappresentantePro2P",
+      "xml": {
+        "name": "ISRappresentantePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISRiferimentoPro2P": {
+      "type": "object",
+      "properties": {
+        "codiceFiscale": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "datiIdentificativi": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "datiNascita": {
+          "$ref": "#/definitions/JAXBElement«ISDatiNascitaPro2P»"
+        },
+        "decesso": {
+          "$ref": "#/definitions/JAXBElement«ISDecessoPro2P»"
+        }
+      },
+      "title": "ISRiferimentoPro2P",
+      "xml": {
+        "name": "ISRiferimentoPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISSessoAEPro2P": {
+      "type": "object",
+      "properties": {
+        "valore": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISSessoAEPro2P",
+      "xml": {
+        "name": "ISSessoAEPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISSoggettoPro2P": {
+      "type": "object",
+      "properties": {
+        "attivita": {
+          "type": "array",
+          "xml": {
+            "name": "attivita",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ISAttivitaPro2P"
+          }
+        },
+        "codiceFiscale": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "denominazione": {
+          "$ref": "#/definitions/JAXBElement«ISDenominazionePro2P»"
+        },
+        "depositario": {
+          "$ref": "#/definitions/JAXBElement«ISRiferimentoPro2P»"
+        },
+        "domicilioFiscale": {
+          "$ref": "#/definitions/JAXBElement«ISLuogoPro2P»"
+        },
+        "estinzioneCF": {
+          "$ref": "#/definitions/JAXBElement«ISEstinzionePro2P»"
+        },
+        "onlus": {
+          "$ref": "#/definitions/JAXBElement«ISOnlusPro2P»"
+        },
+        "partitaIva": {
+          "$ref": "#/definitions/JAXBElement«ISPartitaIvaPro2P»"
+        },
+        "rappresentante": {
+          "$ref": "#/definitions/JAXBElement«ISRappresentantePro2P»"
+        },
+        "sede": {
+          "$ref": "#/definitions/JAXBElement«ISLuogoPro2P»"
+        }
+      },
+      "title": "ISSoggettoPro2P",
+      "xml": {
+        "name": "ISSoggettoPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISTipologiaPro2P": {
+      "type": "object",
+      "properties": {
+        "tipologia": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISTipologiaPro2P",
+      "xml": {
+        "name": "ISTipologiaPro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ISUbicazionePro2P": {
+      "type": "object",
+      "properties": {
+        "altro": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "cap": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "codiceCatastale": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "comune": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "distretto": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "numCivico": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "provincia": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        },
+        "tipologia": {
+          "$ref": "#/definitions/JAXBElement«ISTipologiaPro2P»"
+        },
+        "toponimo": {
+          "$ref": "#/definitions/JAXBElement«string»"
+        }
+      },
+      "title": "ISUbicazionePro2P",
+      "xml": {
+        "name": "ISUbicazionePro2p",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImpresaIndividualeDto": {
+      "type": "object",
+      "required": [
+        "denominazione",
+        "formaGiuridica",
+        "oggettoSociale",
+        "partitaIva",
+        "sedeLegale"
+      ],
+      "properties": {
+        "denominazione": {
+          "type": "string",
+          "description": "Denominazione della persona",
+          "allowEmptyValue": false
+        },
+        "formaGiuridica": {
+          "type": "string",
+          "description": "Forma giuridica dell'azienda",
+          "allowEmptyValue": false
+        },
+        "oggettoSociale": {
+          "type": "string",
+          "description": "Oggetto sociale della ditta",
+          "allowEmptyValue": false
+        },
+        "partitaIva": {
+          "type": "string",
+          "description": "Partita iva della persona",
+          "allowEmptyValue": false
+        },
+        "sedeLegale": {
+          "description": "Sede legale della ditta",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/SedeDto"
+        },
+        "unitaLocali": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnitaLocaleDto"
+          }
+        }
+      },
+      "title": "ImpresaIndividualeDto",
+      "description": "Impresa sia essa individuale oppure no."
+    },
+    "IndirizzoDto": {
+      "type": "object",
+      "properties": {
+        "cap": {
+          "type": "string",
+          "description": "Codice avviamento postale dove e' ubicato l'indirizzo",
+          "allowEmptyValue": false
+        },
+        "civico": {
+          "type": "string",
+          "description": "Numero civico dell'indirizzo",
+          "allowEmptyValue": false
+        },
+        "codiceIstat": {
+          "type": "string",
+          "description": "Codice istat del comune dove e' ubicato l'indirizzo",
+          "allowEmptyValue": false
+        },
+        "comune": {
+          "type": "string",
+          "description": "Comune dove e' ubicato l'indirizzo",
+          "allowEmptyValue": false
+        },
+        "denominazioneEstesa": {
+          "type": "string",
+          "description": "Aggregazione dei dati toponimo, via e civico",
+          "allowEmptyValue": false
+        },
+        "frazione": {
+          "type": "string",
+          "description": "Frazione dove e' ubicato l'indirizzo",
+          "allowEmptyValue": false
+        },
+        "provincia": {
+          "type": "string",
+          "description": "Provincia dove e' ubicato l'indirizzo",
+          "allowEmptyValue": false
+        },
+        "toponimo": {
+          "type": "string",
+          "description": "Indica se via, piazza, corso ecc.",
+          "allowEmptyValue": false
+        },
+        "via": {
+          "type": "string",
+          "description": "Denominazione dell'indirizzo",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "IndirizzoDto",
+      "description": "Indirizzo di un punto geografico"
+    },
+    "InfoAgricoltoreSIAN": {
+      "type": "object",
+      "properties": {
+        "annoCamp": {
+          "type": "number"
+        },
+        "codFisc": {
+          "type": "string"
+        },
+        "dataFineAsse": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataFinePossRequ": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataInizAsse": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataInizPossRequ": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dtlCapxaction": {
+          "type": "string"
+        },
+        "dtlCapxtimestamp": {
+          "type": "string"
+        },
+        "flagAgriAtti": {
+          "type": "number"
+        },
+        "idOrpa": {
+          "type": "number"
+        },
+        "idRaia": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "idSogg": {
+          "type": "number"
+        }
+      },
+      "title": "InfoAgricoltoreSIAN"
+    },
+    "InfoVerificaFirma": {
+      "type": "object",
+      "properties": {
+        "cfFirmatario": {
+          "type": "string"
+        },
+        "dataFirma": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "title": "InfoVerificaFirma"
+    },
+    "InputStream": {
+      "type": "object",
+      "title": "InputStream"
+    },
+    "IscrizioneRepertorioEconomicoDto": {
+      "type": "object",
+      "required": [
+        "dataIscrizione",
+        "numero"
+      ],
+      "properties": {
+        "cessata": {
+          "type": "boolean"
+        },
+        "codiceRea": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dataIscrizione": {
+          "type": "string",
+          "format": "date",
+          "description": "Data di iscrizione",
+          "allowEmptyValue": false
+        },
+        "numero": {
+          "type": "string",
+          "description": "Numero di iscrizione al registro",
+          "allowEmptyValue": false
+        },
+        "provinciaRea": {
+          "type": "string"
+        }
+      },
+      "title": "IscrizioneRepertorioEconomicoDto",
+      "description": "Dati relativi all'iscrizione al registro imprese"
+    },
+    "IscrizioneSezioneDto": {
+      "type": "object",
+      "required": [
+        "dataIscrizione",
+        "sezione"
+      ],
+      "properties": {
+        "coltivatoreDiretto": {
+          "type": "string",
+          "description": "Contenuto campo coltivatore diretto come ottenuto da Parix",
+          "allowEmptyValue": false
+        },
+        "dataIscrizione": {
+          "type": "string",
+          "format": "date",
+          "description": "Data iscrizione sezione",
+          "allowEmptyValue": false
+        },
+        "qualifica": {
+          "type": "string",
+          "description": "Qualifica iscrizione",
+          "allowEmptyValue": false
+        },
+        "sezione": {
+          "type": "string",
+          "description": "Tipo sezione",
+          "allowEmptyValue": false,
+          "enum": [
+            "ORDINARIA",
+            "SPECIALE"
+          ]
+        }
+      },
+      "title": "IscrizioneSezioneDto"
+    },
+    "JAXBElement«ISCodifica»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISCodifica»"
+    },
+    "JAXBElement«ISDatiNascitaPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISDatiNascitaPro2P»"
+    },
+    "JAXBElement«ISDatiPersonaFisicaPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISDatiPersonaFisicaPro2P»"
+    },
+    "JAXBElement«ISDecessoPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISDecessoPro2P»"
+    },
+    "JAXBElement«ISDenominazionePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISDenominazionePro2P»"
+    },
+    "JAXBElement«ISDittaIndividualePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISDittaIndividualePro2P»"
+    },
+    "JAXBElement«ISErroreAEPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISErroreAEPro2P»"
+    },
+    "JAXBElement«ISEstinzionePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISEstinzionePro2P»"
+    },
+    "JAXBElement«ISInfoDatePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISInfoDatePro2P»"
+    },
+    "JAXBElement«ISLuogoPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISLuogoPro2P»"
+    },
+    "JAXBElement«ISOnlusPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISOnlusPro2P»"
+    },
+    "JAXBElement«ISPartitaIvaPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISPartitaIvaPro2P»"
+    },
+    "JAXBElement«ISPersonaFisicaPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISPersonaFisicaPro2P»"
+    },
+    "JAXBElement«ISRappresentantePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISRappresentantePro2P»"
+    },
+    "JAXBElement«ISRiferimentoPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISRiferimentoPro2P»"
+    },
+    "JAXBElement«ISSessoAEPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISSessoAEPro2P»"
+    },
+    "JAXBElement«ISSoggettoPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISSoggettoPro2P»"
+    },
+    "JAXBElement«ISTipologiaPro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISTipologiaPro2P»"
+    },
+    "JAXBElement«ISUbicazionePro2P»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«ISUbicazionePro2P»"
+    },
+    "JAXBElement«XMLGregorianCalendar»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«XMLGregorianCalendar»"
+    },
+    "JAXBElement«string»": {
+      "type": "object",
+      "properties": {
+        "globalScope": {
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/QName"
+        },
+        "nil": {
+          "type": "boolean"
+        },
+        "typeSubstituted": {
+          "type": "boolean"
+        }
+      },
+      "title": "JAXBElement«string»"
+    },
+    "LISTAIMPRESE": {
+      "type": "object",
+      "properties": {
+        "estremiimpresa": {
+          "type": "array",
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/ESTREMIIMPRESA"
+          }
+        },
+        "totale": {
+          "type": "string",
+          "xml": {
+            "name": "totale",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "LISTAIMPRESE"
+    },
+    "LISTAPERSONE": {
+      "type": "object",
+      "properties": {
+        "estremiimpresa": {
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMIIMPRESA"
+        },
+        "persona": {
+          "type": "array",
+          "xml": {
+            "name": "PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/PERSONA"
+          }
+        },
+        "schedapersona": {
+          "type": "array",
+          "xml": {
+            "name": "SCHEDA_PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/SCHEDAPERSONA"
+          }
+        },
+        "totale": {
+          "type": "string",
+          "xml": {
+            "name": "totale",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "LISTAPERSONE"
+    },
+    "LISTAUL": {
+      "type": "object",
+      "properties": {
+        "estremiimpresa": {
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMIIMPRESA"
+        },
+        "informazionisede": {
+          "xml": {
+            "name": "INFORMAZIONI_SEDE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INFORMAZIONISEDE"
+        },
+        "localizzazioni": {
+          "type": "array",
+          "xml": {
+            "name": "LOCALIZZAZIONI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/LOCALIZZAZIONI"
+          }
+        }
+      },
+      "title": "LISTAUL"
+    },
+    "LOCALIZZAZIONE": {
+      "type": "object",
+      "properties": {
+        "attivita": {
+          "type": "string",
+          "xml": {
+            "name": "ATTIVITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cessazioneloc": {
+          "xml": {
+            "name": "CESSAZIONE_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CESSAZIONELOC"
+        },
+        "codiceatecoul": {
+          "xml": {
+            "name": "CODICE_ATECO_UL",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CODICEATECOUL"
+        },
+        "codiciistat02": {
+          "xml": {
+            "name": "CODICI_ISTAT_02",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CODICIISTAT02"
+        },
+        "commerciodettaglio": {
+          "xml": {
+            "name": "COMMERCIO_DETTAGLIO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/COMMERCIODETTAGLIO"
+        },
+        "datiartigiani": {
+          "xml": {
+            "name": "DATI_ARTIGIANI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DATIARTIGIANI"
+        },
+        "denominazione": {
+          "type": "string",
+          "xml": {
+            "name": "DENOMINAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtapertura": {
+          "type": "string",
+          "xml": {
+            "name": "DT_APERTURA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "elemento": {
+          "type": "string",
+          "xml": {
+            "name": "elemento",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "indirizzo": {
+          "xml": {
+            "name": "INDIRIZZO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INDIRIZZO"
+        },
+        "insegna": {
+          "type": "string",
+          "xml": {
+            "name": "INSEGNA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numerotipo": {
+          "xml": {
+            "name": "NUMERO_TIPO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/NUMEROTIPO"
+        },
+        "personeloc": {
+          "xml": {
+            "name": "PERSONE_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERSONELOC"
+        },
+        "ruoliloc": {
+          "xml": {
+            "name": "RUOLI_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/RUOLILOC"
+        }
+      },
+      "title": "LOCALIZZAZIONE"
+    },
+    "LOCALIZZAZIONI": {
+      "type": "object",
+      "properties": {
+        "elemento": {
+          "type": "string",
+          "xml": {
+            "name": "elemento",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "localizzazione": {
+          "type": "array",
+          "xml": {
+            "name": "LOCALIZZAZIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/LOCALIZZAZIONE"
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "provincia",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "LOCALIZZAZIONI"
+    },
+    "MECCANICI": {
+      "type": "object",
+      "properties": {
+        "dtiscrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ISCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numero": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "provincia": {
+          "type": "string",
+          "xml": {
+            "name": "PROVINCIA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "qualifica": {
+          "type": "string",
+          "xml": {
+            "name": "QUALIFICA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "MECCANICI"
+    },
+    "MarcaType": {
+      "type": "object",
+      "properties": {
+        "dataFineValiditaCert": {
+          "xml": {
+            "name": "dataFineValiditaCert",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "dataInizioValiditaCert": {
+          "xml": {
+            "name": "dataInizioValiditaCert",
+            "attribute": true,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "tsanameIssuer": {
+          "type": "string"
+        },
+        "tsanameSubject": {
+          "type": "string"
+        },
+        "tsdateTime": {
+          "$ref": "#/definitions/XMLGregorianCalendar"
+        },
+        "tsimprint": {
+          "type": "string"
+        },
+        "tsserialNumber": {
+          "type": "string"
+        }
+      },
+      "title": "MarcaType",
+      "xml": {
+        "name": "MarcaType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ModelAndView": {
+      "type": "object",
+      "properties": {
+        "empty": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "object"
+        },
+        "modelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "reference": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "100",
+            "101",
+            "102",
+            "103",
+            "200",
+            "201",
+            "202",
+            "203",
+            "204",
+            "205",
+            "206",
+            "207",
+            "208",
+            "226",
+            "300",
+            "301",
+            "302",
+            "303",
+            "304",
+            "305",
+            "307",
+            "308",
+            "400",
+            "401",
+            "402",
+            "403",
+            "404",
+            "405",
+            "406",
+            "407",
+            "408",
+            "409",
+            "410",
+            "411",
+            "412",
+            "413",
+            "414",
+            "415",
+            "416",
+            "417",
+            "418",
+            "419",
+            "420",
+            "421",
+            "422",
+            "423",
+            "424",
+            "426",
+            "428",
+            "429",
+            "431",
+            "451",
+            "500",
+            "501",
+            "502",
+            "503",
+            "504",
+            "505",
+            "506",
+            "507",
+            "508",
+            "509",
+            "510",
+            "511"
+          ]
+        },
+        "view": {
+          "$ref": "#/definitions/View"
+        },
+        "viewName": {
+          "type": "string"
+        }
+      },
+      "title": "ModelAndView"
+    },
+    "NUMEROTIPO": {
+      "type": "object",
+      "properties": {
+        "cciaa": {
+          "type": "string",
+          "xml": {
+            "name": "CCIAA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "nrea": {
+          "type": "string",
+          "xml": {
+            "name": "N_REA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numero": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo1": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_1",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo2": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_2",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo3": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_3",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo4": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_4",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "tipo5": {
+          "type": "string",
+          "xml": {
+            "name": "TIPO_5",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "NUMEROTIPO"
+    },
+    "PERESTENSIONE": {
+      "type": "object",
+      "properties": {
+        "cognome": {
+          "type": "string",
+          "xml": {
+            "name": "COGNOME",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "datanascita": {
+          "type": "string",
+          "xml": {
+            "name": "DATA_NASCITA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "nome": {
+          "type": "string",
+          "xml": {
+            "name": "NOME",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERESTENSIONE"
+    },
+    "PERSONA": {
+      "type": "object",
+      "properties": {
+        "cariche": {
+          "xml": {
+            "name": "CARICHE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CARICHE"
+        },
+        "elemento": {
+          "type": "string",
+          "xml": {
+            "name": "elemento",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "elettore": {
+          "type": "string",
+          "xml": {
+            "name": "ELETTORE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "fallimentopersona": {
+          "xml": {
+            "name": "FALLIMENTO_PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/FALLIMENTOPERSONA"
+        },
+        "identificativo": {
+          "xml": {
+            "name": "IDENTIFICATIVO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/IDENTIFICATIVO"
+        },
+        "personafisica": {
+          "xml": {
+            "name": "PERSONA_FISICA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERSONAFISICA"
+        },
+        "personagiuridica": {
+          "xml": {
+            "name": "PERSONA_GIURIDICA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERSONAGIURIDICA"
+        },
+        "rappresentante": {
+          "type": "string",
+          "xml": {
+            "name": "RAPPRESENTANTE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERSONA"
+    },
+    "PERSONAFISICA": {
+      "type": "object",
+      "properties": {
+        "cittadinanza": {
+          "type": "string",
+          "xml": {
+            "name": "CITTADINANZA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codicefiscale": {
+          "type": "string",
+          "xml": {
+            "name": "CODICE_FISCALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "cognome": {
+          "type": "string",
+          "xml": {
+            "name": "COGNOME",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "estreminascita": {
+          "xml": {
+            "name": "ESTREMI_NASCITA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMINASCITA"
+        },
+        "indirizzo": {
+          "xml": {
+            "name": "INDIRIZZO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INDIRIZZO"
+        },
+        "nome": {
+          "type": "string",
+          "xml": {
+            "name": "NOME",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "sesso": {
+          "type": "string",
+          "xml": {
+            "name": "SESSO",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERSONAFISICA"
+    },
+    "PERSONAGIURIDICA": {
+      "type": "object",
+      "properties": {
+        "cciaa": {
+          "type": "string",
+          "xml": {
+            "name": "CCIAA",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "codicefiscale": {
+          "type": "string",
+          "xml": {
+            "name": "CODICE_FISCALE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "denominazione": {
+          "type": "string",
+          "xml": {
+            "name": "DENOMINAZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcostituzione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_COSTITUZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "indirizzo": {
+          "xml": {
+            "name": "INDIRIZZO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/INDIRIZZO"
+        },
+        "niscrizionerea": {
+          "type": "string",
+          "xml": {
+            "name": "N_ISCRIZIONE_REA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERSONAGIURIDICA"
+    },
+    "PERSONELOC": {
+      "type": "object",
+      "properties": {
+        "persona": {
+          "type": "array",
+          "xml": {
+            "name": "PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/PERSONA"
+          }
+        },
+        "totalePersone": {
+          "type": "string",
+          "xml": {
+            "name": "totale_persone",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERSONELOC"
+    },
+    "PERSONESEDE": {
+      "type": "object",
+      "properties": {
+        "persona": {
+          "type": "array",
+          "xml": {
+            "name": "PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/PERSONA"
+          }
+        },
+        "totale": {
+          "type": "string",
+          "xml": {
+            "name": "totale",
+            "attribute": true,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PERSONESEDE"
+    },
+    "PROCEDURACONCORSUALE": {
+      "type": "object",
+      "properties": {
+        "codicepc": {
+          "type": "string",
+          "xml": {
+            "name": "CODICE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descpc": {
+          "type": "string",
+          "xml": {
+            "name": "DESC_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtaccertamentopc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ACCERTAMENTO_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtcessazionepc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CESSAZIONE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtchiusurapc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_CHIUSURA_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtesecuzionepc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ESECUZIONE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtiniziopc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_INIZIO_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtomologazionepc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_OMOLOGAZIONE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtrevocapc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_REVOCA_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtrisoluzionepc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_RISOLUZIONE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtterminepc": {
+          "type": "string",
+          "xml": {
+            "name": "DT_TERMINE_PC",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "PROCEDURACONCORSUALE"
+    },
+    "PROCEDURECONCORSUALI": {
+      "type": "object",
+      "properties": {
+        "proceduraconcorsuale": {
+          "type": "array",
+          "xml": {
+            "name": "PROCEDURA_CONCORSUALE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/PROCEDURACONCORSUALE"
+          }
+        }
+      },
+      "title": "PROCEDURECONCORSUALI"
+    },
+    "ParteFirmataType": {
+      "type": "object",
+      "properties": {
+        "datiFirmatari": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirmatarioType"
+          }
+        },
+        "parteFirmata": {
+          "$ref": "#/definitions/ParteFirmataType"
+        }
+      },
+      "title": "ParteFirmataType",
+      "xml": {
+        "name": "ParteFirmataType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "PersonaFisicaConCaricaDto": {
+      "type": "object",
+      "properties": {
+        "anagrafica": {
+          "$ref": "#/definitions/AnagraficaDto"
+        },
+        "codiceFiscale": {
+          "type": "string"
+        },
+        "listaCarica": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaricaDto"
+          }
+        }
+      },
+      "title": "PersonaFisicaConCaricaDto"
+    },
+    "PersonaFisicaDto": {
+      "type": "object",
+      "required": [
+        "codiceFiscale",
+        "deceduta"
+      ],
+      "properties": {
+        "anagrafica": {
+          "description": "I dati dell'eventuale ditta individuale",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/AnagraficaDto"
+        },
+        "codiceFiscale": {
+          "type": "string",
+          "description": "Codice fiscale della persona",
+          "allowEmptyValue": false
+        },
+        "deceduta": {
+          "type": "boolean",
+          "example": false,
+          "description": "Se si tratta di una pesona deceduta",
+          "allowEmptyValue": false
+        },
+        "domicilioFiscale": {
+          "description": "Domicilio fiscale della persona fisica",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/IndirizzoDto"
+        },
+        "impresaIndividuale": {
+          "description": "I dati dell'eventuale ditta individuale",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/ImpresaIndividualeDto"
+        },
+        "iscrizioniSezione": {
+          "type": "array",
+          "description": "Dati iscrizione sezione della persona",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/IscrizioneSezioneDto"
+          }
+        }
+      },
+      "title": "PersonaFisicaDto",
+      "description": "Dati di una persona"
+    },
+    "PersonaGiuridicaConCaricaDto": {
+      "type": "object",
+      "properties": {
+        "codiceFiscale": {
+          "type": "string"
+        },
+        "denominazione": {
+          "type": "string"
+        },
+        "listaCarica": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaricaDto"
+          }
+        }
+      },
+      "title": "PersonaGiuridicaConCaricaDto"
+    },
+    "PersonaGiuridicaDto": {
+      "type": "object",
+      "required": [
+        "codiceFiscale",
+        "denominazione",
+        "formaGiuridica",
+        "oggettoSociale",
+        "partitaIva",
+        "sedeLegale"
+      ],
+      "properties": {
+        "capitaleSocialeDeliberato": {
+          "type": "number",
+          "format": "double"
+        },
+        "codiceFiscale": {
+          "type": "string",
+          "description": "Codice fiscale della persona",
+          "allowEmptyValue": false
+        },
+        "dataCostituzione": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataTermine": {
+          "type": "string",
+          "format": "date"
+        },
+        "denominazione": {
+          "type": "string",
+          "description": "Denominazione della persona",
+          "allowEmptyValue": false
+        },
+        "formaGiuridica": {
+          "type": "string",
+          "description": "Forma giuridica dell'azienda",
+          "allowEmptyValue": false
+        },
+        "iscrizioniSezione": {
+          "type": "array",
+          "description": "Dati iscrizione sezione della persona",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/IscrizioneSezioneDto"
+          }
+        },
+        "oggettoSociale": {
+          "type": "string",
+          "description": "Oggetto sociale della ditta",
+          "allowEmptyValue": false
+        },
+        "partitaIva": {
+          "type": "string",
+          "description": "Partita iva della persona",
+          "allowEmptyValue": false
+        },
+        "personeFisicheConCarica": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonaFisicaConCaricaDto"
+          }
+        },
+        "personeGiuridicheConCarica": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonaGiuridicaConCaricaDto"
+          }
+        },
+        "rappresentanteLegale": {
+          "description": "Rappresentante legale dell'impresa (valorizzato solo per anagrafe tributaria)",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/RappresentanteLegaleDto"
+        },
+        "sedeLegale": {
+          "description": "Sede legale della ditta",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/SedeDto"
+        },
+        "unitaLocali": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnitaLocaleDto"
+          }
+        }
+      },
+      "title": "PersonaGiuridicaDto",
+      "description": "Impresa sia essa individuale oppure no."
+    },
+    "QName": {
+      "type": "object",
+      "properties": {
+        "localPart": {
+          "type": "string"
+        },
+        "namespaceURI": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        }
+      },
+      "title": "QName"
+    },
+    "RISPOSTA": {
+      "type": "object",
+      "properties": {
+        "dati": {
+          "xml": {
+            "name": "DATI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DATI"
+        },
+        "header": {
+          "xml": {
+            "name": "HEADER",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/HEADER"
+        }
+      },
+      "title": "RISPOSTA"
+    },
+    "RUOLILOC": {
+      "type": "object",
+      "properties": {
+        "ruololoc": {
+          "type": "array",
+          "xml": {
+            "name": "RUOLO_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/RUOLOLOC"
+          }
+        }
+      },
+      "title": "RUOLILOC"
+    },
+    "RUOLOLOC": {
+      "type": "object",
+      "properties": {
+        "altroruololoc": {
+          "xml": {
+            "name": "ALTRO_RUOLO_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ALTRORUOLOLOC"
+        },
+        "cessazioneruolo": {
+          "xml": {
+            "name": "CESSAZIONE_RUOLO",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/CESSAZIONERUOLO"
+        },
+        "impiantistiloc": {
+          "xml": {
+            "name": "IMPIANTISTI_LOC",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/IMPIANTISTILOC"
+        },
+        "impresepulizia": {
+          "xml": {
+            "name": "IMPRESE_PULIZIA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/IMPRESEPULIZIA"
+        },
+        "meccanici": {
+          "xml": {
+            "name": "MECCANICI",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/MECCANICI"
+        }
+      },
+      "title": "RUOLOLOC"
+    },
+    "RappresentanteLegaleDto": {
+      "type": "object",
+      "required": [
+        "codiceFiscale",
+        "nominativo"
+      ],
+      "properties": {
+        "codiceFiscale": {
+          "type": "string",
+          "description": "Codice fiscale del rappresentante legale",
+          "allowEmptyValue": false
+        },
+        "nominativo": {
+          "type": "string",
+          "description": "Nominativo del rappresentante legale",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "RappresentanteLegaleDto",
+      "description": "Codice fiscale del rappresentante legale"
+    },
+    "RispostaRichiestaRispostaSincronaRicercaAnagraficaAll": {
+      "type": "object",
+      "properties": {
+        "esito": {
+          "xml": {
+            "name": "esito",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ISCodifica"
+        },
+        "risposta": {
+          "xml": {
+            "name": "risposta",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ISDatiAnagraficiPro2P"
+        }
+      },
+      "title": "RispostaRichiestaRispostaSincronaRicercaAnagraficaAll",
+      "xml": {
+        "name": "RispostaRichiestaRispostaSincronaRicercaAnagraficaAll",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "SCADENZEESERCIZI": {
+      "type": "object",
+      "properties": {
+        "dtprimoesercizio": {
+          "type": "string",
+          "xml": {
+            "name": "DT_PRIMO_ESERCIZIO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtsuccessive": {
+          "type": "string",
+          "xml": {
+            "name": "DT_SUCCESSIVE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "SCADENZEESERCIZI"
+    },
+    "SCHEDAPERSONA": {
+      "type": "object",
+      "properties": {
+        "elemento": {
+          "type": "string",
+          "xml": {
+            "name": "elemento",
+            "attribute": true,
+            "wrapped": false
+          }
+        },
+        "estremiimpresa": {
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMIIMPRESA"
+        },
+        "persona": {
+          "xml": {
+            "name": "PERSONA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/PERSONA"
+        }
+      },
+      "title": "SCHEDAPERSONA"
+    },
+    "SCHEDAUL": {
+      "type": "object",
+      "properties": {
+        "estremiimpresa": {
+          "xml": {
+            "name": "ESTREMI_IMPRESA",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/ESTREMIIMPRESA"
+        },
+        "localizzazione": {
+          "type": "array",
+          "xml": {
+            "name": "LOCALIZZAZIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/LOCALIZZAZIONE"
+          }
+        }
+      },
+      "title": "SCHEDAUL"
+    },
+    "SEZIONE": {
+      "type": "object",
+      "properties": {
+        "coltdiretto": {
+          "type": "string",
+          "xml": {
+            "name": "COLT_DIRETTO",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "csezione": {
+          "type": "string",
+          "xml": {
+            "name": "C_SEZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "descrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DESCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "dtiscrizione": {
+          "type": "string",
+          "xml": {
+            "name": "DT_ISCRIZIONE",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "SEZIONE"
+    },
+    "SEZIONI": {
+      "type": "object",
+      "properties": {
+        "sezione": {
+          "type": "array",
+          "xml": {
+            "name": "SEZIONE",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/SEZIONE"
+          }
+        }
+      },
+      "title": "SEZIONI"
+    },
+    "SedeDto": {
+      "type": "object",
+      "required": [
+        "indirizzo"
+      ],
+      "properties": {
+        "attivitaAteco": {
+          "type": "array",
+          "description": "Attivita ateco della ditta",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/AttivitaDto"
+          }
+        },
+        "indirizzo": {
+          "description": "Indirizzo della sede",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/IndirizzoDto"
+        },
+        "indirizzoPec": {
+          "type": "string",
+          "description": "Email della sede",
+          "allowEmptyValue": false
+        },
+        "iscrizioneRegistroImprese": {
+          "description": "Dati di registrazione al registro imprese",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/IscrizioneRepertorioEconomicoDto"
+        },
+        "telefono": {
+          "type": "string",
+          "description": "Telefono della sede",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "SedeDto",
+      "description": "Unita locale o sede legale di un'impresa"
+    },
+    "StrutturaAllevamentoDto": {
+      "type": "object",
+      "properties": {
+        "cap": {
+          "type": "string"
+        },
+        "comune": {
+          "type": "string"
+        },
+        "foglioCatastale": {
+          "type": "string"
+        },
+        "identificativo": {
+          "type": "string"
+        },
+        "indirizzo": {
+          "type": "string"
+        },
+        "latitudine": {
+          "type": "number"
+        },
+        "localita": {
+          "type": "string"
+        },
+        "longitudine": {
+          "type": "number"
+        },
+        "particella": {
+          "type": "string"
+        },
+        "sezione": {
+          "type": "string"
+        },
+        "subalterno": {
+          "type": "string"
+        }
+      },
+      "title": "StrutturaAllevamentoDto"
+    },
+    "SuperficiAccertateDto": {
+      "type": "object",
+      "properties": {
+        "annoCampagna": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cuaa": {
+          "type": "string"
+        },
+        "identificativoDomanda": {
+          "type": "string"
+        },
+        "motivazioneA1": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NO"
+          ]
+        },
+        "motivazioneA2": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NO"
+          ]
+        },
+        "motivazioneA3": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NO"
+          ]
+        },
+        "motivazioneB0": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NO"
+          ]
+        },
+        "motivazioneB1": {
+          "type": "string",
+          "enum": [
+            "SI",
+            "NO"
+          ]
+        },
+        "superficieAccertata": {
+          "type": "number",
+          "format": "double"
+        },
+        "superficieDeterminata": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "title": "SuperficiAccertateDto"
+    },
+    "TOTALEQUOTE": {
+      "type": "object",
+      "properties": {
+        "ammontare": {
+          "type": "string",
+          "xml": {
+            "name": "AMMONTARE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numeroazioni": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO_AZIONI",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "numeroquote": {
+          "type": "string",
+          "xml": {
+            "name": "NUMERO_QUOTE",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "valuta": {
+          "type": "string",
+          "xml": {
+            "name": "VALUTA",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "TOTALEQUOTE"
+    },
+    "TitoloAgricoltoreSIAN": {
+      "type": "object",
+      "properties": {
+        "annoCampagnaFine": {
+          "type": "number"
+        },
+        "annoCampagnaInizio": {
+          "type": "number"
+        },
+        "cuaaTitolare": {
+          "type": "string"
+        },
+        "dataFinePossesso": {
+          "type": "string"
+        },
+        "dataInizioPossesso": {
+          "type": "string"
+        },
+        "idTitolare": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numeroTitolare": {
+          "type": "string"
+        },
+        "superficieTitolo": {
+          "type": "number"
+        },
+        "valoreTitolo": {
+          "type": "number"
+        }
+      },
+      "title": "TitoloAgricoltoreSIAN"
+    },
+    "UnitaLocaleDto": {
+      "type": "object",
+      "required": [
+        "identificativo"
+      ],
+      "properties": {
+        "attivita": {
+          "type": "string"
+        },
+        "attivitaAteco": {
+          "type": "array",
+          "description": "Attivita ateco della ditta",
+          "allowEmptyValue": false,
+          "items": {
+            "$ref": "#/definitions/AttivitaDto"
+          }
+        },
+        "causaleCessazione": {
+          "type": "string"
+        },
+        "dataApertura": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataCessazione": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataDenunciaCessazione": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataDenunciaInizioAttivita": {
+          "type": "string",
+          "format": "date"
+        },
+        "destinazioniUso": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identificativo": {
+          "type": "string",
+          "description": "Identificativo unita' locale",
+          "allowEmptyValue": false
+        },
+        "indirizzo": {
+          "description": "Domicilio dell'unita' locale",
+          "allowEmptyValue": false,
+          "$ref": "#/definitions/IndirizzoDto"
+        },
+        "indirizzoPec": {
+          "type": "string",
+          "description": "Indirizzo Pec dell'unita' locale",
+          "allowEmptyValue": false
+        },
+        "settoreMerceologico": {
+          "type": "string"
+        },
+        "telefono": {
+          "type": "string",
+          "description": "Recapito telefonico dell'unita' locale",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "UnitaLocaleDto"
+    },
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
+        }
+      },
+      "title": "View"
+    },
+    "WarningResponseType": {
+      "type": "object",
+      "properties": {
+        "dettaglioFirmaDigitale": {
+          "xml": {
+            "name": "DettaglioFirmaDigitale",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DettaglioFirmaDigitaleType"
+        },
+        "documento": {
+          "xml": {
+            "name": "Documento",
+            "attribute": false,
+            "wrapped": false
+          },
+          "$ref": "#/definitions/DocumentoType"
+        },
+        "warningFault": {
+          "type": "array",
+          "xml": {
+            "name": "WarningFault",
+            "attribute": false,
+            "wrapped": false
+          },
+          "items": {
+            "$ref": "#/definitions/WarningType"
+          }
+        }
+      },
+      "title": "WarningResponseType",
+      "xml": {
+        "name": "WarningResponseType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "WarningType": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMsg": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "subjectCN": {
+          "type": "string",
+          "xml": {
+            "name": "SubjectCN",
+            "attribute": false,
+            "wrapped": false
+          }
+        },
+        "subjectDN": {
+          "type": "string",
+          "xml": {
+            "name": "SubjectDN",
+            "attribute": false,
+            "wrapped": false
+          }
+        }
+      },
+      "title": "WarningType",
+      "xml": {
+        "name": "WarningType",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "XMLGregorianCalendar": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "eon": {
+          "type": "integer"
+        },
+        "eonAndYear": {
+          "type": "integer"
+        },
+        "fractionalSecond": {
+          "type": "number"
+        },
+        "hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "millisecond": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "second": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timezone": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "xmlschemaType": {
+          "$ref": "#/definitions/QName"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "XMLGregorianCalendar"
+    }
+  }
+}

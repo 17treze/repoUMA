@@ -1,0 +1,57 @@
+<p-dialog
+  [(visible)]="popupVisibile"
+  [responsive]="true"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="true"
+  [positionTop]="0"
+  (onHide)="closePopup()"
+  [blockScroll]="true"
+>
+  <p-header>
+    Domanda unica campagna {{annoCampagna}}
+  </p-header>
+  <div class="boxpopup">
+    <app-tabella-dati-aggregati-istruttoria
+      tipoSostegno="DISACCOPPIATO"
+      tipoIstruttoria="ANTICIPO"
+      [annoCampagna]="annoCampagna"
+      (datiAggregatiModelEmitter)="setDatiAggregatiAnticipoModel($event)"
+      class="mb-4"
+    >
+      {{ "IstruttorieDatiAggregati.ANTICIPO_DISACCOPPIATO" | translate }}
+    </app-tabella-dati-aggregati-istruttoria>
+    <app-tabella-dati-aggregati-istruttoria
+      tipoSostegno="DISACCOPPIATO"
+      tipoIstruttoria="SALDO"
+      [annoCampagna]="annoCampagna"
+      (datiAggregatiModelEmitter)="setDatiAggregatiSaldoModel($event)"
+      class="mb-4"
+    >
+      {{ "IstruttorieDatiAggregati.SALDO_DISACCOPPIATO" | translate }}
+    </app-tabella-dati-aggregati-istruttoria>
+    <app-tabella-dati-aggregati-istruttoria
+      tipoSostegno="DISACCOPPIATO"
+      tipoIstruttoria="INTEGRAZIONE"
+      [annoCampagna]="annoCampagna"
+      (datiAggregatiModelEmitter)="setDatiAggregatiIntegrazioneModel($event)"
+      class="mb-4"
+    >
+      {{ "IstruttorieDatiAggregati.INTEGRAZIONE_DISACCOPPIATO" | translate }}
+    </app-tabella-dati-aggregati-istruttoria>
+
+    <!-- <hr>
+    <app-tabella-totali-dati-aggregati-istruttoria *ngIf="datiTotali" [datiTotali]="datiTotali">
+    </app-tabella-totali-dati-aggregati-istruttoria> -->
+
+  </div>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      class="btn btn-darkgreen mt-0 mr-0"
+      (click)="closePopup()"
+      label="{{ 'chiudi' | translate }}"
+    ></button>
+  </p-footer>
+</p-dialog>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/VisuraImmobile/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vi="http://www.fabbricato.catasto.regione.taa.it/VisuraImmobileType/schemas" xmlns:uiu="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" xmlns:tns="http://www.catasto.regione.taa.it/VisuraImmobile/schemas" xmlns:pt="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:auth="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas">
+  <xs:import namespace="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6.xsd"/>
+  <xs:import namespace="http://www.fabbricato.catasto.regione.taa.it/VisuraImmobileType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8_9_10_11_12_13.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8_9_10_11_12_13_14.xsd"/>
+  <xs:element name="GetDatiVisuraImmobile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="infoAutorizzative" type="auth:InfoAutorizzativeCatastoType"/>
+        <xs:element name="chiaveUI" type="uiu:ChiaveUnitaImmobiliareType"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="formato" type="xs:string"/>
+        <xs:element maxOccurs="1" minOccurs="0" name="convenzione" type="xs:string"/>
+        <xs:element default="true" maxOccurs="1" minOccurs="1" name="soloCosto" type="xs:boolean"/>
+        <xs:element maxOccurs="1" minOccurs="0" name="dataRiferimento" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDatiVisuraImmobileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="0" name="visuraPerImmobile" type="vi:DatiVisuraImmobileType">
+          <xs:annotation>
+            <xs:documentation>Le informazioni sull'elaborato richiesto</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubalterniParticella">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="infoAutorizzative" type="auth:InfoAutorizzativeCatastoType"/>
+        <xs:element name="particella" type="pt:ChiaveParticellaType"/>
+        <xs:element maxOccurs="1" minOccurs="0" name="dataRiferimento" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubalterniParticellaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="0" name="subalterniParticella" type="vi:ElencoSubalterniParticellaType">
+          <xs:annotation>
+            <xs:documentation>Le informazioni sull'elaborato richiesto</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="FormatoVisuraType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Contiene l'elenco dei possibili formati delle visure di un immobile</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="PDF"/>
+      <xs:enumeration value="XML"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

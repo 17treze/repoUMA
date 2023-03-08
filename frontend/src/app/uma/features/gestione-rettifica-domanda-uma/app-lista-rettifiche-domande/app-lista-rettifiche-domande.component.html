@@ -1,0 +1,79 @@
+<p-accordion>
+  <p-accordionTab
+    [header]="header"
+    [selected]="true">
+    <p-table
+      #table
+      [columns]="cols"
+      [value]="listaDomande"
+      [autoLayout]="true"
+      [paginator]="false"
+      [rows]="elementiPerPagina"
+      [totalRecords]="nrDomande"
+      [responsive]="true"
+      (sortFunction)="a4gMultiTableService.customSortFn($event)"
+      [customSort]="true"
+      [lazy]="true"
+      (onLazyLoad)="changePage($event)">
+      <ng-template
+        pTemplate="header"
+        let-columns>
+        <tr>
+          <th
+            *ngFor="let col of columns"
+            class="text-center"
+            [pSortableColumn]="col.fieldSort"
+            [style.width]="col.width"
+            [pSortableColumnDisabled]="col.field == null">
+            {{col.header}}
+            <p-sortIcon
+              [field]="col.field"
+              *ngIf="col.sortable"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-domanda
+        let-i="rowIndex">
+        <tr class="text-center">
+          <td>{{ domanda.nrDomanda }}</td>
+          <td>
+            {{ domanda.dataPresentazione | date: "dd/MM/yyyy" }}
+          </td>
+          <td>{{ domanda.anno }}</td>
+          <td>
+            {{ domanda.stato | translate | replaceWithSpaceBy:'_' }}
+          </td>
+          <td>{{ domanda.cuaa }}</td>
+          <td>{{ domanda.protocollo }}</td>
+          <td class="text-center">
+            <button
+              pButton
+              class="command-button no-border-radius p-button-lg py-1 px-4 bg-primary"
+              icon="pi pi-pencil"
+              [disabled]="!domanda.edit"
+              iconPos="left"
+              (click)="visualizzaDomanda(domanda.nrDomanda, false)"></button>
+          </td>
+          <td class="text-center">
+            <button
+              pButton
+              class="command-button no-border-radius p-button-lg py-1 px-4 bg-primary"
+              icon="pi pi-arrow-right"
+              iconPos="left"
+              [disabled]="!domanda.view"
+              (click)="visualizzaDomanda(domanda.nrDomanda, true)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="emptymessage"
+        let-columns>
+        <tr>
+          <td [attr.colspan]="9">Nessuna {{footer}} presente</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-accordionTab>
+</p-accordion>

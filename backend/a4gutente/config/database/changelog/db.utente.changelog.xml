@@ -1,0 +1,2722 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!-- Da versione 1.1 di fascicolo -->
+    <changeSet id="UTENTE_1.0" author="Lorenzo Martinelli">
+        <!-- Contenuto di 001_tabelleProfili.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE TABLE A4GT_PROFILO (
+			    ID ${id.number.type} NOT NULL,
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    IDENTIFICATIVO ${string.type}(500 CHAR) NOT NULL,
+			    DESCRIZIONE ${string.type}(4000 CHAR),
+			    CONSTRAINT A4GT_PROFILO_PK PRIMARY KEY (ID),
+			    CONSTRAINT A4GT_PROFILO_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX TABLESPACE ${tablespace.index}
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GT_FUNZIONE (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				IDENTIFICATIVO ${string.type}(500) NOT NULL,
+				DESCRIZIONE ${string.type}(4000) NOT NULL,
+				CONSTRAINT A4GT_FUNZIONE_PK PRIMARY KEY (ID),
+				CONSTRAINT A4GT_FUNZIONE_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX TABLESPACE ${tablespace.index}
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GR_PROFILO_FUNZIONE (
+			    ID ${id.number.type} NOT NULL,
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    ID_PROFILO ${id.number.type} NOT NULL,
+			    ID_FUNZIONE ${id.number.type} NOT NULL,
+			    CONSTRAINT A4GR_PROFILO_FUNZIONE_FK1 FOREIGN KEY (ID_FUNZIONE) REFERENCES A4GT_FUNZIONE (ID),
+			    CONSTRAINT A4GR_PROFILO_FUNZIONE_FK2 FOREIGN KEY (ID_PROFILO) REFERENCES A4GT_PROFILO (ID),
+			    CONSTRAINT A4GR_PROFILO_FUNZIONE_UIDX UNIQUE (ID_PROFILO, ID_FUNZIONE) USING INDEX TABLESPACE ${tablespace.index},
+			    CONSTRAINT A4GR_PROFILO_FUNZIONE_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+        </sql>
+
+        <!-- Contenuto di 002_tabelleUtenti.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE TABLE A4GT_UTENTE (
+			    ID ${id.number.type} NOT NULL,
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    IDENTIFICATIVO ${string.type}(50 CHAR) NOT NULL,
+				CODICE_FISCALE ${string.type}(20 CHAR),
+				NOME ${string.type}(50 CHAR),
+				COGNOME ${string.type}(50 CHAR),
+			    CONSTRAINT A4GT_UTENTE_PK PRIMARY KEY (ID),
+				CONSTRAINT A4GT_UTENTE_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX TABLESPACE ${tablespace.index}
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GR_UTENTE_PROFILO (
+			  ID ${id.number.type} NOT NULL,
+			  VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			  ID_UTENTE ${id.number.type} NOT NULL,
+			  ID_PROFILO ${id.number.type} NOT NULL,
+			  CONSTRAINT A4GR_UTENTE_PROFILO_PK PRIMARY KEY (ID),
+			  CONSTRAINT A4GR_UTENTE_PROFILO_UIDX UNIQUE (ID_UTENTE, ID_PROFILO) USING INDEX TABLESPACE ${tablespace.index},
+			  CONSTRAINT A4GR_UTENTE_PROFILO_FK1 FOREIGN KEY (ID_UTENTE) REFERENCES A4GT_UTENTE (ID),
+			  CONSTRAINT A4GR_UTENTE_PROFILO_FK2 FOREIGN KEY (ID_PROFILO) REFERENCES A4GT_PROFILO (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GR_UTENTE_AZIENDA (
+			    ID ${id.number.type} NOT NULL,
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    ID_UTENTE ${id.number.type} NOT NULL,
+			    ID_AZIENDA ${id.number.type} NOT NULL,
+			    ID_CARICA ${id.number.type} NOT NULL,
+			    DATA_AGGIORNAMENTO DATE,
+			    CONSTRAINT A4GR_UTENTE_AZIENDA_PK PRIMARY KEY (ID),
+			    CONSTRAINT A4GR_UTENTE_AZIENDA_UIDX UNIQUE (ID_UTENTE, ID_AZIENDA) USING INDEX TABLESPACE ${tablespace.index},
+				CONSTRAINT A4GR_UTENTE_AZIENDA_FK1 FOREIGN KEY (ID_UTENTE) REFERENCES A4GT_UTENTE (ID),
+			    CONSTRAINT A4GR_UTENTE_AZIENDA_FK2 FOREIGN KEY (ID_AZIENDA) REFERENCES A4GT_AZIENDA_AGRICOLA (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GT_ENTE (
+			  ID ${id.number.type} NOT NULL,
+			  VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			  IDENTIFICATIVO NUMBER(9) NOT NULL,
+			  DESCRIZIONE ${string.type}(150),
+			  CONSTRAINT A4GT_ENTE_PK PRIMARY KEY (ID),
+			  CONSTRAINT A4GT_ENTE_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX TABLESPACE ${tablespace.index}
+			) TABLESPACE ${tablespace.data};
+			
+			-- CREATE TABLE
+			CREATE TABLE A4GR_UTENTE_ENTE (
+			  ID ${id.number.type} NOT NULL,
+			  VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			  ID_UTENTE ${id.number.type} NOT NULL,
+			  ID_ENTE ${id.number.type} NOT NULL,
+			  CONSTRAINT A4GR_UTENTE_ENTE_PK PRIMARY KEY (ID),
+			  CONSTRAINT A4GR_UTENTE_ENTE_UIDX UNIQUE (ID_UTENTE, ID_ENTE) USING INDEX TABLESPACE ${tablespace.index},
+			  CONSTRAINT A4GR_UTENTE_ENTE_FK1 FOREIGN KEY (ID_UTENTE) REFERENCES A4GT_UTENTE (ID),
+			  CONSTRAINT A4GR_UTENTE_ENTE_FK2 FOREIGN KEY (ID_ENTE) REFERENCES A4GT_ENTE (ID)
+			)
+			TABLESPACE ${tablespace.data};
+        </sql>
+
+        <!-- ******************** INIZIALIZZAZIONE ******************** -->
+
+
+        <!-- ******************** GRANT ******************** -->
+		<!-- Contenuto di 001_tabelleProfili.sql -->	
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FUNZIONE TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_PROFILO_FUNZIONE TO ${user.writer};
+			GRANT DELETE,INSERT,SELECT,UPDATE ON A4GT_PROFILO TO ${user.writer};
+		</sql>
+		
+		<!-- Contenuto di 002_tabelleUtenti.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_UTENTE TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GR_UTENTE_PROFILO TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_UTENTE_AZIENDA TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ENTE TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_UTENTE_ENTE TO ${user.writer};
+        </sql>
+
+    </changeSet>
+
+    <!-- Da versione 1.3 di fascicolo -->
+    <changeSet id="UTENTE_1.1" author="Lorenzo Martinelli">
+    	<!-- Contenuto di 001_AS_DomandaRegistrazioneUtente.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE TABLE A4GT_DOMANDA_REGISTRAZIONE (
+			    ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    IDENTIFICATIVO_UTENTE ${string.type}(50 CHAR) NOT NULL,
+			    STATO ${string.type}(15 CHAR) NOT NULL,
+			    CODICE_FISCALE ${string.type}(20 CHAR) NOT NULL,
+			    NOME ${string.type}(31 CHAR) NOT NULL,
+			    COGNOME ${string.type}(31 CHAR) NOT NULL,
+			    EMAIL ${string.type}(50 CHAR) NOT NULL,
+			    TELEFONO ${string.type}(50 CHAR) NOT NULL,
+			    RESPONSABILITA CLOB NOT NULL,
+			    A4G NUMBER(1)  DEFAULT 0 NOT NULL,
+			    SRT NUMBER(1) DEFAULT 0 NOT NULL,
+			    AGS NUMBER(1) DEFAULT 0 NOT NULL,
+			    CONSTRAINT A4GT_DOM_REGISTRAZ_PK PRIMARY KEY (ID),
+			    CONSTRAINT A4GT_DOM_REGISTRAZ_RESP_JSON CHECK (RESPONSABILITA IS JSON)
+			) TABLESPACE ${tablespace.data}
+			NOCOMPRESS
+			LOB (RESPONSABILITA) STORE AS LOB_T_DOM_REGISTRAZ_RESPONS
+			      ( TABLESPACE  ${tablespace.lob}
+			        DISABLE      STORAGE IN ROW
+			      )
+			NOCACHE
+			NOPARALLEL;
+        </sql>
+
+        <!-- Contenuto di 001_AS_DomandaRegistrazioneUtente.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_DOMANDA_REGISTRAZIONE TO ${user.writer};
+        </sql>
+    </changeSet>
+
+    <!-- Da versione 1.4 di fascicolo -->
+    <changeSet id="UTENTE_1.2" author="Lorenzo Martinelli">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_ENTE ADD CAA ${string.type}(100);
+    	</sql>
+    </changeSet>
+
+    <!-- Da versione 1.5 di fascicolo -->
+    <changeSet id="UTENTE_1.3" author="Lorenzo Martinelli">
+    	<!-- Contenuto di 001a_tabellaAllegatoResponsabilita.sql -->
+    	<sql endDelimiter=";" splitStatements="true">
+    		CREATE TABLE A4GT_ALLEGATO_RESPONSABILITA (
+			    ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			    ID_DOMANDA_REGISTRAZIONE ${id.number.type} NOT NULL,
+			    ID_RESPONSABILITA NUMBER(19) NOT NULL,
+			    COD_RESPONSABILITA ${string.type}(50) NOT NULL,
+			    ALLEGATO BLOB,
+			    DT_INSERIMENTO DATE,
+			    CONSTRAINT A4GT_ALLEGATO_RESP_FK1 FOREIGN KEY (ID_DOMANDA_REGISTRAZIONE) REFERENCES A4GT_DOMANDA_REGISTRAZIONE (ID),
+			    CONSTRAINT A4GT_ALLEGATO_RESP PRIMARY KEY (ID) USING INDEX
+			) TABLESPACE ${tablespace.data}
+			NOCOMPRESS
+			LOB (ALLEGATO) STORE AS LOB_ALLEGATO_RESP
+			 ( TABLESPACE ${tablespace.lob}
+			    DISABLE STORAGE IN ROW
+			 )
+			NOCACHE
+			NOPARALLEL;
+    	</sql>
+    	
+    	<!-- Contenuto di 001a_tabellaAllegatoResponsabilita.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEGATO_RESPONSABILITA TO ${user.writer};
+        </sql>
+    </changeSet>
+
+    <changeSet id="UTENTE_1.4" author="Lorenzo Martinelli">
+    	<sql endDelimiter=";" splitStatements="true">
+    		INSERT INTO A4GT_PROFILO (ID, IDENTIFICATIVO, DESCRIZIONE) values (NXTNBR.NEXTVAL,'amministratore','Amministratore Sistema');
+			INSERT INTO A4GT_PROFILO (ID, IDENTIFICATIVO, DESCRIZIONE) values (NXTNBR.NEXTVAL,'appag','Utente amministratore APPAG');
+			INSERT INTO A4GT_PROFILO (ID, IDENTIFICATIVO, DESCRIZIONE) values (NXTNBR.NEXTVAL,'caa','Utente CAA');
+			INSERT INTO A4GT_PROFILO (ID, IDENTIFICATIVO, DESCRIZIONE) values (NXTNBR.NEXTVAL,'azienda','Utente azienda agricola');
+
+
+    		INSERT INTO A4GT_FUNZIONE (ID, IDENTIFICATIVO, DESCRIZIONE)
+    			VALUES (NXTNBR.NEXTVAL, 'RICERCAFASCICOLOFILTROENTE', 'Ricerca fascicoli con filtro sull''ente');
+    		
+    		INSERT INTO A4GT_FUNZIONE (ID, IDENTIFICATIVO, DESCRIZIONE)
+    			VALUES (NXTNBR.NEXTVAL, 'RICERCAFASCICOLONOFILTRO', 'Ricerca fascicoli senza filtri');
+
+			INSERT INTO A4GT_FUNZIONE (ID, IDENTIFICATIVO, DESCRIZIONE)
+				VALUES (NXTNBR.NEXTVAL, 'RICERCAFASCICOLOFILTROUTENTE', 'Ricerca fascicoli con filtro sull''utente');
+			
+			INSERT INTO A4GR_PROFILO_FUNZIONE(ID, ID_PROFILO, ID_FUNZIONE)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa'), (SELECT ID FROM A4GT_FUNZIONE WHERE IDENTIFICATIVO = 'RICERCAFASCICOLOFILTROENTE'));
+			
+			INSERT INTO A4GR_PROFILO_FUNZIONE(ID, ID_PROFILO, ID_FUNZIONE)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), (SELECT ID FROM A4GT_FUNZIONE WHERE IDENTIFICATIVO = 'RICERCAFASCICOLONOFILTRO'));
+			
+			INSERT INTO A4GR_PROFILO_FUNZIONE(ID, ID_PROFILO, ID_FUNZIONE)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore'), (SELECT ID FROM A4GT_FUNZIONE WHERE IDENTIFICATIVO = 'RICERCAFASCICOLONOFILTRO'));
+			
+			INSERT INTO A4GR_PROFILO_FUNZIONE(ID, ID_PROFILO, ID_FUNZIONE)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda'), (SELECT ID FROM A4GT_FUNZIONE WHERE IDENTIFICATIVO = 'RICERCAFASCICOLOFILTROUTENTE'));
+    	</sql>
+    </changeSet>
+    <!-- Sprint con demo 19.11.2018 -->
+    <changeSet id="UTENTE_1.5" author="Elisabetta Freschi">
+        <createTable tableName="A4GT_PERSONA">
+
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_PERSONA_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_FISCALE" type="${string.type}(16)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="A4GT_PERSONA_CODFISCALE_UIDX"/>
+            </column>
+            <column name="NOME" type="${string.type}(63)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COGNOME" type="${string.type}(63)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="A4GT_PRIVACY_PERSONA">
+
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_PRIVACY_PERSONA_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_PERSONA" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_PRIVACY_PERSONA_FK"
+                             referencedTableName="A4GT_PERSONA"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="TIPO_INFORMATIVA" type="${string.type}(15 CHAR)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DT_ACCETTAZIONE" type="java.sql.Types.DATE" defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DT_PROTOCOLLAZIONE" type="DATE" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="NR_PROTOCOLLO" type="${string.type}(31)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="A4GT_PRIVACY_PERSONA" indexName="A4GT_PRIVACY_PERSONA_TIPO_UIDX" unique="true">
+            <column name="ID_PERSONA"/>
+            <column name="TIPO_INFORMATIVA"/>
+        </createIndex>
+    	
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PERSONA TO ${user.writer};
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PRIVACY_PERSONA TO ${user.writer};
+        </sql>
+        <sql>
+        	ALTER INDEX A4GT_PERSONA_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        	ALTER INDEX A4GT_PERSONA_CODFISCALE_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        	ALTER INDEX A4GT_PRIVACY_PERSONA_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        	ALTER INDEX A4GT_PRIVACY_PERSONA_TIPO_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>
+		<rollback>
+            drop table A4GT_PERSONA;
+        </rollback>
+    </changeSet>
+    <!-- Task servizio carica ruoli (sprint 05/12/2018) -->
+    <changeSet id="UTENTE_1.6.1" author="Elisabetta Freschi">
+    	<createTable tableName="A4GD_RUOLO">
+            <column name="IDENTIFICATIVO" type="${string.type}(63)">
+                <constraints primaryKey="true" primaryKeyName="A4GD_RUOLO_PK"/>
+            </column>
+            <column name="DESCRIZIONE" type="${string.type}(127)">
+                <constraints nullable="false"/>
+            </column>
+    	</createTable>
+    	<sql endDelimiter=";" splitStatements="true">
+    		INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gfascicolo.fascicolo.ricerca.tutti','Possibilita di visionare tutti i fascicoli ed eseguire la ricerca senza filtri');
+			INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gfascicolo.fascicolo.ricerca.ente','Possibilita di visionare i fascicoli dell''ente');
+			INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gfascicolo.fascicolo.ricerca.utente','Possibilita di visionare solo i fascicoli associati all''utente');
+    	</sql>
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_RUOLO TO ${user.writer};
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_RUOLO TO ${user.writer};
+        </sql>
+    </changeSet>
+    <!-- Task servizio carica ruoli (sprint 05/12/2018) -->
+    <changeSet id="UTENTE_1.6.2" author="Elisabetta Freschi">
+    	<createTable tableName="A4GR_PROFILO_RUOLO">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GR_PROFILO_RUOLO_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_PROFILO" type="${id.number.type}">
+                <constraints foreignKeyName="A4GR_PROFILO_RUOLO_PROF_FK"
+                             referencedTableName="A4GT_PROFILO"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="ID_RUOLO" type="${string.type}(63)">
+                <constraints foreignKeyName="A4GR_PROFILO_RUOLO_RUOLO_FK"
+                             referencedTableName="A4GD_RUOLO"
+                             referencedColumnNames="IDENTIFICATIVO"
+                             nullable="false" />
+            </column>
+    	</createTable>
+        <createIndex tableName="A4GR_PROFILO_RUOLO" indexName="A4GR_PROFILO_RUOLO_UIDX" unique="true">
+            <column name="ID_PROFILO"/>
+            <column name="ID_RUOLO"/>
+        </createIndex>
+    	<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (1, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa'), 'a4gfascicolo.fascicolo.ricerca.ente');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (2, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gfascicolo.fascicolo.ricerca.tutti');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (3, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore'), 'a4gfascicolo.fascicolo.ricerca.tutti');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (4, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda'), 'a4gfascicolo.fascicolo.ricerca.utente');
+    	</sql>
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_PROFILO_RUOLO TO ${user.writer};
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_PROFILO_RUOLO TO ${user.writer};
+        </sql>
+    </changeSet>
+    <!-- Task per modifica size della column (sprint 05/12/2018) -->
+    <changeSet id="UTENTE_1.7" author="Paolo Procida">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_PRIVACY_PERSONA MODIFY NR_PROTOCOLLO VARCHAR(50);
+    	</sql>
+    </changeSet>
+	<!-- Sprint 5 20/11/2018 TASK - CREAZIONE MANUALE DI UTENTE OPERATORE CAA -->
+    <changeSet id="UTENTE_5.1" author="Bettina Irler">
+        <createTable tableName="A4GT_LOAD_UTENTE_CAA">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_LOAD_UTENTE_CAA_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+			<column name="COGNOME" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="NOME" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_FISCALE" type="${string.type}(16)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="EMAIL" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="TELEFONO" type="${string.type}(20)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="CAA" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="UFFICIO" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="RESPONSABILE" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>		
+			<column name="NR_FASCICOLO_PRIVACY" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>	
+			<column name="NR_PROTOCOLLO_PRIVACY" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="CARICATO" type="${version.number.type}">
+            </column>				
+        </createTable>
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOAD_UTENTE_CAA TO ${user.writer};
+        </sql>
+        <sql>
+        	ALTER INDEX A4GT_LOAD_UTENTE_CAA_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>
+		<rollback>
+            drop table A4GT_LOAD_UTENTE_CAA;
+        </rollback>
+    </changeSet>
+	<!-- Sprint 5 20/11/2018 TASK - CREAZIONE MANUALE DI UTENTE OPERATORE CAA -->
+     <changeSet id="UTENTE_5.2" author="Bettina Irler">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_UTENTE ADD EMAIL ${string.type}(50);
+			ALTER TABLE A4GT_UTENTE ADD TELEFONO ${string.type}(50);
+    	</sql>
+    </changeSet>
+    <changeSet id="UTENTE_5.3" author="Elisabetta Freschi">
+     	<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+     		<column name="DOCUMENTO" type="BLOB"></column>
+     	</addColumn>
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER TABLE A4GT_DOMANDA_REGISTRAZIONE MOVE LOB(DOCUMENTO) STORE AS (TABLESPACE ${tablespace.lob});
+        </sql>
+    </changeSet>
+    <changeSet id="UTENTE_5.4" author="Elisabetta Freschi">
+    	<createTable tableName="A4GT_FIRMA_DOMANDA_REG">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_FIRMA_DOMANDA_REG_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_DOMANDA" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_FIRMA_DOM_REG_DOM_FK"
+                             referencedTableName="A4GT_DOMANDA_REGISTRAZIONE"
+                             referencedColumnNames="ID"
+                             unique="true" uniqueConstraintName="A4GT_FIRMA_DOM_REG_DOM_UIDX"
+                             nullable="false" />
+            </column>
+            <column name="XML" type="CLOB">
+                <constraints nullable="false" />
+            </column>
+            <column name="PDF" type="BLOB">
+                <constraints nullable="false" />
+            </column>
+    	</createTable>
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER TABLE A4GT_FIRMA_DOMANDA_REG MOVE LOB(PDF) STORE AS (TABLESPACE ${tablespace.lob});
+            ALTER INDEX A4GT_FIRMA_DOM_REG_DOM_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>
+    </changeSet>
+	<!-- Sprint 5 20/11/2018 TASK - CREAZIONE MANUALE DI UTENTE OPERATORE CAA -->
+     <changeSet id="UTENTE_5.3" author="Bettina Irler">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GR_UTENTE_PROFILO DROP COLUMN ID;
+			ALTER TABLE A4GR_UTENTE_PROFILO DROP COLUMN VERSIONE;
+    	</sql>
+    </changeSet>
+	<changeSet id="UTENTE_5.4" author="Bettina Irler">
+    	<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GR_UTENTE_PROFILO DROP CONSTRAINT A4GR_UTENTE_PROFILO_UIDX;
+    		ALTER TABLE A4GR_UTENTE_PROFILO ADD CONSTRAINT A4GR_UTENTE_PROFILO_PK PRIMARY KEY (ID_UTENTE, ID_PROFILO);
+    	</sql>
+    </changeSet>
+	<!-- Sprint 5 20/11/2018 TASK - CREAZIONE MANUALE DI UTENTE OPERATORE CAA -->
+     <changeSet id="UTENTE_5.5" author="Bettina Irler">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GR_UTENTE_ENTE DROP COLUMN ID;
+			ALTER TABLE A4GR_UTENTE_ENTE DROP COLUMN VERSIONE;
+			ALTER TABLE A4GR_UTENTE_ENTE DROP CONSTRAINT A4GR_UTENTE_ENTE_UIDX;
+    		ALTER TABLE A4GR_UTENTE_ENTE ADD CONSTRAINT A4GR_UTENTE_ENTE_PK PRIMARY KEY (ID_UTENTE, ID_ENTE);
+    	</sql>
+    </changeSet>
+    <changeSet id="UTENTE_5.5" author="Elisabetta Freschi">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FIRMA_DOMANDA_REG TO ${user.writer};
+        </sql>
+    </changeSet>
+    <changeSet id="UTENTE_5.6" author="Elisabetta Freschi">
+        <sql endDelimiter=";" splitStatements="true">
+        	INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gutente.utenti.importazione','Possibilita di richidere l''importazione massiva delle utente');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gutente.utenti.importazione');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore'), 'a4gutente.utenti.importazione');
+        </sql>
+    </changeSet>
+
+    <changeSet id="UTENTE_5.1" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			Insert into A4GD_RUOLO (IDENTIFICATIVO,DESCRIZIONE) values ('a4gistruttoria.pac.domandaUnica.visualizza','Possibilita di visualizzare i dati e le informazioni di istruttoria della Domanda Unica');
+			Insert into A4GD_RUOLO (IDENTIFICATIVO,DESCRIZIONE) values ('a4gistruttoria.pac.domandaUnica.edita','Possibilita di modificare i dati e le informazioni di istruttoria della Domanda Unica');
+			
+			Insert into A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) values (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'),'a4gistruttoria.pac.domandaUnica.visualizza');
+			Insert into A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) values (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'),'a4gistruttoria.pac.domandaUnica.edita');
+		</sql>
+    </changeSet>
+	<!-- Sprint 6 fine sprint 21.12.2018 -->
+    <changeSet id="UTENTE_6.1" author="Elisabetta Freschi">
+     	<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+     		<column name="ID_PROTOCOLLO" type="${string.type}(255 CHAR)" />
+     		<column name="DT_PROTOCOLLAZIONE" type="DATE" />
+     	</addColumn>
+    </changeSet>
+	<!-- Sprint 6 fine sprint 21.12.2018 - Gestione utenti e aziende-->
+     <changeSet id="UTENTE_6.2" author="Bettina Irler">
+	 	<addColumn tableName="A4GR_UTENTE_AZIENDA">
+     		<column name="CUAA" type="${string.type}(16)"/>
+     	</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GR_UTENTE_AZIENDA DROP CONSTRAINT A4GR_UTENTE_AZIENDA_UIDX;
+			ALTER TABLE A4GR_UTENTE_AZIENDA DROP CONSTRAINT A4GR_UTENTE_AZIENDA_FK2;
+		</sql>
+		<dropColumn tableName="A4GR_UTENTE_AZIENDA">
+     		<column name="ID_AZIENDA"/>
+     	</dropColumn>
+    </changeSet>
+     <changeSet id="UTENTE_6.1" author="Bettina Irler">
+	 	<dropColumn tableName="A4GT_UTENTE">
+     		<column name="NOME"/>
+     		<column name="COGNOME"/>
+     	</dropColumn>
+    </changeSet>
+    <changeSet id="UTENTE_6.2" author="Elisabetta Freschi">
+    	<dropTable tableName="A4GR_PROFILO_FUNZIONE"/>
+    	<dropTable tableName="A4GT_FUNZIONE"/>
+    </changeSet>
+    <changeSet id="UTENTE_6.3" author="Elisabetta Freschi">
+        <sql endDelimiter=";" splitStatements="true">
+        	INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gutente.persone.tutti.edita','Possibilita di editare i dati di tutte le persone');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gutente.persone.tutti.edita');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore'), 'a4gutente.persone.tutti.edita');
+			
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa'), 'a4gutente.persone.tutti.edita');
+				
+        	INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE) values ('a4gutente.persone.persona.edita','Possibilita di editare i propri dati personali');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda'), 'a4gutente.persone.persona.edita');
+				
+        </sql>
+    </changeSet>
+	 <changeSet id="UTENTE_6.3" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			alter table A4GT_LOAD_UTENTE_CAA drop CONSTRAINT A4GT_LOAD_UTENTE_CAA_PK;
+			alter table A4GT_LOAD_UTENTE_CAA add CONSTRAINT A4GT_LOAD_UTENTE_CAA_PK PRIMARY KEY (CODICE_FISCALE, UFFICIO);
+		</sql>
+	 	<dropColumn tableName="A4GT_LOAD_UTENTE_CAA">
+			<column name="ID"/>
+			<column name="VERSIONE"/>
+     	</dropColumn>
+	</changeSet>
+    <changeSet id="UTENTE_6.4" author="Elisabetta Freschi">
+    	<createTable tableName="A4GUTE_LOGGING">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GUTE_LOGGING_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UTENTE" type="${string.type}(31)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIPO_EVENTO" type="${string.type}(63)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TABELLA" type="${string.type}(127)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_ENTITA" type="${id.number.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DT_EVENTO" type="java.sql.Types.TIMESTAMP" defaultValueComputed="systimestamp">
+                <constraints nullable="false"/>
+            </column>
+    	</createTable>
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER INDEX A4GUTE_LOGGING_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>
+    </changeSet>
+    <changeSet id="UTENTE_6.5" author="Elisabetta Freschi">
+		<addUniqueConstraint columnNames="ID_UTENTE, CUAA"
+			tableName="A4GR_UTENTE_AZIENDA" constraintName="A4GR_UTENTE_AZIENDA_UIDX" />
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER INDEX A4GR_UTENTE_AZIENDA_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>
+    </changeSet>
+    <changeSet id="UTENTE_6.6" author="Elisabetta Freschi">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GUTE_LOGGING TO ${user.writer};
+        </sql>
+    </changeSet>
+
+    <include file = "config/database/changelog/db.utente.enti.changelog.xml"/>
+
+    <changeSet id="UTENTE_7.1" author="Elisabetta Freschi">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.ricerca.tutti</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati antimafia senza filtri</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.tutti</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.ricerca.ente</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati antimafia per le aziende collegate all'ente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.ente</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.ricerca.utente</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati antimafia per le aziende dell'utente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.utente</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.edita.tutti</column>
+        	<column name="DESCRIZIONE">Possibilita di compilare i dati antimafia per tutte le aziende</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.edita.tutti</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.edita.ente</column>
+        	<column name="DESCRIZIONE">Possibilita di compilare i dati antimafia per le aziende collegate all'ente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.edita.ente</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.edita.utente</column>
+        	<column name="DESCRIZIONE">Possibilita di compilare i dati antimafia per le aziende dell'utente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.edita.utente</column>
+        </insert>
+
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.cancella.tutti</column>
+        	<column name="DESCRIZIONE">Possibilita di eliminare i dati antimafia per tutte le aziende</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.cancella.tutti</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.cancella.ente</column>
+        	<column name="DESCRIZIONE">Possibilita di eliminare i dati antimafia per le aziende collegate all'ente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.cancella.ente</column>
+        </insert>
+
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gfascicolo.antimafia.cancella.utente</column>
+        	<column name="DESCRIZIONE">Possibilita di eliminare i dati antimafia per le aziende dell'utente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.cancella.utente</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.2" author="Elisabetta Freschi">
+    	<insert tableName="A4GT_PROFILO">
+    		<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO">gestoreutenti</column>
+        	<column name="DESCRIZIONE">Profilo per la gestione delle utenze del sistema</column>
+    	</insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.3" author="Elisabetta Freschi">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.fascicolo.visualizza</column>
+        	<column name="DESCRIZIONE">Possibilita di editare i dati di fascicolo siap</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4g.ags.fascicolo.visualizza</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4g.ags.fascicolo.visualizza</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4g.ags.fascicolo.visualizza</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.4" author="Elisabetta Freschi">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.domanda.psr.visualizza</column>
+        	<column name="DESCRIZIONE">Visualizzazione dati della domanda PSR</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.psr.visualizza</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.5" author="Elisabetta Freschi">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.domanda.du.visualizza</column>
+        	<column name="DESCRIZIONE">Visualizzazione dati della domanda DU</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.du.visualizza</column>
+        </insert>
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.domanda.du.movimenta</column>
+        	<column name="DESCRIZIONE">Possibilita di movimentare la domanda DU</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.du.movimenta</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.6" author="Elisabetta Freschi">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gutente.utenti.edita</column>
+        	<column name="DESCRIZIONE">Possibilita di editare i dati utenti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gutente.utenti.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti')" />
+        	<column name="ID_RUOLO">a4gutente.utenti.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore')" />
+        	<column name="ID_RUOLO">a4gutente.utenti.edita</column>
+        </insert>
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gutente.domandaregistrazione.visualizza</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare le domande di registrazione al Sistema</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gutente.domandaregistrazione.visualizza</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti')" />
+        	<column name="ID_RUOLO">a4gutente.domandaregistrazione.visualizza</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore')" />
+        	<column name="ID_RUOLO">a4gutente.domandaregistrazione.visualizza</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.7" author="Daniele Faieta">
+		<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.pianicolture.visualizza</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati sui piani colturali</column>
+        </insert>
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="IDENTIFICATIVO">USER_CATASTO</column>
+			<column name="CODICE_FISCALE">USER_CATASTO</column>
+		</insert>
+        <insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO">catasto_utenza_tecnica</column>
+      		<column name="DESCRIZIONE">Utenza tecnica per applicativo catasto</column>
+    	</insert>
+		<insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'catasto_utenza_tecnica')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_CATASTO')" />
+		</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'catasto_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4g.ags.pianicolture.visualizza</column>
+		</insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.8" author="Salvatore Caccia">
+    	<insert tableName="A4GT_PROFILO">
+    		<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO">istruttoreamf</column>
+        	<column name="DESCRIZIONE">Profilo per la gestione della istruttoria antimafia</column>
+    	</insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.antimafia.visualizza</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare le domande collegate alla dichiarazione antimafia</column>
+        </insert>
+       	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.antimafia.edita</column>
+        	<column name="DESCRIZIONE">Possibilita di inserire/modificare le domande collegate alla dichiarazione antimafia</column>
+        </insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.antimafia.cancella</column>
+        	<column name="DESCRIZIONE">Possibilita di cancellare le domande collegate alla dichiarazione antimafia</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza</column>
+        </insert>
+ 	        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.cancella</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.cancella</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.9" author="Elisabetta Freschi">
+       <dropUniqueConstraint tableName="A4GR_UTENTE_AZIENDA" constraintName="A4GR_UTENTE_AZIENDA_UIDX"/>
+       <addUniqueConstraint columnNames="ID_UTENTE, CUAA" tableName="A4GR_UTENTE_AZIENDA" constraintName="A4GR_UTENTE_AZIENDA_UIDX" deferrable="true" initiallyDeferred="true" />
+    </changeSet>
+    <changeSet id="UTENTE_7.10" author="Salvatore Caccia">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.tutti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.edita.tutti</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_7.11" author="Salvatore Caccia">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.psr.visualizza</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_8.1" author="Salvatore Caccia">
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="IDENTIFICATIVO">USER_VERIFICA_PERIODICA</column>
+			<column name="CODICE_FISCALE">VERIFICA_PERIODICA</column>
+		</insert>
+        <insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO">verifica_periodica_utenza_tecnica</column>
+      		<column name="DESCRIZIONE">Utenza tecnica per permettere la verifica periodica</column>
+    	</insert>
+		<insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'verifica_periodica_utenza_tecnica')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_VERIFICA_PERIODICA')" />
+		</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'verifica_periodica_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.tutti</column>
+		</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'verifica_periodica_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gfascicolo.antimafia.edita.tutti</column>
+		</insert>
+    </changeSet>
+    <changeSet id="UTENTE_8.2" author="Daniele Faieta">
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="IDENTIFICATIVO">USER_SRT</column>
+			<column name="CODICE_FISCALE">USER_SRT</column>
+		</insert>
+        <insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO">srt_utenza_tecnica</column>
+      		<column name="DESCRIZIONE">Utenza tecnica per applicativo SRTrento</column>
+    	</insert>
+		<insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'srt_utenza_tecnica')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_SRT')" />
+		</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'srt_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza</column>
+		</insert>
+    </changeSet>
+	<changeSet id="UTENTE_8.3" author="Salvatore Caccia">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.antimafia.visualizza.ente</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati di istruttoria per le aziende collegate all'ente</column>
+        </insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.antimafia.visualizza.utente</column>
+        	<column name="DESCRIZIONE">Possibilita di visionare i dati di istruttoria per le aziende dell'utente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza.ente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza.utente</column>
+        </insert>         	
+	</changeSet>
+	<changeSet id="UTENTE_9.0" author="Elisabetta Freschi">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.domandaUnica.rielaboraDati</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire i servizi per rielaborare i dati delle domande da istruire</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'amministratore')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.rielaboraDati</column>
+        </insert>         	
+	</changeSet>
+    <changeSet id="UTENTE_10.0" author="Elisabetta Freschi">
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="IDENTIFICATIVO">USER_A4GPROXY_BDN</column>
+			<column name="CODICE_FISCALE">USER_A4GPROXY_BDN</column>
+		</insert>
+    </changeSet>
+    <changeSet id="UTENTE_11.0" author="Elisabetta Freschi">
+        <insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO">istruttoredu</column>
+      		<column name="DESCRIZIONE">Profilo per eseguire le istruttorie delle domande DU</column>
+    	</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.edita</column>
+		</insert>
+    </changeSet>
+    <changeSet id="UTENTE_12.0" author="Elisabetta Freschi">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_RUOLO">a4g.ags.domanda.du.visualizza</column>
+		</insert>
+    </changeSet>
+	<!--  TASK - INTRODUZIONE PROFILO ISTRUTTORE DU: CAMBIO PROFILO PER ISTRUTTORI -->
+    <changeSet id="UTENTE_12.1" author="Elisabetta Freschi">
+    	<delete tableName="A4GR_UTENTE_PROFILO">
+    		<where>ID_UTENTE = (SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'PLLFRC76H09H612S')</where>
+    	</delete>
+    	<delete tableName="A4GR_UTENTE_PROFILO">
+    		<where>ID_UTENTE = (SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'ZMRLCU79R06H612A')</where>
+    	</delete>
+    	<delete tableName="A4GR_UTENTE_PROFILO">
+    		<where>ID_UTENTE = (SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'FRRMRC68A16L378O')</where>
+    	</delete>
+    </changeSet>
+    <changeSet id="UTENTE_12.2" author="Elisabetta Freschi" labels="PROD">
+        <insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'PLLFRC76H09H612S')" />
+		</insert>
+        <insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'ZMRLCU79R06H612A')" />
+		</insert>
+        <insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'FRRMRC68A16L378O')" />
+		</insert>
+    </changeSet>
+	<changeSet id="UTENTE_12.3" author="Elisabetta Freschi">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.statistica.edita</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire l'elaborazione delle statistiche relative alle domande</column>
+        </insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.istruttoria.edita</column>
+        	<column name="DESCRIZIONE">Possibilita di compilare i dati dell'istruttoria</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.statistica.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.istruttoria.edita</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.4" author="Elisabetta Freschi">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.domandaUnica.domandaIntegrativa.edita</column>
+        	<column name="DESCRIZIONE">Possibilita di editare e lavorare le domande integrative</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.domandaIntegrativa.edita</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.domandaIntegrativa.edita</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.5" author="Elisabetta Freschi">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gfascicolo.antimafia.ricerca.tutti</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.6" author="Elisabetta Freschi">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gistruttoria.antimafia.visualizza</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.7" author="Elisabetta Freschi">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.istruttoria.edita</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.8" author="Elisabetta Freschi">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.domanda.du.liquidabilita.visualizza</column>
+        	<column name="DESCRIZIONE">Possibilita di visualizzare le informazioni di liquidabilita della domanda unica</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.du.liquidabilita.visualizza</column>
+        </insert>         	
+	</changeSet>
+	<changeSet id="UTENTE_12.8" author="Marco Dalla Torre">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.domandaUnica.visualizza.tutti</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire la ricerca su tutte le domande</column>
+        </insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.domandaUnica.visualizza.ente</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire la ricerca sulle domande relative all'ente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.visualizza.tutti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.visualizza.tutti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.domandaUnica.visualizza.ente</column>
+        </insert>
+	</changeSet>
+	<changeSet id="UTENTE_12.9" author="Fabio Strada">
+		<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="CONFIGURATO" type="NUMBER(1)" defaultValue="0">
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="DT_APPROVAZIONE" type="DATE"></column>
+		</addColumn>
+		<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="DT_RIFIUTO" type="DATE"></column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="UTENTE_12.10" author="Fabio Strada">
+		<addColumn tableName="A4GT_PROFILO">
+			<column name="RESPONSABILITA" type="${string.type}(100)"></column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="UTENTE_12.11" author="Fabio Strada">
+		<createTable tableName="A4GT_ISTRUTTORIA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_ISTRUTTORIA_PK"/>
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="VARIAZIONE_RICHIESTA" type="${string.type}(2000)"></column>
+			<column name="TESTO_COMUNICAZIONE" type="${string.type}(4000)"></column>
+			<column name="MOTIVAZIONE_RIFIUTO" type="${string.type}(2000)"></column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+				<constraints foreignKeyName="A4GT_ISTRUTTORIA_DOMANDA_FK"
+							 referencedTableName="A4GT_DOMANDA_REGISTRAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ISTRUTTORIA TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_12.12" author="Fabio Strada">
+		<createTable tableName="A4GR_PROFILO_ISTRUTTORIA">
+			<column name="ID_ISTRUTTORIA" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_PROFILO_ISTRUTTORIA_FK1"
+							 referencedTableName="A4GT_ISTRUTTORIA"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+			<column name="ID_PROFILO" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_PROFILO_ISTRUTTORIA_FK2"
+							 referencedTableName="A4GT_PROFILO"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+
+		<createTable tableName="A4GR_ENTE_ISTRUTTORIA">
+			<column name="ID_ISTRUTTORIA" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_ENTE_ISTRUTTORIA_FK1"
+							 referencedTableName="A4GT_ISTRUTTORIA"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+			<column name="ID_ENTE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_ENTE_ISTRUTTORIA_FK2"
+							 referencedTableName="A4GT_ENTE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_PROFILO_ISTRUTTORIA TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_ENTE_ISTRUTTORIA TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_12.13" author="Fabio Strada">
+		<addColumn tableName="A4GT_ISTRUTTORIA">
+			<column name="NOTE" type="${string.type}(2000)"></column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="UTENTE_12.14" author="Elisabetta">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.du.movimenta</column>
+        </insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_12.14" author="Fabio Strada">
+		<addColumn tableName="A4GT_ISTRUTTORIA">
+			<column name="TESTO_MAIL_INVIATA" type="${string.type}(2000)"></column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="UTENTE_13.1" author="Lorenzo Martinelli">
+    	<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"/>
+        	<column name="IDENTIFICATIVO">libero_professionista</column>
+        	<column name="DESCRIZIONE">Utente libero professionista</column>
+			<column name="RESPONSABILITA">LIBERO_PROFESSIONISTA</column>
+        </insert>
+		<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"/>
+        	<column name="IDENTIFICATIVO">altro_ente</column>
+        	<column name="DESCRIZIONE">Utenza di un ente differente da CAA</column>
+			<column name="RESPONSABILITA">DIPENDENTE_ALTRI_ENTI</column>
+        </insert>
+	</changeSet>	
+
+	<changeSet id="UTENTE_13.2" author="Fabio Strada">
+		<dropNotNullConstraint columnName="ID_DOMANDA"
+							   tableName="A4GT_ISTRUTTORIA"/>
+	</changeSet>
+
+	<changeSet id="UTENTE_13.3" author="Fabio Strada">
+		<addColumn tableName="A4GT_ISTRUTTORIA">
+			<column name="ID_UTENTE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GT_ISTRUTTORIA_UTENTE_FK"
+							 referencedTableName="A4GT_UTENTE"
+							 referencedColumnNames="ID"
+							 nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="UTENTE_13.4" author="Fabio Strada">
+		<sql endDelimiter=";" splitStatements="true">
+
+			INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE)
+			VALUES ('a4gutente.domandaregistrazione.edita','Possibilita di editare i dati delle domande di registrazione');
+
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gutente.domandaregistrazione.edita');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti'), 'a4gutente.domandaregistrazione.edita');
+
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_13.5" author="Fabio Strada">
+		<sql endDelimiter=";" splitStatements="true">
+
+			INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE)
+			VALUES ('a4gutente.domandaregistrazione.istruttoria.visualizza','Possibilita di editare i dati delle domande di registrazione');
+
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gutente.domandaregistrazione.istruttoria.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti'), 'a4gutente.domandaregistrazione.istruttoria.visualizza');
+
+			INSERT INTO A4GD_RUOLO (IDENTIFICATIVO, DESCRIZIONE)
+			VALUES ('a4gutente.domandaregistrazione.istruttoria.edita','Possibilita di editare i dati delle domande di registrazione');
+
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag'), 'a4gutente.domandaregistrazione.istruttoria.edita');
+			INSERT INTO A4GR_PROFILO_RUOLO(ID, ID_PROFILO, ID_RUOLO)
+			VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti'), 'a4gutente.domandaregistrazione.istruttoria.edita');
+
+		</sql>
+	</changeSet>
+
+    <changeSet id="UTENTE_14.1" author="Salvatore Caccia">
+        <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4g.ags.domanda.du.azienda.visualizza</column>
+        	<column name="DESCRIZIONE">Visualizzazione dati della domanda DU per aziende</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4g.ags.domanda.du.azienda.visualizza</column>
+        </insert>
+    </changeSet>
+
+	<changeSet id="UTENTE_14.2" author="Fabio Strada">
+        <addColumn tableName="A4GT_ISTRUTTORIA">
+            <column name="DATA_TERMINE_ISTRUTTORIA" type="DATE"></column>
+        </addColumn>
+	</changeSet>
+
+    <changeSet id="UTENTE_14.3" author="Fabio Strada">
+        <addColumn tableName="A4GT_ISTRUTTORIA">
+            <column name="ID_ISTRUTTORE" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_ISTRUTTORIA_UTENTE_FK_1"
+                             referencedTableName="A4GT_UTENTE"
+                             referencedColumnNames="ID"
+                             nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+	<changeSet id="UTENTE_14.4" author="Fabio Strada">
+		<dropColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="DT_APPROVAZIONE"></column>
+		</dropColumn>
+		<dropColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="DT_RIFIUTO"></column>
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="UTENTE_14.5" author="Fabio Strada">
+		<createTable tableName="A4GR_PROFILO_DIS_ISTRUTTORIA">
+			<column name="ID_ISTRUTTORIA" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_PROFILO_D_ISTRUTTORIA_FK1"
+							 referencedTableName="A4GT_ISTRUTTORIA"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+			<column name="ID_PROFILO" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_PROFILO_D_ISTRUTTORIA_FK2"
+							 referencedTableName="A4GT_PROFILO"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="UTENTE_14.6" author="Fabio Strada">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_PROFILO_DIS_ISTRUTTORIA TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_14.7" author="Fabio Strada">
+		<addUniqueConstraint columnNames="CODICE_FISCALE"
+							 tableName="A4GT_UTENTE"
+							 constraintName="A4GT_UTENTE_COD_FISC"
+							 deferrable="true"
+							 initiallyDeferred="true" />
+	</changeSet>
+
+	<changeSet id="UTENTE_14.8" author="Fabio Strada">
+		<addColumn tableName="A4GT_ISTRUTTORIA">
+			<column name="MOTIVO_DISATTIVAZIONE" type="${string.type}(2000)">
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="UTENTE_15.0" author="Elisabetta Freschi">
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.istruttoria.du.visualizza.tutti</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire la ricerca di tutte le istruttorie relative a domande uniche</column>
+        </insert>
+    	<insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO">a4gistruttoria.pac.istruttoria.du.visualizza.utente</column>
+        	<column name="DESCRIZIONE">Possibilita di eseguire la ricerca sulle istruttorie di domande uniche presentate dall'utente</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.istruttoria.du.visualizza.tutti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.istruttoria.du.visualizza.tutti</column>
+        </insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.istruttoria.du.visualizza.utente</column>
+        </insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_15.0" author="GianFilippo Autellitano">
+		<update tableName="a4gt_domanda_registrazione">
+			<column name="stato" value="APPROVATA"/>
+			<where>stato = 'CHIUSA'</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="UTENTE_16.0" author="Fabio Strada">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'UTENZA_TECNICA' WHERE IDENTIFICATIVO = 'catasto_utenza_tecnica';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_PAT' WHERE IDENTIFICATIVO = 'istruttoreamf';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'UTENZA_TECNICA' WHERE IDENTIFICATIVO = 'verifica_periodica_utenza_tecnica';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'UTENZA_TECNICA' WHERE IDENTIFICATIVO = 'srt_utenza_tecnica';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_TNDIGIT' WHERE IDENTIFICATIVO = 'amministratore';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_PAT' WHERE IDENTIFICATIVO = 'appag';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_CAA' WHERE IDENTIFICATIVO = 'caa';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'TITOLARE_AZIENDA_AGRICOLA' WHERE IDENTIFICATIVO = 'azienda';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_PAT' WHERE IDENTIFICATIVO = 'gestoreutenti';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_PAT' WHERE IDENTIFICATIVO = 'istruttoredu';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'LIBERO_PROFESSIONISTA' WHERE IDENTIFICATIVO = 'libero_professionista';
+			UPDATE A4GT_PROFILO SET RESPONSABILITA = 'DIPENDENTE_ALTRI_ENTI' WHERE IDENTIFICATIVO = 'altro_ente';
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UTENTE_21.1" author="Gabriele Ninfa">
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="IDENTIFICATIVO">USER_AUTOMAZIONE_APPROVAZIONE</column>
+			<column name="CODICE_FISCALE">AUTOAPPROVAZIONE</column>
+		</insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_21.2" author="Gabriele Ninfa">
+		<insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO">automazione_approvazione_utenza_tecnica</column>
+      		<column name="DESCRIZIONE">Utenza tecnica per automazione approvazione</column>
+    	</insert>
+		<insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_AUTOMAZIONE_APPROVAZIONE')" />
+		</insert>
+        <insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.edita</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.istruttoria.edita</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.istruttoria.visualizza</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.visualizza</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica')" />
+			<column name="ID_RUOLO">a4gutente.utenti.edita</column>
+		</insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_21.3" author="Gabriele Ninfa">
+		<insert tableName="A4GT_PERSONA">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+    	    <column name="VERSIONE">0</column>
+    	    <column name="CODICE_FISCALE" valueComputed="(SELECT CODICE_FISCALE FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_AUTOMAZIONE_APPROVAZIONE')" />
+    	    <column name="NOME">PROCESSO</column>
+    	    <column name="COGNOME">AUTOMATICO</column>
+    	</insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_22.1" author="Gabriele Ninfa">
+		<update tableName="A4GT_PROFILO">
+			<column name="RESPONSABILITA" value="UTENZA_TECNICA"/>
+			<where>IDENTIFICATIVO = 'automazione_approvazione_utenza_tecnica'</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="UTENTE_21.4" author="Antonio Trombetta">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GT_PROFILO (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE, RESPONSABILITA)
+			VALUES (NXTNBR.NEXTVAL, 0,'viewer_altro_ente','Profilo per visualizzare i dati ALTRO ENTE', 'DIPENDENTE_ALTRI_ENTI');
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="UTENTE_21.5" author="Antonio Trombetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4g.ags.domanda.du.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4g.ags.domanda.psr.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4gfascicolo.antimafia.ricerca.tutti');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4gistruttoria.antimafia.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4gistruttoria.pac.domandaUnica.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4gistruttoria.pac.domandaUnica.visualizza.tutti');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente'),'a4gistruttoria.pac.istruttoria.du.visualizza.tutti');
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_21.6" author="Antonio Trombetta">
+		<update tableName="A4GT_PROFILO">
+			<column name="DESCRIZIONE" value="Utenza di un ente differente da CAA"/>
+			<where>IDENTIFICATIVO = 'viewer_altro_ente'</where>
+		</update>
+
+		<delete tableName="A4GR_PROFILO_ISTRUTTORIA">
+			<where>ID_PROFILO = (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'altro_ente')</where>
+		</delete>
+
+		<delete tableName="A4GT_PROFILO">
+			<where>IDENTIFICATIVO = 'altro_ente'</where>
+		</delete>
+	</changeSet>
+
+	<changeSet id="UTENTE_21.7" author="Antonio Trombetta">
+		<update tableName="A4GT_PROFILO">
+			<column name="DESCRIZIONE" value="Utenza Visualizzatore di un ente differente da CAA"/>
+			<where>IDENTIFICATIVO = 'viewer_altro_ente'</where>
+		</update>
+	</changeSet>
+	
+	
+	<changeSet id="UTENTE_21.8" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GT_PROFILO (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE, RESPONSABILITA)
+			VALUES (NXTNBR.NEXTVAL, 0,'viewer_pat','Profilo per visualizzare i dati PAT', 'DIPENDENTE_PAT');
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UTENTE_21.9" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4g.ags.domanda.du.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4g.ags.domanda.psr.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4gfascicolo.antimafia.ricerca.tutti');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4gistruttoria.antimafia.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4gistruttoria.pac.domandaUnica.visualizza');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4gistruttoria.pac.domandaUnica.visualizza.tutti');
+			INSERT INTO A4GR_PROFILO_RUOLO (ID,VERSIONE,ID_PROFILO,ID_RUOLO) VALUES (NXTNBR.NEXTVAL,0,(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat'),'a4gistruttoria.pac.istruttoria.du.visualizza.tutti');
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_24.0" author="Massimo Nascivera">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GT_EVENTSTORED_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false" />
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UTENTE_24.1" author="Massimo Nascivera">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_EVENTSTORED ADD USER_NAME ${string.type}(100) NOT NULL;
+    	</sql>
+    </changeSet>
+    
+    <changeSet id="UTENTE_25.0" author="Massimo Nascivera">
+    	<renameTable newTableName="A4GT_LOGGING" oldTableName="A4GUTE_LOGGING" />
+    </changeSet>
+    
+    <changeSet id="UTENTE_25.1" author="Massimo Nascivera">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_EVENTSTORED MODIFY USER_NAME NULL;
+    	</sql>
+    </changeSet>
+
+    <changeSet id="UTENTE_25.2" author="Massimo Nascivera">
+		<insert tableName="A4GT_UTENTE">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"/>
+			<column name="IDENTIFICATIVO" value="USER_SCHEDULER_EVENT"/>
+			<column name="CODICE_FISCALE" value="USERSCHEDULEREVE"/>
+		</insert>
+        <insert tableName="A4GT_PROFILO">
+    	    <column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+            <column name="IDENTIFICATIVO" value="scheduler_event_utenza_tecnica"/>
+      		<column name="DESCRIZIONE" value="Utenza tecnica per permettere la gestione di eventi sincroni"/>
+			<column name="RESPONSABILITA" value="UTENZA_TECNICA"/>
+    	</insert>
+		<insert tableName="A4GR_UTENTE_PROFILO">
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'scheduler_event_utenza_tecnica')" />
+			<column name="ID_UTENTE" valueComputed="(SELECT ID FROM A4GT_UTENTE WHERE IDENTIFICATIVO = 'USER_SCHEDULER_EVENT')" />
+		</insert>
+    </changeSet>
+
+    <changeSet id="UTENTE_25.3" author="Massimo Nascivera">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"/>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'scheduler_event_utenza_tecnica')" />
+			<column name="ID_RUOLO" value="a4gfascicolo.antimafia.edita.tutti"/>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"/>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'scheduler_event_utenza_tecnica')" />
+			<column name="ID_RUOLO" value="a4gutente.domandaregistrazione.edita"/>
+		</insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_26.0" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_DOMANDA_REGISTRAZIONE">
+     		<column name="TIPO_DOMANDA_REGISTRAZIONE" type="${string.type}(16)"></column>
+     	</addColumn>
+    </changeSet>
+    <changeSet id="UTENTE_26.1" author="Marco Dalla Torre">
+		<update tableName="A4GT_DOMANDA_REGISTRAZIONE">
+			<column name="TIPO_DOMANDA_REGISTRAZIONE" value="COMPLETA" />
+			<where>TIPO_DOMANDA_REGISTRAZIONE is null</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="UTENTE_28.1" author="Lorenzo Martinelli">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+        	<column name="ID_RUOLO">a4gistruttoria.pac.statistica.edita</column>
+        </insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_28U.1" author="Paolo Cristofaro">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.edita.ente</column>
+        	<column name="DESCRIZIONE">Possibilità di inserire/modificare una domanda di richiesta carburante per le aziende iscritte all'ente</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.edita.utente</column>
+        	<column name="DESCRIZIONE">Possibilità di inserire/modificare una domanda di richiesta carburante per le aziende dell'utente</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.edita.ente</column>
+        </insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.edita.utente</column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_29U.0" author="Bruno Conetta">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.ricerca.ente</column>
+        	<column name="DESCRIZIONE">Possibilità di ricercare una domanda di richiesta carburante per le aziende iscritte all'ente</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.ricerca.utente</column>
+        	<column name="DESCRIZIONE">Possibilità di ricercare una domanda di richiesta carburante per le aziende dell'utente</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.ente</column>
+        </insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.utente</column>
+        </insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_29F.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_ENTE_ID_ISTRUTTORIA ON A4GR_ENTE_ISTRUTTORIA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ENTE_ID_ENTE ON A4GR_ENTE_ISTRUTTORIA (ID_ENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_DIS_ID_ISTRUTTORIA ON A4GR_PROFILO_DIS_ISTRUTTORIA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_DIS_ID_PROFILO ON A4GR_PROFILO_DIS_ISTRUTTORIA (ID_PROFILO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_ID_ISTRUTTORIA ON A4GR_PROFILO_ISTRUTTORIA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_ISTR_ID_PROFILO ON A4GR_PROFILO_ISTRUTTORIA (ID_PROFILO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_RUOLO_ID_PROFILO ON A4GR_PROFILO_RUOLO (ID_PROFILO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROFILO_RUOLO_ID_RUOLO ON A4GR_PROFILO_RUOLO (ID_RUOLO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_UTENTE_AZIENDA_ID_UTENTE ON A4GR_UTENTE_AZIENDA (ID_UTENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_UTENTE_ENTE_ID_UTENTE ON A4GR_UTENTE_ENTE (ID_UTENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_UTENTE_ID_ENTE ON A4GR_UTENTE_ENTE (ID_ENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_UTENTE_PROFILO_ID_UTENTE ON A4GR_UTENTE_PROFILO (ID_UTENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_UTENTE_ID_PROFILO ON A4GR_UTENTE_PROFILO (ID_PROFILO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ALL_RESP_ID_DOM_REG ON A4GT_ALLEGATO_RESPONSABILITA (ID_DOMANDA_REGISTRAZIONE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTRUTTORIA_ID_DOMANDA ON A4GT_ISTRUTTORIA (ID_DOMANDA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTRUTTORIA_ID_UTENTE ON A4GT_ISTRUTTORIA (ID_UTENTE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTRUTTORIA_ID_ISTRUTTORE ON A4GT_ISTRUTTORIA (ID_ISTRUTTORE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PRIVACY_ID_PERSONA ON A4GT_PRIVACY_PERSONA (ID_PERSONA) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+    <changeSet id="UTENTE_31F" author="Marco Dalla Torre">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.fascicolo.apertura.ente</column>
+        	<column name="DESCRIZIONE">Apertura di un fascicolo</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.fascicolo.apertura.ente</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.revoca.ente</column>
+        	<column name="DESCRIZIONE">Revoca ordinaria mandato di un fascicolo</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.revoca.ente</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.revocaimmediata</column>
+        	<column name="DESCRIZIONE">Revoca immediata mandato di un fascicolo</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.revocaimmediata.cruscotto.ente</column>
+        	<column name="DESCRIZIONE">Cruscotto delle revoche mandato</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata.cruscotto.ente</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.revocaimmediata.accettazione</column>
+        	<column name="DESCRIZIONE">Accettazione o rifiuto di una revoca immediata mandato</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata.accettazione</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.modificasportello</column>
+        	<column name="DESCRIZIONE">Modifica mandato dello sportello</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.modificasportello</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.fascicolo.dettaglio.home.ente</column>
+        	<column name="DESCRIZIONE">Visualizzazione di un fascicolo</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.fascicolo.dettaglio.home.ente</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.fascicolo.aggiornamento.modalitapagamento.ente</column>
+        	<column name="DESCRIZIONE">Aggiornamento dati di pagamento</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.fascicolo.aggiornamento.modalitapagamento.ente</column>
+        </insert>
+		
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.fascicolo.visualizzazione.modalitapagamento.ente</column>
+        	<column name="DESCRIZIONE">Visualizzazione dati di pagamento</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.modalitapagamento.ente</column>
+        </insert>
+    </changeSet>
+	
+	<changeSet id="UTENTE_31F.2" author="Marco Dalla Torre">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4ganagrafica.mandato.revocaimmediata.cruscotto.valutate.tutti</column>
+        	<column name="DESCRIZIONE">Cruscotto delle revoche mandato, visualizza tutte le richieste già valutate</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata.cruscotto.valutate.tutti</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_32U.0" author="Bruno Conetta">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.cancella.ente</column>
+        	<column name="DESCRIZIONE">Possibilità di cancellare una domanda di richiesta carburante per le aziende iscritte all'ente</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.cancella.utente</column>
+        	<column name="DESCRIZIONE">Possibilità di cancellare una domanda di richiesta carburante per le aziende dell'utente</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.cancella.ente</column>
+        </insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.cancella.utente</column>
+        </insert>
+    </changeSet>
+    <changeSet id="UTENTE_31F.2" author="Marco Campisi">
+		<insert tableName="A4GD_RUOLO">
+		 	<column name="IDENTIFICATIVO">istanzariesame.richiestamodificasuolo.tutti</column>
+        	<column name="DESCRIZIONE">Possibilità di ricerca delle richieste modifica del suolo</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+        	<column name="ID_RUOLO">istanzariesame.richiestamodificasuolo.tutti</column>
+        </insert>
+    </changeSet>
+	
+	<changeSet id="UTENTE_34.1" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT ON A4GT_EVENTSTORED TO NETEYE;
+		</sql>
+	</changeSet>
+    <changeSet id="UTENTE_35.1" author="Elisabetta Freschi">
+    	<insert tableName="A4GT_PROFILO">
+    		<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO">backoffice</column>
+        	<column name="DESCRIZIONE">Profilo per l'accesso alle funzionalita GIS da parte del backoffice</column>
+        	<column name="RESPONSABILITA">DIPENDENTE_PAT</column>
+    	</insert>
+    	<insert tableName="A4GT_PROFILO">
+    		<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO">viticolo</column>
+        	<column name="DESCRIZIONE">Profilo per l'accesso alle funzionalita per il personale Viticolo</column>
+        	<column name="RESPONSABILITA">DIPENDENTE_PAT</column>
+    	</insert>
+	</changeSet>
+    <changeSet id="UTENTE_35.2" author="Elisabetta Freschi">
+    	<delete tableName="A4GR_PROFILO_RUOLO">
+    		<where>ID_RUOLO = 'istanzariesame.richiestamodificasuolo.tutti'</where>
+    	</delete>
+    	<delete tableName="A4GD_RUOLO">
+    		<where>IDENTIFICATIVO = 'istanzariesame.richiestamodificasuolo.tutti'</where>
+    	</delete>
+	</changeSet>
+    <changeSet id="UTENTE_35.3" author="Elisabetta Freschi">
+    	<modifyDataType
+        columnName="IDENTIFICATIVO"
+        newDataType="${string.type}(127)"
+        tableName="A4GD_RUOLO"/>
+    	<modifyDataType
+        columnName="ID_RUOLO"
+        newDataType="${string.type}(127)"
+        tableName="A4GR_PROFILO_RUOLO"/>
+	</changeSet>
+    <changeSet id="UTENTE_35.4" author="Elisabetta Freschi">
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.ricerca.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca delle Richiesta Modifica Suolo senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.ricerca.filtroCuaa</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca delle Richiesta Modifica Suolo con limitazione su CUAA (mandati)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.edit.filtroCuaa</column>
+		<column name="DESCRIZIONE">Possibilità di modifica (update) delle Richiesta Modifica Suolo con limitazione su CUAA (mandati)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.ricerca.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca dei messaggi su Richiesta Modifica Suolo senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.ricerca.filtroCuaa</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca dei messaggi su Richiesta Modifica Suolo con limitazione su CUAA (mandati)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.edit.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di modifica (insert) dei messaggi su Richiesta Modifica Suolo senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.edit.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di modifica (insert) dei documenti allegati su Richiesta ModificaSuolo senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.delete.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di cancellazione  dei documenti allegati su Richiesta ModificaSuolo senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.ricerca.tutti</column>
+		<column name="DESCRIZIONE">Possibiltà di ricerca delle Lavorazioni senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.ricerca.filtroVite</column>
+		<column name="DESCRIZIONE">Possiblità di ricerca delle Lavorazioni con limitazione su tipo suolo VITE</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+		<column name="DESCRIZIONE">Possibilità di modifica delle Lavorazioni con limitazioni sull'utente (solo le proprie)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.delete</column>
+		<column name="DESCRIZIONE">Possibilità di cancellazione delle Lavorazioni con limitazioni sull'utente (solo le proprie)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.ricerca.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca dei Poligoni Dichiarato senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.ricerca.filtroVite</column>
+		<column name="DESCRIZIONE">Possibilità di ricerca dei Poligoni Dichiarato con limitazione su tipo suolo VITE</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.edit.tutti</column>
+		<column name="DESCRIZIONE">Possibilità di selezione dei Poligoni Dichiarato senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+		<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.edit.filtroVite</column>
+		<column name="DESCRIZIONE">Possibilità di selezione dei Poligoni Dichiarato con limitazione su tipo suolo VITE</column>
+		</insert>
+	</changeSet>
+    <changeSet id="UTENTE_35.5" author="Elisabetta Freschi">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.ricerca.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.ricerca.filtroCuaa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.edit.filtroCuaa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.ricerca.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.ricerca.filtroCuaa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.delete.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.ricerca.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.ricerca.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.delete</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.delete</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.ricerca.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.ricerca.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.poligonodichiarato.edit.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+    </changeSet>
+    <changeSet id="UTENTE_35.6" author="Elisabetta Freschi">
+    	<delete tableName="A4GR_PROFILO_RUOLO">
+    		<where>ID_RUOLO like 'a4g.richiestamodificasuolo%'</where>
+    	</delete>
+    	<delete tableName="A4GD_RUOLO">
+    		<where>IDENTIFICATIVO like 'a4g.richiestamodificasuolo%'</where>
+    	</delete>
+    </changeSet>
+    <changeSet id="UTENTE_35.7" author="Elisabetta Freschi">
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di ricerca senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.filtroCuaa</column>
+				<column name="DESCRIZIONE">Possibilità di ricerca con limitazione su CUAA (aggiunta lista CUAA in query di rcerca)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.edit.filtroCuaa</column>
+				<column name="DESCRIZIONE">Possibilità di modifica con limitazione su CUAA (verifica mandato su CUAA della richiesta)</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.edit.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di inserire messaggi senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.edit.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di inserire documenti senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+				<column name="DESCRIZIONE">Possibilità di creare lavorazioni senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.visualizza.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di ricerca senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.lavorazione.visualizza.filtroVite</column>
+				<column name="DESCRIZIONE">Possibiiltà di ricerca con limitazione su tipo Suolo VITE</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di ricerca senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.filtroVite</column>
+				<column name="DESCRIZIONE">Possibiiltà di ricerca con limitazione su tipo Suolo poligono dichiarato VITE</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.poligonodichiarato.edit.tutti</column>
+				<column name="DESCRIZIONE">Possibilità di associazione poligono a lavorazione senza limitazioni</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.poligonodichiarato.edit.filtroVite</column>
+				<column name="DESCRIZIONE">Possibilità di associazione poligono a lavorazione con limitazione su tipo suolo poligono dichiarato VITE</column>
+		</insert>
+	</changeSet>
+    <changeSet id="UTENTE_35.8" author="Elisabetta Freschi">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.filtroCuaa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.edit.filtroCuaa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>		
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.edit</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.visualizza.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.visualizza.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.edit.filtroVite</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+    </changeSet>
+    
+    <changeSet id="UTENTE_35.9" author="Marco Campisi">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.messaggio.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.documento.edit.tutti</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>		
+    </changeSet>
+    
+    <changeSet id="UTENTE_35.10" author="Marco Campisi">
+    
+    	<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.layer.caa</column>
+				<column name="DESCRIZIONE">Possibilità di ricercare i layer configurati per i profili CAA</column>
+		</insert>
+		
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.layer.backoffice</column>
+				<column name="DESCRIZIONE">Possibilità di ricercare i layer configurati per i profili BACKOFFICE</column>
+		</insert>
+		
+		<insert tableName="A4GD_RUOLO">
+				<column name="IDENTIFICATIVO">a4g.richiestamodificasuolo.layer.viticolo</column>
+				<column name="DESCRIZIONE">Possibilità di ricercare i layer configurati per i profili VITICOLO</column>
+		</insert>
+		
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.caa</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'caa')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.backoffice</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+		        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+				<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.viticolo</column>
+				<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+		</insert>		
+    </changeSet>
+	<changeSet id="UTENTE_41U.0" author="Bruno Conetta">
+		<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="IDENTIFICATIVO">istruttoreuma</column>
+			<column name="DESCRIZIONE">Profilo per la gestione della istruttoria uma</column>
+			<column name="RESPONSABILITA">DIPENDENTE_PAT</column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_41U.1" author="Bruno Conetta">
+
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+			<column name="DESCRIZIONE">Consente la ricerca di tutte le domande UMA</column>
+		</insert>
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO">a4g.uma.dichiarazioneconsumi.modifica</column>
+			<column name="DESCRIZIONE">Consente la sola modifica di una dichiarazione consumi</column>
+		</insert>
+
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreuma')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4g.uma.dichiarazioneconsumi.modifica</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreuma')" />
+		</insert>
+	</changeSet>
+	<changeSet id="UTENTE_36.0" author="Pietro De Vigili">
+		<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="IDENTIFICATIVO">operatore_distributore</column>
+			<column name="DESCRIZIONE">Profilo per il personale dei distributori per la gestione dei prelievi UMA</column>
+			<column name="RESPONSABILITA">DIPENDENTE_DISTRIBUTORE</column>
+		</insert>
+	</changeSet>
+	<changeSet id="UTENTE_36.1" author="Pietro De Vigili">
+		<createTable tableName="A4GT_DISTRIBUTORE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_DISTRIBUTORE_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DENOMINAZIONE_AZIENDA" type="${string.type}(128)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DISTRIBUTORE" type="${string.type}(128)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_DISTRIBUTORE" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="COMUNE" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROVINCIA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="INDIRIZZO" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX A4GT_DISTRIBUTORE_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DISTRIBUTORE TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_36.2" author="Pietro De Vigili">
+		<createTable tableName="A4GR_UTENTE_DISTRIBUTORE">
+			<column name="ID_UTENTE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_UTENTE_DISTRIBUTORE_FK1"
+							 referencedTableName="A4GT_UTENTE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+			<column name="ID_DISTRIBUTORE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_UTENTE_DISTRIBUTORE_FK2"
+							 referencedTableName="A4GT_DISTRIBUTORE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GR_UTENTE_DISTRIBUTORE TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_36.3" author="Pietro De Vigili">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.edita</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'operatore_distributore')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4gutente.domandaregistrazione.visualizza</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'operatore_distributore')" />
+		</insert>
+	</changeSet>
+	<changeSet id="UTENTE_36.4" author="Pietro De Vigili">
+		<dropTable tableName="A4GR_UTENTE_DISTRIBUTORE"/>
+		<dropTable tableName="A4GT_DISTRIBUTORE"/>
+	</changeSet>
+	<changeSet id="UTENTE_36.5" author="Pietro De Vigili">
+		<createTable tableName="A4GT_DISTRIBUTORE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_DISTRIBUTORE_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DENOMINAZIONE_AZIENDA" type="${string.type}(128)">
+				<constraints nullable="false" />
+			</column>
+			<column name="COMUNE_DISTRIBUTORE" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROVINCIA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="INDIRIZZO" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX A4GT_DISTRIBUTORE_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DISTRIBUTORE TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_36.6" author="Pietro De Vigili">
+		<createTable tableName="A4GR_UTENTE_DISTRIBUTORE">
+			<column name="ID_UTENTE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_UTENTE_DISTRIBUTORE_FK1"
+							 referencedTableName="A4GT_UTENTE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+			<column name="ID_DISTRIBUTORE" type="${id.number.type}">
+				<constraints foreignKeyName="A4GR_UTENTE_DISTRIBUTORE_FK2"
+							 referencedTableName="A4GT_DISTRIBUTORE"
+							 referencedColumnNames="ID"
+							 nullable="false"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GR_UTENTE_DISTRIBUTORE TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<include file = "config/database/changelog/db.utente.distributori.changelog.xml"/>
+	
+	<changeSet id="UTENTE_42U.0" author="Bruno Conetta">
+        <insert tableName="A4GR_PROFILO_RUOLO">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'operatore_distributore')" />
+        	<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+        </insert>		
+	</changeSet>
+
+	<changeSet id="UTENTE_42F.0" author="Gabriele Ninfa">
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO">a4ganagrafica.dichiarazioniassociative.visualizza.utente</column>
+			<column name="DESCRIZIONE">Possibilita di visualizzazione le dichiarazioni associative</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+			<column name="ID_RUOLO">a4ganagrafica.dichiarazioniassociative.visualizza.utente</column>
+		</insert>
+		
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO">a4ganagrafica.dichiarazioniassociative.edita.utente</column>
+			<column name="DESCRIZIONE">Possibilita di inserire/modificare le dichiarazioni associative</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda')" />
+			<column name="ID_RUOLO">a4ganagrafica.dichiarazioniassociative.edita.utente</column>
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_46NF.0" author="Gabriele Ninfa">
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+			<column name="DESCRIZIONE">Permettere di visualizzare tutti i fascicoli in sola lettura</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_46NF.1" author="Gabriele Ninfa">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoredu')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreamf')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'istruttoreuma')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'backoffice')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viticolo')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'gestoreutenti')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_47.0" author="Lorenzo Martinelli">
+        <insert tableName="A4GT_ENTE">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO" valueNumeric="57" />
+        	<column name="DESCRIZIONE">CAA ATS - 005 - ROVERETO</column>
+			<column name="CAA">ATS</column>
+        </insert>			
+	</changeSet>
+	
+	<changeSet id="UTENTE_48NF.0" author="Gabriele Ninfa">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_DOMANDA_REGISTRAZIONE MODIFY TIPO_DOMANDA_REGISTRAZIONE VARCHAR(50);
+    	</sql>
+    </changeSet>
+    
+	<changeSet id="UTENTE_52.0" author="Immacolata Conti" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true"><![CDATA[
+			INSERT INTO A4GT_DISTRIBUTORE (ID, VERSIONE, DENOMINAZIONE_AZIENDA, COMUNE_DISTRIBUTORE, PROVINCIA, INDIRIZZO, DATA_INIZIO, DATA_FINE) VALUES (NXTNBR.NEXTVAL, 0, 'TELO COMBUSTIBILI SAS di MALACARNE MAURO E C.', 'LAMON', 'BELLUNO', 'VIA ANTONIO SLONGO, 30', to_date('26/01/2022', 'DD/MM/YYYY'), NULL);
+			]]></sql>
+    </changeSet>
+    
+    <changeSet id="UTENTE_54U.0" author="Paolo Cristofaro">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4g.uma.dichiarazioneconsumi.modifica</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_55.0" author="Antonio Avitabile">
+		<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="IDENTIFICATIVO">operatore_dogane</column>
+			<column name="DESCRIZIONE">Dipendente Agenzia delle Dogane</column>
+			<column name="RESPONSABILITA">DIPENDENTE_DOGANE</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='operatore_dogane')" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_57NF.0" author="Gabriele Ninfa">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_altro_ente')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.backoffice</column>
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_57NF.1" author="Gabriele Ninfa">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'appag')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.backoffice</column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_57NF.2" author="Giustino De Vincentiis">
+		<!-- 
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti</column>
+		</insert>
+		-->
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.ricerca.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.lavorazione.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.poligonodichiarato.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.richiestamodificasuolo.visualizza.tutti</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'viewer_pat')" />
+			<column name="ID_RUOLO">a4g.richiestamodificasuolo.layer.backoffice</column>
+		</insert>
+	</changeSet>
+
+	<changeSet id="UTENTE_58NF.0" author="Gabriele Ninfa">
+		<insert tableName="A4GT_PROFILO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="IDENTIFICATIVO">responsabile_fascicolo_pat</column>
+			<column name="DESCRIZIONE">Profilo per operare come gestore su tutti i
+				fascicoli e su tutte le schede di fascicolo (dettaglio fascicolo,
+				visualizzazione schede, sospensione)
+			</column>
+			<column name="RESPONSABILITA">DIPENDENTE_PAT</column>
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4gfascicolo.fascicolo.ricerca.tutti
+			</column>
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='responsabile_fascicolo_pat')" />
+		</insert>
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.tutti
+			</column>
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='responsabile_fascicolo_pat')" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_58NF.1" author="Gabriele Ninfa">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_RUOLO">a4ganagrafica.fascicolo.visualizzazione.modalitapagamento.ente
+			</column>
+			<column name="ID_PROFILO"
+				valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='responsabile_fascicolo_pat')" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="UTENTE_59.0" author="Bruno Conetta">
+	
+	    <insert tableName="A4GD_RUOLO">
+        	<column name="IDENTIFICATIVO" value="a4g.uma.domandarichiestacarburante.edita.tutti"></column>
+        	<column name="DESCRIZIONE" value= "Possibilità di inserire/modificare i dati delle domande uma"></column>
+        </insert>
+	
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"></column>
+			<column name="ID_RUOLO">a4g.uma.domandarichiestacarburante.edita.tutti</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='amministratore')" />
+		</insert>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_S45.01" author="Andrea Alioto">
+
+		<insert tableName="A4GD_RUOLO">
+			<column name="IDENTIFICATIVO" value="a4gutente.utenti.profili.visualizza"></column>
+			<column name="DESCRIZIONE" value= "Possibilita di visionare in ricerca i profili degli utenti"></column>
+		</insert>
+
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"></column>
+			<column name="ID_RUOLO">a4gutente.utenti.profili.visualizza</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='backoffice')" />
+		</insert>
+
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL"></column>
+			<column name="ID_RUOLO">a4gutente.utenti.profili.visualizza</column>
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO where IDENTIFICATIVO='viticolo')" />
+		</insert>
+
+	</changeSet>
+
+	<changeSet id="UTENTE_64.0" author="Massimo Nascivera">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'responsabile_fascicolo_pat')" />
+			<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata.cruscotto.ente</column>
+		</insert>
+	</changeSet>
+	<changeSet id="UTENTE_64.1" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			DELETE from a4gr_profilo_ruolo where ID_RUOLO='a4ganagrafica.mandato.revocaimmediata.cruscotto.ente' and id_profilo = (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'responsabile_fascicolo_pat');
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_64.2" author="Massimo Nascivera">
+		<insert tableName="A4GR_PROFILO_RUOLO">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="ID_PROFILO" valueComputed="(SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'responsabile_fascicolo_pat')" />
+			<column name="ID_RUOLO">a4ganagrafica.mandato.revocaimmediata.cruscotto.valutate.tutti</column>
+		</insert>
+	</changeSet>
+	<changeSet id="UTENTE_65.0" author="Lorenzo Martinelli">
+        <insert tableName="A4GT_ENTE">
+        	<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+        	<column name="IDENTIFICATIVO" valueNumeric="71" />
+        	<column name="DESCRIZIONE">CAA CAF AGRI SRL</column>
+			<column name="CAA">AGRI</column>
+        </insert>			
+	</changeSet>
+</databaseChangeLog>

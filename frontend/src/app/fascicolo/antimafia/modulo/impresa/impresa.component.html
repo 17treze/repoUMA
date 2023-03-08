@@ -1,0 +1,105 @@
+<div class="boxgrey">
+  <h3>
+    {{textTitle}}
+  </h3>
+  <div class="ui-g">
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.descrizioneImpresa}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.denominazione ? dettaglioImpresa.denominazione : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.CCIAAnumeroIscrizione}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.estremiCCIAA.numeroIscrizione ? dettaglioImpresa.estremiCCIAA.numeroIscrizione : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.provinciaImpresa}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.estremiCCIAA.sede ? dettaglioImpresa.estremiCCIAA.sede : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.CCIAAdataIscrizione}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.estremiCCIAA.dataIscrizione ? dettaglioImpresa.estremiCCIAA.dataIscrizione : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.sedeLegale}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.sedeLegale ? dettaglioImpresa.sedeLegale : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.formaGiuridica}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.dettaglioPersonaGiuridica.formaGiuridica ? dettaglioImpresa.dettaglioPersonaGiuridica.formaGiuridica : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.estremiCostituzione}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.estremiCCIAA.dataIscrizione ?
+        dettaglioImpresa.estremiCCIAA.dataIscrizione : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.capitaleSociale}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.dettaglioPersonaGiuridica.capitaleSociale ? dettaglioImpresa.dettaglioPersonaGiuridica.capitaleSociale : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.durataSocieta}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.dettaglioPersonaGiuridica.durata ? dettaglioImpresa.dettaglioPersonaGiuridica.durata :
+        labels.illimitata}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.codiceFiscale}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.codiceFiscale ? dettaglioImpresa.codiceFiscale : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.partitaIva}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.partitaIva ? dettaglioImpresa.partitaIva : labels.nd}}
+    </div>
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.indirizzoPEC}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{dettaglioImpresa.indirizzoPEC ? dettaglioImpresa.indirizzoPEC : labels.nd}}
+    </div>
+    <div *ngIf="dettaglioImpresa.oggettoSociale" class="ui-g-12">
+      <p-fieldset legend="{{labels.oggettoSociale}}">
+        <p-inplace [closable]="true">
+          <span pInplaceDisplay>
+            <span class="fa fa-table"></span><span style="margin-left:8px">
+              {{dettaglioImpresa.oggettoSociale | slice:0:350}} ... ... ...
+            </span>
+          </span>
+          <span pInplaceContent>
+            {{dettaglioImpresa.oggettoSociale ? dettaglioImpresa.oggettoSociale : labels.nd}}
+          </span>
+        </p-inplace>
+      </p-fieldset>
+    </div>
+  </div>
+  <div class="ui-g" *ngIf="!dettaglioImpresa.oggettoSociale">
+    <div class="ui-g-3 box-padded">
+      <strong>{{labels.oggettoSociale}}</strong>
+    </div>
+    <div class="ui-g-3 box-padded">
+      {{labels.nd}}
+    </div>
+  </div>
+</div>
+
+<app-step-action (next)="conferma()"></app-step-action>

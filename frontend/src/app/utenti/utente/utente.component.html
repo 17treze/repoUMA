@@ -1,0 +1,296 @@
+<div class="ui-g ui-fluid">
+  <div class="tophome">
+    <div class="ui-grid-fixed">
+      <h4>CREAZIONE/MODIFICA PROFILO SISTEMA INFORMATIVO AGRICOLTURA</h4>
+    </div>
+  </div>
+  <p-toast
+    key="tst"
+    [style]="{marginTop: '70px'}"></p-toast>
+  <p-toast
+    position="top-center"
+    key="tst-protocolla"
+    [baseZIndex]="50000"
+    modal="true"
+    (onClose)="onCloseMessageProtocolla()"></p-toast>
+  <div class="ui-grid-fixed">
+    <div class="ui-g-12">
+      <form
+        #f="ngForm"
+        (ngSubmit)="onSubmit(f)"
+        *ngIf="datiAnagraficiUtente">
+        <div class="accordion-wrapper">
+          <p-accordion>
+            <p-accordionTab
+              header="Anagrafica"
+              [selected]="true">
+              <fieldset
+                [disabled]="inserimentoDisabled"
+                pTooltip="I campi contrassegnati con l'asterisco sono obbligatori!"
+                tooltipPosition="top">
+                <div class="boxgrey-user">
+                  <div class="ui-g-2">
+                    <label>Cognome *</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="datiAnagraficiUtente.cognome"
+                      name="cognome"
+                      required
+                      pInputText>
+                  </div>
+                  <div class="ui-g-2">
+                    <label>Nome *</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="datiAnagraficiUtente.nome"
+                      name="nome"
+                      required
+                      pInputText>
+                  </div>
+                  <div class="ui-g-2">
+                    <label>C.F. *</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="datiAnagraficiUtente.codiceFiscale"
+                      name="codiceFiscale"
+                      [readonly]="cfReadonly || !canChangeCf"
+                      #cfInput="ngModel"
+                      [ngClass]="{'is-invalid': cfInput.invalid}"
+                      pInputText
+                      required
+                      appValidaCf>
+                    <div *ngIf="cfInput.errors">
+                      <p
+                        *ngIf="cfInput.errors?.cfErrato"
+                        class="ui-message ui-messages-error ui-corner-all">
+                                                {{cfInput.errors.cfErrato}}
+                                            </p>
+                    </div>
+                  </div>
+                  <div class="ui-g-2">
+                    <label>Email/PEC *</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="datiAnagraficiUtente.email"
+                      name="email"
+                      #emailinput="ngModel"
+                      required
+                      appValidaEmail
+                      pInputText>
+                    <div *ngIf="emailinput.errors">
+                      <p
+                        *ngIf="emailinput.errors?.emailErrata"
+                        class="ui-message ui-messages-error ui-corner-all">
+                                                {{emailinput.errors.emailErrata}}
+                                            </p>
+                    </div>
+                  </div>
+                  <div class="ui-g-12"></div>
+                  <div class="ui-g-2">
+                    <label>Telefono *</label>
+                  </div>
+                  <div class="ui-g-4">
+                    <input
+                      type="text"
+                      [(ngModel)]="datiAnagraficiUtente.telefono"
+                      name="telefono"
+                      #telefonoinput="ngModel"
+                      required
+                      appValidaTelefono
+                      pInputText>
+                    <div *ngIf="telefonoinput.errors">
+                      <p
+                        *ngIf="telefonoinput.errors?.telefonoErrato"
+                        class="ui-message ui-messages-error ui-corner-all">
+                                                {{telefonoinput.errors.telefonoErrato}}
+                                            </p>
+                    </div>
+                  </div>
+                  <div class="ui-g-6"></div>
+                </div>
+              </fieldset>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="accordion-wrapper">
+          <p-accordion>
+            <p-accordionTab
+              header="Responsabilità"
+              [selected]="true">
+              <div
+                class="boxgrey-user"
+                pTooltip="Selezionare la Responsabilità e premere il pulsante Aggiungi (+)"
+                tooltipPosition="top">
+                <fieldset [disabled]="inserimentoDisabled">
+                  <div class="ui-g-11">
+                    <p-dropdown
+                      [options]="responsabilitaList"
+                      [(ngModel)]="selectedResponsabilita"
+                      name="selectedResponsabilita"
+                      [disabled]="inserimentoDisabled"></p-dropdown>
+                  </div>
+                  <div class="ui-g-1">
+                    <button
+                      pButton
+                      type="button"
+                      icon="ui-icon-add"
+                      title="{{datiAnagraficiUtente.codiceFiscale ? 'Aggiungi Responsabilità' : 'Inserire un C.F. per continuare'}}"
+                      (click)="addComponent()"
+                      [disabled]="(!datiAnagraficiUtente.codiceFiscale)"></button>
+                  </div>
+
+                  <div class="ui-g-12">
+                    <ng-template #viewContainerRef></ng-template>
+                  </div>
+                </fieldset>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="accordion-wrapper">
+          <p-accordion>
+            <p-accordionTab
+              header="Applicativi"
+              [selected]="true">
+              <div
+                class="boxgrey-user"
+                pTooltip="Selezionare l'applicativo, o gli applicativi, desiderati. Se sono stati compilati tutti i dati, sarà possibile premere il pulsante Salva"
+                tooltipPosition="top"
+                escape="false">
+                <p-multiSelect
+                  [filter]="false"
+                  [options]="applicativi"
+                  [(ngModel)]="selectedApplicativi"
+                  name="applicativi"
+                  multiple="multiple"
+                  checkbox="checkbox"
+                  optionLabel="title"
+                  defaultLabel="Seleziona applicativo/i"
+                  required
+                  [disabled]="inserimentoDisabled">
+                </p-multiSelect>
+              </div>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        <div class="ui-g-8"></div>
+        <div class="ui-g-2">
+          <div class="back-button sm">
+            <button
+              pButton
+              icon="ui-icon-edit"
+              type="button"
+              class="blue-grey-btn"
+              label="Modifica"
+              pButton
+              [disabled]="!inserimentoDisabled"
+              (click)="modificaStatoRichiesta()"></button>
+          </div>
+        </div>
+        <div class="ui-g-2">
+          <div class="next-button sm">
+            <button
+              pButton
+              icon="ui-icon-save"
+              type="submit"
+              label="Salva"
+              pButton
+              [disabled]="!f.valid || responsabilitaNonValide || inserimentoDisabled"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="ui-g-12">
+      <form #fAutorizzazioni="ngForm">
+        <fieldset [disabled]="!inserimentoDisabled">
+          <div class="accordion-wrapper">
+            <p-accordion>
+              <p-accordionTab
+                header="Autorizzazioni"
+                [selected]="true">
+                <div
+                  class="boxgrey-user"
+                  pTooltip="Dopo aver visualizzato i documenti Informativa privacy e Modulo richiesta accesso sarà possibile attivare la relativa Firma Accettazione e procedere con la protocollazione della richiesta"
+                  tooltipPosition="top">
+                  <div class="ui-g">
+                    <div class="ui-g-12">
+                      <p-table>
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>
+                              <b>VISUALIZZAZIONE</b>
+                            </th>
+                            <th>
+                              <b>FIRMA ACCETTAZIONE</b>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <a
+                                [routerLink]
+                                (click)="downloadInformativaPrivacy()">
+                                Informativa Privacy
+                              </a>
+                            </th>
+                            <th>
+                              <p-inputSwitch
+                                [(ngModel)]="checked1"
+                                [disabled]="!informativaPrivacyFile"
+                                (onChange)="sottoScriviPrivacyCheck($event)"
+                                name="checked1"
+                                [disabled]="(!(this.datiDomanda.autorizzazioni && this.datiDomanda.autorizzazioni.length > 0) && (!viewPrivacy)) || (this.datiDomanda.autorizzazioni && this.datiDomanda.autorizzazioni.length > 0) || !inserimentoDisabled || this.blockCheckPrivacyOk"></p-inputSwitch>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <a
+                                [routerLink]
+                                *ngIf="saveOk"
+                                (click)="downloadModuloRichiestaAccesso()">
+                                Modulo richiesta accesso
+                              </a>
+                              <span *ngIf="!saveOk">Modulo richiesta accesso</span>
+                            </th>
+                            <th>
+                              <p-inputSwitch
+                                [(ngModel)]="checked2"
+                                name="checked2"
+                                (onChange)="sottoScriviDomandaCheck($event)"
+                                [disabled]="checked2 || !viewModuloDomanda"></p-inputSwitch>
+                            </th>
+                          </tr>
+                        </ng-template>
+                      </p-table>
+
+                    </div>
+                  </div>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </fieldset>
+        <div class="ui-g-9"></div>
+        <div class="ui-g-3">
+          <div class="next-button">
+            <button
+              pButton
+              icon="ui-icon-check"
+              type="button"
+              label="PROTOCOLLA RICHIESTA"
+              pButton
+              [disabled]="!(this.checked1 && this.checked2) || !inserimentoDisabled || !canProtocol"
+              (click)="startProtocollazioneAsincrona()"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

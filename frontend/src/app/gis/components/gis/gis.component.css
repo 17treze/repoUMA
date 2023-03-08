@@ -1,0 +1,155 @@
+.ui-sidebar.ui-widget.ui-widget-content.ui-shadow.ui-sidebar-active.ui-sidebar-left {
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+  }
+.ol-layer canvas {
+    /* transform: initial!important;
+    transform-origin: initial!important; */
+}
+
+.loading-indicator {
+    position: fixed;
+    z-index: 9999999999999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+#progressSpinner {
+    background: rgba(0,0,0,.288);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9998;
+    background-color: #171717b8;
+    opacity: 0.5;
+}
+@media only screen and (min-height:150px) and (max-height:920px){
+    #dichiaratoInseriti > div.ui-accordion-header.ui-state-default.ui-state-active {
+        float: inherit!important;
+    }
+    #dichiaratoInseriti > div.ui-accordion-header.ui-state-default a {
+        background-color: #f1f1f1!important;
+        z-index: 999;
+        position: relative;
+    }
+    button.gis-button {
+        padding-top: 10px!important;
+        padding-bottom: 7px!important;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }    
+    .fixed-btn{
+        top: calc(9vh + 280px);
+        position: relative!important;
+     }
+     .for-poligoni.fixed-height {
+        max-height: inherit!important;
+    }
+    button#calcolaPoligoni {
+        width: 270px;
+    }
+    button.gis-button.btn-indietro {
+        padding: 8px 37px!important;
+    }
+    button.gis-button.crea-lavorazione {
+        font-size: 13px;
+        padding: 0px 5px;
+    }
+    #buttongis {
+        padding:5px!important;
+    }
+    div#buttongis {
+        padding: 1px!important;
+    }
+    .editTolbar div:nth-child(1) button {
+        width: 30px!important;
+        height: 35px!important;
+    }
+    .editTolbar div:nth-child(1) button {
+        font-size: 23px!important;
+    }
+    .number-input {
+        left: 0px!important;
+        bottom: 38px!important;
+    }
+}
+#creaLavorazione > div > div.card-content > wizard-component > div > div > div.step4 > creazione-lavorazione > div:nth-child(4) > p-accordion > div > 
+p-accordiontab.accordion-title > div.ui-accordion-content-wrapper > div {
+    padding: 0;
+}
+#ui-accordiontab-5-content > div,
+#ui-accordiontab-15-content > div,
+#ui-accordiontab-16-content > div,
+#ui-accordiontab-17-content > div,
+#ui-accordiontab-0-content > div,
+#ui-accordiontab-1-content > div {
+    border: 0!important;
+    background: transparent!important;
+    padding: 0;
+}
+
+p-accordiontab > div.ui-accordion-header.ui-state-default.ui-corner-all > a > span.ui-accordion-toggle-icon.pi.pi-fw.pi-chevron-right,
+p-accordiontab > div.ui-accordion-header.ui-state-default.ui-corner-all > a > span.ui-accordion-toggle-icon.pi.pi-fw.pi-chevron-down {
+    float: right;
+    color: #464c51;
+}
+
+
+a#ui-accordiontab-0,
+a#ui-accordiontab-1,
+a#ui-accordiontab-15,
+a#ui-accordiontab-16,
+a#ui-accordiontab-17,
+a#ui-accordiontab-2,
+a#ui-accordiontab-3,
+a#ui-accordiontab-4,
+a#ui-accordiontab-5 {
+    outline: none;
+}
+a#ui-accordiontab-1 {
+    float: left;
+    width: 100%;
+}
+body .ui-accordion .ui-accordion-header.ui-state-active,
+body .ui-accordion .ui-accordion-header,
+body .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover {
+    background-color: transparent!important;
+}
+body .ui-accordion .ui-accordion-header > a{
+    color: #30373D!important;
+    padding: 10px 0px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-top: 1px solid #D8D8D8;
+    border-bottom: 1px solid #D8D8D8;
+}
+.contentHeaderTable{
+    border-right: 1px solid;
+    font-weight: 500 !important;
+    color: #ffffff !important;
+    background-color: #00985b !important;
+    text-align: center;
+    font-size: 14px;
+}
+.ui-inputswitch.ui-widget {
+    overflow: visible!important;
+}
+#lavorazioneWorkspace > div.workspaceDiv.ng-star-inserted > div > div > div > p-inputswitch > div > span:before,
+detail-gis > div.card-content > form > div > div > div > label > p-inputswitch > div > span:before {
+    height: 1.15em!important;
+    width: 1.25em!important;
+    bottom: -0.1em!important;
+}
+#lavorazioneWorkspace > div.workspaceDiv > div.grid-workspace > div > div.p-col > p-inputswitch > div,
+detail-gis > div.card-content > form > div > div > div > label > p-inputswitch > div {
+    overflow: visible;
+}

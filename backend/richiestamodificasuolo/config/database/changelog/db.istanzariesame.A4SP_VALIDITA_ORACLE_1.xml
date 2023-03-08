@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">	
+
+<!--changeSet per package A4SP_VALIDITA_ORACLE-->
+	<changeSet id="ISTANZARIESAME_S25.03" author="Bettina Irler">
+		<sql endDelimiter="?" splitStatements="true">
+			create or replace PACKAGE A4SP_VALIDITA_ORACLE as
+			a4s_tol number := 0.005;
+			   procedure fixWorkspace(pid number, ptolleranza number default a4s_tol);
+			   procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol);
+			   procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) ;
+			END A4SP_VALIDITA_ORACLE;
+			?
+			
+	create or replace PACKAGE BODY A4SP_VALIDITA_ORACLE is
+	   procedure fixWorkspace(pid number, ptolleranza number default a4s_tol) as
+	   begin 
+	    insert into A4ST_WORKSPACE_LAV_SUOLO (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA, AREA)
+	    select nxtnbr.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA, SDO_GEOM.SDO_AREA(shape, ptolleranza) AREA from (
+	    select VERSIONE, ID_LAVORAZIONE, SDO_CUSTOM.SDO_FIX(shape, ptolleranza) shape, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA from A4ST_WORKSPACE_LAV_SUOLO where id = pid
+	    );
+	    
+	    delete from A4ST_WORKSPACE_LAV_SUOLO where id = pid;
+	    commit;
+	end;
+	
+	   procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) as
+	   begin 
+	    INSERT ALL
+	    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+	    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID_WORKSPACE, NXTNBR.nextval)
+	    (
+	    select  0 VERSIONE, ID_LAVORAZIONE, SHAPE_NEW AS SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA, 
+	    sdo_geom.sdo_area(SHAPE_NEW, ptolleranza) AREA, ID ID_WORKSPACE
+				from
+				(  select T.*, SDO_GEOMETRY(I.SDO_GTYPE, I.SDO_SRID, I.SDO_POINT, I.SDO_ELEM_INFO, I.SDO_ORDINATES) SHAPE_NEW
+					from  A4ST_WORKSPACE_LAV_SUOLO T 
+					cross join table(SDO_UTIL.EXTRACT_ALL(sdo_custom.sdo_fix(t.shape, ptolleranza), 0)) I 
+	                 where id = pid
+				));
+	    commit;
+	end;
+	
+	   procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol)  as
+	begin 
+	    INSERT ALL
+	    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+	    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+	    (
+	    select  ID, 0 VERSIONE, ID_LAVORAZIONE, SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA , sdo_geom.sdo_area(shape, ptolleranza) area
+	    from  A4ST_WORKSPACE_LAV_SUOLO T where id = pid
+				);
+	    commit;
+	end;
+	
+	END A4SP_VALIDITA_ORACLE;
+	?
+	</sql>
+	<sql endDelimiter=";" splitStatements="true">
+		GRANT EXECUTE ON A4SP_VALIDITA_ORACLE TO ${user.writer};
+	</sql>
+	</changeSet>
+	
+		<changeSet id="ISTANZARIESAME_S26.06" author="Bettina Irler">
+		<sql endDelimiter="?" splitStatements="true">
+			create or replace PACKAGE A4SP_VALIDITA_ORACLE as
+			a4s_tol number := 0.005;
+			   procedure fixWorkspace(pid number, ptolleranza number default a4s_tol);
+			   procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol);
+			   procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) ;
+			END A4SP_VALIDITA_ORACLE;
+			?
+			
+	create or replace PACKAGE BODY A4SP_VALIDITA_ORACLE is
+	   procedure fixWorkspace(pid number, ptolleranza number default a4s_tol) as
+	   begin 
+    
+        insert into A4ST_WORKSPACE_LAV_SUOLO 
+	    select nxtnbr.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA, SDO_GEOM.SDO_AREA(shape, ptolleranza) AREA,ID_GRID,ISTATP,CAMPAGNA from (
+	    select VERSIONE, ID_LAVORAZIONE, SDO_CUSTOM.SDO_FIX(shape, ptolleranza) shape, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA,ID_GRID,ISTATP,CAMPAGNA from A4ST_WORKSPACE_LAV_SUOLO where id = pid
+	    );
+        
+	    delete from A4ST_WORKSPACE_LAV_SUOLO where id = pid;
+	    commit;
+	end;
+	
+	   procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) as
+	   begin 
+	    INSERT ALL
+	    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+	    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID_WORKSPACE, NXTNBR.nextval)
+	    (
+	    select  0 VERSIONE, ID_LAVORAZIONE, SHAPE_NEW AS SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA, 
+	    sdo_geom.sdo_area(SHAPE_NEW, ptolleranza) AREA, ID ID_WORKSPACE
+				from
+				(  select T.*, SDO_GEOMETRY(I.SDO_GTYPE, I.SDO_SRID, I.SDO_POINT, I.SDO_ELEM_INFO, I.SDO_ORDINATES) SHAPE_NEW
+					from  A4ST_WORKSPACE_LAV_SUOLO T 
+					cross join table(SDO_UTIL.EXTRACT_ALL(sdo_custom.sdo_fix(t.shape, ptolleranza), 0)) I 
+	                 where id = pid
+				));
+	    commit;
+	end;
+	
+	   procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol)  as
+	begin 
+	    INSERT ALL
+	    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+	    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+	    (
+	    select  ID, 0 VERSIONE, ID_LAVORAZIONE, SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA , sdo_geom.sdo_area(shape, ptolleranza) area
+	    from  A4ST_WORKSPACE_LAV_SUOLO T where id = pid
+				);
+	    commit;
+	end;
+	
+	END A4SP_VALIDITA_ORACLE;
+	?
+	</sql>
+	<sql endDelimiter=";" splitStatements="true">
+		GRANT EXECUTE ON A4SP_VALIDITA_ORACLE TO ${user.writer};
+	</sql>
+	</changeSet>
+	</databaseChangeLog>

@@ -1,0 +1,290 @@
+<p-toast
+  key="tst-fabbricati"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <div class="funzioni-grid boxgrey">
+    <a
+      [routerLink]
+      (click)="handleClick()"
+      class="d-flex align-items-center text-decoration-none color-primary">
+      <i
+        class="pi pi-chevron-left"
+        style="font-size: 2rem; color: black"></i>
+      <img src="assets/img/ico-dotazione.jpg">
+      <span class="text-uppercase ml-2">
+      {{ "FascicoloAziendale.DOTAZIONE_TECNICA" | translate }} /
+      {{ "FascicoloAziendale.FABBRICATI" | translate }}
+    </span>
+    </a>
+    <br>
+    <form
+      [formGroup]="modificaFabbricato"
+      (ngSubmit)="onSubmit()">
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+        <p-accordion
+          expandIcon
+          collapseIcon>
+          <p-accordionTab
+            header="DETTAGLIO FABBRICATO"
+            [selected]="true">
+            <p align="right">
+            <button
+                class="pull-right"
+                pButton
+                style="background-color: green"
+                label="MODIFICA"
+                [disabled]="modificaAttiva"
+                (click)="modificaDettaglio()"
+                pButton>
+              </button>
+          </p>
+            <table class="table table-hoover">
+              <tbody>
+                <tr>
+                  <td width="25%">
+                    <strong>Ubicazione:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.ubicazione? fabbricato.ubicazione : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="ubicazioneFabbricato"
+                          [formControl]="modificaFabbricato.controls.ubicazioneFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['ubicazioneFabbricato'].invalid && (modificaFabbricato.controls['ubicazioneFabbricato'].dirty || modificaFabbricato.controls['ubicazioneFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['ubicazioneFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td width="15%"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Tipologia:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.tipologia? fabbricato.tipologia : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="tipologiaFabbricato"
+                          [formControl]="modificaFabbricato.controls.tipologiaFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['tipologiaFabbricato'].invalid && (modificaFabbricato.controls['tipologiaFabbricato'].dirty || modificaFabbricato.controls['tipologiaFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['tipologiaFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Destinazione:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.destinazione? fabbricato.destinazione : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="20"
+                          style="border: 1px solid rgb(180, 178, 178)"
+                          pInputText
+                          id="destinazioneFabbricato"
+                          [formControl]="modificaFabbricato.controls.destinazioneFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['destinazioneFabbricato'].invalid && (modificaFabbricato.controls['destinazioneFabbricato'].dirty || modificaFabbricato.controls['destinazioneFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['destinazioneFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Utilizzatori:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.utilizzatori? fabbricato.utilizzatori : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="20"
+                          style="border: 1px solid rgb(180, 178, 178)"
+                          pInputText
+                          id="utilizzatoriFabbricato"
+                          [formControl]="modificaFabbricato.controls.utilizzatoriFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['utilizzatoriFabbricato'].invalid && (modificaFabbricato.controls['utilizzatoriFabbricato'].dirty || modificaFabbricato.controls['utilizzatoriFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['utilizzatoriFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>                
+                <tr>
+                  <td>
+                    <strong>Superficie coperta:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.superficieCoperta? fabbricato.superficieCoperta : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="superficieCopertaFabbricato"
+                          [formControl]="modificaFabbricato.controls.superficieCopertaFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['superficieCopertaFabbricato'].invalid && (modificaFabbricato.controls['superficieCopertaFabbricato'].dirty || modificaFabbricato.controls['superficieCopertaFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['superficieCopertaFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>                  
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Superficie scoperta:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.superficieScoperta? fabbricato.superficieScoperta : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="superficieScopertaFabbricato"
+                          [formControl]="modificaFabbricato.controls.superficieScopertaFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['superficieScopertaFabbricato'].invalid && (modificaFabbricato.controls['superficieScopertaFabbricato'].dirty || modificaFabbricato.controls['superficieScopertaFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['superficieScopertaFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Volume:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.volume? fabbricato.volume : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="volumeFabbricato"
+                          [formControl]="modificaFabbricato.controls.volumeFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['volumeFabbricato'].invalid && (modificaFabbricato.controls['volumeFabbricato'].dirty || modificaFabbricato.controls['volumeFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['volumeFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Nr. posti:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{fabbricato.nrPosti? fabbricato.nrPosti : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="nrPostiFabbricato"
+                          [formControl]="modificaFabbricato.controls.nrPostiFabbricato">
+                          </span>
+                      <div
+                        *ngIf="modificaFabbricato.controls['nrPostiFabbricato'].invalid && (modificaFabbricato.controls['nrPostiFabbricato'].dirty || modificaFabbricato.controls['nrPostiFabbricato'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaFabbricato.controls['nrPostiFabbricato'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>                
+              </tbody>
+            </table>
+            <div *ngIf="modificaAttiva">
+              <br>
+              <div class="p-grid">
+                <div class="p-col-10"></div>
+                <div class="p-col-1">
+                  <p align="right">
+                      <button
+                      class="pull-right"
+                      pButton
+                      style="background-color: green"
+                      label="ANNULLA"
+                      [disabled]="!modificaAttiva"
+                      (click)="annullaModifica()"
+                      pButton>
+                    </button>
+                    </p>
+                </div>
+                <div class="p-col-1">
+                  <p align="right">
+                      <button
+                      class="pull-right"
+                      pButton
+                      style="background-color: green"
+                      label="SALVA"
+                      [disabled]="!modificaAttiva"
+                      type="submit"
+                      pButton>
+                    </button>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </form>
+  </div>
+</div>

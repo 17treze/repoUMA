@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="ISTRUTTORIA_20.2" author="Lorenzo Martinelli">
+        <delete tableName="A4GT_PRODUZIONE_LATTE">
+            <where>EXTRACT(YEAR FROM DT_CONS_VEND) = 2018 AND CUAA NOT IN (SELECT d.CUAA_INTESTATARIO FROM A4GT_DOMANDA d WHERE d.ANNO_CAMPAGNA = 2018)</where>
+        </delete>
+    </changeSet>
+
+    <changeSet id="ISTRUTTORIA_20.3" author="Lorenzo Martinelli">
+        <delete tableName="A4GT_PRODUZIONE_LATTE">
+            <where>EXTRACT(YEAR FROM DT_CONS_VEND) = 2019 AND CUAA NOT IN (SELECT d.CUAA_INTESTATARIO FROM A4GT_DOMANDA d WHERE d.ANNO_CAMPAGNA = 2019)</where>
+        </delete>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_20.1" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_SOSTEGNO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+							 primaryKeyName="PK_SOSTEGNO"
+							 primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+					defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+				
+			<column name="SOSTEGNO" type="${string.type}(25)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+                <constraints foreignKeyName="FK_SOSTEGNO_DOMANDA"
+                             referencedTableName="A4GT_DOMANDA"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+		</createTable>
+		<addUniqueConstraint columnNames="SOSTEGNO, ID_DOMANDA" tableName="A4GT_SOSTEGNO" tablespace="${tablespace.index}" validate="true"/>
+		
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_SOSTEGNO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_SOSTEGNO TO ${user.reader};
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_20.2" author="Gabriele Ninfa">
+		<sql endDelimiter="/" dbms="oracle">
+			DECLARE
+			
+			  CURSOR c1 IS
+			    SELECT id_domanda, jt.*
+			    FROM a4gt_dati_lavorazione
+			        ,json_table(json_dati_sintesi_impegni, '$'
+			          COLUMNS ("DISACCOPPIATO" VARCHAR2(5 CHAR) path '$.richiestaDisaccoppiato'
+			                  ,"SUPERFICIE" VARCHAR2(5 CHAR) path '$.richiestaSuperfici'
+			                  ,"ZOOTECNIA" VARCHAR2(5 CHAR) path '$.richiestaZootecnia'
+			                  )) jt
+			    ORDER BY 1;
+			
+			BEGIN
+			
+			  FOR rec_cur IN c1
+			    loop
+			      IF (rec_cur.disaccoppiato = 'true')
+			        THEN
+			          INSERT INTO a4gt_sostegno(ID, sostegno, id_domanda)
+			          VALUES(nxtnbr.nextval, 'DISACCOPPIATO', rec_cur.id_domanda);
+			      END IF;
+			      IF (rec_cur.superficie = 'true')
+			        THEN
+			          INSERT INTO a4gt_sostegno(ID, sostegno, id_domanda)
+			          VALUES(nxtnbr.nextval, 'SUPERFICIE', rec_cur.id_domanda);
+			      END IF;
+			      IF (rec_cur.zootecnia = 'true')
+			        THEN
+			          INSERT INTO a4gt_sostegno(ID, sostegno, id_domanda)
+			          VALUES(nxtnbr.nextval, 'ZOOTECNIA', rec_cur.id_domanda);
+			      END IF;
+			    END loop;
+			
+			  exception
+			    WHEN others THEN
+			      raise_application_error(-20001,'An error was encountered - '||sqlcode||' -ERROR- '||sqlerrm);
+			      ROLLBACK;
+			
+			END;
+			/
+		</sql>
+	</changeSet>
+
+	<include file="config/database/changelog/db.istruttoria.capitoloAccoppiati2019.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_20.1.2" author="Elisabetta Freschi">
+		<sql endDelimiter="/" dbms="oracle">
+			DECLARE
+			V_JSON_OUTPUT clob;
+			BEGIN
+			
+			FOR r_passo IN (
+			    SELECT P.* FROM A4GT_PASSO_TRANSIZIONE P WHERE P.codice_passo = 'CALCOLO_ACZ'  and P.dati_output not like '%ACZIMPCALCLORDOTOT%'
+			)
+			LOOP
+			    V_JSON_OUTPUT := r_passo.dati_output;
+                BEGIN
+				    FOR r_variabili in (
+				        select di.TIPO_VAR, di.val_num from A4GT_PASSO_TRANSIZIONE P,
+				            JSON_TABLE(p.dati_output, '$.variabiliCalcolo[*]' COLUMNS (
+				                TIPO_VAR varchar2 path '$.tipoVariabile',
+				                VAL_NUM varchar2 path '$.valNumber')) di
+				        where p.id = r_passo.id
+				    )
+				    LOOP
+				        IF (r_variabili.TIPO_VAR = 'ACZIMPCALCTOT') THEN
+					    	V_JSON_OUTPUT := REGEXP_REPLACE(V_JSON_OUTPUT, '{"tipoVariabile":"ACZIMPCALCTOT"', '{"tipoVariabile":"ACZIMPCALCLORDOTOT", "valNumber":' || r_variabili.VAL_NUM || '}, {"tipoVariabile":"ACZIMPCALCTOT"');
+				        END IF;
+				
+				    END LOOP;
+				    UPDATE A4GT_PASSO_TRANSIZIONE SET DATI_OUTPUT = V_JSON_OUTPUT WHERE ID = r_passo.id;
+	            EXCEPTION 
+	                WHEN OTHERS then
+	                    CONTINUE;
+    	        END;
+			END LOOP;
+			END;
+			/
+		</sql>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.produzionelatte2019.changelog_v2.xml"/>
+
+	<include file="config/database/changelog/db.istruttoria.attestazioniAlpeggio2019.xml"/>
+
+	<changeSet id="ISTRUTTORIA_20.3" author="Elisabetta Freschi">
+		<sql endDelimiter="/" dbms="oracle">
+			DECLARE
+			V_JSON_OUTPUT clob;
+			BEGIN
+			
+			FOR r_passo IN (
+			    SELECT P.* FROM A4GT_PASSO_TRANSIZIONE P WHERE P.codice_passo =  'CONTROLLI_FINALI' and dati_output not like '%"IMPCALCFINLORDO"%'
+			)
+			LOOP
+			    V_JSON_OUTPUT := r_passo.dati_output;
+                BEGIN
+				    FOR r_variabili in (
+				        select di.TIPO_VAR, di.val_num from A4GT_PASSO_TRANSIZIONE P,
+				            JSON_TABLE(p.dati_output, '$.variabiliCalcolo[*]' COLUMNS (
+				                TIPO_VAR varchar2 path '$.tipoVariabile',
+				                VAL_NUM varchar2 path '$.valNumber')) di
+				        where p.id = r_passo.id
+				    )
+				    LOOP
+				        IF (r_variabili.TIPO_VAR = 'IMPCALCFIN') THEN
+					    	V_JSON_OUTPUT := REGEXP_REPLACE(V_JSON_OUTPUT, '{"tipoVariabile":"IMPCALCFIN"', '{"tipoVariabile":"IMPCALCFINLORDO", "valNumber":' || r_variabili.VAL_NUM || '}, {"tipoVariabile":"IMPCALCFIN"');
+				        END IF;
+				
+				    END LOOP;
+				    UPDATE A4GT_PASSO_TRANSIZIONE SET DATI_OUTPUT = V_JSON_OUTPUT WHERE ID = r_passo.id;
+	            EXCEPTION 
+	                WHEN OTHERS then
+	                    CONTINUE;
+    	        END;
+			END LOOP;
+			END;
+			/
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_20.4" author="Elisabetta Freschi">
+		<addUniqueConstraint columnNames="NUMERO_DOMANDA" tableName="A4GT_DOMANDA" constraintName="UIDX_A4GT_DOMANDA_NUM"/>
+		<addUniqueConstraint columnNames="ANNO_CAMPAGNA, CUAA_INTESTATARIO" tableName="A4GT_DOMANDA" constraintName="UIDX_A4GT_DOMANDA_CUAA_ANNO"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_20.1" author="Marco Dalla Torre">
+		<update tableName="A4GT_ISTRUTTORIA">
+			<column name="ERRORE_CALCOLO" valueBoolean="false" />
+			<where>ERRORE_CALCOLO IS NULL</where>
+		</update>
+	</changeSet>
+
+	<!--
+	<changeSet id="ISTRUTTORIA_20.2" author="Marco Dalla Torre">
+		<addNotNullConstraint columnName="ERRORE_CALCOLO"
+							  constraintName="CST_ERRORE_CALCOLO_NOT_NULL"
+							  defaultNullValue="0"
+							  tableName="A4GT_ISTRUTTORIA"/>
+	</changeSet>
+	-->
+	
+	<changeSet id="ISTRUTTORIA_22.1" author="Salvatore Caccia">
+	 	<addColumn tableName="A4GT_STATISTICA_DU">
+			<column name="DATA_ELABORAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_22.2" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true">
+			update A4GT_STATISTICA_DU s set s.DATA_ELABORAZIONE = TO_DATE('09-10-2019', 'DD-MM-YYYY');
+		</sql>
+	</changeSet>	
+	<changeSet id="ISTRUTTORIA_22.3" author="Salvatore Caccia">
+			<addNotNullConstraint tableName="A4GT_STATISTICA_DU"
+	            columnName="DATA_ELABORAZIONE"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_26.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_A4GT_DOMANDA_STATO_ANNO ON A4GT_DOMANDA (ANNO_CAMPAGNA, STATO) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_26.2" author="Gabriele Ninfa">
+	<sql endDelimiter=";" splitStatements="true">
+		CREATE INDEX IDX_A4GT_PASCOLO_PART_DOMANDA ON A4GT_PASCOLO_PARTICELLA (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DATI_PASCOLO_DOMANDA ON A4GT_DATI_PASCOLO (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_RIC_SUP_DOMANDA ON A4GT_RICHIESTA_SUPERFICIE (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_ALL_IMP_DOMANDA ON A4GT_ALLEVAMENTO_IMPEGNATO (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DATI_LAV_DOMANDA ON A4GT_DATI_LAVORAZIONE (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_SOSTEGNO_DOMANDA ON A4GT_SOSTEGNO (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DICH_DU_DOMANDA ON A4GT_DICHIARAZIONE_DU (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DOM_COLLEGATE_DOMANDA ON A4GT_DOMANDE_COLLEGATE (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_ERRORE_RIC_DOMANDA ON A4GT_ERRORE_RICEVIBILITA (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_ISTRUTTORIA_DOMANDA ON A4GT_ISTRUTTORIA (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DATI_FILTRO_DOMANDA ON A4GT_DATI_FILTRO_DOMANDA (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_STAT_DU_DOMANDA ON A4GT_STATISTICA_DU (ID_DOMANDA) TABLESPACE ${tablespace.index};
+		CREATE INDEX IDX_A4GT_DATI_EREDE_DOMANDA ON A4GT_DATI_EREDE (ID_DOMANDA) TABLESPACE ${tablespace.index};
+	</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_26.3" author="Marco Dalla Torre">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_ANOM_DOM_SOST_PASSO_LAV ON A4GT_ANOM_DOMANDA_SOSTEGNO (ID_PASSO_LAVORAZIONE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PASSO_TRANZ_TRANZ_SOSTEGNO ON A4GT_PASSO_TRANSIZIONE (ID_TRANSIZ_SOSTEGNO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_TRANZ_ISTRUTRORIA_ID_ISTR ON A4GT_TRANSIZIONE_ISTRUTTORIA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<include file="config/database/changelog/2020/db.istruttoria.campione2020.changelog.xml"/>
+	
+	<include file="config/database/changelog/2020/db.istruttoria.capitolispesa2020.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_29.1" author="Lorenzo Martinelli">
+		<update tableName="A4GT_ISTRUTTORIA">
+			<column name="BLOCCATA_BOOL" valueBoolean="false" />
+			<where>BLOCCATA_BOOL IS NULL</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_29.2" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_ISTRUTTORIA" columnName="BLOCCATA_BOOL"
+			constraintName="CST_BLOCCATA_BOOL_NOT_NULL"
+			defaultNullValue="0"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_29.3" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_ISTRUTTORIA" columnName="ERRORE_CALCOLO"
+			constraintName="CST_ERRORE_CALCOLO_NOT_NULL"
+			defaultNullValue="0"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_29.4" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE a4gt_domanda
+			SET num_domanda_rettificata = 230456,
+				dt_presentaz_originaria = to_date('08062020 171053','ddmmyyyy hh24:mi:ss'),
+				dt_protocollaz_originaria = to_date('08062020 171137','ddmmyyyy hh24:mi:ss')
+			WHERE numero_domanda = 235882;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UTENTE_29F.5" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CAPITOLO_SPESA_ID_INTERV ON A4GD_CAPITOLO_SPESA (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_COLTURA_ID_INTERVENTO ON A4GD_COLTURA_INTERVENTO (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ALL_IMPEGNATO_ID_INTERV ON A4GT_ALLEVAMENTO_IMPEGNATO (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_CAPO_ID_RICH_ALLEVAM_ESITO ON A4GT_CAPO_TRACKING (ID_RICH_ALLEVAM_ESITO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DATI_PART_ID_ISTRUTTORIA ON A4GT_DATI_PARTICELLA_COLTURA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DOM_COLL_ID_BDNA ON A4GT_DOMANDE_COLLEGATE (ID_TRASMISSIONE_BDNA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ESITO_CLC_ID_ALL_DU ON A4GT_ESITO_CALCOLO_CAPO (ID_ALLEVAM_DU) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ESITO_MAN_ID_ISTRUTTORIA ON A4GT_ESITO_MAN_PASCOLO (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ESITO_MAN_ID_PASC_PARTIC ON A4GT_ESITO_MAN_PASCOLO (ID_PASCOLO_PARTICELLA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_IMPORTO_UNITARIO_ID_INTERV ON A4GT_IMPORTO_UNITARIO (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTR_PASC_ID_ISTRUTTORIA ON A4GT_ISTRUTTORE_DIS_PASCOLI (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTR_DIS_ID_ISTRUTTORIA ON A4GT_ISTRUTTORE_DISACCOPPIATO (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTR_SUP_ID_ISTRUTTORIA ON A4GT_ISTRUTTORE_SUPERFICIE (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTR_ZOO_ID_ISTRUTTORIA ON A4GT_ISTRUTTORE_ZOOTECNIA (ID_ISTRUTTORIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTRUTTORIA_ID_ELENCO_LIQ ON A4GT_ISTRUTTORIA (ID_ELENCO_LIQUIDAZIONE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ISTRUTTORIA_ID_STATO_LAV ON A4GT_ISTRUTTORIA (ID_STATO_LAVORAZIONE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_RICH_SUP_ID_INTERVENTO ON A4GT_RICHIESTA_SUPERFICIE (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_TRANS_ISTR_STATO_INIZIALE ON A4GT_TRANSIZIONE_ISTRUTTORIA (ID_STATO_INIZIALE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_TRANS_ISTR_STATO_FINALE ON A4GT_TRANSIZIONE_ISTRUTTORIA (ID_STATO_FINALE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_31.1" author="Lorenzo Martinelli">
+		<update tableName="A4GT_POLITICA_AGRICOLA">
+			<column name="ANNO_FINE" valueNumeric="2022"/>
+			<where>CODICE_PAC = 'PAC1420'</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_34.1" author="Lorenzo Martinelli">
+		<renameTable newTableName="A4GT_LOGGING"
+					 oldTableName="A4GISTR_LOGGING"/>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_35.1" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_33.1" author="Alessandro Fiori">
+		<insert tableName="A4GD_STATO_LAV_SOSTEGNO">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" value="0"/>
+			<column name="IDENTIFICATIVO" value="DEBITI"/>
+			<column name="DESCRIZIONE" value="Debiti da Recuperare"/>
+		</insert>
+	</changeSet>
+	
+	<include file="config/database/changelog/2020/db.istruttoria.etichettaturacarne2020.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.analisilatte2020_a.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.analisilatte2020_b.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.analisilatte2020_c.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.analisilatte2020_d.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.produzionelatte2020.changelog.xml"/>
+	<include file="config/database/changelog/2020/db.istruttoria.attestazionialpeggio2020.changelog.xml"/>
+	
+	<include file="config/database/changelog/2020/db.istruttoria.registriolio2020.changelog.xml"/>
+
+	<include file="config/database/changelog/2021/db.istruttoria.coltureinterventi2021.changelog.xml"/>
+	<include file="config/database/changelog/2021/db.istruttoria.capitolispesa2021.changelog.xml"/>
+	
+	<include file="config/database/changelog/2021/db.istruttoria.campione2021.changelog.xml"/>
+	
+	<changeSet author="Michele Finizio" id="ISTRUTTORIA_51.0">
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="PSR_STRUTTURALI_EU" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-11-19" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2022-01-01" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="9999-12-31" />
+			<column name="SOGLIA" value="5000" />
+		</insert>
+	</changeSet>
+	
+	<changeSet author="Bruno Conetta" id="ISTRUTTORIA_52.0">
+		<update tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="SOGLIA" value="25000" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="2022-12-31" />
+			<where> SOGLIA = 5000 AND DATA_INIZIO_APPLICAZIONE > TO_DATE('31-12-2021', 'DD-MM-YYYY') </where>
+		</update>
+		
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="PSR_STRUTTURALI_EU" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-11-19" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2023-01-01" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="9999-12-31" />
+			<column name="SOGLIA" value="5000" />
+		</insert>
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="PSR_SUPERFICIE_EU" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-11-19" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2023-01-01" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="9999-12-31" />
+			<column name="SOGLIA" value="5000" />
+		</insert>
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="DOMANDA_UNICA" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-11-19" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2023-01-01" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="9999-12-31" />
+			<column name="SOGLIA" value="5000" />
+		</insert>
+	</changeSet>
+	
+	<changeSet author="Lorenzo Martinelli" id="ISTRUTTORIA_52.0">
+		<update tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="9999-12-31" />
+			<where>SOGLIA = 25000 AND DATA_INIZIO_APPLICAZIONE = TO_DATE('01-01-2022', 'DD-MM-YYYY') </where>
+		</update>
+		
+		<delete tableName="A4GT_SOGLIA_ACQUISIZIONE">
+            <where>SOGLIA = 5000</where>
+        </delete>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_53NF.0" author="Gabriele Ninfa">
+		<renameColumn newColumnName="DT_SCADENZA_DOMANDE_INIZIALI" oldColumnName="DT_SCADENZA_DOMANDE" tableName="A4GT_CONF_ISTRUTTORIA" />
+		<renameColumn newColumnName="SCADENZA_DOM_INIZIALE_RITARDO" oldColumnName="SCADENZA_DOMANDA_RITARDO" tableName="A4GT_CONF_RICEVIBILITA" />
+	 	<addColumn tableName="A4GT_CONF_ISTRUTTORIA">
+			<column name="DT_SCADENZA_DOMANDE_MODIFICA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_CONF_RICEVIBILITA">
+			<column name="SCADENZA_DOM_MODIFICA_RITARDO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+			update A4GT_CONF_ISTRUTTORIA set DT_SCADENZA_DOMANDE_MODIFICA = DT_SCADENZA_DOMANDE_INIZIALI;
+			update A4GT_CONF_RICEVIBILITA set SCADENZA_DOM_MODIFICA_RITARDO = SCADENZA_DOM_INIZIALE_RITARDO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_53NF.1" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_DOMANDA">
+			<column name="DT_PROTOCOLLAZ_ULT_MODIFICA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="NUMERO_DOMANDA_ULT_MODIFICA" type="NUMBER(10)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_53NF.2" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_ISTRUTTORE_DISACCOPPIATO">
+			<column name="ANNULLO_RIDUZIONE" type="BOOLEAN">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_ISTRUTTORE_SUPERFICIE">
+			<column name="ANNULLO_RIDUZIONE" type="BOOLEAN">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_ISTRUTTORE_ZOOTECNIA">
+			<column name="ANNULLO_RIDUZIONE" type="BOOLEAN">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_53NF.3" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			update A4GT_ISTRUTTORE_ZOOTECNIA IZ
+			set IZ.annullo_riduzione =
+					(
+						select D.annullo_riduzione
+						from
+							A4GT_ISTRUTTORIA I
+								INNER JOIN
+							A4GT_DOMANDA D
+							ON I.ID_DOMANDA = D.ID
+						WHERE IZ.ID_ISTRUTTORIA = I.ID
+						  and I.SOSTEGNO = 'ZOOTECNIA'
+					);
+			update A4GT_ISTRUTTORE_DISACCOPPIATO AID
+			set AID.annullo_riduzione =
+					(
+						select D.annullo_riduzione
+						from
+							A4GT_ISTRUTTORIA I
+								INNER JOIN
+							A4GT_DOMANDA D
+							ON I.ID_DOMANDA = D.ID
+						WHERE AID.ID_ISTRUTTORIA = I.ID
+						  and I.SOSTEGNO = 'DISACCOPPIATO'
+					);
+			update A4GT_ISTRUTTORE_SUPERFICIE ISUP
+			set ISUP.annullo_riduzione =
+					(
+						select D.annullo_riduzione
+						from
+							A4GT_ISTRUTTORIA I
+								INNER JOIN
+							A4GT_DOMANDA D
+							ON I.ID_DOMANDA = D.ID
+						WHERE ISUP.ID_ISTRUTTORIA = I.ID
+						  and I.SOSTEGNO = 'SUPERFICIE'
+					);
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_53NF.4" author="Massimo Nascivera">
+		<dropColumn tableName="A4GT_DOMANDA" columnName="ANNULLO_RIDUZIONE" />
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_57NF.0" author="Giustino De Vincentiis">
+		<update tableName="A4GT_ANOM_DOMANDA_SOSTEGNO">
+			<column name="LIVELLO_ANOMALIA" value="INFO" />
+			<where>CODICE_ANOMALIA IN ('BRIDUSDC035', 'BRIDUSDC019', 'BRIDUSDC135') AND LIVELLO_ANOMALIA = 'WARNING'</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_57NF.1" author="Giustino De Vincentiis">
+		<sql endDelimiter=";" splitStatements="true">
+			update a4gt_passo_transizione
+			set dati_sintesi_lavorazione = replace(dati_sintesi_lavorazione, 
+			                '"tipoControllo":"BRIDUSDC035_supMinimaAmmessa","esito":false,"livelloControllo":"WARNING"',
+			                '"tipoControllo":"BRIDUSDC035_supMinimaAmmessa","esito":false,"livelloControllo":"INFO"')
+			where dati_sintesi_lavorazione like '%"tipoControllo":"BRIDUSDC035_supMinimaAmmessa","esito":false,"livelloControllo":"WARNING"%'
+			AND CODICE_PASSO = 'RIDUZIONI_BPS'
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			update a4gt_passo_transizione
+			set dati_sintesi_lavorazione = replace(dati_sintesi_lavorazione, 
+			                '"tipoControllo":"BRIDUSDC135_isAnomalieCoordinamento","esito":true,"livelloControllo":"WARNING"',
+			                '"tipoControllo":"BRIDUSDC135_isAnomalieCoordinamento","esito":true,"livelloControllo":"INFO"')
+			where dati_sintesi_lavorazione like '%"tipoControllo":"BRIDUSDC135_isAnomalieCoordinamento","esito":true,"livelloControllo":"WARNING"%'
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			update a4gt_passo_transizione
+			set dati_sintesi_lavorazione = replace(dati_sintesi_lavorazione, 
+			                '"tipoControllo":"BRIDUSDC019_PresenzaMAN","esito":true,"livelloControllo":"WARNING"',
+			                '"tipoControllo":"BRIDUSDC019_PresenzaMAN","esito":true,"livelloControllo":"INFO"')
+			where dati_sintesi_lavorazione like '%"tipoControllo":"BRIDUSDC019_PresenzaMAN","esito":true,"livelloControllo":"WARNING"%'
+			AND CODICE_PASSO = 'ANOMALIE_MANTENIMENTO'
+		</sql>
+	</changeSet>
+
+	<include file="config/database/changelog/2021/db.istruttoria.produzionelatte.2021.changelog.xml"/>
+	<include file="config/database/changelog/2021/db.istruttoria.analisilatte.2021.changelog.xml"/>
+	<include file="config/database/changelog/2021/db.istruttoria.registriolio.2021.changelog.xml"/>
+	<include file="config/database/changelog/2021/db.istruttoria.attestazionialpeggio.2021.changelog.xml"/>
+	<include file="config/database/changelog/2021/db.istruttoria.etichettaturacarne.2021.changelog.xml"/>
+	
+	
+	<changeSet  author="Lorenzo Martinelli"  id="ISTRUTTORIA_63_1">  
+		<addDefaultValue columnName="CONTROLLO_SIGECO_LOCO" 
+				defaultValueNumeric="0"
+				tableName="A4GT_ISTRUTTORE_ZOOTECNIA"/>  
+	</changeSet>
+    <changeSet id="ISTRUTTORIA_63.0" author="Bruno Conetta">
+		<createTable tableName="A4GT_REGISTRO_DOP">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+							 primaryKeyName="PK_REGISTRO_DOP"
+							 primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+				
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false"/>
+			</column>
+			
+            <column name="CAMPAGNA_INIZIO" type="NUMBER(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="CAMPAGNA_FINE" type="NUMBER(4)"></column>
+		</createTable>
+		
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_REGISTRO_DOP TO ${user.writer};
+			GRANT SELECT ON A4GT_REGISTRO_DOP TO ${user.reader};
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_A4GT_REGISTRO_DOP_CUAA ON A4GT_REGISTRO_DOP (CUAA) TABLESPACE ${tablespace.index};
+		</sql>
+		
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.registrodop.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_3N.0" author="Lorenzo Martinelli">
+		<update tableName="A4GT_PICCOLO_AGRICOLTORE">
+			<column name="ANNO_FINE" value="2021" />
+			<where>CUAA = 'PRGLDI55M62L378W'</where>
+		</update>
+	</changeSet>
+</databaseChangeLog>

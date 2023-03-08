@@ -1,0 +1,1 @@
+delete from A4GT_PROCESSO where ID = 3;

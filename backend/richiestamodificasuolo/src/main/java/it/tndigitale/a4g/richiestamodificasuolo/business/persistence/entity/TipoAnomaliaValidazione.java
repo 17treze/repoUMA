@@ -1,0 +1,5 @@
+package it.tndigitale.a4g.richiestamodificasuolo.business.persistence.entity;
+
+public enum TipoAnomaliaValidazione {
+	SOVRAPPOSIZIONE_POLIGONI_WORKSPACE, POLIGONI_DEBORDANO_AREA_DI_LAVORO, ERRORI_ORACLE, ERRORI_ORACLE_NON_CORREGGIBILI, ERRORI_ORACLE_CORRETTI_CON_SCOSTAMENTO_AREA
+}

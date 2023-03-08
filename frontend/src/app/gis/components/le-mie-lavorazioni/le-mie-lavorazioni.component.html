@@ -1,0 +1,67 @@
+<div class="p-field">
+  <label for="tipoRicerca" class="orderBy" (click)="changeOrderLavorazioni()">
+    Ordinamento
+    <i
+      *ngIf="ordineLavorazioni === 'DESC'"
+      class="pi pi-arrow-down"
+      style="font-size: 20px; vertical-align: middle; color: #333333"
+    ></i>
+    <i
+      *ngIf="ordineLavorazioni === 'ASC'"
+      class="pi pi-arrow-up"
+      style="font-size: 20px; vertical-align: middle; color: #333333"
+    ></i>
+  </label>
+</div>
+
+<div *ngIf="mylavorazioniSuolo">
+  <div
+    class="for-mie-lavorazioni"
+    infiniteScroll
+    (scrolled)="onScroll()"
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [immediateCheck]="true"
+    [scrollWindow]="false"
+  >
+    <div class="p-field" *ngFor="let n of mylavorazioniSuolo; let i = index">
+      <div class="content-scroll">
+        <div class="stato-content anno-content">
+          <div for="STATO" class="label-stato" [ngClass]="n.stato">
+            <span>{{ n.statoMappato }}</span>
+          </div>
+          <div
+            class="badge badge-anno"
+            [ngStyle]="{
+              'outline-color': changeYearColor(n.campagna),
+              'background-color': changeYearColor(n.campagna)
+            }"
+          >
+            <span>{{ n.campagna }}</span>
+          </div>
+        </div>
+        <label
+          class="mie-lavorazioni-label"
+          (click)="apriPannelloLavorazione(n)"
+          for="LAVORAZIONE"
+          ><span>LAVORAZIONE</span>
+          <div class="action-richiesta">{{ n.id }}</div></label
+        >
+        <label class="mie-lavorazioni-label" for="DATA"
+          ><span>DATA INIZIO</span>
+          {{ n.dataInizioLavorazione | date: "dd/MM/yyyy" }}</label
+        >
+        <label class="mie-lavorazioni-label" for="DATA-ULTIMA-MODIFICA"
+          ><span>DATA ULTIMA MODIFICA</span>
+          {{ n.dataUltimaModifica | date: "dd/MM/yyyy HH:mm:ss" }}</label
+        >
+        <label class="mie-lavorazioni-label" for="TITOLO"
+          ><span>TITOLO</span> {{ n.titolo || "" }}</label
+        >
+        <label class="mie-lavorazioni-label" for="UTENTE"
+          ><span>UTENTE</span> {{ n.utente }}</label
+        >
+      </div>
+    </div>
+  </div>
+</div>

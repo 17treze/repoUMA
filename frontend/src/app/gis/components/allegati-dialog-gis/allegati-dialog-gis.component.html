@@ -1,0 +1,21 @@
+<p-dialog
+  *ngIf="allegatiEvent.displayAllegati"
+  [(visible)]="allegatiEvent.displayAllegati"
+  (onHide)="closeDialog()"
+  class="uploadAttachmentsPopup">
+  <gis-upload-attachments
+    [allegatiService]="allegatiService"
+    [idDichiarato]="detailResults.id"
+    [tipoAllegato]="tipoAllegato"
+    [initFile]="initFile"
+    [detailResults]="detailResults"
+    [profiloUtente]="profiloUtente">
+  </gis-upload-attachments>
+  <allegati-gis
+    [allegatiService]="allegatiService"
+    [idDichiarato]="detailResults.id"
+    [detailResults]="detailResults"></allegati-gis>
+</p-dialog>
+<div
+  id="overlayAllegati"
+  *ngIf="allegatiEvent.displayAllegati"></div>

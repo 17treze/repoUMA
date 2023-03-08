@@ -1,0 +1,15 @@
+<!-- IDENTIFY BTN -->
+<div id="identify" (click)="enableListener()" [class.active-tool]="isActive" [ngClass]="{'toolDisattivato':!canUseListener}">
+  <button class='btn btn-primary' pTooltip="Identifica" tooltipPosition="left"><i class="fa fa-info"></i></button>
+</div>
+
+<!-- IDENTIFY RESULTS -->
+<div id="info-panel" #identifyPanel class="card-content identify-results" [hidden]="(!isActive || panelEvent.identifyTableContent && panelEvent.identifyTableContent.length === 0)" [ngClass]="{'onlyIdentify': !panelEvent.showLayerSwitcher && panelEvent.showWmsResults && isActive}">
+  <p-sidebar class="sidebar-results wms-results" (onHide)="panelEvent.showWmsResults = false" [(visible)]="panelEvent.showWmsResults" [(dismissible)]="dismissible"
+   [(blockScroll)]="blockScroll" position="left">
+    <h1 style="text-transform: none!important;">Risultati</h1>
+    <div class="tree-node" *ngIf="panelEvent.identifyTableContent">
+      <gis-tree-table [data]="panelEvent.identifyTableContent"></gis-tree-table>
+    </div>
+  </p-sidebar>
+</div>

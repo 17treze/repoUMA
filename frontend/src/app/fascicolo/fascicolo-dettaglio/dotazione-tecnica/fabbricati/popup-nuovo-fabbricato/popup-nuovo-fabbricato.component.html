@@ -1,0 +1,1051 @@
+<p-toast key="tst-fabbricato" [style]="{marginTop: '70px'}"></p-toast>
+<p-toast position="center" key="aggiungiParticellaInTrentino" (onClose)="onRejectAggiornaDichiarazione()" [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="onConfirmAggiornaDichiarazione()" label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button type="button" pButton (click)="onRejectAggiornaDichiarazione()" label="No"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-dialog #dialogNuovoFabbricato id="popup-nuovo-fabbricato" [(visible)]="display" header="Fabbricato"
+  [focusOnShow]="false" [modal]="true" [closable]="true" [closeOnEscape]="true" [blockScroll]="true" position="center"
+  [style]="{width: '80vw', height: '90vh'}" [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden'}"
+  [dismissableMask]="false" styleClass="large-dialog" [class]="idValidazione ? 'title-grey' : ''" (onHide)="annulla()">
+
+  <form novalidate [formGroup]="fabbricatoForm" (ngSubmit)="onSubmit($event)" class="p-grid h-100">
+
+    <!-- Sezione dati -->
+    <div class="p-grid w-100 m-0">
+      <div class="p-col-12 p-col-align-start ui-fluid">
+        <div class="p-grid">
+          <p-accordion [class]="idValidazione ? 'accordion-grey' : ''" class="w-100" #accordion
+            (onOpen)="onSelectAccordion($event)">
+
+            <div class="p-grid p-4 boxgrey">
+              <div class="p-col p-0">
+
+                <!-- Selezione tipologia/sottotipologia/sottotipo -->
+                <div class="p-grid m-0">
+                  <div class="p-col-4">
+                    <label for="tipologia-fabbricato">Ambito*</label>
+                    <p-dropdown id="tipologia-fabbricato" formControlName="tipologiaFabbricato"
+                      [disabled]="READONLY_MODE" (onChange)="onSelectTipologia($event)"
+                      [options]="tipologicheService.tipologiaFabbricato"></p-dropdown>
+                    <div
+                      *ngIf="fabbricatoForm.get('tipologiaFabbricato').invalid && (fabbricatoForm.get('tipologiaFabbricato').dirty || fabbricatoForm.get('tipologiaFabbricato').touched)">
+                      <p-message *ngIf="fabbricatoForm.get('tipologiaFabbricato').errors?.required" class="font-12"
+                        severity="error" text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="sotto-tipologia-fabbricato">Tipologia*</label>
+                    <p-dropdown id="sotto-tipologia-fabbricato" formControlName="sottoTipologiaFabbricato"
+                      [disabled]="READONLY_MODE" (onChange)="onSelectSottoTipologia($event)"
+                      [options]="tipologicheService.sottoTipologiaFabbricato"></p-dropdown>
+                    <div
+                      *ngIf="fabbricatoForm.get('sottoTipologiaFabbricato').invalid && (fabbricatoForm.get('sottoTipologiaFabbricato').dirty || fabbricatoForm.get('sottoTipologiaFabbricato').touched)">
+                      <p-message *ngIf="fabbricatoForm.get('sottoTipologiaFabbricato').errors?.required" class="font-12"
+                        severity="error" text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4" *ngIf="isSelctedStruttureZootecniche()">
+                    <label for="sotto-tipo-fabbricato">Sotto Tipologia*</label>
+                    <p-dropdown id="sotto-tipo-fabbricato" formControlName="sottoTipo" [disabled]="READONLY_MODE"
+                      (onChange)="onSelectSottoTipo($event)" [options]="tipologicheService.sottoTipoFabbricato">
+                    </p-dropdown>
+                    <div
+                      *ngIf="fabbricatoForm.get('sottoTipo').invalid && (fabbricatoForm.get('sottoTipo').dirty || fabbricatoForm.get('sottoTipo').touched)">
+                      <p-message *ngIf="fabbricatoForm.get('sottoTipo').errors?.required" class="font-12"
+                        severity="error" text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sezione Particella -->
+            <div *ngIf="!disabledAccordionParticelle()"
+              class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+              <p-accordionTab header="DATI CATASTALI" cache="false" [selected]="true">
+                <ng-template pTemplate="content">
+                  <div class="p-grid align-self-center">
+                    <div class="p-grid m-0">
+                      <p-fieldset class="p-col">
+                        <p-header class="color-primary font-weight-bold">Particella</p-header>
+                        <div class="p-grid m-0">
+                          <!-- Switch In Trentino o Fuori Trentino -->
+                          <div class="p-col-12 pl-3">
+                            <label class="fs-18 align-text-top" for="scelta-in-out">
+                              In Trentino
+                            </label>
+                            <p-inputSwitch [disabled]="particellaModificaInCorso != null" class="large-switch p-4"
+                              id="scelta-in-out" (onChange)="onSelectTrentinoInOut($event)"
+                              formControlName="fuoriTrentino">
+                            </p-inputSwitch>
+                            <label class="fs-18 align-text-top" for="scelta-in-out">
+                              Fuori Trentino
+                            </label>
+                          </div>
+                          <!-- In Trentino -->
+                          <div *ngIf="!fabbricatoForm.get('fuoriTrentino').value" class="p-col-12">
+                            <div class="p-col p-0" formGroupName="datiCatastali">
+                              <div class="p-grid m-0">
+                                <div class="p-col-4">
+                                  <label for="comune-catastale-input">Comune catastale</label>
+                                  <input id="comune-catastale-input" [maxlength]="50" type="text" pInputText
+                                    formControlName="comune" pattern="^([0-9])+$"
+                                    (change)="getElencoSubalterniParticellaCatasto()">
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.comune').invalid && (fabbricatoForm.get('datiCatastali.comune').dirty || fabbricatoForm.get('datiCatastali.comune').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.comune').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.comune').errors?.pattern"
+                                      class="font-12" severity="error" text="Formato non valido">
+                                    </p-message>
+                                  </div>
+                                </div>
+                                <div class="p-col-8">
+                                  <div class="p-grid m-0">
+                                    <div class="p-col-5 p-0">
+                                      <label for="numero-particella-input">Particella</label>
+                                      <input id="numero-particella-input" [maxlength]="25" type="text" pInputText
+                                        formControlName="particella" (change)="getElencoSubalterniParticellaCatasto()">
+                                      <div
+                                        *ngIf="fabbricatoForm.get('datiCatastali.particella').invalid && (fabbricatoForm.get('datiCatastali.particella').dirty || fabbricatoForm.get('datiCatastali.particella').touched)">
+                                        <p-message
+                                          *ngIf="fabbricatoForm.get('datiCatastali.particella').errors?.required"
+                                          class="font-12" severity="error" text="Campo Obbligatorio">
+                                        </p-message>
+                                      </div>
+                                    </div>
+                                    <div class="p-col-1 p-0">
+                                      <div id="div-with-line">/</div>
+                                    </div>
+                                    <div class="p-col-6 p-0">
+                                      <label for="denominatore-input">&nbsp;</label>
+                                      <input id="denominatore-input" [maxlength]="25" type="text" pInputText
+                                        formControlName="denominatore">
+                                      <div
+                                        *ngIf="fabbricatoForm.get('datiCatastali.denominatore').invalid && (fabbricatoForm.get('datiCatastali.denominatore').dirty || fabbricatoForm.get('datiCatastali.denominatore').touched)">
+                                        <p-message
+                                          *ngIf="fabbricatoForm.get('datiCatastali.denominatore').errors?.required"
+                                          class="font-12" severity="error" text="Campo Obbligatorio">
+                                        </p-message>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="p-grid m-0">
+                                <div class="p-col-6">
+                                  <label for="tipologia-catasto">Tipologia</label>
+                                  <p-dropdown id="tipologia-catasto" formControlName="tipologia"
+                                    [disabled]="READONLY_MODE" (onChange)="onSelectTipologiaCatasto($event)"
+                                    [options]="tipologicheService.tipologiaCatasto"></p-dropdown>
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.tipologia').invalid && (fabbricatoForm.get('datiCatastali.tipologia').dirty || fabbricatoForm.get('datiCatastali.tipologia').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.tipologia').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                  </div>
+                                </div>
+                                <div class="p-col-6"
+                                  *ngIf="fabbricatoForm.get('datiCatastali.tipologia').value === 'EDIFICIALE'">
+                                  <label for="subalterno-input">Subalterno</label>
+                                  <p-dropdown id="subalterno-input" formControlName="subalterno"
+                                    [options]="subalternoList" editable="true"
+                                    placeholder="Seleziona o digita un subalterno"></p-dropdown>
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.subalterno').invalid && (fabbricatoForm.get('datiCatastali.subalterno').dirty || fabbricatoForm.get('datiCatastali.subalterno').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.subalterno').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="p-grid m-0 p-justify-end p-align-center">
+                                <div class="p-col-fixed" *ngIf="!READONLY_MODE">
+                                  <button pButton class="ui-button-secondary ui-button-text button-accent-alt"
+                                    label="AGGIUNGI PARTICELLA" icon="pi pi-plus-circle" iconPos="right"
+                                    (click)="aggiungiParticellaInTrentino($event)"></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Fuori Trentino -->
+                          <div *ngIf="fabbricatoForm.get('fuoriTrentino').value" class="p-col-12">
+                            <div class="p-col p-0" formGroupName="datiCatastali">
+                              <div class="p-grid m-0">
+                                <div class="p-col-6">
+                                  <label for="sezione-input">Sezione (codice nazionale)*</label>
+                                  <input id="sezione-input" [maxlength]="25" type="text" pInputText
+                                    formControlName="sezione">
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.sezione').invalid && (fabbricatoForm.get('datiCatastali.sezione').dirty || fabbricatoForm.get('datiCatastali.sezione').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.sezione').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                  </div>
+                                </div>
+                                <div class="p-col-6">
+                                  <label for="foglio">Foglio*</label>
+                                  <input id="foglio-input" [maxlength]="25" type="text" pInputText
+                                    formControlName="foglio" pattern="^([0-9])+$">
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.foglio').invalid && (fabbricatoForm.get('datiCatastali.foglio').dirty || fabbricatoForm.get('datiCatastali.foglio').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.foglio').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.foglio').errors?.pattern"
+                                      class="font-12" severity="error" text="Formato non valido">
+                                    </p-message>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="p-grid m-0">
+                                <div class="p-col-8">
+                                  <div class="p-grid m-0">
+                                    <div class="p-col-5 p-0">
+                                      <label for="numero-particella-input">Particella</label>
+                                      <input id="numero-particella-input" [maxlength]="25" type="text" pInputText
+                                        formControlName="particella" (change)="getElencoSubalterniParticellaCatasto()">
+                                      <div
+                                        *ngIf="fabbricatoForm.get('datiCatastali.particella').invalid && (fabbricatoForm.get('datiCatastali.particella').dirty || fabbricatoForm.get('datiCatastali.particella').touched)">
+                                        <p-message
+                                          *ngIf="fabbricatoForm.get('datiCatastali.particella').errors?.required"
+                                          class="font-12" severity="error" text="Campo Obbligatorio">
+                                        </p-message>
+                                      </div>
+                                    </div>
+                                    <div class="p-col-1 p-0">
+                                      <div id="div-with-line">/</div>
+                                    </div>
+                                    <div class="p-col-6 p-0">
+                                      <label for="denominatore-input">&nbsp;</label>
+                                      <input id="denominatore-input" [maxlength]="25" type="text" pInputText
+                                        formControlName="denominatore">
+                                      <div
+                                        *ngIf="fabbricatoForm.get('datiCatastali.denominatore').invalid && (fabbricatoForm.get('datiCatastali.denominatore').dirty || fabbricatoForm.get('datiCatastali.denominatore').touched)">
+                                        <p-message
+                                          *ngIf="fabbricatoForm.get('datiCatastali.denominatore').errors?.required"
+                                          class="font-12" severity="error" text="Campo Obbligatorio">
+                                        </p-message>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="p-col-4">
+                                  <label for="tipologia-catasto">Tipologia*</label>
+                                  <p-dropdown id="tipologia-catasto" formControlName="tipologia"
+                                    [disabled]="READONLY_MODE" (onChange)="onSelectTipologiaCatasto($event)"
+                                    [options]="tipologicheService.tipologiaCatasto"></p-dropdown>
+                                  <div
+                                    *ngIf="fabbricatoForm.get('datiCatastali.tipologia').invalid && (fabbricatoForm.get('datiCatastali.tipologia').dirty || fabbricatoForm.get('datiCatastali.tipologia').touched)">
+                                    <p-message *ngIf="fabbricatoForm.get('datiCatastali.tipologia').errors?.required"
+                                      class="font-12" severity="error" text="Campo Obbligatorio">
+                                    </p-message>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="p-grid m-0 p-justify-end p-align-center">
+                                <div class="p-col-fixed" *ngIf="!READONLY_MODE">
+                                  <button *ngIf="particellaModificaInCorso != null" pButton
+                                    class="ui-button-secondary ui-button-text button-accent-alt"
+                                    label="ANNULLA MODIFICA" icon="pi pi-undo" iconPos="right"
+                                    (click)="annullaModifica($event)"></button>
+                                </div>
+                                <div class="p-col-fixed" *ngIf="!READONLY_MODE">
+                                  <button *ngIf="particellaModificaInCorso === null" pButton
+                                    class="ui-button-secondary ui-button-text button-accent-alt"
+                                    label="AGGIUNGI PARTICELLA" icon="pi pi-plus-circle" iconPos="right"
+                                    (click)="aggiungiParticellaFuoriTrentino($event)"></button>
+                                  <button *ngIf="particellaModificaInCorso != null" pButton
+                                    class="ui-button-secondary ui-button-text button-accent-alt"
+                                    label="AGGIORNA PARTICELLA" icon="pi pi-save" iconPos="right"
+                                    (click)="aggiornaParticellaFuoriTrentino($event)"></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Elenco Particelle -->
+                        <div class="p-col-12 p-3" *ngIf="particelleList?.length">
+                          <p-table #tableParticelle [columns]="cols" [value]="particelleList" pandableRows="true"
+                            [autoLayout]="true" [paginator]="false" [responsive]="true" dataKey="particella">
+                            <ng-template pTemplate="header" let-columns>
+                              <tr>
+                                <th *ngFor="let col of columns">
+                                  <strong>{{ col.header }}</strong>
+                                </th>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-particella let-expanded="expanded" let-columns="columns"
+                              let-rowIndex="rowIndex">
+                              <tr>
+                                <td>
+                                  <a href="#" [pRowToggler]="particella">
+                                    <i title="Dettaglio particella"
+                                      [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                                  </a>
+                                </td>
+                                <td class="text-center">{{particella.particella}}</td>
+                                <td class="text-center">{{particella.denominatore}}</td>
+                                <td class="text-center">{{particella.tipologia}}</td>
+                                <td class="text-center">{{particella.inTrentino ? 'Sì' : 'No'}}</td>
+                                <td class="text-center">{{particella.esito}}</td>
+                                <td class="text-center">
+                                  <button *ngIf="!particella.inTrentino" pButton type="button"
+                                    title="Modifica particella" class="icon-button-square" icon="pi pi-pencil"
+                                    (click)="modificaParticella(particella, rowIndex)"></button>
+                                  <button pButton type="button" title="Elimina particella"
+                                    class="icon-button-square ml-2" icon="pi pi-times-circle"
+                                    (click)="eliminaParticella(particella)" [disabled]="READONLY_MODE"></button>
+                                </td>
+                              </tr>
+                            </ng-template>
+                            <ng-template pTemplate="rowexpansion" let-particella let-columns="columns"
+                              let-rowIndex="rowIndex">
+                              <ng-template [ngIf]="particella">
+                                <tr>
+                                  <td [attr.colspan]="columns.length">
+                                    <tbody *ngIf="particella.inTrentino">
+                                      <tr>
+                                        <th>Dati particella In Trentino</th>
+                                        <th></th>
+                                      </tr>
+                                      <tr>
+                                        <td>Numero Particella:</td>
+                                        <td>{{particella.particella}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Denominatore:</td>
+                                        <td>{{particella.denominatore}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Tipologia:</td>
+                                        <td>{{particella.tipologia}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Comune catastale:</td>
+                                        <td>{{particella.comune}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Subalterno:</td>
+                                        <td>{{particella.subalterno || 'ND'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Indirizzo:</td>
+                                        <td>{{particella.indirizzo || 'ND'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Superficie:</td>
+                                        <td>{{particella.superficie || 'ND'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Consistenza:</td>
+                                        <td>{{particella.consistenza || 'ND'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Categoria:</td>
+                                        <td>{{particella.categoria || 'ND'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Note:</td>
+                                        <td>{{particella.note || 'ND'}}</td>
+                                      </tr>
+                                    </tbody>
+                                    <tbody *ngIf="!particella.inTrentino">
+                                      <tr>
+                                        <th>Dati particella Fuori Trentino</th>
+                                        <th></th>
+                                      </tr>
+                                      <tr>
+                                        <td>Numero Particella:</td>
+                                        <td>{{particella.particella}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Denominatore:</td>
+                                        <td>{{particella.denominatore}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Tipologia:</td>
+                                        <td>{{particella.tipologia}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Sezione:</td>
+                                        <td>{{particella.sezione}}</td>
+                                      </tr>
+                                      <tr>
+                                        <td>Foglio:</td>
+                                        <td>{{particella.foglio}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </td>
+                                </tr>
+                              </ng-template>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage" let-columns>
+                              <tr>
+                                <td [attr.colspan]="columns.length">Nessun contenuto disponibile</td>
+                              </tr>
+                            </ng-template>
+                          </p-table>
+                        </div>
+                      </p-fieldset>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-accordionTab>
+            </div>
+
+            <!-- Sezione Fabbricato -->
+            <div *ngIf="fabbricatoEnabled" class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+              <p-accordionTab header="FABBRICATI STRUMENTALI" [selected]="true" cache="false">
+                <ng-template pTemplate="content">
+                  <div class="p-grid align-self-center">
+                    <div formGroupName="fabbricati" class="p-grid m-0 w-100">
+                      <div class="p-col-6">
+                        <label for="denominazione-input">Denominazione</label>
+                        <input id="denominazione-input" [maxlength]="100" type="text" pInputText
+                          formControlName="denominazione">
+                      </div>
+                      <div class="p-col-6">
+                        <label for="indirizzo-input">Indirizzo</label>
+                        <input id="indirizzo-input" [maxlength]="50" type="text" pInputText formControlName="indirizzo">
+                      </div>
+                      <div class="p-col-6">
+                        <label for="comune-amministrativo-input">Comune Amministrativo*</label>
+                        <input id="comune-amministrativo-input" [maxlength]="50" type="text" pInputText
+                          formControlName="comune">
+                        <div
+                          *ngIf="fabbricatoForm.get('fabbricati.comune').invalid && (fabbricatoForm.get('fabbricati.comune').dirty || fabbricatoForm.get('fabbricati.comune').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('fabbricati.comune').errors?.required" class="font-12"
+                            severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="volume-input">Volume (mc.)</label>
+                        <input id="volume-input" [maxlength]="10" pattern="^([0-9])+$" type="text" class="text-right"
+                          pInputText formControlName="volume">
+                        <p-message *ngIf="fabbricatoForm.get('fabbricati.volume').errors?.pattern" class="font-12"
+                          severity="error" text="Formato non valido">
+                        </p-message>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="superficie-totale-input">Superficie totale (mq.)*</label>
+                        <input id="superficie-totale-input" [maxlength]="20"
+                          [a4gLimitSumNoInput]="{ toSum: ['superficieCoperta','superficieScoperta'], limit: 'superficie'}"
+                          pattern="^([0-9])+$" type="text" class="text-right" pInputText formControlName="superficie">
+                        <div
+                          *ngIf="fabbricatoForm.get('fabbricati.superficie').invalid && (fabbricatoForm.get('fabbricati.superficie').dirty || fabbricatoForm.get('fabbricati.superficie').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('fabbricati.superficie').errors?.required"
+                            class="font-12" severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                          <p-message *ngIf="fabbricatoForm.get('fabbricati.superficie').errors?.pattern" class="font-12"
+                            severity="error" text="Formato non valido">
+                          </p-message>
+                          <p-message *ngIf="fabbricatoForm.get('fabbricati.superficie').errors?.maxArray"
+                            class="font-12" severity="error"
+                            text="Attenzione! La somma di superficie scoperta e coperta non può eccedere la superficie totale!">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="superficie-coperta-input">Superficie coperta (mq.)</label>
+                        <input id="superficie-coperta-input" [maxlength]="10"
+                          [a4gLimitSumNoInput]="{ toSum: ['superficieCoperta','superficieScoperta'], limit: 'superficie'}"
+                          pattern="^([0-9])+$" type="text" class="text-right" pInputText
+                          formControlName="superficieCoperta">
+                        <p-message *ngIf="fabbricatoForm.get('fabbricati.superficieCoperta').errors?.pattern"
+                          class="font-12" severity="error" text="Formato non valido">
+                        </p-message>
+                        <p-message *ngIf="fabbricatoForm.get('fabbricati.superficieCoperta').errors?.maxArray"
+                          class="font-12" severity="error"
+                          text="{{ 'Attenzione! Le superfici digitate eccedono la superficie totale: '+ (fabbricatoForm.get('fabbricati.superficie').value ? fabbricatoForm.get('fabbricati.superficie').value : 0)}}">
+                        </p-message>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="superficie-scoperta-input">Superficie scoperta (mq.)</label>
+                        <input id="superficie-scoperta-input" [maxlength]="10"
+                          [a4gLimitSumNoInput]="{ toSum: ['superficieCoperta','superficieScoperta'], limit: 'superficie'}"
+                          pattern="^([0-9])+$" type="text" class="text-right" pInputText
+                          formControlName="superficieScoperta">
+                        <p-message *ngIf="fabbricatoForm.get('fabbricati.superficieScoperta').errors?.pattern"
+                          class="font-12" severity="error" text="Formato non valido">
+                        </p-message>
+                        <p-message *ngIf="fabbricatoForm.get('fabbricati.superficieScoperta').errors?.maxArray"
+                          class="font-12" severity="error"
+                          text="{{ 'Attenzione! Le superfici digitate eccedono la superficie totale: '+ (fabbricatoForm.get('fabbricati.superficie').value ? fabbricatoForm.get('fabbricati.superficie').value : 0)}}">
+                        </p-message>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="tipo-conduzione-fabbricato">Tipo conduzione*</label>
+                        <p-dropdown id="tipo-conduzione-fabbricato" formControlName="tipoConduzione"
+                          [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                        <div
+                          *ngIf="fabbricatoForm.get('fabbricati.tipoConduzione').invalid && (fabbricatoForm.get('fabbricati.tipoConduzione').dirty || fabbricatoForm.get('fabbricati.tipoConduzione').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('fabbricati.tipoConduzione').errors?.required"
+                            class="font-12" severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-12">
+                        <label for="descrizione-fabbricato-input">Descrizione sintetica del fabbricato</label>
+                        <input id="descrizione-fabbricato-input" [maxlength]="200" type="text" pInputText
+                          formControlName="descrizione">
+                      </div>
+                    </div>
+                    <!-- Footer -->
+                    <div class="p-grid m-0 w-100">
+                      <div class="p-col p-0">
+                        <p-footer class="p-col">
+                          <i> * Campo obbligatorio</i>
+                        </p-footer>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-accordionTab>
+            </div>
+
+            <!-- Sezione serre -->
+            <div *ngIf="serreEnabled" class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+              <p-accordionTab header="SERRE E PROTEZIONI" [selected]="true" cache="false">
+                <ng-template pTemplate="content">
+                  <div class="p-grid align-self-center">
+                    <div formGroupName="serre" class="p-grid m-0 w-100">
+                      <div class="p-col-6">
+                        <label for="denominazione-input">Denominazione</label>
+                        <input id="denominazione-input" [maxlength]="100" type="text" pInputText
+                          formControlName="denominazione">
+                      </div>
+                      <div class="p-col-6">
+                        <label for="indirizzo-input">Indirizzo</label>
+                        <input id="indirizzo-input" [maxlength]="50" type="text" pInputText formControlName="indirizzo">
+                      </div>
+                      <div class="p-col-6">
+                        <label for="comune-amministrativo-input">Comune Amministrativo*</label>
+                        <input id="comune-amministrativo-input" [maxlength]="50" type="text" pInputText
+                          formControlName="comune">
+                        <div
+                          *ngIf="fabbricatoForm.get('serre.comune').invalid && (fabbricatoForm.get('serre.comune').dirty || fabbricatoForm.get('serre.comune').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('serre.comune').errors?.required" class="font-12"
+                            severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="volume-input">Volume (mc.)*</label>
+                        <input id="volume-input" [maxlength]="10" pattern="^([0-9])+$" type="text" class="text-right"
+                          pInputText formControlName="volume">
+                        <div
+                          *ngIf="fabbricatoForm.get('serre.volume').invalid && (fabbricatoForm.get('serre.volume').dirty || fabbricatoForm.get('serre.volume').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('serre.volume').errors?.required" class="font-12"
+                            severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                          <p-message *ngIf="fabbricatoForm.get('serre.volume').errors?.pattern" class="font-12"
+                            severity="error" text="Formato non valido">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="superficie-occupata-input">Superficie occupata (mq.)</label>
+                        <input id="superficie-occupata-input" [maxlength]="20" pattern="^([0-9])+$" type="text"
+                          class="text-right" pInputText formControlName="superficie">
+                        <p-message *ngIf="fabbricatoForm.get('serre.superficie').errors?.pattern" class="font-12"
+                          severity="error" text="Formato non valido">
+                        </p-message>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="anno-costruzione-input">Anno di costruzione</label>
+                        <input id="anno-costruzione-input" [maxlength]="4" pattern="^([0-9])+$" type="text"
+                          class="text-right" pInputText formControlName="annoCostruzione">
+                        <p-message *ngIf="fabbricatoForm.get('serre.annoCostruzione').errors?.pattern" class="font-12"
+                          severity="error" text="Formato non valido">
+                        </p-message>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="conformita-urbanistica-input">Titolo di conformità urbanistica</label>
+                        <input id="conformita-urbanistica-input" [maxlength]="50" type="text" pInputText
+                          formControlName="titoloConformitaUrbanistica">
+                      </div>
+                      <div class="p-col-6 p-grid align-content-end">
+                        <div class="p-col">
+                          <label for="impianto-riscaldamento-input">Presenza impianto di riscaldamento</label>
+                          <p-checkbox class="pl-4" id="impianto-riscaldamento-input"
+                            [formControl]="fabbricatoForm.get('serre.impiantoRiscaldamento')" binary="true">
+                          </p-checkbox>
+                        </div>
+                      </div>
+                      <div class="p-col-6">
+                        <label for="tipo-conduzione-serre">Tipo conduzione*</label>
+                        <p-dropdown id="tipo-conduzione-serre" formControlName="tipoConduzione"
+                          [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                        <div
+                          *ngIf="fabbricatoForm.get('serre.tipoConduzione').invalid && (fabbricatoForm.get('serre.tipoConduzione').dirty || fabbricatoForm.get('serre.tipoConduzione').touched)">
+                          <p-message *ngIf="fabbricatoForm.get('serre.tipoConduzione').errors?.required" class="font-12"
+                            severity="error" text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </div>
+                      <div class="p-col-12">
+                        <label for="descrizione-serra-input">Descrizione sintetica della serra</label>
+                        <input id="descrizione-serra-input" [maxlength]="200" type="text" pInputText
+                          formControlName="descrizione">
+                      </div>
+                      <div class="p-col-12">
+                        <p-fieldset class="p-col">
+                          <p-header class="color-primary font-weight-bold">Materiale di copertura</p-header>
+                          <div class="p-grid m-0">
+                            <div class="p-col">
+                              <label for="tipologia-materiale-input">Tipologia materiale</label>
+                              <input id="tipologia-materiale-input" [maxlength]="100" type="text" pInputText
+                                formControlName="tipologiaMateriale">
+                            </div>
+                            <div class="p-col">
+                              <label for="anno-acquisto-input">Anno di acquisto</label>
+                              <input id="anno-acquisto-input" [maxlength]="4" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="annoAcquisto">
+                              <p-message *ngIf="fabbricatoForm.get('serre.annoAcquisto').errors?.pattern"
+                                class="font-12" severity="error" text="Formato non valido">
+                              </p-message>
+                            </div>
+                          </div>
+                        </p-fieldset>
+                      </div>
+
+                    </div>
+                  </div>
+                  <!-- Footer -->
+                  <div class="p-grid m-0 w-100">
+                    <div class="p-col p-0">
+                      <p-footer class="p-col">
+                        <i> * Campo obbligatorio</i>
+                      </p-footer>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-accordionTab>
+            </div>
+
+            <!-- Sezione strutture zootecniche -->
+            <div *ngIf="struttureEnabled" class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+              <p-accordionTab header="STRUTTURE ZOOTECNICHE" [selected]="true" cache="false">
+                <ng-template pTemplate="content">
+                  <div formGroupName="strutture" class="p-grid m-0 p-0">
+                    <p-tabView [activeIndex]="activeTab">
+
+                      <!-- Zootecnia - Stoccaggio Letami -->
+                      <p-tabPanel header="STOCCAGGIO LETAMI"
+                        [selected]="sottoTipoLogiaSelected === sottoTipologiaZootecnia.STOCCAGGIO_LETAMI"
+                        [disabled]="sottoTipoLogiaSelected != sottoTipologiaZootecnia.STOCCAGGIO_LETAMI">
+                        <div class="p-grid align-self-center">
+                          <div formGroupName="stoccaggioLetami" class="p-grid m-0 w-100">
+                            <div class="p-col-4">
+                              <label for="denominazione-input">Denominazione</label>
+                              <input id="denominazione-input" [maxlength]="100" type="text" pInputText
+                                formControlName="denominazione">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="indirizzo-input">Indirizzo</label>
+                              <input id="indirizzo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="indirizzo">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="comune-amministrativo-input">Comune Amministrativo*</label>
+                              <input id="comune-amministrativo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="comune">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.comune').invalid || (fabbricatoForm.get('strutture.stoccaggioLetami.comune').dirty || fabbricatoForm.get('strutture.stoccaggioLetami.comune').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.comune').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="copertura-letami">Copertura*</label>
+                              <p-dropdown id="copertura-letami" formControlName="copertura" [disabled]="READONLY_MODE"
+                                [options]="tipologicheService.copertura"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.copertura').invalid || (fabbricatoForm.get('strutture.stoccaggioLetami.copertura').dirty || fabbricatoForm.get('strutture.stoccaggioLetami.copertura').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.copertura').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6"></div>
+                            <div class="p-col-4">
+                              <label for="superficie-input">Superficie (mq.)*</label>
+                              <input id="superficie-input" [maxlength]="20" pattern="^([0-9])+$" type="text"
+                                (blur)="calcVolume('LETAMI')" class="text-right" pInputText
+                                formControlName="superficie">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.superficie').invalid || (fabbricatoForm.get('strutture.stoccaggioLetami.superficie').dirty || fabbricatoForm.get('strutture.stoccaggioLetami.superficie').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.superficie').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.superficie').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-4">
+                              <label for="altezza-letami">Altezza (m)*</label>
+                              <input id="altezza-letami" [maxlength]="10" pattern="^([0-9])+$" type="text"
+                                (blur)="calcVolume('LETAMI')" class="text-right" pInputText formControlName="altezza">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.altezza').invalid || (fabbricatoForm.get('strutture.stoccaggioLetami.altezza').dirty || fabbricatoForm.get('strutture.stoccaggioLetami.altezza').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.altezza').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.altezza').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-4">
+                              <label for="volume-input">Volume (mc.)</label>
+                              <input id="volume-input" [maxlength]="10" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="volume" readonly>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="tipo-conduzione-strutture">Tipo conduzione*</label>
+                              <p-dropdown id="tipo-conduzione-strutture" formControlName="tipoConduzione"
+                                [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.tipoConduzione').invalid || (fabbricatoForm.get('strutture.stoccaggioLetami.tipoConduzione').dirty || fabbricatoForm.get('strutture.stoccaggioLetami.tipoConduzione').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLetami.tipoConduzione').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-12">
+                              <label for="descrizione-struttura-input">Descrizione sintetica della struttura</label>
+                              <input id="descrizione-struttura-input" [maxlength]="200" type="text" pInputText
+                                formControlName="descrizione">
+                            </div>
+                          </div>
+                          <!-- Footer -->
+                          <div class="p-grid m-0 w-100">
+                            <div class="p-col p-0">
+                              <p-footer class="p-col">
+                                <i> * Campo obbligatorio</i>
+                              </p-footer>
+                            </div>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+
+                      <!-- Zootecnia - Stoccaggio Liquami -->
+                      <p-tabPanel header="STOCCAGGIO LIQUAMI"
+                        [selected]="sottoTipoLogiaSelected === sottoTipologiaZootecnia.STOCCAGGIO_LIQUAMI"
+                        [disabled]="sottoTipoLogiaSelected != sottoTipologiaZootecnia.STOCCAGGIO_LIQUAMI">
+                        <div class="p-grid align-self-center">
+                          <div formGroupName="stoccaggioLiquami" class="p-grid m-0 w-100">
+                            <div class="p-col-4">
+                              <label for="denominazione-input">Denominazione</label>
+                              <input id="denominazione-input" [maxlength]="100" type="text" pInputText
+                                formControlName="denominazione">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="indirizzo-input">Indirizzo</label>
+                              <input id="indirizzo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="indirizzo">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="comune-amministrativo-input">Comune Amministrativo*</label>
+                              <input id="comune-amministrativo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="comune">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.comune').invalid || (fabbricatoForm.get('strutture.stoccaggioLiquami.comune').dirty || fabbricatoForm.get('strutture.stoccaggioLiquami.comune').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.comune').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="copertura-liquami">Copertura*</label>
+                              <p-dropdown id="copertura-liquami" formControlName="copertura" [disabled]="READONLY_MODE"
+                                [options]="tipologicheService.copertura"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.copertura').invalid || (fabbricatoForm.get('strutture.stoccaggioLiquami.copertura').dirty || fabbricatoForm.get('strutture.stoccaggioLiquami.copertura').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.copertura').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6"></div>
+                            <div class="p-col-4">
+                              <label for="superficie-liquami">Superficie (mq.)*</label>
+                              <input id="superficie-liquami" [maxlength]="20" pattern="^([0-9])+$" type="text"
+                                (blur)="calcVolume('LIQUAMI')" class="text-right" pInputText
+                                formControlName="superficie">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.superficie').invalid || (fabbricatoForm.get('strutture.stoccaggioLiquami.superficie').dirty || fabbricatoForm.get('strutture.stoccaggioLiquami.superficie').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.superficie').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.superficie').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-4">
+                              <label for="altezza-liquami">Altezza (m)*</label>
+                              <input id="altezza-liquami" [maxlength]="10" pattern="^([0-9])+$" type="text"
+                                (blur)="calcVolume('LIQUAMI')" class="text-right" pInputText formControlName="altezza">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.altezza').invalid || (fabbricatoForm.get('strutture.stoccaggioLiquami.altezza').dirty || fabbricatoForm.get('strutture.stoccaggioLiquami.altezza').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.altezza').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.altezza').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-4">
+                              <label for="volume-input">Volume (mc.)*</label>
+                              <input id="volume-input" [maxlength]="10" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="volume" readonly>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="tipo-conduzione-strutture">Tipo conduzione*</label>
+                              <p-dropdown id="tipo-conduzione-strutture" formControlName="tipoConduzione"
+                                [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.tipoConduzione').invalid || (fabbricatoForm.get('strutture.stoccaggioLiquami.tipoConduzione').dirty || fabbricatoForm.get('strutture.stoccaggioLiquami.tipoConduzione').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stoccaggioLiquami.tipoConduzione').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-12">
+                              <label for="descrizione-struttura-input">Descrizione sintetica della struttura</label>
+                              <input id="descrizione-struttura-input" [maxlength]="200" type="text" pInputText
+                                formControlName="descrizione">
+                            </div>
+                          </div>
+                          <!-- Footer -->
+                          <div class="p-grid m-0 w-100">
+                            <div class="p-col p-0">
+                              <p-footer class="p-col">
+                                <i> * Campo obbligatorio</i>
+                              </p-footer>
+                            </div>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+
+                      <!-- Zootecnia - Aree Scoperte -->
+                      <p-tabPanel header="AREE SCOPERTE"
+                        [selected]="sottoTipoLogiaSelected === sottoTipologiaZootecnia.AREE_SCOPERTE"
+                        [disabled]="sottoTipoLogiaSelected != sottoTipologiaZootecnia.AREE_SCOPERTE">
+                        <div class="p-grid align-self-center">
+                          <div formGroupName="areeScoperte" class="p-grid m-0 w-100">
+                            <div class="p-col-4">
+                              <label for="denominazione-aree">Denominazione</label>
+                              <input id="denominazione-aree" [maxlength]="100" type="text" pInputText
+                                formControlName="denominazione">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="indirizzo-aree">Indirizzo</label>
+                              <input id="indirizzo-aree" [maxlength]="50" type="text" pInputText
+                                formControlName="indirizzo">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="comune-amministrativo-aree">Comune Amministrativo*</label>
+                              <input id="comune-amministrativo-aree" [maxlength]="50" type="text" pInputText
+                                formControlName="comune">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.areeScoperte.comune').invalid || (fabbricatoForm.get('strutture.areeScoperte.comune').dirty || fabbricatoForm.get('strutture.areeScoperte.comune').touched)">
+                                <p-message *ngIf="fabbricatoForm.get('strutture.areeScoperte.comune').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="superficie-aree">Superficie scoperta (mq.)*</label>
+                              <input id="superficie-aree" [maxlength]="20" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="superficie">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.areeScoperte.superficie').invalid || (fabbricatoForm.get('strutture.areeScoperte.superficie').dirty || fabbricatoForm.get('strutture.areeScoperte.superficie').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.areeScoperte.superficie').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.areeScoperte.superficie').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6"></div>
+                            <div class="p-col-6">
+                              <label for="tipo-conduzione-aree">Tipo conduzione*</label>
+                              <p-dropdown id="tipo-conduzione-aree" formControlName="tipoConduzione"
+                                [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.areeScoperte.tipoConduzione').invalid || (fabbricatoForm.get('strutture.areeScoperte.tipoConduzione').dirty || fabbricatoForm.get('strutture.areeScoperte.tipoConduzione').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.areeScoperte.tipoConduzione').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-12">
+                              <label for="descrizione-struttura-aree">Descrizione sintetica della struttura</label>
+                              <input id="descrizione-struttura-aree" [maxlength]="200" type="text" pInputText
+                                formControlName="descrizione">
+                            </div>
+                          </div>
+                          <!-- Footer -->
+                          <div class="p-grid m-0 w-100">
+                            <div class="p-col p-0">
+                              <p-footer class="p-col">
+                                <i> * Campo obbligatorio</i>
+                              </p-footer>
+                            </div>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+
+                      <!-- Zootecnia - Stalle -->
+                      <p-tabPanel header="STALLE" [selected]="sottoTipoLogiaSelected === sottoTipologiaZootecnia.STALLE"
+                        [disabled]="sottoTipoLogiaSelected != sottoTipologiaZootecnia.STALLE">
+                        <div class="p-grid align-self-center">
+                          <div formGroupName="stalle" class="p-grid m-0 w-100">
+                            <div class="p-col-4">
+                              <label for="denominazione-input">Denominazione</label>
+                              <input id="denominazione-input" [maxlength]="100" type="text" pInputText
+                                formControlName="denominazione">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="indirizzo-input">Indirizzo</label>
+                              <input id="indirizzo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="indirizzo">
+                            </div>
+                            <div class="p-col-4">
+                              <label for="comune-amministrativo-input">Comune Amministrativo*</label>
+                              <input id="comune-amministrativo-input" [maxlength]="50" type="text" pInputText
+                                formControlName="comune">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stalle.comune').invalid || (fabbricatoForm.get('strutture.stalle.comune').dirty || fabbricatoForm.get('strutture.stalle.comune').touched)">
+                                <p-message *ngIf="fabbricatoForm.get('strutture.stalle.comune').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="volume-input">Volume (mc.)</label>
+                              <input id="volume-input" [maxlength]="10" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="volume">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stalle.volume').invalid || (fabbricatoForm.get('strutture.stalle.volume').dirty || fabbricatoForm.get('strutture.stalle.volume').touched)">
+                                <p-message *ngIf="fabbricatoForm.get('strutture.stalle.volume').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="superficie-input">Superficie (mq.)*</label>
+                              <input id="superficie-input" [maxlength]="20" pattern="^([0-9])+$" type="text"
+                                class="text-right" pInputText formControlName="superficie">
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stalle.superficie').invalid || (fabbricatoForm.get('strutture.stalle.superficie').dirty || fabbricatoForm.get('strutture.stalle.superficie').touched)">
+                                <p-message *ngIf="fabbricatoForm.get('strutture.stalle.superficie').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                                <p-message *ngIf="fabbricatoForm.get('strutture.stalle.superficie').errors?.pattern"
+                                  class="font-12" severity="error" text="Formato non valido">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-6">
+                              <label for="tipo-conduzione-strutture">Tipo conduzione*</label>
+                              <p-dropdown id="tipo-conduzione-strutture" formControlName="tipoConduzione"
+                                [disabled]="READONLY_MODE" [options]="tipologicheService.tipoConduzione"></p-dropdown>
+                              <div
+                                *ngIf="fabbricatoForm.get('strutture.stalle.tipoConduzione').invalid || (fabbricatoForm.get('strutture.stalle.tipoConduzione').dirty || fabbricatoForm.get('strutture.stalle.tipoConduzione').touched)">
+                                <p-message
+                                  *ngIf="fabbricatoForm.get('strutture.stalle.tipoConduzione').errors?.required"
+                                  class="font-12" severity="error" text="Campo Obbligatorio">
+                                </p-message>
+                              </div>
+                            </div>
+                            <div class="p-col-12">
+                              <label for="descrizione-struttura-input">Descrizione sintetica della struttura</label>
+                              <input id="descrizione-struttura-input" [maxlength]="200" type="text" pInputText
+                                formControlName="descrizione">
+                            </div>
+                          </div>
+                          <!-- Footer -->
+                          <div class="p-grid m-0 w-100">
+                            <div class="p-col p-0">
+                              <p-footer class="p-col">
+                                <i> * Campo obbligatorio</i>
+                              </p-footer>
+                            </div>
+                          </div>
+                        </div>
+                      </p-tabPanel>
+
+                    </p-tabView>
+                  </div>
+                </ng-template>
+              </p-accordionTab>
+            </div>
+
+          </p-accordion>
+        </div>
+      </div>
+    </div>
+    <!-- Button bar -->
+    <div class="p-col-12 p-col-align-end ui-fluid">
+      <p-footer>
+        <div class="p-col-12">
+          <div class="ui-g-9 text-left"></div>
+          <div class="ui-g-3 text-right">
+            <button [disabled]="READONLY_MODE" pButton [class]="idValidazione ? 'button-custom-grey':''"
+              class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-10m" type="submit"
+              label="Salva Fabbricato">
+            </button>
+          </div>
+        </div>
+      </p-footer>
+    </div>
+
+  </form>
+
+</p-dialog>

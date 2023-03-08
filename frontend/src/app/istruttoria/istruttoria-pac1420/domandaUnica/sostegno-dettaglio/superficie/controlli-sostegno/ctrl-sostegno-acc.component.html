@@ -1,0 +1,84 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+        <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+        <p-accordion *ngIf="checkValidDataTitle(controlliSostegnoErrors)">
+          <p-accordionTab header="ANOMALIE BLOCCANTI" [selected]="true">
+            <p-table [columns]="cols" [value]="controlliSostegnoErrors" [autoLayout]="true" [paginator]="false"
+              [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-controllo let-i="rowIndex">
+                <tr *ngIf="controllo.title != null">
+                  <td>{{ controllo.title }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+        <p-accordion *ngIf="checkValidDataTitle(controlliSostegnoWarnings)">
+          <p-accordionTab header="WARNING" [selected]="true">
+            <p-table [columns]="cols" [value]="controlliSostegnoWarnings" [autoLayout]="true" [paginator]="false"
+              [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-controllo let-i="rowIndex">
+                <tr *ngIf="controllo.title != null">
+                  <td>{{ controllo.title }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+        <p-accordion *ngIf="checkValidDataTitle(controlliSostegnoInfos)">
+          <p-accordionTab header="INFORMAZIONI" [selected]="true">
+            <p-table [columns]="cols" [value]="controlliSostegnoInfos" [autoLayout]="true" [paginator]="false"
+              [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-controllo let-i="rowIndex">
+                <tr *ngIf="controllo.title != null">
+                  <td>{{ controllo.title || controllo.label}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+        <p-accordion *ngIf="checkValidDataTitle(controlliSostegnoSuccesses)">
+          <p-accordionTab header="SUCCESS" [selected]="true">
+            <p-table [columns]="cols" [value]="controlliSostegnoSuccesses" [autoLayout]="true" [paginator]="false"
+              [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-controllo let-i="rowIndex">
+                <tr *ngIf="controllo.title != null">
+                  <td>{{controllo.title}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+      <div *ngIf="!isControlliSostegnoPresent">
+        {{ 'CONTROLLI_SOSTEGNO.nessunControlloEseguito' | translate }}
+      </div>
+    </div>
+  </div>
+</div>

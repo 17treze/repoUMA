@@ -1,0 +1,89 @@
+<p-toast
+  key="tst-consegne"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="boxgrey ui-grid-fixed px-0">
+  <div class="p-grid ui-fluid">
+    <form
+      class="p-col"
+      novalidate
+      [formGroup]="gestioneForm"
+      (ngSubmit)="onSubmit()">
+      <div class="p-grid p-align-end p-justify-between">
+        <div class="p-col-8">
+          <label for="distributore">Distributore</label>
+          <p-dropdown
+            class="small-font"
+            formControlName="distributore"
+            [options]="listaDistributori"></p-dropdown>
+          <div *ngIf="gestioneForm.get('distributore').invalid && gestioneForm.get('distributore').dirty && gestioneForm.get('distributore').touched">
+            <p-message
+              *ngIf="gestioneForm.get('distributore').errors?.required"
+              class="font-12"
+              severity="error"
+              text="{{umaMessages.mandatory}}">
+            </p-message>
+          </div>
+        </div>
+        <div class="p-col-2 p-0">
+          <div class="p-grid m-0 p-align-end">
+            <div class="p-col-8 pl-0">
+              <label for="dataPrelievo">Data prelievo</label>
+              <p-calendar
+                #dataPrelievoRef
+                formControlName="dataPrelievo"
+                showButtonBar="true"
+                dateFormat="dd/mm/yy"
+                [locale]="calendarService.localeITA"
+                [showIcon]="true">
+              </p-calendar>
+            </div>
+            <div class="p-col-4 pl-0">
+              <label for="campagna">Anno</label>
+              <p-dropdown
+                class="small-width"
+                formControlName="campagna"
+                [options]="valoriCampagna"
+                (onChange)="refreshDistributori()"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="p-col-2 searchbutton">
+          <button
+            pButton
+            class="ui-button-success"
+            label="VISUALIZZA PRELIEVI"
+            type="submit">
+          </button>
+        </div>
+      </div>
+      <div
+        class="p-grid p-justify-end pb-2"
+        *ngIf="datasourcePrelievi?.length">
+        <div class="p-col-2">
+          <button
+            class="ui-button-success"
+            pButton
+            label="SALVA"
+            (click)="salva()"></button>
+        </div>
+      </div>
+      <div
+        *ngIf="datasourcePrelievi != null"
+        class="p-grid">
+        <div class="p-col">
+          <div class="p-grid p-2">
+            <div class="p-col p-0">
+              <app-a4g-multi-table
+                [cols]="cols"
+                [values]="datasourcePrelievi"
+                [customSort]="true"
+                [readonly]="false"
+                (changedValueForm)="onChangeForm($event)"
+                (clickCheckbox)="onClickCheckbox($event)"></app-a4g-multi-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

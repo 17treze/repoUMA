@@ -1,0 +1,28 @@
+:host {
+  .command-button.command-button.command-button {
+    font-size: 22px !important;
+    height: auto !important;
+    width: auto !important;
+    background-color: #4caf50 !important;
+  }
+
+  ::ng-deep .ui-paginator {
+    .ui-dropdown {
+      float: revert;
+      width: auto !important;
+      color: #212529 !important;
+    }
+  }
+
+  ::ng-deep th.highlighted {
+    background: #e8f5e9 !important;
+  }
+
+  ::ng-deep .ui-table-auto-layout > .ui-table-wrapper > table {
+    min-height: 18.5em;
+  }
+
+  ::ng-deep th.highlighted.ui-sortable-column.ui-state-highlight {
+    background-color: #7cb342 !important;
+  }
+}

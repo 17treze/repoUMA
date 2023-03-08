@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: it.tndigitale.a4g.fascicolo.anagrafica.api.MandatoControllerConEccezioniTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.6 s - in it.tndigitale.a4g.fascicolo.anagrafica.api.MandatoControllerConEccezioniTest

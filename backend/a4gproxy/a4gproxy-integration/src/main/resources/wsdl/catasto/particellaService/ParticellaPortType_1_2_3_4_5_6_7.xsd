@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:cc="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas">
+  <xs:import namespace="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6_7_8.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene le i tipi che modellano una particella fondiaria o edificiale.</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="ChiaveParticellaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una particella edificiale o fondiaria</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="comuneCatastale" type="cc:ChiaveComuneCatastaleType">
+        <xs:annotation>
+          <xs:documentation>Il comune ove e' ubicata la particella stessa.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="numero" type="tns:NumeroParticellaType" use="required">
+      <xs:annotation>
+        <xs:documentation>Il numero identificativo della particella.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="tipologia" type="tns:TipoParticellaType" use="required">
+      <xs:annotation>
+        <xs:documentation>Il tipo di particella: modella estensione di una particella in edificiale e fondiaria.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ParticellaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una particella edificiale o fondiaria</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="chiave" type="tns:ChiaveParticellaType">
+        <xs:annotation>
+          <xs:documentation>Informazioni identificative della particella.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="listaQualitaColtura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="qualita" type="tns:QualitaColturaParticellaType">
+              <xs:annotation>
+                <xs:documentation>Qualita di coltura correnti di una particella.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute default="VALIDATA" name="stato" type="tns:StatoEntitaCatastaleType">
+      <xs:annotation>
+        <xs:documentation>Indica lo stato di una particella, ovvero se ESTINTA oppure no.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="RedditoType">
+    <xs:annotation>
+      <xs:documentation>Valore del reddito di una particella fondiaria, suddiviso in dominicale e agrario</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="dominicale" type="xs:double"/>
+    <xs:attribute name="agrario" type="xs:double"/>
+  </xs:complexType>
+  <xs:complexType name="InformazioniDescrittiveQualitaColturaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazione descrittive di una qualita di coltura di una particella edificiale o fondiaria (per semplicita' non sono state distinte). La tipologia fa riferimento alle informazioni che nel prospetto sono contenute nella coltura. Si tenga presente che lo stato della particella, ovvero se ATTIVA oppure ESTINTA e' un'attributo della Particella stessa, non una sua qualita' di coltura). La classe e' un attributo tipico delle qualita' di particelle fondiarie.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="superficie" type="xs:integer" use="required"/>
+    <xs:attribute name="qualita" type="tns:TipologiaQualitaColturaType" use="required"/>
+    <xs:attribute name="classe" type="tns:ClasseType">
+      <xs:annotation>
+        <xs:documentation>Rappresenta la classe di una particella fondiaria</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="QualitaColturaParticellaType">
+    <xs:annotation>
+      <xs:documentation>Modella la qualita' di coltura di una particella edificiale o fondiaria (per semplicita' non sono state distinte) ed il reddito che vale solo per le qualita' di coltura di particelle fondiarie.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descrizione" type="tns:InformazioniDescrittiveQualitaColturaType">
+        <xs:annotation>
+          <xs:documentation>Modella le informazioni descrittive di una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="reddito" type="tns:RedditoType">
+        <xs:annotation>
+          <xs:documentation>Modella il reddito di una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="TipoParticellaType">
+    <xs:annotation>
+      <xs:documentation>Dichiara che tipo di particella sia, ovvero se edificiale o fondiaria. Vale EDIFICIALE per le particelle edificiali; FONDIARIA per le particelle fondiarie.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="EDIFICIALE"/>
+      <xs:enumeration value="FONDIARIA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NumeroParticellaType">
+    <xs:annotation>
+      <xs:documentation>Modella il simple type rappresentante il numero identificativo della particella</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="StatoEntitaCatastaleType">
+    <xs:annotation>
+      <xs:documentation>Lista di possibili stati di un'entita' catastale (particella o porzione materiale, che può essere ATTIVA o ESTINTA</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="ESTINTA"/>
+      <xs:enumeration value="VALIDATA"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ClasseType">
+    <xs:annotation>
+      <xs:documentation>Lista di possibili classi di una particella fondiaria. E' un valore numerico da 1 a 8</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="3"/>
+      <xs:enumeration value="4"/>
+      <xs:enumeration value="5"/>
+      <xs:enumeration value="6"/>
+      <xs:enumeration value="7"/>
+      <xs:enumeration value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipologiaQualitaColturaType">
+    <xs:annotation>
+      <xs:documentation>Lista di possibili qualita' di coltura di particelle edificiali (AREA_EDIFICIALE, EDIFICIO, FABBRICATO_SOTTERRANEO, PROPRIETA_SUPERFICIARIA) o fondiarie (ARATIVO, PRATO, ORTO, FRUTTETO, VIGNA, PASCOLO, ALPE, BOSCO, PALUDE_STAGNO, LAGO, FIUME_TORRENTE, STRADA, IMPRODUTTIVO), ovvero la qualita' di coltura di una particella o di una porzione di superficie della stessa. Sul prospetto tale informazione e' evidenziata nella coltura</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="ARATIVO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Arativo". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PRATO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Prato". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ORTO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Orto". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FRUTTETO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Frutteto". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VIGNA">
+        <xs:annotation>
+          <xs:documentation>Valore per "Vigna". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PASCOLO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Pascolo". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ALPE">
+        <xs:annotation>
+          <xs:documentation>Valore per "Alpe". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BOSCO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Bosco". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PALUDE_STAGNO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Palude Stagno". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LAGO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Lago". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LAGO_ESENTE_ESTIMO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Lago esente estimo". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ESENTE_IMPOSTA">
+        <xs:annotation>
+          <xs:documentation>Valore per "Esente imposta". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FIUME_TORRENTE">
+        <xs:annotation>
+          <xs:documentation>Valore per "Fiume Torrente". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="STRADA">
+        <xs:annotation>
+          <xs:documentation>Valore per "Strada". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IMPRODUTTIVO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Improduttivo". Valore per una particella fondiaria</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AREA_EDIFICIALE">
+        <xs:annotation>
+          <xs:documentation>Valore per "Area edificiale". Valore per una particella edificiale</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EDIFICIO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Edificio". Valore per una particella edificiale</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FABBRICATO_SOTTERRANEO">
+        <xs:annotation>
+          <xs:documentation>Valore per "Proprieta' superficiaria". Valore per una particella edificiale</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PROPRIETA_SUPERFICIARIA">
+        <xs:annotation>
+          <xs:documentation>Valore per "Fabbricato sotterraneo". Valore per una particella edificiale</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,124 @@
+<p-toast key='tst' [baseZIndex]="50000"></p-toast>
+<div class="ui-g ui-fluid">
+  <div class="tophome">
+    <div class="ui-grid-fixed">
+      <h4>{{ 'RICHIESTE_ACCESSO.TITLE' | translate }}</h4>
+    </div>
+  </div>
+  <div class="ui-grid-fixed">
+      <div class="accordion-wrapper">
+        <p-accordion>
+          <p-accordionTab header="Cerca" [selected]="openSearchTab == 1">
+            <form (ngSubmit)="eseguiRicercaSuTuttiTab()">
+              <fieldset [disabled]="false" tooltipPosition="top">
+                <div class="boxgrey-user">
+                    <div class="ui-g-12">
+                        <div class="ui-g-2">
+                            <label>{{labels.dataProtocollazione}}</label>
+                        </div>
+                        <div class="ui-g-4">
+                            <p-calendar name="rangeDates" [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" showButtonBar="true"
+                                        class="a4g-calendar" dateFormat="dd/mm/yy" [locale] = "language">
+                            </p-calendar>
+                        </div>
+                        <div class="ui-g-2">
+                            <label>{{labels.nrProtocollo}}</label>
+                        </div>
+                        <div class="ui-g-4">
+                            <input type="text" name="nrProtocollo" pInputText [(ngModel)]="idProtocollo" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <div class="ui-g-2">
+                            <label>{{labels.cognome}}</label>
+                        </div>
+                        <div class="ui-g-4">
+                            <input type="text" name="cognome" pInputText [(ngModel)]="cognome" maxlength="30">
+                        </div>
+                        <div class="ui-g-2">
+                            <label>{{labels.nome}}</label>
+                        </div>
+                        <div class="ui-g-4">
+                            <input type="text" name="nome" pInputText [(ngModel)]="nome" maxlength="30">
+                        </div>
+                    </div>
+                    <div class="ui-g-12">
+                        <div class="ui-g-2">
+                            <label>{{labels.codiceFiscale}}</label>
+                        </div>
+                        <div class="ui-g-4">
+                            <input type="text" name="codiceFiscale" pInputText [(ngModel)]="codiceFiscale" maxlength="16">
+                        </div>
+                        <div class="ui-g-6"></div>
+                    </div>
+                    <div class="ui-g-12">
+                        <div class="ui-g-9"></div>
+                        <div class="ui-g-3">
+                            <div class="next-button">
+                                <button pButton icon="ui-icon-check" type="submit" label="RICERCA">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </fieldset>
+            </form>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+  </div>
+  <div class="ui-g-12 ">
+    <div class="ui-grid-fixed">
+      <div class="funzioni-grid tab-new boxgrey">
+        <p-tabView class="container--gestione-utenze" (onChange)="handleTabChange($event)">
+          <p-tabPanel [selected]="selectedTab == 'PROTOCOLLATE'">
+            <ng-template pTemplate="header">
+              <span class="ui-tabview-title ng-star-inserted">{{'gestioneUtenze.PROTOCOLLATE' | translate}}
+                <span>{{this.reformattedItemBadges['PROTOCOLLATA']}}</span>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-richieste-protocollate>
+              </app-richieste-protocollate>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel [selected]="selectedTab == 'IN_LAVORAZIONE'">
+            <ng-template pTemplate="header">
+              <span class="ui-tabview-title ng-star-inserted">
+                {{'gestioneUtenze.IN_LAVORAZIONE' | translate}}
+                <span>{{this.reformattedItemBadges['IN_LAVORAZIONE']}}</span>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-richieste-in-lavorazione>
+              </app-richieste-in-lavorazione>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel [selected]="selectedTab == 'APPROVATE'">
+            <ng-template pTemplate="header">
+              <span class="ui-tabview-title ng-star-inserted">{{'gestioneUtenze.APPROVATE' | translate}}
+                <span>{{this.reformattedItemBadges['APPROVATA']}}</span>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-richieste-approvate>
+              </app-richieste-approvate>
+            </ng-template>
+          </p-tabPanel>
+          <p-tabPanel [selected]="selectedTab == 'RIFIUTATE'">
+            <ng-template pTemplate="header">
+              <span class="ui-tabview-title ng-star-inserted">
+                {{'gestioneUtenze.RIFIUTATE' | translate}}
+                <span>{{this.reformattedItemBadges['RIFIUTATA']}}</span>
+              </span>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <app-richieste-rifiutate>
+              </app-richieste-rifiutate>
+            </ng-template>
+          </p-tabPanel>
+        </p-tabView>
+      </div>
+    </div>
+  </div>
+</div>

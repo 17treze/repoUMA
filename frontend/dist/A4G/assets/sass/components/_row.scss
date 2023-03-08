@@ -1,0 +1,74 @@
+$color-border: #dddddd;
+
+.row--edit,
+.table--edit.table--edit.table--edit {
+    .ui-inputtext.ui-inputtext {
+        text-align: right;
+
+        &:not([disabled]) {
+            background-color: #EDEDED;
+            border: 1px solid #E8E8E8;
+            border-radius: 2px;
+            box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        &:disabled {
+            border: 1px solid transparent;
+            opacity: 1;
+        }
+    }
+}
+
+.row--edit {
+    margin-left: 0;
+    margin-right: 0;
+    border-bottom: 1px solid $color-border;
+    border-right: 1px solid $color-border;
+
+    & > [class*="col"] {
+        // display: flex;
+        // align-items: center;
+        min-height: 70px;
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+
+        border-left: 1px solid $color-border;
+        border-top: 1px solid $color-border;
+
+        background-color: #ffffff;
+    }
+}
+
+.table--edit.table--edit.table--edit {
+    table {
+        border: 1px solid $color-border;
+
+        & > tbody > tr > td {
+            border: 0;
+            border-top: 1px solid $color-border;
+            border-bottom: 1px solid $color-border;
+            background-color: #ffffff;
+        }
+    }
+}
+
+.row--cols {
+    .row--edit { height: 100%; }
+    & > * { margin-bottom: -1px; }
+}
+
+.row-cols {
+    columns: 2;
+    column-rule-width: 2rem;
+
+    & > * {
+        margin-bottom: -1px;
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+             break-inside: avoid;
+    }
+}
+
+.col--b-l {
+    border-left: 1px solid rgba(#ffffff, 0.3);
+}

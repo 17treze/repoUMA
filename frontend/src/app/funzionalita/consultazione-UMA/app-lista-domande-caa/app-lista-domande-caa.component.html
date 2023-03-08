@@ -1,0 +1,108 @@
+<div class="boxgrey layout-actionmenu p-0">
+  <p-table
+    #table
+    [columns]="cols"
+    [value]="listaDomande"
+    [autoLayout]="true"
+    [paginator]="true"
+    [rows]="elementiPerPagina"
+    [totalRecords]="nrDomande"
+    [lazy]="true"
+    [rowsPerPageOptions]="[10,25,50,100]"
+    (onLazyLoad)="changePage($event)">
+    <ng-template
+      pTemplate="header"
+      let-columns>
+      <tr>
+        <th
+          class="highlighted"
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.fieldSort"
+          [style.width]="col.width"
+          [pSortableColumnDisabled]="col.field == null">
+          {{col.header}}
+          <p-sortIcon
+            [field]="col.field"
+            *ngIf="col.sortable"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th
+          class="highlighted"
+          *ngFor="let col of columns"
+          [ngSwitch]="col.field">
+          <input
+            #nrDomandaFilter
+            *ngSwitchCase="'nrDomanda'"
+            pInputText
+            type="text"
+            placeholder="Cerca..."
+            (input)="table.filter($event.target.value, col.field, 'startsWith')">
+          <p-dropdown
+            #tipiDomandaFilter
+            *ngSwitchCase="'tipo'"
+            [options]="tipiDomande"
+            [style]="{'width':'100%'}"
+            (onChange)="table.filter($event.value, col.field, 'equals')"></p-dropdown>
+          <p-dropdown
+            #statoDomandaFilter
+            *ngSwitchCase="'stato'"
+            [options]="stati"
+            [style]="{'width':'100%'}"
+            (onChange)="table.filter($event.value, col.field, 'equals')"></p-dropdown>
+          <input
+            #cuaaDomandaFilter
+            *ngSwitchCase="'cuaa'"
+            pInputText
+            type="text"
+            placeholder="Cerca..."
+            (input)="table.filter($event.target.value, col.field, 'contains')">
+          <input
+            #denominazioneDomandaFilter
+            *ngSwitchCase="'denominazione'"
+            pInputText
+            type="text"
+            placeholder="Cerca..."
+            (input)="table.filter($event.target.value, col.field, 'contains')">
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-domanda
+      let-i="rowIndex">
+      <tr>
+        <td>{{ domanda.anno }}</td>
+        <td>{{ domanda.nrDomanda }}</td>
+        <td>{{ domanda.tipo }}</td>
+        <td>
+          {{ domanda.stato | translate | replaceWithSpaceBy:'_' }}
+        </td>
+        <td>{{ domanda.cuaa }}</td>
+        <td>
+          {{ domanda.denominazione | clearString:'NO_DENOM'}}
+        </td>
+        <td>{{ domanda.protocollo }}</td>
+        <td class="text-center">
+          <button
+            pButton
+            class="command-button no-border-radius p-button-lg py-1 px-4 bg-primary"
+            icon="pi pi-arrow-right"
+            iconPos="left"
+            (click)="visualizzaDomanda(domanda)"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="emptymessage"
+      let-columns>
+      <tr>
+        <td
+          [attr.colspan]="9"
+          class="align-top">
+          Nessuna {{footer}} presente
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

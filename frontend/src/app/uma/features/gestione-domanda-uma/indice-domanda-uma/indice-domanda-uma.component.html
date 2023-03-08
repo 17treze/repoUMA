@@ -1,0 +1,110 @@
+<p-toast
+  position="top-center"
+  key="tst-cancellazione"
+  [modal]="true"
+  [baseZIndex]="5000"
+  (onClose)="onCloseToastCancellazione()">
+</p-toast>
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<p-confirmDialog
+  header="Attenzione"
+  icon="pi pi-exclamation-triangle"
+  class="ui-dialog-visible"
+  acceptIcon
+  rejectIcon
+  key="cancellazione-domanda-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<div class="ui-grid-fixed position-unset top-rettifica">
+  <div class="boxgrey">
+    <div class="p-col">
+      <!-- Richiesta carburante -->
+      <div class="p-grid py-2 p-align-center p-justify-between">
+        <ng-container *ngIf="richiestaCarburante?.idRettificata == null then richiestaTpl else rettificaTpl"></ng-container>
+        <ng-template #richiestaTpl>
+          <h5 class="p-col p-col-align-center">
+          <strong>{{"UMA.RICHIESTA_CARBURANTE" | translate | uppercase}}</strong>
+        </h5>
+        </ng-template>
+        <ng-template #rettificaTpl>
+          <h5 class="p-col p-col-align-center">
+          <strong>{{"UMA.RETTIFICA_CARBURANTE" | translate | uppercase}}</strong>
+        </h5>
+        </ng-template>
+        <div
+          *ngIf="mostraScarica"
+          class="p-col-fixed">
+          <div class="p-col">
+            <button
+              class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+              (click)="stampaRichiestaCarburantePDF()"
+              pButton
+              icon="pi pi-file-pdf"
+              iconPos="right"
+              type="button"
+              label="SCARICA">
+            </button>
+          </div>
+        </div>
+        <div
+          *ngIf="inCompilazione"
+          class="p-col-fixed">
+          <div class="p-col">
+            <button
+              class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+              (click)="eliminaDomanda()"
+              pButton
+              icon="pi pi-trash"
+              iconPos="right"
+              type="button"
+              label="ELIMINA">
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="p-grid">
+        <p-steps
+          [model]="items"
+          [readonly]="false"
+          [activeIndex]="activeIndex"
+          (activeIndexChange)="activeIndexChange($event)"></p-steps>
+      </div>
+      <div *ngIf="activeIndex == 0">
+        <app-macchine
+          [inCompilazione]="inCompilazione"
+          [idFascicolo]="idFascicolo"
+          [richiestaCarburante]="richiestaCarburante"
+          (updateRichiesta)="updateRichiesta($event)"
+          (nextStep)="nextStep($event)"></app-macchine>
+      </div>
+      <div *ngIf="activeIndex == 1">
+        <app-lavorazioni-indice
+          [inCompilazione]="inCompilazione"
+          [idFascicolo]="idFascicolo"
+          [richiestaCarburante]="richiestaCarburante"
+          (nextStep)="nextStep($event)"
+          (prevStep)="prevStep($event)"></app-lavorazioni-indice>
+      </div>
+      <div *ngIf="activeIndex == 2">
+        <app-fabbisogno
+          [inCompilazione]="inCompilazione"
+          [idFascicolo]="idFascicolo"
+          [richiestaCarburante]="richiestaCarburante"
+          (nextStep)="nextStep($event)"
+          (prevStep)="prevStep($event)"></app-fabbisogno>
+      </div>
+      <div *ngIf="activeIndex == 3">
+        <app-protocollazione
+          [inCompilazione]="inCompilazione"
+          [idFascicolo]="idFascicolo"
+          [richiestaCarburante]="richiestaCarburante"
+          (prevStep)="prevStep($event)"></app-protocollazione>
+      </div>
+    </div>
+  </div>
+</div>

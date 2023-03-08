@@ -1,0 +1,32 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "PNSFNC94T08C794U",
+        "ragioneSociale": "PENASA FRANCESCO",
+        "numeroDomanda": 183338,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-26T14:24:35.000+0200",
+        "codEnteCompilatore": "10",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 009",
+        "dataProtocollazione": "2018-04-26T14:25:56.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        }
+    }
+}

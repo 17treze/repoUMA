@@ -1,0 +1,51 @@
+<div *ngFor="let accordion of accordionModels" class="accordion-custom-wrap">
+  <p-accordionTab [selected]="true">
+    <p-header style="font-size: 120%; color: green; font-weight: bold">{{
+      accordion.headerTitle
+    }}</p-header>
+
+    <p-table [value]="accordion.fields" class="accordion-table">
+      <ng-template *ngIf="columns?.length" pTemplate="header">
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-field>
+        <tr [ngClass]="{'row-highlight': field.showButton && field.colorButton === 'green' }">
+          <td>
+            <strong>{{ field.mkey }}</strong>
+          </td>
+          <td>
+            <div class="p-grid p-2">
+              <div
+                class="p-0 p-col-12 p-col-align-center"
+                *ngIf="field.showButton"
+              >
+                <button
+                  disabled
+                  pButton
+                  [label]="field.showButton"
+                  type="button"
+                  class="h-auto ui-button-rounded ui-button-flat-message"
+                  [ngStyle]="{ 'background-color': field.colorButton }"
+                ></button>
+              </div>
+              <div class="p-0 p-col-12 p-col-align-center">
+                <div *ngIf="!field.longText">
+                  {{ field.mvalue ? field.mvalue : ("ND" | translate) }}
+                </div>
+                <div *ngIf="field.longText">
+                  <app-a4g-show-more-show-less
+                    [fullText]="field.mvalue | translate"
+                    [limit]="500"
+                  ></app-a4g-show-more-show-less>
+                  <!-- {{field.mvalue ? field.mvalue : 'ND' | translate}} -->
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-accordionTab>
+</div>

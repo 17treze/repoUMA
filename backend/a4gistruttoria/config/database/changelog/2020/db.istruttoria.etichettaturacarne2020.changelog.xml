@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<changeSet id="ISTRUTTORIA_39.1" author="Lorenzo Martinelli">
+		<insert tableName="A4GT_ETICHETTURA_CARNE">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="CUAA" value="00386500227"/>
+			<column name="CODICE_ASL" value="003FE330"/>
+			<column name="DT_INIZIO_VALIDITA" valueDate="2020-12-10"/>
+			<column name="DT_FINE_VALIDITA" valueDate="NULL"/>
+		</insert>
+		<insert tableName="A4GT_ETICHETTURA_CARNE">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="CUAA" value="DLPRRT81S03L174B"/>
+			<column name="CODICE_ASL" value="107TN027"/>
+			<column name="DT_INIZIO_VALIDITA" valueDate="2020-01-17"/>
+			<column name="DT_FINE_VALIDITA" valueDate="NULL"/>
+		</insert>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_39.2" author="Lorenzo Martinelli">
+		<update tableName="A4GT_ETICHETTURA_CARNE">
+			<column name="DT_FINE_VALIDITA" valueDate="2020-01-15"/>
+			<where>CUAA = '02380280228' AND CODICE_ASL = '083TN011'</where>
+		</update>
+		<update tableName="A4GT_ETICHETTURA_CARNE">
+			<column name="DT_FINE_VALIDITA" valueDate="2020-03-19"/>
+			<where>CUAA = 'DLPCDD44C16E658G' AND CODICE_ASL = '017TN063'</where>
+		</update>
+	</changeSet>
+</databaseChangeLog>

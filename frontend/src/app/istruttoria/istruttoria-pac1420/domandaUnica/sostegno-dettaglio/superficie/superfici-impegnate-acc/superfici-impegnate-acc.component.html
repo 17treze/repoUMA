@@ -1,0 +1,127 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <h3>
+        <span>
+          Accoppiato Superficie
+        </span>
+      </h3>
+      <div class="table-responsive">
+        <p-table #tab [columns]="cols" [value]="superficiImpegnateSintesi" [autoLayout]="true" [responsive]="true"
+          dataKey="supRichiestaTotale">
+          <ng-template pTemplate="header" let-columns>
+            <!-- <tr>
+              <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                <strong>{{col.header}}</strong>
+              </th>
+            </tr> -->
+          </ng-template>
+          <ng-template pTemplate="body" let-superfici let-expanded="expanded" let-columns="columns">
+            <tr>
+             
+              <td>
+                  <a [pRowToggler]="superfici">
+                      <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i> <strong>Superficie Totale Richiesta (mq)</strong> </a>
+              </td>
+              <td>
+                <strong>Superficie Totale Richiesta (mq)</strong>
+              </td>
+              <td class="text-right" style="font-weight:bold;">{{superfici.supRichiestaTotale}}</td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="rowexpansion" let-superfici let-columns="columns">
+            <tr>
+              <td [attr.colspan]="columns.length + 1">
+                <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                  <div class="ui-g-12 ui-md-9">
+                    <div class="ui-g">
+                      <div class="ui-g-12" *ngIf="superfici.m8">
+                        <b>Intervento Soia - Superficie Totale Richiesta:</b> {{superfici.m8}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m9">
+                        <b>Intervento Frumento - Superficie Totale Richiesta:</b> {{superfici.m9}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m10">
+                        <b>Intervento Proteaginose - Superficie Totale Richiesta:</b> {{superfici.m10}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m11">
+                        <b>Intervento Leguminose - Superficie Totale Richiesta:</b> {{superfici.m11}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m14">
+                        <b>Intervento Pomodoro - Superficie Totale Richiesta:</b> {{superfici.m14}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m15">
+                        <b>Intervento Olivi Standard - Superficie Totale Richiesta:</b> {{superfici.m15}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m16">
+                        <b>Intervento Olivi 7.5% - Superficie Totale Richiesta:</b> {{superfici.m16}}
+                      </div>
+                      <div class="ui-g-12" *ngIf="superfici.m17">
+                        <b>Intervento Olivi Qualità - Superficie Totale Richiesta:</b> {{superfici.m17}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length + 1">
+                Nessun controllo eseguito
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <div class="accordion-wrapper dettaglioaccordion">
+        <div *ngFor="let intervento of this.interventi">
+          <div
+            *ngIf="this.dettaglioDomandaAccoppiati && this.dettaglioDomandaAccoppiati.datiSuperficiImpegnate &&  this.dettaglioDomandaAccoppiati.datiSuperficiImpegnate[intervento]">
+            <p-accordion>
+              <p-accordionTab header="{{setHeader(intervento)}}" [selected]="true">
+                <div class="table-responsive" style="margin-top:20px; display: block">
+                  <p-table #tab [columns]="cols"
+                    [value]="this.dettaglioDomandaAccoppiati.datiSuperficiImpegnate[intervento].superficiImpegnate"
+                    [autoLayout]="true" [paginator]="true" [rows]="this.elementiPagina" [responsive]="true">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                          [pSortableColumnDisabled]="col.field == null">
+                          <strong>{{col.header}}</strong>
+                          <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-superfici let-i="rowIndex">
+                      <tr [pSelectableRow]="particella">
+                        <td>{{superfici.datiCatastali.idParticella}}</td>
+                        <td>{{superfici.datiCatastali.comune}}</td>
+                        <td>{{superfici.datiCatastali.codNazionale}}</td>
+                        <td>{{superfici.datiCatastali.foglio}}</td>
+                        <td>{{superfici.datiCatastali.particella}}</td>
+                        <td>{{superfici.datiCatastali.sub}}</td>
+                        <td>{{superfici.riferimentiCartografici.codIsola}}</td>
+                        <td>{{superfici.datiColtivazione.codColtura3}}</td>
+                        <td>{{superfici.datiColtivazione.descrizioneColtura}}</td>
+                        <td>{{superfici.supRichiestaNetta}}</td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="10">
+                          Nessuna particella trovata
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

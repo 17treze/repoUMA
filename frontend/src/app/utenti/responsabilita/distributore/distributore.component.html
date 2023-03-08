@@ -1,0 +1,123 @@
+<div class="ui-g ui-fluid">
+  <p-toast
+    position="center"
+    key="warn-already-uploadedFile-distributor"
+    [modal]="true"
+    [baseZIndex]="5000"
+  >
+    <ng-template let-messageService pTemplate="messageService">
+      <div style="text-align: center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+        <h3>{{ messageService.summary }}</h3>
+        <p>{{ messageService.detail }}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onConfirmHasAlreadyUploadedFile()"
+            [label]="labels.si"
+            class="ui-button-success"
+          ></button>
+        </div>
+        <div class="ui-g-6">
+          <button
+            type="button"
+            pButton
+            (click)="onRejectHasAlreadyUploadedFile()"
+            [label]="labels.no"
+            class="ui-button-secondary"
+          ></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <div class="ui-g-12 ui-lg-12">
+    <p-panel [toggleable]="true">
+      <p-header>
+        {{ title }}
+        <button
+          pButton
+          type="button"
+          icon="ui-icon-close"
+          [title]="labels.delete"
+          class="remove-btn"
+          (click)="removeMe()"
+        ></button>
+      </p-header>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <fieldset [disabled]="disabled">
+          <div class="ui-g form-group">
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+              <label>{{ labels.distributorTitle }} *</label>
+              <p-pickList
+                [source]="orderedAvailableDistributors"
+                [target]="orderedSelectedDistributors"
+                [dragdrop]="!disabled"
+                [responsive]="true"
+              >
+                <ng-template let-distributor pTemplate="item">
+                  <div>
+                    {{ distributor.denominazioneAzienda }} -
+                    {{ distributor.comune }}
+                  </div>
+                </ng-template>
+              </p-pickList>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+              <label>{{ labels.responsabile }} *</label>
+              <input
+                type="text"
+                [(ngModel)]="responsabile"
+                name="responsabile"
+                pInputText
+                required
+              />
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+              <div class="ui-g-12 ui-md-12">
+                <label>{{ labels.authorization }}</label>
+                <button
+                  pButton
+                  type="button"
+                  icon="ui-icon-file-download"
+                  [label]="labels.downloadAuthorization"
+                  (click)="downloadFile()"
+                ></button>
+                <button
+                  pButton
+                  type="button"
+                  icon="{{ icon }}"
+                  [label]="labels.uploadAuthorization"
+                  (click)="verifyUploadFile()"
+                  [disabled]="!responsabile"
+                ></button>
+                <input
+                  type="file"
+                  style="display: none"
+                  #upFileDistributor
+                  id="upFileDistributor"
+                  name="upFileDistributor"
+                  multiple="false"
+                  accept="{{ fileExt }}"
+                  (change)="uploadFile($event)"
+                />
+              </div>
+            </div>
+            <div>
+              <p-fieldset align="justify">
+                <p-header>{{ labels.warning }}</p-header>
+                {{ labels.distributorFirstWarning }}
+                <br />
+                {{ labels.distributorSecondWarning }}
+                <br />
+                {{ labels.distributorThirdWarning }}
+              </p-fieldset>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </p-panel>
+  </div>
+</div>

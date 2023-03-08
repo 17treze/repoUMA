@@ -1,0 +1,7 @@
+export enum SezioniDichiarazioneConsumi {
+    PRELIEVI = "PRELIEVI",
+    CLIENTI_CONTOTERZI = "CLIENTI_CONTOTERZI",
+    RICEVUTI = "RICEVUTI",
+    CONSUMI = "CONSUMI",
+    TRASFERIMENTI = "TRASFERIMENTI"
+}

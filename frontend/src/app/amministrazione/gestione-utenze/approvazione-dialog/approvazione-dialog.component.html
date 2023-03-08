@@ -1,0 +1,49 @@
+<div id="confirm" *ngIf="richiestaAccessoCorrente">
+  <p-dialog [(visible)]="display" header="{{ 'RICHIESTE_ACCESSO.approvaDomanda' | translate }}"
+    [dismissableMask]="true" width="710" [modal]="true" [focusOnShow]="false"
+    appendTo="body" [closable]="true" #dialog [closeOnEscape]="true">
+    <div class="popup-approvazione  popup--custom">
+      <div class="mb-4">
+        <h6>Stai per approvare la domanda di
+          <strong>
+            {{ richiestaAccessoCorrente.datiAnagrafici.nome.toUpperCase() }}
+            {{ richiestaAccessoCorrente.datiAnagrafici.cognome.toUpperCase() }}</strong>
+          (Prot. {{ richiestaAccessoCorrente.idProtocollo }} del
+          {{ richiestaAccessoCorrente.dataProtocollazione | date : 'dd/MM/yyyy' }})
+        </h6>
+      </div>
+      <div class="boxgrey p-3 mb-3">
+        <h6 class="mb-3"><strong>Testo della mail *</strong></h6>
+        <textarea rows="10" cols="30" pInputTextarea id="mail" type="text" [(ngModel)]="testoMail" style="width: -webkit-fill-available"
+          autoResize="true" required></textarea>
+      </div>
+      <div class="boxgrey p-3 mb-3">
+        <h6 class="mb-3"><strong>Aggiungi note <em>(opzionale)</em></strong></h6>
+        <textarea pInputTextarea id="note" type="text" [(ngModel)]="note" style="width: -webkit-fill-available"
+          autoResize="true">
+        </textarea>
+      </div>
+      <div class="boxgrey p-3">
+        <div class="row  align-items-center">
+          <div class="col-6">
+            <h6 class="mb-0"><strong>Comunica le credenziali di accesso all'utente</strong></h6>
+          </div>
+          <div class="col-6">
+            <div class="d-flex  align-items-center">
+              <img
+                src="assets/img/icons/phone-outgoing.svg"
+                alt="phone"
+                class="mr-2" />
+              <span>{{ richiestaAccessoCorrente.datiAnagrafici.telefono }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="d-flex justify-content-end">
+        <button pButton icon="fa ui-icon-check" type="submit" label="{{ 'RICHIESTE_ACCESSO.approvaDomanda' | translate }}" class="button--success"
+          (click)="approvaDomanda(richiestaAccessoCorrente.id)"></button>
+      </div>
+    </div>
+  </p-dialog>
+</div>

@@ -1,0 +1,24 @@
+[  
+   {  
+      "id":100086,
+      "version":0,
+      "cuaa":"SGNNLN54T28A3727",
+      "tipoDomanda":"DOMANDA_UNICA",
+      "idDomanda":1789674,
+      "dtDomanda":"2018-07-31",
+      "campagna":null,
+      "importoRichiesto":1285.09,
+      "dtBdnaOp":null,
+      "dtBdna":null,
+      "protocollo":null,
+      "statoBdna":null,
+      "nomeFileCsv":"nomeFileAnnulla.csv",
+      "flagConfermato":false,
+      "misurePsr":null,
+      "dtInizioSilenzioAssenso":"2019-01-01T14:27:02.000+0000",
+      "dtFineSilenzioAssenso":"2029-01-01T14:27:02.000+0000",
+      "dtInizioEsitoNegativo":"2019-01-01T14:27:02.000+0000",
+      "dtFineEsitoNegativo":"2029-01-01T14:27:02.000+0000",
+      "statoBdnaAggiornato":null
+   }
+]

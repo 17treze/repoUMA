@@ -1,0 +1,93 @@
+:host {
+  $primaryColor: #4caf50;
+  $primaryLightColor: #81c784;
+  $primaryDarkColor: #388e3c;
+  $lightgray: #cacaca;
+  $accentDarkColor: #9ccc65;
+
+  div.title-table {
+    min-height: 38px;
+    box-shadow: none;
+    background: $primaryDarkColor;
+  }
+
+  .border-right-0-5 {
+    border-right: .5px ridge #dee2e6;
+  }
+
+  .border-left-0-5 {
+    border-left: .5px ridge #dee2e6;
+  }
+
+  .ui-inputtext:disabled {
+    border-bottom: 1px dotted;
+    opacity: .7;
+    background: #e8f5e9;
+  }
+
+  ::ng-deep span.ui-message-text {
+    font-size: .7em;
+  }
+
+  input {
+    text-align: right;
+  }
+
+  button.ui-button > ::ng-deep span.ui-button-icon-left {
+      background: $primaryColor;
+  }
+
+  .font-14 {
+    font-size: 14px;
+  }
+
+  .icon-button-square {
+    background-color: $primaryColor !important;
+    border: 1px solid $primaryLightColor;
+    border-radius: unset;
+    height: 4em !important;
+    width: 4em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $primaryDarkColor !important;
+    }
+
+    & > ::ng-deep span.pi {
+      font-size: x-large !important;
+    }
+  }
+
+  .icon-button-circle {
+    background-color: transparent !important;
+    opacity: 1;
+    width: 3em !important;
+    height: 3em !important;
+
+    > ::ng-deep span.ui-button-icon-left {
+      background: darkgrey !important;
+
+      &:hover {
+        background-color: lightgrey !important;
+      }
+    }
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    & > ::ng-deep span.pi {
+      font-size: x-large !important;
+      background: $accentDarkColor;
+    }
+    
+  }
+}

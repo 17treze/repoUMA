@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="VisuraImmobileService" targetNamespace="http://www.catasto.regione.taa.it/VisuraImmobile/service" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wrp="http://www.catasto.regione.taa.it/VisuraImmobile/schemas" xmlns:tns="http://www.catasto.regione.taa.it/VisuraImmobile/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ex="http://www.regione.taa.it/FaultType/schemas" xmlns:cex="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" xmlns:alfex="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" xmlns:aex="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" xmlns:acex="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas">
+  <wsdl:documentation>Contiene il binding del servizio VisuraImmobile che permette di ottenere la visura di un'unita' immobiliare ad una certa data</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/VisuraImmobile/definitions" xmlns:tns="http://www.catasto.regione.taa.it/VisuraImmobile/definitions">
+      <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="VisuraImmobilePortType.xsd"/>
+      <xs:import namespace="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" schemaLocation="VisuraImmobilePortType_1.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" schemaLocation="VisuraImmobilePortType_1_2.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3.xsd"/>
+      <xs:import namespace="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/VisuraImmobile/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ConvenzioneErrataFault">
+    <wsdl:part element="ex:ConvenzioneErrataFault" name="cef"/>
+  </wsdl:message>
+  <wsdl:message name="DatiInputObbligatoriMancantiFault">
+    <wsdl:part element="ex:DatiInputObbligatoriMancantiFault" name="dimf"/>
+  </wsdl:message>
+  <wsdl:message name="SoggettoNonTitolareFault">
+    <wsdl:part element="cex:SoggettoNonTitolareFault" name="sntf"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareSoppressaFault">
+    <wsdl:part element="cex:UnitaImmobiliareSoppressaFault" name="uisf"/>
+  </wsdl:message>
+  <wsdl:message name="ParticellaNonValidaFault">
+    <wsdl:part element="cex:ParticellaNonValidaFault" name="pnvf"/>
+  </wsdl:message>
+  <wsdl:message name="NessunaProprietaAllaDataFault">
+    <wsdl:part element="cex:NessunaProprietaAllaDataFault" name="npadf"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareNonValidaFault">
+    <wsdl:part element="cex:UnitaImmobiliareNonValidaFault" name="uinvf"/>
+  </wsdl:message>
+  <wsdl:message name="GetDatiVisuraImmobileRequest">
+    <wsdl:part element="wrp:GetDatiVisuraImmobile" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetSubalterniParticellaResponse">
+    <wsdl:part element="wrp:GetSubalterniParticellaResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ParticellaEstintaFault">
+    <wsdl:part element="cex:ParticellaEstintaFault" name="pef"/>
+  </wsdl:message>
+  <wsdl:message name="GetDatiVisuraImmobileResponse">
+    <wsdl:part element="wrp:GetDatiVisuraImmobileResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="WSFault">
+    <wsdl:part element="ex:WSFault" name="fault"/>
+  </wsdl:message>
+  <wsdl:message name="UnitaImmobiliareSenzaTitolariFault">
+    <wsdl:part element="cex:UnitaImmobiliareSenzaTitolariFault" name="uistf"/>
+  </wsdl:message>
+  <wsdl:message name="GetSubalterniParticellaRequest">
+    <wsdl:part element="wrp:GetSubalterniParticella" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="VisuraImmobilePortType">
+    <wsdl:operation name="GetDatiVisuraImmobile">
+      <wsdl:input message="tns:GetDatiVisuraImmobileRequest" name="GetDatiVisuraImmobile"/>
+      <wsdl:output message="tns:GetDatiVisuraImmobileResponse" name="GetDatiVisuraImmobileResponse"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSoppressaFault" name="uisf"/>
+      <wsdl:fault message="tns:DatiInputObbligatoriMancantiFault" name="dimf"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSenzaTitolariFault" name="uistf"/>
+      <wsdl:fault message="tns:ConvenzioneErrataFault" name="cef"/>
+      <wsdl:fault message="tns:UnitaImmobiliareNonValidaFault" name="uinvf"/>
+      <wsdl:fault message="tns:SoggettoNonTitolareFault" name="sntf"/>
+      <wsdl:fault message="tns:WSFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubalterniParticella">
+      <wsdl:input message="tns:GetSubalterniParticellaRequest" name="GetSubalterniParticella"/>
+      <wsdl:output message="tns:GetSubalterniParticellaResponse" name="GetSubalterniParticellaResponse"/>
+      <wsdl:fault message="tns:ParticellaEstintaFault" name="pef"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSoppressaFault" name="uisf"/>
+      <wsdl:fault message="tns:DatiInputObbligatoriMancantiFault" name="dimf"/>
+      <wsdl:fault message="tns:UnitaImmobiliareSenzaTitolariFault" name="uistf"/>
+      <wsdl:fault message="tns:NessunaProprietaAllaDataFault" name="npadf"/>
+      <wsdl:fault message="tns:UnitaImmobiliareNonValidaFault" name="uinvf"/>
+      <wsdl:fault message="tns:SoggettoNonTitolareFault" name="sntf"/>
+      <wsdl:fault message="tns:WSFault" name="fault"/>
+      <wsdl:fault message="tns:ParticellaNonValidaFault" name="pnvf"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VisuraImmobileBinding" type="tns:VisuraImmobilePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetDatiVisuraImmobile">
+      <soap:operation soapAction="http://www.catasto.regione.taa.it/catasto/VisuraImmobileService/GetDatiVisuraImmobile"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="uisf">
+        <soap:fault name="uisf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="dimf">
+        <soap:fault name="dimf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uistf">
+        <soap:fault name="uistf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="cef">
+        <soap:fault name="cef" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uinvf">
+        <soap:fault name="uinvf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="sntf">
+        <soap:fault name="sntf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubalterniParticella">
+      <soap:operation soapAction="http://www.catasto.regione.taa.it/catasto/VisuraImmobileService/GetSubalterniParticella"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="pef">
+        <soap:fault name="pef" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uisf">
+        <soap:fault name="uisf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="dimf">
+        <soap:fault name="dimf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uistf">
+        <soap:fault name="uistf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="npadf">
+        <soap:fault name="npadf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="uinvf">
+        <soap:fault name="uinvf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="sntf">
+        <soap:fault name="sntf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="pnvf">
+        <soap:fault name="pnvf" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VisuraImmobileService">
+    <wsdl:port binding="tns:VisuraImmobileBinding" name="VisuraImmobilePort">
+      <soap:address location="https://172.20.0.111:20443/catasto/VisuraImmobileService/VisuraImmobilePortType"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

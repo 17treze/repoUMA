@@ -1,0 +1,32 @@
+{
+	"infoGeneraliDomanda": {
+		"pac": "PAC1420",
+		"tipoDomanda": "DU",
+		"campagna": 2018,
+		"modulo": "PAGAMENTI DIRETTI",
+		"codModulo": "BPS_2018",
+		"cuaaIntestatario": "BRGNGL64C30C7941",
+		"ragioneSociale": "AZ. AGR. BERGAMO ANGELO",
+		"numeroDomanda": 8183430,
+		"numeroDomandaRettificata": null,
+		"dataPresentazione": "2018-04-26T17:18:39.000+0200",
+		"codEnteCompilatore": "19",
+		"enteCompilatore": "CAA CIA - CLES - 002",
+		"dataProtocollazione": "2018-04-26T17:19:15.000+0200",
+		"dataPresentazOriginaria": null,
+		"dataProtocollazOriginaria": null
+	},
+	"controlliPresentazione": {
+		"aggiornamentoFascicolo": "S",
+		"visioneAnomalie": "S",
+		"firmaDomanda": "S",
+		"archiviazioneDomanda": "S"
+	},
+	"richieste": {
+		"sintesiRichieste": {
+			"richiestaDisaccoppiato": true,
+			"richiestaSuperfici": false,
+			"richiestaZootecnia": false
+		}
+	}
+}

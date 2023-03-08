@@ -1,0 +1,63 @@
+{
+    "infoAgricoltoreSIAN": {
+        "idRaia": 22578534,
+        "annoCamp": 2018,
+        "codFisc": "BRGNGL64C30C794G",
+        "dataFineAsse": 253402297199000,
+        "dataFinePossRequ": 1546210800000,
+        "dataInizAsse": 1526734691000,
+        "dataInizPossRequ": 1514761200000,
+        "dtlCapxaction": null,
+        "dtlCapxtimestamp": null,
+        "flagAgriAtti": 1,
+        "idOrpa": 160,
+        "idSogg": 2146687
+    },
+    "titoliSIAN": [
+        {
+            "idTitolare": 138473594,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000002986701",
+            "valoreTitolo": 99.65,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "20180601",
+            "dataFinePossesso": "99991231",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 138473596,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000002986702",
+            "valoreTitolo": 99.65,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "20180601",
+            "dataFinePossesso": "99991231",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 138473598,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000002986703",
+            "valoreTitolo": 99.65,
+            "superficieTitolo": 1,
+            "dataInizioPossesso": "20180601",
+            "dataFinePossesso": "99991231",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        },
+        {
+            "idTitolare": 138473600,
+            "cuaaTitolare": null,
+            "numeroTitolare": "000002986704",
+            "valoreTitolo": 20.92,
+            "superficieTitolo": 0.21,
+            "dataInizioPossesso": "20180601",
+            "dataFinePossesso": "99991231",
+            "annoCampagnaInizio": 2017,
+            "annoCampagnaFine": 9999
+        }
+    ],
+    "flagGiovAgri": null
+}

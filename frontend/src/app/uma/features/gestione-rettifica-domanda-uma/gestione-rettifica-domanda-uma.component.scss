@@ -1,0 +1,60 @@
+/** replica variabili dichiarate in theme-green.1.scss per evitare warning sul Budget */
+$primaryColor: #4caf50;
+$primaryDarkColor: #388e3c;
+$primaryLightColor: #81c784;
+$primaryLightestColor: #e8f5e9;
+$primaryTextColor: #ffffff;
+$accentColor: #7cb342;
+$accentDarkColor: #9ccc65;
+$accentLightColor: #9ccc65;
+$accentTextColor: #ffffff;
+/** end */
+
+:host {
+  .command-button.command-button.command-button {
+    font-size: 22px !important;
+    height: auto !important;
+    width: auto !important;
+    background-color: $primaryColor !important;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .w-11m {
+    width: 11em;
+  }
+
+  .w-12m {
+    width: 12em;
+  }
+
+  .w-13m {
+    width: 13em;
+  }
+
+  .ui-button-secondary.large-icon {
+    & > ::ng-deep span.pi {
+      font-size: x-large !important;
+    }
+  }
+
+  p-dropdown > ::ng-deep .ui-dropdown {
+    label.ui-dropdown-label {
+      height: 100%;
+      font-weight: normal !important;
+    }
+  }
+
+  .button-accent-alt {
+    border: 2px solid #01985a;
+    color: #01985a !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.ui-button-icon-right.ui-clickable {
+      color: #01985a;
+      font-size: x-large;
+    }
+  }
+}

@@ -1,0 +1,1059 @@
+<!-- popup allegati ammissibile gasolio conto terzi -->
+<app-popup-allegati-motivo-consumi
+  #popupAllegatiMotivoConsumi
+  (chiudiPopup)="closeDialogMotivazione($event)">
+</app-popup-allegati-motivo-consumi>
+
+<!-- popup allegati per tutti i campi di recupero -->
+<app-popup-motivo-recupero
+  #popupAllegatiMotivoRecupero
+  (chiudiPopup)="closeDialogMotivazione($event)">
+</app-popup-motivo-recupero>
+
+<!-- popup protocollazione dichiarazione consumi -->
+
+<app-popup-protocollazione-dichiarazione
+  *ngIf="dichiarazioneConsumiDto"
+  [cfRichiedente]="dichiarazioneConsumiDto.cfRichiedente"
+  [idFascicolo]="idFascicolo"
+  [idDichiarazione]="dichiarazioneConsumiDto.id"
+  [popupVisibile]="popupProtocollaVisibile"
+  [cuaa]="dichiarazioneConsumiDto.cuaa"
+  (chiudiPopup)="closeProtocollazioneDialog()">
+</app-popup-protocollazione-dichiarazione>
+
+<p-confirmDialog
+  #cd
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  key="conferma-accisa-dialog">
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      label="OK"
+      class="w-10m"
+      (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
+
+<p-confirmDialog
+  #cambioData
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  key="conferma-cambio-data"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<!-- eliminazione se presente rettifica o se c'è una richiesta obsoleta dialog -->
+<p-confirmDialog
+  [closable]="false"
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="rettifica-error-dialog"
+  acceptLabel="OK"
+  rejectLabel="Annulla"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<!-- tost generico -->
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"></p-toast>
+
+<!-- tost di avvenuta eliminazione dichiarazione consumi -->
+<p-toast
+  position="top-center"
+  key="tst-delete"
+  [modal]="true"
+  [baseZIndex]="50000"
+  (onClose)="onCloseToastCancellazione()"></p-toast>
+
+<div class="ui-g ui-fluid mt-5">
+  <div class="ui-grid-fixed mt-2">
+    <div class="p-col">
+      <p-toast
+        #deleteToast
+        position="center"
+        key="checkCancella"
+        [modal]="true"
+        [baseZIndex]="5000">
+        <ng-template
+          let-message
+          pTemplate="message">
+          <div style="text-align: center">
+            <i
+              class="pi pi-exclamation-triangle"
+              style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+          </div>
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="confermaCancellazioneConsuntivo(deleteToast)"
+                label="Si"
+                class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+              <button
+                type="button"
+                pButton
+                (click)="rifiutaCancellazioneConsuntivo(deleteToast)"
+                label="No"
+                class="ui-button-secondary"></button>
+            </div>
+          </div>
+        </ng-template>
+      </p-toast>
+
+      <form
+        class="p-grid p-align-center"
+        novalidate
+        [formGroup]="consumiForm">
+        <!-- Prima riga: Save & Back -->
+        <div class="p-col-3 py-3">
+          <a
+            [routerLink]
+            (click)="goBack()"
+            class="d-flex align-items-center text-decoration-none color-primary">
+            <i
+              class="pi pi-chevron-left"
+              style="font-size: 2rem; color: black"></i>
+            <img src="assets/img/icons/uma-icon/icon-altre_black.svg">
+            <span class="ml-2">
+              <strong class="fs-20">{{ 'UMA.DICHIARAZIONE_CONSUMI.DICHIARAZIONE_CONSUMI' | translate | uppercase }}</strong>
+            </span>
+          </a>
+        </div>
+        <div class="p-col"></div>
+        <div
+          class="p-col-fixed w-10m px-1 py-1"
+          *ngIf="!READONLY_MODE">
+          <button
+            pButton
+            class="ui-button-secondary ui-button-text button-accent-alt"
+            type="submit"
+            label="SALVA"
+            icon="pi pi-save"
+            iconPos="right"
+            *loading="loading"
+            (click)="!loading && validaDichiarazione() && saveDichiarazione()"></button>
+        </div>
+        <div
+          class="p-col-fixed w-13m px-1 py-1"
+          *ngIf="!READONLY_MODE">
+          <button
+            pButton
+            type="button"
+            label="SALVA E PROTOCOLLA..."
+            *loading="loading"
+            (click)="!loading && validaDichiarazioneDaProtocollare() && saveAndProtocollaDichiarazione()"></button>
+        </div>
+
+        <!-- Seconda riga - Dichiarazione consumi -->
+        <div class="boxgrey">
+          <div
+            class="p-grid p-align-center"
+            *ngIf="!isUtenteIstruttoreUma || (isUtenteIstruttoreUma && dichiarazioneConsumiDto?.stato == STATO_DICHIARAZIONE_CONSUMI.PROTOCOLLATA)">
+            <div class="p-col p-col-align-center">
+              Data di riferimento conduzione:
+              <strong>{{dichiarazioneConsumiDto?.dataConduzione | date:'dd MMMM yyyy'}}</strong>
+            </div>
+          </div>
+          <div
+            class="p-grid p-align-center"
+            *ngIf="isUtenteIstruttoreUma && dichiarazioneConsumiDto?.stato == STATO_DICHIARAZIONE_CONSUMI.IN_COMPILAZIONE">
+            <div class="p-col-2">Data riferimento conduzione:</div>
+            <div class="p-col-2">
+              <p-calendar
+                #dataConduzioneRef
+                formControlName="dataConduzione"
+                dateFormat="dd MM yy"
+                [locale]="calendarService.localeITA"
+                [showIcon]="true"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                (onSelect)="salvaDataConduzione($event)"
+                [readonlyInput]="true">
+              </p-calendar>
+            </div>
+            <div
+              *ngIf="!isDataDefault()"
+              class="p-col-2"
+              (click)="ripristinaDataConduzione()">
+              <span class="text-primary cursor-pointer"><u>
+                  ripristina data {{ dataConduzioneDefault | date:'dd/MM/yyyy' }}
+                </u></span>
+            </div>
+            <div class="p-col"></div>
+          </div>
+          <div class="p-grid">
+            <div class="p-col">
+              <!-- Prima sezione: Anno precedente -->
+              <p-panel
+                [toggleable]="!loading"
+                [(collapsed)]="areCollapsed[0]">
+                <p-header>Riepilogo anno precedente</p-header>
+                <div class="p-grid text-center">
+                  <div class="p-col"></div>
+                  <div class="p-col p-col-align-center font-15">Gasolio conto proprio</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio conto terzi e svincolate</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio totale</div>
+                  <div class="p-col p-col-align-center font-15">Benzina</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio serre</div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Residuo campagna precedente (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="residuoGasolioContoProprio">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="residuoGasolioContoTerzi">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="residuoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="residuoBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="residuoGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Ammissibile (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ammissibileGasolioContoProprio">
+                  </div>
+                  <div class="p-col">
+                    <div class="ui-inputgroup">
+                      <button
+                        pButton
+                        type="button"
+                        *ngIf="showAllegatiIconAmmissibile(inputAmmissibileGasolioContoTerzi,inputRichiestoAssegnatoGasolioTerzi )"
+                        (click)="openDialogMotivazione('AMMISSIBILE_GASOLIO_TERZI')"
+                        class="icon-button-square"
+                        title="Allega un documento"
+                        icon="pi pi-attachment"></button>
+                      <button
+                        pButton
+                        type="button"
+                        *ngIf="!inputAmmissibileGasolioContoTerzi.disabled && motivoRecuperoAmmissibile?.allegati?.length > 0"
+                        (click)="cancellaAllegati('AMMISSIBILE_GASOLIO_TERZI')"
+                        class="icon-button-square border-left-0"
+                        title="Elimina allegati"
+                        icon="pi pi-times"></button>
+                      <input
+                        #inputAmmissibileGasolioContoTerzi
+                        [a4gNotEmptyList]="{list:motivoRecuperoAmmissibile?.allegati, active:{on: true, field: 'richAssegnatoGasolioContoTerzi'}}"
+                        [a4gNotZero]="{list:motivoRecuperoAmmissibile?.allegati, active:{on: true, field: 'richAssegnatoGasolioContoTerzi'}}"
+                        type="text"
+                        (blur)="inputAmmissibileGasolioContoTerzi.value > 0 && !motivoRecuperoAmmissibile?.allegati?.length && inputAmmissibileGasolioContoTerzi.value != inputRichiestoAssegnatoGasolioTerzi.value && openDialogMotivazione('AMMISSIBILE_GASOLIO_TERZI')"
+                        class="text-right"
+                        pInputText
+                        [maxlength]="maxLengthInput"
+                        pattern="^([0-9])+$"
+                        formControlName="ammissibileGasolioContoTerzi">
+                    </div>
+                    <!-- <div *ngIf="consumiForm.get('ammissibileGasolioContoTerzi').invalid && (consumiForm.get('ammissibileGasolioContoTerzi').dirty || consumiForm.get('ammissibileGasolioContoTerzi').touched)"> -->
+                    <div>
+                      <p-message
+                        *ngIf="consumiForm.get('ammissibileGasolioContoTerzi').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('ammissibileGasolioContoTerzi').errors?.emptylist"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario aggiungere gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('ammissibileGasolioContoTerzi').errors?.notZero"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario eliminare gli allegati">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ammissibileGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ammissibileBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ammissibileGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Richiesto/Assegnato (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="richAssegnatoGasolioContoProprio">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      #inputRichiestoAssegnatoGasolioTerzi
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="richAssegnatoGasolioContoTerzi">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="richAssegnatoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="richAssegnatoBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="richAssegnatoGasolioSerre">
+                  </div>
+                </div>
+              </p-panel>
+
+              <!-- Seconda sezione: Carburante -->
+              <p-panel
+                [toggleable]="!loading"
+                [(collapsed)]="areCollapsed[1]">
+                <p-header>Operazioni carburante</p-header>
+                <div class="p-grid text-center">
+                  <div class="p-col"></div>
+                  <div class="p-col p-col-align-center font-15"></div>
+                  <div class="p-col p-col-align-center font-15"></div>
+                  <div class="p-col p-col-align-center font-15">Gasolio totale</div>
+                  <div class="p-col p-col-align-center font-15">Benzina</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio serre</div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Ricevuto (lt)</small>
+                  </div>
+                  <div class="p-col"></div>
+                  <div class="p-col"></div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ricevutoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ricevutoBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="ricevutoGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Trasferito (lt)</small>
+                  </div>
+                  <div class="p-col"></div>
+                  <div class="p-col"></div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="trasferitoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="trasferitoBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="trasferitoGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Prelevato (lt)</small>
+                  </div>
+                  <div class="p-col"></div>
+                  <div class="p-col"></div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="prelevatoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="prelevatoBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="prelevatoGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Disponibile (lt)</small>
+                  </div>
+                  <div class="p-col"></div>
+                  <div class="p-col"></div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="disponibileGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="disponibileBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="disponibileGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Accisa (lt)</small>
+                  </div>
+                  <div class="p-col"></div>
+                  <div class="p-col"></div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="accisaGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="accisaBenzina">
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="accisaGasolioSerre">
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col-2 p-col-align-center">
+                    <small>Motivo accisa</small>
+                  </div>
+                  <div class="p-col-4"></div>
+                  <div class="p-col-6">
+                    <p-dropdown
+                      formControlName="accisaMotivo"
+                      (onChange)="onChangeMotivoAccisa($event)"
+                      [options]="tipologicheService.motiviAccisa"></p-dropdown>
+                    <div *ngIf="consumiForm.get('accisaMotivo').invalid && (consumiForm.get('accisaMotivo').dirty || consumiForm.get('accisaMotivo').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('accisaMotivo').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="E' obbligatorio inserire una motivazione">
+                      </p-message>
+                    </div>
+                  </div>
+                </div>
+                <p-footer *ngIf="isAccisaObbligatoria() && !READONLY_MODE">
+                  <i>Nota: è obbligatorio inserire una motivazione per il campo Accisa</i>
+                </p-footer>
+              </p-panel>
+
+              <!-- Terza sezione: Dichiarazione -->
+              <p-panel
+                [toggleable]="!loading"
+                [(collapsed)]="areCollapsed[2]">
+                <p-header>Dichiarazione consumi</p-header>
+                <div class="p-grid text-center">
+                  <div class="p-col"></div>
+                  <div class="p-col p-col-align-center font-15">Gasolio conto proprio</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio conto terzi e svincolate</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio totale</div>
+                  <div class="p-col p-col-align-center font-15">Benzina</div>
+                  <div class="p-col p-col-align-center font-15">Gasolio serre</div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Consumato (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSum]="{ toSum: 'consumatoGasolioContoTerzi', limit: 'disponibileGasolioTotale' }" -->
+                    <input
+                      #inputConsumatoGasolioContoProprio
+                      [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoTerzi', 'rimanenzaDicembreGasolioContoTerzi', 'rimanenzaDicembreGasolioContoProprio', 'recuperoGasolioContoProprio', 'recuperoGasolioContoTerzi'], limit: 'disponibileGasolioTotale' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="consumatoGasolioContoProprio">
+                    <div *ngIf="consumiForm.get('consumatoGasolioContoProprio').invalid && (consumiForm.get('consumatoGasolioContoProprio').dirty || consumiForm.get('consumatoGasolioContoProprio').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioContoProprio').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioContoProprio').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSum]="{ toSum: 'consumatoGasolioContoProprio', limit: 'disponibileGasolioTotale' }" -->
+                    <input
+                      #inputConsumatoGasolioContoTerzi
+                      [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoProprio', 'rimanenzaDicembreGasolioContoTerzi', 'rimanenzaDicembreGasolioContoProprio', 'recuperoGasolioContoProprio', 'recuperoGasolioContoTerzi'], limit: 'disponibileGasolioTotale' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="consumatoGasolioContoTerzi">
+                    <div *ngIf="consumiForm.get('consumatoGasolioContoTerzi').invalid && (consumiForm.get('consumatoGasolioContoTerzi').dirty || consumiForm.get('consumatoGasolioContoTerzi').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioContoTerzi').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioContoTerzi').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      [maxlength]="maxLengthInput"
+                      pInputText
+                      formControlName="consumatoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSup]="{limit:'disponibileBenzina'}" -->
+                    <input
+                      #inputConsumatoBenzina
+                      [a4gLimitSumArray]="{ toSum: ['recuperoBenzina', 'rimanenzaDicembreBenzina'], limit: 'disponibileBenzina' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="consumatoBenzina">
+                    <div *ngIf="consumiForm.get('consumatoBenzina').invalid && (consumiForm.get('consumatoBenzina').dirty || consumiForm.get('consumatoBenzina').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoBenzina').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoBenzina').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileBenzina').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSup]="{limit:'disponibileGasolioSerre'}" -->
+                    <input
+                      #inputConsumatoGasolioSerre
+                      [a4gLimitSumArray]="{ toSum: ['rimanenzaDicembreGasolioSerre', 'recuperoGasolioSerre'], limit: 'disponibileGasolioSerre' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="consumatoGasolioSerre">
+                    <div *ngIf="consumiForm.get('consumatoGasolioSerre').invalid && (consumiForm.get('consumatoGasolioSerre').dirty || consumiForm.get('consumatoGasolioSerre').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioSerre').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('consumatoGasolioSerre').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioSerre').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Rimanenza al 31 dicembre (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSum]="{ toSum: 'rimanenzaDicembreGasolioContoTerzi', limit: 'disponibileGasolioTotale' }" -->
+                    <input
+                      #inputRimanenzaDicembreGasolioContoProprio
+                      [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoTerzi', 'rimanenzaDicembreGasolioContoTerzi', 'consumatoGasolioContoProprio', 'recuperoGasolioContoProprio', 'recuperoGasolioContoTerzi'], limit: 'disponibileGasolioTotale' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="rimanenzaDicembreGasolioContoProprio">
+                    <div *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoProprio').invalid && (consumiForm.get('rimanenzaDicembreGasolioContoProprio').dirty || consumiForm.get('rimanenzaDicembreGasolioContoProprio').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoProprio').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoProprio').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSum]="{ toSum: 'rimanenzaDicembreGasolioContoProprio', limit: 'disponibileGasolioTotale' }" -->
+                    <input
+                      #inputRimanenzaDicembreGasolioContoTerzi
+                      [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoTerzi', 'consumatoGasolioContoProprio', 'rimanenzaDicembreGasolioContoProprio', 'recuperoGasolioContoProprio', 'recuperoGasolioContoTerzi'], limit: 'disponibileGasolioTotale' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="rimanenzaDicembreGasolioContoTerzi">
+                    <div *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoTerzi').invalid && (consumiForm.get('rimanenzaDicembreGasolioContoTerzi').dirty || consumiForm.get('rimanenzaDicembreGasolioContoTerzi').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoTerzi').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioContoTerzi').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      [maxlength]="maxLengthInput"
+                      pInputText
+                      formControlName="rimanenzaDicembreGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSup]="{limit:'disponibileBenzina'}" -->
+                    <input
+                      #inputRimanenzaDicembreBenzina
+                      [a4gLimitSumArray]="{ toSum: ['consumatoBenzina', 'recuperoBenzina'], limit: 'disponibileBenzina' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="rimanenzaDicembreBenzina">
+                    <div *ngIf="consumiForm.get('rimanenzaDicembreBenzina').invalid && (consumiForm.get('rimanenzaDicembreBenzina').dirty || consumiForm.get('rimanenzaDicembreBenzina').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreBenzina').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreBenzina').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileBenzina').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <!-- [a4gLimitSup]="{limit:'disponibileGasolioSerre'}" -->
+                    <input
+                      #inputRimanenzaDicembreGasolioSerre
+                      [a4gLimitSumArray]="{ toSum: ['consumatoGasolioSerre', 'recuperoGasolioSerre'], limit: 'disponibileGasolioSerre' }"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      [maxlength]="maxLengthInput"
+                      pattern="^([0-9])+$"
+                      formControlName="rimanenzaDicembreGasolioSerre">
+                    <div *ngIf="consumiForm.get('rimanenzaDicembreGasolioSerre').invalid && (consumiForm.get('rimanenzaDicembreGasolioSerre').dirty || consumiForm.get('rimanenzaDicembreGasolioSerre').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioSerre').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('rimanenzaDicembreGasolioSerre').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioSerre').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-grid">
+                  <div class="p-col p-col-align-center">
+                    <small>Recupero (lt)</small>
+                  </div>
+                  <div class="p-col">
+                    <div class="ui-inputgroup">
+                      <button
+                        *ngIf="(consumiForm.get('recuperoGasolioContoProprio').value > 0 || motivoRecuperoGasolioContoProprio?.allegati?.length)"
+                        pButton
+                        type="button"
+                        class="icon-button-square"
+                        (click)="openDialogMotivazione('RECUPERO_GASOLIO_PROPRIO')"
+                        title="Allega un documento"
+                        icon="pi pi-attachment"></button>
+                      <button
+                        *ngIf="!inputRecuperoGasolioContoProprio?.disabled && motivoRecuperoGasolioContoProprio?.allegati?.length"
+                        pButton
+                        type="button"
+                        class="icon-button-square border-left-0"
+                        (click)="cancellaAllegati('RECUPERO_GASOLIO_PROPRIO')"
+                        title="Elimina allegati"
+                        icon="pi pi-times"></button>
+                      <input
+                        #inputRecuperoGasolioContoProprio
+                        [a4gNotEmptyList]="{list:motivoRecuperoGasolioContoProprio?.allegati}"
+                        [a4gNotZero]="{list:motivoRecuperoGasolioContoProprio?.allegati}"
+                        [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoTerzi', 'rimanenzaDicembreGasolioContoTerzi', 'rimanenzaDicembreGasolioContoProprio', 'consumatoGasolioContoProprio', 'recuperoGasolioContoTerzi'], limit: 'disponibileGasolioTotale' }"
+                        type="text"
+                        class="text-right"
+                        pInputText
+                        pattern="^([0-9])+$"
+                        (blur)="inputRecuperoGasolioContoProprio.value > 0 && !motivoRecuperoGasolioContoProprio?.allegati?.length && openDialogMotivazione('RECUPERO_GASOLIO_PROPRIO')"
+                        [maxlength]="maxLengthInput"
+                        formControlName="recuperoGasolioContoProprio">
+                    </div>
+                    <div *ngIf="consumiForm.get('recuperoGasolioContoProprio').invalid && (consumiForm.get('recuperoGasolioContoProprio').dirty || consumiForm.get('recuperoGasolioContoProprio').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoProprio').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoProprio').errors?.emptylist"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario aggiungere gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoProprio').errors?.notZero"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario eliminare gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoProprio').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <div class="ui-inputgroup">
+                      <button
+                        *ngIf="(inputRecuperoGasolioContoTerzi.value > 0 || motivoRecuperoGasolioContoTerzi?.allegati?.length)"
+                        pButton
+                        type="button"
+                        class="icon-button-square"
+                        (click)="openDialogMotivazione('RECUPERO_GASOLIO_TERZI')"
+                        title="Allega un documento"
+                        icon="pi pi-attachment"></button>
+                      <button
+                        *ngIf="!inputRecuperoGasolioContoTerzi.disabled && motivoRecuperoGasolioContoTerzi?.allegati?.length"
+                        pButton
+                        type="button"
+                        class="icon-button-square border-left-0"
+                        (click)="cancellaAllegati('RECUPERO_GASOLIO_TERZI')"
+                        title="Elimina allegati"
+                        icon="pi pi-times"></button>
+                      <input
+                        #inputRecuperoGasolioContoTerzi
+                        [a4gNotEmptyList]="{list:motivoRecuperoGasolioContoTerzi?.allegati}"
+                        [a4gNotZero]="{list:motivoRecuperoGasolioContoTerzi?.allegati}"
+                        [a4gLimitSumArray]="{ toSum: ['consumatoGasolioContoTerzi', 'rimanenzaDicembreGasolioContoTerzi', 'rimanenzaDicembreGasolioContoProprio', 'recuperoGasolioContoProprio', 'consumatoGasolioContoProprio'], limit: 'disponibileGasolioTotale' }"
+                        type="text"
+                        class="text-right"
+                        pInputText
+                        [maxlength]="maxLengthInput"
+                        pattern="^([0-9])+$"
+                        (blur)="inputRecuperoGasolioContoTerzi.value > 0 && !motivoRecuperoGasolioContoTerzi?.allegati?.length && openDialogMotivazione('RECUPERO_GASOLIO_TERZI')"
+                        formControlName="recuperoGasolioContoTerzi">
+                    </div>
+                    <div *ngIf="consumiForm.get('recuperoGasolioContoTerzi').invalid && (consumiForm.get('recuperoGasolioContoTerzi').dirty || consumiForm.get('recuperoGasolioContoTerzi').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoTerzi').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoTerzi').errors?.emptylist"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario aggiungere gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoTerzi').errors?.notZero"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario eliminare gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioContoTerzi').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioTotale').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <input
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="recuperoGasolioTotale">
+                  </div>
+                  <div class="p-col">
+                    <div class="ui-inputgroup">
+                      <button
+                        *ngIf="(inputRecuperoBenzina.value > 0 || motivoRecuperoBenzina?.allegati?.length)"
+                        pButton
+                        type="button"
+                        class="icon-button-square"
+                        (click)="openDialogMotivazione('RECUPERO_BENZINA')"
+                        title="Allega un documento"
+                        icon="pi pi-attachment"></button>
+                      <button
+                        *ngIf="!inputRecuperoBenzina.disabled && motivoRecuperoBenzina?.allegati?.length"
+                        pButton
+                        type="button"
+                        class="icon-button-square border-left-0"
+                        (click)="cancellaAllegati('RECUPERO_BENZINA')"
+                        title="Elimina allegati"
+                        icon="pi pi-times"></button>
+                      <input
+                        #inputRecuperoBenzina
+                        [a4gNotEmptyList]="{list:motivoRecuperoBenzina?.allegati}"
+                        [a4gNotZero]="{list:motivoRecuperoBenzina?.allegati}"
+                        [a4gLimitSumArray]="{ toSum: ['consumatoBenzina', 'rimanenzaDicembreBenzina'], limit: 'disponibileBenzina' }"
+                        type="text"
+                        class="text-right"
+                        pInputText
+                        [maxlength]="maxLengthInput"
+                        pattern="^([0-9])+$"
+                        (blur)="inputRecuperoBenzina.value > 0 && !motivoRecuperoBenzina?.allegati?.length && openDialogMotivazione('RECUPERO_BENZINA')"
+                        formControlName="recuperoBenzina">
+                    </div>
+                    <div *ngIf="consumiForm.get('recuperoBenzina').invalid && (consumiForm.get('recuperoBenzina').dirty || consumiForm.get('recuperoBenzina').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoBenzina').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoBenzina').errors?.emptylist"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario aggiungere gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoBenzina').errors?.notZero"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario eliminare gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoBenzina').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileBenzina').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col">
+                    <div class="ui-inputgroup">
+                      <button
+                        *ngIf="(inputRecuperoGasolioSerre.value > 0 || motivoRecuperoGasolioSerre?.allegati?.length)"
+                        pButton
+                        type="button"
+                        class="icon-button-square"
+                        (click)="openDialogMotivazione('RECUPERO_GASOLIO_SERRE')"
+                        title="Allega un documento"
+                        icon="pi pi-attachment"></button>
+                      <button
+                        *ngIf="!inputRecuperoGasolioSerre.disabled && motivoRecuperoGasolioSerre?.allegati?.length"
+                        pButton
+                        type="button"
+                        class="icon-button-square border-left-0"
+                        (click)="cancellaAllegati('RECUPERO_GASOLIO_SERRE')"
+                        title="Elimina allegati"
+                        icon="pi pi-times"></button>
+                      <input
+                        #inputRecuperoGasolioSerre
+                        [a4gNotEmptyList]="{list:motivoRecuperoGasolioSerre?.allegati}"
+                        [a4gNotZero]="{list:motivoRecuperoGasolioSerre?.allegati}"
+                        [a4gLimitSumArray]="{ toSum: ['rimanenzaDicembreGasolioSerre', 'consumatoGasolioSerre'], limit: 'disponibileGasolioSerre' }"
+                        type="text"
+                        class="text-right"
+                        pInputText
+                        [maxlength]="maxLengthInput"
+                        pattern="^([0-9])+$"
+                        (blur)="inputRecuperoGasolioSerre.value > 0 && !motivoRecuperoGasolioSerre?.allegati?.length && openDialogMotivazione('RECUPERO_GASOLIO_SERRE')"
+                        formControlName="recuperoGasolioSerre">
+                    </div>
+                    <div *ngIf="consumiForm.get('recuperoGasolioSerre').invalid && (consumiForm.get('recuperoGasolioSerre').dirty || consumiForm.get('recuperoGasolioSerre').touched)">
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioSerre').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioSerre').errors?.emptylist"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario aggiungere gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioSerre').errors?.notZero"
+                        class="font-12"
+                        severity="error"
+                        text="Per procedere è necessario eliminare gli allegati">
+                      </p-message>
+                      <p-message
+                        *ngIf="consumiForm.get('recuperoGasolioSerre').errors?.maxArray"
+                        class="font-12"
+                        severity="error"
+                        text="{{ 'Attenzione! Le quantità digitate eccedono il carburante disponibile: '+ consumiForm.get('disponibileGasolioSerre').value}}">
+                      </p-message>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

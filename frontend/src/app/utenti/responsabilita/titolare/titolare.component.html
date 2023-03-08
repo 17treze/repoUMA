@@ -1,0 +1,68 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-lg-12">
+    <p-panel [toggleable]="true">
+      <p-header>
+        {{title}}
+        <button
+          pButton
+          type="button"
+          icon="ui-icon-close"
+          title="Elimina"
+          class="remove-btn"
+          (click)="removeMe()"></button>
+      </p-header>
+      <form
+        #f="ngForm"
+        (ngSubmit)="onSubmit(f)">
+        <fieldset [disabled]="disabled">
+          <div class="ui-g form-group">
+            <div class="ui-g-12 ui-md-6 ui-lg-5">
+              <span class>
+                <label>CUAA *</label>
+              <input
+                  type="text"
+                  [(ngModel)]="cuaa"
+                  name="cuaa"
+                  #cuaaInput="ngModel"
+                  [ngClass]="{'is-invalid': cuaaInput.invalid && (cuaaInput.touched|| f.submitted)}"
+                  pInputText
+                  appValidaCuaaCompleto
+                  (input)="cuaachange($event)">
+              
+              <div *ngIf="cuaaInput.errors"><p
+                    *ngIf="cuaaInput.errors?.cuaaErratoCompleto"
+                    class="ui-message ui-messages-error ui-corner-all">
+                    {{cuaaInput.errors.cuaaErratoCompleto}}
+                </p>
+                </div>
+            </span>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-2">
+              <br>
+              <button
+                pButton
+                type="submit"
+                [disabled]="!f.valid || submitted"
+                label="Cerca"></button>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-5">
+              <span class>
+                <label>Descrizione Impresa</label>
+              <input
+                  type="text"
+                  [(ngModel)]="denominazione"
+                  name="denominazione"
+                  #denominazioneInput="ngModel"
+                  [ngClass]="{'is-invalid': denominazioneInput.invalid}"
+                  [readonly]="true"
+                  pInputText
+                  appValidadenominazione>
+              
+            </span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </p-panel>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+#buttongis {
+    z-index: 99999;
+    background-color: #e8e8e8;
+    box-shadow: 0 0 4px 1px #212529;
+    border-left: none;
+    margin-top: 0px;
+    position: fixed;
+    bottom: 0;
+    width: 101%;
+    border-right: none;
+    border-bottom: none;
+    margin-bottom: -5px;
+    padding: 0px 10px;
+}
+
+#buttongis>div {
+    padding-top: 1px;
+    padding-bottom: 0px;
+}
+
+#mouse-position {
+    text-align: center;
+    border: 1px solid #0d5f3fb8;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.coordinate-input {
+    width: 300px;
+    margin: 0 25%;
+}
+
+gis-anno-campagna>div.select-campagna {
+    margin: -1px 0px;
+    float: left;
+    max-width: 200px;
+}
+
+@media (max-width: 1150px) {
+    #buttongis {
+        padding: 0px !important;
+    }
+}

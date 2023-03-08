@@ -1,0 +1,213 @@
+<app-popup-istruttore-uma-configurazione
+  #popupIstruttoreUmaConfigurazioneComponent
+  (onCloseImpostazioniDialog)="closeDialogIstruttoreUmaConfig($event)">
+</app-popup-istruttore-uma-configurazione>
+<app-popup-genera-file-xml-cup
+  #popupGeneraFileXmlCup
+  (onCloseImpostazioniDialog)="closeDialogGeneraFileXmlCup()">
+</app-popup-genera-file-xml-cup>
+<app-popup-scarica-elenchi-uma #popupScaricaElenchiUma></app-popup-scarica-elenchi-uma>
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed">
+    <div *ngIf="ruoliAbilitatiPrimoGruppo()">
+      <hr
+        align="center"
+        size="1"
+        width="100%"
+        color="black"
+        noshade>
+      <div class="row">
+        <div class="col-4">
+          <H5>
+            <img
+              src="assets/img/ico-pac-14-20.jpg"
+              class="d-inline-block mr-3">
+            <b>{{ "ISTANZE_ISTRUTTORIA.PAC_2014-2020" | translate }}</b>
+          </H5>
+        </div>
+        <div class="col-8">
+
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickPac1420()">
+                    {{ "ISTANZE_ISTRUTTORIA.DOMANDA_UNICA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a [routerLink]="['../ricerca-domande']">
+                    {{ "ISTANZE_ISTRUTTORIA.CERCA_DOMANDE" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div *ngIf="ruoliAbilitatiPrimoGruppo()">
+      <hr
+        align="center"
+        size="1"
+        width="100%"
+        color="black"
+        noshade>
+      <div class="row">
+        <div class="col-4">
+          <H5>
+            <img
+              src="assets/img/ico-antimafia.jpg"
+              class="d-inline-block mr-3">
+            <b>{{ "ISTANZE_ISTRUTTORIA.ANTIMAFIA" | translate }}</b>
+          </H5>
+        </div>
+        <div class="col-8">
+
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickCertificazioniAntimafia()">
+                    {{ "ISTANZE_ISTRUTTORIA.DOMANDA_ANTIMAFIA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div *ngIf="ruoloAPPAG()">
+      <hr
+        align="center"
+        size="1"
+        width="100%"
+        color="black"
+        noshade>
+      <div class="row">
+        <div class="col-4">
+          <H5>
+            <img
+              src="assets/img/ico-psr.jpg"
+              class="d-inline-block mr-3">
+            <b>{{ "ISTANZE_ISTRUTTORIA.ISTRUTTORIA_PSR" | translate }}</b>
+          </H5>
+        </div>
+        <div class="col-8">
+
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickGeneraXML()">
+                    {{ "ISTANZE_ISTRUTTORIA.GENERA_FILE_XML" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div *ngIf="ruoliAbilitatiSecondoGruppo()">
+      <hr
+        align="center"
+        size="1"
+        width="100%"
+        color="black"
+        noshade>
+      <div class="row">
+        <div class="col-4">
+          <H5>
+            <img
+              src="assets/img/ico-UMA.jpg"
+              class="d-inline-block mr-3">
+            <b>{{ "ISTANZE_ISTRUTTORIA.ISTRUTTORIA_UMA" | translate }}</b>
+          </H5>
+        </div>
+        <div class="col-8">
+
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickUma('consultazioneUMA')">
+                    {{ "ISTANZE_ISTRUTTORIA.CONSULTAZIONE_UMA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickUma('ricercaAziende')">
+                    {{ "ISTANZE_ISTRUTTORIA.PRELIEVI_UMA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr *ngIf="displayValidazionePrelievi()">
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="onClickUma('gestioneConsegne')">
+                    {{ "ISTANZE_ISTRUTTORIA.VALIDAZIONE_UMA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a (click)="openDialogScarica()">
+                    {{ 'UMA.SCARICA_ELENCHI' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a
+                    [routerLink]
+                    (click)="openDialogIstruttoreConfigurazione()">
+                    {{ "ISTANZE_ISTRUTTORIA.CONFIGURA_ISTRUTTORIA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

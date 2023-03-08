@@ -1,0 +1,8 @@
+<ns2:get_Elenco_Capi_Premio xmlns:ns2="http://bdr.izs.it/webservices">
+	<ns2:p_premio>
+		<ns2:CUAA>PDRTTR69M30C794R</ns2:CUAA>
+		<ns2:Id_alle_BDN>729337</ns2:Id_alle_BDN>
+		<ns2:Anno_Campagna>2019</ns2:Anno_Campagna>
+		<ns2:Codice_Intervento>311</ns2:Codice_Intervento>
+	</ns2:p_premio>
+</ns2:get_Elenco_Capi_Premio>

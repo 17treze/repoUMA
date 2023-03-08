@@ -1,0 +1,61 @@
+<div class="p-col box box-fasc">
+  <div class="p-col w-100">
+    <div class="p-col">
+      <img
+        class="box__icon"
+        src="{{header.icon}}">
+      <h3 class="box__title">{{ header.title | translate }}</h3>
+    </div>
+    <div class="p-col">
+      <p class="box__subtitle">{{ header.subtitle | translate }}</p>
+    </div>
+    <div class="p-col" *ngIf="mainFile">
+      <p
+            class="h6 text-uppercase mb-4"
+          >
+            <span>{{ mainFile?.label }}</span>
+            <img
+              class="ml-2"
+              src="assets/img/ico-x.jpg"
+              (click)="clickButton($event, 'elimina_allegato', null, null, 'main')"
+            />
+          </p>
+    </div>
+    <div
+      class="p-grid p-justify-center mt-1m"
+      *ngIf="attachments">
+      <div class="p-grid p-align-center border-bottom border-top"
+      *ngFor="let attachment of attachments; let i = index">
+        <div class="p-col">
+          <a
+            class="cursor-pointer p-col"
+            target="_blank">
+            {{ attachment.nome }}
+          </a>
+        </div>
+        <div class="p-col-fixed">
+          <img
+            class="cursor-pointer"
+            src="assets/img/ico-x.jpg"
+            (click)="clickButton($event, 'elimina_allegato', null, i, 'attachment')">
+        </div>
+      </div>
+    </div>
+    <div
+      class="p-grid m-0">
+      <button
+        id="{{button?.id}}"
+        [disabled]="!enableBox.enableButton"
+        class="box__button position-relative w-20m p-justify-center p-col"
+        (click)="clickButton($event, button.id, button.type)">
+        <span>{{ button.label | translate}}</span>
+        <i class="{{button.icon}} text-white to__right"></i>
+      </button>
+    </div>
+    <span
+      class="box__confirm"
+      [ngClass]="{'is--done': enableBox.enableHeader}">
+        <i class="pi pi-check text-white"></i>
+      </span>
+  </div>
+</div>

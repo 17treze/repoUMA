@@ -1,0 +1,74 @@
+<p-confirmDialog header="Conferma" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<div class="boxgrey f18">
+  <div class="ui-g" *ngIf="editable == false">
+    <div class="ui-g-4">
+      <strong>Data apertura domanda integrativa</strong>
+    </div>
+    <div class="ui-g-2">
+      {{premioAggregato.sostegnoDuDi.dtAperturaDomanda | date:'dd/MM/yyyy'}}
+    </div>
+    <div class="ui-g-4">
+      <strong>Data chiusura domanda integrativa</strong>
+    </div>
+    <div class="ui-g-2">{{premioAggregato.sostegnoDuDi.dtChiusuraDomanda | date:'dd/MM/yyyy'}}
+    </div>
+    <ng-template ngFor let-premio [ngForOf]="premiIntervento" let-i="index">
+      <div class="ui-g-4">
+        <strong>{{premio.intervento.misura}} - {{premio.intervento.descrizioneBreve}} -
+          {{premio.intervento.codiceAgea}}</strong>
+      </div>
+      <div class="ui-g-2">
+        {{premio.valoreUnitarioIntervento | number:'1.2-2':'it-IT'}}
+      </div>
+    </ng-template>
+
+    <div class="ui-g-12 text-right"><button pButton type="button" label="Modifica" (click)="modifica()"
+        class="btn-green" style="min-height:42px; box-shadow:none"></button></div>
+
+  </div>
+  <!-- FINE VISUALIZZAZIONE-->
+
+  <div class="ui-g" *ngIf="editable == true">
+    <div class="ui-g-4">
+      <strong>Data apertura domanda integrativa</strong>
+    </div>
+    <div class="ui-g-2">
+      <p-calendar dateFormat="dd/mm/yy" [locale]="it" [showIcon]="true"
+        [(ngModel)]="premioAggregato.sostegnoDuDi.dtAperturaDomanda">
+      </p-calendar>
+    </div>
+    <div class="ui-g-4">
+      <strong>Data chiusura domanda integrativa</strong>
+    </div>
+    <div class="ui-g-2">
+      <p-calendar dateFormat="dd/mm/yy" [locale]="it" [showIcon]="true"
+        [(ngModel)]="premioAggregato.sostegnoDuDi.dtChiusuraDomanda">
+      </p-calendar>
+    </div>
+    <form [formGroup]="updateForm" class="ui-g-12">
+      <div formArrayName="premi">
+        <div *ngFor="let premio of premiIntervento; let index = index;">
+          <div class="ui-g-4">
+            <strong>{{premio.intervento.misura}} - {{premio.intervento.descrizioneBreve}} -
+              {{premio.intervento.codiceAgea}}</strong>
+          </div>
+          <div class="ui-g-2">
+            <input type="text" pInputText [formControlName]="index" />
+            <div *ngIf="!isValid(index)" class="ui-message ui-messages-error ui-corner-all">
+              Numero non valido
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="ui-g-12 text-right">
+      <button pButton type="button" label="Salva" (click)="salva()" class="btn-green"
+        style="min-height:42px; box-shadow:none; margin-right:10px;">
+      </button>
+      <button pButton type="button" label="Annulla" (click)="annullaModifica()" class="btn-green"
+        style="min-height:42px; box-shadow:none">
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+		<ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll xmlns="http://cooperazione.sian.it/schema/interscambio/" xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/">
+	<ns1:risposta>
+	</ns1:risposta>
+	<ns1:esito>
+		<ns1:codice xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/globals">S013</ns1:codice>
+		<ns2:descrizione xmlns:ns2="http://cooperazione.sian.it/schema/interscambio/globals">Servizio non disponibile</ns2:descrizione>
+	</ns1:esito>
+</ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll>

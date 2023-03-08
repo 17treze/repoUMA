@@ -1,0 +1,160 @@
+{
+	"header": {
+		"esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+		"servizio": "Nessuna Impresa Trovata",
+		"esito": "KO"
+	},
+	"dati": {
+		"listaimprese": null,
+		"datiimpresa": {
+			"estremiimpresa": {
+				"denominazione": "TORRESANI CRISTIAN",
+				"codicefiscale": "TRRCST78B08C794X",
+				"partitaiva": "01696010220",
+				"formagiuridica": {
+					"cformagiuridica": "DI",
+					"descrizione": "IMPRESA INDIVIDUALE"
+				},
+				"datiiscrizioneri": {
+					"numerori": "TN-2001-15388",
+					"data": "20010523",
+					"sezioni": {
+						"sezione": [{
+								"csezione": "P",
+								"descrizione": "PICCOLO IMPRENDITORE",
+								"dtiscrizione": "20010523",
+								"coltdiretto": "COLTIVATORE DIRETTO"
+							}
+						]
+					}
+				},
+				"datiiscrizionerea": [{
+						"nrea": "173710",
+						"cciaa": "TN",
+						"flagsede": "SI",
+						"itrasferimentosede": null,
+						"faggiornamento": null,
+						"data": "20010509",
+						"dtultaggiornamento": "20130724",
+						"cfonte": "RI",
+						"cessazione": null
+					}
+				],
+				"elemento": null
+			},
+			"oggettosociale": null,
+			"dtfondazione": null,
+			"codiceformaammv": null,
+			"descformaammv": null,
+			"duratasocieta": null,
+			"capitali": null,
+			"capitaleinvestito": null,
+			"informazionisede": {
+				"insegna": null,
+				"indirizzo": {
+					"provincia": "TRENTO",
+					"comune": "RUMO",
+					"ccomune": "022163",
+					"toponimo": "VIA",
+					"via": "LANZA",
+					"ncivico": "25/B",
+					"cap": "38020",
+					"stato": null,
+					"frazione": null,
+					"altreindicazioni": null,
+					"stradario": null,
+					"telefono": null,
+					"fax": null,
+					"indirizzopec": "cristian.torresani@pec.agritel.it"
+				},
+				"attivita": "",
+				"infoattivita": {
+					"dtinizioattivita": "20010413",
+					"statoattivita": null
+				},
+				"codiciistat02": null,
+				"codiceatecoul": {
+					"attivitaistat": [{
+							"cattivita": "0141",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Allevamento di bovini e bufale da latte, produzione di latte crudo",
+							"cimportanza": "P",
+							"dtinizioattivita": "20010413"
+						}
+					]
+				},
+				"ruoliloc": null,
+				"datiartigiani": null,
+				"commerciodettaglio": null,
+				"cessazione": null,
+				"procedureconcorsuali": null
+			},
+			"personesede": {
+				"persona": [{
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "173710",
+							"progressivopersona": "1",
+							"progressivoloc": "0"
+						},
+						"personafisica": {
+							"cognome": "TORRESANI",
+							"nome": "CRISTIAN",
+							"sesso": "MASCHILE",
+							"estreminascita": {
+								"provincia": "TRENTO",
+								"comune": "CLES",
+								"ccomune": "022062",
+								"stato": null,
+								"data": "19780208"
+							},
+							"codicefiscale": "TRRCST78B08C794X",
+							"cittadinanza": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "RUMO",
+								"ccomune": "022163",
+								"toponimo": "VIA",
+								"via": "LANZA",
+								"ncivico": "25/B",
+								"cap": "38020",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"personagiuridica": null,
+						"cariche": {
+							"carica": [{
+									"descrizione": "TITOLARE FIRMATARIO",
+									"ccarica": "TIT",
+									"dtinizio": null,
+									"dtfine": null
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": null,
+						"elemento": "1"
+					}
+				],
+				"totale": "1"
+			},
+			"localizzazioni": []
+		},
+		"listaul": null,
+		"schedaul": null,
+		"listapersone": null,
+		"schedapersona": null,
+		"errore": {
+            "tipo": "IMP_occorrenza_0",
+            "msgerr": "NESSUNA IMPRESA TROVATA"
+        }
+	}
+}

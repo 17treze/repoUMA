@@ -1,0 +1,224 @@
+<ng-template contextConsumer contextDisposer="testContext">
+</ng-template>
+<!-- Tipo di ricerca -->
+<div *ngIf="!panelEvent.nuovaLavorazione" class="p-field" style="margin:0;">
+  <label for="tipoRicerca">Tipo Ricerca</label>
+  <select class="form-control custom-select full" [(ngModel)]="selectTipoRicerca.value" (change)="changeTipo($event)">
+    <option value="" selected>Richiesta di modifica suolo</option>
+    <option *ngIf="ruoloBackoffice || ruoloViticolo" value="Lavorazione">Lavorazioni</option>
+  </select>
+</div>
+
+<!-- Form Ricerca Richiesta di modifica suolo -->
+<fieldset *ngIf="selectTipoRicerca.value === ''">
+  <form *ngIf="!panelEvent.nuovaLavorazione" [formGroup]="searchForm" class="gis-form" (ngSubmit)="searchPost()">
+    <div class="p-field">
+      <label for="cuaa">CUAA</label>
+      <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && f.cuaa.errors }">
+        <input type="text" formControlName="cuaa" class="form-control full" maxlength="16" placeholder="CUAA" />
+      </span>
+      <!-- Show CUAA errors-->
+      <div *ngIf="submitted && f.cuaa.errors" class="form-invalid-control">
+        <div *ngIf="f.cuaa.errors.minlength">Inserire almeno 3 caratteri</div>
+        <div *ngIf="f.cuaa.errors.maxlength">Inserire massimo 16 caratteri</div>
+      </div>
+    </div>
+
+    <div class="p-field">
+      <label for="Comune">Comune catastale</label>
+      <p-autoComplete id="comuniCatastali" [(ngModel)]="selectedComune" [suggestions]="filteredComuni"
+        (completeMethod)="filterComuni($event)" field="denominazione" [minLength]="3" formControlName="comune"
+        [dropdown]="true">
+        <ng-template let-comune pTemplate="item">
+          <div class="comune-item">
+            <div>{{comune.denominazione}}</div>
+          </div>
+        </ng-template>
+      </p-autoComplete>
+    </div>
+
+    <div class="p-field">
+      <label for="Anno campagna">Anno campagna</label>
+      <select p-dropdown class="form-control custom-select full" [(ngModel)]="annoCampagna"
+        formControlName="annoCampagna">
+        <option *ngFor="let anno of anno_campagna" [ngValue]="anno.value">{{anno.label}}</option>
+      </select>
+    </div>
+
+    <div class="p-field">
+      <label for="Data inserimento">Data inserimento</label>
+      <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="dataInserimento" formControlName="dataInserimento"></p-calendar>
+    </div>
+
+    <div class="p-field">
+      <label for="Stato richiesta">Stato richiesta</label>
+      <select p-dropdown class="form-control custom-select full" [(ngModel)]="selectStatoRichiesta"
+        formControlName="statoRichiesta">
+        <option *ngFor="let tipo of statoRichiesta" [ngValue]="tipo.value">{{tipo.name}}</option>
+      </select>
+    </div>
+
+    <div class="p-field">
+      <label for="tipoRicerca">Tipo Richiesta</label>
+      <select p-dropdown class="form-control custom-select full" [(ngModel)]="selectTipoRichiesta"
+        (change)="changeTipoRichiesta($event)" formControlName="tipoRichiesta">
+        <option *ngFor="let tipo of TipoRichiesta" [ngValue]="tipo.value" [hidden]="selectTipoRichiesta == tipo.nome">
+          {{tipo.nome}}</option>
+      </select>
+    </div>
+
+    <div class="p-field">
+      <label for="idRichiesta">ID Richiesta</label>
+      <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && f.idRichiesta.errors }">
+        <input type="text" formControlName="idRichiesta" class="form-control full" placeholder="es. 847565"
+          maxlength="20" appOnlynumber />
+      </span>
+      <!-- Show IdRichiesta errors-->
+      <div *ngIf="submitted && f.idRichiesta.errors" class="form-invalid-control">
+        <div *ngIf="f.idRichiesta.errors.maxlength">Inserire massimo 20 caratteri</div>
+      </div>
+    </div>
+    <div class="p-field mgTop45">
+      <button type="submit" class="gis-button" pButton label="Cerca"></button>
+    </div>
+  </form>
+</fieldset>
+
+<!-- Form Ricerca Lavorazioni -->
+<fieldset *ngIf="selectTipoRicerca.value === 'Lavorazione'">
+  <form *ngIf="!panelEvent.nuovaLavorazione" [formGroup]="searchFormLavorazione" class="gis-form"
+    (ngSubmit)="searchLavorazioni()">
+    <div class="p-field">
+      <label for="idLavorazione">ID</label>
+      <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && ricercaLav.idLavorazione.errors }">
+        <input type="text" formControlName="idLavorazione" class="form-control full" minlength="3" maxlength="20"
+          placeholder="Id Lavorazione" appOnlynumber />
+      </span>
+      <!-- Show IdLavorazione errors-->
+      <div *ngIf="submitted && ricercaLav.idLavorazione.errors" class="form-invalid-control">
+        <div *ngIf="ricercaLav.idLavorazione.errors.minlength">Inserire almeno 3 cifre</div>
+      </div>
+    </div>
+
+    <div class="p-field">
+      <label for="titolo">Titolo</label>
+      <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && ricercaLav.titolo.errors }">
+        <input type="text" formControlName="titolo" class="form-control full" maxlength="50"
+          placeholder="Titolo Lavorazione" />
+      </span>
+      <!-- Show titolo errors-->
+      <div *ngIf="submitted && ricercaLav.titolo.errors" class="form-invalid-control">
+        <div *ngIf="ricercaLav.titolo.errors.minlength">Inserire almeno 3 caratteri</div>
+      </div>
+    </div>
+
+    <div class="p-field">
+      <label for="cuaa">CUAA</label>
+      <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && ricercaLav.cuaa.errors }">
+        <input type="text" formControlName="cuaa" class="form-control full" maxlength="16" placeholder="CUAA" />
+      </span>
+      <!-- Show CUAA errors-->
+      <div *ngIf="submitted && ricercaLav.cuaa.errors" class="form-invalid-control">
+        <div *ngIf="ricercaLav.cuaa.errors.minlength">Inserire almeno 3 caratteri</div>
+        <div *ngIf="ricercaLav.cuaa.errors.maxlength">Inserire massimo 16 caratteri</div>
+      </div>
+    </div>
+
+    <div class="p-field">
+      <label for="stato">Stato</label>
+      <p-dropdown [options]="statiLavorazione" class="custom-select" placeholder="Seleziona uno stato"
+        optionLabel="name" formControlName="statoLavorazione" id="statoLavSelect" [showClear]="true">
+      </p-dropdown>
+    </div>
+
+    <div class="p-field">
+      <label for="utentiLavorazione">Utente Lavorazione</label>
+      <p-dropdown class="custom-select" formControlName="utente" [options]="utentiLavorazione"
+        placeholder="Seleziona un utente" optionLabel="name" id="utenteLavSelect" [showClear]="true">
+      </p-dropdown>
+    </div>
+
+
+    <div class="p-field mgTop45">
+      <button type="submit" class="gis-button" pButton label="Cerca"></button>
+    </div>
+  </form>
+</fieldset>
+
+<!-- Form Nuova lavorazione -->
+<form *ngIf="panelEvent.nuovaLavorazione" [formGroup]="lavorazioneForm" class="gis-form lavorazione-form"
+  (ngSubmit)="searchPoligoniDichiarati()">
+
+  <div class="p-field">
+    <label for="idRichiesta">ID Richiesta</label>
+    <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && lav.idRichiesta.errors }">
+      <input type="text" formControlName="idRichiesta" class="form-control full" placeholder="es. 847565" maxlength="20"
+        appOnlynumber />
+    </span>
+    <!-- Show IdRichiesta errors-->
+    <div *ngIf="submitted && lav.idRichiesta.errors" class="form-invalid-control">
+      <div *ngIf="lav.idRichiesta.errors.maxlength">Inserire massimo 20 caratteri</div>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="cuaa">CUAA</label>
+    <span class="p-input-icon-left" [ngClass]="{ 'is-invalid': submitted && lav.cuaa.errors }">
+      <input type="text" formControlName="cuaa" class="form-control full" maxlength="16" placeholder="CUAA" />
+    </span>
+    <!-- Show CUAA errors-->
+    <div *ngIf="submitted && lav.cuaa.errors" class="form-invalid-control">
+      <div *ngIf="lav.cuaa.errors.minlength">Inserire almeno 3 caratteri</div>
+      <div *ngIf="lav.cuaa.errors.maxlength">Inserire massimo 16 caratteri</div>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="Comune">Comune catastale</label>
+    <p-autoComplete [(ngModel)]="selectedComune" [suggestions]="filteredComuni" (completeMethod)="filterComuni($event)"
+      field="denominazione" [minLength]="3" formControlName="comune" [dropdown]="true">
+      <ng-template let-comune pTemplate="item">
+        <div class="comune-item">
+          <div>{{comune.denominazione}}</div>
+        </div>
+      </ng-template>
+    </p-autoComplete>
+  </div>
+
+  <div class="p-field">
+    <label for="TAG Dichiarato">TAG Dichiarato</label>
+    <select p-dropdown class="form-control custom-select full" [(ngModel)]="selectTagDichiarato"
+      formControlName="tagDichiarato">
+      <option *ngFor="let tipo of tagDichiarato" [ngValue]="tipo.value">{{tipo.name}}</option>
+    </select>
+  </div>
+
+  <div class="p-field">
+    <label for="TAG Rilevato">TAG Rilevato</label>
+    <select p-dropdown class="form-control custom-select full" [(ngModel)]="selectTagRilevato"
+      formControlName="tagRilevato">
+      <option *ngFor="let tipo of tagRilevato" [ngValue]="tipo.value">{{tipo.name}}</option>
+    </select>
+  </div>
+
+   <div class="p-field">
+        <label for="Visibile da Ortofoto">Visibile da Ortofoto</label>
+        <select
+            p-dropdown
+            class="form-control custom-select full"
+            [(ngModel)]="visibileOrtofoto"
+            formControlName="visibileOrtofoto"
+        >
+            <option
+                *ngFor="let valore of visibile_ortofoto"
+                [ngValue]="valore.value"
+            >
+                {{ valore.label }}
+            </option>
+        </select>
+    </div>
+
+  <div class="p-field" *ngIf="!lavorazioniEvent.readOnly">
+    <button type="submit" class="gis-button mgBot15 fixBtn" pButton label="Cerca"></button>
+  </div>
+</form>

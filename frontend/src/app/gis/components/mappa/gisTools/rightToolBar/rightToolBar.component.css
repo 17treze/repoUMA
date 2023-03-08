@@ -1,0 +1,39 @@
+@import url('./../../../../../../../node_modules/@fortawesome/fontawesome-free/css/all.min.css');
+.pattern-right-menu {
+    background: #ffffffde;
+    min-width: 54px;
+    max-width: 54px;
+    height: 150vh;
+    z-index: 1000;
+    position: absolute;
+    right: 0;
+    /*top: 45px;*/
+    box-shadow: 0 0 4px 1px #212529;
+}
+
+div#right-menu-gis {
+    float: right;
+}
+
+#right-menu-gis div button {
+    color: #00985b;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #ffffff54;
+    font-size: 25px;
+    width: 100%;
+}
+
+#right-menu-gis div button:focus {
+    outline: none;
+}
+
+.ol-layerswitcher button:after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f5fd"!important;
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    color: #00985b;
+}

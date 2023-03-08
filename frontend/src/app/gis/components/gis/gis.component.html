@@ -1,0 +1,31 @@
+<div class="maps-container ui-grid" style="zoom:1;height: 100%;" [ngStyle]="{'height': getHeight}">
+    <div id="sidebar-gis">
+        <gis-sidebar></gis-sidebar>
+    </div>
+    <div id="right-toolbar-gis">
+        <gis-rightToolBar></gis-rightToolBar>
+    </div>
+    <div id="map-gis">
+        <gis-mappa
+            class="map"
+            #mapsContent
+            [center]="[669426.43,5100596.95]"
+            [zoom]="14"
+            (mapReady)="onMapReady($event)"
+            (mousedown)="onMouseDown($event)"
+        >
+            <gis-layer [profiloUtente]="profiloUtente">
+            </gis-layer>
+            <gis-dragPan></gis-dragPan>
+            <gis-dragZoom></gis-dragZoom>
+        </gis-mappa>
+    </div>
+    <div id="bottombar">
+        <gis-bottombar></gis-bottombar>
+    </div>
+</div> 
+
+
+<div class="loading-indicator" *ngIf="panelEvent.bufferSpinnerLoading.length>0">
+    <p-progressSpinner id="progressSpinner" [style]="{width: '65px', height: '65px', top: '50%',left: '50%'}" strokeWidth="6" fill="transparent"></p-progressSpinner>       
+</div>

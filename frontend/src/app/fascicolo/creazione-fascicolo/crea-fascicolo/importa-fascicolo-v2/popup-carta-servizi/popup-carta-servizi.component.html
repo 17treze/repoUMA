@@ -1,0 +1,91 @@
+<p-dialog
+  width="560"
+  [(visible)]="popupVisibile"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="false"
+>
+  <p-toast key="tstPopup" [style]="{ marginTop: '70px' }"></p-toast>
+  <p-header *ngIf="showTipologia">
+    {{ "NuovoFascicolo.ALLEGA_TIPO_DOCUMENTO" | translate }}
+  </p-header>
+  <p-header *ngIf="!showTipologia">
+    {{ "NuovoFascicolo.ALLEGA_CARTASERVIZI" | translate }}
+  </p-header>
+  <form [formGroup]="allegaDocumento">
+    <!-- <div class="ui-g-12 text-left" *ngIf="!_popupVisibile">
+        <label class="labelricerca">{{ 'NuovoFascicolo.TIPO_DOCUMENTO' | translate }}</label>
+        <p-dropdown [options]="tipoDocumento" formControlName="selectedTipoDocumento" 
+          name="selectedTipoDocumento" visible="false" 
+          [(ngModel)]="selectedTipo" placeholder="{{'NuovoFascicolo.SELEZIONA' | translate}}" (click)="sceltaTipologia()"></p-dropdown>
+      </div> -->
+
+    <div *ngIf="showTipologia" class="boxgrey">
+      <label for="tipologiaDoc" class="h6">{{ 'NuovoFascicolo.TIPO_DOCUMENTO' | translate }}</label>
+      <input
+        type="text"
+        name="tipologiaDoc"
+        formControlName="tipologiaDocumento"
+        style="border: 1px solid #323232"
+        [(ngModel)]="tipologiaDocumento"
+        placeholder="{{
+          'NuovoFascicolo.DESCRIZIONE_TIPO_DOCUMENTO' | translate
+        }}"
+        pInputText
+        maxlength="100"
+        class="bg-white d-block w-100"
+      />
+    </div>
+
+    <div *ngIf="tipoDaCaricare > 0">
+      <div *ngIf="!fileCaricato">
+        <button
+          pButton
+          type="button"
+          [disabled]="
+            tipoDaCaricare == 2 &&
+            (allegaDocumento.controls.tipologiaDocumento.value ==
+              stringaVuota ||
+              allegaDocumento.controls.tipologiaDocumento.value == null)
+          "
+          label="{{ 'NuovoFascicolo.SFOGLIA' | translate }}"
+          (click)="uploadCartaServizi()"
+          class="btn btn-green"
+        ></button>
+      </div>
+      <input
+        type="file"
+        #fileDaPopup
+        id="fileDaPopup"
+        name="fileDaPopup"
+        onclick="this.value = null"
+        (change)="onFileChange($event)"
+        accept="{{ fileExt }}"
+        class="inputUploadFile"
+        style="display: none"
+      />
+      <h6
+        *ngIf="fileCaricato"
+        class="text-confirm"
+        style="padding: 0 !important"
+      >
+        <span>{{ nomeFileCaricato }} </span
+        ><img src="assets/img/ico-x.jpg" (click)="eliminaAllegato()" />
+      </h6>
+    </div>
+
+    <div class="ui-g-6 text-right" ></div>
+  </form>
+  <hr />
+  <div class="d-flex align-items-center justify-content-between">
+    <button (click)="annulla()" class="btn text-lowercase px-0">
+      {{ "NuovoFascicolo.ANNULLA" | translate }}
+    </button>
+    <button
+      *ngIf="fileCaricato"
+      (click)="conferma()"
+      class="btn btn-green"
+    >{{ 'NuovoFascicolo.CONFERMA' | translate }}</button>
+  </div>
+</p-dialog>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<istanzeonline>
+    <serviceprovider value="A4G">
+        <oraautenticazione>17:56</oraautenticazione>
+        <numerocertificato>427398</numerocertificato>
+        <nome>MASSIMO</nome>
+        <moduloId>documento</moduloId>
+        <hashcertificato>37847683</hashcertificato>
+        <datascadenzacertificato>29062022</datascadenzacertificato>
+        <datarilasciocertificato>30062016</datarilasciocertificato>
+        <dataautenticazione>01/09/2020</dataautenticazione>
+        <cognome>NASCIVERA</cognome>
+        <codicefiscale>NSCMSM74A22H612G</codicefiscale>
+        <certificationauthority>CN=Provincia autonoma Trento - CA Cittadini, OU=Servizi di Certificazione, O=Actalis S.p.A., C=IT</certificationauthority>
+        <sicurezza>5vhTM61Cx/TYatr7fX7jJ08n6x/zTOWwS7a/o4ksROaIHh/XqbgdtKwQZ4dmLAjI</sicurezza>
+        <autenticationmethod>SMARTCARD</autenticationmethod>
+        <hashdati>ebd7ec53f8e11eb9e88bd7e14cd9d2be0fe5435bf248b1cf6bfa2a1730e32af0</hashdati>
+        <hashdocumento>ebd7ec53f8e11eb9e88bd7e14cd9d2be0fe5435bf248b1cf6bfa2a1730e32af0</hashdocumento>
+    </serviceprovider>
+</istanzeonline>

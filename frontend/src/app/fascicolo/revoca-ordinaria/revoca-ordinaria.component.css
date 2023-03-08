@@ -1,0 +1,38 @@
+.square-box-small {
+  background-color: #eaeaea;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  min-height: 390px;
+  cursor: pointer;
+  color: #125f40 !important;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 10px;
+  line-height: 24px !important;
+}
+
+.square-box-small img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.text-confirm {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--popup-box-blue);
+}
+
+.inputUploadFile {
+  width: 80px !important;
+}
+
+.no-text-transform {
+  text-transform: none;
+}

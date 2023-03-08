@@ -1,0 +1,38 @@
+@import '../../../uma.index.style.scss';
+
+:host {
+  th {
+    color: $black;
+  }
+
+  .table-container {
+    height: 27em;
+    max-height: 27em;
+    overflow: auto;
+  }
+
+  .icon-button-square {
+    background-color: $primaryColor !important;
+    border-radius: unset;
+    height: 5em !important;
+    width: 5em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+  }
+
+  ::ng-deep .ui-widget-header {
+    border: unset !important;
+  }
+
+  ::ng-deep p-message.extended {
+    .ui-message.ui-message-error {
+      width: 33em;
+      margin: 0;
+    }
+  }
+}

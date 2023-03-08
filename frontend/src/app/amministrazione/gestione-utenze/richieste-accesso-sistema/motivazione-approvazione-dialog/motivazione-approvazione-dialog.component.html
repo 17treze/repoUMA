@@ -1,0 +1,55 @@
+<div id="confirm" *ngIf="richiestaAccessoCorrente">
+  <p-dialog #dialog [(visible)]="display" width="710" modal="true" appendTo="body" closable="true"
+    closeOnEscape="true" [contentStyle]="{'overflow':'auto','max-height':'750px'}">
+    <form [formGroup]="domandaApprovataGroup">
+      <div class="ui-g-12">
+          <h3>{{ 'RICHIESTE_ACCESSO.DOMANDA_APPROVATA' | translate }}</h3>
+      </div>
+      <div class="ui-g-12">
+            <h6>Domanda di
+                <strong>
+                    {{ richiestaAccessoCorrente.datiAnagrafici.nome.toUpperCase() }}
+                    {{ richiestaAccessoCorrente.datiAnagrafici.cognome.toUpperCase() }}
+                </strong>
+                (Prot. {{ richiestaAccessoCorrente.idProtocollo }} del {{ richiestaAccessoCorrente.dataProtocollazione | date : 'dd/MM/yyyy' }}
+                <strong>
+                    approvata
+                </strong>
+                    in data {{ richiestaAccessoCorrente.dataApprovazione | date : 'dd/MM/yyyy' }})
+            </h6>
+          <div class="boxgrey  p-3  mb-3">
+            <h6 class="mb-3"><strong>{{ 'RICHIESTE_ACCESSO.LABEL_MAIL' | translate }}</strong></h6>
+             <textarea rows="10" cols="30" pInputTextarea id="mail" type="text" formControlName="testoMail" style="width: -webkit-fill-available"
+               autoResize="true" readonly>
+             </textarea>
+          </div>
+          <div class="boxgrey  p-3  mb-3">
+            <h6 class="mb-3"><strong>Note</strong></h6>
+             <textarea pInputTextarea id="note" type="text" formControlName="note" style="width: -webkit-fill-available"
+               autoResize="true" readonly>
+             </textarea>
+          </div>
+      </div>
+      <div class="ui-g-7">
+          <b>{{ 'RICHIESTE_ACCESSO.COMUNICA_CREDENZIALI' | translate }}</b>
+      </div>
+      <div class="ui-g-5">
+          <img
+                src="assets/img/icons/phone.png"
+                alt="phone"
+                tooltipPosition="left"
+                tooltipStyleClass="tooltip--white"
+                class="mx-2" />
+                {{ richiestaAccessoCorrente.datiAnagrafici.telefono }}
+      </div>
+      <!--<div class="ui-g-12">
+          <p-checkbox name="conferma" label="{{ 'RICHIESTE_ACCESSO.CONFERMA_COMUNICAZIONE' | translate }}"></p-checkbox>
+      </div>-->
+      <div class="ui-g-12">
+          <div class="next-button">
+              <button pButton type="button" label="{{ 'chiudi' | translate }}" class="annulla" (click)="onClose()"></button>
+          </div>
+      </div>
+      </form>
+  </p-dialog>
+</div>

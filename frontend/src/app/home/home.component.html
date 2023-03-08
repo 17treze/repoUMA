@@ -1,0 +1,42 @@
+<div class="ui-g ui-fluid">
+
+  <div class="top-home">
+    <div class="ui-grid-fixed">
+      <h4>Benvenuto {{utente?.identificativo}}, sei autorizzato ai seguenti applicativi, seleziona come vuoi procedere</h4>
+    </div>
+  </div>
+
+  <div class="ui-grid-fixed">
+    <div class="ui-g-12 boxlanding">
+      <div class="ui-g-4">
+        <div class="card ">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/misure_strutturali.png" />
+            <h4>SRTrento - Misure strutturali</h4>
+          </div>
+          <p-panelMenu class="cardcollapse" [model]="srTrentoMenu"></p-panelMenu>
+        </div>
+      </div>
+
+      <div class="ui-g-4">
+        <div class="card ">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/nuovo_sistema.png" />
+            <h4>A4G - Nuovo Sistema Informativo Agricoltura</h4>
+          </div>
+          <p-panelMenu [model]="a4GItems" *ngIf="a4GItems"></p-panelMenu>
+          <p-messages [(value)]="msgs"></p-messages>
+        </div>
+      </div>
+      <div class="ui-g-4">
+        <div class="card ">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/sistema_informativo.png" />
+            <h4>SIAP - Sistema Informativo Agricoltura</h4>
+          </div>
+          <p-panelMenu class="cardcollapse" [model]="agsItems"></p-panelMenu>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

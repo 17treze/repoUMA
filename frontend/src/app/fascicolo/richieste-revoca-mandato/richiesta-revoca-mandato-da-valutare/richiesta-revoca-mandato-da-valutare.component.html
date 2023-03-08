@@ -1,0 +1,130 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+
+<div *ngIf="richiestePresenti">
+  <div *ngFor="let richiesta of richiesteDaValutare">
+    <div
+      class="boxgrey"
+      style="display: inline-block">
+      <div class="d-flex  align-items-center  mb-3">
+        <h3 class="mr-auto  mb-0 pb-0">{{ richiesta.denominazioneAzienda }}</h3>
+      </div>
+
+      <div class="row  row--edit">
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75"><strong>{{ 'RICHIESTA_REVOCA_IMMEDIATA.CUAA' | translate }}</strong></span>
+          <span class="mr-auto  w-75">{{ richiesta.cuaa }}</span>
+        </div>
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75"><strong>{{ 'RICHIESTA_REVOCA_IMMEDIATA.SEDE_AMMINISTRATIVA' | translate }}</strong></span>
+          <span class="mr-auto  w-75">{{ richiesta.denominazioneSedeAmministrativaCaa }}</span>
+        </div>
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75"><strong>{{ 'RICHIESTA_REVOCA_IMMEDIATA.DATA_RICHIESTA' | translate }}</strong></span>
+          <span class="mr-auto  w-75">{{ richiesta.dataSottoscrizione | date : 'dd/MM/yyyy' }}</span>
+        </div>
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75"><strong>{{ 'RICHIESTA_REVOCA_IMMEDIATA.SEDE_SPORTELLO' | translate }}</strong></span>
+          <span class="mr-auto  w-75">{{ richiesta.denominazioneSportelloCaa }}</span>
+        </div>
+        <div
+          class="col-12  d-flex  align-items-center"
+          *ngIf="richiesta.causaRichiesta">
+          <span class="mr-auto  w-75"><strong>{{ 'RICHIESTA_REVOCA_IMMEDIATA.CAUSA_REVOCA' | translate }}</strong></span>
+          <span class="mr-auto  w-75">{{ richiesta.causaRichiesta }}</span>
+        </div>
+      </div>
+      <HR>
+      <div class="ui-g-8">
+        <h5><strong>
+        <img
+              class="box__icon"
+              (click)="scaricaRevocaImmediata(richiesta.idProtocollo)"
+              src="assets/img/icons/icon-download.png">
+        <a
+              [routerLink]
+              (click)="scaricaRevocaImmediata(richiesta.idProtocollo)"
+              style="text-decoration: none">
+              {{ 'RICHIESTA_REVOCA_IMMEDIATA.DESC_SCARICA_DOC_REVOCA' | translate }}
+            </a></strong></h5>
+      </div>
+      <div
+        class="ui-g-2"
+        style="text-align: right;">
+        <button
+          pButton
+          icon="ui-icon-block"
+          style="background-color: red"
+          label="{{ 'RICHIESTA_REVOCA_IMMEDIATA.RIFIUTA' | translate }}"
+          (click)="showDialog(richiesta)"
+          pButton>
+        </button>
+      </div>
+      <div
+        class="ui-g-2"
+        style="text-align: right;">
+        <button
+          pButton
+          icon="ui-icon-done"
+          type="button"
+          label="{{ 'RICHIESTA_REVOCA_IMMEDIATA.ACCETTA' | translate }}"
+          (click)="accettaRichiesta(richiesta.cuaa)"
+          pButton>
+        </button>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+
+<div *ngIf="!richiestePresenti">
+  <div
+    class="boxgrey"
+    style="display: inline-block">
+    <div class="d-flex  align-items-center  mb-3">
+      <h3 class="mr-auto  mb-0 pb-0">{{ "RICHIESTA_REVOCA_IMMEDIATA.NESSUNA_REVOCA_DA_VALUTARE" | translate }}</h3>
+    </div>
+  </div>
+</div>
+
+<app-richiesta-revoca-mandato-rifiuto-dialog
+  #rifiutoDialog
+  (displayChange)="onDialogClose($event)">
+</app-richiesta-revoca-mandato-rifiuto-dialog>
+
+<p-toast
+  position="center"
+  key="accettaRichiestaRevocaImmediata"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confermaRevoca()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="annulla()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

@@ -1,0 +1,2912 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="ANAGRAFICA_22.0" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+				START WITH 1
+				MAXVALUE 999999999999999999999999999
+				MINVALUE 1
+				NOCYCLE
+				NOCACHE
+				ORDER;
+			
+			CREATE TABLE A4GT_LOGGING (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				UTENTE ${string.type}(500 CHAR) NOT NULL,
+				TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+				TABELLA ${string.type}(4000) NOT NULL,
+				ID_ENTITA NUMBER(19) NOT NULL,
+				DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+				CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		GRANT SELECT ON NXTNBR TO ${user.writer};
+		GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.1" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_SOGGETTO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_SOGGETTO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="IDENTIFICATIVO" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="IDENTIFICATIVO" tableName="A4GT_SOGGETTO" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_SOGGETTO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_SOGGETTO TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.2" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_SPORTELLO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_SPORTELLO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_SOGGETTO_CAA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_SPORTELLO_SOGGETTO" referencedTableName="A4GT_SOGGETTO" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="ID_SPORTELLO_AGS" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="ID_SPORTELLO_AGS" tableName="A4GT_SPORTELLO" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_SPORTELLO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_SPORTELLO TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.3" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_FASCICOLO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_FASCICOLO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_SOGGETTO_IMPRESA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FASCICOLO_SOGGETTO" referencedTableName="A4GT_SOGGETTO" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO_VALIDITA" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE_VALIDITA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_FASCICOLO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_FASCICOLO TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.4" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_MANDATO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_MANDATO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_SPORTELLO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_MANDATO_SPORTELLO" referencedTableName="A4GT_SPORTELLO" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="CONTRATTO" type="BLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROTOCOLLO" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="PROTOCOLLO" tableName="A4GT_MANDATO" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_MANDATO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_MANDATO TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.5" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_DETENZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_DETENZIONE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="ID_SOGGETTO_DETENTORE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_DETENZIONE_SOGGETTO" referencedTableName="A4GT_SOGGETTO" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="ID_FASCICOLO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_DETENZIONE_FASCICOLO" referencedTableName="A4GT_FASCICOLO" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="ID_MANDATO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_DETENZIONE_MANDATO" referencedTableName="A4GT_MANDATO" referencedColumnNames="ID" nullable="false" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DETENZIONE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_DETENZIONE TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.6" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_SOGGETTO">
+			<column name="DENOMINAZIONE" type="${string.type}(100)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.7" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'00337460224','APPAG - PROVINCIA AUTONOMA DI TRENTO');
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'01896970223','CAA COOPTN - SEDE');
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'01904670229','CENTRO ASSISTENZA COLDIRETTI DEL TRENTINO SRL');
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'07343031006','CAA ACLI SRL');
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'05804771003','CAA CIA SRL');
+			Insert into A4GT_SOGGETTO (ID,VERSIONE,IDENTIFICATIVO,DENOMINAZIONE) values (NXTNBR.nextval,0,'01159210226','AGRICOLTURA TRENTINA SERVIZI SRL');
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.8" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_SPORTELLO">
+			<column name="DENOMINAZIONE" type="${string.type}(100)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_22.9" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,3,'CAA COLDIRETTI DEL TRENTINO - 001',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,4,'CAA COLDIRETTI DEL TRENTINO - 003',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,5,'CAA COLDIRETTI DEL TRENTINO - 004',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,6,'CAA COLDIRETTI DEL TRENTINO - 005',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,7,'CAA COLDIRETTI DEL TRENTINO - 006',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,8,'CAA COLDIRETTI DEL TRENTINO - 007',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,9,'CAA COLDIRETTI DEL TRENTINO - 008',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,10,'CAA COLDIRETTI DEL TRENTINO - 009',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,11,'CAA COLDIRETTI DEL TRENTINO - 010',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,12,'CAA COLDIRETTI DEL TRENTINO - 011',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,13,'CAA ACLI - TRENTO - 001',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '07343031006'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,14,'CAA ACLI - TRENTO - 002',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '07343031006'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,16,'CAA ACLI - TRENTO - 004',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '07343031006'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,17,'CAA ACLI - TRENTO - 005',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '07343031006'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,18,'CAA CIA - TRENTO - 001',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '05804771003'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,19,'CAA CIA - CLES - 002',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '05804771003'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,20,'CAA ATS - 001 - TRENTO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01159210226'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,21,'UFFICIO DI TEST',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '00337460224'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,23,'ENTE ISTRUTTORE TRENTO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '00337460224'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,55,'CAA ATS - 003 - CLES',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01159210226'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,56,'CAA ATS - 004 - MEZZOLOMBARDO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01159210226'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,57,'CAA ATS - 005 - ROVERETO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01159210226'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,89,'CAA COOPTN - CS - ALA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,90,'CAA COOPTN - CS - ALDENO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,91,'CAA COOPTN - CS - AVIO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,92,'CAA COOPTN - CS - GROPPELLO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,93,'CAA COOPTN - CS - LAVIS',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,94,'CAA COOPTN - CS - TRENTO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,95,'CAA COOPTN - CS - LIPROVIT',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,96,'CAA COOPTN - CS - MEZZACORONA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,97,'CAA COOPTN - CS - MEZZOLOMBARDO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,98,'CAA COOPTN - CS - MORI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,99,'CAA COOPTN - CS - NOMI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,100,'CAA COOPTN - CS - ROVERE''',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,101,'CAA COOPTN - CS - RIVA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,102,'CAA COOPTN - CS - SAV',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,103,'CAA CIA - BORGO VALSUGANA - 003',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '05804771003'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,104,'CAA COOPTN - CS - ISERA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,105,'CAA COOPTN - CS - TOBLINO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,140,'CAA COOPTN - CP - FERRARI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,141,'CAA COOPTN - CP - POJER',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,142,'CAA COOPTN - CP - BOLOGNANI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,143,'CAA COOPTN - CP - SPAGNOLLI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,252,'CAA COOPTN - CP - BAZZANELLA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,266,'CAA COOPTN - CP - PISONI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,273,'CAA COOPTN - CP - TENUTE LUNELLI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,668,'CAA COLDIRETTI DEL TRENTINO - 012',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01904670229'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,686,'CAA COOPTN - CP - DORIGATI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,764,'CAA CIA - ROVERETO - 004',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '05804771003'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,766,'CAA COOPTN - CP - MONFORT',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,777,'CAA COOPTN - CP - BAILONI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,778,'CAA ACLI - TRENTO - 006',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '07343031006'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1000,'CAA COOPTN - CP - VALLAGARINA CONC',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1003,'CAA COOPTN - MF - AGRINOVANTA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1004,'CAA COOPTN - MF - AVN',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1005,'CAA COOPTN - MF - CF CLES',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1006,'CAA COOPTN - MF - COBA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1007,'CAA COOPTN - MF - COBAV',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1008,'CAA COOPTN - MF - COCEA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1009,'CAA COOPTN - MF - COFAV',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1010,'CAA COOPTN - MF - COFSAC',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1011,'CAA COOPTN - MF - COL',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1012,'CAA COOPTN - MF - CONTA''',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1013,'CAA COOPTN - MF - COPAG',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1014,'CAA COOPTN - MF - FAT',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1015,'CAA COOPTN - MF - LEVICOFRUTTA - COVAL',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1016,'CAA COOPTN - MF - MONDOAGRICOLO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1017,'CAA COOPTN - MF - SABAC',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1018,'CAA COOPTN - MF - SANT''ORSOLA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1019,'CAA COOPTN - MF - SARC',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1020,'CAA COOPTN - MF - SCAF',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1021,'CAA COOPTN - MF - SFC',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1022,'CAA COOPTN - MF - SFT',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1023,'CAA COOPTN - MF - TERZA SPONDA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1024,'CAA COOPTN - MF - UF COREDO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1025,'CAA COOPTN - MF - UF RALLO',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1026,'CAA COOPTN - MF - UNIFRUTTA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1027,'CAA COOPTN - MF - VAL DI GRESTA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1028,'CAA COOPTN - MF - 5 COMUNI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1029,'CAA COOPTN - MF - VALLI DEL SARCA',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1037,'CAA COOPTN - CP - ENDRIZZI',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_SOGGETTO_CAA) VALUES (NXTNBR.nextval,0,1445,'CAA COOPTN - MF - CASA ',(SELECT ID FROM A4GT_SOGGETTO WHERE IDENTIFICATIVO = '01896970223'));
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.0" author="Antonio Trombetta">
+		<dropColumn tableName="A4GT_MANDATO" columnName="PROTOCOLLO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.0" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_MANDATO">
+			<column name="ID_DETENZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_MANDATO_DETENZIONE" referencedTableName="A4GT_DETENZIONE" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.1" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_MANDATO m
+			SET m.ID_DETENZIONE = (SELECT d.ID FROM A4GT_DETENZIONE d WHERE d.ID_MANDATO = m.ID);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.2" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_DETENZIONE">
+			<column name="ID_MANDATO" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.3" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_MANDATO" columnName="ID_DETENZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.4" author="Antonio Trombetta">
+		<addColumn tableName="A4GT_SPORTELLO">
+			<column name="COMUNE" type="${string.type}(100)"></column>
+		</addColumn>
+		<addColumn tableName="A4GT_SOGGETTO">
+			<column name="PARTITA_IVA" type="${string.type}(11)"></column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_SOGGETTO RENAME TO A4GT_PERSONA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.5" author="Antonio Trombetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 3;
+			UPDATE a4gt_sportello SET comune = 'CLES' WHERE id_sportello_ags = 4;
+			UPDATE a4gt_sportello SET comune = 'TIONE DI TRENTO' WHERE id_sportello_ags = 5;
+			UPDATE a4gt_sportello SET comune = 'ROVERETO' WHERE id_sportello_ags = 6;
+			UPDATE a4gt_sportello SET comune = 'ARCO' WHERE id_sportello_ags = 7;
+			UPDATE a4gt_sportello SET comune = 'BORGO VALSUGANA' WHERE id_sportello_ags = 8;
+			UPDATE a4gt_sportello SET comune = 'TESERO' WHERE id_sportello_ags = 9;
+			UPDATE a4gt_sportello SET comune = 'MALE''' WHERE id_sportello_ags = 10;
+			UPDATE a4gt_sportello SET comune = 'PERGINE VALSUGANA' WHERE id_sportello_ags = 11;
+			UPDATE a4gt_sportello SET comune = 'MEZZOLOMBARDO' WHERE id_sportello_ags = 12;
+			UPDATE a4gt_sportello SET comune = 'CLES' WHERE id_sportello_ags = 13;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 14;
+			UPDATE a4gt_sportello SET comune = 'ROVERETO' WHERE id_sportello_ags = 16;
+			UPDATE a4gt_sportello SET comune = 'MEZZOLOMBARDO' WHERE id_sportello_ags = 17;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 18;
+			UPDATE a4gt_sportello SET comune = 'CLES' WHERE id_sportello_ags = 19;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 20;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 21;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 23;
+			UPDATE a4gt_sportello SET comune = 'CLES' WHERE id_sportello_ags = 55;
+			UPDATE a4gt_sportello SET comune = 'MEZZOLOMBARDO' WHERE id_sportello_ags = 56;
+			UPDATE a4gt_sportello SET comune = 'ROVERETO' WHERE id_sportello_ags = 57;
+			UPDATE a4gt_sportello SET comune = 'ALA' WHERE id_sportello_ags = 89;
+			UPDATE a4gt_sportello SET comune = 'ALDENO' WHERE id_sportello_ags = 90;
+			UPDATE a4gt_sportello SET comune = 'AVIO' WHERE id_sportello_ags = 91;
+			UPDATE a4gt_sportello SET comune = 'REVO`' WHERE id_sportello_ags = 92;
+			UPDATE a4gt_sportello SET comune = 'LAVIS' WHERE id_sportello_ags = 93;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 94;
+			UPDATE a4gt_sportello SET comune = 'ROVERE` DELLA LUNA' WHERE id_sportello_ags = 95;
+			UPDATE a4gt_sportello SET comune = 'MEZZOCORONA' WHERE id_sportello_ags = 96;
+			UPDATE a4gt_sportello SET comune = 'MEZZOLOMBARDO' WHERE id_sportello_ags = 97;
+			UPDATE a4gt_sportello SET comune = 'MORI' WHERE id_sportello_ags = 98;
+			UPDATE a4gt_sportello SET comune = 'NOMI' WHERE id_sportello_ags = 99;
+			UPDATE a4gt_sportello SET comune = 'ROVERE` DELLA LUNA' WHERE id_sportello_ags = 100;
+			UPDATE a4gt_sportello SET comune = 'RIVA DEL GARDA' WHERE id_sportello_ags = 101;
+			UPDATE a4gt_sportello SET comune = 'ROVERETO' WHERE id_sportello_ags = 102;
+			UPDATE a4gt_sportello SET comune = 'BORGO VALSUGANA' WHERE id_sportello_ags = 103;
+			UPDATE a4gt_sportello SET comune = 'ISERA' WHERE id_sportello_ags = 104;
+			UPDATE a4gt_sportello SET comune = 'CALAVINO' WHERE id_sportello_ags = 105;
+			UPDATE a4gt_sportello SET comune = 'TRENTO - TRENTO' WHERE id_sportello_ags = 140;
+			UPDATE a4gt_sportello SET comune = 'FAEDO' WHERE id_sportello_ags = 141;
+			UPDATE a4gt_sportello SET comune = 'LAVIS' WHERE id_sportello_ags = 142;
+			UPDATE a4gt_sportello SET comune = 'ISERA' WHERE id_sportello_ags = 143;
+			UPDATE a4gt_sportello SET comune = 'ALA - CHIZZOLA' WHERE id_sportello_ags = 252;
+			UPDATE a4gt_sportello SET comune = 'LASINO' WHERE id_sportello_ags = 266;
+			UPDATE a4gt_sportello SET comune = 'TRENTO - TRENTO' WHERE id_sportello_ags = 273;
+			UPDATE a4gt_sportello SET comune = 'LEVICO TERME' WHERE id_sportello_ags = 668;
+			UPDATE a4gt_sportello SET comune = 'MEZZOCORONA' WHERE id_sportello_ags = 686;
+			UPDATE a4gt_sportello SET comune = 'ROVERETO' WHERE id_sportello_ags = 764;
+			UPDATE a4gt_sportello SET comune = 'LAVIS' WHERE id_sportello_ags = 766;
+			UPDATE a4gt_sportello SET comune = 'TRENTO - RAVINA' WHERE id_sportello_ags = 777;
+			UPDATE a4gt_sportello SET comune = 'BORGO VALSUGANA' WHERE id_sportello_ags = 778;
+			UPDATE a4gt_sportello SET comune = 'ALA - CHIZZOLA' WHERE id_sportello_ags = 1000;
+			UPDATE a4gt_sportello SET comune = 'STORO' WHERE id_sportello_ags = 1003;
+			UPDATE a4gt_sportello SET comune = 'SANZENO' WHERE id_sportello_ags = 1004;
+			UPDATE a4gt_sportello SET comune = 'CLES' WHERE id_sportello_ags = 1005;
+			UPDATE a4gt_sportello SET comune = 'DENNO' WHERE id_sportello_ags = 1006;
+			UPDATE a4gt_sportello SET comune = 'VILLA AGNEDO' WHERE id_sportello_ags = 1007;
+			UPDATE a4gt_sportello SET comune = 'TAIO' WHERE id_sportello_ags = 1008;
+			UPDATE a4gt_sportello SET comune = 'CALDONAZZO' WHERE id_sportello_ags = 1009;
+			UPDATE a4gt_sportello SET comune = 'CALDES' WHERE id_sportello_ags = 1010;
+			UPDATE a4gt_sportello SET comune = 'SPORMINORE' WHERE id_sportello_ags = 1011;
+			UPDATE a4gt_sportello SET comune = 'CUNEVO' WHERE id_sportello_ags = 1012;
+			UPDATE a4gt_sportello SET comune = 'COMANO TERME - DASINDO' WHERE id_sportello_ags = 1013;
+			UPDATE a4gt_sportello SET comune = 'TUENNO' WHERE id_sportello_ags = 1014;
+			UPDATE a4gt_sportello SET comune = 'LEVICO TERME' WHERE id_sportello_ags = 1015;
+			UPDATE a4gt_sportello SET comune = 'CALAVINO' WHERE id_sportello_ags = 1016;
+			UPDATE a4gt_sportello SET comune = 'BREZ' WHERE id_sportello_ags = 1017;
+			UPDATE a4gt_sportello SET comune = 'PERGINE VALSUGANA' WHERE id_sportello_ags = 1018;
+			UPDATE a4gt_sportello SET comune = 'TASSULLO' WHERE id_sportello_ags = 1019;
+			UPDATE a4gt_sportello SET comune = 'LIVO' WHERE id_sportello_ags = 1020;
+			UPDATE a4gt_sportello SET comune = 'CAMPODENNO' WHERE id_sportello_ags = 1021;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 1022;
+			UPDATE a4gt_sportello SET comune = 'REVO`' WHERE id_sportello_ags = 1023;
+			UPDATE a4gt_sportello SET comune = 'COREDO' WHERE id_sportello_ags = 1024;
+			UPDATE a4gt_sportello SET comune = 'TASSULLO' WHERE id_sportello_ags = 1025;
+			UPDATE a4gt_sportello SET comune = 'NANNO' WHERE id_sportello_ags = 1026;
+			UPDATE a4gt_sportello SET comune = 'RONZO-CHIENIS' WHERE id_sportello_ags = 1027;
+			UPDATE a4gt_sportello SET comune = 'MEZZOLOMBARDO' WHERE id_sportello_ags = 1028;
+			UPDATE a4gt_sportello SET comune = 'DRO' WHERE id_sportello_ags = 1029;
+			UPDATE a4gt_sportello SET comune = 'SAN MICHELE ALL`ADIGE' WHERE id_sportello_ags = 1037;
+			UPDATE a4gt_sportello SET comune = 'TRENTO' WHERE id_sportello_ags = 1445;
+		</sql>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+	UPDATE A4GT_PERSONA SET partita_iva = '00337460224', denominazione =
+	'APPAG - PROVINCIA AUTONOMA DI TRENTO' WHERE identificativo =
+	'00337460224';
+	UPDATE A4GT_PERSONA SET partita_iva = '01896970223', denominazione = 'CAA
+	COOPTRENTO SRL' WHERE identificativo = '01896970223';
+	UPDATE A4GT_PERSONA SET partita_iva = '01904670229', denominazione = 'CENTRO
+	ASSISTENZA IMPRESE COLDIRETTI DEL TRENTINO S.R.L.' WHERE identificativo
+	= '01904670229';
+	UPDATE A4GT_PERSONA SET partita_iva = '07343031006', denominazione = 'CENTRO
+	AUTORIZZATO DI ASSISTENZA AGRICOLA C.A.A. ACLI SRL (IN BREVE C.A.A.
+	ACLI)' WHERE identificativo = '07343031006';
+	UPDATE A4GT_PERSONA SET partita_iva = '05804771003', denominazione = 'CAA -
+	CIA S.R.L.' WHERE identificativo = '05804771003';
+	UPDATE A4GT_PERSONA SET partita_iva = '01159210226', denominazione =
+	'AGRICOLTURA TRENTINA SERVIZI S.R.L.' WHERE identificativo =
+	'01159210226';
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_23.6" author="Salvatore Caccia">
+		<dropColumn tableName="A4GT_MANDATO">
+			<column name="ID_DETENZIONE" />
+		</dropColumn>
+		<addForeignKeyConstraint baseColumnNames="ID" baseTableName="A4GT_MANDATO" constraintName="FK_MANDATO_DETENZIONE" referencedColumnNames="ID" referencedTableName="A4GT_DETENZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.0" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_PERSONA_FISICA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_PERSONA_FISICA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="COGNOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="SESSO" type="${string.type}(7)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_NASCITA" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="COMUNE_NASCITA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROVINCIA_NASCITA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DECEDUTO" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_FISICA" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_PERSONA_FISICA TO
+			${user.writer};
+			GRANT SELECT ON A4GT_PERSONA_FISICA TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.1" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_PERSONA_GIURIDICA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PARTITA_IVA" type="${string.type}(11)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINAZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="FORMA_GIURIDICA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="OGGETTO_SOCIALE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_COSTITUZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_TERMINE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="CAPITALE_SOCIALE_DELIBERATO" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="CF_RAPPRESENTANTE_LEGALE" type="${string.type}(16)">
+				<constraints foreignKeyName="FK_RAPPRESENTANTE_LEGALE" referencedTableName="A4GT_PERSONA_FISICA" referencedColumnNames="CODICE_FISCALE" nullable="true" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_GIURIDICA" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_PERSONA_GIURIDICA TO
+			${user.writer};
+			GRANT SELECT ON A4GT_PERSONA_GIURIDICA TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.2" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'00337460224','APPAG - PROVINCIA AUTONOMA DI TRENTO','00337460224');
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'01896970223','CAA COOPTRENTO SRL','01896970223');
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'01904670229','CENTRO ASSISTENZA IMPRESE COLDIRETTI DEL TRENTINO S.R.L.','01904670229');
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'07343031006','CENTRO AUTORIZZATO DI ASSISTENZA AGRICOLA C.A.A. ACLI SRL (IN BREVE C.A.A. ACLI)','07343031006');
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'05804771003','CAA - CIA S.R.L.','05804771003');
+			Insert into A4GT_PERSONA_GIURIDICA (ID,VERSIONE,CODICE_FISCALE,DENOMINAZIONE,PARTITA_IVA) values (NXTNBR.nextval,0,'01159210226','AGRICOLTURA TRENTINA SERVIZI S.R.L.','01159210226');
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.3" author="Gabriele Ninfa">
+		<addColumn tableName="a4gt_detenzione">
+			<column name="ID_PERSONA_GIURIDICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_DETENTORE" referencedTableName="A4GT_PERSONA_GIURIDICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="a4gt_sportello">
+			<column name="ID_PERSONA_GIURIDICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_SPORTELLO_PERSONA_GIURIDICA" referencedTableName="A4GT_PERSONA_GIURIDICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="a4gt_fascicolo">
+			<column name="ID_PERSONA_GIURIDICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FASCICOLO_PERSONA_GIURIDICA" referencedTableName="A4GT_PERSONA_GIURIDICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="a4gt_fascicolo">
+			<column name="ID_PERSONA_FISICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FASCICOLO_PERSONA_FISICA" referencedTableName="A4GT_PERSONA_FISICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.4" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			UPDATE a4gt_sportello s
+			SET id_persona_giuridica = (SELECT ID FROM a4gt_persona_giuridica
+			                            WHERE codice_fiscale = (SELECT identificativo FROM a4gt_persona
+			                                                    WHERE ID = s.id_soggetto_caa));
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.4" author="Marco Dalla Torre">
+		<dropColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_SOGGETTO_IMPRESA" />
+		</dropColumn>
+		<dropColumn tableName="A4GT_DETENZIONE">
+			<column name="ID_SOGGETTO_DETENTORE" />
+		</dropColumn>
+		<addNotNullConstraint columnDataType="${id.number.type}" columnName="ID_PERSONA_GIURIDICA" tableName="A4GT_DETENZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_24.5" author="Marco Dalla Torre">
+		<dropColumn tableName="A4GT_SPORTELLO">
+			<column name="ID_SOGGETTO_CAA" />
+		</dropColumn>
+		<dropTable cascadeConstraints="true" tableName="A4GT_PERSONA" />
+	</changeSet>
+
+
+	<changeSet id="ANAGRAFICA_25.1" author="Lorenzo Martinelli">
+		<createTable tableName="A4GT_PERSONA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_PERSONA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_PERSONA TO ${user.writer};
+			GRANT SELECT ON A4GT_PERSONA TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.2" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GT_PERSONA (ID, VERSIONE, CODICE_FISCALE)
+			SELECT ID, VERSIONE, CODICE_FISCALE
+			FROM A4GT_PERSONA_FISICA;
+
+			INSERT INTO A4GT_PERSONA (ID, VERSIONE, CODICE_FISCALE)
+			SELECT ID, VERSIONE, CODICE_FISCALE
+			FROM A4GT_PERSONA_GIURIDICA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.3" author="Lorenzo Martinelli">
+		<addForeignKeyConstraint baseColumnNames="ID" baseTableName="A4GT_PERSONA_FISICA" constraintName="FK_ID_PERSONA_FISICA" referencedColumnNames="ID" referencedTableName="A4GT_PERSONA" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.4" author="Lorenzo Martinelli">
+		<addForeignKeyConstraint baseColumnNames="ID" baseTableName="A4GT_PERSONA_GIURIDICA" constraintName="FK_ID_PERSONA_GIURIDICA" referencedColumnNames="ID" referencedTableName="A4GT_PERSONA" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.5" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DENOMINAZIONE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+	<!-- Valorizzare denominazione e renderlo not null -->
+
+	<changeSet id="ANAGRAFICA_25.6" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO f SET f.DENOMINAZIONE = (
+				SELECT p.DENOMINAZIONE FROM A4GT_PERSONA_GIURIDICA p
+				WHERE p.ID = f.ID_PERSONA_GIURIDICA
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.7" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO f SET f.DENOMINAZIONE = (
+				SELECT p.COGNOME || ' ' || p.NOME FROM A4GT_PERSONA_FISICA p
+				WHERE p.ID = f.ID_PERSONA_FISICA
+			);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.7_1" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_FASCICOLO" columnName="DENOMINAZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.8" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_PERSONA" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.9" author="Lorenzo Martinelli">
+		<update tableName="A4GT_FASCICOLO">
+			<column name="ID_PERSONA" valueComputed="ID_PERSONA_FISICA" />
+			<where>ID_PERSONA_FISICA IS NOT NULL</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.10" author="Lorenzo Martinelli">
+		<update tableName="A4GT_FASCICOLO">
+			<column name="ID_PERSONA" valueComputed="ID_PERSONA_GIURIDICA" />
+			<where>ID_PERSONA_GIURIDICA IS NOT NULL</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.11" author="Lorenzo Martinelli">
+		<dropForeignKeyConstraint baseTableName="A4GT_PERSONA_GIURIDICA" constraintName="FK_RAPPRESENTANTE_LEGALE" />
+
+		<dropColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="CODICE_FISCALE" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.12" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="CODICE_FISCALE" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.13" author="Lorenzo Martinelli">
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA" baseTableName="A4GT_FASCICOLO" constraintName="FK_ID_FASCICOLO_PERSONA" referencedColumnNames="ID" referencedTableName="A4GT_PERSONA" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.14" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_PERSONA_FISICA" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.15" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_PERSONA_GIURIDICA" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.16" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_DETENZIONE">
+			<column name="ID_PERSONA_GIURIDICA" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.17" author="Lorenzo Martinelli">
+		<createTable tableName="A4GT_ATTIVITA_ATECO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_ATTIVITA_ATECO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_SEDE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DESCRIZIONE" type="${string.type}(300)">
+				<constraints nullable="false" />
+			</column>
+			<column name="IMPORTANZA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_ATTIVITA_ATECO TO ${user.writer};
+			GRANT SELECT ON A4GT_ATTIVITA_ATECO TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.18" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="DENOMINAZIONE" type="${string.type}(200)" />
+			<column name="PARTITA_IVA" type="${string.type}(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.19" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="DATA_ISCRIZIONE" type="DATE" />
+			<column name="PROVINCIA_CCIAA" type="${string.type}(2)" />
+			<column name="NUMERO_REPERTORIO" type="NUMBER(10)" />
+			<column name="CESSATA" type="NUMBER(1)" />
+			<column name="DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="TOPONIMO" type="${string.type}(50)" />
+			<column name="VIA" type="${string.type}(200)" />
+			<column name="NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="CAP" type="${string.type}(10)" />
+			<column name="CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="FRAZIONE" type="${string.type}(100)" />
+			<column name="PROVINCIA" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.20" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="DATA_ISCRIZIONE" type="DATE" />
+			<column name="PROVINCIA_CCIAA" type="${string.type}(2)" />
+			<column name="NUMERO_REPERTORIO" type="NUMBER(10)" />
+			<column name="CESSATA" type="NUMBER(1)" />
+			<column name="DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="TOPONIMO" type="${string.type}(50)" />
+			<column name="VIA" type="${string.type}(200)" />
+			<column name="NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="CAP" type="${string.type}(10)" />
+			<column name="CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="FRAZIONE" type="${string.type}(100)" />
+			<column name="PROVINCIA" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.21" author="Bruno Conetta">
+		<modifyDataType tableName="A4GT_PERSONA_GIURIDICA" columnName="OGGETTO_SOCIALE" newDataType="${string.type}(4000)" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.22" author="Bruno Conetta">
+		<dropNotNullConstraint tableName="A4GT_FASCICOLO" columnName="DATA_INIZIO_VALIDITA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.23" author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true">
+			DELETE FROM A4GT_MANDATO;
+			DELETE FROM A4GT_DETENZIONE;
+			DELETE FROM A4GT_SPORTELLO;
+			DELETE FROM A4GT_FASCICOLO;
+			DELETE FROM A4GT_PERSONA_FISICA;
+			DELETE FROM A4GT_PERSONA_GIURIDICA;
+			DELETE FROM A4GT_PERSONA;
+			DELETE FROM A4GT_ATTIVITA_ATECO;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.24" author="Antonio Avitabile">
+		<createTable tableName="A4GT_CAA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_CAA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINAZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PARTITA_IVA" type="${string.type}(11)">
+				<constraints nullable="true" />
+			</column>
+			<column name="FORMA_GIURIDICA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="ATTO_RICONOSCIMENTO" type="${string.type}(500)">
+				<constraints nullable="true" />
+			</column>
+			<column name="SOCIETA_SERVIZI" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CF_SOCIETA_SERVIZI" type="${string.type}(11)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DESCRIZIONE_ESTESA" type="${string.type}(300)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CODICE_ISTAT" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="FRAZIONE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="TOPONIMO" type="${string.type}(50)">
+				<constraints nullable="true" />
+			</column>
+			<column name="VIA" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+			<column name="NUMERO_CIVICO" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CAP" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="PROVINCIA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="COMUNE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_CAA TO
+			${user.writer};
+			GRANT SELECT
+			ON A4GT_CAA TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.25" author="Antonio Avitabile">
+		<dropColumn tableName="A4GT_SPORTELLO">
+			<column name="ID_PERSONA_GIURIDICA" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.26" author="Antonio Avitabile">
+		<addColumn tableName="A4GT_SPORTELLO">
+			<column name="ID_CAA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CAA_SPORTELLO" referencedTableName="A4GT_CAA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.27" author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			Insert into A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE) values (NXTNBR.nextval,0,'01896970223','CAA COOPTRENTO SRL','01896970223', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione del Dirigente del Servizio Vigilanza e Promozione delle Attività Agricole n. 282 del 23 agosto 2011', 'VIA BRENNERO 322', 'VIA BRENNERO', '322', '38121', 'TN', 'TRENTO');
+			Insert into A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, SOCIETA_SERVIZI, CF_SOCIETA_SERVIZI, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE) values (NXTNBR.nextval,0,'01904670229','CENTRO ASSISTENZA IMPRESE COLDIRETTI DEL TRENTINO S.R.L.','01904670229', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione del Dirigente del Servizio Vigilanza e Promozione delle Attività Agricole n. 284 del 25 agosto 2011', 'IMPRESA VERDE TRENTINO ALTO ADIGE S.R.L.', '01676700220', 'VIA KUFSTEIN 2', 'VIA KUFSTEIN', '2', '38121', 'TN', 'TRENTO');
+			Insert into A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, SOCIETA_SERVIZI, CF_SOCIETA_SERVIZI, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE) values (NXTNBR.nextval,0,'07343031006','CENTRO AUTORIZZATO DI ASSISTENZA AGRICOLA C.A.A. ACLI SRL (IN BREVE C.A.A. ACLI)','07343031006', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione della Regione Lazio n. A01798 del 09 marzo 2012 con oggetto“Approvazione del verbale relativo alla valutazione della richiesta di adeguamento ai requisiti del Decreto del Ministro delle politiche agricole alimentari e forestali del 27 marzo 2008', 'IMPRESA ACLI SERVICE TRENTINO SRL', '01752060226', 'VIA ERGISTO BEZZI, 23/25', 'VIA ERGISTO BEZZI', '23/25', '00153', 'RM', 'ROMA');
+			Insert into A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, SOCIETA_SERVIZI, CF_SOCIETA_SERVIZI, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE) values (NXTNBR.nextval,0,'05804771003','CAA - CIA S.R.L.','05804771003', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione della Regione Lazio n. A02140 del 20 marzo 2012 con oggetto “Approvazione del verbale relativo alla valutazione della richiesta di adeguamento ai requisiti del Decreto del Ministro delle politiche agricole alimentari e forestali del 27 marzo 2008', 'AGRIVERDE - CIA S.R.L.', '01393750227', 'LUNGOTEVERE MICHELANGELO 9', 'LUNGOTEVERE MICHELANGELO', '9', '00192', 'RM', 'ROMA');
+			Insert into A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, SOCIETA_SERVIZI, CF_SOCIETA_SERVIZI, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE) values (NXTNBR.nextval,0,'01159210226','AGRICOLTURA TRENTINA SERVIZI S.R.L.','01159210226', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione del Dirigente del Servizio Vigilanza e Promozione delle Attività Agricole n. 283 del 24 agosto 2011', 'AGRISERVICE SOCIETA COOPERATIVA', '01075220226', 'VIA GUARDINI 73', 'VIA GUARDINI', '73', '38121', 'TN', 'TRENTO');
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.28" author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,3,'CAA COLDIRETTI DEL TRENTINO - 001',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,4,'CAA COLDIRETTI DEL TRENTINO - 003',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'CLES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,5,'CAA COLDIRETTI DEL TRENTINO - 004',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'TIONE DI TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,6,'CAA COLDIRETTI DEL TRENTINO - 005',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'ROVERETO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,7,'CAA COLDIRETTI DEL TRENTINO - 006',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'ARCO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,8,'CAA COLDIRETTI DEL TRENTINO - 007',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'BORGO VALSUGANA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,9,'CAA COLDIRETTI DEL TRENTINO - 008',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'TESERO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,10,'CAA COLDIRETTI DEL TRENTINO - 009',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'MALE`');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,11,'CAA COLDIRETTI DEL TRENTINO - 010',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'PERGINE VALSUGANA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,12,'CAA COLDIRETTI DEL TRENTINO - 011',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'MEZZOLOMBARDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,13,'CAA ACLI - TRENTO - 001',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '07343031006'), 'CLES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,14,'CAA ACLI - TRENTO - 002',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '07343031006'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,16,'CAA ACLI - TRENTO - 004',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '07343031006'), 'ROVERETO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,17,'CAA ACLI - TRENTO - 005',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '07343031006'), 'MEZZOLOMBARDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,18,'CAA CIA - TRENTO - 001',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '05804771003'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,19,'CAA CIA - CLES - 002',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '05804771003'), 'CLES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,20,'CAA ATS - 001 - TRENTO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01159210226'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,55,'CAA ATS - 003 - CLES',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01159210226'), 'CLES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,56,'CAA ATS - 004 - MEZZOLOMBARDO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01159210226'), 'MEZZOLOMBARDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,57,'CAA ATS - 005 - ROVERETO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01159210226'), 'ROVERETO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,89,'CAA COOPTN - CS - ALA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ALA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,90,'CAA COOPTN - CS - ALDENO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ALDENO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,91,'CAA COOPTN - CS - AVIO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'AVIO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,92,'CAA COOPTN - CS - GROPPELLO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'REVO`');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,93,'CAA COOPTN - CS - LAVIS',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LAVIS');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,94,'CAA COOPTN - CS - TRENTO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,95,'CAA COOPTN - CS - LIPROVIT',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ROVERE` DELLA LUNA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,96,'CAA COOPTN - CS - MEZZACORONA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'MEZZOCORONA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,97,'CAA COOPTN - CS - MEZZOLOMBARDO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'MEZZOLOMBARDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,98,'CAA COOPTN - CS - MORI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'MORI');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,99,'CAA COOPTN - CS - NOMI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'NOMI');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,100,'CAA COOPTN - CS - ROVERE''',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ROVERE` DELLA LUNA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,101,'CAA COOPTN - CS - RIVA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'RIVA DEL GARDA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,102,'CAA COOPTN - CS - SAV',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ROVERETO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,103,'CAA CIA - BORGO VALSUGANA - 003',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '05804771003'), 'BORGO VALSUGANA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,104,'CAA COOPTN - CS - ISERA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ISERA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,105,'CAA COOPTN - CS - TOBLINO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CALAVINO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,140,'CAA COOPTN - CP - FERRARI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO - TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,141,'CAA COOPTN - CP - POJER',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'FAEDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,142,'CAA COOPTN - CP - BOLOGNANI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LAVIS');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,143,'CAA COOPTN - CP - SPAGNOLLI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ISERA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,252,'CAA COOPTN - CP - BAZZANELLA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ALA - CHIZZOLA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,266,'CAA COOPTN - CP - PISONI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LASINO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,273,'CAA COOPTN - CP - TENUTE LUNELLI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO - TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,668,'CAA COLDIRETTI DEL TRENTINO - 012',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01904670229'), 'LEVICO TERME');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,686,'CAA COOPTN - CP - DORIGATI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'MEZZOCORONA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,764,'CAA CIA - ROVERETO - 004',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '05804771003'), 'ROVERETO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,766,'CAA COOPTN - CP - MONFORT',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LAVIS');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,777,'CAA COOPTN - CP - BAILONI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO - RAVINA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,778,'CAA ACLI - TRENTO - 006',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '07343031006'), 'BORGO VALSUGANA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1000,'CAA COOPTN - CP - VALLAGARINA CONC',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'ALA - CHIZZOLA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1003,'CAA COOPTN - MF - AGRINOVANTA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'STORO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1004,'CAA COOPTN - MF - AVN',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'SANZENO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1005,'CAA COOPTN - MF - CF CLES',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CLES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1006,'CAA COOPTN - MF - COBA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'DENNO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1007,'CAA COOPTN - MF - COBAV',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'VILLA AGNEDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1008,'CAA COOPTN - MF - COCEA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TAIO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1009,'CAA COOPTN - MF - COFAV',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CALDONAZZO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1010,'CAA COOPTN - MF - COFSAC',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CALDES');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1011,'CAA COOPTN - MF - COL',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'SPORMINORE');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1012,'CAA COOPTN - MF - CONTA''',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CUNEVO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1013,'CAA COOPTN - MF - COPAG',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'COMANO TERME - DASINDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1014,'CAA COOPTN - MF - FAT',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TUENNO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1015,'CAA COOPTN - MF - LEVICOFRUTTA - COVAL',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LEVICO TERME');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1016,'CAA COOPTN - MF - MONDOAGRICOLO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CALAVINO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1017,'CAA COOPTN - MF - SABAC',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'BREZ');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1018,'CAA COOPTN - MF - SANT''ORSOLA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'PERGINE VALSUGANA');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1019,'CAA COOPTN - MF - SARC',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TASSULLO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1020,'CAA COOPTN - MF - SCAF',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'LIVO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1021,'CAA COOPTN - MF - SFC',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'CAMPODENNO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1022,'CAA COOPTN - MF - SFT',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1023,'CAA COOPTN - MF - TERZA SPONDA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'REVO`');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1024,'CAA COOPTN - MF - UF COREDO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'COREDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1025,'CAA COOPTN - MF - UF RALLO',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TASSULLO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1026,'CAA COOPTN - MF - UNIFRUTTA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'NANNO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1027,'CAA COOPTN - MF - VAL DI GRESTA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'RONZO-CHIENIS');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1028,'CAA COOPTN - MF - 5 COMUNI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'MEZZOLOMBARDO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1029,'CAA COOPTN - MF - VALLI DEL SARCA',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'DRO');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1037,'CAA COOPTN - CP - ENDRIZZI',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'SAN MICHELE ALL`ADIGE');
+			INSERT INTO A4GT_SPORTELLO (ID,VERSIONE,ID_SPORTELLO_AGS,DENOMINAZIONE,ID_CAA, COMUNE) VALUES (NXTNBR.nextval,0,1445,'CAA COOPTN - MF - CASA ',(SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '01896970223'), 'TRENTO');
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.29" author="Antonio Avitabile">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="COMUNE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.30" author="Antonio Avitabile">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="COMUNE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+
+	<changeSet id="ANAGRAFICA_25.21" author="Lorenzo Martinelli">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_EVENTSTORED" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false" />
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true" />
+			</column>
+			<column name="USER_NAME" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.22" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.31" author="Bruno Conetta">
+		<renameColumn newColumnName="IDENTIFICATIVO" oldColumnName="ID_SPORTELLO_AGS" tableName="A4GT_SPORTELLO" />
+		<addColumn tableName="A4GT_MANDATO">
+			<column name="IDENTIFICATIVO_SPORTELLO" type="${id.number.type}"></column>
+		</addColumn>
+		<addForeignKeyConstraint baseColumnNames="IDENTIFICATIVO_SPORTELLO" baseTableName="A4GT_MANDATO" constraintName="FK_IDENTIFICATIVO_SPORTELLO" referencedColumnNames="IDENTIFICATIVO" referencedTableName="A4GT_SPORTELLO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.23" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_MANDATO m
+			SET m.IDENTIFICATIVO_SPORTELLO = (SELECT IDENTIFICATIVO FROM A4GT_SPORTELLO s WHERE s.ID = m.ID_SPORTELLO)
+			WHERE m.IDENTIFICATIVO_SPORTELLO IS NULL;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.24" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_MANDATO" columnName="IDENTIFICATIVO_SPORTELLO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_25.25" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_MANDATO">
+			<column name="ID_SPORTELLO" />
+		</dropColumn>
+	</changeSet>
+
+
+	<changeSet id="ANAGRAFICA_27.1" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="NOME_RAPPRESENTANTE_LEGALE" type="${string.type}(200)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.2" author="Lorenzo Martinelli">
+		<addNotNullConstraint tableName="A4GT_PERSONA_GIURIDICA" columnName="NOME_RAPPRESENTANTE_LEGALE" defaultNullValue="DATO_FARLOCCO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.3" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="PEC" type="${string.type}(200)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.1" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="PEC" type="${string.type}(200)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.2" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="TELEFONO" type="${string.type}(30)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.3" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="TELEFONO" type="${string.type}(30)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.4" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="STATO" type="${string.type}(30)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.5" author="Lorenzo Martinelli">
+		<addNotNullConstraint columnDataType="${string.type}(30)" columnName="STATO" constraintName="CT_FASCICOLO_STATO_NOT_NULL" defaultNullValue="IN_AGGIORNAMENTO" tableName="A4GT_FASCICOLO" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.6" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="FORMA_GIURIDICA" type="${string.type}(100)"></column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.7" author="Bruno Conetta">
+		<addUniqueConstraint columnNames="CUAA" tableName="A4GT_FASCICOLO" tablespace="${tablespace.index}" validate="true" />
+
+		<dropColumn tableName="A4GT_FASCICOLO" columnName="DATA_INIZIO_VALIDITA" />
+		<dropColumn tableName="A4GT_FASCICOLO" columnName="DATA_FINE_VALIDITA" />
+	</changeSet>
+
+
+	<changeSet id="ANAGRAFICA_26.8" author="Bruno Conetta">
+		<addColumn tableName="A4GT_MANDATO">
+			<column name="DATA_SOTTOSCRIZIONE" type="DATE" />
+		</addColumn>
+
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_MANDATO m
+			SET
+			m.DATA_SOTTOSCRIZIONE = (SELECT DATA_INIZIO FROM A4GT_DETENZIONE d
+			WHERE d.ID = m.ID)
+			WHERE m.DATA_SOTTOSCRIZIONE IS NULL;
+		</sql>
+
+		<addNotNullConstraint tableName="A4GT_MANDATO" columnName="DATA_SOTTOSCRIZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.9" author="Bruno Conetta">
+		<addColumn tableName="A4GT_CAA">
+			<column name="EMAIL" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.7_0" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_ATTIVITA_ATECO">
+			<column name="FONTE" type="${string.type}(20)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.7" author="Lorenzo Martinelli">
+		<addNotNullConstraint columnDataType="${string.type}(20)" columnName="FONTE" constraintName="CT_ATECO_FONTE_NOT_NULL" defaultNullValue="CAMERA_COMMERCIO" tableName="A4GT_ATTIVITA_ATECO" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_26.8" author="Lorenzo Martinelli">
+		<update tableName="A4GT_ATTIVITA_ATECO">
+			<column name="FONTE" value="ANAGRAFE_TRIBUTARIA" />
+			<where>IMPORTANZA IS NULL</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.4" author="Massimo Nascivera">
+		<createTable tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_PERSONA_FISICA_CON_CARICA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="COGNOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="SESSO" type="${string.type}(7)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_NASCITA" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="COMUNE_NASCITA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROVINCIA_NASCITA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DECEDUTO" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="TOPONIMO" type="${string.type}(50)" />
+			<column name="COMUNE" type="${string.type}(100)" />
+			<column name="CAP" type="${string.type}(10)" />
+			<column name="PROVINCIA" type="${string.type}(100)" />
+		</createTable>
+		<createTable tableName="A4GT_CARICA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_CARICA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DESCRIZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="IDENTIFICATIVO" type="${string.type}(20)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_INIZIO_CARICA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="ID_PERSONA_FISICA_CON_CARICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_PERSONA_FISICA_CON_CARICA" referencedTableName="A4GT_PERSONA_FISICA_CON_CARICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_FISICA_CON_CARICA" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PERSONA_FISICA_CON_CARICA TO ${user.writer};
+            GRANT SELECT ON A4GT_PERSONA_FISICA_CON_CARICA TO ${user.reader};
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CARICA TO ${user.writer};
+            GRANT SELECT ON A4GT_CARICA TO ${user.reader};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.5" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="VIA" type="${string.type}(200)" />
+			<column name="NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="FRAZIONE" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.4" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="SEDE_DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="SEDE_TOPONIMO" type="${string.type}(50)" />
+			<column name="SEDE_VIA" type="${string.type}(200)" />
+			<column name="SEDE_NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="SEDE_CAP" type="${string.type}(10)" />
+			<column name="SEDE_CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="SEDE_PROVINCIA" type="${string.type}(100)" />
+			<column name="SEDE_COMUNE" type="${string.type}(100)" />
+			<column name="SEDE_FRAZIONE" type="${string.type}(100)" />
+		</addColumn>
+
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="SEDE_DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="SEDE_TOPONIMO" type="${string.type}(50)" />
+			<column name="SEDE_VIA" type="${string.type}(200)" />
+			<column name="SEDE_NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="SEDE_CAP" type="${string.type}(10)" />
+			<column name="SEDE_CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="SEDE_PROVINCIA" type="${string.type}(100)" />
+			<column name="SEDE_COMUNE" type="${string.type}(100)" />
+			<column name="SEDE_FRAZIONE" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.5" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_PERSONA_FISICA SET
+				SEDE_DESCRIZIONE_ESTESA = DESCRIZIONE_ESTESA,
+				SEDE_TOPONIMO = TOPONIMO,
+				SEDE_VIA = VIA,
+				SEDE_NUMERO_CIVICO = NUMERO_CIVICO,
+				SEDE_CAP = CAP,
+				SEDE_CODICE_ISTAT = CODICE_ISTAT,
+				SEDE_FRAZIONE = FRAZIONE,
+				SEDE_PROVINCIA = PROVINCIA,
+				SEDE_COMUNE = COMUNE;
+
+			UPDATE A4GT_PERSONA_GIURIDICA SET
+				SEDE_DESCRIZIONE_ESTESA = DESCRIZIONE_ESTESA,
+				SEDE_TOPONIMO = TOPONIMO,
+				SEDE_VIA = VIA,
+				SEDE_NUMERO_CIVICO = NUMERO_CIVICO,
+				SEDE_CAP = CAP,
+				SEDE_CODICE_ISTAT = CODICE_ISTAT,
+				SEDE_FRAZIONE = FRAZIONE,
+				SEDE_PROVINCIA = PROVINCIA,
+				SEDE_COMUNE = COMUNE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.6" author="Massimo Nascivera">
+		<dropColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="CODICE_FISCALE" />
+		</dropColumn>
+	</changeSet>
+
+
+	<changeSet id="ANAGRAFICA_27.6" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_PERSONA_FISICA SET
+			DESCRIZIONE_ESTESA = NULL,
+			TOPONIMO = NULL,
+			VIA = NULL,
+			NUMERO_CIVICO = NULL,
+			CAP = NULL,
+			CODICE_ISTAT = NULL,
+			FRAZIONE = NULL,
+			PROVINCIA = NULL,
+			COMUNE = NULL;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.7" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="DESCRIZIONE_ESTESA" />
+			<column name="TOPONIMO" />
+			<column name="VIA" />
+			<column name="NUMERO_CIVICO" />
+			<column name="CAP" />
+			<column name="CODICE_ISTAT" />
+			<column name="FRAZIONE" />
+			<column name="PROVINCIA" />
+			<column name="COMUNE" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.8" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="SEDE_CC_DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="SEDE_CC_TOPONIMO" type="${string.type}(50)" />
+			<column name="SEDE_CC_VIA" type="${string.type}(200)" />
+			<column name="SEDE_CC_NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="SEDE_CC_CAP" type="${string.type}(10)" />
+			<column name="SEDE_CC_CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="SEDE_CC_PROVINCIA" type="${string.type}(100)" />
+			<column name="SEDE_CC_COMUNE" type="${string.type}(100)" />
+			<column name="SEDE_CC_FRAZIONE" type="${string.type}(100)" />
+		</addColumn>
+
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="SEDE_CC_DESCRIZIONE_ESTESA" type="${string.type}(300)" />
+			<column name="SEDE_CC_TOPONIMO" type="${string.type}(50)" />
+			<column name="SEDE_CC_VIA" type="${string.type}(200)" />
+			<column name="SEDE_CC_NUMERO_CIVICO" type="${string.type}(10)" />
+			<column name="SEDE_CC_CAP" type="${string.type}(10)" />
+			<column name="SEDE_CC_CODICE_ISTAT" type="${string.type}(10)" />
+			<column name="SEDE_CC_PROVINCIA" type="${string.type}(100)" />
+			<column name="SEDE_CC_COMUNE" type="${string.type}(100)" />
+			<column name="SEDE_CC_FRAZIONE" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.7" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="PARTITA_IVA_PERSONA_GIURIDICA" type="${string.type}(11)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.8" author="Massimo Nascivera">
+		<dropColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA" columnName="PARTITA_IVA_PERSONA_GIURIDICA" />
+		<addColumn tableName="A4GT_CARICA">
+			<column name="ID_PERSONA_GIURIDICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CARICA_PERSONA_GIURIDICA" referencedTableName="A4GT_PERSONA_GIURIDICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.9" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY NOME NULL;            
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY COGNOME NULL;
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY SESSO NULL;
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY DATA_NASCITA NULL;
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY COMUNE_NASCITA NULL;
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY PROVINCIA_NASCITA NULL;
+            ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA MODIFY DECEDUTO NULL;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.10" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_PERSONA_GIURIDICA ADD (foo CLOB);
+			UPDATE A4GT_PERSONA_GIURIDICA SET foo = OGGETTO_SOCIALE;
+			ALTER TABLE A4GT_PERSONA_GIURIDICA DROP COLUMN OGGETTO_SOCIALE;
+			ALTER TABLE A4GT_PERSONA_GIURIDICA RENAME COLUMN foo TO OGGETTO_SOCIALE;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.9" author="Lorenzo Martinelli">
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="CAPITALE_SOCIALE_DELIBERATO_2" type="NUMBER(10,2)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.10" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_PERSONA_GIURIDICA SET
+			CAPITALE_SOCIALE_DELIBERATO_2 = CAPITALE_SOCIALE_DELIBERATO;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.11" author="Lorenzo Martinelli">
+		<dropColumn tableName="A4GT_PERSONA_GIURIDICA" columnName="CAPITALE_SOCIALE_DELIBERATO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.12" author="Lorenzo Martinelli">
+		<renameColumn tableName="A4GT_PERSONA_GIURIDICA" oldColumnName="CAPITALE_SOCIALE_DELIBERATO_2" newColumnName="CAPITALE_SOCIALE_DELIBERATO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_27.11" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="CODICE_FISCALE" type="${string.type}(16)" />
+		</addColumn>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_FISICA_CON_CARICA" tablespace="${tablespace.index}" validate="true" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.1" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="ORGANISMO_PAGATORE" type="${string.type}(30)" defaultValue="APPAG">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.2" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE a4gt_caa
+			SET denominazione = 'CAA AGRICOLTURA TRENTINA SERVIZI S.R.L.'
+			WHERE codice_fiscale = '01159210226';
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.2" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DATA_APERTURA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.3" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_SPORTELLO">
+			<column name="INDIRIZZO" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CAP" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="PROVINCIA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="TELEFONO" type="${string.type}(30)">
+				<constraints nullable="true" />
+			</column>
+			<column name="EMAIL" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.4" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">  
+			UPDATE a4gt_sportello SET indirizzo = 'VIA GIUSTI 40', cap = '38100', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 3;
+			UPDATE a4gt_sportello SET indirizzo = 'PIAZZA GRANDA 18', cap = '38023', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 4;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CIRCONVALLAZIONE 63', cap = '38079', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 5;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA MONTE CAURIOL 7/B', cap = '38068', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 6;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA S. CATERINA 60/A', cap = '38062', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 7;
+			UPDATE a4gt_sportello SET indirizzo = 'VIALE CITTA'' DI PRATO 23', cap = '38051', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 8;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA ROMA 22/B', cap = '38038', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 9;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DAMIANO CHIESA 4', cap = '38027', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 10;
+			UPDATE a4gt_sportello SET indirizzo = 'LOC. FRATTE 22', cap = '38057', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 11;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA ROTALIANA 23', cap = '38017', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 12;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA TIBERIO CLAUDIO 5', cap = '38023', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 13;
+			UPDATE a4gt_sportello SET indirizzo = 'GALLERIA TIRRENA 10', cap = '38100', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 14;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA BEZZI, 28', cap = '38068', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 16;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DE GASPERI 63', cap = '38017', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 17;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA E. MACCANI 199', cap = '38100', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 18;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DALLAFIOR 40', cap = '38023', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 19;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA GUARDINI 73', cap = '38100', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 20;
+			UPDATE a4gt_sportello SET indirizzo = 'PIAZZA NAVARINO 13', cap = '38023', provincia = 'TN', telefono = '0463421531', email = NULL WHERE identificativo = 55;
+			UPDATE a4gt_sportello SET indirizzo = 'CORSO DEL POPOLO 23', cap = '38017', provincia = 'TN', telefono = '0461606005', email = NULL WHERE identificativo = 56;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CALCINARI 17/A', cap = '38068', provincia = 'TN', telefono = '0464435361', email = NULL WHERE identificativo = 57;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Bolzano 10', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 89;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Roma 76', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 90;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Dante 14', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 91;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Carlo Antonio Martini 10', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 92;
+			UPDATE a4gt_sportello SET indirizzo = 'Via del Carmine 7', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 93;
+			UPDATE a4gt_sportello SET indirizzo = 'Via dei Viticoltori 2-4', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 94;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Rosmini 40', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 95;
+			UPDATE a4gt_sportello SET indirizzo = 'Via del Teroldego 1', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 96;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Trento 65/B', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 97;
+			UPDATE a4gt_sportello SET indirizzo = 'Via del Garda 35', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 98;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Roma 1', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 99;
+			UPDATE a4gt_sportello SET indirizzo = 'Via 4 Novembre 9', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 100;
+			UPDATE a4gt_sportello SET indirizzo = 'Via San Nazzaro 4', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 101;
+			UPDATE a4gt_sportello SET indirizzo = 'Viale Trento 81', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 102;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA GOZZER 7', cap = '38051', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 103;
+			UPDATE a4gt_sportello SET indirizzo = 'Via al Ponte 1', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 104;
+			UPDATE a4gt_sportello SET indirizzo = 'Via Longa 1 Fraz. Sarche', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 105;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DEL PONTE 15 ', cap = '38123', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 140;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA MOLINI 4', cap = '38010', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 141;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA STAZIONE 19', cap = '38015', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 142;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA G. B. ROSINA 4/A', cap = NULL, provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 143;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA ZENATTI, 18', cap = '38061', provincia = 'TN', telefono = '0464696019', email = 'cantinabazzanella@alice.it' WHERE identificativo = 252;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA SAN SIRO N. 7/B FRAZ. PERGOLESE', cap = '38076', provincia = 'TN', telefono = '0461563216', email = 'marco@pisoni.net' WHERE identificativo = 266;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DEL PONTE 15', cap = '38123', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 273;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CLAUDIA AUGUSTA, 13', cap = '38056', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 668;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DANTE 5', cap = '38016', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 686;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA PAGANINI, 55', cap = '38068', provincia = 'TN', telefono = '0464423910', email = 'caa.rovereto@cia.tn.it' WHERE identificativo = 764;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CARLO SETTE 21', cap = '38015', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 766;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DELLE MASERE 7/A FR. RAVINA', cap = '38123', provincia = 'TN', telefono = '0461911842', email = 'bailonidaniela@gmail.com' WHERE identificativo = 777;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CARDUCCI, 3', cap = '38051', provincia = 'TN', telefono = NULL, email = NULL WHERE identificativo = 778;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA A. CARDUCCI, 4', cap = '38061', provincia = 'TN', telefono = '0464696033', email = 'augusta@vallagarinaconcentrati.it' WHERE identificativo = 1000;
+			UPDATE a4gt_sportello SET indirizzo = 'PIAZZA EUROPA 2', cap = '38089', provincia = 'TN', telefono = '0465686614', email = 'info@agri90.it' WHERE identificativo = 1003;
+			UPDATE a4gt_sportello SET indirizzo = 'FRAZIONE CASEZ 68', cap = '38010', provincia = 'TN', telefono = '0463434000', email = 'avn@melinda.it' WHERE identificativo = 1004;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA G.RUATTI 61', cap = '38023', provincia = 'TN', telefono = '0463421626', email = 'cfc@melinda.it' WHERE identificativo = 1005;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA CASE SPARSE', cap = '38010', provincia = 'TN', telefono = '0461645500', email = 'coba@melinda.it' WHERE identificativo = 1006;
+			UPDATE a4gt_sportello SET indirizzo = 'LOC. BARRICATA - FR. VILLA', cap = '38059', provincia = 'TN', telefono = '0461782664', email = 'cobavtn@tin.it' WHERE identificativo = 1007;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA COOPERAZIONE, 21 - FR. SEGNO', cap = '38012', provincia = 'TN', telefono = '0463461500', email = 'cocea@melinda.it' WHERE identificativo = 1008;
+			UPDATE a4gt_sportello SET indirizzo = 'VIALE TRENTO, 15', cap = '38052', provincia = 'TN', telefono = '0461723102', email = 'assistenza.tecnica@cofav.it' WHERE identificativo = 1009;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DEL TONALE 26', cap = '38022', provincia = 'TN', telefono = '0463901332', email = 'cofsac@melinda.it' WHERE identificativo = 1010;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA LOVER 27', cap = '38010', provincia = 'TN', telefono = '0461641078', email = 'col@melinda.it' WHERE identificativo = 1011;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA PROVINCIALE 26', cap = '38010', provincia = 'TN', telefono = '0461652158', email = 'conta@melinda.it' WHERE identificativo = 1012;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA GIOVANNI PRATI 1 - FR DASINDO', cap = '38077', provincia = 'TN', telefono = '0465701793', email = 'info@copagtrentino.it' WHERE identificativo = 1013;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA 4 VILLE, 39', cap = '38019', provincia = 'TN', telefono = '0463450222', email = 'fat@melinda.it' WHERE identificativo = 1014;
+			UPDATE a4gt_sportello SET indirizzo = 'VIALE VENEZIA 106', cap = '38056', provincia = 'TN', telefono = '0461707666', email = 'cooplevico@levicofrutta.it' WHERE identificativo = 1015;
+			UPDATE a4gt_sportello SET indirizzo = 'PIAZZA DEL CASON ROS, 2', cap = '38072', provincia = 'TN', telefono = '0461565031', email = 'info@serenestar.it' WHERE identificativo = 1016;
+			UPDATE a4gt_sportello SET indirizzo = 'FRAZIONE ARSIO, 40', cap = '38021', provincia = 'TN', telefono = '0463874348', email = 'sabac@melinda.it' WHERE identificativo = 1017;
+			UPDATE a4gt_sportello SET indirizzo = 'FR. ZIVIGNAGO VIA LAGORAI 131', cap = '38057', provincia = 'TN', telefono = '0461518111', email = 'info@santorsola.com' WHERE identificativo = 1018;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DEI GLAVASI 12', cap = '38010', provincia = 'TN', telefono = '0463450522', email = 'sarc@melinda.it' WHERE identificativo = 1019;
+			UPDATE a4gt_sportello SET indirizzo = 'CIVICO N. 70', cap = '38020', provincia = 'TN', telefono = '0463450522', email = 'scaf@melinda.it' WHERE identificativo = 1020;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA PROVINCIALE N 2', cap = '38010', provincia = 'TN', telefono = '0461655646', email = 'sfc@melinda.it' WHERE identificativo = 1021;
+			UPDATE a4gt_sportello SET indirizzo = 'FR ROMAGNANO VIA DEI POMARI', cap = '38123', provincia = 'TN', telefono = '0461841711', email = 'info@sft.tn.it' WHERE identificativo = 1022;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA PADRE EUSEBIO IORI 1', cap = '38028', provincia = 'TN', telefono = '0463432252', email = 'terzasponda@melinda.it' WHERE identificativo = 1023;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DON L. GUETTI, 13', cap = '38010', provincia = 'TN', telefono = '0463536420', email = 'ufc@melinda.it' WHERE identificativo = 1024;
+			UPDATE a4gt_sportello SET indirizzo = 'FRAZIONE RALLO VIA DE SAN GIOAN 1', cap = '38010', provincia = 'TN', telefono = '0463450580', email = 'ufr@melinda.it' WHERE identificativo = 1025;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA BERGAMO 2', cap = '38010', provincia = 'TN', telefono = '0463450646', email = 'unifrutta@melinda.it' WHERE identificativo = 1026;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA LONGA 86/90 FRAZ. PANNONE', cap = '38060', provincia = 'TN', telefono = '0464802922', email = 'info@valdigresta.org' WHERE identificativo = 1027;
+			UPDATE a4gt_sportello SET indirizzo = 'LOC MASO PARTI 2', cap = '38017', provincia = 'TN', telefono = '0461602051', email = 'info@5comuni.it' WHERE identificativo = 1028;
+			UPDATE a4gt_sportello SET indirizzo = 'FR PIETRAMURATA VIALE DAINO 84', cap = '38074', provincia = 'TN', telefono = '0464507184', email = 'info@vallidelsarca.it' WHERE identificativo = 1029;
+			UPDATE a4gt_sportello SET indirizzo = 'LOC. MASETTO 2', cap = '38010', provincia = 'TN', telefono = '0461662669', email = 'tiziana.piffer@endrizzi.it' WHERE identificativo = 1037;
+			UPDATE a4gt_sportello SET indirizzo = 'VIA DEL BRENNERO 322 ', cap = '38121', provincia = 'TN', telefono = '0461421575', email = 'AMMINISTRAZIONE@PEC.PECLATRENTINA.IT' WHERE identificativo = 1445;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.5" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_PERSONA_GIURIDICA MODIFY DENOMINAZIONE VARCHAR2(200 BYTE);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.1" author="Massimo Nascivera">
+		<createTable tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_REVOCA_IMMEDIATA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_SOTTOSCRIZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="STATO" type="${string.type}(30)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_MANDATO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_REV_IMM_MANDATO" referencedTableName="A4GT_MANDATO" referencedColumnNames="ID" nullable="false" />
+			</column>
+		</createTable>
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_REVOCA_IMMEDIATA" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+            GRANT
+            SELECT,INSERT,UPDATE,DELETE ON A4GT_REVOCA_IMMEDIATA TO
+            ${user.writer};
+            GRANT SELECT ON A4GT_REVOCA_IMMEDIATA TO ${user.reader};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.2" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_REVOCA_IMMEDIATA ADD (foo VARCHAR2(255));
+            UPDATE A4GT_REVOCA_IMMEDIATA SET foo = CODICE_FISCALE;
+            ALTER TABLE A4GT_REVOCA_IMMEDIATA DROP COLUMN CODICE_FISCALE;
+            ALTER TABLE A4GT_REVOCA_IMMEDIATA RENAME COLUMN foo TO CODICE_FISCALE;
+        </sql>
+
+		<addColumn tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="ID_PROTOCOLLO" type="${string.type}(255)" />
+			<column name="DT_PROTOCOLLO" type="DATE" />
+		</addColumn>
+
+		<createIndex tableName="A4GT_REVOCA_IMMEDIATA" indexName="A4GT_REV_IMM_CF" unique="true">
+			<column name="CODICE_FISCALE" />
+		</createIndex>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.3" author="Massimo Nascivera">
+		<dropIndex tableName="A4GT_REVOCA_IMMEDIATA" indexName="A4GT_REV_IMM_CF" />
+		<createIndex tableName="A4GT_REVOCA_IMMEDIATA" indexName="A4GT_REV_IMM_CF" unique="false">
+			<column name="CODICE_FISCALE" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.6" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_FASCICOLO MODIFY DENOMINAZIONE VARCHAR2(200 BYTE);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.7" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="DATA_VALUTAZIONE" type="DATE" />
+			<column name="MOTIVAZIONE_RIFIUTO" type="${string.type}(4000)" />
+			<column name="CAUSA_RICHIESTA" type="${string.type}(4000)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_28.8" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_REV_IMM_ID_MANDATO ON A4GT_REVOCA_IMMEDIATA (ID_MANDATO) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_29.2" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="RICHIESTA_FIRMATA" type="BLOB" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_29.3" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CARICA_PERSONA_FISICA ON A4GT_CARICA (ID_PERSONA_FISICA_CON_CARICA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_CARICA_PERSONA_GIURIDICA ON A4GT_CARICA (ID_PERSONA_GIURIDICA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DETENZIONE_ID_FASCICOLO ON A4GT_DETENZIONE (ID_FASCICOLO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_FASCICOLO_ID_PERSONA ON A4GT_FASCICOLO (ID_PERSONA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_MANDATO_SPORTELLO ON A4GT_MANDATO (IDENTIFICATIVO_SPORTELLO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_SPORTELLO_ID_CAA ON A4GT_SPORTELLO (ID_CAA) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_29.4" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_PERSONA_GIURIDICA_CARICA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_PERSONA_GIURIDICA_CARICA" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DENOMINAZIONE" type="${string.type}(200)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_GIURIDICA_CARICA" tablespace="${tablespace.index}" validate="true" />
+
+		<addColumn tableName="A4GT_CARICA">
+			<column name="ID_PERSONA_GIURIDICA_CARICA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_PERSONA_GIURIDICA_CARICA" referencedTableName="A4GT_PERSONA_GIURIDICA_CARICA" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+
+		<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PERSONA_GIURIDICA_CARICA TO ${user.writer};
+            GRANT SELECT ON A4GT_PERSONA_GIURIDICA_CARICA TO ${user.reader};
+			CREATE INDEX IDX_PERSONA_GIURIDICA_CARICA ON A4GT_CARICA (ID_PERSONA_GIURIDICA_CARICA) TABLESPACE ${tablespace.index};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_29.5" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA MODIFY DENOMINAZIONE VARCHAR2(2048 BYTE);
+            ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA MODIFY CODICE_FISCALE NULL;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_29.6" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_PERSONA_GIURIDICA MODIFY CAPITALE_SOCIALE_DELIBERATO NUMBER(20,2);
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_30.1" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DATA_MODIFICA" type="DATE" />
+			<column name="UTENTE_MODIFICA" type="${string.type}(100)" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_30.1" author="Massimo Nascivera">
+		<createTable tableName="A4GT_MODO_PAGAMENTO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_MODO_PAGAMENTO" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="IBAN" type="${string.type}(30)">
+				<constraints nullable="false" />
+			</column>
+			<column name="BIC" type="${string.type}(11)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINAZIONE" type="${string.type}(400)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_FASCICOLO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_PAGAMENTO_FASCICOLO" referencedTableName="A4GT_FASCICOLO" referencedColumnNames="ID" nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint columnNames="IBAN" tableName="A4GT_MODO_PAGAMENTO" constraintName="A4GT_PAGAMENTO_UNIQUE_IBAN" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_MODO_PAGAMENTO TO ${user.writer};
+            GRANT SELECT ON A4GT_MODO_PAGAMENTO TO ${user.reader};
+            CREATE INDEX IDX_PAGAMENTO_ID_FASCICOLO ON A4GT_MODO_PAGAMENTO (ID_FASCICOLO) TABLESPACE ${tablespace.index};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_30.2" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            ALTER TABLE A4GT_MODO_PAGAMENTO MODIFY IBAN VARCHAR2(34);
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_31.0" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="ID_SPORTELLO_DICHIARATO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_REVOCA_IMMEDIATA_SPORTELLO" referencedTableName="A4GT_SPORTELLO" referencedColumnNames="ID" nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+            CREATE INDEX IDX_REVOCA_IMMEDIATA_SPORTELLO ON A4GT_REVOCA_IMMEDIATA (ID_SPORTELLO_DICHIARATO) TABLESPACE ${tablespace.index};
+        </sql>
+	</changeSet>
+	<changeSet id="ANAGRAFICA_30.3" author="Massimo Nascivera">
+		<dropUniqueConstraint constraintName="A4GT_PAGAMENTO_UNIQUE_IBAN" tableName="A4GT_MODO_PAGAMENTO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_32F.0" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_ISCRIZIONE_SEZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_ISCRIZIONE_SEZIONE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="SEZIONE" type="${string.type}(30)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_ISCRIZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="QUALIFICA" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="COLTIVATORE_DIRETTO" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="ID_PERSONA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_ISCRIZIONE_SEZIONE_PERSONA" referencedTableName="A4GT_PERSONA" referencedColumnNames="ID" nullable="false" />
+			</column>
+		</createTable>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_ISCRIZIONE_SEZIONE TO
+			${user.writer};
+			GRANT SELECT ON A4GT_ISCRIZIONE_SEZIONE TO ${user.reader};
+			CREATE INDEX IDX_ISCRIZIONE_SEZIONE_PERSONA ON A4GT_ISCRIZIONE_SEZIONE (ID_PERSONA) TABLESPACE ${tablespace.index};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.0" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+			CREATE TABLE A4GT_UNITA_LOCALE (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				IDENTIFICATIVO_UTE VARCHAR(20),
+				DATA_APERTURA DATE,
+				DATA_CESSAZIONE DATE,
+				DATA_DENUNCIA_CESSAZIONE DATE,
+				CAUSALE_CESSAZIONE VARCHAR(4000),
+				ATTIVITA VARCHAR(4000),
+				DATA_DENUNCIA_INIZIO_ATTIVITA DATE,
+				SETTORE_MERCEOLOGICO VARCHAR(100),
+				TELEFONO VARCHAR(100),
+				INDIRIZZO_PEC VARCHAR(100),
+				TOPONIMO VARCHAR(100),
+				VIA VARCHAR(100),
+				NUMERO_CIVICO VARCHAR(100),
+				COMUNE VARCHAR(100),
+				CAP VARCHAR(100),
+				CODICE_ISTAT_COMUNE VARCHAR(100),
+				FRAZIONE VARCHAR(100),
+				PROVINCIA VARCHAR(100),
+				ID_PERSONA ${id.number.type},
+				CONSTRAINT PK_UNITA_LOCALE PRIMARY KEY (ID),
+				FOREIGN KEY (ID_PERSONA) REFERENCES A4GT_PERSONA (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE TABLE A4GT_DESTINAZIONE_USO (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				DESCRIZIONE VARCHAR(100),
+				ID_UNITA_LOCALE ${id.number.type},
+				CONSTRAINT PK_DESTINAZIONE_USO PRIMARY KEY (ID),
+				FOREIGN KEY (ID_UNITA_LOCALE) REFERENCES A4GT_UNITA_LOCALE (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			ALTER TABLE A4GT_ATTIVITA_ATECO ADD ID_UNITA_LOCALE ${id.number.type};
+			ALTER TABLE A4GT_ATTIVITA_ATECO ADD CONSTRAINT FK_ATTIVITA_ATECO_UNITA_LOCALE FOREIGN KEY (ID_UNITA_LOCALE) REFERENCES A4GT_UNITA_LOCALE(ID);
+
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_UNITA_LOCALE_PERSONA ON A4GT_UNITA_LOCALE (ID_PERSONA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DEST_USO_UNITA_LOCALE ON A4GT_DESTINAZIONE_USO (ID_UNITA_LOCALE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ATT_ATECO_UNITA_LOCALE ON A4GT_ATTIVITA_ATECO (ID_UNITA_LOCALE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.2" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_UNITA_LOCALE
+			RENAME TO A4GT_UNITA_TECNICO_ECNONOMICHE;
+			
+			ALTER TABLE A4GT_DESTINAZIONE_USO
+			RENAME COLUMN ID_UNITA_LOCALE TO ID_UNITA_TECNICO_ECNONOMICHE;
+			
+			ALTER TABLE A4GT_ATTIVITA_ATECO
+			RENAME COLUMN ID_UNITA_LOCALE TO ID_UNITA_TECNICO_ECNONOMICHE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.3" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_UNITA_TECNICO_ECNONOMICHE
+			RENAME TO A4GT_UNITA_TECNICO_ECONOMICHE;
+			
+			ALTER TABLE A4GT_DESTINAZIONE_USO
+			RENAME COLUMN ID_UNITA_TECNICO_ECNONOMICHE TO ID_UNITA_TECNICO_ECONOMICHE;
+			
+			ALTER TABLE A4GT_ATTIVITA_ATECO
+			RENAME COLUMN ID_UNITA_TECNICO_ECNONOMICHE TO ID_UNITA_TECNICO_ECONOMICHE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.4" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            GRANT
+            SELECT,INSERT,UPDATE,DELETE ON A4GT_UNITA_TECNICO_ECONOMICHE TO
+            ${user.writer};
+            GRANT SELECT ON A4GT_UNITA_TECNICO_ECONOMICHE TO ${user.reader};
+            GRANT
+            SELECT,INSERT,UPDATE,DELETE ON A4GT_DESTINAZIONE_USO TO
+            ${user.writer};
+            GRANT SELECT ON A4GT_DESTINAZIONE_USO TO ${user.reader};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_33F.5" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            ALTER TABLE A4GT_ATTIVITA_ATECO MODIFY ID_SEDE NULL;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.0" author="Gabriele Ninfa">
+
+		<dropForeignKeyConstraint baseTableName="A4GT_MODO_PAGAMENTO" constraintName="FK_PAGAMENTO_FASCICOLO" />
+
+		<dropForeignKeyConstraint baseTableName="A4GT_DETENZIONE" constraintName="FK_DETENZIONE_FASCICOLO" />
+
+		<dropPrimaryKey constraintName="PK_FASCICOLO" dropIndex="true" tableName="A4GT_FASCICOLO" />
+
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_FASCICOLO SET ID_VALIDAZIONE = 0;			
+		</sql>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_FASCICOLO" tableName="A4GT_FASCICOLO" tablespace="${tablespace.index}" />
+
+		<addColumn tableName="A4GT_MODO_PAGAMENTO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_MODO_PAGAMENTO SET ID_VALIDAZIONE = 0, FASCICOLO_ID_VALIDAZIONE = 0;
+		</sql>
+
+		<addForeignKeyConstraint baseColumnNames="ID_FASCICOLO, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_MODO_PAGAMENTO" constraintName="FK_PAGAMENTO_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<addColumn tableName="A4GT_DETENZIONE">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_DETENZIONE SET ID_VALIDAZIONE = 0, FASCICOLO_ID_VALIDAZIONE = 0;
+		</sql>
+
+		<addForeignKeyConstraint baseColumnNames="ID_FASCICOLO, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_DETENZIONE" constraintName="FK_DETENZIONE_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<rollback>
+			<dropForeignKeyConstraint baseTableName="A4GT_DETENZIONE" constraintName="FK_DETENZIONE_FASCICOLO" />
+
+			<dropColumn tableName="A4GT_DETENZIONE">
+				<column name="ID_VALIDAZIONE" />
+				<column name="FASCICOLO_ID_VALIDAZIONE" />
+			</dropColumn>
+
+			<dropForeignKeyConstraint baseTableName="A4GT_MODO_PAGAMENTO" constraintName="FK_PAGAMENTO_FASCICOLO" />
+
+			<dropColumn tableName="A4GT_MODO_PAGAMENTO">
+				<column name="ID_VALIDAZIONE" />
+				<column name="FASCICOLO_ID_VALIDAZIONE" />
+			</dropColumn>
+
+			<dropPrimaryKey constraintName="PK_FASCICOLO" dropIndex="true" tableName="A4GT_FASCICOLO" />
+
+			<dropColumn tableName="A4GT_FASCICOLO" columnName="ID_VALIDAZIONE" />
+
+			<addPrimaryKey columnNames="ID" constraintName="PK_FASCICOLO" tableName="A4GT_FASCICOLO" tablespace="${tablespace.index}" />
+
+			<addForeignKeyConstraint baseColumnNames="ID_FASCICOLO" baseTableName="A4GT_DETENZIONE" constraintName="FK_DETENZIONE_FASCICOLO" referencedColumnNames="ID" referencedTableName="A4GT_FASCICOLO" />
+
+			<addForeignKeyConstraint baseColumnNames="ID_FASCICOLO" baseTableName="A4GT_MODO_PAGAMENTO" constraintName="FK_PAGAMENTO_FASCICOLO" referencedColumnNames="ID" referencedTableName="A4GT_FASCICOLO" />
+		</rollback>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.1" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_REVOCA_IMMEDIATA">
+			<column name="MANDATO_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            UPDATE A4GT_REVOCA_IMMEDIATA SET MANDATO_ID_VALIDAZIONE = 0;
+        </sql>
+		<dropForeignKeyConstraint baseTableName="A4GT_REVOCA_IMMEDIATA" constraintName="FK_REV_IMM_MANDATO" />
+		<addColumn tableName="A4GT_MANDATO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            UPDATE A4GT_MANDATO SET ID_VALIDAZIONE = 0;
+        </sql>
+		<dropForeignKeyConstraint baseTableName="A4GT_MANDATO" constraintName="FK_MANDATO_DETENZIONE" />
+		<dropPrimaryKey constraintName="PK_DETENZIONE" dropIndex="true" tableName="A4GT_DETENZIONE" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_DETENZIONE" tableName="A4GT_DETENZIONE" tablespace="${tablespace.index}" />
+		<addForeignKeyConstraint baseColumnNames="ID, ID_VALIDAZIONE" baseTableName="A4GT_MANDATO" constraintName="FK_MANDATO_DETENZIONE" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_DETENZIONE" />
+		<dropPrimaryKey constraintName="PK_MANDATO" dropIndex="true" tableName="A4GT_MANDATO" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_MANDATO" tableName="A4GT_MANDATO" tablespace="${tablespace.index}" />
+		<addForeignKeyConstraint baseColumnNames="ID_MANDATO, MANDATO_ID_VALIDAZIONE" baseTableName="A4GT_REVOCA_IMMEDIATA" constraintName="FK_REV_IMM_MANDATO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_MANDATO" />
+		<dropPrimaryKey constraintName="PK_MODO_PAGAMENTO" dropIndex="true" tableName="A4GT_MODO_PAGAMENTO" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_MODO_PAGAMENTO" tableName="A4GT_MODO_PAGAMENTO" tablespace="${tablespace.index}" />
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_FASCICOLO ADD (foo VARCHAR2(16));
+            UPDATE A4GT_FASCICOLO SET foo = CUAA;
+            ALTER TABLE A4GT_FASCICOLO DROP COLUMN CUAA;
+            ALTER TABLE A4GT_FASCICOLO RENAME COLUMN foo TO CUAA;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.2" author="Gabriele Ninfa">
+		<addUniqueConstraint columnNames="ID_VALIDAZIONE, CUAA" constraintName="UIDX_FASCICOLO_IDVAL_CUAA" tableName="A4GT_FASCICOLO" />
+		<createIndex indexName="IDX_FASCICOLO_IDVAL" tableName="A4GT_FASCICOLO">
+			<column name="ID_VALIDAZIONE" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.3" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="IN_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.4" author="Massimo Nascivera">
+		<addNotNullConstraint tableName="A4GT_FASCICOLO" columnName="IN_VALIDAZIONE" defaultNullValue="0" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_34F.5" author="Massimo Nascivera">
+		<dropColumn tableName="A4GT_FASCICOLO">
+			<column name="IN_VALIDAZIONE" />
+		</dropColumn>
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DATA_VALIDAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="CF_VALIDAZIONE" type="${string.type}(16)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="NOMINATIVO_VALIDAZIONE" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.0" author="Massimo Nascivera">
+		<dropForeignKeyConstraint baseTableName="A4GT_CARICA" constraintName="FK_CARICA_PERSONA_GIURIDICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.1" author="Massimo Nascivera">
+		<dropForeignKeyConstraint baseTableName="A4GT_PERSONA_FISICA" constraintName="FK_ID_PERSONA_FISICA" />
+		<dropForeignKeyConstraint baseTableName="A4GT_PERSONA_GIURIDICA" constraintName="FK_ID_PERSONA_GIURIDICA" />
+		<dropForeignKeyConstraint baseTableName="A4GT_FASCICOLO" constraintName="FK_ID_FASCICOLO_PERSONA" />
+		<dropForeignKeyConstraint baseTableName="A4GT_ISCRIZIONE_SEZIONE" constraintName="FK_ISCRIZIONE_SEZIONE_PERSONA" />
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_UNITA_TECNICO_ECONOMICHE ADD (foo ${id.number.type});
+			UPDATE A4GT_UNITA_TECNICO_ECONOMICHE SET foo = ID_PERSONA;
+			ALTER TABLE A4GT_UNITA_TECNICO_ECONOMICHE DROP COLUMN ID_PERSONA;
+			ALTER TABLE A4GT_UNITA_TECNICO_ECONOMICHE RENAME COLUMN foo TO ID_PERSONA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.2" author="Massimo Nascivera">
+		<dropPrimaryKey constraintName="PK_PERSONA" dropIndex="true" tableName="A4GT_PERSONA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.3" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_PERSONA ADD (foo VARCHAR2(16));
+			UPDATE A4GT_PERSONA SET foo = CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA DROP COLUMN CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA RENAME COLUMN foo TO CODICE_FISCALE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.4" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_PERSONA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_PERSONA SET ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.5" author="Massimo Nascivera">
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_PERSONA" tableName="A4GT_PERSONA" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.6" author="Massimo Nascivera">
+		<addUniqueConstraint columnNames="ID_VALIDAZIONE, CODICE_FISCALE" constraintName="UIDX_PERSONA_IDVAL_CF" tableName="A4GT_PERSONA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.7" author="Massimo Nascivera">
+		<createIndex indexName="IDX_PERSONA_IDVAL" tableName="A4GT_PERSONA">
+			<column name="ID_VALIDAZIONE" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.8" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_PERSONA_FISICA SET ID_VALIDAZIONE = 0;
+		</sql>
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_PERSONA_GIURIDICA SET ID_VALIDAZIONE = 0;
+		</sql>
+		<addColumn tableName="A4GT_ISCRIZIONE_SEZIONE">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_ISCRIZIONE_SEZIONE SET ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.9" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_UNITA_TECNICO_ECONOMICHE">
+			<column name="PERSONA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_UNITA_TECNICO_ECONOMICHE SET PERSONA_ID_VALIDAZIONE = 0;
+		</sql>
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="PERSONA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO SET PERSONA_ID_VALIDAZIONE = 0;
+		</sql>
+		<addColumn tableName="A4GT_ISCRIZIONE_SEZIONE">
+			<column name="PERSONA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_ISCRIZIONE_SEZIONE SET PERSONA_ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.10" author="Massimo Nascivera">
+		<dropPrimaryKey constraintName="PK_PERSONA_FISICA" dropIndex="true" tableName="A4GT_PERSONA_FISICA" />
+		<dropPrimaryKey constraintName="PK_PERSONA_GIURIDICA" dropIndex="true" tableName="A4GT_PERSONA_GIURIDICA" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_PERSONA_FISICA" tableName="A4GT_PERSONA_FISICA" tablespace="${tablespace.index}" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_PERSONA_GIURIDICA" tableName="A4GT_PERSONA_GIURIDICA" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.11" author="Massimo Nascivera">
+		<addForeignKeyConstraint baseColumnNames="ID, ID_VALIDAZIONE" baseTableName="A4GT_PERSONA_FISICA" constraintName="FK_ID_PERSONA_FISICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA" />
+		<addForeignKeyConstraint baseColumnNames="ID, ID_VALIDAZIONE" baseTableName="A4GT_PERSONA_GIURIDICA" constraintName="FK_ID_PERSONA_GIURIDICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.12" author="Massimo Nascivera">
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA, PERSONA_ID_VALIDAZIONE" baseTableName="A4GT_FASCICOLO" constraintName="FK_ID_FASCICOLO_PERSONA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA" />
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA, PERSONA_ID_VALIDAZIONE" baseTableName="A4GT_ISCRIZIONE_SEZIONE" constraintName="FK_ISCRIZIONE_SEZIONE_PERSONA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA" />
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA, PERSONA_ID_VALIDAZIONE" baseTableName="A4GT_UNITA_TECNICO_ECONOMICHE" constraintName="FK_ID_UTE_PERSONA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.13" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_CARICA">
+			<column name="PERS_GIURIDICA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_CARICA SET PERS_GIURIDICA_ID_VALIDAZIONE = 0;
+		</sql>
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA_GIURIDICA, PERS_GIURIDICA_ID_VALIDAZIONE" baseTableName="A4GT_CARICA" constraintName="FK_CARICA_PERSONA_GIURIDICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA_GIURIDICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.14" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_ATTIVITA_ATECO">
+			<column name="PERSONA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            UPDATE A4GT_ATTIVITA_ATECO SET PERSONA_ID_VALIDAZIONE = 0;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_35F.15" author="Massimo Nascivera">
+		<dropPrimaryKey constraintName="PK_ISCRIZIONE_SEZIONE" dropIndex="true" tableName="A4GT_ISCRIZIONE_SEZIONE" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_ISCRIZIONE_SEZIONE" tableName="A4GT_ISCRIZIONE_SEZIONE" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.0" author="Gabriele Ninfa">
+		<dropPrimaryKey constraintName="PK_CARICA" dropIndex="true" tableName="A4GT_CARICA" />
+		<dropForeignKeyConstraint baseTableName="A4GT_CARICA" constraintName="FK_PERSONA_FISICA_CON_CARICA" />
+		<dropForeignKeyConstraint baseTableName="A4GT_CARICA" constraintName="FK_PERSONA_GIURIDICA_CARICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.1" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_CARICA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_PERSONA_GIURIDICA_CARICA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_CARICA SET ID_VALIDAZIONE = 0;
+			UPDATE A4GT_PERSONA_FISICA_CON_CARICA SET ID_VALIDAZIONE = 0;
+			UPDATE A4GT_PERSONA_GIURIDICA_CARICA SET ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.2" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_CARICA">
+			<column name="PERSONA_FISICA_CARICA_IDVAL" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="PERSONA_GIURIDICA_CARICA_IDVAL" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.3" author="Gabriele Ninfa">
+		<dropPrimaryKey constraintName="PK_PERSONA_GIURIDICA_CARICA" dropIndex="true" tableName="A4GT_PERSONA_GIURIDICA_CARICA" />
+		<dropPrimaryKey constraintName="PK_PERSONA_FISICA_CON_CARICA" dropIndex="true" tableName="A4GT_PERSONA_FISICA_CON_CARICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.4" author="Gabriele Ninfa">
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_CARICA" tableName="A4GT_CARICA" tablespace="${tablespace.index}" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_PERSONA_GIURIDICA_CARICA" tableName="A4GT_PERSONA_GIURIDICA_CARICA" tablespace="${tablespace.index}" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_PERSONA_FISICA_CON_CARICA" tableName="A4GT_PERSONA_FISICA_CON_CARICA" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.5" author="Gabriele Ninfa">
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA_FISICA_CON_CARICA, PERSONA_FISICA_CARICA_IDVAL" baseTableName="A4GT_CARICA" constraintName="FK_PERSONA_FISICA_CON_CARICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA_FISICA_CON_CARICA" />
+		<addForeignKeyConstraint baseColumnNames="ID_PERSONA_GIURIDICA_CARICA, PERSONA_GIURIDICA_CARICA_IDVAL" baseTableName="A4GT_CARICA" constraintName="FK_PERSONA_GIURIDICA_CARICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA_GIURIDICA_CARICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.6" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+			ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA ADD (foo VARCHAR2(255));
+			UPDATE A4GT_PERSONA_GIURIDICA_CARICA SET foo = CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA DROP COLUMN CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA RENAME COLUMN foo TO CODICE_FISCALE;
+		</sql>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+			ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA ADD (foo VARCHAR2(255));
+			UPDATE A4GT_PERSONA_FISICA_CON_CARICA SET foo = CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA DROP COLUMN CODICE_FISCALE;
+			ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA RENAME COLUMN foo TO CODICE_FISCALE;
+		</sql>
+		<addUniqueConstraint columnNames="ID_VALIDAZIONE, CODICE_FISCALE" constraintName="UIDX_PERS_GIUR_CARICA_IDVAL_CF" tableName="A4GT_PERSONA_GIURIDICA_CARICA" />
+		<addUniqueConstraint columnNames="ID_VALIDAZIONE, CODICE_FISCALE" constraintName="UIDX_PERS_FIS_CARICA_IDVAL_CF" tableName="A4GT_PERSONA_FISICA_CON_CARICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.7" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_CARICA SET PERSONA_FISICA_CARICA_IDVAL = 0, PERSONA_GIURIDICA_CARICA_IDVAL = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.8" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE a4gt_attivita_ateco SET persona_id_validazione = NULL WHERE id_sede IS NULL;
+		</sql>
+		<addColumn tableName="A4GT_ATTIVITA_ATECO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">                       
+			UPDATE A4GT_ATTIVITA_ATECO SET ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.10" author="Gabriele Ninfa">
+		<dropPrimaryKey constraintName="PK_ATTIVITA_ATECO" dropIndex="true" tableName="A4GT_ATTIVITA_ATECO" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_ATTIVITA_ATECO" tableName="A4GT_ATTIVITA_ATECO" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_36F.11" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_LOGGING">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.0" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_UNITA_TECNICO_ECONOMICHE">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_DESTINAZIONE_USO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_UNITA_TECNICO_ECONOMICHE SET ID_VALIDAZIONE = 0;
+			UPDATE A4GT_DESTINAZIONE_USO SET ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.1" author="Gabriele Ninfa">
+		<dropPrimaryKey constraintName="PK_DESTINAZIONE_USO" dropIndex="true" tableName="A4GT_DESTINAZIONE_USO" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_DESTINAZIONE_USO" tableName="A4GT_DESTINAZIONE_USO" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.2" author="Gabriele Ninfa">
+		<dropForeignKeyConstraint baseTableName="A4GT_ATTIVITA_ATECO" constraintName="FK_ATTIVITA_ATECO_UNITA_LOCALE" />
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_DESTINAZIONE_USO ADD (foo ${id.number.type});
+			UPDATE A4GT_DESTINAZIONE_USO SET foo = ID_UNITA_TECNICO_ECONOMICHE;
+			ALTER TABLE A4GT_DESTINAZIONE_USO DROP COLUMN ID_UNITA_TECNICO_ECONOMICHE;
+			ALTER TABLE A4GT_DESTINAZIONE_USO RENAME COLUMN foo TO ID_UNITA_TECNICO_ECONOMICHE;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.3" author="Gabriele Ninfa">
+		<dropPrimaryKey constraintName="PK_UNITA_LOCALE" dropIndex="true" tableName="A4GT_UNITA_TECNICO_ECONOMICHE" />
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_UNITA_LOCALE" tableName="A4GT_UNITA_TECNICO_ECONOMICHE" tablespace="${tablespace.index}" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.4" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_ATTIVITA_ATECO">
+			<column name="UNITA_TECNICO_ECONOMICHE_IDVAL" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_DESTINAZIONE_USO">
+			<column name="UNITA_TECNICO_ECONOMICHE_IDVAL" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_ATTIVITA_ATECO SET UNITA_TECNICO_ECONOMICHE_IDVAL = 0;
+			UPDATE A4GT_DESTINAZIONE_USO SET UNITA_TECNICO_ECONOMICHE_IDVAL = 0;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_37F.5" author="Gabriele Ninfa">
+		<addForeignKeyConstraint baseColumnNames="ID_UNITA_TECNICO_ECONOMICHE, UNITA_TECNICO_ECONOMICHE_IDVAL" baseTableName="A4GT_ATTIVITA_ATECO" constraintName="FK_ATTIVITA_ATECO_UNITA_LOCALE" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_UNITA_TECNICO_ECONOMICHE" />
+		<addForeignKeyConstraint baseColumnNames="ID_UNITA_TECNICO_ECONOMICHE, UNITA_TECNICO_ECONOMICHE_IDVAL" baseTableName="A4GT_DESTINAZIONE_USO" constraintName="FK_DEST_USO_UNITA_LOCALE" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_UNITA_TECNICO_ECONOMICHE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_38F.0" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">           
+            CREATE TABLE A4GT_LOGGING_VALIDAZIONE (
+            ID ${id.number.type} NOT NULL,
+            ID_VALIDAZIONE ${version.number.type},
+            VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+            UTENTE ${string.type}(500 CHAR) NOT NULL,
+            TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+            TABELLA ${string.type}(4000) NOT NULL,
+            ID_ENTITA NUMBER(19) NOT NULL,
+            DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+            CONSTRAINT A4GT_LOGGING_VALIDAZIONE_PK PRIMARY KEY (ID)
+            ) TABLESPACE ${tablespace.data};
+        </sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">            
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING_VALIDAZIONE TO ${user.writer};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_38F.1" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            INSERT INTO A4GT_LOGGING_VALIDAZIONE(ID, ID_VALIDAZIONE, VERSIONE, UTENTE, TIPO_EVENTO, TABELLA, ID_ENTITA, DT_EVENTO)
+            SELECT ID, ID_VALIDAZIONE, VERSIONE, UTENTE, TIPO_EVENTO, TABELLA, ID_ENTITA, DT_EVENTO
+            FROM A4GT_LOGGING
+            WHERE ID_VALIDAZIONE IS NOT NULL;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_38F.2" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+            DELETE FROM A4GT_LOGGING
+            WHERE ID_VALIDAZIONE IS NOT NULL;
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_38F.3" author="Massimo Nascivera">
+		<dropColumn tableName="A4GT_LOGGING">
+			<column name="ID_VALIDAZIONE" />
+		</dropColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_39F.0" author="Giustino De Vincentiis">
+		<addColumn tableName="A4GT_CARICA">
+			<column name="FIRMATARIO" type="${boolean.type}"></column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_CARICA SET FIRMATARIO = 0;
+		</sql>
+		<addNotNullConstraint tableName="A4GT_CARICA" columnName="FIRMATARIO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_39F.1" author="Marco Dalla Torre">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO SET DATA_APERTURA = SYSDATE WHERE DATA_APERTURA IS NULL;
+		</sql>
+		<addNotNullConstraint tableName="A4GT_FASCICOLO" columnName="DATA_APERTURA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_39F.2" author="Gabriele Ninfa">
+		<renameColumn tableName="A4GT_ATTIVITA_ATECO" oldColumnName="PERSONA_ID_VALIDAZIONE" newColumnName="SEDE_ID_VALIDAZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_39F.3" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="SCHEDA_VALIDAZIONE_FIRMATA" type="BLOB" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_40F.1" author="Marco Dalla Torre">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO SET STATO = 'ALLA_FIRMA_AZIENDA' WHERE STATO = 'CONTROLLATO';
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_40F.2" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="ID_PROTOCOLLO" type="${string.type}(255 CHAR)" />
+			<column name="DT_PROTOCOLLAZIONE" type="DATE" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_41F.0" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DT_AGGIORNAMENTO_FONTI_ESTERNE" type="DATE" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_42F.0" author="Giustino De Vincentiis">
+		<createTable tableName="A4GT_ORGANIZZAZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_ORGANIZZAZIONE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DENOMINAZIONE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addUniqueConstraint constraintName="UIDX_ORGANIZZAZIONE" columnNames="DENOMINAZIONE" tableName="A4GT_ORGANIZZAZIONE" tablespace="${tablespace.index}" validate="true" />
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GT_ORGANIZZAZIONE VALUES (NXTNBR.nextval, 0, 'Consorzio difesa produttori agricoli Co.Di.Pr.A');
+		</sql>
+
+		<createTable tableName="A4GT_FASCICOLO_ORGANIZZAZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_FASCICOLO_ORGANIZZAZIONE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ORGANIZZAZIONE_ID" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FASCICOLO_ORGANIZZAZIONE_1" referencedTableName="A4GT_ORGANIZZAZIONE" referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="UTENTE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DT_INIZIO_ASSOCIAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_FINE_ASSOCIAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_INSERIMENTO_ASSOCIAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_CANCELLAZIONE_ASSOCIAZIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_FASCICOLO_ORGANIZZAZIONE" constraintName="FK_FASCICOLO_ORGANIZZAZIONE_2" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_42F.1" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">            
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FASCICOLO_ORGANIZZAZIONE TO ${user.writer};
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ORGANIZZAZIONE TO ${user.writer};
+        </sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_42F.2" author="Giustino De Vincentiis">
+		<renameColumn tableName="A4GT_FASCICOLO_ORGANIZZAZIONE" newColumnName="UTENTE_INSERIMENTO" oldColumnName="UTENTE" />
+		<addColumn tableName="A4GT_FASCICOLO_ORGANIZZAZIONE">
+			<column name="UTENTE_CANCELLAZIONE" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_42F.3" author="Giustino De Vincentiis">
+		<addColumn tableName="A4GT_PERSONA_FISICA_CON_CARICA">
+			<column name="VERIFICA_CODICE_FISCALE" type="${string.type}(20)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_42F.4" author="Giustino De Vincentiis">
+
+		<addColumn tableName="A4GT_FASCICOLO_ORGANIZZAZIONE">
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_FASCICOLO_ORGANIZZAZIONE fo SET fo.CUAA = (select f.cuaa from a4gt_fascicolo f where f.id = fo.fascicolo_id and f.id_validazione = fo.fascicolo_id_validazione);
+		</sql>
+		<addNotNullConstraint tableName="A4GT_FASCICOLO_ORGANIZZAZIONE" columnName="CUAA" />
+
+		<dropForeignKeyConstraint baseTableName="A4GT_FASCICOLO_ORGANIZZAZIONE" constraintName="FK_FASCICOLO_ORGANIZZAZIONE_2" />
+		<dropColumn tableName="A4GT_FASCICOLO_ORGANIZZAZIONE" columnName="FASCICOLO_ID" />
+		<dropColumn tableName="A4GT_FASCICOLO_ORGANIZZAZIONE" columnName="FASCICOLO_ID_VALIDAZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_43F.1" author="Giustino De Vincentiis">
+		<createTable tableName="A4GT_DETENZIONE_IN_PROPRIO">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${id.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_DETENZIONE_IN_PROPRIO" tableName="A4GT_DETENZIONE_IN_PROPRIO" tablespace="${tablespace.index}" />
+		<addForeignKeyConstraint baseColumnNames="ID, ID_VALIDAZIONE" baseTableName="A4GT_DETENZIONE_IN_PROPRIO" constraintName="FK_IN_PROPRIO_DETENZIONE" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_DETENZIONE" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_DETENZIONE_IN_PROPRIO TO
+			${user.writer};
+			GRANT SELECT ON A4GT_DETENZIONE_IN_PROPRIO TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_46NF.0" author="Giustino De Vincentiis">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DT_CHIUSURA_TRASFERIMENTO_OP" type="DATE" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_47NF.0" author="Gabriele Ninfa">
+		<dropColumn tableName="A4GT_MODO_PAGAMENTO" columnName="DENOMINAZIONE" />
+		<addColumn tableName="A4GT_MODO_PAGAMENTO">
+			<column name="DENOMINAZIONE_ISTITUTO" type="${string.type}(400)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINAZIONE_FILIALE" type="${string.type}(400)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CITTA_FILIALE" type="${string.type}(200)">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_47NF.1" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_DOCUMENTO_IDENTITA">
+			<column name="ID" type="${id.number.type}"></column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUMERO" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPOLOGIA" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_RILASCIO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_SCADENZA" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DOCUMENTO" type="BLOB">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE" constraintName="PK_DOCUMENTO_IDENTITA" tableName="A4GT_DOCUMENTO_IDENTITA" tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_DOCUMENTO_IDENTITA" constraintName="FK_DOC_IDENTITA_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<createIndex indexName="IDX_DOC_IDENTITA_FASCICOLO" tableName="A4GT_DOCUMENTO_IDENTITA">
+			<column name="FASCICOLO_ID" />
+			<column name="FASCICOLO_ID_VALIDAZIONE" />
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_47NF.2" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DOCUMENTO_IDENTITA TO ${user.writer};
+			GRANT SELECT ON A4GT_DOCUMENTO_IDENTITA TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_49NF.0" author="Massimo Nascivera">
+		<createTable tableName="A4GT_CONTROLLO_COMPLETEZZA">
+			<column name="ID" type="${id.number.type}"></column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPO_CONTROLLO" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ESITO" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CONTROLLO" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_ESECUZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="UTENTE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="ID" constraintName="PK_CONTROLLO_COMPLETEZZA" tableName="A4GT_CONTROLLO_COMPLETEZZA" tablespace="${tablespace.index}" />
+
+		<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_CONTROLLO_COMPLETEZZA" constraintName="FK_CONTROLLO_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<createIndex indexName="IDX_CONTROLLO_FASCICOLO" tableName="A4GT_CONTROLLO_COMPLETEZZA">
+			<column name="FASCICOLO_ID" />
+			<column name="FASCICOLO_ID_VALIDAZIONE" />
+		</createIndex>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.writer};
+			GRANT SELECT ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_49NF.1" author="Massimo Nascivera">
+		<dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="DATA_ESECUZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_49NF.2" author="Massimo Nascivera">
+		<dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="ESITO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_50NF.0" author="Massimo Nascivera">
+		<addColumn tableName="A4GT_CARICA">
+			<column name="PERSONA_FISICA_ID" type="${id.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_CARICA">
+			<column name="PERSONA_FISICA_ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+		<addForeignKeyConstraint baseColumnNames="PERSONA_FISICA_ID, PERSONA_FISICA_ID_VALIDAZIONE" baseTableName="A4GT_CARICA" constraintName="FK_CARICA_PERSONA_FISICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA_FISICA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_51NF.0" author="Gabriele Ninfa">
+		<dropColumn tableName="A4GT_FASCICOLO" columnName="CF_VALIDAZIONE" />
+		<renameColumn tableName="A4GT_FASCICOLO" newColumnName="UTENTE_VALIDAZIONE" oldColumnName="NOMINATIVO_VALIDAZIONE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_56NF.0" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DATA_CHIUSURA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_56NF.1" author="Giustino De Vincentiis">
+		<createTable tableName="A4GT_SOSPENSIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_SOSPENSIONE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO_SOSPENSIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="MOTIVAZIONE_INIZIO_SOSPENSIONE" type="${string.type}(4000)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE_SOSPENSIONE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="MOTIVAZIONE_FINE_SOSPENSIONE" type="${string.type}(4000)">
+				<constraints nullable="true" />
+			</column>
+			<column name="UTENTE" type="${string.type}(100)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_SOSPENSIONE" constraintName="FK_SOSPENSIONE_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<createIndex indexName="IDX_SOSPENSIONE_FASCICOLO" tableName="A4GT_SOSPENSIONE">
+			<column name="FASCICOLO_ID" />
+			<column name="FASCICOLO_ID_VALIDAZIONE" />
+		</createIndex>
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_SOSPENSIONE TO ${user.writer};
+			GRANT SELECT ON A4GT_SOSPENSIONE TO ${user.reader};
+		</sql>
+
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_58NF.0" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_PERSONA_FISICA_CON_CARICA DROP CONSTRAINT UIDX_PERS_FIS_CARICA_IDVAL_CF;
+			ALTER TABLE A4GT_PERSONA_GIURIDICA_CARICA DROP CONSTRAINT UIDX_PERS_GIUR_CARICA_IDVAL_CF;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_SOSPENSIONE RENAME TO A4GT_MOVIMENTAZIONE_FASCICOLO;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.1" author="Bruno Conetta">
+		<renameColumn newColumnName="DATA_INIZIO" oldColumnName="DATA_INIZIO_SOSPENSIONE" tableName="A4GT_MOVIMENTAZIONE_FASCICOLO" />
+		<renameColumn newColumnName="DATA_FINE" oldColumnName="DATA_FINE_SOSPENSIONE" tableName="A4GT_MOVIMENTAZIONE_FASCICOLO" />
+		<renameColumn newColumnName="MOTIVAZIONE_INIZIO" oldColumnName="MOTIVAZIONE_INIZIO_SOSPENSIONE" tableName="A4GT_MOVIMENTAZIONE_FASCICOLO" />
+		<renameColumn newColumnName="MOTIVAZIONE_FINE" oldColumnName="MOTIVAZIONE_FINE_SOSPENSIONE" tableName="A4GT_MOVIMENTAZIONE_FASCICOLO" />
+
+		<addColumn tableName="A4GT_MOVIMENTAZIONE_FASCICOLO">
+			<column name="TIPO" type="${string.type}(30)">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.2" author="Bruno Conetta">
+		<dropColumn tableName="A4GT_FASCICOLO" columnName="DATA_CHIUSURA" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.3" author="Bruno Conetta">
+		<dropNotNullConstraint tableName="A4GT_MOVIMENTAZIONE_FASCICOLO" columnName="MOTIVAZIONE_INIZIO" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.4" author="Ninfa Gabriele">
+		<addColumn tableName="A4GT_PERSONA_FISICA">
+			<column name="DATA_MORTE" type="DATE" />
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_60.5" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_EREDE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_EREDE" primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="PERSONA_FISICA_ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="PERSONA_FISICA_ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="FASCICOLO_ID_VALIDAZIONE" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="IBAN" type="${string.type}(34)">
+				<constraints nullable="false" />
+			</column>
+			<column name="BIC" type="${string.type}(11)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DENOMINAZIONE_ISTITUTO" type="${string.type}(400)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DENOMINAZIONE_FILIALE" type="${string.type}(400)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CITTA_FILIALE" type="${string.type}(200)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="PERSONA_FISICA_ID, PERSONA_FISICA_ID_VALIDAZIONE" baseTableName="A4GT_EREDE" constraintName="FK_EREDE_PERSONA_FISICA" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_PERSONA_FISICA" />
+
+		<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" baseTableName="A4GT_EREDE" constraintName="FK_EREDE_FASCICOLO" referencedColumnNames="ID, ID_VALIDAZIONE" referencedTableName="A4GT_FASCICOLO" />
+
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_EREDE TO ${user.writer};
+			GRANT SELECT ON A4GT_EREDE TO ${user.reader};
+			CREATE INDEX IDX_EREDE_PERSONA_FISICA ON A4GT_EREDE (PERSONA_FISICA_ID,
+			PERSONA_FISICA_ID_VALIDAZIONE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_EREDE_FASCICOLO ON A4GT_EREDE (FASCICOLO_ID,
+			FASCICOLO_ID_VALIDAZIONE) TABLESPACE ${tablespace.index};
+		</sql>
+
+		<addUniqueConstraint columnNames="PERSONA_FISICA_ID, PERSONA_FISICA_ID_VALIDAZIONE, FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE" constraintName="UIDX_EREDE_FASCICOLO" tableName="A4GT_EREDE" />
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_61.0" author="Giustino De Vincentiis">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_EREDE DROP (IBAN, BIC, DENOMINAZIONE_ISTITUTO, DENOMINAZIONE_FILIALE, CITTA_FILIALE);
+			ALTER TABLE A4GT_EREDE ADD FIRMATARIO NUMBER(1,0) DEFAULT 0 NOT NULL;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_63.0" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_FASCICOLO_STATO ON A4GT_FASCICOLO (STATO) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_63.1" author="Riccardo Sommavilla">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GT_CAA (ID, VERSIONE, CODICE_FISCALE, DENOMINAZIONE, PARTITA_IVA, FORMA_GIURIDICA, ATTO_RICONOSCIMENTO, TOPONIMO, VIA, NUMERO_CIVICO, CAP, PROVINCIA, COMUNE, EMAIL) values (NXTNBR.nextval, 0, '13482761007', 'CAA CAF AGRI SRL', '13482761007', 'SOCIETA A RESPONSABILITA LIMITATA', 'determinazione dalla Regione Lazio n. G10565 del 04 settembre 2015', 'VIA NIZZA, 154', 'VIA NIZZA', '154', '00198', 'RM', 'ROMA', 'caacafagri@pec.caacafagri.com');
+			INSERT INTO A4GT_SPORTELLO (ID, VERSIONE, IDENTIFICATIVO, DENOMINAZIONE, COMUNE, ID_CAA, INDIRIZZO, CAP, PROVINCIA, TELEFONO, EMAIL) VALUES (NXTNBR.nextval, 0, 71, 'CAA CAF AGRI', 'SAN BONIFACIO', (SELECT ID FROM A4GT_CAA WHERE PARTITA_IVA = '13482761007'), 'PIAZZA MATTEOTTI 11', '37047', 'VR', '0456100277', 'vr-224@caacafagri.com');
+		</sql>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_3N.1" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTPDFID
+			START
+			WITH 3500000
+			MAXVALUE 999999999999999999999999999
+			MINVALUE 3500000
+			NOCYCLE
+			NOCACHE
+			ORDER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_3N.2" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_FASCICOLO ADD SCHEDA_VALIDAZIONE BLOB;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_3N.3" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_FASCICOLO ADD ID_SCHEDA_VALIDAZIONE NUMBER(10,0);
+		</sql>
+	</changeSet>	
+	
+	<changeSet id="FASCICOLO_3N.4" author="Alessandro Porcu">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_MODO_PAGAMENTO ADD CERTIFICATO_PA NUMBER(1,0);
+		</sql>
+	</changeSet>	
+
+	<changeSet id="FASCICOLO_3N.4" author="Angelo Vacca">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON NXTPDFID TO ${user.writer};
+			GRANT SELECT ON NXTPDFID TO ${user.reader};
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

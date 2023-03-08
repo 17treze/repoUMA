@@ -1,0 +1,49 @@
+<p-dialog
+  header="{{ 'FAS_ANA.COMPLETA_TRASFERIMENTO_DA_APPAG' | translate }}"
+  class="dialog-rappr-legale"
+  [(visible)]="popupVisible"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}"
+  (onHide)="closePopup()">
+  <div class="boxgrey p-grid">
+    <div class="ui-g-6">
+      <strong>{{'Data chiusura iter di trasferimento' | translate }}:</strong>
+    </div>
+    <div class="ui-g-6">
+      <p-calendar
+        class="white-background-icon"
+        dateFormat="dd/mm/yy"
+        [(ngModel)]="dataChiusura"
+        [showIcon]="true"
+        [maxDate]="maxDate"
+        [readonlyInput]="true"
+        appendTo="body"
+        required>
+      </p-calendar>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="ui-g-6 text-left">
+      <button
+        pButton
+        type="button"
+        label="{{ 'ANNULLA' | translate }}"
+        (click)="closePopup()"
+        class="btn-green"
+        style="min-height:42px; box-shadow:none">
+      </button>
+    </div>
+    <div class="ui-g-6 text-right">
+      <button
+        pButton
+        type="submit"
+        (click)="onCompletaTrasferimento()"
+        label="{{ 'CONFERMA' | translate }}"
+        class="btn-green"
+        style="min-height:42px; box-shadow:none; margin-right:10px;">
+      </button>
+    </div>
+  </div>
+</p-dialog>

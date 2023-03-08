@@ -1,0 +1,48 @@
+<p-dialog
+  [(visible)]="isPopupVisible"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  (onHide)="close()">
+  <p-header>
+    {{'FAS_ANA.PASSA_A' | translate}}...
+  </p-header>
+  
+  <div class="p-grid p-dir-col">
+    <div class="p-col">
+      <button
+        *ngIf="isFascicoloAllaFirmaAziendaOrAllaFirmaCaa()"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.STATO.IN_AGGIORNAMENTO' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="changeStatusInAggiornamentoFascicolo()">
+      </button>
+    </div>
+    <div class="p-col">
+      <button
+        *ngIf="isFascicoloInAggiornamentoOrAllaFirmaCaa()"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.STATO.ALLA_FIRMA_AZIENDA' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="openPopupSchedaValidazione()">
+      </button>
+    </div>
+    <div class="p-col">
+      <button
+        *ngIf="isUtenteCaaAndFascicoloInAggiornamento()"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.STATO.VALIDATO' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="openPopupSchedaValidazioneFirmaCaaAzienda()">
+      </button>
+    </div>
+  </div>
+</p-dialog>

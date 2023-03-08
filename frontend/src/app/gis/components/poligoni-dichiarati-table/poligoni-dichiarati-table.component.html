@@ -1,0 +1,134 @@
+<!-- Tabella ridotta -->
+<div
+    id="poligoniDichiaratiTable"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    *ngIf="!poligoniDichiaratiEvent.showDialog"
+    (scrolled)="onScroll()"
+    [immediateCheck]="true"
+    [scrollWindow]="false"
+    style="height: 250px"
+>
+    <div
+        *ngIf="
+            poligoniDichiaratiEvent.poligoni &&
+            poligoniDichiaratiEvent.poligoni.length > 0 &&
+            !poligoniDichiaratiEvent.showDialog
+        "
+        class="icon-open-dettaglio"
+        (click)="openDialogDichiarati(detailResults)"
+    >
+        <i class="extWindow fa fa-external-link-alt"></i>
+    </div>
+    <p-table
+        class="tablePoligoniWorkspace"
+        id="tablePoligoniWorkspace"
+        [value]="poligoniDichiaratiEvent.poligoni"
+        [customSort]="true"
+        [scrollable]="true"
+        [autoLayout]="true"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="contentHeaderTable td-zoom" style="width: 30px"></th>
+                <th class="contentHeaderTable td-suolo">Suolo D/R</th>
+                <th class="contentHeaderTable td-stato">Stato</th>
+                <th class="contentHeaderTable td-esito">Esito</th>
+                <th class="contentHeaderTable td-notifica">
+                    <i class="fas fa-bell" style="color: #fff"></i>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-poligono>
+            <tr style="text-align: center">
+                <td class="td-zoom">
+                    <span
+                        pTooltip="{{ poligono.id }}"
+                        tooltipPosition="top"
+                        (click)="centerMap(poligono.extent)"
+                    >
+                        <i
+                            class="fa fa-crosshairs zoom-icon-dichiarati"
+                            style="
+                                font-size: 20px !important;
+                                background: transparent !important;
+                                color: #00985b !important;
+                            "
+                            aria-hidden="true"
+                        ></i>
+                    </span>
+                </td>
+                <td class="td-suolo">
+                    {{ poligono.codiRilePrevalenteDich }} /
+                    {{ poligono.codiRilePrevalenteRil }}
+                </td>
+                <td class="td-stato">
+                    {{
+                        poligono.statoLavorazione
+                            | decodeEnumPipe: listaStatoLavorazione
+                    }}
+                </td>
+                <td class="td-esito">
+                    <span
+                        pTooltip="{{
+                            poligono.esito
+                                | decodeEnumPipe: listaEsitoLavorazione
+                        }}"
+                        tooltipPosition="top"
+                    >
+                        <span
+                            *ngIf="poligono.esito === 'DA_LAVORARE'"
+                            style="
+                                background: #70b8d5;
+                                border-radius: 100%;
+                                padding: 0 5px;
+                            "
+                        >
+                            <i
+                                class="fas fa-pencil-alt"
+                                [ngClass]="poligono.esito"
+                            ></i>
+                        </span>
+                        <span *ngIf="poligono.esito === 'APPROVATO'">
+                            <i
+                                class="fas fa-check-circle"
+                                [ngClass]="poligono.esito"
+                            ></i>
+                        </span>
+                        <span *ngIf="poligono.esito === 'RESPINTO'">
+                            <i
+                                class="fas fa-minus-circle"
+                                [ngClass]="poligono.esito"
+                            ></i>
+                        </span>
+                        <span *ngIf="poligono.esito === 'PARZIALE'">
+                            <i
+                                class="fas fa-adjust"
+                                [ngClass]="poligono.esito"
+                            ></i>
+                        </span>
+                    </span>
+                </td>
+                <td class="td-notifica">
+                    <span pTooltip="Nuova notifica" tooltipPosition="top">
+                        <!-- IF (profilo=BO && poligono.nuovaModificaCaa ) || (profilo=CAA && poligono.nuovaModificaBo)-->
+                        <span
+                            *ngIf="
+                                (profiloUtente.profilo === 'caa' &&
+                                    poligono.nuovaModificaBo) ||
+                                (profiloUtente.profilo != 'caa' &&
+                                    poligono.nuovaModificaCaa)
+                            "
+                        >
+                            <i
+                                class="fas fa-exclamation-circle"
+                                style="font-size: 20px; color: #ffa600"
+                            ></i>
+                        </span>
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

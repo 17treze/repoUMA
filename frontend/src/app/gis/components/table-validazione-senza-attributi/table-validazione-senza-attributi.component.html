@@ -1,0 +1,46 @@
+<div *ngIf="TableValidazioneSenzaAttributiInput"
+    [ngClass]="{'adlOverflow': TableValidazioneSenzaAttributiInput.length < 10}">
+    <p-table class="tablePoligoniWorkspace" id="tablePoligoniWorkspace"
+        [value]="TableValidazioneSenzaAttributiInput"
+        dataKey="id" [scrollable]="true" scrollHeight="425px" [loading]="loading" [autoLayout]="true">
+        <ng-template pTemplate="header">
+            <th class="contentHeaderTable" *ngFor="let col of columns" [style.width]="col.width"
+                [pSortableColumn]="col.field" [ngClass]="col.class">
+                {{col.header}}
+            </th>
+
+        </ng-template>
+
+        <ng-template pTemplate="body" let-poligono let-ri="rowIndex">
+            <tr style="text-align: center;">
+                <td 
+                    style="padding: 0px !important; width:10%">
+                    <div id="lavorazioneWorkspace-id">
+                        <span (click)="centerMap(poligono);" pTooltip="{{poligono.id}}" tooltipPosition="right">
+                            <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </td>
+
+                <td style="padding: 0px !important; width: 25%">
+                   
+                    <span pTooltip="{{poligono.codUsoSuoloWorkspaceLavSuolo.descrizione}}" tooltipPosition="top">
+                        {{poligono.codUsoSuoloWorkspaceLavSuolo.codUsoSuolo}}</span>
+                </td>
+
+                <td style="padding: 0px !important; width: 25%">
+                    
+                    <span pTooltip="{{poligono.statoColtWorkspaceLavSuolo.descrizione}}" tooltipPosition="top">
+                        {{poligono.statoColtWorkspaceLavSuolo.statoColt}}</span>
+                </td>
+
+                <td style="width: 40%; text-align: right;">
+                    <span>{{ poligono.area | areaFormatPipe}}</span>
+                </td>
+
+
+            </tr>
+
+        </ng-template>
+    </p-table>
+</div>

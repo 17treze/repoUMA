@@ -1,0 +1,493 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+
+        <!--E' presente un intervento tra: 310-311-322 -->
+        <p-accordion *ngIf="isProduzioneLatte() && showProduzione">
+          <p-accordionTab header="PRODUZIONE LATTE">
+            <h5 class="h5Title">Produzione e Analisi Latte</h5>
+            <table class="table table-bordered tableBorder">
+              <tbody>
+                <tr>
+                  <th scope="row">MESI</th>
+                  <td class="tdAnalisiLatte" *ngFor="let mese of mesi"><b>{{mese}}</b></td>
+                </tr>
+                <tr>
+                  <th scope="row">PRODUZIONE</th>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.gennaio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.febbraio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.marzo==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.aprile==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.maggio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.giugno==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.luglio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.agosto==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.settembre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.ottobre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.novembre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiProduzione.dicembre==true ? 'Si' : 'No'}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">ANALISI</th>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.gennaio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.febbraio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.marzo==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.aprile==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.maggio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.giugno==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.luglio==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.agosto==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.settembre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.ottobre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.novembre==true ? 'Si' : 'No'}}</td>
+                  <td class="tdAnalisiLatte">{{produzioneLatte.mesiAnalisi.dicembre==true ? 'Si' : 'No'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 class="h5Title">Valori Medi</h5>
+            <table class="table tableBorder table-striped">
+              <div style="text-align: center" *ngIf="noAnalisi">
+                Analisi non presente
+              </div>
+              <tbody *ngIf="!noAnalisi">
+                <tr>
+                  <th scope="row" class="valoriMediTitle">Cellule Somatiche</th>
+                  <td class="valoriMedi">{{produzioneLatte.tenoreCellule | number : '1.2-2'}} litri</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="valoriMediTitle">Carica Batterica</th>
+                  <td class="valoriMedi">{{produzioneLatte.tenoreBatteri | number : '1.2-2'}} litri</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="valoriMediTitle">Contenuto Proteine</th>
+                  <td class="valoriMedi">{{produzioneLatte.contenutoProteine | number : '1.2-2'}} grammi</td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 class="h5Title">Registrazione Alpeggio</h5>
+            <table class="table tableBorder table-striped">
+              <div style="text-align: center" *ngIf="alpeggi==null">
+                Alpeggio non presente
+              </div>
+              <tbody *ngIf="alpeggi!=null">
+                <tr *ngFor="let alpeggio of alpeggi">
+                  <th scope="row">Dal: </th>
+                  <td class="valoriMedi tdDataAlpeggio">{{alpeggio.dtInizio}}</td>
+                  <th scope="row">Al: </th>
+                  <td class="valoriMedi">{{alpeggio.dtFine}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </p-accordionTab>
+        </p-accordion>
+
+        <!--E' presente l'intervento 318-->
+        <p-accordion *ngIf="isEtichettatura()">
+          <p-accordionTab header="ETICHETTATURA">
+            <table class="table tableBorder table-striped">
+              <div style="text-align: center" *ngIf="etichettature==null">
+                Etichettatura non presente
+              </div>
+              <tbody *ngIf="etichettature!=null">
+                <tr>
+                  <th scope="row">Codice Asl</th>
+                  <th>Dal</th>
+                  <th>Al</th>
+                </tr>
+                <tr *ngFor="let etichettatura of etichettature">
+                  <td scope="row">{{etichettatura.codiceAsl}}</td>
+                  <td>
+                    {{etichettatura.dtInizioValidita == null ? '-' : (etichettatura.dtInizioValidita | date:'dd-MM-yyyy') }}
+                  </td>
+                  <td>
+                    {{etichettatura.dtFineValidita   == null ? '-' : (etichettatura.dtFineValidita | date:'dd-MM-yyyy') }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </p-accordionTab>
+        </p-accordion>
+
+        <hr *ngIf="isProduzioneLatte() || isEtichettatura()">
+
+        <p-accordion *ngFor="let allevamento of this.allevamenti">
+          <p-accordionTab
+            header="{{allevamento.datiAllevamento.descrizioneAllevamento}} - {{allevamento.datiAllevamento.codiceAllevamento}} - {{allevamento.codiceIntervento}} - Numero Capi: {{allevamento.richiesteAllevamentoDuEsito.length}}"
+            [selected]="false">
+            <div class="globalfilter">
+              <i class="material-icons">search</i>
+              <input type="text" pInputText size="50" placeholder="Ricerca..."
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+            <p-table #dt [columns]="cols" [value]="allevamento.richiesteAllevamentoDuEsito" [autoLayout]="true"
+              [paginator]="true" [rows]="elementiPagina" [responsive]="true" dataKey="codiceCapo">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th style="width: 3em"></th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.header"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioAllevamenti let-expanded="expanded" let-columns="columns">
+                <tr>
+                  <td>
+                    <a href="#" [pRowToggler]="dettaglioAllevamenti">
+                      <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    </a>
+                  </td>
+                  <td>{{dettaglioAllevamenti.codiceCapo}}</td>
+                  <td>{{allevamento.codiceSpecie}}</td>
+                  <td>{{dettaglioAllevamenti.esito}}</td>
+                  <td>{{dettaglioAllevamenti.messaggio}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="rowexpansion" let-dettaglioAllevamenti let-columns="columns">
+
+                <ng-template [ngIf]="isInterventoBovini(dettaglioAllevamenti.capoBdn.intervento)">
+                  <tr>
+                    <td [attr.colspan]="columns.length + 1">
+                      <!-- Informazioni per i capi per cui è stato richiesto il sostegno alla zootecnia bovina -->
+                  <tr>
+                    <th>Dati identificativi</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.codice}}</td>
+                  </tr>
+                  <tr>
+                    <td>Razza</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.razzaCodice}}</td>
+                  </tr>
+                  <tr>
+                    <td>La data di nascita del capo</td>
+                    <td>
+                      {{dettaglioAllevamenti.capoBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.dtNascita | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati identificativi dei vitelli del primo parto e di registrazione della loro nascita</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.codVitello}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di nascita del vitello</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtNascita | date:
+                        "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Gemello</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.tipoOrigine}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di registrazione della nascita</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtInserimentoBdnNascita ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtInserimentoBdnNascita | date:
+                        "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Registarzione della nascita delegata</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.flagDelegatoNascitaVitello}}</td>
+                  </tr>
+                  <tr>
+                    <td>Marcatura prepagata</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.flagProrogaMarcatura}}</td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati di registrazione della movimentazione</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Data di ingresso della vacca nell’allevamento</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn && dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtIngresso ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtIngresso | date:
+                        "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di comunicazione all’autorità competente dell’ingresso</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn && dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtComAutoritaIngresso ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtComAutoritaIngresso | date:
+                        "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di registrazione in BDN dell’ingresso</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn && dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtInserimentoBdnIngresso ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn[0].vaccaDtInserimentoBdnIngresso | date:
+                        "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Esito del controllo</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Esito</td>
+                    <td>{{dettaglioAllevamenti.esito}}</td>
+                  </tr>
+                  </td>
+                  </tr>
+                </ng-template>
+                <!-- Informazioni per i capi per cui è stato richiesto il sostegno alla zootecnia bovina in allevamenti di montagna -->
+                <ng-template [ngIf]="isAllevamentoMontagna(dettaglioAllevamenti.capoBdn.intervento)">
+                  <tr>
+                    <td [attr.colspan]="columns.length + 1">
+                  <tr>
+                    <th>Dati identificativi</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.codice}}</td>
+                  </tr>
+                  <tr>
+                    <td>Razza</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.razzaCodice}}</td>
+                  </tr>
+                  <tr>
+                    <td>La data di nascita del capo</td>
+                    <td>
+                      {{dettaglioAllevamenti.capoBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.dtNascita | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati identificativi dei vitelli del primo parto e di registrazione della loro nascita</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.codVitello}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di nascita del vitello</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtNascita | date:
+                            "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Gemello</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.tipoOrigine}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di registrazione della nascita</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtInserimentoBdnNascita ? (dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.dtInserimentoBdnNascita | date:
+                            "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Registarzione della nascita delegata</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.flagDelegatoNascitaVitello}}</td>
+                  </tr>
+                  <tr>
+                    <td>Marcatura prepagata</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.capoLatteBdn.vitelloBdn.flagProrogaMarcatura}}</td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Lista delle detenzioni che sono state valutate per il raggiungimento dei sei mesi in zone
+                      montane</th>
+                    <th></th>
+                  </tr>
+
+                  <tr>
+                    <td *ngFor="let detenzione of dettaglioAllevamenti.capoBdn.capoLatteBdn.detenzioniBdn">
+                  <tr>
+                    <th>Periodo di detenzione</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Data di inizio detenzione</td>
+                    <td>
+                      {{detenzione.dtInizioDetenzione ? (detenzione.dtInizioDetenzione | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Data di fine detenzione</td>
+                    <td>
+                      {{detenzione.dtFineDetenzione ? (detenzione.dtFineDetenzione | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati identificativi dell'allevamento</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Cuaa dell'azienda</td>
+                    <td>{{detenzione.cuaa}}</td>
+                  </tr>
+                  <tr>
+                    <td>Codice asl</td>
+                    <td>{{detenzione.codiceAsl}}</td>
+                  </tr>
+                  <tr>
+                    <td>Allevamento di montagna</td>
+                    <td>{{detenzione.allevamentoMontagna == true ? 'SI' : 'NO'}}</td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati di registrazione della movimentazione</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Data di ingresso della vacca nell’allevamento</td>
+                    <td>
+                      {{detenzione.vaccaDtIngresso ? (detenzione.vaccaDtIngresso | date:"dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Data di comunicazione all’autorità competente dell’ingresso</td>
+                    <td>
+                      {{detenzione.vaccaDtComAutoritaIngresso ? (detenzione.vaccaDtComAutoritaIngresso | date:"dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Data di registrazione in BDN dell’ingresso</td>
+                    <td>
+                      {{detenzione.vaccaDtInserimentoBdnIngresso ? (detenzione.vaccaDtInserimentoBdnIngresso | date:"dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+                  </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Esito del controllo</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Esito</td>
+                    <td>{{dettaglioAllevamenti.esito}}</td>
+                  </tr>
+                  </td>
+                  </tr>
+                </ng-template>
+                <!-- Informazioni per i capi per cui è stato richiesto il sostegno alla macellazione -->
+                <ng-template [ngIf]="isInterventoMacellati(dettaglioAllevamenti.capoBdn.intervento)">
+                  <tr>
+                    <td [attr.colspan]="columns.length + 1">
+                  <tr>
+                    <th>Dati identificativi</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.codice}}</td>
+                  </tr>
+                  <tr>
+                    <td>Razza</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.razzaCodice}}</td>
+                  </tr>
+                  <tr>
+                    <td>La data di nascita del capo</td>
+                    <td>
+                      {{dettaglioAllevamenti.capoBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.dtNascita | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati di registrazione della movimentazione</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td *ngFor="let detenzione of dettaglioAllevamenti.capoBdn.capoMacellatoBdn.detenzioniBdn">
+                  <tr>
+                    <td>Data di ingresso della vacca nell’allevamento</td>
+                    <td>{{detenzione.vaccaDtIngresso  ? (detenzione.vaccaDtIngresso | date:
+                                              "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di comunicazione all’autorità competente dell’ingresso</td>
+                    <td>{{detenzione.vaccaDtComAutoritaIngresso ? (detenzione.vaccaDtComAutoritaIngresso | date:
+                                              "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <tr>
+                    <td>Data di registrazione in BDN dell’ingresso</td>
+                    <td>{{detenzione.vaccaDtInserimentoBdnIngresso ? (detenzione.vaccaDtInserimentoBdnIngresso | date:
+                                              "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Dati di detenzione in stalla</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Data di uscita del capo dall’allevamento</td>
+                    <td>{{detenzione.dtUscita ? (detenzione.dtUscita | date: "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  </tr>
+                  <br>
+                  </td>
+                  </tr>
+
+                  <tr>
+                    <th>Esito del controllo</th>
+                    <th></th>
+                  </tr>
+
+                  <tr>
+                    <td>Esito</td>
+                    <td>{{dettaglioAllevamenti.esito}}</td>
+                  </tr>
+                  </td>
+                  </tr>
+                </ng-template>
+                <ng-template [ngIf]="isInterventoOvicaprini(dettaglioAllevamenti.capoBdn.intervento)">
+                  <tr>
+                    <td [attr.colspan]="columns.length + 1">
+                  <tr>
+                    <th>Dati identificativi</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Marca auricolare</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.codice}}</td>
+                  </tr>
+                  <tr>
+                    <td>Razza</td>
+                    <td>{{dettaglioAllevamenti.capoBdn.razzaCodice}}</td>
+                  </tr>
+                  <tr>
+                    <td>La data di nascita del capo</td>
+                    <td>
+                      {{dettaglioAllevamenti.capoBdn.dtNascita ? (dettaglioAllevamenti.capoBdn.dtNascita | date: "dd/MM/yyyy") : intestazioni.nd}}
+                    </td>
+                  </tr>
+                  <br>
+
+                  <tr>
+                    <th>Esito del controllo</th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>Esito</td>
+                    <td>{{dettaglioAllevamenti.esito}}</td>
+                  </tr>
+
+                  </td>
+                  </tr>
+                </ng-template>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+        <div *ngIf='(this.allevamenti.length == 0)'>
+          Nessun controllo eseguito
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

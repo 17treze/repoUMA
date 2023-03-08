@@ -1,0 +1,6 @@
+<div class="select-campagna" style="margin: -1px 0px;">
+  <label>Campagna</label>
+  <select p-dropdown class="form-control custom-select full" [(ngModel)]="annoCampagnaSelezionato">
+    <option *ngFor="let anno of anno_campagna" [ngValue]="anno.value">{{anno.label}}</option>
+  </select>
+</div>

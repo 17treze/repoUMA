@@ -1,0 +1,1312 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Dettaglio completo impresa",
+        "esito": "OK"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": {
+            "estremiimpresa": {
+                "denominazione": "FERRARI F.LLI LUNELLI S.P.A (IN BREVE FERRARI S.P.A.)",
+                "codicefiscale": "00123890220",
+                "partitaiva": "00123890220",
+                "formagiuridica": {
+                    "cformagiuridica": "AU",
+                    "descrizione": "SOCIETA' PER AZIONI CON SOCIO UNICO"
+                },
+                "datiiscrizioneri": {
+                    "numerori": "TN205-2912",
+                    "data": "19960219",
+                    "sezioni": {
+                        "sezione": [
+                            {
+                                "csezione": "O",
+                                "descrizione": "ORDINARIA",
+                                "dtiscrizione": "19960219",
+                                "coltdiretto": null
+                            },
+                            {
+                                "csezione": "G",
+                                "descrizione": "IMPRESA AGRICOLA",
+                                "dtiscrizione": "20010528",
+                                "coltdiretto": null
+                            }
+                        ]
+                    }
+                },
+                "datiiscrizionerea": [
+                    {
+                        "nrea": "76693",
+                        "cciaa": "TN",
+                        "flagsede": "SI",
+                        "itrasferimentosede": null,
+                        "faggiornamento": null,
+                        "data": "19701116",
+                        "dtultaggiornamento": "20180920",
+                        "cfonte": "RI",
+                        "cessazione": null
+                    }
+                ],
+                "elemento": null
+            },
+            "oggettosociale": "- LA PRODUZIONE, LA TRASFORMAZIONE E IL COMMERCIO DI PRODOTTI AGRICOLI EALIMENTARI IN GENERE ED IN PARTICOLARE, A SOLO TITOLO ESEMPLIFICATIVO, DI UVA,VINI, MOSTI, LIQUORI, SPUMANTI, DISTILLATI, DOLCIUMI E CAFFE' E L'ATTIVITA' DIIMPORT ED EXPORT DEI MEDESIMI PRODOTTI E LE ATTIVITA' CONNESSE;- L'ACQUISTO, LA VENDITA, LA PERMUTA E LA LOCAZIONE DI TERRENI AGRICOLI E NON;- L'ACQUISTO, LA VENDITA, LA PERMUTA, LA COSTRUZIONE E/O LA RISTRUTTURAZIONE DIBENI IMMOBILI, A SCOPO DI STABILE INVESTIMENTO CURANDONE ANCHE LA RELATIVAGESTIONE;- LA PRESTAZIONE DI SERVIZI DI ORGANIZZAZIONE AZIENDALE, AMMINISTRATIVA,COMMERCIALE E DI MARKETING NEI CONFRONTI DELLE SOCIETA' PARTECIPATE E NEICONFRONTI DELLE SOCIETA' DEL GRUPPO DI APPARTENENZA;- L'ASSUNZIONE O LA CESSIONE DI PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA',ITALIANE O ESTERE, A SCOPO DI STABILE INVESTIMENTO, PER GESTIONE E GODIMENTO,NON PROFESSIONALMENTE, NE' NEI CONFRONTI DEL PUBBLICO, BENSI' OCCASIONALMENTE EPER CONTO PROPRIO, NONCHE' COSTITUIRE O PARTECIPARE ALLA COSTITUZIONE DIASSOCIAZIONI TEMPORANEE DI IMPRESA;- LA GESTIONE DI RISTORANTI, ALBERGHI E/O COMUNQUE DI ATTIVITA' RICETTIVE;- L'ACQUISTO DI CREDITI D'IMPRESA NEI CONFRONTI DI CLIENTI, DALLA CONTROLLANTE,DA SOCIETA' CONTROLLATE E COLLEGATE E COMUNQUE DA SOCIETA' FACENTI PARTE DELLOSTESSO GRUPPO DI APPARTENENZA. IL TUTTO COME DISCIPLINATO DALLE NORME DEL CODICECIVILE.SEMPRE PER IL RAGGIUNGIMENTO DELL'OGGETTO SOCIALE, LA SOCIETA' POTRA' ALTRESI'COMPIERE OGNI OPERAZIONE COMMERCIALE, INDUSTRIALE ED IMMOBILIARE; A TALE FINEPOTRA' ALTRESI' COMPIERE IN VIA NON PREVALENTE E CON ESPRESSA ESCLUSIONE DIQUALSIASI ATTIVITA' SVOLTA NEI CONFRONTI DEL PUBBLICO, OPERAZIONI FINANZIARIE EMOBILIARI, CONCEDERE FINANZIAMENTI, ONEROSI E NON, NEI CONFRONTI DELLE SOCIETA'DEL GRUPPO DI APPARTENENZA, CONCEDERE FIDEJUSSIONI, AVALLI, CAUZIONI, GARANZIEANCHE A FAVORE DI TERZI.",
+            "dtfondazione": null,
+            "codiceformaammv": "CA",
+            "descformaammv": "CONSIGLIO DI AMMINISTRAZIONE",
+            "duratasocieta": {
+                "dtcostituzione": "19701107",
+                "dttermine": "20401231",
+                "durataillimitata": null,
+                "scadenzeesercizi": {
+                    "dtprimoesercizio": null,
+                    "dtsuccessive": "31/12"
+                }
+            },
+            "capitali": {
+                "fondoconsortile": null,
+                "totalequote": {
+                    "numeroazioni": null,
+                    "numeroquote": "7000000",
+                    "ammontare": "1",
+                    "valuta": "EURO"
+                },
+                "capitalesociale": {
+                    "deliberato": "7000000",
+                    "sottoscritto": "7000000",
+                    "versato": "7000000",
+                    "tipoconferimenti": null,
+                    "valuta": "EURO"
+                }
+            },
+            "capitaleinvestito": null,
+            "informazionisede": {
+                "insegna": null,
+                "indirizzo": {
+                    "provincia": "TRENTO",
+                    "comune": "TRENTO",
+                    "ccomune": "022205",
+                    "toponimo": "VIA",
+                    "via": "DEL PONTE",
+                    "ncivico": "15",
+                    "cap": "38123",
+                    "stato": null,
+                    "frazione": "RAVINA",
+                    "altreindicazioni": null,
+                    "stradario": null,
+                    "telefono": "0461972311",
+                    "fax": null,
+                    "indirizzopec": "INFO@PEC.CANTINEFERRARI.IT"
+                },
+                "attivita": "PRODUZIONE DI VINI SPUMANTI NATURALI (DAL 20.7.1971)VENDITA AL MINUTO DI SPUMANTI, VINI E GRAPPE (DAL 19.12.1996)",
+                "infoattivita": {
+                    "dtinizioattivita": "19710720",
+                    "statoattivita": null
+                },
+                "codiciistat02": null,
+                "codiceatecoul": {
+                    "attivitaistat": [
+                        {
+                            "cattivita": "0121",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazione di uva",
+                            "cimportanza": "S",
+                            "dtinizioattivita": "20010412"
+                        },
+                        {
+                            "cattivita": "0126",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazione di frutti oleosi",
+                            "cimportanza": "S",
+                            "dtinizioattivita": "20010412"
+                        },
+                        {
+                            "cattivita": "11022",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Produzione di vino spumante e altri vini speciali",
+                            "cimportanza": "P",
+                            "dtinizioattivita": "19710720"
+                        },
+                        {
+                            "cattivita": "4725",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Commercio al dettaglio di bevande",
+                            "cimportanza": "S",
+                            "dtinizioattivita": "19961219"
+                        }
+                    ]
+                },
+                "ruoliloc": {
+                    "ruololoc": [
+                        {
+                            "impiantistiloc": null,
+                            "meccanici": {
+                                "tipo": "DITTA OPERANTE CON L'ESTERO",
+                                "provincia": "TN",
+                                "numero": "001875",
+                                "dtiscrizione": "19930622",
+                                "qualifica": null
+                            },
+                            "impresepulizia": null,
+                            "altroruololoc": null,
+                            "cessazioneruolo": null
+                        }
+                    ]
+                },
+                "datiartigiani": null,
+                "commerciodettaglio": {
+                    "dtdenuncia": "19961219",
+                    "superficie": "498",
+                    "settoremerceologico": "ALIMENTARE"
+                },
+                "cessazione": null,
+                "procedureconcorsuali": null
+            },
+            "personesede": {
+                "persona": [
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "3",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LUNELLI",
+                            "nome": "LUIGI",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19390414"
+                            },
+                            "codicefiscale": "LNLLGU39D14L378O",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "PIAZZA",
+                                "via": "DUOMO",
+                                "ncivico": "9",
+                                "cap": "38122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "SI",
+                        "elemento": "1"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "8",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LUNELLI",
+                            "nome": "MARCELLO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19671020"
+                            },
+                            "codicefiscale": "LNLMCL67R20L378W",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MILANO",
+                                "ncivico": "144",
+                                "cap": "38122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "RESPONSABILE",
+                                    "ccarica": "RE",
+                                    "dtinizio": "20061031",
+                                    "dtfine": null
+                                },
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                },
+                                {
+                                    "descrizione": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+                                    "ccarica": "VPA",
+                                    "dtinizio": "20180613",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "SI",
+                        "elemento": "2"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "13",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "MONTI",
+                            "nome": "PIETRO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "BASELGA DI PINE'",
+                                "ccomune": "022009",
+                                "stato": null,
+                                "data": "19430717"
+                            },
+                            "codicefiscale": "MNTPTR43L17A694C",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "ROVERETO",
+                                "ccomune": "022161",
+                                "toponimo": "VIA",
+                                "via": "BELLAVISTA II",
+                                "ncivico": "21",
+                                "cap": "38068",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SINDACO SUPPLENTE",
+                                    "ccarica": "SIS",
+                                    "dtinizio": "20170525",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "3"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "21",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LUNELLI",
+                            "nome": "MATTEO BRUNO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19740131"
+                            },
+                            "codicefiscale": "LNLMTB74A31F205S",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "VIA",
+                                "via": "MALPAGA",
+                                "ncivico": "9",
+                                "cap": "38122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                },
+                                {
+                                    "descrizione": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+                                    "ccarica": "PCA",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                },
+                                {
+                                    "descrizione": "AMMINISTRATORE DELEGATO",
+                                    "ccarica": "AMD",
+                                    "dtinizio": "20180613",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "SI",
+                        "elemento": "4"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "22",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "TN",
+                            "niscrizionerea": "1176001",
+                            "denominazione": "LUNELLI S.P.A.",
+                            "codicefiscale": "00598990224",
+                            "dtcostituzione": "19831006",
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "VIA",
+                                "via": "DEL PONTE",
+                                "ncivico": null,
+                                "cap": "38123",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIO UNICO",
+                                    "ccarica": "SOU",
+                                    "dtinizio": "20030729",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "5"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "23",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "GOBBI",
+                            "nome": "EZIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19520607"
+                            },
+                            "codicefiscale": "GBBZEI52H07L378V",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "ARCO",
+                                "ccomune": "022006",
+                                "toponimo": "VIA",
+                                "via": "BETTINAZZI",
+                                "ncivico": "30",
+                                "cap": "38062",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SINDACO",
+                                    "ccarica": "SIE",
+                                    "dtinizio": "20170525",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "6"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "24",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "POSTAL",
+                            "nome": "MAURIZIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19570703"
+                            },
+                            "codicefiscale": "PSTMRZ57L03L378Z",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "VIA",
+                                "via": "MARZOLA",
+                                "ncivico": "74",
+                                "cap": "38123",
+                                "stato": null,
+                                "frazione": "GROTTA DI VILLAZZANO",
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PRESIDENTE DEL COLLEGIO SINDACALE",
+                                    "ccarica": "PCS",
+                                    "dtinizio": "20170525",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "7"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "25",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LUNELLI",
+                            "nome": "CAMILLA",
+                            "sesso": "FEMMINILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19750830"
+                            },
+                            "codicefiscale": "LNLCLL75M70L378A",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "DELLA RESISTENZA",
+                                "ncivico": "56",
+                                "cap": "38123",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "8"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "26",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "SCOZZI",
+                            "nome": "MAURIZIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "BRINDISI",
+                                "comune": "BRINDISI",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19600228"
+                            },
+                            "codicefiscale": "SCZMRZ60B28B180Y",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "STRADA",
+                                "via": "DELLE TABARELLE",
+                                "ncivico": "25",
+                                "cap": "38123",
+                                "stato": null,
+                                "frazione": "VILLAZZANO",
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SINDACO SUPPLENTE",
+                                    "ccarica": "SIS",
+                                    "dtinizio": "20170525",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "9"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "27",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": null,
+                        "personagiuridica": {
+                            "cciaa": "MI",
+                            "niscrizionerea": "1602581",
+                            "denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+                            "codicefiscale": "12979880155",
+                            "dtcostituzione": "19991210",
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MONTE ROSA",
+                                "ncivico": null,
+                                "cap": "20149",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIETA' DI REVISIONE",
+                                    "ccarica": "SDR",
+                                    "dtinizio": "20160506",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "10"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "28",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LUNELLI",
+                            "nome": "ALESSANDRO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19781105"
+                            },
+                            "codicefiscale": "LNLLSN78S05L378V",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "GIUSEPPE GRAZIOLI",
+                                "ncivico": "77",
+                                "cap": "38122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "11"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "29",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "BERNELLI",
+                            "nome": "MARIA TERESA",
+                            "sesso": "FEMMINILE",
+                            "estreminascita": {
+                                "provincia": "CUNEO",
+                                "comune": "MONDOVI'",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19500808"
+                            },
+                            "codicefiscale": "BRNMTR50M48F351V",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "CAVEDINE",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "IV NOVEMBRE",
+                                "ncivico": "29",
+                                "cap": "38073",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SINDACO",
+                                    "ccarica": "SIE",
+                                    "dtinizio": "20170525",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "12"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "30",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "BRANCHINI",
+                            "nome": "ARMANDO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "BOLOGNA",
+                                "comune": "BOLOGNA",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19451030"
+                            },
+                            "codicefiscale": "BRNRND45R30A944H",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "PAVIA",
+                                "comune": "ZAVATTARELLO",
+                                "ccomune": null,
+                                "toponimo": "FRAZIONE",
+                                "via": "CASA STEFANONE",
+                                "ncivico": "15",
+                                "cap": "27059",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "13"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "31",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "BENASSI",
+                            "nome": "LINO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "stato": null,
+                                "data": "19431202"
+                            },
+                            "codicefiscale": "BNSLNI43T02H201D",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "MASO LIBRAR",
+                                "ncivico": "11/1",
+                                "cap": "38121",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "CONSIGLIERE",
+                                    "ccarica": "CON",
+                                    "dtinizio": "20180504",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "14"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "32",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "GAROFALO",
+                            "nome": "BENIAMINO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "SALERNO",
+                                "comune": "CAVA DE' TIRRENI",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19700520"
+                            },
+                            "codicefiscale": "GRFBMN70E20C361R",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "SANTA CROCE",
+                                "ncivico": "2",
+                                "cap": "20122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PROCURATORE SPECIALE",
+                                    "ccarica": "PP",
+                                    "dtinizio": "20160711",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "15"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "33",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "BRUGNARA",
+                            "nome": "RUGGERO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19520718"
+                            },
+                            "codicefiscale": "BRGRGR52L18F205N",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "SEGRATE",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "TORINO",
+                                "ncivico": "7",
+                                "cap": "20090",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PROCURATORE SPECIALE",
+                                    "ccarica": "PP",
+                                    "dtinizio": "20160711",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "16"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "34",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "DIMARCO",
+                            "nome": "CLAUDIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TARANTO",
+                                "comune": "MARTINA FRANCA",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19741110"
+                            },
+                            "codicefiscale": "DMRCLD74S10E986P",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "DELLA RESISTENZA",
+                                "ncivico": "46",
+                                "cap": "38123",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PROCURATORE SPECIALE",
+                                    "ccarica": "PP",
+                                    "dtinizio": "20160711",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "17"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "35",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "LORO",
+                            "nome": "LORENZO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "ROVERETO",
+                                "ccomune": "022161",
+                                "stato": null,
+                                "data": "19700711"
+                            },
+                            "codicefiscale": "LROLNZ70L11H612I",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "ROVERETO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "LUNGO LENO SINISTRO",
+                                "ncivico": "24/A",
+                                "cap": "38068",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PROCURATORE SPECIALE",
+                                    "ccarica": "PP",
+                                    "dtinizio": "20160711",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "18"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "76693",
+                            "progressivopersona": "36",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "SANTATO",
+                            "nome": "RENZO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "ROVIGO",
+                                "comune": "ROVIGO",
+                                "ccomune": null,
+                                "stato": null,
+                                "data": "19640510"
+                            },
+                            "codicefiscale": "SNTRNZ64E10H620A",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "ROVERETO",
+                                "ccomune": null,
+                                "toponimo": "VIA",
+                                "via": "TACCHI",
+                                "ncivico": "3",
+                                "cap": "38068",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "PROCURATORE SPECIALE",
+                                    "ccarica": "PP",
+                                    "dtinizio": "20160711",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": "NO",
+                        "elemento": "19"
+                    }
+                ],
+                "totale": "19"
+            },
+            "localizzazioni": [
+                {
+                    "localizzazione": [
+                        {
+                            "numerotipo": {
+                                "cciaa": "TN",
+                                "nrea": "76693",
+                                "numero": "1",
+                                "tipo1": "MAGAZZINO",
+                                "tipo2": null,
+                                "tipo3": null,
+                                "tipo4": null,
+                                "tipo5": null
+                            },
+                            "denominazione": null,
+                            "insegna": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "TRENTO",
+                                "ccomune": "022205",
+                                "toponimo": "VIA",
+                                "via": "PROVINA",
+                                "ncivico": "22",
+                                "cap": "38040",
+                                "stato": null,
+                                "frazione": "RAVINA",
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            },
+                            "dtapertura": "20050418",
+                            "attivita": "",
+                            "codiciistat02": null,
+                            "codiceatecoul": {
+                                "attivitaistat": [
+                                    {
+                                        "cattivita": "11022",
+                                        "tcodifica": "07",
+                                        "cfonte": null,
+                                        "descattivita": "Produzione di vino spumante e altri vini speciali",
+                                        "cimportanza": "I",
+                                        "dtinizioattivita": null
+                                    }
+                                ]
+                            },
+                            "ruoliloc": null,
+                            "datiartigiani": null,
+                            "commerciodettaglio": null,
+                            "personeloc": null,
+                            "cessazioneloc": null,
+                            "elemento": "1"
+                        },
+                        {
+                            "numerotipo": {
+                                "cciaa": "TN",
+                                "nrea": "76693",
+                                "numero": "2",
+                                "tipo1": "UFFICIO",
+                                "tipo2": null,
+                                "tipo3": null,
+                                "tipo4": null,
+                                "tipo5": null
+                            },
+                            "denominazione": null,
+                            "insegna": null,
+                            "indirizzo": {
+                                "provincia": "MILANO",
+                                "comune": "MILANO",
+                                "ccomune": "015146",
+                                "toponimo": "VIA",
+                                "via": "CONSERVATORIO",
+                                "ncivico": "22",
+                                "cap": "20122",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            },
+                            "dtapertura": "20010118",
+                            "attivita": "ATTIVITA':ATTIVITA' AMMINISTRATIVA.",
+                            "codiciistat02": null,
+                            "codiceatecoul": {
+                                "attivitaistat": [
+                                    {
+                                        "cattivita": "702",
+                                        "tcodifica": "07",
+                                        "cfonte": null,
+                                        "descattivita": "Attivita' di consulenza gestionale",
+                                        "cimportanza": "P",
+                                        "dtinizioattivita": "20010118"
+                                    }
+                                ]
+                            },
+                            "ruoliloc": null,
+                            "datiartigiani": null,
+                            "commerciodettaglio": null,
+                            "personeloc": null,
+                            "cessazioneloc": {
+                                "dtcessazione": "20040323",
+                                "dtdenunciacess": "20040423",
+                                "causale": "CHIUSURA DELL'UNITA' LOCALE"
+                            },
+                            "elemento": "2"
+                        }
+                    ],
+                    "elemento": "1",
+                    "provincia": "TN"
+                }
+            ]
+        },
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": null
+    }
+}

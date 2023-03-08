@@ -1,0 +1,68 @@
+{
+  "codiceFiscale": "BLDLCU67M12L378O",
+  "anagrafica": {
+    "nome": "LUCA",
+    "cognome": "BALDESSARI",
+    "sesso": "MASCHIO",
+    "dataNascita": "1967-08-12",
+    "comuneNascita": "TRENTO",
+    "provinciaNascita": "TRENTO"
+  },
+  "domicilioFiscale": {
+    "toponimo": "VIA",
+    "via": "NEDDA FALZOLGHER",
+    "civico": "25",
+    "comune": "TRENTO",
+    "frazione": null,
+    "cap": "38123",
+    "codiceIstat": "022205",
+    "provincia": "TRENTO",
+    "denominazioneEstesa": null
+  },
+  "deceduta": null,
+  "impresaIndividuale": {
+    "partitaIva": "01817010224",
+    "denominazione": "BALDESSARI LUCA",
+    "sedeLegale": {
+      "indirizzo": {
+        "toponimo": "VIA",
+        "via": "NEDDA FALZOLGHER",
+        "civico": "25",
+        "comune": "TRENTO",
+        "frazione": null,
+        "cap": "38123",
+        "codiceIstat": "022205",
+        "provincia": "TRENTO",
+        "denominazioneEstesa": null
+      },
+      "attivitaAteco": [
+        {
+          "codice": "461901",
+          "descrizione": "Agenti e rappresentanti di vari prodotti senza prevalenza di alcuno",
+          "importanza": "SECONDARIO"
+        },
+        {
+          "codice": "461902",
+          "descrizione": "Procacciatori d'affari di vari prodotti senza prevalenza di alcuno",
+          "importanza": "PRIMARIO_IMPRESA"
+        },
+        {
+          "codice": "461902",
+          "descrizione": "Procacciatori d'affari di vari prodotti senza prevalenza di alcuno",
+          "importanza": "PRIMARIO"
+        }
+      ],
+      "iscrizioneRegistroImprese": {
+        "numero": "129569",
+        "dataIscrizione": "1991-01-31",
+        "codiceRea": 129569,
+        "provinciaRea": "TN",
+        "cessata": true
+      },
+      "telefono": "0461924707",
+      "indirizzoPec": "BALDESSARILUCA@LEGALMAIL.IT"
+    },
+    "oggettoSociale": null,
+    "formaGiuridica": "IMPRESA INDIVIDUALE"
+  }
+}

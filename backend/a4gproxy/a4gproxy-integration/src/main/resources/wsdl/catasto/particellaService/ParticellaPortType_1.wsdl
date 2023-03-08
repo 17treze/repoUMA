@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ParticellaService" targetNamespace="http://www.catasto.regione.taa.it/Particella/service" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wrp="http://www.catasto.regione.taa.it/Particella/schemas" xmlns:tns="http://www.catasto.regione.taa.it/Particella/service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:lfex="http://www.librofondiario.regione.taa.it/LibroFondiarioFaultType/schemas" xmlns:ex="http://www.regione.taa.it/FaultType/schemas" xmlns:cex="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" xmlns:alfex="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" xmlns:aex="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" xmlns:acex="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/fondiario/Frazionamento/definitions" xmlns:tns="http://www.catasto.regione.taa.it/fondiario/Frazionamento/definitions">
+      <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="ParticellaPortType.xsd"/>
+      <xs:import namespace="http://www.regione.taa.it/AutorizzazioneFaultType/schemas" schemaLocation="ParticellaPortType_1.xsd"/>
+      <xs:import namespace="http://www.librofondiario.regione.taa.it/LibroFondiarioFaultType/schemas" schemaLocation="ParticellaPortType_1_2.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/AutorizzazioneCatastoFaultType/schemas" schemaLocation="ParticellaPortType_1_2_3.xsd"/>
+      <xs:import namespace="http://www.librofondiario.regione.taa.it/AutorizzazioneLFFaultType/schemas" schemaLocation="ParticellaPortType_1_2_3_4.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5.xsd"/>
+      <xs:import namespace="http://www.catasto.regione.taa.it/Particella/schemas" schemaLocation="ParticellaPortType_1_2_3_4_5_6.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ParticellaNonValidaFault">
+    <wsdl:part element="cex:ParticellaNonValidaFault" name="pnvf"/>
+  </wsdl:message>
+  <wsdl:message name="NessunaProprietaAllaDataFault">
+    <wsdl:part element="cex:NessunaProprietaAllaDataFault" name="npadf"/>
+  </wsdl:message>
+  <wsdl:message name="AssenzaDelegatoFault">
+    <wsdl:part element="alfex:AssenzaDelegatoFault" name="adf"/>
+  </wsdl:message>
+  <wsdl:message name="GetParticellaResponse">
+    <wsdl:part element="wrp:GetParticellaResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="WSFault">
+    <wsdl:part element="ex:WSFault" name="fault"/>
+  </wsdl:message>
+  <wsdl:message name="AutorizzazioneProprietaFault">
+    <wsdl:part element="acex:AutorizzazioneProprietaFault" name="aprf"/>
+  </wsdl:message>
+  <wsdl:message name="DatiInputObbligatoriMancantiFault">
+    <wsdl:part element="ex:DatiInputObbligatoriMancantiFault" name="dimf"/>
+  </wsdl:message>
+  <wsdl:message name="ParticellaEstintaFault">
+    <wsdl:part element="cex:ParticellaEstintaFault" name="pef"/>
+  </wsdl:message>
+  <wsdl:message name="SoggettoNonTitolareFault">
+    <wsdl:part element="cex:SoggettoNonTitolareFault" name="sntf"/>
+  </wsdl:message>
+  <wsdl:message name="AssenzaRichiedenteFault">
+    <wsdl:part element="acex:AssenzaRichiedenteFault" name="arf"/>
+  </wsdl:message>
+  <wsdl:message name="AutorizzazioneLocazioneFault">
+    <wsdl:part element="aex:AutorizzazioneLocazioneFault" name="alf"/>
+  </wsdl:message>
+  <wsdl:message name="GetParticellaRequest">
+    <wsdl:part element="wrp:GetParticella" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ParticellaPortType">
+    <wsdl:operation name="GetParticella">
+      <wsdl:input message="tns:GetParticellaRequest"/>
+      <wsdl:output message="tns:GetParticellaResponse"/>
+      <wsdl:fault message="tns:ParticellaEstintaFault" name="pef"/>
+      <wsdl:fault message="tns:DatiInputObbligatoriMancantiFault" name="dimf"/>
+      <wsdl:fault message="tns:AssenzaDelegatoFault" name="adf"/>
+      <wsdl:fault message="tns:NessunaProprietaAllaDataFault" name="npadf"/>
+      <wsdl:fault message="tns:AssenzaRichiedenteFault" name="arf"/>
+      <wsdl:fault message="tns:SoggettoNonTitolareFault" name="sntf"/>
+      <wsdl:fault message="tns:WSFault" name="fault"/>
+      <wsdl:fault message="tns:ParticellaNonValidaFault" name="pnvf"/>
+      <wsdl:fault message="tns:AutorizzazioneLocazioneFault" name="alf"/>
+      <wsdl:fault message="tns:AutorizzazioneProprietaFault" name="aprf"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Particella" type="tns:ParticellaPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetParticella">
+      <soap:operation soapAction="http://www.catasto.regione.taa.it/fondiario/Particella/service/GetParticella"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="pef">
+        <soap:fault name="pef" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="dimf">
+        <soap:fault name="dimf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="adf">
+        <soap:fault name="adf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="npadf">
+        <soap:fault name="npadf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="arf">
+        <soap:fault name="arf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="sntf">
+        <soap:fault name="sntf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="pnvf">
+        <soap:fault name="pnvf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="alf">
+        <soap:fault name="alf" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="aprf">
+        <soap:fault name="aprf" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ParticellaService">
+    <wsdl:port binding="tns:Particella" name="ParticellaPort">
+      <soap:address location="https://ws-p.intra.catastotn.it/catasto/ParticellaService/ParticellaPortType"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

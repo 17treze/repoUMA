@@ -1,0 +1,78 @@
+<!-- SETTINGS BTN -->
+<div id="settings" [ngClass]="{'active-tool': panelEvent.showSettings}" (click)="openSettings();enableListener();" >
+    <button class='btn btn-primary' pTooltip="Impostazioni" tooltipPosition="left" >
+        <i class="fa fa-cog"></i>
+    </button>
+</div>
+
+<!-- SETTINGS CONTENT -->
+<div id="settings-panel" class="card-content" [hidden]="!panelEvent.showSettings">
+    <p-sidebar class="sidebar-settings"
+               [(visible)]="panelEvent.showSettings" [(dismissible)]="dismissible" position="left">
+        <h1 style="text-transform: none!important;">IMPOSTAZIONI</h1>
+
+        <div class="p-col-12">
+            <p-header class="settings-header-dropdown">Editing</p-header>
+
+            <div class="border-selection-dropdown"></div>
+                <div class="title-dropdown-options p-grid p-align-center p-justify-start">
+                    <label class="label-misura-option">Tipo Misura</label>
+                    <div id="tipologiaMisura" class="p-col-2 mr-2 ui-dropdown-grid-inline">
+                        <p-dropdown
+                                placeholder="Entrambe"
+                                [(ngModel)]="selectedTipologiaMisura"
+                                [options]="tipologiaMisura"
+                                (onChange)="onChangeTipologiaMisura($event)">
+                        </p-dropdown>
+                    </div>
+                </div>
+            <!--
+            <p-header class="settings-header-dropdown">Ricerca</p-header>
+            <div class="border-selection-dropdown"></div>
+            -->
+            <div class="p-col-12">
+                <p-header class="settings-header-dropdown-subsection">Snap</p-header>
+    
+                <div class="border-selection-dropdown "></div>
+                    <div class="title-dropdown-options p-grid p-align-center p-justify-start" style="padding: 10px 0;">
+                        <label class="label-misura-option " style="width: 126px;">Valore</label>
+                        <div > 
+                            <!--<p-inputNumber [(ngModel)]="value20" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="100">
+                            </p-inputNumber>--> <input type="text" style="min-width: 12.5em;" [(ngModel)]="valoreSnap"  maxlength="3" min="0" (ngModelChange)="onChangeSnap($event)" appOnlynumber>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div class="title-dropdown-options p-grid p-align-center p-justify-start">
+                        <label class="label-misura-option"style="width: 126px;">Unità di Misura</label>
+                        <div id="tipologiaMisura" class="p-col-2 mr-2 ui-dropdown-grid-inline">
+                            <p-dropdown
+                                placeholder="Px"
+                                     [disabled]="true"   >
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div class="title-dropdown-options p-grid p-align-center p-justify-start">
+                        <label class="label-misura-option"style="width: 126px;">Modalità</label>
+                        <div id="tipologiaMisura" class="p-col-2 mr-2 ui-dropdown-grid-inline">
+                            <p-dropdown
+                                placeholder="Entrambi"
+                                [(ngModel)]="selectedModalita"
+                                [options]="tipologiaModalita"
+                                (onChange)="onChangeModalitaSnap($event)">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                <!--
+                <p-header class="settings-header-dropdown">Ricerca</p-header>
+                <div class="border-selection-dropdown"></div>
+                -->
+    
+            </div>
+        </div>
+      
+
+    </p-sidebar>
+</div>
+
+

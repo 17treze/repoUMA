@@ -1,0 +1,9 @@
+.dialog-config {
+    padding: 0.5rem;
+    border: 1px solid #dedede;
+    border-top: 0;
+}
+
+.ng-dirty.ng-invalid {
+    border-color: red;
+}

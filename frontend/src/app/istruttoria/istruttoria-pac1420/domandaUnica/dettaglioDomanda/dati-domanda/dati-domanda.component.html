@@ -1,0 +1,74 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+            <div class="ui-grid-fixed">
+
+  <div class="ui-g-4">
+    <div>
+      <h3><span>Sintesi Calcolo</span></h3>
+    </div>
+    <div class="table-responsive">
+      <p-treeTable *ngIf="dataSintesi" [value]="dataSintesi" [columns]="cols">
+        <ng-template pTemplate="header" let-columns>
+          <tr style="display: none">
+            <th height="0" span="0" *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns; let i = index">
+              <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+              <span style="vertical-align: middle">
+                <a *ngIf="rowData['bold'] == 0">{{rowData[col.field]}}</a><strong *ngIf="rowData['bold'] == 1">{{rowData[col.field]}}</strong>
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </div>
+  </div>
+  <div class="ui-g-8">
+    <div>
+      <div>
+        <h3><span>Dettaglio Calcolo cia</span></h3>
+      </div>
+      <div *ngIf='tipiControllo' class="accordion-wrapper dettaglioaccordionmultiple">
+        <ng-template ngFor let-tipoControllo let-last="last" [ngForOf]="tipiControllo">
+          <div *ngIf='tipoControllo.descrizione1 != "Anomalie mantenimento"'>
+          <p-accordion>
+            <p-accordionTab header="Calcolo {{tipoControllo.descrizione1}}" [selected]="false">
+              <ng-template *ngIf='tabelle' ngFor let-tabella let-last="last" [ngForOf]="tabelle | tipoFilter : 'codice1' : tipoControllo.codice1">
+                <div class="table-responsive" style="margin-top:30px">
+                  <p-table [columns]="cols" [value]="controlli | tipoFilter : 'codice1' : tipoControllo.codice1 | tipoFilter : 'codice2' : tabella.codice2"
+                    [autoLayout]="true" [paginator]="false" [responsive]="true">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                          <strong *ngIf='col.header'>{{tabella.descrizione2}}</strong>
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-dato let-i="rowIndex">
+                      <tr>
+                        <td>{{dato.controlloDescrizione}}</td>
+                        <td>{{dato.valore}}</td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="10">
+                          Controllo non eseguito
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div></div></div>

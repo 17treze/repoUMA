@@ -1,0 +1,31 @@
+export enum enumTool {
+    // non mettere enum che cominciano con altri enum (es. draw e drawHole)
+    drawNewEl = 'drawNewEl',
+    modifyEl = 'modifyEl',
+    deleteEl = 'deleteEl',
+    transformEl = 'transformEl',
+    snapEl = 'snapEl',
+    selectEl = 'selectEl',
+    drawHoleEl = 'drawHoleEl',
+    drawRegularEl = 'drawRegularEl',
+    undoRedoInteraction = 'undoRedoInteraction',
+    saveFeatures = 'saveFeatures',
+    unionFeatures = 'unionFeatures',
+    selectFeatures = 'selectFeatures',
+    selectFeaturesBox = 'selectFeaturesBox',
+    lineSplit = 'lineSplit',
+    polySplit = 'polySplit',
+    closeHole = 'closeHole',
+    coverHole = 'coverHole',
+    intersectFeatures = 'intersectFeatures',
+    drawTraceNewEl = 'drawTraceNewEl',
+    fillAttributeInteraction = 'fillAttributeInteraction',
+    drawBuffer = 'drawBuffer',
+    misuraEl = 'misuraEl',
+    drawAdl = 'drawAdl',
+    modifyAdl = 'modifyAdl',
+    selectAdl = 'selectAdl',
+    deleteAdl = 'deleteAdl',
+    addNoteToFeature = 'addNoteToFeature'
+}
+

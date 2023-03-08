@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" xmlns:pt="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:pers="http://www.catasto.regione.taa.it/PersonaType/schemas" xmlns:bene="http://www.librofondiario.regione.taa.it/BeneType/schemas">
+  <xs:import namespace="http://www.catasto.regione.taa.it/ParticellaType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7.xsd"/>
+  <xs:import namespace="http://www.librofondiario.regione.taa.it/BeneType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8_9.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/PersonaType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8_9_10_11.xsd"/>
+  <xs:complexType name="UnitaImmobiliareType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Descrizione dell'unita' immobiliare</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="dettaglioChiave" type="tns:DettaglioChiaveUnitaImmobiliareType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="datiClassamento" type="tns:DatiClassamentoType"/>
+      <xs:element maxOccurs="1" minOccurs="0" ref="tns:rendita"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="indirizzo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">lista di indirizzi dell'unita immobiliare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="piani" type="xs:string">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">Descrizione dei piani dell'unita immobiliare</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DatiCatastaliUnitaImmobiliareType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="chiaveUI" type="tns:ChiaveUnitaImmobiliareType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="datiClassamento" type="tns:DatiClassamentoType"/>
+      <xs:element maxOccurs="1" minOccurs="0" ref="tns:rendita"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="dettaglio" type="tns:DettaglioChiaveUnitaImmobiliareType"/>
+    </xs:sequence>
+    <xs:attribute name="codiceUI" type="xs:integer" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DatiClassamentoType">
+    <xs:attribute name="categoria" type="tns:CategoriaType">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">La categoria dell'immobile</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="classe" type="tns:ClasseType">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">La classe dell'immobile</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="consistenza" type="xs:double">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">La consistenza dell'immobile</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ChiaveUnitaImmobiliareType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Informazioni che identificano un immobile</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="particellaEdificiale" type="pt:ChiaveParticellaType">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">Una delle particelle edificiali in cui e' ubicato l'immobile</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="subalterno" type="xs:integer" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="it">Fissata la particella edificiale, individua univocamente una parte dell'immobile</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DettaglioChiaveUnitaImmobiliareType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Lista di porzioni materiali della chiave dell'unita' immobiliare</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="chiaveUI" type="tns:ChiaveUnitaImmobiliareType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="porzioneMateriale" type="bene:ChiavePorzioneMaterialeType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="rendita" type="xs:double">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Rendita di un immobile</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:simpleType name="ClasseType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Lista di possibili classi di un Immobile</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="3"/>
+      <xs:enumeration value="4"/>
+      <xs:enumeration value="5"/>
+      <xs:enumeration value="6"/>
+      <xs:enumeration value="7"/>
+      <xs:enumeration value="8"/>
+      <xs:enumeration value="9"/>
+      <xs:enumeration value="10"/>
+      <xs:enumeration value="11"/>
+      <xs:enumeration value="12"/>
+      <xs:enumeration value="13"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CategoriaType">
+    <xs:annotation>
+      <xs:documentation xml:lang="it">Contiene l'elenco dei possibili valori di categoria alla quale puo' appartenere una certa unita' immobiliare</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="A01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO SIGNORILE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO CIVILE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO ECONOMICO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO POPOLARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO ULTRAPOPOLARE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI DI TIPO RURALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI IN VILLINI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A08">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI IN VILLE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A09">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">CASTELLI, PALAZZI DI EMINENTI PREGI ARTISTICI E STORICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A10">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">UFFICI E STUDI PRIVATI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="A11">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ABITAZIONI ED ALLOGGI TIPICI DEI LUOGHI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">COLLEGI, CONVITTI, EDUCANDATI, RICOVERI ORFANATROFI, OSPIZI, CONVENTI, SEMINARI, CASERME</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">CASE DI CURA ED OSPEDALI SENZA FINI DI LUCRO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">PRIGIONI E RIFORMATORI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">UFFICI PUBBLICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">SCUOLE E LABORATORI SCIENTIFICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">BIBLIOTECHE, PINACOTECHE, MUSEI, GALLERIE, ACCADEMIE, CIRCOLI RICREATIVI E CULTURALI SENZA FINE DI LUCRO, CHE NON HANNO SEDE IN EDIFICI DELLA CATEGORIA A/9</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">CAPPELLE ED ORATORI NON DESTINATI ALL`ESERCIZIO PUBBLICO DEI CULTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B08">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">MAGAZZINI SOTTERANEI PER DEPOSITO DERRATE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">NEGOZI E BOTTEGHE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">MAGAZZINI E LOCALI DI DEPOSITO, CANTINE E SOFFITTE SE NON UNITE ALL`UNITA` IMMOBILIARE ABITATIVA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">LABORATORI PER ARTI E MESTIERI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI E LOCALI PER ESERCIZI SPORTIVI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">STABILIMENTI BALNEARI E DI ACQUE CURATIVE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">STALLE, SCUDERIE, RIMESSE ED AUTORIMESSE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="C07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">TETTOIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">OPIFICI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ALBERGHI E PENSIONI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">TEATRI, CINEMATOGRAFI, SALE PER CONCERTI E SPETTACOLI, ARENE, PARCHI GIOCHI, ZOO-SAFARI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">CASE DI CURA E OSPEDALI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">ISTITUTI DI CREDITO, CAMBIO ED ASSICURAZIONE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI, LOCALI, AREE ATTREZZATE PER ESERCIZI SPORTIVI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI COSTRUITI O ADATTATI PER LE SPECIALI ESIGENZE DI UN`ATTIVITA` INDUSTRIALE E NON SUSCETTIBILE DI DESTINAZIONE DIVERSA SENZA RADICALI TRASFORMAZIONI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D08">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI COSTRUITI O ADATTATI PER LE SPECIALI ESIGENZE DI UN`ATTIVITA` COMMERCIALE E NON SUSCETTIBILI DI DESTINAZIONE DIVERSA SENZA RADICALI TRASFORMAZIONI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D09">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">EDIFICI GALLEGGIANTI O ASSICURATI A PUNTI FISSI DEL SUOLO, PONTI PRIVATI SOGGETTI A PEDAGGIO, AREE ATTREZZATE PER L`APPOGGIO DI PALLONI AEROSTATICI E DIRIGIBILI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="D10">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI PER FUNZIONI PRODUTTIVE CONNESSE ALLE ATTIVITA` AGRICOLE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">STAZIONI PER SERVIZI DI TRASPORTO TERRESTRI, MARITTIMI ED AEREI, STAZIONI PER METROPOLITANE, STAZIONI PER FERROVIE, IMPIANTI DI RISALITA IN GENERE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">PONTI COMUNALI E PROVINCIALI SOGGETTI A PEDAGGIO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">COSTRUZIONI E FABBRICATI PER SPECIALI ESIGENZE PUBBLICHE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">RECINTI CHIUSI PER MERCATI, FIERE, POSTEGGIO BESTIAME E SIMILI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI COSTITUENTI FORTIFICAZIONI E LORO DIPENDENZE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FARI, SEMAFORI TORRI PER RENDERE PUBBLICO L`USO DELL`OROLOGIO COMUNALE</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI PER L`ESERCIZIO PUBBLICO DEI CULTI</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E08">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATI E COSTRUZIONI NEI CIMITERI ESCLUSI I COLOMBARI, I SEPOLCRI E LE TOMBE DI FAMIGLIA</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="E09">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">EDIFICI A DESTINAZIONE PARTICOLARE NON COMPRESI NELLE CATEGORIE PRECEDENTI DEL GRUPPO E</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F01">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">AREA URBANA (F/1)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F02">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATO DANNEGGIATO O DISTRUTTO (F/2)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F03">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">UNITA' IN CORSO DI COSTRUZIONE (F/3)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F04">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">UNITA' IN CORSO DI DEFINIZIONE (F/4)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F05">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">TERRAZZE E LASTRICI SOLARI (F/5)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F06">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">PROCEDIMENTO AVANTI LE COMMISSIONI TRIBUTARIE (F/6)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F07">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">PORTICO (F/7)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F10">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">FABBRICATO RITENUTO RURALE (F/10)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F09">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">UNITA' PROVENIENTE DAL CATASTO FONDIARIO (F/9)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="F11">
+        <xs:annotation>
+          <xs:documentation xml:lang="it">IN ATTESA DI CLASSAMENTO</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

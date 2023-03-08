@@ -1,0 +1,30 @@
+<p-dialog
+  header="{{ 'FAS_ANA.MIGRAZIONE_FASCICOLO' | translate }}"
+  width="700"
+  [(visible)]="popupRunMigrazioneOpen"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  (onHide)="closePopup()">
+  <div class="popup-approvazione popup--custom">
+    <div
+      class="p-grid ui-g-12"
+      style="text-align:center">
+      <div class="p-col">
+        <span>{{ 'FAS_ANA.DESC_MIGRAZIONE_FASCICOLO' | translate }}</span>
+        <br>
+        <br>
+        <div>
+          <button
+            style="min-width: max-content"
+            pButton
+            label="{{ 'FAS_ANA.REDIRECT_RICERCA_FASCICOLI' | translate }}"
+            class="btn-green"
+            (click)="closePopup()">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

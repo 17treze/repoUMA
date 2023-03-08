@@ -1,0 +1,55 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="FASCICOLO_WRT_1.0" author="Lorenzo Martinelli" dbms="oracle">
+        <!-- Contenuto di 000a_oggettiComuni-Sinonimi.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+        </sql>
+        
+        <!-- Contenuto di 002a_tabelleDichiarazioniAntimafia-Sinonimi.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM A4GT_AZIENDA_AGRICOLA FOR ${user.superuser}.A4GT_AZIENDA_AGRICOLA;
+			CREATE OR REPLACE SYNONYM A4GD_STATO_DIC_ANTIMAFIA FOR ${user.superuser}.A4GD_STATO_DIC_ANTIMAFIA;
+			CREATE OR REPLACE SYNONYM A4GT_DICHIARAZIONE_ANTIMAFIA FOR ${user.superuser}.A4GT_DICHIARAZIONE_ANTIMAFIA;
+			CREATE OR REPLACE SYNONYM A4GD_TIPO_ALLEGATO FOR ${user.superuser}.A4GD_TIPO_ALLEGATO;
+			CREATE OR REPLACE SYNONYM A4GT_ALLEGATO_DIC_ANTIMAFIA FOR ${user.superuser}.A4GT_ALLEGATO_DIC_ANTIMAFIA;
+		</sql>
+    </changeSet>
+
+	<changeSet id="FASCICOLO_WRT_1.1" author="Lorenzo Martinelli" dbms="oracle">
+		<!-- 003a_tabellaAllegatoDicFamConv-Sinonimo.sql -->
+    	<sql endDelimiter=";" splitStatements="true">
+    		CREATE OR REPLACE SYNONYM A4GT_ALLEGATO_DIC_FAM_CONV FOR ${user.superuser}.A4GT_ALLEGATO_DIC_FAM_CONV;
+    	</sql>
+    </changeSet>
+
+	<changeSet id="FASCICOLO_WRT_1.2" author="Elisabetta Freschi" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+    		CREATE OR REPLACE SYNONYM A4GFASC_LOGGING FOR ${user.superuser}.A4GFASC_LOGGING;
+    	</sql>
+    </changeSet>
+    
+	<changeSet id="FASCICOLO_WRT_20.1" author="Caccia Salvatore" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+    		CREATE OR REPLACE SYNONYM A4GT_PROCEDIMENTO_AMF FOR ${user.superuser}.A4GT_PROCEDIMENTO_AMF;
+    	</sql>
+    </changeSet>
+
+	<changeSet id="FASCICOLO_WRT_24.0" author="Antonio Trombetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_WRT_24.1" author="Antonio Trombetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

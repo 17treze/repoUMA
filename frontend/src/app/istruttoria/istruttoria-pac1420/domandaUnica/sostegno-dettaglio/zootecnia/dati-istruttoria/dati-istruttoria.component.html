@@ -1,0 +1,135 @@
+<div *ngIf="statoSostegno$ | async as statoSostegno">
+  <div [a4gHasPermission]="'MODIFICABILE'" [annoCampagna]="istruttoriaDUCorrente.domanda.campagna"
+    [tipoIstruttoria]="istruttoriaDUCorrente.tipo" [statoSostegno]="istruttoriaDUCorrente.stato" class="boxgrey"
+    style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="ui-grid-fixed">
+          <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+            <h3>
+              <span>
+                Dati Controlli in Loco e Certificazione Antimafia
+              </span>
+            </h3>
+            <div style="font-size: 15px;">
+              <p-checkbox name="controlloSigecoLoco" [(ngModel)]="datiIstruttoriaDaInserire.controlloSigecoLoco"
+                binary="true" label="Si certifica che sono stati effettuati i controlli amministrativi in loco">
+              </p-checkbox>
+              <br />
+              <p-checkbox name="controlloAntimafia" [(ngModel)]="datiIstruttoriaDaInserire.controlloAntimafia"
+                binary="true"
+                label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+              </p-checkbox>
+            </div>
+            <br>
+          </div>
+          <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+            <h3>
+              <span>
+                Dichiarazione riduzione annullamento sanzione
+              </span>
+            </h3>
+            <div style="font-size: 15px;">
+              <p-checkbox name="annulloRiduzione" [(ngModel)]="datiIstruttoriaDaInserire.annulloRiduzione"
+                binary="true" label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+              </p-checkbox>
+            </div>
+            <br>
+          </div>
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+            <h3>
+              <span>
+                Gestione Subentro
+              </span>
+            </h3>
+            <div class="ui-g-12" style="font-size: 15px;">
+              <div class="ui-g-2">
+                <label>CUAA Subentrante</label>
+              </div>
+              <div class="ui-g-4">
+                <input name="cuaaSubentrante" type="text" [(ngModel)]="datiIstruttoriaDaInserire.cuaaSubentrante"
+                  appValidaCuaaCompleto #cuaaSubentrante="ngModel" pInputText>
+                <div *ngIf="cuaaSubentrante.errors">
+                  <p *ngIf="cuaaSubentrante.errors?.cuaaErratoCompleto"
+                    class="ui-message ui-messages-error ui-corner-all">
+                    {{cuaaSubentrante.errors.cuaaErratoCompleto}}
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <div class="ui-g-12 ui-md-2 searchbutton">
+              <br />
+              <button pButton type="submit" class="ui-button-success" [disabled]="!f.valid || submitted">SALVA</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div [a4gHasPermission]="'NON_MODIFICABILE'" [statoSostegno]="istruttoriaDUCorrente.stato"
+    [tipoIstruttoria]="istruttoriaDUCorrente.tipo" [annoCampagna]="istruttoriaDUCorrente.domanda.campagna"
+    class=" boxgrey" style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+      <div class="ui-grid-fixed">
+        <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+        <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dati Controlli in Loco e Certificazione Antimafia
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox disabled [(ngModel)]="datiIstruttoriaDaInserire.controlloSigecoLoco" binary="true"
+              label="Si certifica che sono stati effettuati i controlli amministrativi in loco">
+            </p-checkbox>
+            <br />
+            <p-checkbox disabled [(ngModel)]="datiIstruttoriaDaInserire.controlloAntimafia" binary="true"
+              label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+            </p-checkbox>
+          </div>
+        </div>
+        <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dichiarazione riduzione annullamento sanzione
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox disabled [(ngModel)]="datiIstruttoriaDaInserire.annulloRiduzione" binary="true"
+              label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+            </p-checkbox>
+          </div>
+        </div>
+        <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Gestione Subentro
+            </span>
+          </h3>
+          <div class="ui-g-12" style="font-size: 15px;">
+            <div class="ui-g-2">
+              <label>CUAA Subentrante</label>
+            </div>
+            <div class="ui-g-4">
+              <input name="cuaaSubentrante" type="text" [(ngModel)]="datiIstruttoriaDaInserire.cuaaSubentrante"
+                appValidaCuaaCompleto #cuaaSubentrante="ngModel" pInputText disabled>
+              <div *ngIf="cuaaSubentrante.errors">
+                <p *ngIf="cuaaSubentrante.errors?.cuaaErratoCompleto"
+                  class="ui-message ui-messages-error ui-corner-all">
+                  {{cuaaSubentrante.errors.cuaaErratoCompleto}}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

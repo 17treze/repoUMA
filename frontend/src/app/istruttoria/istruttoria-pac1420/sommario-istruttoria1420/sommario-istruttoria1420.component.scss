@@ -1,0 +1,104 @@
+%button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 30px !important;
+    min-height: 0 !important;
+    height: auto;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: var(--white) !important;
+    box-shadow: none;
+
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 1 !important;
+
+    span { line-height: 1; }
+}
+
+.message-custom {
+    .ui-message.ui-message.ui-message {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: .375rem 1rem;
+        border: 0;
+
+        background-color: #F9F4CF;
+
+        .ui-message-icon.ui-message-icon {
+            font-size: 1rem;
+            margin-top: 0;
+            margin-right: .5rem;
+            height: auto;
+            color: #ffae3f;
+        }
+
+        .ui-message-text {
+            line-height: 1; 
+            color: #7C724F;
+        }
+    }
+}
+
+.dropdown-custom {
+    text-transform: uppercase;
+
+    * { color: var(--primary) !important; }
+
+    .ui-dropdown.ui-dropdown.ui-dropdown {
+        background-image: none;
+        padding-bottom: 0;
+    }
+
+    .ui-dropdown-label.ui-dropdown-label.ui-dropdown-label,
+    .ui-menuitem-link {
+        @extend %button;
+    }
+
+    .ui-dropdown-trigger.ui-dropdown-trigger.ui-dropdown-trigger,
+    .pi.pi-caret-down {
+        margin-top: 0 !important;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 20px;
+    }
+
+    .ui-menubar.ui-menubar {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .ui-menubar-custom { display: none !important; }
+
+    .ui-dropdown-panel.ui-dropdown-panel .ui-dropdown-item.ui-state-highlight {
+        background-color: var(--primary);
+        span { color: var(--white) !important; }
+    }
+
+    .ui-widget-content.ui-widget-content.ui-widget-content {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.button-custom .ui-button {
+    @extend %button;
+    * { color: var(--primary) !important; }
+
+    .pi {
+        font-size: 26px;
+        right: 0;
+    }
+
+    text-transform: uppercase;
+}
+
+.table-custom table {
+    .ui-table-tbody > tr { background: transparent; }
+    .btn { box-shadow: none; }
+}

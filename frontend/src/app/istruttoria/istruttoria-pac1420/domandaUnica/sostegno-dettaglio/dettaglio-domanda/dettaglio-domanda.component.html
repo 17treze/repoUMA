@@ -1,0 +1,201 @@
+<div *ngIf="istruttoriaDUCorrente">
+    <div class="ui-g ui-fluid">
+        <p-toast position="center" key="warn-annullaIstruttoria" [modal]="true" [baseZIndex]="9999998">
+            <ng-template let-messageService pTemplate="messageService">
+                <div style="text-align: center">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                    <h3>{{messageService.summary}}</h3>
+                    <p>{{messageService.detail}}</p>
+                    <p>{{a4gMessages.CONFERMA_ANNULLA_ISTRUTTORIA_CONFERMA}}</p>
+                </div>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-6">
+                        <button type="button" pButton (click)="annullaIstruttoria()" label="Si"
+                            class="ui-button-success"></button>
+                    </div>
+                    <div class="ui-g-6">
+                        <button type="button" pButton (click)="onRejectAnnullaIstruttoria()" label="No"
+                            class="ui-button-secondary"></button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-toast>
+        <div class="tophome">
+            <div class="ui-grid-fixed">
+                <div class="layout-topbar" style="padding:0px; height:auto;">
+                    <div class="layout-topbar-menu-wrapper">
+                        <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}"
+                            (click)="app.onTopbarMenuClick($event)">
+                            <li style="margin:0px;">
+                                <h4>{{istruttoriaDUCorrente.tipo}} - {{istruttoriaDUCorrente.domanda.campagna}}</h4>
+                            </li>
+                            <li>
+                                <h4>/</h4>
+                            </li>
+                            <li #idDomanda *ngIf="istruttoriaDUCorrente.domanda.id"
+                                [ngClass]="{'active-topmenuitem':app.activeTopbarItem === idDomanda}"
+                                (click)="app.onTopbarRootItemClick($event, idDomanda)">
+                                <a href="#" style="color:#0e5f3f" (click)="showDialog()">
+                                    <h4>{{istruttoriaDUCorrente.domanda.numeroDomanda}} - {{istruttoriaDUCorrente.domanda.cuaaIntestatario}} -
+                                        {{istruttoriaDUCorrente.domanda.ragioneSociale | slice:0:60}}</h4>
+                                    <span class="topbar-item-name">{{istruttoriaDUCorrente.domanda.id}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="top-sub-green">
+            <div class="ui-g-12">
+                <div class="ui-grid-fixed">
+                    <p-tabMenu [model]="menu1"></p-tabMenu>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%" class="disaccoppiato">
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+    <p-overlayPanel #op baseZIndex="10000">
+        <!-- width: 700px !important; -->
+        <ul style="color:#333; padding:15px; width: 700px !important;">
+            <strong>CUAA /</strong> {{istruttoriaDUCorrente.domanda.cuaaIntestatario}}<br>
+            <strong>Ragione Sociale /</strong>
+            {{istruttoriaDUCorrente.domanda.ragioneSociale}}<br>
+            <strong>Id /</strong> {{istruttoriaDUCorrente.domanda.id}}<br>
+            <strong>Numero /</strong> {{istruttoriaDUCorrente.domanda.numeroDomanda}}<br>
+            <strong>Modulo /</strong> {{istruttoriaDUCorrente.domanda.descModuloDomanda}}<br>
+            <strong>Data pres. /</strong>
+            {{istruttoriaDUCorrente.domanda.dtPresentazione}}<br>
+            <strong>Ente Comp. /</strong>
+            {{istruttoriaDUCorrente.domanda.descEnteCompilatore}}<br>
+            <strong>Stato /</strong> {{istruttoriaDUCorrente.domanda.stato}}
+        </ul>
+    </p-overlayPanel>
+
+    <p-dialog [(visible)]="displayDetails" [modal]="true" [responsive]="true" [contentStyle]="{'max-width':'800px'}"
+        [minY]="70" [maximizable]="false" [baseZIndex]="999998">
+        <p-header>
+            <strong>INFO domanda</strong>
+        </p-header>
+        <div class="ui-g">
+            <div class="ui-g-2">
+                <strong>CUAA</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.cuaaIntestatario}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Ragione Sociale</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.ragioneSociale}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Id</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.id}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Numero</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.numeroDomanda}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Modulo</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.descModuloDomanda}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Data pres.</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.dtPresentazione | date: "dd/MM/yyyy"}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Ente Comp.</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.descEnteCompilatore}}
+            </div>
+            <div class="ui-g-2">
+                <strong>Stato</strong>
+            </div>
+            <div class="ui-g-4">
+                {{istruttoriaDUCorrente.domanda.stato}}
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p-button appDebounceClick label="Annulla Domanda" (debounceClick)="confermaAnnullamento()">
+                    </p-button>
+                </div>
+            </div>
+            <p-fieldset *ngIf="titolareDeceduto" [style]="{'min-width':'750px'}"
+                legend="Dati di istruttoria relativi all'erede di un titolare deceduto">
+                <div class="ui-g">
+                    <div class="ui-g-2">
+                        <strong>Nominativo</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.nome}} {{datiEredeDto.cognome}}
+                    </div>
+                    <div class="ui-g-2">
+                        <strong>Codice fiscale</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.codiceFiscale}}
+                    </div>
+                    <div class="ui-g-2">
+                        <strong>Residenza</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.indirizzoResidenza}} {{datiEredeDto.codiceIstat}} {{datiEredeDto.capResidenza}}
+                        {{datiEredeDto.provResidenza}}
+                    </div>
+                    <div class="ui-g-2">
+                        <strong>IBAN</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.iban}}
+                    </div>
+                    <div class="ui-g-2">
+                        <strong>Dati di nascita</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.dtNascita  | date: 'dd/MM/yyyy'}} {{datiEredeDto.codIstatNascita}}
+                        {{datiEredeDto.provNascita}}
+
+                    </div>
+                    <div class="ui-g-2">
+                        <strong>Sesso</strong>
+                    </div>
+                    <div class="ui-g-4">
+                        {{datiEredeDto.sesso}}
+                    </div>
+                    <div *ngIf="datiErediOk">
+                        <div class="ui-g-1">
+                            <p-checkbox binary="true" [(ngModel)]="datiEredeDto.certificato"
+                                (onChange)="onCheckboxChangeDatiErede($event)">
+                            </p-checkbox>
+                        </div>
+                        <div class="ui-g-11">
+                            <span>Si attesta che i dati dell’erede sono corretti ed è possibile liquidare la
+                                domanda</span>
+                        </div>
+                    </div>
+                    <div *ngIf="!datiErediOk">
+                        <div class="ui-g-12 error">
+                            <span> {{messaggioErroreDatiErede}}</span>
+                        </div>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+        <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+    </p-dialog>
+</div>

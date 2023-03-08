@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<changeSet id="ISTRUTTORIA_READ_20.2" author="Gabriele Ninfa" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_DATI_LAVORAZIONE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_WRT_20.2" author="Gabriele Ninfa" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_DATI_LAVORAZIONE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_20.3" author="Gabriele Ninfa">
+		<dropTable tableName="A4GT_DATI_LAVORAZIONE"></dropTable>
+	</changeSet>
+
+</databaseChangeLog>

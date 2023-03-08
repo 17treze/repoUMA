@@ -1,0 +1,142 @@
+<p-dialog
+  #dialogNuovoPrelievo
+  id="popup-nuovo-prelievo"
+  [(visible)]="display"
+  header="Prelievo Carburante"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="center"
+  [style]="{width: '80vw'}"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden'}"
+  [dismissableMask]="true"
+  (onHide)="onHideDialog($event)">
+
+  <p-toast
+    key="tst-prelievo"
+    [style]="{marginTop: '70px'}"></p-toast>
+
+  <form
+    novalidate
+    [formGroup]="prelievoForm"
+    (ngSubmit)="onSubmit()">
+
+    <!-- Prima Sezione - Dati distributore -->
+    <div class="p-grid p-align-center ui-fluid">
+      <div class="p-col">
+        <!-- Prima riga - Distributore -->
+        <div class="p-grid p-align-center">
+          <div class="p-col-3">
+            <strong>Distributore</strong>
+          </div>
+          <div class="p-col">
+            <p-dropdown
+              [disabled]="READONLY_MODE"
+              formControlName="identificativoDistributore"
+              (onChange)="onChangeDistributore()"
+              [options]="distributoriVM"></p-dropdown>
+            <div *ngIf="prelievoForm.get('identificativoDistributore').invalid && prelievoForm.get('identificativoDistributore').dirty && prelievoForm.get('identificativoDistributore').touched">
+              <p-message
+                *ngIf="prelievoForm.get('identificativoDistributore').errors?.required"
+                class="font-12"
+                severity="error"
+                text="{{umaMessages.mandatory}}">
+              </p-message>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Documento Fiscale -->
+        <div class="p-grid p-align-center">
+          <div class="p-col-3">
+            <strong>Estremi documento fiscale</strong>
+          </div>
+          <div class="p-col">
+            <input
+              #inputDocumentoFiscale
+              formControlName="estremiDocumentoFiscale"
+              type="text"
+              maxlength="50"
+              pInputText
+              [disabled]="READONLY_MODE">
+          </div>
+        </div>
+
+        <!-- Terza riga - Data prelievo / consegnato -->
+        <div class="p-grid p-align-center">
+          <div class="p-col-3">
+            <strong>Data prelievo</strong>
+          </div>
+          <div class="p-col">
+            <p-calendar
+              #dataPrelievoRef
+              formControlName="data"
+              dateFormat="dd MM yy"
+              [locale]="calendarService.localeITA"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              [showIcon]="true"
+              [disabled]="READONLY_MODE">
+            </p-calendar>
+            <div *ngIf="prelievoForm.get('data').invalid && prelievoForm.get('data').dirty && prelievoForm.get('data').touched">
+              <p-message
+                *ngIf="prelievoForm.get('data').errors?.required"
+                class="font-12"
+                severity="error"
+                text="{{umaMessages.mandatory}}">
+              </p-message>
+            </div>
+          </div>
+          <div class="p-col-5">
+            <div class="p-grid m-0 p-justify-end">
+              <p-checkbox
+                [formControl]="prelievoForm.controls['isConsegnato']"
+                label="consegnato"
+                binary="true"
+                [disabled]="READONLY_MODE"></p-checkbox>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Seconda Sezione - Tabella Carburante -->
+    <div class="p-grid p-align-center">
+      <div class="p-col">
+        <app-a4g-multi-table
+          [cols]="cols"
+          [values]="datasource"
+          [readonly]="READONLY_MODE"
+          (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+      </div>
+    </div>
+
+    <!-- Separatore -->
+    <br>
+
+    <!-- Button bar -->
+    <div class="p-grid p-justify-between">
+      <div>
+        <button
+          pButton
+          class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Annulla"
+          (click)="annulla()"></button>
+      </div>
+      <div class="pr-0_5m">
+        <button
+          pButton
+          [disabled]="READONLY_MODE"
+          class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-10m"
+          type="button"
+          label="Salva Prelievo"
+          (click)="salvaPrelievo()"></button>
+      </div>
+    </div>
+  </form>
+
+</p-dialog>

@@ -1,0 +1,43 @@
+:host {
+  .h-15m {
+    height: 15em;
+  }
+
+  .h-11m {
+    height: 11em;
+  }
+
+  .box-border-bottom {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 8px;
+      width: 100%;
+      border-bottom: 1px dashed #ffffff;
+    }
+
+    * {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      padding: 2px;
+      background-color: #0d5f3f;
+    }
+  }
+
+  span.btn.btn-outline-light {
+    cursor: auto;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background-color: transparent;
+      color: #f8f9fa;
+    }
+  }
+}

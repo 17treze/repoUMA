@@ -1,0 +1,83 @@
+.editTolbar div:nth-child(1) {
+    display: inherit;
+}
+
+.editTolbar div:nth-child(1) {
+    display: inherit;
+    float: right;
+}
+
+.editTolbar div:nth-child(1) button {
+    color: #00985b;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    padding: 0px 5px;
+
+}
+
+.editTolbar {
+    /*width: 96.5%;*/
+    /*width: calc(100% - 54px);*/
+    float: right;
+    background: #ffffffde;
+    position: fixed;
+    z-index: 9997;
+    /*left: 3.5%;*/
+    /*left: 54px;*/
+    bottom: 40px;
+    align-self: center;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 1px #212529;
+
+}
+
+.editTolbar div:nth-child(1) button:disabled,
+.toolDisattivato {
+    cursor: not-allowed;
+    pointer-events: none !important;
+}
+
+.editTolbar div:nth-child(1) button {
+    margin: 0 4px;
+}
+
+.groupTool div {
+    display: inherit;
+    float: right;
+}
+
+.active-tool button {
+    color: #ffffff !important;
+    background: #00985b !important;
+    border-radius: 0;
+}
+
+.alert-tool button {
+    color: #ffffff !important;
+    background: #c9451a !important;
+    border-radius: 0 10px 10px 0;
+    margin: 0 !important;
+}
+
+.right-separator {
+    border-right: 2px dashed #626262 !important;
+    border-radius: 0 !important;
+}
+
+.editTolbar div:nth-child(1) button {
+    width: 40px;
+    height: 45px;
+}
+
+.editTolbar div:nth-child(1) button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.editTolbar div.active-tool:nth-child(1) button.btn.btn-primary.first-element {
+    color: #ffffff !important;
+    background: #00985b !important;
+    border-radius: 10px 0px 0px 10px;
+    margin: 0 !important;
+}

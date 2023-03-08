@@ -1,0 +1,1 @@
+Script da eseguire su SQL SERVER catalog SIAR_TN(_QUAL)

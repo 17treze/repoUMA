@@ -1,0 +1,37 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g ui-grid-fixed">
+    <div class="layout-actionmenu w-100">
+      <h3 class="richiesta-title no-text-transform">{{'REVOCA_MANDATO_DLG.RICHIESTE_REVOCA_MANDATO' | translate}}</h3>
+    </div>
+    <div
+      class="funzioni-grid tab-new"
+      style="width:100%">
+      <p-tabView
+        class="container--gestione-utenze"
+        (onChange)="handleTabChange($event)">
+        <p-tabPanel [selected]="selectedTab == 'DA_VALUTARE'" *ngIf="!roleAppag">
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">
+              {{'REVOCA_MANDATO_DLG.DA_VALUTARE' | translate}}
+            </span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-richiesta-revoca-mandato-da-valutare></app-richiesta-revoca-mandato-da-valutare>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel [selected]="selectedTab == 'VALUTATE'">
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">
+              {{'REVOCA_MANDATO_DLG.VALUTATE' | translate}}
+              <span>{{this.counter}}</span>
+            </span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-richiesta-revoca-mandato-valutate (updateCounter)="updateCounter($event)"></app-richiesta-revoca-mandato-valutate>
+          </ng-template>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+
+  </div>
+</div>

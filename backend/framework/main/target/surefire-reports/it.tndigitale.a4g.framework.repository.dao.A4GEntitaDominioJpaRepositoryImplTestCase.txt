@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: it.tndigitale.a4g.framework.repository.dao.A4GEntitaDominioJpaRepositoryImplTestCase
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.292 s - in it.tndigitale.a4g.framework.repository.dao.A4GEntitaDominioJpaRepositoryImplTestCase

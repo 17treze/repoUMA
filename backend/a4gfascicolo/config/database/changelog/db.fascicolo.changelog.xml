@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<changeSet id="FASCICOLO_1.0" author="Lorenzo Martinelli">
+		<!-- Contenuto di 000_oggettiComuni.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+			START WITH 1
+			MAXVALUE 999999999999999999999999999
+			MINVALUE 1
+			NOCYCLE
+			NOCACHE
+			ORDER;
+
+			CREATE TABLE A4GT_LOGGING (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			UTENTE ${string.type}(500 CHAR) NOT NULL,
+			TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+			TABELLA ${string.type}(4000) NOT NULL,
+			ID_ENTITA NUMBER(19) NOT NULL,
+			DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+			CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<!-- Contenuto di 002_tabelleDichiarazioniAntimafia.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_AZIENDA_AGRICOLA (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			CUAA ${string.type}(16) NOT NULL,
+			CONSTRAINT A4GT_AZIENDA_AGRICOLA_UIDX UNIQUE (CUAA) USING INDEX TABLESPACE
+			${tablespace.index},
+			CONSTRAINT A4GT_AZIENDA_AGRICOLA_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data};
+
+			CREATE TABLE A4GD_STATO_DIC_ANTIMAFIA (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			IDENTIFICATIVO ${string.type}(500) NOT NULL,
+			DESCRIZIONE ${string.type}(4000) NOT NULL,
+			CONSTRAINT A4GD_STATO_DIC_ANTIMAFIA_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX
+			TABLESPACE ${tablespace.index},
+			CONSTRAINT A4GD_STATO_DIC_ANTIMAFIA_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data};
+
+			CREATE TABLE A4GT_DICHIARAZIONE_ANTIMAFIA (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			ID_AZIENDA_AGRICOLA ${id.number.type} NOT NULL,
+			DATI_DICHIARAZIONE CLOB,
+			ID_STATO ${id.number.type} NOT NULL,
+			PDF_GENERATO BLOB,
+			DT_GENERAZIONE_PDF DATE,
+			PDF_FIRMATO BLOB,
+			DT_UPLOAD_PDF_FIRMATO DATE,
+			ID_DOC_PROTOCOLLATO NUMBER,
+			RIF_PROTOCOLLO ${string.type}(500),
+			DT_INIZIO_COMPILAZIONE DATE,
+			DT_ULTIMO_AGGIORNAMENTO DATE,
+			CONSTRAINT A4GT_DIC_ANTIMAFIA_FK1 FOREIGN KEY (ID_AZIENDA_AGRICOLA) REFERENCES
+			A4GT_AZIENDA_AGRICOLA (ID),
+			CONSTRAINT A4GT_DIC_ANTIMAFIA_FK2 FOREIGN KEY (ID_STATO) REFERENCES
+			A4GD_STATO_DIC_ANTIMAFIA (ID),
+			CONSTRAINT A4GT_DIC_ANTIMAFIA_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data}
+			NOCOMPRESS
+			LOB (PDF_GENERATO) STORE AS LOB_AMF_PDF_GENERATO
+			( TABLESPACE ${tablespace.lob}
+			DISABLE STORAGE IN ROW
+			)
+			LOB (PDF_FIRMATO) STORE AS LOB_AMF_PDF_FIRMATO
+			( TABLESPACE ${tablespace.lob}
+			DISABLE STORAGE IN ROW
+			)
+			NOCACHE
+			NOPARALLEL;
+
+			CREATE TABLE A4GD_TIPO_ALLEGATO (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			IDENTIFICATIVO ${string.type}(500) NOT NULL,
+			DESCRIZIONE ${string.type}(4000) NOT NULL,
+			CONSTRAINT A4GD_TIPO_ALLEGATO_UIDX UNIQUE (IDENTIFICATIVO) USING INDEX
+			TABLESPACE ${tablespace.index},
+			CONSTRAINT A4GD_TIPO_ALLEGATO_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data};
+
+			CREATE TABLE A4GT_ALLEGATO_DIC_ANTIMAFIA (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			ID_DICHIARAZIONE_ANTIMAFIA ${id.number.type} NOT NULL,
+			ID_TIPO_ALLEGATO ${id.number.type} NOT NULL,
+			PDF_ALLEGATO BLOB,
+			DT_UPLOAD_PDF_ALLEGATO DATE,
+			CONSTRAINT A4GT_ALLEGATO_DIC_AMF_FK1 FOREIGN KEY (ID_DICHIARAZIONE_ANTIMAFIA)
+			REFERENCES A4GT_DICHIARAZIONE_ANTIMAFIA (ID),
+			CONSTRAINT A4GT_ALLEGATO_DIC_AMF_FK2 FOREIGN KEY (ID_TIPO_ALLEGATO) REFERENCES
+			A4GD_TIPO_ALLEGATO (ID),
+			CONSTRAINT A4GT_ALLEGATO_DIC_AMF_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data}
+			NOCOMPRESS
+			LOB (PDF_ALLEGATO) STORE AS LOB_AMF_PDF_ALLEGATO
+			( TABLESPACE ${tablespace.lob}
+			DISABLE STORAGE IN ROW
+			)
+			NOCACHE
+			NOPARALLEL;
+		</sql>
+
+		<!-- Contenuto di 003_tabelleDichiarazioneAntimafia.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ASSENZA_DT NUMBER(1);
+		</sql>
+
+		<!-- ******************** INIZIALIZZAZIONE ******************** -->
+
+
+		<!-- ******************** GRANT ******************** -->
+		<!-- Tabelle di liquibase -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,
+			INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT
+			SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO
+			${user.writer};
+		</sql>
+
+		<!-- Tabelle di a4g -->
+		<!-- Contenuto di 000_oggettiComuni.sql -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON
+			NXTNBR TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON
+			A4GT_LOGGING TO ${user.writer};
+		</sql>
+
+		<!-- Contenuto di 002_tabelleDichiarazioniAntimafia.sql -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_AZIENDA_AGRICOLA TO
+			${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON
+			A4GT_DICHIARAZIONE_ANTIMAFIA TO ${user.writer};
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GD_STATO_DIC_ANTIMAFIA TO
+			${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON
+			A4GD_TIPO_ALLEGATO TO ${user.writer};
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEGATO_DIC_ANTIMAFIA TO
+			${user.writer};
+		</sql>
+
+	</changeSet>
+
+	<!-- Da versione 1.2 di fascicolo (1.1 e' in utente) -->
+	<changeSet id="FASCICOLO_1.1" author="Lorenzo Martinelli">
+		<!-- Contenuto di 003a_tabellaAllegatoDicFamConv.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_ALLEGATO_DIC_FAM_CONV (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			ID_DICHIARAZIONE_ANTIMAFIA ${id.number.type} NOT NULL,
+			CF_SOGGETTO_IMPRESA ${string.type}(16) NOT NULL,
+			COD_CARICA ${string.type}(50) NOT NULL,
+			PDF_DIC_FAM_CONV BLOB,
+			DT_PDF_DIC_FAM_CONV DATE,
+			CONSTRAINT A4GT_ALLEGATO_DIC_FAM_CONV_FK1 FOREIGN KEY
+			(ID_DICHIARAZIONE_ANTIMAFIA) REFERENCES A4GT_DICHIARAZIONE_ANTIMAFIA
+			(ID),
+			CONSTRAINT A4GT_ALLEGATO_DIC_FAM_CONV_PK PRIMARY KEY (ID)
+			) TABLESPACE
+			${tablespace.data}
+			NOCOMPRESS
+			LOB (PDF_DIC_FAM_CONV) STORE AS LOB_AMF_PDF_DIC_FAM_CONV
+			( TABLESPACE ${tablespace.lob}
+			DISABLE STORAGE IN ROW
+			)
+			NOCACHE
+			NOPARALLEL;
+		</sql>
+
+		<!-- ******************** GRANT ******************** -->
+		<!-- Contenuto di 003a_tabellaAllegatoDicFamConv.sql -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEGATO_DIC_FAM_CONV TO
+			${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_4.1" author="Francesco Marani">
+		<!-- Correzione lunghezza massima numeri generati da sqquence unica -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER SEQUENCE NXTNBR MAXVALUE 99999999999999999999;
+			<comment>Correzione lunghezza massima numeri generati da sqquence unica</comment>
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_5.1" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA DROP COLUMN ID_DOC_PROTOCOLLATO;
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA DROP COLUMN RIF_PROTOCOLLO;
+
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD DT_PROTOCOLLAZIONE DATE;
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ID_PROTOCOLLO
+			VARCHAR2(255);
+		</sql>
+	</changeSet>
+	<changeSet id="FASCICOLO_5.2" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD DT_FINE DATE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_6.1" author="Caccia Salvatore">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO
+			A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE) VALUES
+			(NXTNBR.NEXTVAL,'CONTROLLATA','Stato che identifica che il processo
+			di controllo domanda antimafia è andato a buon fine');
+			INSERT INTO A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE) VALUES
+			(NXTNBR.NEXTVAL,'CONTROLLO_MANUALE','Stato che identifica che il
+			processo di controllo domanda antimafia non è andato a buon fine');
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_6.2" author="Elisabetta Freschi">
+		<renameTable newTableName="A4GFASC_LOGGING"
+			oldTableName="A4GT_LOGGING" />
+	</changeSet>
+
+	<changeSet id="FASCICOLO_6.3" author="Caccia Salvatore">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			insert into A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE)
+			select NXTNBR.NEXTVAL,'BOZZA','Stato che identifica le dichiarazioni
+			antimafia in compilazione.'
+			from dual
+			where not exists(select *
+			from A4GD_STATO_DIC_ANTIMAFIA
+			where (IDENTIFICATIVO ='BOZZA'));
+
+			insert into A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE)
+			select NXTNBR.NEXTVAL,'FIRMATA','Stato che identifica le dichiarazioni
+			antimafia firmate.'
+			from dual
+			where not exists(select *
+			from A4GD_STATO_DIC_ANTIMAFIA
+			where (IDENTIFICATIVO ='FIRMATA'));
+
+			insert into A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE)
+			select NXTNBR.NEXTVAL,'PROTOCOLLATA','Stato che identifica le dichiarazioni
+			antimafia protocollate.'
+			from dual
+			where not exists(select *
+			from A4GD_STATO_DIC_ANTIMAFIA
+			where (IDENTIFICATIVO ='PROTOCOLLATA'));
+
+			insert into A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE)
+			select NXTNBR.NEXTVAL,'RETTIFICATA','Stato che identifica le dichiarazioni
+			antimafia rettificate da una dichiarazione antimafia successiva.'
+			from dual
+			where not exists(select *
+			from A4GD_STATO_DIC_ANTIMAFIA
+			where (IDENTIFICATIVO ='RETTIFICATA'));
+
+			insert into A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE)
+			select NXTNBR.NEXTVAL,'CHIUSA','Stato che identifica la chiusura logica di
+			una Dichiarazione Antimafia'
+			from dual
+			where not exists(select *
+			from A4GD_STATO_DIC_ANTIMAFIA
+			where (IDENTIFICATIVO ='CHIUSA'));
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_7.1" author="Salvatore De Luca">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_NOTA (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			NOTA CLOB NOT NULL,
+			TIPO ${string.type}(32) NOT NULL,
+			CHIAVE_ESTERNA ${string.type}(50) NOT NULL,
+			DT_INSERIMENTO DATE NOT NULL,
+			UTENTE ${string.type}(60),
+			CONSTRAINT A4GT_NOTA_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<!-- ******************** GRANT ******************** -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_NOTA TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_7.2" author="Caccia Salvatore">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO
+			A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE) VALUES
+			(NXTNBR.NEXTVAL,'RIFIUTATA','Stato che identifica che il processo di
+			controllo domanda antimafia è stata rifutata');
+			INSERT INTO A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE) VALUES
+			(NXTNBR.NEXTVAL,'POSITIVO','Stato che identifica che il processo di
+			controllo domanda antimafia ha avuto esito positivo');
+			INSERT INTO
+			A4GD_STATO_DIC_ANTIMAFIA (ID,IDENTIFICATIVO,DESCRIZIONE) VALUES
+			(NXTNBR.NEXTVAL,'VERIFICA_PERIODICA','Stato che identifica che il
+			processo di controllo domanda antimafia è sottoposta a verifica
+			periodica');
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_16.2" author="Paolo Procida">
+		<insert tableName="A4GD_TIPO_ALLEGATO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="pdf" />
+			<column name="DESCRIZIONE" value="Estensione file di tipo PDF" />
+		</insert>
+		<insert tableName="A4GD_TIPO_ALLEGATO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="pdf.p7m" />
+			<column name="DESCRIZIONE" value="Estensione file di tipo P7M" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_16.1" author="Paolo Procida">
+		<addColumn tableName="A4GT_ALLEGATO_DIC_FAM_CONV">
+			<column name="ID_TIPO_ALLEGATO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_TIPO_ALLEGATO"
+					referencedTableName="A4GD_TIPO_ALLEGATO" referencedColumnNames="ID" />
+			</column>
+		</addColumn>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_19.1" author="Salvatore De Luca">
+		<update tableName="A4GT_ALLEGATO_DIC_FAM_CONV">
+			<column name="ID_TIPO_ALLEGATO"
+				valueComputed="(SELECT ID FROM A4GD_TIPO_ALLEGATO WHERE IDENTIFICATIVO = 'pdf')" />
+			<where>ID_TIPO_ALLEGATO is null</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_19.2" author="Salvatore De Luca">
+		<update tableName="A4GT_ALLEGATO_DIC_ANTIMAFIA">
+			<column name="ID_TIPO_ALLEGATO"
+				valueComputed="(SELECT ID FROM A4GD_TIPO_ALLEGATO WHERE IDENTIFICATIVO = 'pdf')" />
+			<where>ID_TIPO_ALLEGATO is null</where>
+		</update>
+	</changeSet>
+
+
+	<changeSet id="FASCICOLO_20.1" author="Caccia Salvatore">
+		<createTable tableName="A4GT_PROCEDIMENTO_AMF">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_PROCEDIMENTO_AMF"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DICHIARAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_ID_DICHIARAZIONE"
+					referencedTableName="A4GT_DICHIARAZIONE_ANTIMAFIA"
+					referencedColumnNames="ID" nullable="false" />
+			</column>
+			<column name="PROCEDIMENTO" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_PROCEDIMENTO_AMF TO
+			${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_20.2" author="Marco Dalla Torre">
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Bozza" />
+			<where>IDENTIFICATIVO = 'BOZZA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Firmata" />
+			<where>IDENTIFICATIVO = 'FIRMATA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Protocollata" />
+			<where>IDENTIFICATIVO = 'PROTOCOLLATA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Rettificata" />
+			<where>IDENTIFICATIVO = 'RETTIFICATA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Controllo Manuale" />
+			<where>IDENTIFICATIVO = 'CONTROLLO_MANUALE'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Positivo" />
+			<where>IDENTIFICATIVO = 'POSITIVO'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Chiusa" />
+			<where>IDENTIFICATIVO = 'CHIUSA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Rifiutata" />
+			<where>IDENTIFICATIVO = 'RIFIUTATA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Verifica Periodica" />
+			<where>IDENTIFICATIVO = 'VERIFICA_PERIODICA'</where>
+		</update>
+		<update tableName="A4GD_STATO_DIC_ANTIMAFIA">
+			<column name="DESCRIZIONE" value="Controllata" />
+			<where>IDENTIFICATIVO = 'CONTROLLATA'</where>
+		</update>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_21.0" author="Antonio Avitabile">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ESITO VARCHAR2(2);
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ESITO_DATA_ELABORAZIONE DATE;
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ESITO_DESCRIZIONE VARCHAR(500);
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ESITO_INVIO_AGEA VARCHAR(2);
+			ALTER TABLE A4GT_DICHIARAZIONE_ANTIMAFIA ADD ESITO_INVIO_BDNA VARCHAR(2);
+		</sql>
+	</changeSet>
+
+	<changeSet id="FASCICOLO_24.0" author="Antonio Trombetta">
+		<renameTable newTableName="A4GT_LOGGING" oldTableName="A4GFASC_LOGGING" />
+	</changeSet>
+
+	<changeSet id="FASCICOLO_24.1" author="Antonio Trombetta">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+							 primaryKeyName="PK_EVENTSTORED" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+					defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false" />
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)"
+					defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_24.2" author="Massimo Nascivera">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_EVENTSTORED ADD USER_NAME ${string.type}(100) NOT NULL;
+    	</sql>
+    </changeSet>
+    
+    <changeSet id="FASCICOLO_24.3" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_25.0" author="Massimo Nascivera">
+    	<sql endDelimiter=";" splitStatements="true">
+    		ALTER TABLE A4GT_EVENTSTORED MODIFY USER_NAME NULL;
+    	</sql>
+    </changeSet>
+    
+    <changeSet id="UTENTE_29F.0" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_ALL_AMF_ID_DICH_AMF ON A4GT_ALLEGATO_DIC_ANTIMAFIA (ID_DICHIARAZIONE_ANTIMAFIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ALL_AMF_ID_TIPO_ALLEGATO ON A4GT_ALLEGATO_DIC_ANTIMAFIA (ID_TIPO_ALLEGATO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ALL_FAM_ID_DICH_AMF ON A4GT_ALLEGATO_DIC_FAM_CONV (ID_DICHIARAZIONE_ANTIMAFIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_ALL_FAM_ID_TIPO_ALLEGATO ON A4GT_ALLEGATO_DIC_FAM_CONV (ID_TIPO_ALLEGATO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DICH_AMF_ID_AZIENDA ON A4GT_DICHIARAZIONE_ANTIMAFIA (ID_AZIENDA_AGRICOLA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_DICH_AMF_ID_STATO ON A4GT_DICHIARAZIONE_ANTIMAFIA (ID_STATO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PROCEDIMENTO_ID_DICH ON A4GT_PROCEDIMENTO_AMF (ID_DICHIARAZIONE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="FASCICOLO_34.1" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT ON A4GT_EVENTSTORED TO NETEYE;
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>

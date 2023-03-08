@@ -1,0 +1,109 @@
+{
+	"errCod": "",
+	"errDescr": "",
+	"numeroCapi": 4,
+	"listaCapi": {
+		"clsCapo": []
+	},
+	"listaCapiMacellati": {
+		"clsCapoMacellato": []
+	},
+	"listaCapiOvicaprini": {
+		"clsCapoOvicaprino": []
+	},
+	"listaVacche": {
+		"clsCapoVacca" : [{
+	"descrLibro": "sostegno da verificare - br6 false - somma detenzioni allevamenti di montagna e allevamenti incogniti > 180 - (detenzione in allev motagna 4 gg)",
+	"aziendaCodice": "123XX000",
+	"cuaa": "DPDFRZ65C21C794B",
+	"codice": "CAPO_LATTE_4",
+	"dtNascita": 3789500400000,
+	"dtInizioDetenzione": 1498777200000,
+	"dtFineDetenzione": 1499122800000,
+	"vaccaDtIngresso": 1442786400000,
+	"vaccaDtInserimentoBdnIngresso": 1443391200000,
+	"flagProrogaMarcatura": "N",
+	"flagDelegatoIngressoVacca": "N",
+	"codiceVitello": "VITELLO_0",
+	"dtNascitaVitello": 1498950000000,
+	"vitelloDtInserimentoBdnNascita": 1501282800000,
+	"vitelloTipoOrigine": "N",
+	"flagDelegatoNascitaVitello": "N",
+	"flagDelegatoIngressoVitello": "R"
+},
+{
+	"descrLibro": "Detenzione in allevamento non conosciuto = 364 gg > 180 gg",
+	"aziendaCodice": "000XX002",
+	"cuaa": "DPDFRZ65C21C794B",
+	"codice": "CAPO_LATTE_4",
+	"dtNascita": 3789500400000,
+	"dtInizioDetenzione": 1483225200000,
+	"dtFineDetenzione": 1514674800000,
+	"vaccaDtIngresso": 1442786400000,
+	"vaccaDtInserimentoBdnIngresso": 1443391200000,
+	"flagProrogaMarcatura": "N",
+	"flagDelegatoIngressoVacca": "N",
+	"codiceVitello": "VITELLO_0",
+	"dtNascitaVitello": 1498950000000,
+	"vitelloDtInserimentoBdnNascita": 1501282800000,
+	"vitelloTipoOrigine": "N",
+	"flagDelegatoNascitaVitello": "N",
+	"flagDelegatoIngressoVitello": "R"
+},{
+	"descrLibro": "non ammissibile - br6 false - somma detenzioni allevamenti di montagna e non conosciuti comunque < 180 (detenzione in allev motagna = 4 gg)",
+	"aziendaCodice": "123XX000",
+	"cuaa": "DPDFRZ65C21C794B",
+	"codice": "CAPO_LATTE_5",
+	"dtNascita": 3789500400000,
+	"dtInizioDetenzione": 1498777200000,
+	"dtFineDetenzione": 1499122800000,
+	"vaccaDtIngresso": 1442786400000,
+	"vaccaDtInserimentoBdnIngresso": 1443391200000,
+	"flagProrogaMarcatura": "N",
+	"flagDelegatoIngressoVacca": "N",
+	"codiceVitello": "VITELLO_0",
+	"dtNascitaVitello": 1498950000000,
+	"vitelloDtInserimentoBdnNascita": 1501282800000,
+	"vitelloTipoOrigine": "N",
+	"flagDelegatoNascitaVitello": "N",
+	"flagDelegatoIngressoVitello": "R"
+},
+{
+	"descrLibro": "detenzione in allev non conosciuto = 4 gg",
+	"aziendaCodice": "000XX002",
+	"cuaa": "DPDFRZ65C21C794B",
+	"codice": "CAPO_LATTE_5",
+	"dtNascita": 3789500400000,
+	"dtInizioDetenzione": 1498777200000,
+	"dtFineDetenzione": 1499122800000,
+	"vaccaDtIngresso": 1442786400000,
+	"vaccaDtInserimentoBdnIngresso": 1443391200000,
+	"flagProrogaMarcatura": "N",
+	"flagDelegatoIngressoVacca": "N",
+	"codiceVitello": "VITELLO_0",
+	"dtNascitaVitello": 1498950000000,
+	"vitelloDtInserimentoBdnNascita": 1501282800000,
+	"vitelloTipoOrigine": "N",
+	"flagDelegatoNascitaVitello": "N",
+	"flagDelegatoIngressoVitello": "R"
+},{
+	"descrLibro": "capo non ammissibile - br2.1 false - allevamento sicuramente non di montagna",
+	"aziendaCodice": "AZIENDA_NON_DI_MONTAGNA",
+	"cuaa": "DPDFRZ65C21C794B",
+	"codice": "CAPO_LATTE_6",
+	"dtNascita": 3789500400000,
+	"dtInizioDetenzione": 1483225200000,
+	"dtFineDetenzione": 1514674800000,
+	"vaccaDtIngresso": 1442786400000,
+	"vaccaDtInserimentoBdnIngresso": 1443391200000,
+	"flagProrogaMarcatura": "N",
+	"flagDelegatoIngressoVacca": "N",
+	"codiceVitello": "VITELLO_0",
+	"dtNascitaVitello": 1498950000000,
+	"vitelloDtInserimentoBdnNascita": 1501282800000,
+	"vitelloTipoOrigine": "N",
+	"flagDelegatoNascitaVitello": "N",
+	"flagDelegatoIngressoVitello": "R"
+}]
+}
+}

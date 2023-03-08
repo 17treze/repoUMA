@@ -1,0 +1,846 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "PLOLNZ71B07E565W",
+        "ragioneSociale": "POLA LORENZO",
+        "numeroDomanda": 183109,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-25T10:13:45.000+0200",
+        "codEnteCompilatore": "668",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 012",
+        "dataProtocollazione": "2018-04-25T10:14:18.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        }
+    },
+    "infoIstruttoriaDomanda": {
+        "datiEleggibilita": [
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1465179,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01042",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 860,
+                "superficieSigeco": 0,
+                "idParcella": 253444,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461845,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02456",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1035,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461846,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02455",
+                    "sub": "3"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 679,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461707,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "3"
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 1,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461691,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02351",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 3057,
+                "superficieSigeco": 0,
+                "idParcella": 253443,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461743,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02101",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2749,
+                "superficieSigeco": 0,
+                "idParcella": 253446,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461842,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02460",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1192,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461868,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02450",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 956,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461777,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02470",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1771,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461704,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02098",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 501,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461705,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "5"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2045,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1465207,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01045",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1446,
+                "superficieSigeco": 0,
+                "idParcella": 253444,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461709,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2257,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461776,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02471",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1176,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1463770,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01275",
+                    "sub": "2"
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 20,
+                "superficieSigeco": 0,
+                "idParcella": 253445,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1463770,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01275",
+                    "sub": "2"
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 113,
+                "superficieSigeco": 0,
+                "idParcella": 253445,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461850,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02453",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1083,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461774,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02473",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2190,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461466,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02546",
+                    "sub": "7"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2192,
+                "superficieSigeco": 0,
+                "idParcella": 253447,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461847,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02455",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 727,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461708,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2228,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461799,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02461",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1847,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461693,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02348",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1649,
+                "superficieSigeco": 0,
+                "idParcella": 253443,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1465181,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01043",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 845,
+                "superficieSigeco": 0,
+                "idParcella": 253444,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461707,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "3"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 871,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461710,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02096",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2388,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461690,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02351",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1547,
+                "superficieSigeco": 0,
+                "idParcella": 253443,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1463767,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01275",
+                    "sub": "6"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1644,
+                "superficieSigeco": 0,
+                "idParcella": 253445,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461771,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02610",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 918,
+                "superficieSigeco": 0,
+                "idParcella": 253443,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461843,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02459",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1085,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461711,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02095",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 922,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461775,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02472",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 525,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461706,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02097",
+                    "sub": "4"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 274,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1465207,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01045",
+                    "sub": " "
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 141,
+                "superficieSigeco": 0,
+                "idParcella": 253444,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1463770,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01275",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 15329,
+                "superficieSigeco": 0,
+                "idParcella": 253445,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461851,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02452",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1155,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461844,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02457",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2049,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1463767,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "01275",
+                    "sub": "6"
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 399,
+                "superficieSigeco": 0,
+                "idParcella": 253445,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461692,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02350",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1541,
+                "superficieSigeco": 0,
+                "idParcella": 253443,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461797,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02608",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1117,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461852,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02451",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1085,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461711,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02095",
+                    "sub": " "
+                },
+                "codColtura3": "080-336-052",
+                "codColtura5": "336-002-052-044-000",
+                "superficieGis": 138,
+                "superficieSigeco": 0,
+                "idParcella": 253442,
+                "livello": 131
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461769,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02609",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1363,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461848,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02455",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 690,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1461849,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02454",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 3180,
+                "superficieSigeco": 0,
+                "idParcella": 253441,
+                "livello": 121
+            }
+        ]
+    }
+}

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:egov="http://www.cnipa.it/schemas/2003/eGovIT/Busta1_0/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://cooperazione.sian.it/servizi/AnagrafeAziende" xmlns:tns2="http://cooperazione.sian.it/schema/interscambio/"
+	targetNamespace="http://cooperazione.sian.it/servizi/AnagrafeAziende">
+	<types>
+		<xs:schema targetNamespace="http://cooperazione.sian.it/schema/interscambio/globals" elementFormDefault="qualified" attributeFormDefault="qualified"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cooperazione.sian.it/schema/interscambio/globals">
+			<xs:complexType name="ISCodifica">
+				<xs:sequence>
+					<xs:element name="codice" type="xs:string" nillable="true" minOccurs="0" />
+					<xs:element name="descrizione" type="xs:string" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="CodiceFiscalePersonaFisicaType">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z0-9]{5}" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="CodiceFiscalePersonaGiuridicaType">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[0-9]{11}" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+		<xs:schema targetNamespace="http://cooperazione.sian.it/schema/interscambio/users" elementFormDefault="qualified" attributeFormDefault="qualified"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://cooperazione.sian.it/schema/interscambio/users">
+			<xs:simpleType name="CodiceFiscalePersonaFisicaType">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z0-9]{5}" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="ISAutenticazione" type="tns2:ISAutenticazione" />
+			<xs:complexType name="ISAutenticazione">
+				<xs:sequence>
+					<xs:element name="utenteCF" minOccurs="1" type="tns2:CodiceFiscalePersonaFisicaType" nillable="false" />
+					<xs:element name="ruolo" minOccurs="0" type="xs:string" />
+					<xs:element name="idUtenteEnte" minOccurs="0" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+
+		<xs:schema targetNamespace="http://cooperazione.sian.it/schema/interscambio/" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns21="http://cooperazione.sian.it/schema/interscambio/" xmlns:tns="http://cooperazione.sian.it/schema/interscambio/globals" xmlns:tns2="http://cooperazione.sian.it/schema/interscambio/users">
+			<xs:simpleType name="StringType1">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="1" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringTypeComune">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="60" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringType20">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="20" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringTypeCodiceCatastale">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="4" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringTypeCap">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="5" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringTypeSiglaProvincia">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="2" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringTypeToponimo">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="100" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringType150">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="150" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="StringType50">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="50" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="BarrCodeType">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="11" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="CharType">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="1" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="CodiceType">
+				<xs:restriction base="xs:string">
+					<xs:maxLength value="4" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice>
+							<xs:element name="identificativo" type="tns21:identificativoFiscale" />
+						</xs:choice>
+						<xs:element name="utente" type="tns2:ISAutenticazione" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="risposta" type="tns21:ISDatiAnagraficiPro2p" nillable="true" />
+						<xs:element name="esito" type="tns:ISCodifica" nillable="false" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="ISDatiPro2p">
+				<xs:sequence>
+					<xs:element name="attivita" type="tns21:ISAttivitaPro2p" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+					<xs:element name="depositario" type="tns21:ISRiferimentoPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="domicilioFiscale" type="tns21:ISLuogoPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="partitaIva" type="tns21:ISPartitaIvaPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="rappresentante" type="tns21:ISRappresentantePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="sede" type="tns21:ISLuogoPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISAttivitaPro2p">
+				<xs:sequence>
+					<xs:element name="codice" type="tns21:CodiceType" nillable="true" minOccurs="0" />
+					<xs:element name="descrizione" type="tns21:StringType50" nillable="true" minOccurs="0" />
+					<xs:element name="infoDate" type="tns21:ISInfoDatePro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISInfoDatePro2p">
+				<xs:sequence>
+					<xs:element name="dataFine" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="dataInizio" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="fonte" type="tns:ISCodifica" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISRiferimentoPro2p">
+				<xs:sequence>
+					<xs:element name="codiceFiscale" type="tns:CodiceFiscalePersonaFisicaType" nillable="true" minOccurs="0" />
+					<xs:element name="datiIdentificativi" type="tns21:StringType150" nillable="true" minOccurs="0" />
+					<xs:element name="datiNascita" type="tns21:ISDatiNascitaPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="decesso" type="tns21:ISDecessoPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISDatiNascitaPro2p">
+				<xs:sequence>
+					<xs:element name="comune" type="tns21:StringTypeComune" nillable="true" minOccurs="0" />
+					<xs:element name="data" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="provincia" type="tns21:StringTypeSiglaProvincia" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISDecessoPro2p">
+				<xs:sequence>
+					<xs:element name="data" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="fonte" type="xs:string" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISLuogoPro2p">
+				<xs:sequence>
+					<xs:element name="infoDate" type="tns21:ISInfoDatePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="ubicazione" type="tns21:ISUbicazionePro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISUbicazionePro2p">
+				<xs:sequence>
+					<xs:element name="altro" type="tns21:StringType20" nillable="true" minOccurs="0" />
+					<xs:element name="cap" type="tns21:StringTypeCap" nillable="true" minOccurs="0" />
+					<xs:element name="codiceCatastale" type="tns21:StringTypeCodiceCatastale" nillable="true" minOccurs="0" />
+					<xs:element name="comune" type="tns21:StringTypeComune" nillable="true" minOccurs="0" />
+					<xs:element name="distretto" type="tns21:StringType50" nillable="true" minOccurs="0" />
+					<xs:element name="numCivico" type="tns21:StringType20" nillable="true" minOccurs="0" />
+					<xs:element name="provincia" type="tns21:StringTypeSiglaProvincia" nillable="true" minOccurs="0" />
+					<xs:element name="tipologia" type="tns21:ISTipologiaPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="toponimo" type="tns21:StringTypeToponimo" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISTipologiaPro2p">
+				<xs:sequence>
+					<xs:element name="tipologia" type="xs:string" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISPartitaIvaPro2p">
+				<xs:sequence>
+					<xs:element name="confluenzaPiva" type="xs:string" nillable="true" minOccurs="0" />
+					<xs:element name="date" type="tns21:ISInfoDatePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="motivoCessazione" type="xs:string" nillable="true" minOccurs="0" />
+					<xs:element name="piva" type="tns:CodiceFiscalePersonaGiuridicaType" nillable="true" minOccurs="0" />
+					<xs:element name="stato" type="tns21:StringType1" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISRappresentantePro2p">
+				<xs:sequence>
+					<xs:element name="carica" type="tns:ISCodifica" nillable="true" minOccurs="0" />
+					<xs:element name="dateRif" type="tns21:ISInfoDatePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="rappresentante" type="tns21:ISRiferimentoPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISDittaIndividualePro2p">
+				<xs:complexContent>
+					<xs:extension base="tns21:ISDatiPro2p">
+						<xs:sequence>
+							<xs:element name="denominazione" type="tns21:StringType150" nillable="true" minOccurs="0" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ISDatiAnagraficiPro2p">
+				<xs:sequence>
+					<xs:element name="persona" type="tns21:ISDatiPersonaFisicaPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="soggetto" type="tns21:ISSoggettoPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="segnalazione" type="tns21:ISErroreAEPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISDatiPersonaFisicaPro2p">
+				<xs:sequence>
+					<xs:element name="dittaIndividuale" type="tns21:ISDittaIndividualePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="personaFisica" type="tns21:ISPersonaFisicaPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISSessoAEPro2p">
+				<xs:sequence>
+					<!--<xs:element name="descrizione" type="xs:string" nillable="true" minOccurs="0"/>non gestito... 7 -->
+					<xs:element name="valore" type="tns21:StringType1" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISPersonaFisicaPro2p">
+				<xs:sequence>
+					<xs:element name="cognome" type="tns21:StringType50" nillable="true" minOccurs="0" />
+					<xs:element name="datiNascita" type="tns21:ISDatiNascitaPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="nome" type="tns21:StringType50" nillable="true" minOccurs="0" />
+					<xs:element name="codiceFiscale" type="tns:CodiceFiscalePersonaFisicaType" nillable="true" minOccurs="0" />
+					<xs:element name="sesso" type="tns21:ISSessoAEPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="decesso" type="tns21:ISDecessoPro2p" nillable="true" minOccurs="0" />
+					<xs:element name="domicilioFiscale" type="tns21:ISLuogoPro2p" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISErroreAEPro2p">
+				<xs:sequence>
+					<xs:element name="esito" type="tns:ISCodifica" nillable="false" />
+					<!--<xs:element name="codice" type="xs:string" nillable="true" minOccurs="0"/> <xs:element name="descrizione" type="xs:string" nillable="true" minOccurs="0"/> -->
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISSoggettoPro2p">
+				<xs:complexContent>
+					<xs:extension base="tns21:ISDatiPro2p">
+						<xs:sequence>
+							<xs:element name="codiceFiscale" type="tns:CodiceFiscalePersonaFisicaType" nillable="true" minOccurs="0" />
+							<xs:element name="denominazione" type="tns21:ISDenominazionePro2p" nillable="true" minOccurs="0" />
+							<xs:element name="estinzioneCF" type="tns21:ISEstinzionePro2p" nillable="true" minOccurs="0" />
+							<xs:element name="onlus" type="tns21:ISOnlusPro2p" nillable="true" minOccurs="0" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ISDenominazionePro2p">
+				<xs:sequence>
+					<xs:element name="denominazione" type="tns21:StringType150" nillable="true" minOccurs="0" />
+					<xs:element name="info" type="tns21:ISInfoDatePro2p" nillable="true" minOccurs="0" />
+					<xs:element name="naturaGiuridica" type="tns:ISCodifica" nillable="true" minOccurs="0" />
+					<xs:element name="sigla" type="tns21:StringTypeSiglaProvincia" nillable="true" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISEstinzionePro2p">
+				<xs:sequence>
+					<xs:element name="data" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="estinto" type="xs:boolean" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ISOnlusPro2p">
+				<xs:sequence>
+					<xs:element name="data" type="xs:dateTime" nillable="true" minOccurs="0" />
+					<xs:element name="denoninazione" type="tns:ISCodifica" nillable="true" minOccurs="0" />
+					<xs:element name="socCooperativa" type="xs:boolean" minOccurs="0" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="identificativoFiscale">
+				<xs:choice>
+					<xs:element name="CodiceFiscalePersonaFisica" type="tns:CodiceFiscalePersonaFisicaType" />
+					<xs:element name="CodiceFiscalePersonaGiuridica" type="tns:CodiceFiscalePersonaGiuridicaType" />
+				</xs:choice>
+			</xs:complexType>
+		</xs:schema>
+
+	</types>
+	<message name="richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll_Msg">
+		<part element="tns2:richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll" name="body" />
+	</message>
+	<message name="risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll_Msg">
+		<part element="tns2:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll" name="body" />
+	</message>
+	<portType name="ISValidazioneAnagrafe">
+		<operation name="ricercaAnagraficaAll">
+			<documentation>Intestazione/IntestazioneMessaggio/Azione=ricercaAnagrafica,
+				ProfiloCollaborazione=EGOV_IT_ServizioSincrono
+			</documentation>
+			<input message="tns:richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll_Msg" />
+			<output message="tns:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll_Msg" />
+		</operation>
+	</portType>
+
+	<binding name="ISValidazioneAnagrafeWSSoapBinding" type="tns:ISValidazioneAnagrafe">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<!-- <wsp:PolicyReference URI="/specificaSicurezza/authenticatedPddWithSSL.xml" wsdl:required="true"/> -->
+		<operation name="ricercaAnagraficaAll">
+			<soap:operation />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="ISValidazioneAnagrafeWSService">
+		<port name="ISValidazioneAnagrafeWSPort" binding="tns:ISValidazioneAnagrafeWSSoapBinding">
+			<soap:address location=" https://agenziaerogazioniagricoltura.spcoop.gov.it/openspcoop/PA" />
+		</port>
+	</service>
+</definitions>

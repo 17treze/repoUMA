@@ -1,0 +1,1333 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "A4G - Fascicolo - Dotazione Tecnica",
+    "description": "Modulo per l'erogazione dei servizi relativi alla dotazione tecnica del fascicolo",
+    "version": "1.0.0"
+  },
+  "servers": [{
+      "url": "http://localhost:9010/fascicolo/dotazione-tecnica",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [{
+      "name": "MacchineAgsController",
+      "description": "Gestione macchine agricole fascicolo legacy"
+    }, {
+      "name": "DotazioneTecnicaPrivateController",
+      "description": "API privata per dotazione tecnica"
+    }, {
+      "name": "FabbricatiAgsController",
+      "description": "Gestione fabbricati fascicolo legacy"
+    }, {
+      "name": "TipologiaController",
+      "description": "Informazioni di dettaglio tipologie di macchinari"
+    }, {
+      "name": "FabbricatiController",
+      "description": "Gestione fabbricati fascicolo"
+    }, {
+      "name": "MacchineController",
+      "description": "Gestione macchine agricole fascicolo"
+    }
+  ],
+  "paths": {
+    "/api/v1/dotazione-tecnica/private/{cuaa}/{idValidazione}/validazione": {
+      "put": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "operationId": "startValidazioneFascicolo",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/report-scheda-validazione": {
+      "get": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "operationId": "getReportValidazione",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportValidazioneDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/controllo-completezza": {
+      "get": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "operationId": "queryControlloCompletezzaFascicolo",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/EsitoControlloDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "operationId": "rimozioneControlliCompletezza",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/start-controllo-completezza": {
+      "put": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "operationId": "startControlloCompletezzaFascicoloAsincrono",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/migra-fabbricati": {
+      "post": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "summary": "Migra da AGS in A4G i fabbricati del fascicolo",
+        "operationId": "migraFabbricati",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/macchine": {
+      "post": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "summary": "Inserisce o aggiorna una macchina nel fascicolo",
+        "operationId": "postMacchina",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "documento": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "dati": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/migra-macchine": {
+      "post": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "summary": "Migra da AGS in A4G le macchine del fascicolo",
+        "operationId": "migraMacchine",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dotazione-tecnica/private/{cuaa}/macchine/{id}": {
+      "delete": {
+        "tags": ["DotazioneTecnicaPrivateController"],
+        "summary": "Elimina un macchinario",
+        "operationId": "cancellaMacchina",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/fabbricati/catasto": {
+      "get": {
+        "tags": ["FabbricatiController"],
+        "summary": "Reperimento dati inerenti ai fabbricati dal catasto",
+        "operationId": "getFromCatastoParticella",
+        "parameters": [{
+            "name": "numeroParticella",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "denominatore",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "tipologia",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["FONDIARIA", "EDIFICIALE"]
+            }
+          }, {
+            "name": "codiceComuneCatastale",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }, {
+            "name": "subalterno",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatiCatastaliDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/fabbricati": {
+      "get": {
+        "tags": ["FabbricatiController"],
+        "summary": "Reperimento dati generici inerenti ai fabbricati del fascicolo",
+        "operationId": "getFabbricati",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FabbricatoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["FabbricatiController"],
+        "summary": "Inserisce o aggiorna un fabbricato nel fascicolo",
+        "operationId": "postFabbricato",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/fabbricati/{id}": {
+      "get": {
+        "tags": ["FabbricatiController"],
+        "summary": "Reperimento dati generici inerenti ai fabbricati del fascicolo",
+        "operationId": "getFabbricato",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["FabbricatiController"],
+        "summary": "Reperimento dati generici inerenti ai fabbricati del fascicolo",
+        "operationId": "deleteFabbricato",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/macchine": {
+      "get": {
+        "tags": ["MacchineController"],
+        "summary": "Reperimento dati generici inerenti alle macchine del fascicolo",
+        "operationId": "getMacchine",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MacchinaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/macchine/{id}": {
+      "get": {
+        "tags": ["MacchineController"],
+        "summary": "Reperimento dati di dettaglio di una macchina",
+        "operationId": "getMacchina",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/DettaglioMacchinaDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/macchine/{id}/allegati": {
+      "get": {
+        "tags": ["MacchineController"],
+        "summary": "Recupera il documento di possesso associato ad una macchina",
+        "operationId": "getAllegato",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }, {
+            "name": "idValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tipologie": {
+      "get": {
+        "tags": ["TipologiaController"],
+        "summary": "Recupera le tipologie di macchinari",
+        "operationId": "getTipologie",
+        "parameters": [{
+            "name": "ambito",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["MACCHINE", "FABBRICATI", "ZOOTECNIA"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipologiaDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/tipologie/{id}/sottotipi": {
+      "get": {
+        "tags": ["TipologiaController"],
+        "summary": "Recupera i sottotipi associati ad un tipo di macchinario",
+        "operationId": "getSottotipi",
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/SottotipoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legacy/fabbricati": {
+      "get": {
+        "tags": ["FabbricatiAgsController"],
+        "summary": "Reperisce Informazioni sui fabbricati del fascicolo",
+        "description": "Utilizzare il seguente formato per il campo data: yyyy-MM-dd'T'HH:mm Inoltre è possibile filtrare per le province di provenienza (Sigle) e il titolo di conduzione. Valori di default per province: TN e BZ",
+        "operationId": "getFabbricati_1",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "utilizzare il formato yyyy-MM-dd'T'HH:mm",
+              "format": "date-time"
+            }
+          }, {
+            "name": "province",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "description": "Opzionale - Valori di default TN e BZ",
+              "items": {
+                "type": "string",
+                "description": "Opzionale - Valori di default TN e BZ"
+              }
+            }
+          }, {
+            "name": "titoliConduzione",
+            "in": "query",
+            "description": "Filtro fabbricati in base al titolo di conduzione",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TitoloConduzioneAgs"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FabbricatoAgsDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/legacy/macchine": {
+      "get": {
+        "tags": ["MacchineAgsController"],
+        "summary": "Reperisce Informazioni sulle macchine del fascicolo",
+        "description": "Utilizzare il seguente formato per il campo data: yyyy-MM-dd'T'HH:mm",
+        "operationId": "getMacchine_1",
+        "parameters": [{
+            "name": "cuaa",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }, {
+            "name": "data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "utilizzare il formato yyyy-MM-dd'T'HH:mm",
+              "format": "date-time"
+            }
+          }, {
+            "name": "tipiCarburante",
+            "in": "query",
+            "description": "Filtro macchine in base al carburante utilizzato",
+            "required": false,
+            "schema": {
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TipoCarburante"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MacchinaAgsDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/framework/events/{idEvent}/reprocess": {
+      "get": {
+        "tags": ["event-store-controller"],
+        "operationId": "reprocessEvent",
+        "parameters": [{
+            "name": "idEvent",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ReportValidazioneDto": {
+        "type": "object",
+        "properties": {
+          "macchine": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportValidazioneMacchinarioDto"
+            }
+          },
+          "fabbricati": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportValidazioneFabbricatoDto"
+            }
+          }
+        }
+      },
+      "ReportValidazioneFabbricatoDto": {
+        "type": "object",
+        "properties": {
+          "comune": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "superficie": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipologia": {
+            "type": "string"
+          }
+        }
+      },
+      "ReportValidazioneMacchinarioDto": {
+        "type": "object",
+        "properties": {
+          "classe": {
+            "type": "string"
+          },
+          "sottoClasse": {
+            "type": "string"
+          },
+          "targa": {
+            "type": "string"
+          },
+          "telaio": {
+            "type": "string"
+          }
+        }
+      },
+      "EsitoControlloDto": {
+        "type": "object",
+        "properties": {
+          "esito": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idControllo": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "segnalazioni": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SegnalazioneDto"
+            }
+          }
+        }
+      },
+      "SegnalazioneDto": {
+        "type": "object",
+        "properties": {
+          "descrizione": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": ["ERRORE", "AVVERTENZA"]
+          }
+        }
+      },
+      "DatiCatastaliDto": {
+        "type": "object",
+        "properties": {
+          "tipologia": {
+            "type": "string",
+            "enum": ["FONDIARIA", "EDIFICIALE"]
+          },
+          "particella": {
+            "type": "string"
+          },
+          "denominatore": {
+            "type": "string"
+          },
+          "inTrentino": {
+            "type": "boolean"
+          },
+          "sezione": {
+            "type": "string"
+          },
+          "foglio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "sub": {
+            "type": "string"
+          },
+          "indirizzo": {
+            "type": "string"
+          },
+          "superficie": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "consistenza": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          },
+          "esito": {
+            "type": "string",
+            "enum": ["VALIDA", "INVALIDA"]
+          }
+        }
+      },
+      "DettaglioFabbricatoAbstract": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sottotipo": {
+            "$ref": "#/components/schemas/SottotipoDto"
+          },
+          "denominazione": {
+            "type": "string"
+          },
+          "indirizzo": {
+            "type": "string"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "superficie": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descrizione": {
+            "type": "string"
+          },
+          "tipoConduzione": {
+            "type": "string",
+            "enum": ["PROPRIETA_O_COMPROPRIETA", "AFFITTO", "MEZZADRIA", "ALTRA_FORMA", "DECRETO_LEGGE"]
+          },
+          "datiCatastali": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatiCatastaliDto"
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": ["STOCCAGGIO", "FABBRICATO", "SERRA", "STRUMENTALE"]
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "FABBRICATO": "#/components/schemas/DettaglioFabbricatoDto",
+            "STRUMENTALE": "#/components/schemas/DettaglioStrumentaliDto",
+            "SERRA": "#/components/schemas/DettaglioSerreDto",
+            "STOCCAGGIO": "#/components/schemas/DettaglioStoccaggioDto"
+          }
+        }
+      },
+      "DettaglioFabbricatoDto": {
+        "type": "object",
+        "allOf": [{
+            "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+          }
+        ]
+      },
+      "DettaglioSerreDto": {
+        "type": "object",
+        "allOf": [{
+            "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+          }, {
+            "type": "object",
+            "properties": {
+              "impiantoRiscaldamento": {
+                "type": "boolean"
+              },
+              "annoCostruzione": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "tipologiaMateriale": {
+                "type": "string"
+              },
+              "annoAcquisto": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "titoloConformitaUrbanistica": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "DettaglioStoccaggioDto": {
+        "type": "object",
+        "allOf": [{
+            "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+          }, {
+            "type": "object",
+            "properties": {
+              "altezza": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "copertura": {
+                "type": "string",
+                "enum": ["SI", "NO", "PARZIALE"]
+              }
+            }
+          }
+        ]
+      },
+      "DettaglioStrumentaliDto": {
+        "type": "object",
+        "allOf": [{
+            "$ref": "#/components/schemas/DettaglioFabbricatoAbstract"
+          }, {
+            "type": "object",
+            "properties": {
+              "superficieCoperta": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "superficieScoperta": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "SottotipoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descrizione": {
+            "type": "string"
+          },
+          "tipologie": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipologiaDto"
+            }
+          }
+        }
+      },
+      "TipologiaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descrizione": {
+            "type": "string"
+          }
+        }
+      },
+      "FabbricatoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipologia": {
+            "type": "string"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "superficie": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MacchinaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipologia": {
+            "type": "string"
+          },
+          "modello": {
+            "type": "string"
+          },
+          "targa": {
+            "type": "string"
+          },
+          "alimentazione": {
+            "type": "string",
+            "enum": ["GASOLIO", "BENZINA", "ELETTRICO"]
+          }
+        }
+      },
+      "DettaglioMacchinaDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sottotipo": {
+            "$ref": "#/components/schemas/SottotipoDto"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modello": {
+            "type": "string"
+          },
+          "numeroMatricola": {
+            "type": "string"
+          },
+          "numeroTelaio": {
+            "type": "string"
+          },
+          "annoCostruzione": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoPossesso": {
+            "type": "string",
+            "enum": ["COMODATO", "COMPROPRIETA", "IN_USO", "LEASING", "NOLEGGIO", "PROPRIETA"]
+          },
+          "targa": {
+            "type": "string"
+          },
+          "dataImmatricolazione": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "motore": {
+            "$ref": "#/components/schemas/MotoreDto"
+          }
+        }
+      },
+      "MotoreDto": {
+        "type": "object",
+        "properties": {
+          "marca": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string"
+          },
+          "alimentazione": {
+            "type": "string",
+            "enum": ["GASOLIO", "BENZINA", "ELETTRICO"]
+          },
+          "potenza": {
+            "type": "number",
+            "format": "double"
+          },
+          "matricola": {
+            "type": "string"
+          }
+        }
+      },
+      "TitoloConduzioneAgs": {
+        "type": "string",
+        "enum": ["PROPRIETA", "AFFITTO", "MEZZADRIA", "ALTRE_FORME", "NON_CONDOTTA", "NON_DEFINITO", "COMODATO"]
+      },
+      "FabbricatoAgsDto": {
+        "type": "object",
+        "properties": {
+          "idAgs": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "volume": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoFabbricato": {
+            "type": "string"
+          },
+          "tipoFabbricatoCodice": {
+            "type": "string"
+          },
+          "titoloConduzione": {
+            "type": "string"
+          },
+          "particella": {
+            "type": "string"
+          },
+          "subalterno": {
+            "type": "string"
+          },
+          "comune": {
+            "type": "string"
+          },
+          "provincia": {
+            "type": "string"
+          },
+          "siglaProvincia": {
+            "type": "string"
+          },
+          "superficie": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "foglio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comuneCatastale": {
+            "type": "string"
+          },
+          "sezione": {
+            "type": "string"
+          },
+          "descrizione": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoCarburante": {
+        "type": "string",
+        "enum": ["GASOLIO", "BENZINA"]
+      },
+      "MacchinaAgsDto": {
+        "type": "object",
+        "properties": {
+          "idAgs": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "descrizione": {
+            "type": "string"
+          },
+          "targa": {
+            "type": "string"
+          },
+          "classe": {
+            "type": "string"
+          },
+          "sottoClasse": {
+            "type": "string"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "alimentazione": {
+            "type": "string",
+            "enum": ["GASOLIO", "BENZINA"]
+          },
+          "possesso": {
+            "type": "string"
+          },
+          "codiceClasse": {
+            "type": "string"
+          },
+          "codiceSottoClasse": {
+            "type": "string"
+          },
+          "telaio": {
+            "type": "string"
+          },
+          "matricola": {
+            "type": "string"
+          },
+          "marcaMotore": {
+            "type": "string"
+          },
+          "tipoMotore": {
+            "type": "string"
+          },
+          "potenzaKw": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<div>
+  <button class="button" (click)="nuovaDichiarazione()">Nuova</button>
+</div> 
+  <div> 
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>{{ 'ANTIMAFIA.idDichiarazione' | translate }}</td>
+      <td>{{ 'ANTIMAFIA.stato' | translate }}</td>
+      <td>{{ 'ANTIMAFIA.action' | translate }}</td>
+      <!--<td>pdf</td>-->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dichiarazioneAntimafia of this.dichiarazioniAntimafia">
+      <td>{{ dichiarazioneAntimafia.id }}</td>
+      <td>{{ dichiarazioneAntimafia.stato.identificativo}}</td>
+      <td> <a routerLink="{{dichiarazioneAntimafia.id}}">Apri</a></td>
+      <!--<td><button (click)="scaricaPdf(dichiarazioneAntimafia.id)">Scarica</button>
+      <button (click)="caricaFirma(dichiarazioneAntimafia.id)">Firma</button>
+      <button (click)="caricaProtocolla(dichiarazioneAntimafia.id)">Protocolla</button>
+      </td>-->
+    </tr>
+  </tbody>
+</table>
+</div>
+<div *ngIf='firmaPdf && dichiarazioneId'>
+  <app-upload 
+  [id]='this.dichiarazioneId ' 
+  [title]="'Carica File Firmato ' + dichiarazioneId"
+  [serviceUrl]='this.urlUploadFirma'
+  [maxSize]="'-1'"
+  [fileExt]="'.PDF'"></app-upload>
+</div>
+<div *ngIf='protocollaPdf && dichiarazioneId'>
+  <app-upload 
+  [id]='this.dichiarazioneId' 
+  [title]="'Carica File da Procollare ' + dichiarazioneId"
+  [serviceUrl]='this.urlUploadFirma'
+  [maxSize]="'-1'"
+  [fileExt]="'.PDF'"></app-upload>
+</div>

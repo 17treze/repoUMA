@@ -1,0 +1,32 @@
+{  
+   "datiAnagrafici":{  
+      "codiceFiscale":"BZZLBN21M45A178J",
+      "nome":"bb",
+      "cognome":"A",
+      "email":"a.b@gmail.com",
+      "telefono":"99"
+   },
+   "servizi":[  
+      "A4G",
+      "AGS"
+   ],
+   "responsabilitaRichieste":{  
+      "responsabilitaTitolare":null,
+      "responsabilitaLegaleRappresentante":null,
+      "responsabilitaCaa":[  
+         {  
+            "idResponsabilita":1,
+            "responsabile":"sdcf",
+            "codResponsabilita":"CAA",
+            "sedi":[  
+               {  
+                  "descrizione":"CAA ACLI - TRENTO - 001",
+                  "identificativo":13
+               }
+            ],
+            "allegato":null
+         }
+      ]
+   },
+   "id":294
+}

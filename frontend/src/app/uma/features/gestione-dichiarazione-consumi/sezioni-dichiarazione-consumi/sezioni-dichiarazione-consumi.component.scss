@@ -1,0 +1,120 @@
+@import "../../../uma.index.style.scss";
+
+:host {
+  .auto-cursor {
+    cursor: auto;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .cursor-text {
+    cursor: text;
+  }
+
+  ::ng-deep .light-message > div {
+    border-radius: 0.75em;
+    background-color: $primaryTextColor;
+    color: $warnText;
+    border: 3px solid $warn;
+
+    & > span.ui-message-icon {
+      color: $warn;
+    }
+  }
+
+  .cell {
+    border: 1px solid $lightgray;
+    cursor: pointer;
+  }
+
+  .cell.disabled > .cell-content {
+    opacity: 0.5;
+    cursor: auto;
+  }
+
+  .cell-content {
+    color: $accentColor;
+
+    &:hover {
+      background-color: $primaryLightestColor;
+    }
+  }
+
+  div.ui-header-sezioni-uma {
+    background-color: $primaryTextColor;
+    border-top: 2px solid $primaryColor;
+    border-left: 1px solid $lightgray;
+    border-right: 1px solid $lightgray;
+    font-size: 1em;
+  }
+
+  .block-100 {
+    width: 100%;
+    display: block;
+  }
+
+  .button-accent-alt {
+    border: 2px solid $accentColor;
+    color: $accentColor !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.ui-button-icon-right.pi {
+      color: $accentColor !important;
+      font-size: x-large !important;
+    }
+  }
+
+  ::ng-deep .ui-toast-message-custom {
+    background-color: $primaryTextColor;
+    color: $primaryColor;
+  }
+
+  ::ng-deep .ui-toast-message-custom .ui-toast-close-icon {
+    color: $primaryColor;
+  }
+
+  ::ng-deep .ui-dialog >  {
+    .ui-dialog-content >  {
+      .ui-confirmdialog-message {
+        white-space: pre-line;
+      }
+    }
+  }
+
+  .ui-dialog-visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > ::ng-deep div {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      // .ui-dialog-mask
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      // .ui-widget-overlay
+      background-color: rgba(88, 87, 92, 0.8);
+      opacity: 1;
+
+      & > ::ng-deep div.ui-confirmdialog {
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+  

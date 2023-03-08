@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/Immobile/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:uiu="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" xmlns:tns="http://www.catasto.regione.taa.it/Immobile/schemas" xmlns:auth="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas">
+  <xs:import namespace="http://www.fabbricato.catasto.regione.taa.it/UnitaImmobiliareType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/InfoAutorizzativeCatastoType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6_7_8_9_10_11_12_13.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene i wrapper di ImmobileService</xs:documentation>
+  </xs:annotation>
+  <xs:element name="GetImmobile">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni identificative di un 'unita' immobiliare ed una data di riferimento</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="infoAutorizzative" type="auth:InfoAutorizzativeCatastoType">
+          <xs:annotation>
+            <xs:documentation>Le informazioni sul chiamante richieste dal servizio</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="chiaveUI" type="uiu:ChiaveUnitaImmobiliareType">
+          <xs:annotation>
+            <xs:documentation>Le informazioni che servono per individuare un' unita immobiliare</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element maxOccurs="1" minOccurs="0" name="dataRiferimento" type="xs:date">
+          <xs:annotation>
+            <xs:documentation>Modella la data alla quale si riferisce la ricerca delle informazioni di dettaglio dell'unita immobiliare</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetImmobileResponse">
+    <xs:annotation>
+      <xs:documentation>L'output ritornato e' il dettaglio dell'unita immobiliare</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="0" name="immobile" type="uiu:UnitaImmobiliareType">
+          <xs:annotation>
+            <xs:documentation>Le informazioni sull'unita' immobiliare; null se l'unita immobiliare non e' presente nella base dati per la data indicata</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

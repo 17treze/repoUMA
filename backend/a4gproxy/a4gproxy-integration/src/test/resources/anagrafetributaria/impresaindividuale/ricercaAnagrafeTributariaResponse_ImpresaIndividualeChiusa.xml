@@ -1,0 +1,55 @@
+<ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll xmlns="http://cooperazione.sian.it/schema/interscambio/" xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/">
+    <ns1:risposta>
+        <ns1:persona>
+            <ns1:dittaIndividuale>
+                <ns1:attivita>
+                    <ns1:codice>-.74.20.D</ns1:codice>
+                    <ns1:descrizione>ALTRE ATTIVITA' TECNICHE</ns1:descrizione>
+                    <ns1:infoDate>
+                        <ns1:dataInizio>1996-02-24T00:00:00+00:00</ns1:dataInizio>
+                    </ns1:infoDate>
+                </ns1:attivita>
+                <ns1:domicilioFiscale>
+                    <ns1:ubicazione/>
+                </ns1:domicilioFiscale>
+                <ns1:partitaIva>
+                    <ns1:date>
+                        <ns1:dataFine>2008-12-29T00:00:00+00:00</ns1:dataFine>
+                        <ns1:dataInizio>1900-01-01T00:00:00+00:00</ns1:dataInizio>
+                    </ns1:date>
+                    <ns1:motivoCessazione>CESSATA</ns1:motivoCessazione>
+                    <ns1:piva>01248870436</ns1:piva>
+                    <ns1:stato>0</ns1:stato>
+                </ns1:partitaIva>
+                <ns1:sede>
+                    <ns1:ubicazione/>
+                </ns1:sede>
+            </ns1:dittaIndividuale>
+            <ns1:personaFisica>
+                <ns1:cognome>ROGANI</ns1:cognome>
+                <ns1:datiNascita>
+                    <ns1:comune>MACERATA</ns1:comune>
+                    <ns1:data>1967-01-23T00:00:00+00:00</ns1:data>
+                    <ns1:provincia>MC</ns1:provincia>
+                </ns1:datiNascita>
+                <ns1:nome>PAOLA</ns1:nome>
+                <ns1:codiceFiscale>RGNPLA67A63E783V</ns1:codiceFiscale>
+                <ns1:sesso>
+                    <ns1:valore>F</ns1:valore>
+                </ns1:sesso>
+                <ns1:domicilioFiscale>
+                    <ns1:ubicazione>
+                        <ns1:cap>38049</ns1:cap>
+                        <ns1:comune>ALTOPIANO DELLA VIGOLANA</ns1:comune>
+                        <ns1:provincia>TN</ns1:provincia>
+                        <ns1:toponimo>VIA CESARE BATTISTI 4</ns1:toponimo>
+                    </ns1:ubicazione>
+                </ns1:domicilioFiscale>
+            </ns1:personaFisica>
+        </ns1:persona>
+    </ns1:risposta>
+    <ns1:esito>
+        <ns1:codice xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/globals">012</ns1:codice>
+        <ns2:descrizione xmlns:ns2="http://cooperazione.sian.it/schema/interscambio/globals">Operazione correttamente eseguita (RicercaAnagrafica)</ns2:descrizione>
+    </ns1:esito>
+</ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll>

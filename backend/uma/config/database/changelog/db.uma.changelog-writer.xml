@@ -1,0 +1,120 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="UMA_WRT_28U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_WRT_29U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_RICHIESTA_CARBURANTE FOR ${user.superuser}.A4GT_RICHIESTA_CARBURANTE;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_29U.1" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_UTILIZZO_MACCHINARI FOR ${user.superuser}.A4GT_UTILIZZO_MACCHINARI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_29U.2" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GD_GRUPPI_LAVORAZIONE FOR ${user.superuser}.A4GD_GRUPPI_LAVORAZIONE;
+			CREATE OR REPLACE SYNONYM A4GR_COLTURA_GRUPPI FOR ${user.superuser}.A4GR_COLTURA_GRUPPI;
+			CREATE OR REPLACE SYNONYM A4GD_LAVORAZIONE FOR ${user.superuser}.A4GD_LAVORAZIONE;
+			CREATE OR REPLACE SYNONYM A4GT_FABBISOGNO FOR ${user.superuser}.A4GT_FABBISOGNO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_32U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GR_FABBRICATO_GRUPPI FOR ${user.superuser}.A4GR_FABBRICATO_GRUPPI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_34U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_35U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DICHIARAZIONE_CONSUMI FOR ${user.superuser}.A4GT_DICHIARAZIONE_CONSUMI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_35U.1" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CLIENTE FOR ${user.superuser}.A4GT_CLIENTE;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_35U.2" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FATTURE_CLIENTI FOR ${user.superuser}.A4GT_FATTURE_CLIENTI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_35U.3" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONSUMI_CLIENTI FOR ${user.superuser}.A4GT_CONSUMI_CLIENTI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_37U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DISTRIBUTORI FOR ${user.superuser}.A4GT_DISTRIBUTORI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_37U.1" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_PRELIEVI FOR ${user.superuser}.A4GT_PRELIEVI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_37U.2" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_TRASFERIMENTI FOR ${user.superuser}.A4GT_TRASFERIMENTI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_38U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FABBRICATI FOR ${user.superuser}.A4GT_FABBRICATI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_38U.1" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FABBISOGNO_FABBRICATI FOR ${user.superuser}.A4GT_FABBISOGNO_FABBRICATI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_38U.2" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GD_COEFFICIENTI FOR ${user.superuser}.A4GD_COEFFICIENTI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_38U.3" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONSUNTIVI_CONSUMI FOR ${user.superuser}.A4GT_CONSUNTIVI_CONSUMI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_39U.0" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_ALLEGATI_CONSUNTIVI FOR ${user.superuser}.A4GT_ALLEGATI_CONSUNTIVI;
+		</sql>
+	</changeSet>
+	<changeSet id="UMA_WRT_49U.0" author="Antonio Avitabile" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONF FOR ${user.superuser}.A4GT_CONF;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_WRT_53U.0" author="Antonio Avitabile" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_SUPERFICIE_MASSIMA FOR ${user.superuser}.A4GT_SUPERFICIE_MASSIMA;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,114 @@
+{
+	"id": 8262,
+	"version": 0,
+	"datiDichiarazione": {
+		"richiedente": {
+			"nome": "ILARIA",
+			"cognome": "NERVO",
+			"codiceFiscale": "NRVLRI78R50L378B",
+			"comuneNascita": "TRENTO",
+			"provinciaNascita": "TN",
+			"dataNascita": "10/10/1978",
+			"sesso": "F",
+			"residenza": {
+				"indirizzo": "VIA DI CAMPESTRIN N 12",
+				"comune": "PIEVE TESINO",
+				"provincia": "TN",
+				"CAP": "38050"
+			},
+			"carica": "SOCIO",
+			"dtInizioCarica": "05/10/2017",
+			"dtFineCarica": ""
+		},
+		"dettaglioImpresa": {
+			"formaGiuridicaCodice": "SE",
+			"formaGiuridicaDescrizione": "SOCIETA' SEMPLICE",
+			"denominazione": "AZIENDA AGRICOLA MASO FRANZ DI D'ALFONSO FRANCESCO E NERVO ILARIA SOCIETA' SEMPLICE AGRICOLA",
+			"sedeLegale": "PIAZZA PLEBISCITO 7 38050 CINTE TESINO TRENTO",
+			"estremiCCIAA": {
+				"sede": "TN",
+				"numeroIscrizione": "227723",
+				"dataIscrizione": "05/10/2017"
+			},
+			"oggettoSociale": "OGGETTO SOCIALE:L'ESERCIZIO ESCLUSIVO DI IMPRESA AGRICOLA AI SENSI DELL' ARTICOLO 2135 C. C.IN TERRENI DI SUA O ALTRUI PROPRIETA' E QUINDI DI ESERCITARE LE ATTIVITA'DIRETTE ALLA COLTIVAZIONE DI TERRENI, SILVICOLTURA, ALLEVAMENTO DEL BESTIAME EALLE ATTIVITA' CONNESSE CON PARTICOLARE RIFERIMENTO ALL'ATTIVITA'FRUTTI-VITICOLA NONCHE' A TUTTE LE ALTRE ATTIVITA' PREVISTE DALL' ARTICOLO 2135CODICE CIVILE, COMPRESO L'AGRITURISMO.TALI ATTIVITA' POTRANNO ESSERE ESERCITATE SUI TERRENI DI PROPRIETA' DELLASOCIETA', DEI SINGOLI SOCI E/ O SU ALTRI DI CUI, A QUALSIASI TITOLO, LASOCIETA' POTRA' AVERNE LA DISPONIBILITA'.LA SOCIETA' POTRA' GESTIRE, OLTRE ALL' ATTIVITA' AGRICOLA TRADIZIONALMENTEINTESA, ANCHE, IN VIA ACCESSORIA E COMPLEMENTARE, LE ATTIVITA' CONNESSEPREVISTE DALL'ART. 2135 C. C.PER IL RAGGIUNGIMENTO DI DETTO SCOPO SOCIALE, LA SOCIETA' POTRA' SVOLGERE,INOLTRE, TUTTE LE OPERAZIONI MOBILIARI, IMMOBILIARI, COMMERCIALI, INDUSTRIALI,FINANZIARIE, POTRA' PRESTARE FIDEJUSSIONI, AVALLI E GARANZIE, PURCHE' TALIATTIVITA' NON VENGANO ESERCITATE NEI CONFRONTI DEL PUBBLICO E CON ESCLUSIONE DITUTTE QUELLE ATTIVITA' ESPRESSAMENTE RISERVATE AI SENSI DEL TUB E DEL TUF.POTRA' ASSUMERE O CEDERE PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA', AVENTISCOPO ANALOGO OD AFFINE AL PROPRIO AL SOLO FINE DEL CONSEGUIMENTO DELL'OGGETTOSOCIALE E PURCHE' NON NEI CONFRONTI DEL PUBBLICO, NONCHE' COSTITUIRE OPARTECIPARE ALLA COSTITUZIONE DI ASSOCIAZIONI TEMPORANEE DI IMPRESA.LE ATTIVITA' SOPRA DETTE NON POTRANNO ESSERE ESERCITATE CONTEMPORANEAMENTE OVESUSSISTANO INCOMPATIBILITA' FISSATE DALLA LEGGE; SONO COMUNQUE ESPRESSAMENTEESCLUSE DALL'OGGETTO SOCIALE LE ATTIVITA' PROFESSIONALI PROTETTE DA SPECIFICHENORME DI LEGGE E COMUNQUE TUTTE LE ATTIVITA' RISERVATE A SOGGETTI MUNITI DIPARTICOLARI REQUISITI NON POSSEDUTI DALLA SOCIETA'.",
+			"codiceFiscale": "02480020227",
+			"partitaIva": "02480020227",
+			"indirizzoPEC": "MASO.FRANZ@CIA.LEGALMAIL.IT",
+			"dettaglioPersonaGiuridica": {
+				"formaGiuridica": "SOCIETA' SEMPLICE",
+				"estremiCostituzione": "05/10/2017",
+				"capitaleSociale": "Dato non disponibile",
+				"durata": "31/12/2050"
+			},
+			"soggettiImpresa": [{
+					"nome": "ILARIA",
+					"cognome": "NERVO",
+					"codiceFiscale": "NRVLRI78R50L378B",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "10/10/1978",
+					"sesso": "F",
+					"indirizzoResidenza": "VIA DI CAMPESTRIN N 12",
+					"comuneResidenza": "PIEVE TESINO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38050",
+					"carica": [{
+							"codice": "COM",
+							"tipologia": "SOCIO",
+							"dataInizio": "05/10/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "FRANCESCO",
+					"cognome": "D'ALFONSO",
+					"codiceFiscale": "DLFFNC83M11B300E",
+					"comuneNascita": "BUSTO ARSIZIO",
+					"provinciaNascita": "VA",
+					"dataNascita": "11/08/1983",
+					"sesso": "M",
+					"indirizzoResidenza": "PIAZZA PLEBISCITO 7",
+					"comuneResidenza": "CINTE TESINO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38050",
+					"carica": [{
+							"codice": "COM",
+							"tipologia": "SOCIO",
+							"dataInizio": "05/10/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BUSTO ARSIZIO"
+				}
+			],
+			"aziendeCollegate": []
+		}
+	},
+	"dtGenerazionePdf": null,
+	"dtInizioCompilazione": "2018-12-03",
+	"dtUltimoAggiornamento": null,
+	"dtUploadPdfFirmato": null,
+	"dtFine": null,
+	"idProtocollo": null,
+	"pdfFirmato": null,
+	"pdfGenerato": null,
+	"pdfFirmatoName": null,
+	"dtProtocollazione": null,
+	"a4gtAllegatoDicAntimafias": [],
+	"stato": {
+		"id": 11,
+		"identificativo": "BOZZA",
+		"descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+	},
+	"azienda": {
+		"id": 8261,
+		"cuaa": "02480020227"
+	},
+	"assenzaDt": null,
+	"allegatoFamiliariConviventi": null
+}

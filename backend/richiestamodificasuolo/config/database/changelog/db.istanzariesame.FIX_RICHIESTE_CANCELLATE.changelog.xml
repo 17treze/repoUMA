@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTANZARIESAME_S37.2_fix" author="Bettina Irler" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+			update 
+				A4ST_RICHIESTA_MODIFICA_SUOLO r
+				set stato = 'CONCLUSA'
+				where 
+				r.stato = 'CANCELLATA' and 
+				(select count(*) from a4st_suolo_dichiarato d1 where id_richiesta = r.id) =
+				(select count(*) from a4st_suolo_dichiarato d1 
+				inner join a4st_lavorazione_suolo l on d1.id_lavorazione = l.id and l.stato = 'CONSOLIDATA_SU_AGS'
+				where id_richiesta = r.id);
+			
+				commit;
+		</sql>
+    </changeSet>
+	</databaseChangeLog>

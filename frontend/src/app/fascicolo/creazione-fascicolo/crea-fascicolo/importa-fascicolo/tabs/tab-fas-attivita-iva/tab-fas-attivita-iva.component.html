@@ -1,0 +1,35 @@
+<div [ngSwitch]="anagrafica.attivitaAteco == null" class="ui-g-12 boxgrey">
+    <div *ngSwitchCase="false">
+        <div *ngFor="let attivita of anagrafica.attivitaAteco;" class="ui-g-6">
+            <p-card title="{{attivita.codice}}">
+                <div style="border-top: 1px solid">
+                    <div class="ui-g-4 box-padded">
+                        <strong>{{'DESC_ATTIVITA' | translate }}</strong>
+                    </div>
+                    <div class="ui-g-8 box-padded">
+                        {{attivita.descAttivita}}
+                    </div>
+                    <div class="ui-g-4 box-padded">
+                        <strong>{{'IMPORTANZA' | translate }}</strong>
+                    </div>
+                    <div class="ui-g-8 box-padded">
+                        {{ (attivita.importanza? ('FAS_ANA.IMPORTANZA.'+attivita.importanza)  : 'ND') | translate}}
+                    </div>
+                    <div class="ui-g-4 box-padded">
+                        <strong>{{'DATA_INIZIO' | translate }}</strong>
+                    </div>
+                    <div class="ui-g-8 box-padded">
+                        {{attivita.dtInizioAttivita ? (attivita.dtInizioAttivita | date: "dd/MM/yyyy") : 'ND' | translate}}
+                    </div>
+                </div>
+                <span>&nbsp;</span>
+            </p-card>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="true">
+        <h5>
+            {{'NO_CONTENT' | translate}}
+        </h5>
+    </div>
+</div>

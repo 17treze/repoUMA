@@ -1,0 +1,19 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Dettaglio completo impresa",
+        "esito": "KO"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": null,
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": {
+            "tipo": "is_integer_NREA_SEDE",
+            "msgerr": "VALORE ATTESO DI TIPO INTERO PER NUM. REA SEDE"
+        }
+    }
+}

@@ -1,0 +1,2082 @@
+swagger: '2.0'
+info:
+  description: Servizio di integrazione con Sistema informativo di APPAG (SIAP - AGS)
+  version: 1.0.0
+  title: A4G - Sistema informativo di APPAG
+host: localhost:8080
+basePath: /ags
+tags:
+- name: antimafia-rest-controller
+  description: Antimafia Rest Controller
+- name: basic-error-controller
+  description: Basic Error Controller
+- name: cuaa-rest-controller
+  description: Cuaa Rest Controller
+- name: dati-catastali-rest-controller
+  description: Dati Catastali Rest Controller
+- name: domande-psr-rest-controller
+  description: Domande Psr Rest Controller
+- name: domande-rest-controller
+  description: Domande Rest Controller
+- name: domande-uniche-rest-controller
+  description: Domande Uniche Rest Controller
+- name: event-store-controller
+  description: Event Store Controller
+- name: fascicolo-private-controller
+  description: Fascicolo Private Controller
+- name: fascicolo-rest-controller
+  description: Fascicolo Rest Controller
+- name: istruttoria-grafica-du-controller
+  description: Istruttoria Grafica Du Controller
+- name: piani-colture-rest-controller
+  description: Piani Colture Rest Controller
+- name: utente-rest-controller
+  description: Utente Rest Controller
+paths:
+  /api/v1/certificazioni/antimafia:
+    put:
+      tags:
+      - antimafia-rest-controller
+      summary: Sincronizzazione tabella TPAGA_CERTIFICAZIONI_ANTIMAFIA
+      operationId: sincronizzaCertificazioniUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: cuaaList
+        description: Lista cuaa da aggiornare
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/cuaa:
+    get:
+      tags:
+      - cuaa-rest-controller
+      summary: getInfoCuaa
+      operationId: getInfoCuaaUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: query
+        description: cuaa
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Cuaa'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/cuaa/dati-du/{cuaa}:
+    get:
+      tags:
+      - cuaa-rest-controller
+      summary: Servizio per il recupero delle informazioni aggiuntive della Domanda DU relative al CUAA del richiedente
+      operationId: getInfoDomandaDUUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: path
+        description: cuaa
+        required: true
+        type: string
+      - name: anno
+        in: query
+        description: Anno di riferimento
+        required: false
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InfoDomandaDU'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/daticatastali/sezioni/{codNazionale}/regione:
+    get:
+      tags:
+      - dati-catastali-rest-controller
+      summary: Recupera la regione associata ad un determinato codice nazionale (di sezione)
+      operationId: getRegioneByCodNazionaleUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: codNazionale
+        in: path
+        description: 'Codice Nazionale (p.es.: P370)'
+        required: true
+        type: string
+      - name: dataValidita
+        in: query
+        description: 'Data di validità del dato catastale (formato: dd-MM-yyyy)'
+        required: false
+        type: string
+        format: date-time
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegioneCatastale'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Restituisce la lista di domande du
+      operationId: getDomandeUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: Criteri di ricerca
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DomandaUnica'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/checkPresenzaDomandeFiltered:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Controlla se esiste una domanda in base ai parametri indicati
+      operationId: checkExistDomandaPerSettoreUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: 'Parametri di ricerca in formato json: previsti anno e stato
+          (entrambi required)'
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/checkPresenzaDomandeFiltered/{anno}/{cuaa}:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Controlla se esiste una domanda in base ai parametri indicati
+      operationId: checkExistDomandaUnicaUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: anno
+        in: path
+        description: Anno scolastico di riferimento
+        required: true
+        type: integer
+        format: int64
+      - name: cuaa
+        in: path
+        description: Cuaa (Codice fiscale o partita iva dell'azienda agricola)
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/conta:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Servizio che conta le domande trovate rispetto ai parametri di ricerca
+      operationId: contaDomandeUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: 'Parametri di ricerca in formato json: previsti anno e stato
+          (entrambi required)'
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int64
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: true
+  /api/v1/domandeDU/count:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Restituisce il numero di domande da protocollare
+      operationId: countUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: annoRiferimento
+        in: query
+        description: Anno di riferimento
+        required: true
+        type: number
+      - name: codicePac
+        in: query
+        description: Codice PAC
+        required: false
+        type: string
+      - name: tipoDomanda
+        in: query
+        description: Tipo di domanda
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int64
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/exportDomandaProtocollata/{numeroDomanda}:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Effettua i controlli di ricevibilità ed esporta la domanda a A4G
+      operationId: exportDomandaProtocollataUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: numeroDomanda
+        in: path
+        description: Numero della domanda
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DomandaUnica'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/protocollate/{campagna}:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Restituisce la lista di domande uniche protocollate per la ricevibilità
+      operationId: getDomandeProtocollateUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: campagna
+        in: path
+        description: Anno campagna di riferimento
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/{numeroDomanda}:
+    get:
+      tags:
+      - domande-rest-controller
+      summary: Restituisce i dati della domanda du
+      operationId: getDomandaUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: numeroDomanda
+        in: path
+        description: Identificativo della domanda in siap
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DomandaUnica'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/{numeroDomanda}/eseguiMovimento:
+    put:
+      tags:
+      - domande-rest-controller
+      summary: Esegue il movimento per la domanda in input
+      operationId: eseguiMovimentoUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: numeroDomanda
+        in: path
+        description: Numero domanda in siap
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: tipoMovimento
+        description: tipoMovimento
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/{numeroDomanda}/protocollata:
+    post:
+      tags:
+      - domande-rest-controller
+      summary: Forza il movimento per la domanda in input in PROTOCOLLATA
+      operationId: spostaInProtocollatoUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: numeroDomanda
+        in: path
+        description: Numero domanda in siap
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeDU/{numeroDomanda}/ricevi:
+    post:
+      tags:
+      - domande-rest-controller
+      summary: Forza il movimento di ricevibilita per la domanda in input e ne restituisce i dati
+      operationId: riceviUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - name: numeroDomanda
+        in: path
+        description: Numero domanda in siap
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatiRicevibilita'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandePSR:
+    get:
+      tags:
+      - domande-psr-rest-controller
+      summary: Recupare dati PSR SUPERFICIE EU.
+      operationId: getDatiStrutturaliUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: 'Parametri di ricerca in formato JSON: Lista CUAA, Importo e
+          Data'
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DomandaPsr'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/domandeUniche:
+    get:
+      tags:
+      - domande-uniche-rest-controller
+      summary: Restituisce la lista di domande du
+      operationId: getDomandeUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: stati
+        in: query
+        description: Filtro Lista di stati delle domande uniche
+        required: false
+        type: array
+        items:
+          type: string
+          enum:
+          - RICEVIBILE
+          - NON_RICEVIBILE
+          - IN_ISTRUTTORIA
+          - PROTOCOLLATA
+        collectionFormat: multi
+        enum:
+        - RICEVIBILE
+        - NON_RICEVIBILE
+        - IN_ISTRUTTORIA
+        - PROTOCOLLATA
+      - name: expand
+        in: query
+        description: Filtro expand delle domande uniche (RICHIESTE = visualizza booleani sostegni richiesti)
+        required: false
+        type: array
+        items:
+          type: string
+          enum:
+          - RICHIESTE
+        collectionFormat: multi
+        enum:
+        - RICHIESTE
+      - name: campagna
+        in: query
+        description: Filtro anno di campagna delle domande uniche
+        required: false
+        type: integer
+        format: int32
+      - name: cuaa
+        in: query
+        description: Filtro cuaa delle domande uniche
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DomandaUnica'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/esiti/antimafia:
+    get:
+      tags:
+      - antimafia-rest-controller
+      summary: Recupero gli esiti in base ai params
+      operationId: getEsitiUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: Parametri di ricerca
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EsitoAntimafia'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+      - antimafia-rest-controller
+      summary: Inserisce o aggiorna l'esito per il pagamento della dichiarazione antimafia.
+      operationId: salvaUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: esitiAntimafia
+        description: Dati esito antimafia
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/EsitoAntimafia'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - antimafia-rest-controller
+      summary: Cancellazione record da tabella TPAGA_ESITI_ANTIMAFIA per CUAA
+      operationId: cancellaUsingDELETE
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: 'Parametri di ricerca. Implementato solo per CUAA '
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fascicoli:
+    get:
+      tags:
+      - fascicolo-rest-controller
+      summary: Ricerca i dati di fascicolo
+      operationId: fascicoliUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: params
+        in: query
+        description: Criteri di ricerca (cuaa e denominazione) in formato json
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Fascicolo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fascicoli/private/{cuaa}/controllo-completezza:
+    get:
+      tags:
+      - fascicolo-private-controller
+      summary: Restituisce True se il fascicolo supera i controlli di completezza, False altrimenti
+      operationId: getControlloCompletezzaFascicoloUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: query
+        description: cuaa
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fascicoli/{cuaa}/anagrafica:
+    get:
+      tags:
+      - fascicolo-rest-controller
+      summary: Recupera l'anagrafica aziendale dato il codice univoco CUAA
+      operationId: findAnagraficaAziendaleUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: path
+        description: cuaa
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AnagraficaAzienda'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fascicoli/{cuaa}/controllaValidita:
+    get:
+      tags:
+      - fascicolo-rest-controller
+      summary: Verifica se al cuaa in input risulta associato un fascicolo valido su siap(ags)
+      operationId: fascicoloValidoUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: path
+        description: cuaa da verificare
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fascicoli/{cuaa}/controllo-completezza:
+    get:
+      tags:
+      - fascicolo-rest-controller
+      summary: Restituisce l'esito per ogni controllo di completezza del fascicolo
+      operationId: getControlloCompletezzaFascicoloUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: cuaa
+        in: query
+        description: cuaa
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fascicoli/{id}:
+    get:
+      tags:
+      - fascicolo-rest-controller
+      summary: Recupare i dati di dettaglio di un fascicolo dato l'id in siap(ags)
+      operationId: fascicoloDetailUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: id
+        in: path
+        description: Identificativo del fascicolo in siap
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Fascicolo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/framework/events/{idEvent}/reprocess:
+    get:
+      tags:
+      - event-store-controller
+      summary: riprocessEvent
+      operationId: riprocessEventUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: idEvent
+        in: path
+        description: idEvent
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/istruttoria-grafica/cuaa/{cuaa}/id-domanda/{id}:
+    get:
+      tags:
+      - istruttoria-grafica-du-controller
+      summary: Restituisce dati per la visualizzazione grafica delle parcelle in istruttoria domanda unica
+      operationId: fascicoloDetailUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: id
+        in: path
+        description: Identificativo della domanda unica
+        required: true
+        type: integer
+        format: int64
+      - name: cuaa
+        in: path
+        description: Cuaa
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IstruttoriaGraficaDuDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/pianicolture:
+    get:
+      tags:
+      - piani-colture-rest-controller
+      summary: Recupera le informazioni sul piano colture della particella
+      operationId: getPianiColtureByInfoParticellaUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: anno
+        in: query
+        description: anno
+        required: true
+        type: integer
+        format: int32
+      - name: params
+        in: query
+        description: Informazioni sulla particella (Codice comune catastale, codice particella, sub)
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CatastoPianoColture'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/pianicolture/particelle:
+    get:
+      tags:
+      - piani-colture-rest-controller
+      summary: Recupera tutte le particelle che hanno un piano colturale
+      operationId: getParticelleFromPianiColtureUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: anno
+        in: query
+        description: anno
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InfoParticella'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/pianicolture/particelle/count:
+    get:
+      tags:
+      - piani-colture-rest-controller
+      summary: Ritorna il numero di particelle che hanno un piano colturale
+      operationId: getParticelleDistinctCountUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: anno
+        in: query
+        description: anno
+        required: true
+        type: integer
+        format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/pianicolture/particelle/dati-aggiuntivi:
+    get:
+      tags:
+      - piani-colture-rest-controller
+      summary: Recupera i dati aggiuntivi della particella (orientamento, pendenza, altitudine, irrigabilità)
+      operationId: getDatiAggiuntiviInfoParticellaUsingGET
+      produces:
+      - '*/*'
+      parameters:
+      - name: anno
+        in: query
+        description: anno
+        required: true
+        type: integer
+        format: int32
+      - name: params
+        in: query
+        description: Informazioni sulla particella (Codice comune catastale, codice particella, sub)
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DatiAggiuntiviParticella'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/utente:
+    get:
+      tags:
+      - utente-rest-controller
+      summary: Consente di eseguire la ricerca degli utenti di AGS
+      operationId: getUtenteUsingGET_1
+      produces:
+      - '*/*'
+      parameters:
+      - name: codiceFiscale
+        in: query
+        description: Codice fiscale dell'utente da cercare (inizia con)
+        required: false
+        type: string
+      - name: nome
+        in: query
+        description: Nome dell'utente da cercare (contiene)
+        required: false
+        type: string
+      - name: cognome
+        in: query
+        description: Cognome dell'utente da cercare (contiene)
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Utente'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/utente/utenze:
+    get:
+      tags:
+      - utente-rest-controller
+      summary: Restituisce l'elenco delle utenze associate all'utente chiamante in AGS (come filtro codice fiscale)
+      operationId: getUtenteUsingGET
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Utente'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /error:
+    get:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingGET
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    head:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingHEAD
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingDELETE
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    options:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingOPTIONS
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    patch:
+      tags:
+      - basic-error-controller
+      summary: error
+      operationId: errorUsingPATCH
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: object
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+definitions:
+  AnagraficaAzienda:
+    type: object
+    properties:
+      CUAA:
+        type: string
+      DataDocumento:
+        type: string
+        format: date-time
+      DataScadDocumento:
+        type: string
+        format: date-time
+      NumeroDocumento:
+        type: string
+      TipoDocumento:
+        type: string
+      attivita:
+        type: string
+      capRecapito:
+        type: string
+      capResidenza:
+        type: string
+      codiceInps:
+        type: string
+      codiceStatoEsteroRecapito:
+        type: string
+      codiceStatoEsteroResidenza:
+        type: string
+      comuneNascitaPF:
+        type: string
+      comuneRecapito:
+        type: string
+      comuneResidenza:
+        type: string
+      dataAperturaFascicolo:
+        type: string
+        format: date-time
+      dataChiusuraFascicolo:
+        type: string
+        format: date-time
+      dataElaborazione:
+        type: string
+        format: date-time
+      dataNascitaPF:
+        type: string
+        format: date-time
+      dataSchedaValidazione:
+        type: string
+        format: date-time
+      dataSottMandato:
+        type: string
+        format: date-time
+      dataValidazFascicolo:
+        type: string
+        format: date-time
+      denominazione:
+        type: string
+      detentore:
+        type: string
+      indirizzoRecapito:
+        type: string
+      indirizzoResidenza:
+        type: string
+      iscrizioneRea:
+        type: string
+      iscrizioneRegistroImprese:
+        type: string
+      nomePF:
+        type: string
+      organismoPagatore:
+        type: string
+      partitaIVA:
+        type: string
+      pec:
+        type: string
+      provinciaRecapito:
+        type: string
+      provinciaResidenza:
+        type: string
+      schedaValidazione:
+        type: string
+      sessoPF:
+        type: string
+      tipoAzienda:
+        type: string
+      tipoDetentore:
+        type: string
+    title: AnagraficaAzienda
+  CalcoloSostegnoAgs:
+    type: object
+    properties:
+      codCalcolo:
+        type: string
+      idCalcolo:
+        type: integer
+        format: int64
+      idDefCalcolo:
+        type: integer
+        format: int64
+      variabiliCalcolo:
+        type: array
+        items:
+          $ref: '#/definitions/VariabileSostegnoAgs'
+    title: CalcoloSostegnoAgs
+  CatastoPianoColture:
+    type: object
+    properties:
+      catComuneCo:
+        type: integer
+        format: int64
+      catComuneDs:
+        type: string
+      codColtura:
+        type: string
+      codNazionale:
+        type: string
+      codUtilizzo:
+        type: string
+      codVarieta:
+        type: string
+      codiceFiscale:
+        type: string
+      comune:
+        type: string
+      dataFineCond:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      dataInizioCond:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      deColtura:
+        type: string
+      foglio:
+        type: integer
+        format: int64
+      idParticella:
+        type: number
+      particella:
+        type: string
+      percPossesso:
+        type: number
+        format: float
+      protocolloDoc:
+        type: string
+      scadenzaDocDt:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      sezione:
+        type: string
+      sub:
+        type: string
+      supDichiarata:
+        type: number
+      supGis:
+        type: number
+      tipoDocumento:
+        type: integer
+        format: int64
+      titoloPosDe:
+        type: string
+    title: CatastoPianoColture
+  ControlliPresentazione:
+    type: object
+    properties:
+      aggiornamentoFascicolo:
+        type: string
+      archiviazioneDomanda:
+        type: string
+      firmaDomanda:
+        type: string
+      visioneAnomalie:
+        type: string
+    title: ControlliPresentazione
+  Cuaa:
+    type: object
+    properties:
+      cap:
+        type: number
+      codiceFiscale:
+        type: string
+      codiceIstatNascita:
+        type: string
+      codiceIstatRecapito:
+        type: number
+      cognome:
+        type: string
+      comuneNascita:
+        type: string
+      comuneRecapito:
+        type: string
+      dataNascita:
+        type: string
+        format: date-time
+      indirizzoRecapito:
+        type: string
+      nome:
+        type: string
+      sesso:
+        type: string
+      siglaProvNacita:
+        type: string
+      siglaProvRecapito:
+        type: string
+    title: Cuaa
+  DatiAggiuntiviParticella:
+    type: object
+    properties:
+      altitudineMedia:
+        type: integer
+        format: int64
+      irrigabilita:
+        type: boolean
+      orientamentoMedio:
+        type: integer
+        format: int64
+      pendenzaMedia:
+        type: integer
+        format: int64
+    title: DatiAggiuntiviParticella
+  DatiErede:
+    type: object
+    properties:
+      capResidenza:
+        type: string
+      codBelfNascita:
+        type: string
+      codBelfResidenza:
+        type: string
+      codiceFiscale:
+        type: string
+      codiceIstat:
+        type: string
+      codiceIstatNascita:
+        type: string
+      cognome:
+        type: string
+      domandaSospesaAgea:
+        type: boolean
+      dtNascita:
+        type: string
+        format: date-time
+      iban:
+        type: string
+      ibanValido:
+        type: boolean
+      idPersona:
+        type: integer
+        format: int64
+      idSoggetto:
+        type: integer
+        format: int64
+      indirizzoResidenza:
+        type: string
+      nome:
+        type: string
+      provNascita:
+        type: string
+      provResidenza:
+        type: string
+      sesso:
+        type: string
+    title: DatiErede
+  DatiPascolo:
+    type: object
+    properties:
+      codPascolo:
+        type: string
+      descPascolo:
+        type: string
+      particelle:
+        type: array
+        items:
+          $ref: '#/definitions/Particella'
+      tipoPascolo:
+        type: string
+        enum:
+        - MALGA
+        - AZIENDALE
+      uba:
+        type: number
+        format: double
+    title: DatiPascolo
+  DatiRicevibilita:
+    type: object
+    title: DatiRicevibilita
+  DichiarazioniDomandaUnica:
+    type: object
+    properties:
+      codDocumento:
+        type: string
+      descCampo:
+        type: string
+      idCampo:
+        type: string
+      ordine:
+        type: integer
+        format: int64
+      valCheck:
+        type: boolean
+      valDate:
+        type: string
+        format: date-time
+      valNumber:
+        type: integer
+        format: int64
+      valString:
+        type: string
+    title: DichiarazioniDomandaUnica
+  DomandaPsr:
+    type: object
+    properties:
+      anno:
+        type: integer
+        format: int32
+      codModulo:
+        type: string
+      cuaa:
+        type: string
+      dataDomanda:
+        type: string
+        example: dd/MM/yyyy
+      idDomanda:
+        type: integer
+        format: int64
+      importoRichiesto:
+        type: number
+      ragioneSociale:
+        type: string
+      scoSettore:
+        type: string
+      statoDomanda:
+        type: string
+    title: DomandaPsr
+  DomandaUnica:
+    type: object
+    properties:
+      calcoliSostegno:
+        type: array
+        items:
+          $ref: '#/definitions/CalcoloSostegnoAgs'
+      controlliPresentazione:
+        $ref: '#/definitions/ControlliPresentazione'
+      infoGeneraliDomanda:
+        $ref: '#/definitions/InfoGeneraliDomanda'
+      infoIstruttoriaDomanda:
+        $ref: '#/definitions/InfoIstruttoriaDomanda'
+      infoLiquidabilita:
+        $ref: '#/definitions/InfoLiquidabilita'
+      listaErroriRicevibilita:
+        type: array
+        items:
+          type: string
+          enum:
+          - PRESENTAZIONE_NEI_TERMINI
+          - DOMANDA_CARTACEA_FIRMATA
+          - ANOMALIE_COMPILAZIONE_AGS
+          - FASCICOLO_AGGIORNATO
+          - ARCHIVIAZIONE_DOCUMENTI_OK
+      richieste:
+        $ref: '#/definitions/Richieste'
+      sostegnoDisaccoppiato:
+        $ref: '#/definitions/SostegnoDisaccoppiato'
+      sostegnoSuperfici:
+        $ref: '#/definitions/SostegnoSuperfici'
+    title: DomandaUnica
+  EsitoAntimafia:
+    type: object
+    properties:
+      cuaa:
+        type: string
+      dtFineEsitoNegativo:
+        type: string
+        format: date-time
+      dtFineSilenzioAssenso:
+        type: string
+        format: date-time
+      dtInizioEsitoNegativo:
+        type: string
+        format: date-time
+      dtInizioSilenzioAssenso:
+        type: string
+        format: date-time
+      idDomanda:
+        type: integer
+        format: int64
+      tipoDomanda:
+        type: string
+    title: EsitoAntimafia
+  Fascicolo:
+    type: object
+    properties:
+      caa:
+        type: string
+      caacodice:
+        type: string
+      cuaa:
+        type: string
+      denominazione:
+        type: string
+      idFascicolo:
+        type: integer
+        format: int64
+      idSoggetto:
+        type: integer
+        format: int64
+      stato:
+        type: string
+    title: Fascicolo
+  InfoDomandaDU:
+    type: object
+    properties:
+      annoRiferimento:
+        type: integer
+        format: int32
+      cuaa:
+        type: string
+      dataPresentazione:
+        type: string
+        format: date-time
+      descrizioneDomanda:
+        type: string
+      enteCompilatore:
+        type: string
+      numeroDomanda:
+        type: integer
+        format: int64
+      pac:
+        type: string
+      ragioneSociale:
+        type: string
+    title: InfoDomandaDU
+  InfoEleggibilitaParticella:
+    type: object
+    properties:
+      codColtura3:
+        type: string
+      codColtura5:
+        type: string
+      codIntervento:
+        type: string
+      livello:
+        type: integer
+        format: int64
+      particella:
+        $ref: '#/definitions/Particella'
+      sostegno:
+        type: string
+      superficieAnomaliaCoor:
+        type: integer
+        format: int64
+      superficieGis:
+        type: integer
+        format: int64
+      superficieSigeco:
+        type: integer
+        format: int64
+    title: InfoEleggibilitaParticella
+  InfoGeneraliDomanda:
+    type: object
+    properties:
+      campagna:
+        type: number
+      codEnteCompilatore:
+        type: string
+      codModulo:
+        type: string
+      cuaaIntestatario:
+        type: string
+      dataPassaggioStato:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      dataPresentazOriginaria:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      dataPresentazione:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      dataProtocollazOriginaria:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      dataProtocollazione:
+        type: string
+        example: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+      enteCompilatore:
+        type: string
+      modulo:
+        type: string
+      numeroDomanda:
+        type: integer
+        format: int64
+      numeroDomandaRettificata:
+        type: integer
+        format: int64
+      pac:
+        type: string
+      ragioneSociale:
+        type: string
+      stato:
+        type: string
+        enum:
+        - RICEVIBILE
+        - NON_RICEVIBILE
+        - IN_ISTRUTTORIA
+        - PROTOCOLLATA
+      tipoDomanda:
+        type: string
+    title: InfoGeneraliDomanda
+  InfoIstruttoriaDomanda:
+    type: object
+    properties:
+      controlloSigecoChiuso:
+        type: boolean
+      datiEleggibilita:
+        type: array
+        items:
+          $ref: '#/definitions/InfoEleggibilitaParticella'
+    title: InfoIstruttoriaDomanda
+  InfoLiquidabilita:
+    type: object
+    properties:
+      datiErede:
+        $ref: '#/definitions/DatiErede'
+      domandaSospesaAgea:
+        type: boolean
+      iban:
+        type: string
+      ibanFascicolo:
+        type: string
+      ibanValido:
+        type: boolean
+      titolareDeceduto:
+        type: boolean
+    title: InfoLiquidabilita
+  InfoParticella:
+    type: object
+    required:
+    - codiceComuneCatastale
+    - particella
+    properties:
+      codiceComuneCatastale:
+        type: integer
+        format: int32
+      particella:
+        type: string
+      sub:
+        type: string
+    title: InfoParticella
+  IstruttoriaGraficaDuDto:
+    type: object
+    properties:
+      anno:
+        type: integer
+        format: int32
+      cuaa:
+        type: string
+      dataIstruttoriaGrafica:
+        type: string
+        format: date
+      dataRiferimento:
+        type: string
+        format: date
+      idDomanda:
+        type: integer
+        format: int64
+    title: IstruttoriaGraficaDuDto
+  ModelAndView:
+    type: object
+    properties:
+      empty:
+        type: boolean
+      model:
+        type: object
+      modelMap:
+        type: object
+        additionalProperties:
+          type: object
+      reference:
+        type: boolean
+      status:
+        type: string
+        enum:
+        - '100'
+        - '101'
+        - '102'
+        - '103'
+        - '200'
+        - '201'
+        - '202'
+        - '203'
+        - '204'
+        - '205'
+        - '206'
+        - '207'
+        - '208'
+        - '226'
+        - '300'
+        - '301'
+        - '302'
+        - '303'
+        - '304'
+        - '305'
+        - '307'
+        - '308'
+        - '400'
+        - '401'
+        - '402'
+        - '403'
+        - '404'
+        - '405'
+        - '406'
+        - '407'
+        - '408'
+        - '409'
+        - '410'
+        - '411'
+        - '412'
+        - '413'
+        - '414'
+        - '415'
+        - '416'
+        - '417'
+        - '418'
+        - '419'
+        - '420'
+        - '421'
+        - '422'
+        - '423'
+        - '424'
+        - '426'
+        - '428'
+        - '429'
+        - '431'
+        - '451'
+        - '500'
+        - '501'
+        - '502'
+        - '503'
+        - '504'
+        - '505'
+        - '506'
+        - '507'
+        - '508'
+        - '509'
+        - '510'
+        - '511'
+      view:
+        $ref: '#/definitions/View'
+      viewName:
+        type: string
+    title: ModelAndView
+  Particella:
+    type: object
+    properties:
+      codNazionale:
+        type: string
+      comune:
+        type: string
+      foglio:
+        type: integer
+        format: int64
+      idParticella:
+        type: integer
+        format: int64
+      particella:
+        type: string
+      sub:
+        type: string
+    title: Particella
+  RegioneCatastale:
+    type: object
+    properties:
+      codiceIstat:
+        type: string
+      denominazione:
+        type: string
+      idRegione:
+        type: integer
+        format: int32
+    title: RegioneCatastale
+  Richieste:
+    type: object
+    properties:
+      datiPascolo:
+        type: array
+        items:
+          $ref: '#/definitions/DatiPascolo'
+      dichiarazioniDomandaUnica:
+        type: array
+        items:
+          $ref: '#/definitions/DichiarazioniDomandaUnica'
+      sintesiRichieste:
+        $ref: '#/definitions/SintesiRichieste'
+      sostegniAllevamento:
+        type: array
+        items:
+          $ref: '#/definitions/SostegniAllevamento'
+      sostegniSuperficie:
+        type: array
+        items:
+          $ref: '#/definitions/SostegniSuperficie'
+    title: Richieste
+  SintesiRichieste:
+    type: object
+    properties:
+      richiestaDisaccoppiato:
+        type: boolean
+      richiestaSuperfici:
+        type: boolean
+      richiestaZootecnia:
+        type: boolean
+    title: SintesiRichieste
+  SostegniAllevamento:
+    type: object
+    properties:
+      codFiscaleDetentore:
+        type: string
+      codFiscaleProprietario:
+        type: string
+      codIdAllevamento:
+        type: string
+      codIdBdn:
+        type: string
+      codIntervento:
+        type: string
+      comune:
+        type: string
+      denominazioneDetentore:
+        type: string
+      denominazioneProprietario:
+        type: string
+      descAllevamento:
+        type: string
+      descIntervento:
+        type: string
+      idAllevamento:
+        type: integer
+        format: int64
+      idIntervento:
+        type: integer
+        format: int64
+      indirizzo:
+        type: string
+      sostegno:
+        type: string
+      specie:
+        type: string
+    title: SostegniAllevamento
+  SostegniSuperficie:
+    type: object
+    properties:
+      codColtura3:
+        type: string
+      codColtura5:
+        type: string
+      codIntervento:
+        type: string
+      codIsola:
+        type: string
+      codLivello:
+        type: string
+      coeffTara:
+        type: number
+        format: float
+      descColtura:
+        type: string
+      descIntervento:
+        type: string
+      descMantenimento:
+        type: string
+      idColtura:
+        type: integer
+        format: int64
+      idIntervento:
+        type: integer
+        format: int64
+      idIsola:
+        type: integer
+        format: int64
+      idParcella:
+        type: integer
+        format: int64
+      idPianoColture:
+        type: integer
+        format: int64
+      particella:
+        $ref: '#/definitions/Particella'
+      sostegno:
+        type: string
+      supDichiarata:
+        type: integer
+        format: int64
+      supImpegnata:
+        type: integer
+        format: int64
+    title: SostegniSuperficie
+  SostegnoDisaccoppiato:
+    type: object
+    properties:
+      bpsRichiesto:
+        type: boolean
+      giovaneRichiesto:
+        type: boolean
+      greeningRichiesto:
+        type: boolean
+      superficieImpegnataLorda:
+        type: integer
+        format: int64
+      superficieImpegnataNetta:
+        type: number
+        format: float
+    title: SostegnoDisaccoppiato
+  SostegnoSuperfici:
+    type: object
+    properties:
+      sostegnoFrumentoDuroRichiesto:
+        type: boolean
+      sostegnoFrumentoLeguminoseRichiesto:
+        type: boolean
+      sostegnoFrumentoProteaginoseRichiesto:
+        type: boolean
+      sostegnoOlivo75Richiesto:
+        type: boolean
+      sostegnoOlivoNazionareRichiesto:
+        type: boolean
+      sostegnoOlivoQualitaRichiesto:
+        type: boolean
+      sostegnoPomorodoRichiesto:
+        type: boolean
+      sostegnoSoiaRichiesto:
+        type: boolean
+      superficieRichiestaFrumentoDuro:
+        type: integer
+        format: int64
+      superficieRichiestaFrumentoLeguminose:
+        type: integer
+        format: int64
+      superficieRichiestaFrumentoProteaginose:
+        type: integer
+        format: int64
+      superficieRichiestaOlivo75:
+        type: integer
+        format: int64
+      superficieRichiestaOlivoNazionale:
+        type: integer
+        format: int64
+      superficieRichiestaOlivoQualita:
+        type: integer
+        format: int64
+      superficieRichiestaPomodoro:
+        type: integer
+        format: int64
+      superficieRichiestaSoia:
+        type: integer
+        format: int64
+      superficieTotaleRichiesta:
+        type: integer
+        format: int64
+    title: SostegnoSuperfici
+  Utente:
+    type: object
+    properties:
+      cf:
+        type: string
+      cognome:
+        type: string
+      descrizione:
+        type: string
+      nome:
+        type: string
+      utenza:
+        type: string
+    title: Utente
+  VariabileSostegnoAgs:
+    type: object
+    properties:
+      codGruppo:
+        type: string
+      descVariabile:
+        type: string
+      ordine:
+        type: number
+      valore:
+        type: string
+      variabile:
+        type: string
+    title: VariabileSostegnoAgs
+  View:
+    type: object
+    properties:
+      contentType:
+        type: string
+    title: View

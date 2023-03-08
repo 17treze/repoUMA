@@ -1,0 +1,65 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-g ui-fluid">
+  <div class="boxgrey" style="padding-top:50px;">
+    <div class="ui-g-12">
+      <div class="ui-grid-fixed">
+        <div>
+          <h3>Premio base</h3>
+        </div>
+        <div style="display:inline-block; width:100%;">
+          <div class="ui-g-6 box" style="padding-left:0px;">
+            <div class="square-boxsmall">
+              <strong>Sup. Imp. Lorda (mq)</strong>
+              <br />
+              <div *ngIf="this.listaParticelleTable">{{this.listaParticelleTable.supImpegnataLorda}}</div>
+            </div>
+          </div>
+          <div class="ui-g-6" style="padding-right:0px;">
+            <div class="square-boxsmall">
+              <strong>Sup. Imp. Netta (mq)</strong>
+              <br />
+              <div *ngIf="this.listaParticelleTable">{{this.listaParticelleTable.supImpegnataNetta}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive" style="margin-top:20px; display: block">
+          <p-table #tableSup [columns]="cols" [value]="this.listaParticelleTable.paginaSuperfici.risultati"
+            [autoLayout]="true" [totalRecords]="this.listaParticelleTable.paginaSuperfici.count" [paginator]="true"
+            (onLazyLoad)="changePage($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                  [pSortableColumnDisabled]="col.field == null">
+                  <strong>{{col.header}}</strong>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-particella let-i="rowIndex">
+              <tr [pSelectableRow]="particella">
+                <td>{{particella.infoCatastali.idParticella}}</td>
+                <td>{{particella.infoCatastali.comune}}</td>
+                <td>{{particella.infoCatastali.codNazionale}}</td>
+                <td>{{particella.infoCatastali.foglio}}</td>
+                <td>{{particella.infoCatastali.particella}}</td>
+                <td>{{particella.infoCatastali.sub}}</td>
+                <td>{{particella.riferimentiCartografici.codIsola}}</td>
+                <td>{{particella.infoColtivazione.codColtura3}}</td>
+                <td>{{particella.infoColtivazione.descrizioneColtura}}</td>
+                <td>{{particella.supRichiesta}}</td>
+                <td>{{particella.supRichiestaNetta}}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="11">
+                  Nessuna particella trovata
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

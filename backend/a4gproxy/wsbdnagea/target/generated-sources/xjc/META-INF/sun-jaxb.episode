@@ -1,0 +1,1389 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2022.08.29 alle 04:34:04 PM CEST 
+
+  -->
+      
+    <bindings xmlns:tns="http://bdr.izs.it/webservices/ResponseQuery.xsd" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.izs.wsdl.wsBDNAgea"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_ZootecnicaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaZootecnicaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_CapiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Anagrafica_AllevamentiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.AnagraficaAllevamentiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Download_AllevamentiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DownloadAllevamentiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_1Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati1Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_2Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati2Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellatoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellatoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellatoStoricoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellatoStoricoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoStoricoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoStoricoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_Dettagliata_BovResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoDettagliataBovResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_AllevamentoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Scarico_Allevamenti_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ScaricoAllevamentiConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Statistica_Media_AllevamentoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaStatisticaMediaAllevamentoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_ApertoResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoApertoResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Insert_Richiesta_Calcolo_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.InsertRichiestaCalcoloConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Update_Richiesta_Calcolo_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.UpdateRichiestaCalcoloConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Delete_Richiesta_Calcolo_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DeleteRichiestaCalcoloConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Richiesta_Calcolo_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetRichiestaCalcoloConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Calcolo_ConsistenzaResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetCalcoloConsistenzaResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Titoli_SpecialiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBATitoliSpecialiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_OviniResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBAOviniResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_OviniResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOviniResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_Ovini_2012Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOvini2012Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_PascoloResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_dal2014Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloDal2014Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovini_Al_PascoloResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoOviniAlPascoloResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Ingressi_Al_Pascolo_Partite_OviniResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaIngressiAlPascoloPartiteOviniResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Uscite_Da_Pascolo_Partite_OviniResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaUsciteDaPascoloPartiteOviniResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Mandria_LattieraResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaMandriaLattieraResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_IRResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliIRResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_BAResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliBAResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SVResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSVResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_IRResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaIRResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_BAResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaBAResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SVResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSVResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SAResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSAResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findVerbaleControlloResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.FindVerbaleControlloResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SAResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSAResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_PAC2015Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloPAC2015Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Trova_Pascolo_PAC2015Result">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.TrovaPascoloPAC2015Result"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Variazioni_ControlliResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.VariazioniControlliResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_NasciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneNasciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_IngressiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneIngressiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_UsciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneUsciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_NasciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneNasciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_IngressiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Ingressi_PartiteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressiPartiteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_UsciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUsciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Uscite_PartiteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUscitePartiteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_NasciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneNasciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_IngressiResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressiResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Ingressi_PartiteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressiPartiteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_UsciteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUsciteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Uscite_PartiteResult">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUscitePartiteResult"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUNITA_TECNICHE_MUL">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUNITATECNICHEMUL"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiVERBALE_CHECK_LIST">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiVERBALECHECKLIST"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiVARIAZIONE_CONTROLLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiVARIAZIONECONTROLLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiSUI_TEMPI_NOTIFICA_USCITE_PARTITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiSUITEMPINOTIFICAUSCITEPARTITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiSUI_TEMPI_NOTIFICA_USCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiSUITEMPINOTIFICAUSCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiSUI_TEMPI_NOTIFICA_INGRESSI_PARTITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiSUITEMPINOTIFICAINGRESSIPARTITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiSUI_TEMPI_NOTIFICA_INGRESSI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiSUITEMPINOTIFICAINGRESSI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiSUI_TEMPI_NOTIFICA_NASCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiSUITEMPINOTIFICANASCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_TEMPI_NOTIFICA_USCITE_PARTITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVITEMPINOTIFICAUSCITEPARTITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_TEMPI_NOTIFICA_USCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVITEMPINOTIFICAUSCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_TEMPI_NOTIFICA_INGRESSI_PARTITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVITEMPINOTIFICAINGRESSIPARTITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_TEMPI_NOTIFICA_INGRESSI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVITEMPINOTIFICAINGRESSI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_TEMPI_NOTIFICA_NASCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVITEMPINOTIFICANASCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiIRREGOLARITA_ALLEVAMENTO_SA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiIRREGOLARITAALLEVAMENTOSA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiIRREGOLARITA_ALLEVAMENTO_SV">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiIRREGOLARITAALLEVAMENTOSV"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiIRREGOLARITA_ALLEVAMENTO_BA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiIRREGOLARITAALLEVAMENTOBA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiIRREGOLARITA_ALLEVAMENTO_IR">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiIRREGOLARITAALLEVAMENTOIR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONTROLLO_ALLEVAMENTO_SV">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONTROLLOALLEVAMENTOSV"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONTROLLO_ALLEVAMENTO_SA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONTROLLOALLEVAMENTOSA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONTROLLO_ALLEVAMENTO_BA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONTROLLOALLEVAMENTOBA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONTROLLO_ALLEVAMENTO_IR">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONTROLLOALLEVAMENTOIR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_MANDRIA_LATTIERA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZAMANDRIALATTIERA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiALLEVAMENTI_LIBRO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiALLEVAMENTILIBRO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfCAPO_LIBRO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfCAPOLIBRO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfALLEVAMENTO_LIBRO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfALLEVAMENTOLIBRO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPIMAC">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPIMAC"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiMACELLAZIONE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiMACELLAZIONE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiIRREGOLARITA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiIRREGOLARITA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAMPIONE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAMPIONE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_REGISTRI_PASCOLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVIREGISTRIPASCOLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_USCITE_PASCOLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVIUSCITEPASCOLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiOVI_INGRESSI_PASCOLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiOVIINGRESSIPASCOLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiPASCOLO_VISITATO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiPASCOLOVISITATO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_PASCOLO2015">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZAPASCOLO2015"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_PASCOLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZAPASCOLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUBA_CENSIMENTO_OVINO_2012">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUBACENSIMENTOOVINO2012"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUBA_CENSIMENTI_ALLEVAMENTO_OVINO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUBACENSIMENTIALLEVAMENTOOVINO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUBA_CONSISTENZA_OVINI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUBACONSISTENZAOVINI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUBA_CONSISTENZA_ALLEVAMENTO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUBACONSISTENZAALLEVAMENTO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_STAT_ALLEVAMENTO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZASTATALLEVAMENTO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_ALLEVAMENTO_DETT">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZAALLEVAMENTODETT"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCONSISTENZA_ALLEVAMENTO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCONSISTENZAALLEVAMENTO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiAGEA_RICH_CALCOLO_CONSISTENZA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiAGEARICHCALCOLOCONSISTENZA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiANAGRAFICA_ALLEVAMENTO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiANAGRAFICAALLEVAMENTO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiMOVIMENTAZIONI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiMOVIMENTAZIONI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiTEMPI_NOTIFICA_USCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiTEMPINOTIFICAUSCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiTEMPI_NOTIFICA_INGRESSI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiTEMPINOTIFICAINGRESSI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiTEMPI_NOTIFICA_NASCITE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiTEMPINOTIFICANASCITE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiUNITA_TECNICHE">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiUNITATECNICHE"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiFASCICOLO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiFASCICOLO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiDOMANDA_CHIUSA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiDOMANDACHIUSA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiDOMANDA_PREMIO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiDOMANDAPREMIO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPI_MACELLATI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPIMACELLATI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPI_DOMANDA_PAC">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPIDOMANDAPAC"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPI_DOMANDA_MAC">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPIDOMANDAMAC"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiCAPI_BOVINI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiCAPIBOVINI"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiALLEVAMENTO">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiALLEVAMENTO"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfRootDatiALLEVAMENTI">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ArrayOfRootDatiALLEVAMENTI"/>
+                
+        </bindings>
+          
+    </bindings>
+      
+    <bindings xmlns:tns="http://bdr.izs.it/webservices" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.izs.wsdl.wsBDNAgea"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Zootecnica">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaZootecnica"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_ZootecnicaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaZootecnicaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SOAPAutenticazione">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SOAPAutenticazione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapi"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_CapiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Anagrafica_Allevamenti">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.AnagraficaAllevamenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Anagrafica_AllevamentiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.AnagraficaAllevamentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Download_Allevamenti">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DownloadAllevamenti"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Download_AllevamentiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DownloadAllevamentiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_1">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati1"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_1Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati1Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_2">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati2"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Capi_Macellati_2Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaCapiMacellati2Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapo">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellato">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellato"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellatoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellatoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellatoStorico">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellatoStorico"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoMacellatoStoricoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoMacellatoStoricoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoStorico">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoStorico"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:GetInformazioniCapoStoricoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetInformazioniCapoStoricoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_Dettagliata_Bov">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoDettagliataBov"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_Dettagliata_BovResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoDettagliataBovResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_AllevamentoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Scarico_Allevamenti_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ScaricoAllevamentiConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Scarico_Allevamenti_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ScaricoAllevamentiConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Statistica_Media_Allevamento">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaStatisticaMediaAllevamento"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Statistica_Media_AllevamentoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaStatisticaMediaAllevamentoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_Aperto">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoAperto"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Allevamento_ApertoResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAllevamentoApertoResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Insert_Richiesta_Calcolo_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.InsertRichiestaCalcoloConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Insert_Richiesta_Calcolo_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.InsertRichiestaCalcoloConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Update_Richiesta_Calcolo_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.UpdateRichiestaCalcoloConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Update_Richiesta_Calcolo_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.UpdateRichiestaCalcoloConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Delete_Richiesta_Calcolo_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DeleteRichiestaCalcoloConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Delete_Richiesta_Calcolo_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.DeleteRichiestaCalcoloConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Richiesta_Calcolo_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetRichiestaCalcoloConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Richiesta_Calcolo_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetRichiestaCalcoloConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Calcolo_Consistenza">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetCalcoloConsistenza"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Get_Calcolo_ConsistenzaResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.GetCalcoloConsistenzaResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Titoli_Speciali">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBATitoliSpeciali"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Titoli_SpecialiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBATitoliSpecialiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Ovini">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBAOvini"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_OviniResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBAOviniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_Ovini">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOvini"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_OviniResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOviniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_Ovini_2012">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOvini2012"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_UBA_Censim_Ovini_2012Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaUBACensimOvini2012Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_PascoloResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_dal2014">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloDal2014"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_dal2014Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloDal2014Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovini_Al_Pascolo">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoOviniAlPascolo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Ovini_Al_PascoloResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoOviniAlPascoloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Ingressi_Al_Pascolo_Partite_Ovini">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaIngressiAlPascoloPartiteOvini"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Ingressi_Al_Pascolo_Partite_OviniResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaIngressiAlPascoloPartiteOviniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Uscite_Da_Pascolo_Partite_Ovini">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaUsciteDaPascoloPartiteOvini"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Lista_Uscite_Da_Pascolo_Partite_OviniResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ListaUsciteDaPascoloPartiteOviniResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Mandria_Lattiera">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaMandriaLattiera"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Mandria_LattieraResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaMandriaLattieraResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_IR">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliIR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_IRResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliIRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_BA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliBA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_BAResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliBAResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SV">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSV"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SVResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSVResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_IR">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaIR"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_IRResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaIRResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_BA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaBA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_BAResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaBAResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SV">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSV"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SVResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSVResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Irregolarita_SAResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoIrregolaritaSAResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findVerbaleControllo">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.FindVerbaleControllo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:findVerbaleControlloResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.FindVerbaleControlloResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SA">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSA"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Elenco_Controlli_SAResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ElencoControlliSAResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_PAC2015">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloPAC2015"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Consistenza_Al_Pascolo_PAC2015Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.ConsistenzaAlPascoloPAC2015Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Trova_Pascolo_PAC2015">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.TrovaPascoloPAC2015"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Trova_Pascolo_PAC2015Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.TrovaPascoloPAC2015Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Variazioni_Controlli">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.VariazioniControlli"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Variazioni_ControlliResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.VariazioniControlliResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_Nascite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneNascite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_NasciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneNasciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_Ingressi">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneIngressi"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_IngressiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneIngressiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_Uscite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneUscite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Notifica_Registrazione_UsciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.NotificaRegistrazioneUsciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Nascite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneNascite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_NasciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneNasciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Ingressi">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressi"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_IngressiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Ingressi_Partite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressiPartite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Ingressi_PartiteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneIngressiPartiteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Uscite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUscite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_UsciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUsciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Uscite_Partite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUscitePartite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Ovi_Notifica_Registrazione_Uscite_PartiteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.OviNotificaRegistrazioneUscitePartiteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Nascite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneNascite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_NasciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneNasciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Ingressi">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressi"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_IngressiResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressiResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Ingressi_Partite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressiPartite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Ingressi_PartiteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneIngressiPartiteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Uscite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUscite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_UsciteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUsciteResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Uscite_Partite">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUscitePartite"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:Sui_Notifica_Registrazione_Uscite_PartiteResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNAgea.SuiNotificaRegistrazioneUscitePartiteResponse"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

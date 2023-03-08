@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: it.tndigitale.a4g.fascicolo.anagrafica.legacy.SincronizzazioneAgsFascicoloTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 13.609 s - in it.tndigitale.a4g.fascicolo.anagrafica.legacy.SincronizzazioneAgsFascicoloTest

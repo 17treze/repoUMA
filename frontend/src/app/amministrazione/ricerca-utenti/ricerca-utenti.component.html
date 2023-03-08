@@ -1,0 +1,153 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}" [baseZIndex]="50000"></p-toast>
+<modifica-configurazione-utente-dialog
+#configurazioneUtenteDialog (displayChange)="onDialogClose($event)">
+</modifica-configurazione-utente-dialog>
+
+<div class="ui-g  ui-fluid  page-ricerca-utenti">
+  <div class="tophome">
+    <div class="ui-grid-fixed">
+      <div class="row  align-items-stretch">
+        <div class="col d-inline-flex  justify-content-between align-items-center">
+          <h4>{{ 'RICERCA_UTENTE.RICERCA_UTENTI' | translate }}</h4>
+          <div class="btn-border-light">
+          <button pButton icon="pi pi-arrow-down" iconPos="right" class="border h-100" (click)="downloadUtentiA4gCsv()"
+          label="{{ 'RICERCA_UTENTE.ESPORTA_UTENTI' | translate }}"></button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-grid-fixed  boxgrey-user  mt-5">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="row  align-items-stretch">
+        <div class="col-3  d-inline-flex  align-items-center">
+          <label class="mb-0  mr-2">{{ 'Nome' | translate }}</label>
+          <input type="text" [(ngModel)]="nome" name="nome" #nomeInput="ngModel"
+            [ngClass]="{'is-invalid': nomeInput.invalid}" appValidaNome pInputText>
+          <div *ngIf="nomeInput.errors">
+            <p *ngIf="nomeInput.errors?.nomeErrato" class="ui-message ui-messages-error ui-corner-all">
+              {{ nomeInput.errors.nomeErrato }}
+            </p>
+          </div>
+        </div>
+        <div class="col-3  d-inline-flex  align-items-center">
+          <label class="mb-0  mr-2">{{ 'Cognome' | translate }}</label>
+          <input type="text" [(ngModel)]="cognome" name="cognome" #cognomeInput="ngModel"
+            [ngClass]="{'is-invalid': cognomeInput.invalid}" appValidaCognome pInputText>
+          <div *ngIf="cognomeInput.errors">
+            <p *ngIf="cognomeInput.errors?.cognomeErrato" class="ui-message ui-messages-error ui-corner-all">
+              {{ cognomeInput.errors.cognomeErrato }}
+            </p>
+          </div>
+        </div>
+        <div class="col-3  d-inline-flex  align-items-center">
+          <label class="mb-0  mr-2">{{ 'CF' | translate }}</label>
+          <input type="text" [(ngModel)]="codiceFiscale" name="codiceFiscale" #cfInput="ngModel"
+            [ngClass]="{'is-invalid': cfInput.invalid}" appValidaCf pInputText>
+          <div *ngIf="cfInput.errors">
+            <p *ngIf="cfInput.errors?.cfErrato" class="ui-message ui-messages-error ui-corner-all">
+              {{ cfInput.errors.cfErrato }}
+            </p>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="next-button sm h-100 command-button">
+            <button pButton icon="ui-icon-search" type="submit"
+            label="{{ 'RICERCA_UTENTE.CERCA_UTENTE' | translate }}" class="h-100"
+            [disabled]="!(f.valid) || (!nome && !cognome && !codiceFiscale)"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="ui-g-12  boxlanding  row  w-auto  p-0">
+      <div class="col-4">
+        <div class="card">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/misure_strutturali.png" />
+            <h4>SRTrento - Misure strutturali</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/nuovo_sistema.png" />
+            <h4>A4G - Nuovo Sistema Informativo Agricoltura</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="topcard">
+            <img alt="logo" src="assets/layout/images/sistema_informativo.png" />
+            <h4>SIAP - Sistema Informativo Agricoltura</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12  p-0">
+      <p-accordion>
+        <p-accordionTab *ngFor="let utente of this.utenti" [selected]="false">
+          <p-header>
+            <div>{{ "CODICE_FISCALE" | translate }}: {{ utente.cf }} <strong class="ml-3">{{ utente.profili.denominazione }}</strong></div>
+            <div class="ml-auto  d-flex  align-items-center">
+              <!--<span>{{ 'RICERCA_UTENTE.CONTATTI' | translate }}:</span>
+              <div>
+                <img src="assets/img/icons/phone.png" alt="phone" pTooltip="{{ utente.telefono }}"
+                  tooltipPosition="left" tooltipStyleClass="tooltip--white" class="mx-2" />
+                <img src="assets/img/icons/mail.png" alt="phone" pTooltip="{{ utente.email }}"
+                  tooltipStyleClass="tooltip--white" tooltipPosition="right" class="mx-2" />
+              </div>-->
+              <p-button class="ui-button-secondary ml-4 command-button" icon="pi pi-replay" iconPos="left"
+                [disabled]='!utente.profili.profiliA4g'
+                (click)="$event.preventDefault(); vaiAlloStorico(utente)"
+                label="{{ 'RICERCA_UTENTE.STORICO' | translate }}"></p-button>
+              <p-button class="ml-4 command-button" icon="pi pi-cog" iconPos="left"
+                [disabled]='!utente.profili.profiliA4g'
+                (click)="$event.stopPropagation(); openConfigura(!!utente.profili.profiliA4g, utente.cf)"
+                label="{{ 'RICERCA_UTENTE.dettaglioUtente' | translate }}"></p-button>
+            </div>
+          </p-header>
+          <div class="row mb-5">
+            <div class="col-4">
+              <div *ngIf="utente.profili.ruoloSrt; else noSrt" class="box-user-role">
+                <strong>{{ 'SRT' | translate }}</strong>
+                {{ utente.profili.ruoloSrt }}
+              </div>
+              <ng-template #noSrt>
+                <div class="box-user-role">
+                  {{ "RICERCA_UTENTE.NON_TROVATO_SRT" | translate }}
+                </div>
+              </ng-template>
+            </div>
+            <div class="col-4">
+              <div *ngIf="utente.profili.profiliA4g">
+                <div *ngFor="let profiloA4g of utente.profili.profiliA4g" class="box-user-role"><strong>A4G </strong>
+                  <span *ngIf="!profiloA4g.disabled">{{ profiloA4g.descrizione }}</span>
+                  <del *ngIf="profiloA4g.disabled">{{ profiloA4g.descrizione }}</del>
+                  <i class="material-icons" *ngIf="profiloA4g.disabled" style="font-size: 120%;">
+                    lock
+                  </i>
+                </div>
+              </div>
+              <div *ngIf="!(utente.profili.profiliA4g && utente.profili.profiliA4g.length > 0)">
+                <div class="box-user-role">
+                  {{ "RICERCA_UTENTE.NON_TROVATO_A4G" | translate }}</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div *ngIf="utente.profili.profiliAgs && utente.profili.profiliAgs.length > 0">
+                <div *ngFor="let profiloAgs of utente.profili.profiliAgs" class="box-user-role"><strong>AGS</strong>
+                  {{ profiloAgs }}</div>
+              </div>
+              <div *ngIf="!(utente.profili.profiliAgs && utente.profili.profiliAgs.length > 0)">
+                <div class="box-user-role">
+                  {{ "RICERCA_UTENTE.NON_TROVATO_AGS" | translate }}</div>
+              </div>
+            </div>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="conto-terzi-dettaglio-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="conto-terzi-superficie-max-alert"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="ui-g ui-fluid mt-5">
+  <div class="ui-grid-fixed mt-2">
+    <div class="ui-g">
+      <form
+        class="w-100"
+        novalidate
+        [formGroup]="raggruppamentoForm">
+        <div class="p-col">
+          <!-- Prima riga Raggruppamento : Back & Save -->
+          <div class="p-grid p-align-center">
+            <div class="p-col py-3">
+              <a
+                [routerLink]
+                (click)="goBack()"
+                class="d-flex align-items-center text-decoration-none color-primary">
+                <i
+                  class="pi pi-chevron-left"
+                  style="font-size: 2rem; color: black"></i>
+                <img src="assets/img/icons/uma-icon/icon-contoterzi_black.svg">
+                <span class="ml-2">
+                {{ 'UMA.DICHIARAZIONE_CONSUMI.CLIENTI_CONTOTERZI' | translate | uppercase }} / 
+                <strong class="fs-20">{{ cliente?.denominazione }}</strong>
+              </span>
+              </a>
+            </div>
+            <div
+              *ngIf="!READONLY_MODE"
+              class="p-col-fixed w-10m p-0 py-1">
+              <button
+                pButton
+                type="button"
+                label="SALVA"
+                (click)="saveLavorazioni()"></button>
+            </div>
+          </div>
+          <!-- Seconda riga - Accordion raggruppamenti -->
+          <div
+            *ngIf="raggruppamenti?.length"
+            class="p-grid">
+            <div class="boxgrey">
+              <div class="p-col-12 align-self-center w-100">
+                <p-accordion
+                  #accordion
+                  (onOpen)="onSelectAccordion($event)">
+                  <ng-container *ngFor="let raggruppamento of raggruppamenti; let selectedAccordion = index">
+                    <p-accordionTab>
+                      <p-header>
+                        {{raggruppamento.indice}} {{raggruppamento.nome | uppercase}}
+                        <i
+                          class="accordion-icon pi pi-check"
+                          *ngIf="quantitaLavorata[selectedAccordion]>0"></i>
+                      </p-header>
+                      <div class="p-col-12 align-self-center w-100">
+                        <app-a4g-multi-table
+                          *ngIf="datasourceBase?.length"
+                          [title]="nomeRaggruppamento"
+                          [cols]="colsBase"
+                          [values]="datasourceBase"
+                          [readonly]="READONLY_MODE"
+                          (clickIcon)="onClickIcon($event)"
+                          (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                        <div class="mb-1"></div>
+                        <app-a4g-multi-table
+                          *ngIf="datasourceStraordinaria?.length"
+                          [cols]="colsStraordinaria"
+                          [values]="datasourceStraordinaria"
+                          [readonly]="READONLY_MODE"
+                          (clickIcon)="onClickIcon($event)"
+                          (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                      </div>
+                    </p-accordionTab>
+                  </ng-container>
+                </p-accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

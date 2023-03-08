@@ -1,0 +1,21 @@
+:root {
+    --color-border: #e0e0e0;
+    --color-border-alt: #e2e2e2;
+    --color-bg-gray-light: #f6f6f7;
+    --color-accent-green: #0d5f3f;
+    --color-accent-green-alt: #01985a;
+}
+
+@import "tooltip";
+@import "popup";
+@import "checkbox";
+@import "icons";
+@import "icon-floating";
+@import "popup-box";
+@import "button";
+@import "row";
+@import "dialog";
+@import "toast";
+@import "autocomplete";
+@import "hr";
+@import "caa";

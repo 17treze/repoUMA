@@ -1,0 +1,12 @@
+#nav > p-autocomplete > span {
+    width: 100%;
+}
+
+#nav > p-autocomplete > span > input {
+    border: 2px solid rgba(4, 105, 4, 0.76);
+    width: 100%
+}
+#dialog-navigator > p-dialog > div > div > div.ui-dialog-titlebar.ui-widget-header > span {
+    top: -10px;
+    position: relative;
+}

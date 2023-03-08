@@ -1,0 +1,121 @@
+<p-toast
+  key="tst-trasf-in-appag"
+  [style]="{ marginTop: '70px' }">
+</p-toast>
+<p-dialog
+  header="{{ 'FAS_ANA.DATI_CONDUZIONI_TERRENI' | translate }}"
+  class="dialog-rappr-legale"
+  [(visible)]="popupVisible"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}"
+  (onHide)="closePopup()">
+  <div class="ui-g-12 text-left">
+    <button
+      pButton
+      type="submit"
+      (click)="onSave()"
+      label="{{ 'SALVA' | translate }}"
+      class="btn-green"
+      style="min-height:42px; box-shadow:none; margin-right:10px;"
+      [disabled]="!conduzioniList">
+    </button>
+  </div>
+  <div class="p-grid">
+    <div class="layout-actionmenu">
+      <div
+        class="table-responsive"
+        margin-top="30px">
+        <p-table
+          *ngIf="conduzioniList"
+          [columns]="cols"
+          [value]="conduzioniList"
+          dataKey="datiParticella.particella"
+          dataKey="superficieCondotta">
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th style="width: 3em"></th>
+              <th *ngFor="let col of columns">{{col.header}}</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-rowData
+            let-expanded="expanded"
+            let-columns="columns">
+            <tr>
+              <td>
+                <a
+                  href="#"
+                  [pRowToggler]="rowData">
+                  <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+              </td>
+              <td>{{ rowData.datiParticella.provincia }}</td>
+              <td>{{ rowData.datiParticella.comune }}</td>
+              <td>{{ rowData.datiParticella.sezione }}</td>
+              <td>{{ rowData.datiParticella.foglio }}</td>
+              <td>{{ rowData.datiParticella.particella }}</td>
+              <td>{{ rowData.datiParticella.subalterno }}</td>
+              <td>{{ rowData.descrizioneTipoConduzione }}</td>
+              <td>
+                <ng-container *ngIf="rowData.codiceFiscaleProprietarioList && rowData.codiceFiscaleProprietarioList.length>0">
+                  <span *ngFor="let proprietario of rowData.codiceFiscaleProprietarioList">
+                    {{proprietario}}
+                  </span>
+                </ng-container>
+              </td>
+              <td>{{ rowData.superficieCondotta }}</td>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="rowexpansion"
+            let-rowData
+            let-columns="columns">
+            <tr>
+              <td [attr.colspan]="columns.length + 1">
+                <div
+                  class="p-grid -fluid"
+                  style="font-size:16px;padding:20px">
+                  <div class="p-col-12 p-md-9">
+                    <div
+                      class="p-grid"
+                      *ngFor="let documento of rowData.documentiConduzione">
+                      <div class="p-col-12">
+                        <b>Data rilascio:</b>
+                        {{dateSupport.convertToPatternDate3(documento.dataRilascio)}}
+                      </div>
+                      <div class="p-col-12">
+                        <b>Data scadenza:</b>
+                        {{dateSupport.convertToPatternDate3(documento.dataScadenza)}}
+                      </div>
+                      <div class="p-col-12">
+                        <b>Numero documento:</b>
+                        {{documento.numeroDocumento}}
+                      </div>
+                      <div class="p-col-12">
+                        <b>Tipo documento:</b>
+                        {{documento.tipoDocumento}}
+                        <hr>
+                      </div>
+                    </div>
+                    <div
+                      class="p-grid"
+                      *ngIf="!rowData.documentiConduzione">
+                      <div class="p-col-12">
+                        {{ 'FAS_ANA.NESSUN_DOCUMENTO_CONDUZIONE_TERRENI' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</p-dialog>

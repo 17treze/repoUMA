@@ -1,0 +1,207 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati eleggibilità" [selected]="true">
+            <p-table #tableEle *ngIf="listaDettaglioParticelleTable" [columns]="cols"
+              [value]="listaDettaglioParticelleTable.risultati" [autoLayout]="true"
+              [totalRecords]="listaDettaglioParticelleTable.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageEleggibilita($event)" [rows]="elementiPerPagina" [lazy]="true"
+              dataKey="id">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th style="width: 3em"></th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-expanded="expanded" let-dettaglioParticella let-i="rowIndex">
+                <tr>
+                  <td>
+                    <a href="#" [pRowToggler]="dettaglioParticella">
+                        <i (onClick)="onRowExpanded(expanded, dettaglioParticella.id)" [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                    </a>
+                  </td>
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.supImpegnata}}</td>
+                  <td>{{dettaglioParticella.supEleggibile}}</td>
+                  <td>{{dettaglioParticella.supSigeco}}</td>
+                  <td>{{dettaglioParticella.anomalieMantenimento}}</td>
+                  <td>{{dettaglioParticella.anomalieCoordinamento}}</td>
+                  <td>{{dettaglioParticella.superficieAnomalieCoordinamento}}</td>
+                  <td>{{dettaglioParticella.supDeterminata}}</td>
+                  <td>{{dettaglioParticella.supScostamento}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="rowexpansion" let-dettaglioParticella let-columns="columns">
+                <tr>
+                  <td [attr.colspan]="columns.length + 1">
+                    <div class="ui-g ui-fluid" style="font-size:16px; padding:20px">
+                      <div class="ui-g-12 ui-md-3" style="text-align:center">
+                        Parcelle domanda grafica:
+                      </div>
+                      <div class="ui-g-12 ui-md-9">
+                        <div *ngIf="getParcelleValues(dettaglioParticella) | async as parcelleValues">
+                          <span *ngFor="let parcellaValue of parcelleValues" class="mr-5">
+                            <span *ngIf="parcellaValue.link else noLink">
+                              <a href='{{ parcellaValue.link }}' target="_blank">{{parcellaValue.value }}</a>
+                            </span>
+                            <ng-template #noLink>
+                              {{ parcellaValue.value }}
+                            </ng-template>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="12">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <div *ngIf="listaDettaglioParticelleTable">
+              <button
+                pButton
+                type="button"
+                class="ui-button-success"
+                style="width: 300px;"
+                [disabled]="listaDettaglioParticelleTable.elementiTotali<=0"
+                (click)="downloadCsv(1)">
+                {{ 'SCARICA_DATI' | translate }}
+              </button>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati greening" [selected]="true">
+            <p-table #tableGreening *ngIf="listaDettaglioParticelleTableGreening" [columns]="colsGreening"
+              [value]="this.listaDettaglioParticelleTableGreening.risultati" [autoLayout]="true"
+              [totalRecords]="this.listaDettaglioParticelleTableGreening.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageGreening($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioParticella let-i="rowIndex">
+                <tr [pSelectableRow]="dettaglioParticella">
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.supDeterminata}}</td>
+                  <td>{{dettaglioParticella.tipoColtura}}</td>
+                  <td>{{dettaglioParticella.tipoSeminativo}}</td>
+                  <td>{{dettaglioParticella.colturaPrincipale}}</td>
+                  <td>{{dettaglioParticella.secondaColtura}}</td>
+                  <td>{{dettaglioParticella.azotoFissatrice}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="12">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <div *ngIf="listaDettaglioParticelleTableGreening">
+              <button
+                pButton
+                type="button"
+                class="ui-button-success"
+                style="width: 300px;"
+                [disabled]="listaDettaglioParticelleTableGreening.elementiTotali<=0"
+                (click)="downloadCsv(2)">
+                {{ 'SCARICA_DATI' | translate }}
+              </button>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati mantenimento" [selected]="true">
+            <p-table #tableMan *ngIf="listaDettaglioParticelleTableMantenimento" [columns]="colsMantenimento"
+              [value]="this.listaDettaglioParticelleTableMantenimento.risultati" [autoLayout]="true"
+              [totalRecords]="this.listaDettaglioParticelleTableMantenimento.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageMantenimento($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioParticella let-i="rowIndex">
+                <tr [pSelectableRow]="dettaglioParticella">
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.pascolo}}</td>
+                  <td>{{dettaglioParticella.supImpegnata}}</td>
+                  <td>{{dettaglioParticella.supEleggibile}}</td>
+                  <td>{{dettaglioParticella.supSigeco}}</td>
+                  <td>{{dettaglioParticella.anomalieMantenimento}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr *ngIf="listaDettaglioParticelleTable.risultati?.length > 0">
+                  <td [attr.colspan]="11">
+                    Non risultano presenti in domanda particelle afferenti a pascoli.
+                  </td>
+                </tr>
+                <tr *ngIf="listaDettaglioParticelleTable.risultati?.length === 0">
+                  <td [attr.colspan]="11">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <div *ngIf="listaDettaglioParticelleTableMantenimento">
+              <button
+                pButton
+                type="button"
+                class="ui-button-success"
+                style="width: 300px;"
+                [disabled]="listaDettaglioParticelleTableMantenimento.elementiTotali<=0"
+                (click)="downloadCsv(3)">
+                {{ 'SCARICA_DATI' | translate }}
+              </button>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

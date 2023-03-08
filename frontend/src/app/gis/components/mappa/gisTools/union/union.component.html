@@ -1,0 +1,18 @@
+<div class="groupTool" [ngClass]="{'toolDisattivato':!canUse}">
+  <div id="intersectFeaturesTool" (click)="clickIntersect()">
+    <button 
+    pTooltip="Interseca" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUse" 
+    class='btn btn-primary'
+  ><i class="far fa-object-ungroup"></i></button>
+  </div>
+  <div id="unionFeaturesTool" (click)="clickUnion()" >
+    <button 
+    pTooltip="Unisci elementi" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUse" 
+    class='btn btn-primary'
+  ><i class="fa fa-object-group"></i></button>
+  </div>
+</div>

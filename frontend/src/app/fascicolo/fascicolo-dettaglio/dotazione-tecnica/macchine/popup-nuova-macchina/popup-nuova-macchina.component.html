@@ -1,0 +1,449 @@
+<p-dialog
+  #dialogNuovaMacchina
+  id="popup-nuova-macchina"
+  exitConfirm
+  [(visibleField)]="display"
+  [formToAnalyze]="form"
+  header="Macchina"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="center"
+  [style]="{width: '80vw', height: '90vh'}"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden'}"
+  [dismissableMask]="true"
+  styleClass="large-dialog"
+  [class]="idValidazione ? 'title-grey' : ''"
+  (onHide)="annulla()">
+
+  <p-toast
+    key="tst-macchinario"
+    [style]="{marginTop: '70px'}"></p-toast>
+
+  <form
+    #form="ngForm"
+    novalidate
+    [formGroup]="macchinaForm"
+    (ngSubmit)="onSubmit()"
+    class="p-grid h-100">
+    <div class="p-col-12 p-col-align-start ui-fluid">
+      <div class="p-grid">
+        <p-accordion
+          [class]="idValidazione ? 'accordion-grey' : ''"
+          class="w-100"
+          #accordion
+          (onOpen)="onSelectAccordion($event)">
+
+          <!-- Sezione MEZZO AGRICOLO -->
+          <div class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+            <p-accordionTab
+              cache="false"
+              header="MEZZO AGRICOLO">
+              <ng-template pTemplate="content">
+                <div class="p-grid align-self-center">
+                  <div class="p-col-4">
+                    <label for="tipologia-macchinario">Classe ai fini del carburante agevolato per uso agricolo</label>
+                    <p-dropdown
+                      id="tipologia-macchinario"
+                      formControlName="tipologiaMacchinario"
+                      (onChange)="onSelectTipologia($event)"
+                      [options]="tipologicheService.tipologiaMacchinario"></p-dropdown>
+                    <div *ngIf="macchinaForm.get('tipologiaMacchinario').invalid && (macchinaForm.get('tipologiaMacchinario').dirty || macchinaForm.get('tipologiaMacchinario').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('tipologiaMacchinario').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="classe-funzionale-macchinario">Classe funzionale</label>
+                    <p-dropdown
+                      id="classe-funzionale-macchinario"
+                      formControlName="classeFunzionaleMacchinario"
+                      (onChange)="onSelectClasseFunzionale($event)"
+                      [options]="tipologicheService.classeFunzionaleMacchinario"></p-dropdown>
+                    <div *ngIf="macchinaForm.get('classeFunzionaleMacchinario').invalid && (macchinaForm.get('classeFunzionaleMacchinario').dirty || macchinaForm.get('classeFunzionaleMacchinario').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('classeFunzionaleMacchinario').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="sotto-tipologia-macchinario">Tipo macchina</label>
+                    <p-dropdown
+                      id="sotto-tipologia-macchinario"
+                      formControlName="sottoTipologiaMacchinario"
+                      (onChange)="onSelectSottoTipologia($event)"
+                      [options]="tipologicheService.sottoTipologiaMacchinario"></p-dropdown>
+                    <div *ngIf="macchinaForm.get('sottoTipologiaMacchinario').invalid && (macchinaForm.get('sottoTipologiaMacchinario').dirty || macchinaForm.get('sottoTipologiaMacchinario').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('sottoTipologiaMacchinario').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="marca-input">Marca</label>
+                    <input
+                      id="marca-input"
+                      [maxlength]="50"
+                      type="text"
+                      pInputText
+                      formControlName="marcaMacchinario">
+                    <div *ngIf="macchinaForm.get('marcaMacchinario').invalid && (macchinaForm.get('marcaMacchinario').dirty || macchinaForm.get('marcaMacchinario').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('marcaMacchinario').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="modello-input">Modello</label>
+                    <input
+                      id="modello-input"
+                      [maxlength]="50"
+                      type="text"
+                      pInputText
+                      formControlName="modello">
+                    <div *ngIf="macchinaForm.get('modello').invalid && (macchinaForm.get('modello').dirty || macchinaForm.get('modello').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('modello').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div
+                    class="p-col-4">
+                    <label for="targa-input">Targa</label>
+                    <input
+                      id="targa-input"
+                      [maxlength]="50"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="targa">
+                    <div *ngIf="macchinaForm.get('targa').invalid && (macchinaForm.get('targa').dirty || macchinaForm.get('targa').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('targa').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="numero-matricola-input">Numero Matricola</label>
+                    <input
+                      id="numero-matricola-input"
+                      [maxlength]="50"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="numeroMatricola">
+                  </div>
+                  <div class="p-col-4">
+                    <label for="numero-telaio-input">Numero Telaio</label>
+                    <input
+                      id="numero-telaio-input"
+                      [maxlength]="50"
+                      type="text"
+                      class="text-right"
+                      (change)="onChangeNumeroTelaio($event)"
+                      pInputText
+                      formControlName="numeroTelaio">
+                    <div *ngIf="macchinaForm.get('numeroTelaio').invalid && (macchinaForm.get('numeroTelaio').dirty || macchinaForm.get('numeroTelaio').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('numeroTelaio').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="numero-telaio-input">Anno di immatricolazione</label>
+                    <p-spinner
+                      formControlName="annoCostruzione"
+                      [min]="1900"
+                      [max]="currentYear"></p-spinner>
+                    <div *ngIf="macchinaForm.get('annoCostruzione').invalid && (macchinaForm.get('annoCostruzione').dirty || macchinaForm.get('annoCostruzione').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('annoCostruzione').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <!-- solo per altre attrezzature -->
+                  <div
+                    class="p-col-12"
+                    *ngIf="showSwitchMotore">
+                    <label for="switch-motore">Motore</label>
+                    <p-inputSwitch
+                      class="px-4"
+                      id="switch-motore"
+                      formControlName="switchMotore"
+                      (onChange)="enableMotore($event)">
+                    </p-inputSwitch>
+                  </div>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </div>
+
+          <!-- Sezione MOTORE -->
+          <div class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+            <p-accordionTab
+              cache="false"
+              header="MOTORE"
+              [disabled]="motoreDisabled">
+              <ng-template pTemplate="content">
+                <div class="p-grid align-self-center">
+                  <div class="p-col-6">
+                    <label for="marca-motre-input">Marca</label>
+                    <input
+                      id="marca-motore-input"
+                      [maxlength]="50"
+                      type="text"
+                      pInputText
+                      formControlName="marcaMotore">
+                  </div>
+                  <div class="p-col-6">
+                    <label for="tipo-input">Tipo</label>
+                    <input
+                      id="tipo-input"
+                      [maxlength]="50"
+                      type="text"
+                      pInputText
+                      formControlName="tipo">
+                  </div>
+                  <div class="p-col-4">
+                    <label for="alimentazione">Alimentazione</label>
+                    <p-dropdown
+                      id="alimentazione"
+                      formControlName="alimentazione"
+                      (onChange)="onSelectAlimentazione($event)"
+                      [options]="tipologicheService.alimentazioneMotore"></p-dropdown>
+                    <div *ngIf="macchinaForm.get('alimentazione').invalid && (macchinaForm.get('alimentazione').dirty || macchinaForm.get('alimentazione').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('alimentazione').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="potenza-input">Potenza in Kw</label>
+                    <input
+                      id="potenza-input"
+                      [maxlength]="20"
+                      pattern="^([0-9]+\.?[0-9]*)$"
+                      type="text"
+                      class="text-right"
+                      pInputText
+                      formControlName="potenza">
+                    <div *ngIf="macchinaForm.get('potenza').invalid && (macchinaForm.get('potenza').dirty || macchinaForm.get('potenza').touched)">
+                      <p-message
+                        *ngIf="macchinaForm.get('potenza').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                      <p-message
+                        *ngIf="macchinaForm.get('potenza').errors?.pattern"
+                        class="font-12"
+                        severity="error"
+                        text="Formato non valido">
+                      </p-message>
+                    </div>
+                  </div>
+                  <div class="p-col-4">
+                    <label for="numero-motore-input">Numero di Motore</label>
+                    <input
+                      id="numero-motore-input"
+                      [maxlength]="50"
+                      type="text"
+                      class="text-right"
+                      (change)="onChangeNumeroMotore($event)"
+                      pInputText
+                      formControlName="numeroMotore">
+                      <div *ngIf="macchinaForm.get('numeroMotore').invalid && (macchinaForm.get('numeroMotore').dirty || macchinaForm.get('numeroMotore').touched)">
+                        <p-message
+                          *ngIf="macchinaForm.get('numeroMotore').errors?.required"
+                          class="font-12"
+                          severity="error"
+                          text="Campo Obbligatorio">
+                        </p-message>
+                      </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </div>
+
+          <!-- Sezione Possesso -->
+          <div class="accordion-wrapper dettaglioaccordionmultiple px-2 boxgrey">
+            <p-accordionTab
+              cache="false"
+              header="POSSESSO">
+              <ng-template pTemplate="content">
+                <div class="p-grid">
+                  <div class="p-col">
+                    <div class="p-grid m-0 p-justify-between">
+                      <div class="p-col-6 p-0">
+                        <label
+                          class="pr-0_5m"
+                          for="tipo-possesso-input">
+                          Tipologia di possesso
+                        </label>
+                        <p-dropdown
+                          id="tipo-possesso-input"
+                          formControlName="tipologiaPossesso"
+                          (onChange)="onSelectTipologiaPossesso($event)"
+                          [options]="tipologicheService.tipologiaDiPossesso"></p-dropdown>
+                        <div *ngIf="macchinaForm.get('tipologiaPossesso').invalid && (macchinaForm.get('tipologiaPossesso').dirty || macchinaForm.get('tipologiaPossesso').touched)">
+                          <p-message
+                            *ngIf="macchinaForm.get('tipologiaPossesso').errors?.required"
+                            class="font-12"
+                            severity="error"
+                            text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </div>
+                  
+                      <div class="p-col p-0 pl-4" *ngIf= "showCF">
+                        <label for="codice-fiscale-input">Codice fiscale proprietario</label>
+                        <input
+                          id="codiceFiscale-input"
+                          [maxlength]="50"
+                          type="text"
+                          class="text-right"
+                          (change)="onChangeCF($event)"
+                          (keyup)="onKeyupCF($event.target.value)"
+                          pInputText
+                          formControlName="codiceFiscale">
+                          <div *ngIf="macchinaForm.get('codiceFiscale').invalid && (macchinaForm.get('codiceFiscale').dirty || macchinaForm.get('codiceFiscale').touched)">
+                            <p-message
+                              *ngIf="macchinaForm.get('codiceFiscale').errors?.required"
+                              class="font-12"
+                              severity="error"
+                              text="Campo Obbligatorio">
+                            </p-message>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-grid ">
+                  <div class="p-col mt-2">
+                    <div class="p-grid m-0 p-justify-between p-align-end">
+                      <div class="p-col-6 p-0" *ngIf= "showRagioneSociale">
+                        <label for="ragione-sociale-input">Nominativo/Ragione Sociale</label>
+                        <input
+                          id="ragioneSociale-input"
+                          [maxlength]="150"
+                          type="text"
+                          class="text-left"
+                          pInputText
+                          formControlName="ragioneSociale">
+                          <div *ngIf="macchinaForm.get('ragioneSociale').invalid && (macchinaForm.get('ragioneSociale').dirty || macchinaForm.get('ragioneSociale').touched)">
+                            <p-message
+                              *ngIf="macchinaForm.get('ragioneSociale').errors?.required"
+                              class="font-12"
+                              severity="error"
+                              text="Campo Obbligatorio">
+                            </p-message>
+                          </div>
+                      </div>
+                      <div
+                        *ngIf="!fileCaricato"
+                        class="p-col-3 p-0">
+                        <button
+                          pButton
+                          type="button"
+                          class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+                          icon="pi pi-attachment"
+                          iconPos="right"
+                          label="CARICA DOCUMENTO"
+                          (click)="caricaAllegato()"></button>
+                        <input
+                          #fileCaricato
+                          type="file"
+                          id="fileCaricato"
+                          name="fileCaricato"
+                          onclick="this.value = null"
+                          (change)="onFileChange($event)"
+                          accept="{{ fileConfig.fileExt }}"
+                          class="inputUploadFile"
+                          style="display: none">
+                      </div>
+                      <div
+                        class="p-col p-0 pl-4"
+                        *ngIf="fileCaricato">
+                        <div class="p-grid m-0 p-align-center p-justify-between border-bottom border-top">
+                          <div class="p-col">
+                            <a
+                              class="cursor-pointer p-col"
+                              (click)="visualizzaAllegato()"
+                              target="_blank">
+                              {{ allegato?.name }}
+                            </a>
+                          </div>
+                          <div
+                            class="p-col-fixed"
+                            *ngIf="!READONLY_MODE">
+                            <img
+                              class="cursor-pointer"
+                              src="assets/img/ico-x.jpg"
+                              (click)="eliminaAllegato($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-accordionTab>
+          </div>
+
+        </p-accordion>
+        <!-- Separatore -->
+        <br>
+      </div>
+    </div>
+
+    <!-- Button bar -->
+    <div class="p-col-12 p-col-align-end ui-fluid">
+      <p-footer>
+        <div class="p-grid mt-2 p-justify-between">
+          <div>
+          </div>
+          <div>
+            <button
+              [disabled]="READONLY_MODE"
+              pButton
+              [class]="idValidazione ? 'button-custom-grey':''"
+              class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-10m"
+              type="submit"
+              label="Salva Macchina"></button>
+          </div>
+        </div>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>

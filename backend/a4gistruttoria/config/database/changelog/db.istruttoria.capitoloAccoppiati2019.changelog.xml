@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	
+	<changeSet id="ISTRUTTORIA_20.1.1" author="Elisabetta Freschi">
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LATTE')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601919501"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 1 (LATTE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900310"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LATTE')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601919601"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 1 (LATTE) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901310"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LATTE_BMONT')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601919701"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 2 (LATTE MONTAGNA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900311"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LATTE_BMONT')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601919801"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 2 (LATTE MONTAGNA) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901311"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_VAC')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920101"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 4 (VACCHE NUTRICI) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900313"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_VAC')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920101"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 4 (VACCHE NUTRICI) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901313"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920301"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 5 (BOVINI MACELLATI) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900315"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920401"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 5 (BOVINI MACELLATI) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901315"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OVICAP_AGN')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920501"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 6 (AGNELLE DA RIMONTA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900320"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OVICAP_AGN')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920601"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 6 (AGNELLE DA RIMONTA) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901320"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601920901"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 8 (SOIA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900122"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601921001"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 8 (SOIA) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901122"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'GDURO')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601921101"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 9 (FRUMENTO DURO) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900124"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'GDURO')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601921201"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 9 (FRUMENTO DURO) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901124"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LEGUMIN')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601921501"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 11 (LEGUMINOSE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900125"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'LEGUMIN')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601921601"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 11 (LEGUMINOSE) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901125"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIO')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922301"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 15 (OLIVO) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900129"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIO')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922401"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 15 (OLIVO) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901129"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIVE_PEND75')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922501"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 16 (OLIVO IN PENDENZA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900132"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIVE_PEND75')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922601"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 16 (OLIVO IN PENDENZA) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901132"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIVE_DISC')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922701"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 17 (OLIVO DI QUALITA’) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900138"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'OLIVE_DISC')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601922801"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 17 (OLIVO DI QUALITA’) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901138"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC_12M')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923101"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI QUALITA’ - ETICHETTATURA – IGP) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900316"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC_12M')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923201"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI QUALITA’ - ETICHETTATURA – IGP) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901316"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC_ETIC')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923101"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI QUALITA’ - ETICHETTATURA – IGP) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900318"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_MAC_ETIC')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923201"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI QUALITA’ - ETICHETTATURA – IGP) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901318"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_VAC_NO_ISCR')"/>
+			<column name="TIPO" value="SENZA DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923301"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 20 (VACCHE NUTRICI NON ISCRITTE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="900322"/>
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR"/>
+			<column name="VERSIONE" valueNumeric="0"/>
+			<column name="ANNO_CAMPAGNA" valueNumeric="2019"/>
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BOVINI_VAC_NO_ISCR')"/>
+			<column name="TIPO" value="CON DISCIPLINA"/>
+			<column name="CAPITOLO" value="2601923401"/>
+			<column name="DESCRIZIONE_CAPITOLO" value="SSOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 20 (VACCHE NUTRICI NON ISCRITTE) - CON DISCIPLINA FINANZIARIA - ANNO 2019"/>
+			<column name="CODICE_PRODOTTO" valueNumeric="901322"/>
+		</insert>
+	</changeSet>
+	
+</databaseChangeLog>

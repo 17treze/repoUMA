@@ -1,0 +1,8 @@
+<div id="selectFeaturesTool" (click)="enableTool()" [class.active-tool]="isActive()" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <button 
+  pTooltip="Seleziona" tooltipPosition="top"
+  type="button"
+  [disabled]="!canUseTool" 
+  class='select btn btn-primary'
+><i class="fa fa-hand-pointer"></i></button>
+</div>

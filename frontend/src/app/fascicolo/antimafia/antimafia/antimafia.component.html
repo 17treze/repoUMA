@@ -1,0 +1,31 @@
+<div *ngIf=this.cuaaImpresa>
+    <app-select-richiedente [cuaaImpresa]="this.cuaaImpresa" (selectedCuaa)="selected($event)"></app-select-richiedente>
+</div>
+<div *ngIf=this.showLista>
+    <app-sintesi-antimafia-list [dichiarazioniAntimafia]="this.listaDichiarazioni"
+        (newDichiarazione)="rerouteAntimafia()"></app-sintesi-antimafia-list>
+</div>
+
+<p-toast key="errorCreazioneDichiarazione" [style]="{marginTop: '70px'}"></p-toast>
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+
+<p-toast position="center" key="warn-stato-protocollata" (onClose)="onRejectUpdateAndCreateNew()" [modal]="true"
+    [baseZIndex]="5000" sticky="true">
+    <ng-template let-message pTemplate="message">
+        <div style="text-align: center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+            <h3>{{message.summary}}</h3>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onConfirmUpdateAndCreateNew()" label="Si"
+                    class="ui-button-success"></button>
+            </div>
+            <div class="ui-g-6">
+                <button type="button" pButton (click)="onRejectUpdateAndCreateNew()" label="No"
+                    class="ui-button-secondary"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

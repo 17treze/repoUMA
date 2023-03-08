@@ -1,0 +1,3133 @@
+--- Domanda acs 00466140225 - SOCIETA'' AGRICOLA NELLA DI PARABOSCHI M. G. & C. S.S. - 187750
+
+Insert into A4GT_DOMANDA
+   (ID, VERSIONE, NUMERO_DOMANDA, COD_MODULO_DOMANDA, DESC_MODULO_DOMANDA, 
+    ANNO_CAMPAGNA, STATO, CUAA_INTESTATARIO, DT_PROTOCOLLAZIONE, COD_ENTE_COMPILATORE, 
+    DESC_ENTE_COMPILATORE, RAGIONE_SOCIALE, DT_PRESENTAZIONE)
+ Values
+   (NXTNBR.NEXTVAL, 2, 187750, 'BPS_2018', 'PAGAMENTI DIRETTI', 
+    2018, 'IN_ISTRUTTORIA', '00466140225', TO_DATE('05/25/2018 12:21:25', 'MM/DD/YYYY HH24:MI:SS'), 5, 
+    'CAA COLDIRETTI DEL TRENTINO - 004', 'SOCIETA'' AGRICOLA NELLA DI PARABOSCHI M. G. & C. S.S.', TO_DATE('05/25/2018 12:20:38', 'MM/DD/YYYY HH24:MI:SS'));
+
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 364, 364, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195911,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00550","sub":" "}', '{"idPianoColture":6448429,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":364,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 698, 698, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195906,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00548","sub":" "}', '{"idPianoColture":6448424,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":698,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 546, 546, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195882,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00546","sub":" "}', '{"idPianoColture":6448406,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":546,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 699, 699, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195889,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00549","sub":" "}', '{"idPianoColture":6448413,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":699,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2327, 2327, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195888,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00540","sub":"1"}', '{"idPianoColture":6448411,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2327,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 35, 35, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859350,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":3,"particella":"00128","sub":" "}', '{"idPianoColture":6448841,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":35,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493247,"idIsola":1331161,"codIsola":"IT25/00466140225/AAA79"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 135, 135, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2859320,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00027","sub":" "}', '{"idPianoColture":6448803,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":135,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493248,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2, 2, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2859320,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00027","sub":" "}', '{"idPianoColture":6448816,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493249,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 95, 95, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2859320,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00027","sub":" "}', '{"idPianoColture":6448817,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":95,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493250,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 12191, 12191, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859321,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00054","sub":" "}', '{"idPianoColture":6448818,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":12191,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493251,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 24590, 24590, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859319,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00022","sub":" "}', '{"idPianoColture":6448800,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":24590,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493251,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 361, 361, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194481,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01838","sub":" "}', '{"idPianoColture":6448271,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":361,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 993, 993, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194516,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01807","sub":"1"}', '{"idPianoColture":6448310,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":993,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1080, 1080, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194515,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01807","sub":"2"}', '{"idPianoColture":6448307,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1080,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 174, 174, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194490,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01839","sub":" "}', '{"idPianoColture":6448281,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":174,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 450, 450, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194474,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01844","sub":" "}', '{"idPianoColture":6448269,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":450,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 125, 125, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196813,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00598","sub":"1"}', '{"idPianoColture":6448652,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":125,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 495, 495, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196817,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00594","sub":" "}', '{"idPianoColture":6448655,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":495,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 307, 307, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196811,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00591","sub":"1"}', '{"idPianoColture":6448650,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":307,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 278, 278, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196820,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00593","sub":"2"}', '{"idPianoColture":6448658,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":278,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 216, 216, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196700,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00514","sub":"1"}', '{"idPianoColture":6448617,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":216,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 584, 584, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196024,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01076","sub":" "}', '{"idPianoColture":6448479,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":584,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 219, 219, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196022,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01081","sub":"4"}', '{"idPianoColture":6448476,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":219,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 32, 32, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196017,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01080","sub":"2"}', '{"idPianoColture":6448474,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":32,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 59, 59, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196021,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01079","sub":"1"}', '{"idPianoColture":6448475,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":59,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493173,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 52, 52, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196029,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01079","sub":"2"}', '{"idPianoColture":6448481,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":52,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493173,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 234, 234, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195905,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00557","sub":" "}', '{"idPianoColture":6448423,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":234,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 258, 258, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195913,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00558","sub":" "}', '{"idPianoColture":6448430,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":258,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1141, 1141, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195890,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00538","sub":" "}', '{"idPianoColture":6448414,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1141,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 934, 934, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195902,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00560","sub":" "}', '{"idPianoColture":6448419,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":934,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 21, 21, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195902,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00560","sub":" "}', '{"idPianoColture":6448418,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":21,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 206, 206, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2859320,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00027","sub":" "}', '{"idPianoColture":6448806,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":206,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493251,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 66, 66, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2859320,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":2,"particella":"00027","sub":" "}', '{"idPianoColture":6448805,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":66,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493251,"idIsola":1331162,"codIsola":"IT25/00466140225/AAA80"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 24161, 24161, 
+    '040-001-000', '001-011-000-000-000', '{"idParticella":3593346,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":28,"particella":"00081","sub":" "}', '{"idPianoColture":6448950,"idColtura":10,"codColtura3":"040-001-000","codColtura5":"001-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANTURCO (MAIS) - GRANTURCO (MAIS)","coefficienteTara":1,"superficieDichiarata":24161,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493252,"idIsola":1331169,"codIsola":"IT25/00466140225/AAA84"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2301, 2301, 
+    '040-001-000', '001-011-000-000-000', '{"idParticella":3593345,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":28,"particella":"00076","sub":" "}', '{"idPianoColture":6448947,"idColtura":10,"codColtura3":"040-001-000","codColtura5":"001-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANTURCO (MAIS) - GRANTURCO (MAIS)","coefficienteTara":1,"superficieDichiarata":2301,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493253,"idIsola":1331170,"codIsola":"IT25/00466140225/AAA85"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 12560, 12560, 
+    '040-001-000', '001-011-000-000-000', '{"idParticella":3593347,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":28,"particella":"00976","sub":" "}', '{"idPianoColture":6448956,"idColtura":10,"codColtura3":"040-001-000","codColtura5":"001-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANTURCO (MAIS) - GRANTURCO (MAIS)","coefficienteTara":1,"superficieDichiarata":12560,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493254,"idIsola":1331172,"codIsola":"IT25/00466140225/AAA83"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1017, 1017, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2864954,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":26,"particella":"00002","sub":" "}', '{"idPianoColture":6448880,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":1017,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493255,"idIsola":1331174,"codIsola":"IT25/00466140225/AAA87"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 248, 248, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194514,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01808","sub":"1"}', '{"idPianoColture":6448304,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":248,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1339, 1339, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194472,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01836","sub":" "}', '{"idPianoColture":6448267,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1339,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 419, 419, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194431,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01787","sub":" "}', '{"idPianoColture":6448261,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":419,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 163, 163, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194475,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01843","sub":" "}', '{"idPianoColture":6448270,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":163,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 649, 649, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194486,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01833","sub":" "}', '{"idPianoColture":6448279,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":649,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 300, 300, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196875,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00497","sub":" "}', '{"idPianoColture":6448684,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":300,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 647, 647, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196852,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00609","sub":"2"}', '{"idPianoColture":6448682,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":647,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 577, 577, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196831,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00579","sub":" "}', '{"idPianoColture":6448667,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":577,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 786, 786, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196834,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00573","sub":" "}', '{"idPianoColture":6448669,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":786,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 535, 535, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196816,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00595","sub":" "}', '{"idPianoColture":6448653,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":535,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 51, 51, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196017,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01080","sub":"2"}', '{"idPianoColture":6448473,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":51,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493173,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 262, 262, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195007,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01103","sub":" "}', '{"idPianoColture":6448322,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":262,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493174,"idIsola":1331079,"codIsola":"IT25/00466140225/AAA24"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 63, 63, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195007,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01103","sub":" "}', '{"idPianoColture":6448326,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":63,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493175,"idIsola":1331079,"codIsola":"IT25/00466140225/AAA24"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 640, 640, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195138,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01356","sub":" "}', '{"idPianoColture":6448357,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":640,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493176,"idIsola":1331080,"codIsola":"IT25/00466140225/AAA25"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 197, 197, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195137,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01355","sub":" "}', '{"idPianoColture":6448354,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":197,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493176,"idIsola":1331080,"codIsola":"IT25/00466140225/AAA25"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 5, 5, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196065,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01068","sub":" "}', '{"idPianoColture":6448503,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":5,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493158,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 171, 171, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196046,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01085","sub":" "}', '{"idPianoColture":6448491,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":171,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493159,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 239, 239, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196065,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01068","sub":" "}', '{"idPianoColture":6448501,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":239,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493159,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 80, 80, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196034,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01086","sub":"3"}', '{"idPianoColture":6448483,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":80,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493159,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 359, 359, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196064,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01069","sub":" "}', '{"idPianoColture":6448497,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":359,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493159,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 52789, 52789, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2864955,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":26,"particella":"00005","sub":" "}', '{"idPianoColture":6448882,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":52789,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493255,"idIsola":1331174,"codIsola":"IT25/00466140225/AAA87"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 858, 858, 
+    '040-004-513', '004-111-000-022-000', '{"idParticella":2864956,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":26,"particella":"00028","sub":" "}', '{"idPianoColture":6448886,"idColtura":22032,"codColtura3":"040-004-513","codColtura5":"004-111-000-022-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - SOIA - FAVE - USO ENERGETICO-EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":858,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493255,"idIsola":1331174,"codIsola":"IT25/00466140225/AAA87"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 487, 487, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194540,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01818","sub":"1"}', '{"idPianoColture":6448316,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":487,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493256,"idIsola":1526056,"codIsola":"IT25/00466140225/AAA88"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 477, 477, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194529,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01818","sub":"2"}', '{"idPianoColture":6448314,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":477,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493256,"idIsola":1526056,"codIsola":"IT25/00466140225/AAA88"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 63, 63, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194493,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01862","sub":" "}', '{"idPianoColture":6448282,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":63,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493181,"idIsola":1331085,"codIsola":"IT25/00466140225/AAA30"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 279, 279, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194513,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01808","sub":"2"}', '{"idPianoColture":6448302,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":279,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 401, 401, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194545,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01812","sub":" "}', '{"idPianoColture":6448317,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":401,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 389, 389, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195968,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00708","sub":"1"}', '{"idPianoColture":6448441,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":389,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493201,"idIsola":1331104,"codIsola":"IT25/00466140225/AAA49"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 346, 346, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195967,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00708","sub":"2"}', '{"idPianoColture":6448440,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":346,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493201,"idIsola":1331104,"codIsola":"IT25/00466140225/AAA49"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 488, 488, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196262,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01011","sub":" "}', '{"idPianoColture":6448585,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":488,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493202,"idIsola":1331105,"codIsola":"IT25/00466140225/AAA50"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 321, 321, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196818,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00593","sub":"4"}', '{"idPianoColture":6448656,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":321,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 93, 93, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2849191,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00517","sub":"1"}', '{"idPianoColture":6448798,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":93,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 342, 342, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196823,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00591","sub":"2"}', '{"idPianoColture":6448660,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":342,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 282, 282, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196821,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00593","sub":"1"}', '{"idPianoColture":6448659,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":282,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 124, 124, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196848,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00598","sub":"2"}', '{"idPianoColture":6448676,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":124,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1276, 1276, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195136,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01354","sub":" "}', '{"idPianoColture":6448350,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1276,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493176,"idIsola":1331080,"codIsola":"IT25/00466140225/AAA25"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 522, 522, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195139,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01357","sub":" "}', '{"idPianoColture":6448360,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":522,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493176,"idIsola":1331080,"codIsola":"IT25/00466140225/AAA25"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 474, 474, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195140,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01358","sub":"1"}', '{"idPianoColture":6448366,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":474,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493176,"idIsola":1331080,"codIsola":"IT25/00466140225/AAA25"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 460, 460, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196219,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00998","sub":" "}', '{"idPianoColture":6448576,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":460,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493177,"idIsola":1331081,"codIsola":"IT25/00466140225/AAA26"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 355, 355, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194413,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01769","sub":" "}', '{"idPianoColture":6448257,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":355,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493178,"idIsola":1331082,"codIsola":"IT25/00466140225/AAA27"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 466, 466, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196045,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01070","sub":" "}', '{"idPianoColture":6448488,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":466,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493159,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 534, 534, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196036,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01086","sub":"1"}', '{"idPianoColture":6448486,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":534,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493160,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 59, 59, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196065,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01068","sub":" "}', '{"idPianoColture":6448504,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":59,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493160,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 92, 92, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196034,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01086","sub":"3"}', '{"idPianoColture":6448485,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":92,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493160,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 97, 97, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196064,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01069","sub":" "}', '{"idPianoColture":6448500,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":97,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493160,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 82, 82, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194275,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01863","sub":" "}', '{"idPianoColture":6448252,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":82,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493181,"idIsola":1331085,"codIsola":"IT25/00466140225/AAA30"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 649, 649, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195787,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00735","sub":"2"}', '{"idPianoColture":6448379,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":649,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493182,"idIsola":1331086,"codIsola":"IT25/00466140225/AAA31"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 763, 763, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196251,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01014","sub":" "}', '{"idPianoColture":6448583,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":763,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493182,"idIsola":1331086,"codIsola":"IT25/00466140225/AAA31"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 371, 371, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196250,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01015","sub":" "}', '{"idPianoColture":6448582,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":371,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493182,"idIsola":1331086,"codIsola":"IT25/00466140225/AAA31"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 536, 536, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195754,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00735","sub":"1"}', '{"idPianoColture":6448370,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":536,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493182,"idIsola":1331086,"codIsola":"IT25/00466140225/AAA31"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 162, 162, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194528,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01806","sub":"1"}', '{"idPianoColture":6448312,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":162,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493203,"idIsola":1331106,"codIsola":"IT25/00466140225/AAA51"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 188, 188, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196702,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00512","sub":"2"}', '{"idPianoColture":6448618,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":188,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493204,"idIsola":1331107,"codIsola":"IT25/00466140225/AAA52"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 707, 707, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196636,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00306","sub":"1"}', '{"idPianoColture":6448601,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":707,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493205,"idIsola":1331108,"codIsola":"IT25/00466140225/AAA53"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 701, 701, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195107,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01362","sub":" "}', '{"idPianoColture":6448329,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":701,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493206,"idIsola":1331109,"codIsola":"IT25/00466140225/AAA54"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 396, 396, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194893,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01322","sub":"1"}', '{"idPianoColture":6448318,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":396,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493207,"idIsola":1331110,"codIsola":"IT25/00466140225/AAA55"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 742, 742, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195887,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00532","sub":"2"}', '{"idPianoColture":6448410,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":742,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1353, 1353, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196832,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00578","sub":" "}', '{"idPianoColture":6448668,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1353,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 654, 654, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196827,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00589","sub":" "}', '{"idPianoColture":6448663,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":654,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 148, 148, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196899,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00500","sub":" "}', '{"idPianoColture":6448696,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":148,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 544, 544, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195980,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00665","sub":"1"}', '{"idPianoColture":6448447,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":544,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 83, 83, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194435,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01766","sub":" "}', '{"idPianoColture":6448262,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":83,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493178,"idIsola":1331082,"codIsola":"IT25/00466140225/AAA27"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1946, 1946, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1765945,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00436","sub":"4"}', '{"idPianoColture":6448228,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1946,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493179,"idIsola":1331083,"codIsola":"IT25/00466140225/AAA28"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2018, 2018, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1765967,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00436","sub":"6"}', '{"idPianoColture":6448230,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2018,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493179,"idIsola":1331083,"codIsola":"IT25/00466140225/AAA28"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2163, 2163, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1765956,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00436","sub":"5"}', '{"idPianoColture":6448229,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2163,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493179,"idIsola":1331083,"codIsola":"IT25/00466140225/AAA28"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 424, 424, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196844,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00617","sub":"2"}', '{"idPianoColture":6448672,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":424,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493180,"idIsola":1331084,"codIsola":"IT25/00466140225/AAA29"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 102, 102, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196045,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01070","sub":" "}', '{"idPianoColture":6448490,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":102,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493160,"idIsola":1331070,"codIsola":"IT25/00466140225/AAA08"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 522, 522, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195802,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00729","sub":" "}', '{"idPianoColture":6448390,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":522,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 363, 363, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195800,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00731","sub":" "}', '{"idPianoColture":6448388,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":363,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 199, 199, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195801,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00730","sub":" "}', '{"idPianoColture":6448389,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":199,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 640, 640, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195789,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00723","sub":"1"}', '{"idPianoColture":6448380,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":640,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 356, 356, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1764909,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00555","sub":"1"}', '{"idPianoColture":6448222,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":356,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493183,"idIsola":1331087,"codIsola":"IT25/00466140225/AAA32"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 225, 225, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196090,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01153","sub":"2"}', '{"idPianoColture":6448521,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":225,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493184,"idIsola":1331088,"codIsola":"IT25/00466140225/AAA33"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 565, 565, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195132,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01361","sub":"2"}', '{"idPianoColture":6448348,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":565,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493185,"idIsola":1331090,"codIsola":"IT25/00466140225/AAA35"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 662, 662, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1764933,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00547","sub":" "}', '{"idPianoColture":6448226,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":662,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493186,"idIsola":1331091,"codIsola":"IT25/00466140225/AAA36"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 685, 685, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195763,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00742","sub":" "}', '{"idPianoColture":6448374,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":685,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493187,"idIsola":1331092,"codIsola":"IT25/00466140225/AAA37"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 10505, 10505, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859342,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":1,"particella":"00021","sub":" "}', '{"idPianoColture":6448838,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":10505,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493208,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 5190, 5190, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859345,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00293","sub":" "}', '{"idPianoColture":6448839,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":5190,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 10346, 10346, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":4019606,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00341","sub":" "}', '{"idPianoColture":6448982,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":10346,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 19899, 19899, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":4019603,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00339","sub":" "}', '{"idPianoColture":6448977,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":19899,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1609, 1609, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":4019604,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00340","sub":" "}', '{"idPianoColture":6448979,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":1609,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 19426, 19426, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":4019605,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00338","sub":" "}', '{"idPianoColture":6448981,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":19426,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 8, 8, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195996,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00666","sub":" "}', '{"idPianoColture":6448463,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":8,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 296, 296, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196894,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00496","sub":" "}', '{"idPianoColture":6448691,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":296,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 198, 198, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196849,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00612","sub":"1"}', '{"idPianoColture":6448678,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":198,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 723, 723, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195958,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00691","sub":"1"}', '{"idPianoColture":6448437,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":723,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1570, 1570, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195957,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00691","sub":"2"}', '{"idPianoColture":6448436,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1570,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 6465, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448755,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":6465,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493231,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1737, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448724,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":1737,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493232,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 4670, 4670, 
+    '560-065-009', '065-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448742,"idColtura":245,"codColtura3":"560-065-009","codColtura5":"065-002-009-000-000","codLivello":"1311","descrizioneColtura":"PASCOLO POLIFITA (TIPO ALPEGGI) - PASCOLO - PASCOLO POLIFITA (TIPO ALPEGGI) SENZA TARA","coefficienteTara":1,"superficieDichiarata":4670,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493233,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 483, 483, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196131,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01089","sub":" "}', '{"idPianoColture":6448539,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":483,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493165,"idIsola":1331073,"codIsola":"IT25/00466140225/AAA18"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 142, 142, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196068,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01065","sub":" "}', '{"idPianoColture":6448506,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":142,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493165,"idIsola":1331073,"codIsola":"IT25/00466140225/AAA18"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 282, 282, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195806,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00722","sub":" "}', '{"idPianoColture":6448392,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":282,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 311, 311, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195804,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00721","sub":" "}', '{"idPianoColture":6448391,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":311,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 293, 293, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195975,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00702","sub":"1"}', '{"idPianoColture":6448444,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":293,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 532, 532, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195783,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00720","sub":"1"}', '{"idPianoColture":6448377,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":532,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1102, 1102, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195973,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00703","sub":" "}', '{"idPianoColture":6448442,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1102,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 371, 371, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196191,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00944","sub":" "}', '{"idPianoColture":6448566,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":371,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493187,"idIsola":1331092,"codIsola":"IT25/00466140225/AAA37"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 311, 311, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195752,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00744","sub":" "}', '{"idPianoColture":6448369,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":311,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493187,"idIsola":1331092,"codIsola":"IT25/00466140225/AAA37"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 496, 496, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195833,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00937","sub":" "}', '{"idPianoColture":6448396,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":496,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 414, 414, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195841,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00931","sub":"1"}', '{"idPianoColture":6448401,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":414,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 415, 415, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195832,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00938","sub":"1"}', '{"idPianoColture":6448395,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":415,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 12854, 12854, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":4019600,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":2,"particella":"00342","sub":" "}', '{"idPianoColture":6448973,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":12854,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493209,"idIsola":1331112,"codIsola":"IT25/00466140225/AAA56"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2439, 2439, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393037,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01753","sub":" "}', '{"idPianoColture":6448190,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2439,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 964, 964, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393195,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01794","sub":" "}', '{"idPianoColture":6448207,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":964,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 616, 616, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393186,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01760","sub":" "}', '{"idPianoColture":6448196,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":616,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1114, 1114, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393188,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01758","sub":" "}', '{"idPianoColture":6448199,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1114,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1118, 1118, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195986,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00667","sub":"1"}', '{"idPianoColture":6448453,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1118,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 899, 899, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195983,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00670","sub":" "}', '{"idPianoColture":6448449,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":899,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1084, 1084, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195989,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00672","sub":"3"}', '{"idPianoColture":6448458,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1084,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 981, 981, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195960,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00689","sub":" "}', '{"idPianoColture":6448439,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":981,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 826, 826, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195984,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00669","sub":" "}', '{"idPianoColture":6448450,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":826,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 12, 12, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194510,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01804","sub":" "}', '{"idPianoColture":6448298,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":12,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493166,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 181, 181, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194508,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01849","sub":" "}', '{"idPianoColture":6448289,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":181,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493167,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 154, 154, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194482,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01848","sub":" "}', '{"idPianoColture":6448274,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":154,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493167,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 416, 416, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194510,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01804","sub":" "}', '{"idPianoColture":6448294,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":416,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493167,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 161, 161, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194508,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01849","sub":" "}', '{"idPianoColture":6448293,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":161,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493168,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 635, 635, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195796,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00718","sub":"1"}', '{"idPianoColture":6448386,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":635,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 284, 284, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195974,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00702","sub":"2"}', '{"idPianoColture":6448443,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":284,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 492, 492, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195808,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00725","sub":"1"}', '{"idPianoColture":6448393,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":492,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493161,"idIsola":1331071,"codIsola":"IT25/00466140225/AAA16"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 5, 5, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195122,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01365","sub":" "}', '{"idPianoColture":6448347,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":5,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493162,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 60, 60, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195112,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01366","sub":"1"}', '{"idPianoColture":6448333,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":60,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493162,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 494, 494, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195843,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00928","sub":" "}', '{"idPianoColture":6448405,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":494,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 446, 446, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195840,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00931","sub":"2"}', '{"idPianoColture":6448399,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":446,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 511, 511, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195834,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00936","sub":" "}', '{"idPianoColture":6448397,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":511,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 804, 804, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195842,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00929","sub":" "}', '{"idPianoColture":6448402,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":804,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493189,"idIsola":1331093,"codIsola":"IT25/00466140225/AAA38"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 179, 179, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196884,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00504","sub":"2"}', '{"idPianoColture":6448685,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":179,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493190,"idIsola":1331094,"codIsola":"IT25/00466140225/AAA39"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 933, 933, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393099,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01757","sub":" "}', '{"idPianoColture":6448195,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":933,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 451, 451, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393187,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01759","sub":" "}', '{"idPianoColture":6448198,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":451,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 555, 555, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393194,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01795","sub":" "}', '{"idPianoColture":6448206,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":555,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1348, 1348, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393191,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01798","sub":" "}', '{"idPianoColture":6448201,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1348,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493210,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 171, 171, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1393191,"comune":"BOCENAGO (TN)","codNazionale":"A916","foglio":9999,"particella":"01798","sub":" "}', '{"idPianoColture":6448202,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":171,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493211,"idIsola":1331114,"codIsola":"IT25/00466140225/AAA57"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1424, 1424, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196002,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00681","sub":" "}', '{"idPianoColture":6448465,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1424,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1007, 1007, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195987,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00672","sub":"2"}', '{"idPianoColture":6448454,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1007,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2039, 2039, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195755,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00741","sub":" "}', '{"idPianoColture":6448372,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2039,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 953, 953, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196012,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00673","sub":" "}', '{"idPianoColture":6448470,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":953,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 484, 484, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195959,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00690","sub":" "}', '{"idPianoColture":6448438,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":484,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 168, 168, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194507,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01850","sub":" "}', '{"idPianoColture":6448288,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":168,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493168,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 175, 175, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194482,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01848","sub":" "}', '{"idPianoColture":6448278,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":175,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493168,"idIsola":1331074,"codIsola":"IT25/00466140225/AAA19"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 482, 482, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196694,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00509","sub":" "}', '{"idPianoColture":6448610,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":482,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493169,"idIsola":1331075,"codIsola":"IT25/00466140225/AAA20"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 301, 301, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1767354,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"01644","sub":" "}', '{"idPianoColture":6448250,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":301,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493170,"idIsola":1331076,"codIsola":"IT25/00466140225/AAA21"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 463, 463, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194405,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01776","sub":"2"}', '{"idPianoColture":6448255,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":463,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493171,"idIsola":1331077,"codIsola":"IT25/00466140225/AAA22"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 406, 406, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195120,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01372","sub":" "}', '{"idPianoColture":6448343,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":406,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 751, 751, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195122,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01365","sub":" "}', '{"idPianoColture":6448345,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":751,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 425, 425, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195119,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01371","sub":" "}', '{"idPianoColture":6448341,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":425,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 426, 426, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195117,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01369","sub":"3"}', '{"idPianoColture":6448339,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":426,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 459, 459, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195102,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01366","sub":"2"}', '{"idPianoColture":6448327,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":459,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 181, 181, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196893,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00505","sub":" "}', '{"idPianoColture":6448688,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":181,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493190,"idIsola":1331094,"codIsola":"IT25/00466140225/AAA39"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 420, 420, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196279,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01027","sub":"1"}', '{"idPianoColture":6448590,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":420,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493191,"idIsola":1331095,"codIsola":"IT25/00466140225/AAA40"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 443, 443, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196268,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01028","sub":"1"}', '{"idPianoColture":6448588,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":443,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493191,"idIsola":1331095,"codIsola":"IT25/00466140225/AAA40"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 543, 543, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196266,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01029","sub":"1"}', '{"idPianoColture":6448586,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":543,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493191,"idIsola":1331095,"codIsola":"IT25/00466140225/AAA40"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 366, 366, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196244,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01030","sub":"1"}', '{"idPianoColture":6448577,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":366,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493191,"idIsola":1331095,"codIsola":"IT25/00466140225/AAA40"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2551, 2551, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446460,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01023","sub":"10"}', '{"idPianoColture":6448211,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2551,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493212,"idIsola":1331118,"codIsola":"IT25/00466140225/AAA58"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 3275, 3275, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446726,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01023","sub":"12"}', '{"idPianoColture":6448219,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":3275,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493213,"idIsola":1331119,"codIsola":"IT25/00466140225/AAA59"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 14, 14, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446559,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01020","sub":"3"}', '{"idPianoColture":6448215,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":14,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493213,"idIsola":1331119,"codIsola":"IT25/00466140225/AAA59"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1162, 1162, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446468,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01023","sub":"3"}', '{"idPianoColture":6448212,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1162,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493214,"idIsola":1331120,"codIsola":"IT25/00466140225/AAA60"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 102, 102, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446434,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01020","sub":"4"}', '{"idPianoColture":6448210,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":102,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493215,"idIsola":1331120,"codIsola":"IT25/00466140225/AAA60"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1106, 1106, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196004,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00672","sub":"1"}', '{"idPianoColture":6448466,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1106,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 809, 809, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195985,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00667","sub":"2"}', '{"idPianoColture":6448452,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":809,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 800, 800, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195982,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00671","sub":" "}', '{"idPianoColture":6448448,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":800,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 705, 705, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195947,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00693","sub":" "}', '{"idPianoColture":6448434,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":705,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1464, 1464, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195748,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00740","sub":" "}', '{"idPianoColture":6448368,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1464,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 210, 210, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196023,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01077","sub":" "}', '{"idPianoColture":6448478,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":210,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 30, 30, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196029,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01079","sub":"2"}', '{"idPianoColture":6448482,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":30,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 263, 263, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196039,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01081","sub":"3"}', '{"idPianoColture":6448487,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":263,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 560, 560, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196016,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01080","sub":"3"}', '{"idPianoColture":6448471,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":560,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493172,"idIsola":1331078,"codIsola":"IT25/00466140225/AAA23"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 858, 858, 
+    '040-004-513', '004-111-000-022-000', '{"idParticella":2864956,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":26,"particella":"00028","sub":" "}', '{"idPianoColture":6448886,"idColtura":22032,"codColtura3":"040-004-513","codColtura5":"004-111-000-022-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - SOIA - FAVE - USO ENERGETICO-EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":858,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":492968,"idIsola":1331174,"codIsola":"IT25/00466140225/AAA87"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 693, 693, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195114,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01367","sub":" "}', '{"idPianoColture":6448334,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":693,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 6, 6, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195112,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01366","sub":"1"}', '{"idPianoColture":6448331,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":6,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 485, 485, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195115,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01368","sub":" "}', '{"idPianoColture":6448338,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":485,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493163,"idIsola":1331072,"codIsola":"IT25/00466140225/AAA17"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 351, 351, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196068,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01065","sub":" "}', '{"idPianoColture":6448507,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":351,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493164,"idIsola":1331073,"codIsola":"IT25/00466140225/AAA18"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 58971, 58971, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2864952,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00110","sub":" "}', '{"idPianoColture":6448877,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":58971,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493225,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 365, 365, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196247,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01031","sub":"1"}', '{"idPianoColture":6448580,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":365,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493191,"idIsola":1331095,"codIsola":"IT25/00466140225/AAA40"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1072, 1072, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766542,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02155","sub":"2"}', '{"idPianoColture":6448233,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1072,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493192,"idIsola":1331096,"codIsola":"IT25/00466140225/AAA41"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2205, 2205, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766555,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02155","sub":"1"}', '{"idPianoColture":6448236,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2205,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493192,"idIsola":1331096,"codIsola":"IT25/00466140225/AAA41"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 441, 441, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196093,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01150","sub":"2"}', '{"idPianoColture":6448523,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":441,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493193,"idIsola":1331097,"codIsola":"IT25/00466140225/AAA42"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 402, 402, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195791,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00716","sub":"1"}', '{"idPianoColture":6448383,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":402,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493194,"idIsola":1331098,"codIsola":"IT25/00466140225/AAA43"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 122, 122, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196473,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00803","sub":" "}', '{"idPianoColture":6448597,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":122,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493147,"idIsola":1331060,"codIsola":"IT25/00466140225/AAA05"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 190, 190, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196471,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00801","sub":"1"}', '{"idPianoColture":6448594,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":190,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493147,"idIsola":1331060,"codIsola":"IT25/00466140225/AAA05"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 179, 179, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196470,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00800","sub":" "}', '{"idPianoColture":6448593,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":179,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493147,"idIsola":1331060,"codIsola":"IT25/00466140225/AAA05"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 186, 186, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196472,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00801","sub":"2"}', '{"idPianoColture":6448595,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":186,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493147,"idIsola":1331060,"codIsola":"IT25/00466140225/AAA05"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 124, 124, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196469,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00799","sub":"1"}', '{"idPianoColture":6448592,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":124,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493147,"idIsola":1331060,"codIsola":"IT25/00466140225/AAA05"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1059, 1059, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196006,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00686","sub":" "}', '{"idPianoColture":6448469,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1059,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1768, 1768, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195757,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00739","sub":" "}', '{"idPianoColture":6448373,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1768,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 103, 103, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196803,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00659","sub":" "}', '{"idPianoColture":6448645,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":103,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 458, 458, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196762,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00650","sub":"1"}', '{"idPianoColture":6448622,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":458,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 286, 286, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196774,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00641","sub":" "}', '{"idPianoColture":6448633,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":286,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 14931, 14931, 
+    '040-004-513', '004-111-000-022-000', '{"idParticella":2864961,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00102","sub":" "}', '{"idPianoColture":6448893,"idColtura":22032,"codColtura3":"040-004-513","codColtura5":"004-111-000-022-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - SOIA - FAVE - USO ENERGETICO-EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":14931,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":492967,"idIsola":1331132,"codIsola":"IT25/00466140225/AAA62"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 27540, 27540, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864952,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00110","sub":" "}', '{"idPianoColture":6448876,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":27540,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493225,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 11621, 11621, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2864952,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00110","sub":" "}', '{"idPianoColture":6448875,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":11621,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493226,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 7339, 7339, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864952,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00110","sub":" "}', '{"idPianoColture":6448865,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":7339,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493226,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 423, 423, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864953,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00113","sub":" "}', '{"idPianoColture":6448879,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":423,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 43596, 43596, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864950,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00107","sub":" "}', '{"idPianoColture":6448854,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":43596,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2074, 2074, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864946,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00100","sub":" "}', '{"idPianoColture":6448845,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2074,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1802, 1802, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1764926,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00544","sub":"1"}', '{"idPianoColture":6448223,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1802,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493195,"idIsola":1331099,"codIsola":"IT25/00466140225/AAA44"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 422, 422, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196187,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00947","sub":" "}', '{"idPianoColture":6448561,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":422,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493196,"idIsola":1331100,"codIsola":"IT25/00466140225/AAA45"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 376, 376, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196189,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00946","sub":"1"}', '{"idPianoColture":6448563,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":376,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493196,"idIsola":1331100,"codIsola":"IT25/00466140225/AAA45"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 798, 798, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196153,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00965","sub":" "}', '{"idPianoColture":6448554,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":798,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493197,"idIsola":1331101,"codIsola":"IT25/00466140225/AAA46"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 198, 198, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196178,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00964","sub":"2"}', '{"idPianoColture":6448559,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":198,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493197,"idIsola":1331101,"codIsola":"IT25/00466140225/AAA46"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 409, 409, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196246,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01009","sub":" "}', '{"idPianoColture":6448579,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":409,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493148,"idIsola":1331061,"codIsola":"IT25/00466140225/AAA06"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 361, 361, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196256,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01008","sub":" "}', '{"idPianoColture":6448584,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":361,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493148,"idIsola":1331061,"codIsola":"IT25/00466140225/AAA06"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 129, 129, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196849,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00612","sub":"1"}', '{"idPianoColture":6448677,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":129,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493149,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 364, 364, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196801,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00662","sub":" "}', '{"idPianoColture":6448638,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":364,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 127, 127, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196802,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00660","sub":" "}', '{"idPianoColture":6448641,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":127,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 413, 413, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196809,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00653","sub":" "}', '{"idPianoColture":6448649,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":413,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 461, 461, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196796,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00650","sub":"3"}', '{"idPianoColture":6448634,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":461,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 408, 408, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196770,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00651","sub":" "}', '{"idPianoColture":6448628,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":408,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 517, 517, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196772,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00652","sub":" "}', '{"idPianoColture":6448630,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":517,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 394, 394, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196766,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00648","sub":"1"}', '{"idPianoColture":6448623,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":394,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 59247, 59247, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864949,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00106","sub":" "}', '{"idPianoColture":6448853,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":59247,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 30124, 30124, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864948,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00103","sub":" "}', '{"idPianoColture":6448850,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":30124,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 20632, 20632, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864951,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00108","sub":" "}', '{"idPianoColture":6448857,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":20632,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493227,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 33461, 33461, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864977,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":29,"particella":"00031","sub":" "}', '{"idPianoColture":6448942,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":33461,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493228,"idIsola":1331146,"codIsola":"IT25/00466140225/AAA72"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 3440, 3440, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864975,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":29,"particella":"00029","sub":" "}', '{"idPianoColture":6448931,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":3440,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493228,"idIsola":1331146,"codIsola":"IT25/00466140225/AAA72"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 19220, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448743,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":19220,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493229,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 318, 318, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196198,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00963","sub":" "}', '{"idPianoColture":6448569,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":318,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493197,"idIsola":1331101,"codIsola":"IT25/00466140225/AAA46"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 235, 235, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196197,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00964","sub":"1"}', '{"idPianoColture":6448567,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":235,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493197,"idIsola":1331101,"codIsola":"IT25/00466140225/AAA46"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 663, 663, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194993,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01226","sub":" "}', '{"idPianoColture":6448320,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":663,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493199,"idIsola":1331102,"codIsola":"IT25/00466140225/AAA47"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 493, 493, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195795,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00939","sub":" "}', '{"idPianoColture":6448385,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":493,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493200,"idIsola":1331103,"codIsola":"IT25/00466140225/AAA48"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 575, 575, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196179,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00990","sub":" "}', '{"idPianoColture":6448560,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":575,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493141,"idIsola":1331056,"codIsola":"IT25/00466140225/AAA01"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 201, 201, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2195988,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00665","sub":"2"}', '{"idPianoColture":6448455,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":201,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 636, 636, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196800,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00663","sub":" "}', '{"idPianoColture":6448635,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":636,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 18, 18, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196803,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00659","sub":" "}', '{"idPianoColture":6448646,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":18,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 191, 191, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196695,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00518","sub":" "}', '{"idPianoColture":6448614,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":191,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1755, 1755, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195920,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00533","sub":" "}', '{"idPianoColture":6448433,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1755,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 120, 120, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196804,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00658","sub":" "}', '{"idPianoColture":6448648,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":120,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 245, 245, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196769,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00646","sub":" "}', '{"idPianoColture":6448626,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":245,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 716, 716, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196768,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00647","sub":"1"}', '{"idPianoColture":6448624,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":716,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 826, 826, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195991,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00655","sub":" "}', '{"idPianoColture":6448460,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":826,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 498, 498, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195990,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00661","sub":" "}', '{"idPianoColture":6448459,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":498,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 3233, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448764,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":3233,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493234,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2726, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448761,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":2726,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493235,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 8735, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448745,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":8735,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493230,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 18552, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448796,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":18552,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493237,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 7769, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276905,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01977","sub":"1"}', '{"idPianoColture":6448714,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":7769,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493238,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 81678, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448783,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":81678,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493238,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 129, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276905,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01977","sub":"1"}', '{"idPianoColture":6448701,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":129,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 299, 299, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196166,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00995","sub":" "}', '{"idPianoColture":6448557,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":299,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493141,"idIsola":1331056,"codIsola":"IT25/00466140225/AAA01"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 811, 811, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196211,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01000","sub":" "}', '{"idPianoColture":6448575,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":811,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493141,"idIsola":1331056,"codIsola":"IT25/00466140225/AAA01"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 391, 391, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196168,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00992","sub":" "}', '{"idPianoColture":6448558,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":391,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493141,"idIsola":1331056,"codIsola":"IT25/00466140225/AAA01"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 393, 393, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196073,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01058","sub":"2"}', '{"idPianoColture":6448510,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":393,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493142,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 345, 345, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196063,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01059","sub":" "}', '{"idPianoColture":6448496,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":345,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493142,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1072, 1072, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195998,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00582","sub":" "}', '{"idPianoColture":6448464,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1072,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 197, 197, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196897,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00502","sub":" "}', '{"idPianoColture":6448694,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":197,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 499, 499, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196693,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00520","sub":" "}', '{"idPianoColture":6448609,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":499,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 490, 490, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196689,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00525","sub":" "}', '{"idPianoColture":6448608,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":490,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 553, 553, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196830,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00580","sub":" "}', '{"idPianoColture":6448666,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":553,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 872, 872, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196761,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00650","sub":"2"}', '{"idPianoColture":6448621,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":872,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 17, 17, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195980,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00665","sub":"1"}', '{"idPianoColture":6448446,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":17,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 791, 791, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195996,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00666","sub":" "}', '{"idPianoColture":6448462,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":791,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 609, 609, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196801,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00662","sub":" "}', '{"idPianoColture":6448639,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":609,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 148, 148, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196802,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00660","sub":" "}', '{"idPianoColture":6448642,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":148,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 42947, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448790,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":42947,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493236,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 429, 429, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196083,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01421","sub":" "}', '{"idPianoColture":6448515,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":429,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493153,"idIsola":1331064,"codIsola":"IT25/00466140225/AAA10"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 250, 250, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196085,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01419","sub":" "}', '{"idPianoColture":6448520,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":250,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493153,"idIsola":1331064,"codIsola":"IT25/00466140225/AAA10"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 352, 352, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196084,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01420","sub":" "}', '{"idPianoColture":6448518,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":352,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493153,"idIsola":1331064,"codIsola":"IT25/00466140225/AAA10"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 336, 336, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196202,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00960","sub":"2"}', '{"idPianoColture":6448573,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":336,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493154,"idIsola":1331065,"codIsola":"IT25/00466140225/AAA11"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1611, 1611, 
+    '560-065-009', '065-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448741,"idColtura":245,"codColtura3":"560-065-009","codColtura5":"065-002-009-000-000","codLivello":"1311","descrizioneColtura":"PASCOLO POLIFITA (TIPO ALPEGGI) - PASCOLO - PASCOLO POLIFITA (TIPO ALPEGGI) SENZA TARA","coefficienteTara":1,"superficieDichiarata":1611,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 62511, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448740,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":62511,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 577429, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448780,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":577429,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 300204, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448779,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":300204,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 242415, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448778,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":242415,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 645, 645, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196129,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01097","sub":"2"}', '{"idPianoColture":6448538,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":645,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493143,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 430, 430, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196055,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01055","sub":" "}', '{"idPianoColture":6448493,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":430,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493143,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 442, 442, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196077,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01056","sub":" "}', '{"idPianoColture":6448514,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":442,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493143,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 224, 224, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196075,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01057","sub":"2"}', '{"idPianoColture":6448512,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":224,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493143,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 532, 532, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196125,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01093","sub":" "}', '{"idPianoColture":6448535,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":532,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 860, 860, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195898,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00563","sub":" "}', '{"idPianoColture":6448417,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":860,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2262, 2262, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196734,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00571","sub":" "}', '{"idPianoColture":6448620,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":2262,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 732, 732, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195953,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00564","sub":" "}', '{"idPianoColture":6448435,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":732,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 645, 645, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196685,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00532","sub":"1"}', '{"idPianoColture":6448605,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":645,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 366, 366, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2849190,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00596","sub":"1"}', '{"idPianoColture":6448797,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":366,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 328, 328, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2196800,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00663","sub":" "}', '{"idPianoColture":6448636,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":328,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 250, 250, 
+    '040-400-000', '666-000-000-000-000', '{"idParticella":2195988,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00665","sub":"2"}', '{"idPianoColture":6448456,"idColtura":20122,"codColtura3":"040-400-000","codColtura5":"666-000-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - COLTURE DA DEFINIRE (cod. Agea: 400-000)","coefficienteTara":1,"superficieDichiarata":250,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493151,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 468, 468, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196140,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01133","sub":" "}', '{"idPianoColture":6448545,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":468,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493152,"idIsola":1331063,"codIsola":"IT25/00466140225/AAA09"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 397, 397, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196132,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01140","sub":" "}', '{"idPianoColture":6448540,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":397,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493152,"idIsola":1331063,"codIsola":"IT25/00466140225/AAA09"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 300, 300, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196141,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01132","sub":" "}', '{"idPianoColture":6448547,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":300,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493152,"idIsola":1331063,"codIsola":"IT25/00466140225/AAA09"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 300, 300, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196201,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00960","sub":"3"}', '{"idPianoColture":6448571,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":300,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493154,"idIsola":1331065,"codIsola":"IT25/00466140225/AAA11"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1624, 1624, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1764908,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00535","sub":"2"}', '{"idPianoColture":6448221,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1624,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493155,"idIsola":1331066,"codIsola":"IT25/00466140225/AAA12"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 547, 547, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1764905,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"00536","sub":"1"}', '{"idPianoColture":6448220,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":547,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493155,"idIsola":1331066,"codIsola":"IT25/00466140225/AAA12"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 76, 76, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766648,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02212","sub":"1"}', '{"idPianoColture":6448238,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":76,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493156,"idIsola":1331068,"codIsola":"IT25/00466140225/AAA14"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 334, 334, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766677,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02218","sub":"7"}', '{"idPianoColture":6448246,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":334,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493156,"idIsola":1331068,"codIsola":"IT25/00466140225/AAA14"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 106204, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448784,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":106204,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493239,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 4411, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276905,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01977","sub":"1"}', '{"idPianoColture":6448704,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":4411,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493240,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1217, 0, 
+    '680-103-009', '103-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448770,"idColtura":243,"codColtura3":"680-103-009","codColtura5":"103-002-009-000-000","codLivello":"1321","descrizioneColtura":"PASCOLO ARBORATO (BOSCO ALTO FUSTO E CESPUGLIATO) TARA 20% - PASCOLO - PASCOLO ARBORATO (BOSCO ALTOFUSTO E CESPUGLIATO) TARA 20%","coefficienteTara":0,"superficieDichiarata":1217,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493240,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 118499, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276905,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01977","sub":"1"}', '{"idPianoColture":6448712,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":118499,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493241,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 63269, 0, 
+    '720-054-009', '054-002-009-000-000', '{"idParticella":2276906,"comune":"GIUSTINO - GIUSTINO II (TN)","codNazionale":"P456","foglio":9999,"particella":"01976","sub":" "}', '{"idPianoColture":6448777,"idColtura":244,"codColtura3":"720-054-009","codColtura5":"054-002-009-000-000","codLivello":"1322","descrizioneColtura":"PASCOLO ARBORATO (BOSCO CEDUO) TARA 50% - PASCOLO - PASCOLO ARBORATO (BOSCO CEDUO) TARA 50%","coefficienteTara":0,"superficieDichiarata":63269,"descMantenimento":"PASCOLAMENTO CON ANIMALI PROPRI"}', '{"idParcella":493241,"idIsola":1331150,"codIsola":"IT25/00466140225/AAA75"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 639, 639, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196113,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01096","sub":" "}', '{"idPianoColture":6448527,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":639,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 587, 587, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196118,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01098","sub":"2"}', '{"idPianoColture":6448528,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":587,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 774, 774, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196126,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01092","sub":" "}', '{"idPianoColture":6448536,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":774,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 695, 695, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196123,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01095","sub":" "}', '{"idPianoColture":6448532,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":695,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 262, 262, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196119,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01098","sub":"1"}', '{"idPianoColture":6448530,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":262,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 70, 70, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196698,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00515","sub":" "}', '{"idPianoColture":6448616,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":70,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1760, 1760, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196829,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00581","sub":" "}', '{"idPianoColture":6448665,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1760,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1114, 1114, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196901,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00498","sub":"1"}', '{"idPianoColture":6448697,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1114,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 786, 786, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196837,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00611","sub":" "}', '{"idPianoColture":6448671,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":786,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 166, 166, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196898,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00501","sub":" "}', '{"idPianoColture":6448695,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":166,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 351, 351, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196133,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01139","sub":" "}', '{"idPianoColture":6448542,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":351,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493152,"idIsola":1331063,"codIsola":"IT25/00466140225/AAA09"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 55, 55, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196142,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01131","sub":"2"}', '{"idPianoColture":6448550,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":55,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493152,"idIsola":1331063,"codIsola":"IT25/00466140225/AAA09"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 27, 27, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446434,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01020","sub":"4"}', '{"idPianoColture":6448209,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":27,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493216,"idIsola":1331120,"codIsola":"IT25/00466140225/AAA60"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 6, 6, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1446468,"comune":"CADERZONE (TN)","codNazionale":"B335","foglio":9999,"particella":"01023","sub":"3"}', '{"idPianoColture":6448214,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":6,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493216,"idIsola":1331120,"codIsola":"IT25/00466140225/AAA60"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 20756, 20756, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864965,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00108","sub":" "}', '{"idPianoColture":6448905,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":20756,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493217,"idIsola":1331131,"codIsola":"IT25/00466140225/AAA61"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 399, 399, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766650,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02211","sub":"1"}', '{"idPianoColture":6448241,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":399,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493156,"idIsola":1331068,"codIsola":"IT25/00466140225/AAA14"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1186, 1186, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":1766651,"comune":"PINZOLO (TN)","codNazionale":"G681","foglio":9999,"particella":"02210","sub":" "}', '{"idPianoColture":6448243,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1186,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493156,"idIsola":1331068,"codIsola":"IT25/00466140225/AAA14"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 556, 556, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195904,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00547","sub":" "}', '{"idPianoColture":6448422,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":556,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1217, 1217, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195907,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00555","sub":" "}', '{"idPianoColture":6448425,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1217,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 301, 301, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195910,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00551","sub":" "}', '{"idPianoColture":6448428,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":301,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 416, 416, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2274586,"comune":"GIUSTINO - GIUSTINO I (TN)","codNazionale":"P455","foglio":9999,"particella":"00390","sub":" "}', '{"idPianoColture":6448698,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":416,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493242,"idIsola":1331152,"codIsola":"IT25/00466140225/AAA76"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 432, 432, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2274587,"comune":"GIUSTINO - GIUSTINO I (TN)","codNazionale":"P455","foglio":9999,"particella":"00387","sub":" "}', '{"idPianoColture":6448699,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":432,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493242,"idIsola":1331152,"codIsola":"IT25/00466140225/AAA76"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2590, 2590, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859335,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00092","sub":" "}', '{"idPianoColture":6448834,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":2590,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493243,"idIsola":1331159,"codIsola":"IT25/00466140225/AAA77"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 33945, 33945, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859331,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00017","sub":" "}', '{"idPianoColture":6448823,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":33945,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493243,"idIsola":1331159,"codIsola":"IT25/00466140225/AAA77"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 29830, 29830, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859333,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00086","sub":" "}', '{"idPianoColture":6448831,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":29830,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493243,"idIsola":1331159,"codIsola":"IT25/00466140225/AAA77"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 632, 632, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196124,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01094","sub":" "}', '{"idPianoColture":6448534,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":632,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 25, 25, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196073,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01058","sub":"2"}', '{"idPianoColture":6448509,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":25,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 182, 182, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196063,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01059","sub":" "}', '{"idPianoColture":6448495,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":182,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493144,"idIsola":1331057,"codIsola":"IT25/00466140225/AAA02"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 393, 393, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196136,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01137","sub":"1"}', '{"idPianoColture":6448544,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":393,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493145,"idIsola":1331058,"codIsola":"IT25/00466140225/AAA03"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 836, 836, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196146,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01136","sub":" "}', '{"idPianoColture":6448552,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":836,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493145,"idIsola":1331058,"codIsola":"IT25/00466140225/AAA03"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 665, 665, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196684,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00566","sub":" "}', '{"idPianoColture":6448604,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":665,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 804, 804, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196826,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00590","sub":"1"}', '{"idPianoColture":6448662,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":804,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 799, 799, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196828,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00588","sub":" "}', '{"idPianoColture":6448664,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":799,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 398, 398, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196681,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00519","sub":" "}', '{"idPianoColture":6448602,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":398,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 323, 323, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196697,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00516","sub":" "}', '{"idPianoColture":6448615,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":323,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 17914, 17914, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864967,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00146","sub":" "}', '{"idPianoColture":6448919,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":17914,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493217,"idIsola":1331131,"codIsola":"IT25/00466140225/AAA61"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 6145, 6145, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864968,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00147","sub":" "}', '{"idPianoColture":6448927,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":6145,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493217,"idIsola":1331131,"codIsola":"IT25/00466140225/AAA61"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 576, 576, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2864962,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00103","sub":" "}', '{"idPianoColture":6448894,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":576,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493218,"idIsola":1331132,"codIsola":"IT25/00466140225/AAA62"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 14931, 14931, 
+    '040-004-513', '004-111-000-022-000', '{"idParticella":2864961,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00102","sub":" "}', '{"idPianoColture":6448893,"idColtura":22032,"codColtura3":"040-004-513","codColtura5":"004-111-000-022-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - SOIA - FAVE - USO ENERGETICO-EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":14931,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493218,"idIsola":1331132,"codIsola":"IT25/00466140225/AAA62"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 2941, 2941, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":3725563,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00281","sub":" "}', '{"idPianoColture":6448963,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":2941,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493219,"idIsola":1331133,"codIsola":"IT25/00466140225/AAA63"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 444, 444, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195897,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00556","sub":" "}', '{"idPianoColture":6448415,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":444,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 482, 482, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195883,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00545","sub":" "}', '{"idPianoColture":6448407,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":482,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 477, 477, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195903,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00559","sub":" "}', '{"idPianoColture":6448421,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":477,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 244, 244, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195909,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00552","sub":" "}', '{"idPianoColture":6448427,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":244,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 741, 741, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2195884,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00543","sub":" "}', '{"idPianoColture":6448408,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":741,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493157,"idIsola":1331069,"codIsola":"IT25/00466140225/AAA15"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 543, 543, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859334,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00087","sub":" "}', '{"idPianoColture":6448833,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":543,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493243,"idIsola":1331159,"codIsola":"IT25/00466140225/AAA77"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 26785, 26785, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859330,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00016","sub":" "}', '{"idPianoColture":6448821,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":26785,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493243,"idIsola":1331159,"codIsola":"IT25/00466140225/AAA77"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 15882, 15882, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":3725480,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":3,"particella":"00231","sub":" "}', '{"idPianoColture":6448958,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":15882,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493244,"idIsola":1331160,"codIsola":"IT25/00466140225/AAA78"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 17, 17, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859332,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00031","sub":" "}', '{"idPianoColture":6448824,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":17,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493245,"idIsola":1331161,"codIsola":"IT25/00466140225/AAA79"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 34073, 34073, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859332,"comune":"TORRE PALLAVICINA (BG)","codNazionale":"L276","foglio":3,"particella":"00031","sub":" "}', '{"idPianoColture":6448825,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":34073,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493246,"idIsola":1331161,"codIsola":"IT25/00466140225/AAA79"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 24551, 24551, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2859350,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":3,"particella":"00128","sub":" "}', '{"idPianoColture":6448842,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":24551,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493246,"idIsola":1331161,"codIsola":"IT25/00466140225/AAA79"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 517, 517, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196111,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01147","sub":" "}', '{"idPianoColture":6448525,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":517,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493145,"idIsola":1331058,"codIsola":"IT25/00466140225/AAA03"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 446, 446, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196135,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01137","sub":"2"}', '{"idPianoColture":6448543,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":446,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493145,"idIsola":1331058,"codIsola":"IT25/00466140225/AAA03"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 900, 900, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194537,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01810","sub":" "}', '{"idPianoColture":6448315,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":900,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1097, 1097, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194512,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01809","sub":" "}', '{"idPianoColture":6448299,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1097,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 933, 933, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2194518,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"01811","sub":"1"}', '{"idPianoColture":6448311,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":933,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493146,"idIsola":1331059,"codIsola":"IT25/00466140225/AAA04"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 645, 645, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196687,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00528","sub":" "}', '{"idPianoColture":6448606,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":645,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 625, 625, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196853,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00609","sub":"1"}', '{"idPianoColture":6448683,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":625,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 515, 515, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196688,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00526","sub":" "}', '{"idPianoColture":6448607,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":515,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 848, 848, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196825,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00590","sub":"2"}', '{"idPianoColture":6448661,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":848,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 274, 274, 
+    '080-336-052', '336-002-052-044-000', '{"idParticella":2196683,"comune":"CARISOLO - CARISOLO I (TN)","codNazionale":"P415","foglio":9999,"particella":"00567","sub":" "}', '{"idPianoColture":6448603,"idColtura":22591,"codColtura3":"080-336-052","codColtura5":"336-002-052-044-000","codLivello":"131","descrizioneColtura":"Prati e pascoli seminabili, esclusi i pascoli magri  (superficie non avvicendata per almeno 5 anni) - PRATO POLIFITA - NON AVVICENDATO PER ALMENO 5 ANNI (SFALCIATO) - PERMANENTE -","coefficienteTara":1,"superficieDichiarata":274,"descMantenimento":"SFALCIO MECCANIZZATO"}', '{"idParcella":493150,"idIsola":1331062,"codIsola":"IT25/00466140225/AAA07"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 380, 380, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":3725564,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00283","sub":" "}', '{"idPianoColture":6448964,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":380,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493220,"idIsola":1331137,"codIsola":"IT25/00466140225/AAA67"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 4874, 4874, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":2864964,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00106","sub":" "}', '{"idPianoColture":6448900,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":4874,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493221,"idIsola":1331138,"codIsola":"IT25/00466140225/AAA68"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 6400, 6400, 
+    '040-587-000', '587-011-000-000-000', '{"idParticella":2864960,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":35,"particella":"00999","sub":" "}', '{"idPianoColture":6448891,"idColtura":9,"codColtura3":"040-587-000","codColtura5":"587-011-000-000-000","codLivello":"111","descrizioneColtura":"SUPERFICI SEMINABILI - GRANO (FRUMENTO) TENERO - GRANO (FRUMENTO) TENERO","coefficienteTara":1,"superficieDichiarata":6400,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493222,"idIsola":1331139,"codIsola":"IT25/00466140225/AAA69"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 4877, 4877, 
+    '040-562-013', '562-102-000-000-000', '{"idParticella":3725566,"comune":"SONCINO (CR)","codNazionale":"I827","foglio":36,"particella":"00287","sub":" "}', '{"idPianoColture":6448969,"idColtura":22342,"codColtura3":"040-562-013","codColtura5":"562-102-000-000-000","codLivello":"1111","descrizioneColtura":"Superfici seminabili - ERBA MEDICA - DA FORAGGIO - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -","coefficienteTara":1,"superficieDichiarata":4877,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493223,"idIsola":1331140,"codIsola":"IT25/00466140225/AAA70"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+Insert into A4GT_RICHIESTA_SUPERFICIE
+   (ID, VERSIONE, ID_DOMANDA, SUP_RICHIESTA, SUP_RICHIESTA_NETTA, 
+    CODICE_COLTURA_3, CODICE_COLTURA_5, INFO_CATASTALI, INFO_COLTIVAZIONE, RIFERIMENTI_CARTOGRAFICI, 
+    ID_INTERVENTO)
+ Values
+   (NXTNBR.NEXTVAL, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'), 1033, 1033, 
+    '040-699-050', '800-002-050-044-000', '{"idParticella":2864948,"comune":"CREMONA (CR)","codNazionale":"D150","foglio":12,"particella":"00103","sub":" "}', '{"idPianoColture":6448849,"idColtura":22403,"codColtura3":"040-699-050","codColtura5":"800-002-050-044-000","codLivello":"112","descrizioneColtura":"Superfici seminabili - ERBAIO MISTO  - ANNUALE - NON PERMANENTE -","coefficienteTara":1,"superficieDichiarata":1033,"descMantenimento":"PRATICA ORDINARIA"}', '{"idParcella":493224,"idIsola":1331142,"codIsola":"IT25/00466140225/AAA71"}', 
+    (SELECT ID FROM A4GD_INTERVENTO WHERE IDENTIFICATIVO_INTERVENTO = 'BPS'));
+
+
+Insert into A4GT_ISTRUTTORIA(ID,VERSIONE,ID_DOMANDA,SOSTEGNO,ID_STATO_LAVORAZIONE, TIPOLOGIA)
+values(NXTNBR.nextval,0,(SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = '00466140225'),'SUPERFICIE',(select id from a4gd_stato_lav_sostegno where identificativo = 'RICHIESTO'), 'SALDO');
+INSERT INTO A4GT_ISTRUTTORE_SUPERFICIE (ID, CONTROLLO_SIGECO_LOCO, VERSIONE, ID_ISTRUTTORIA) VALUES (NXTNBR.nextval, 1, 0, NXTNBR.CURRVAL-1);
+
+INSERT INTO A4GT_CAMPIONE (ID, VERSIONE, ANNO_CAMPAGNA, CUAA, TIPO_CAMPIONE, TIPO) VALUES (NXTNBR.nextval, 0, 2018, '00466140225', 'SUPERFICIE', 'CASUALE');
+
+
+COMMIT;

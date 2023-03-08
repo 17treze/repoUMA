@@ -1,0 +1,55 @@
+.panel-storico {
+    position: absolute;
+    background: #ffffffde;
+    padding: 5px;
+    border-radius: 10px 0px 0px 10px;
+    z-index: 99999;
+    width: 300px;
+    right: 56px;
+    border-top: 2px solid #626262b8;
+    border-bottom: 2px solid #626262b8;
+    border-left: 2px solid #626262b8;
+}
+
+.label-storico {
+    text-align: center;
+    color: #00985b;
+    font-weight: 700;
+}
+
+.panel-storico>div>div>p-calendar {
+    background: white;
+    border: 1px solid #ced4da;
+    border-radius: 3px;
+}
+
+
+.panel-storico>div.p-grid {
+    float: left !important;
+}
+
+.panel-storico>div>div>label {
+    width: 100px;
+    height: 23px;
+    float: left;
+}
+
+.panel-storico>div>div>select,
+.panel-storico>div>div>p-calendar {
+    height: 26px;
+    padding: 0px 5px;
+    width: 60%;
+    float: right;
+}
+
+.panel-storico>div.p-grid>div.p-col-12 {
+    padding: 8px 12px 0px;
+}
+
+span.campagna-ls {
+    /* color: #fff; */
+    border-radius: 10px;
+    margin: 0px 2px;
+    padding: 0px 3px;
+    border: 1px solid;
+}

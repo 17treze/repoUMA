@@ -1,0 +1,330 @@
+<p-toast
+  key="tst-dlg"
+  [style]="{ marginTop: '70px' }">
+</p-toast>
+<p-dialog
+  #dialogNuovoTitoloConduzione
+  id="popup-nuovo-titolo-conduzione"
+  [(visible)]="popupOpen"
+  header="Titolo conduzione"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="center"
+  [style]="{width: '80vw', height: '90vh'}"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden'}"
+  [dismissableMask]="true"
+  styleClass="large-dialog"
+  [class]="idValidazione ? 'title-grey' : ''"
+  (onHide)="closePopup()">
+
+  <div class="p-col-12 p-col-align-start ui-fluid">
+    <div class="p-grid">
+      <p-accordion
+        [class]="idValidazione ? 'accordion-grey' : ''"
+        class="w-100"
+        [multiple]="true"
+        #accordion>
+
+        <!-- Sezione TIPO CONDUZIONE -->
+        <p-accordionTab
+          cache="false"
+          [selected]="true">
+          <p-header>
+            Tipo conduzione
+            <i
+              class="accordion-icon pi pi-check"
+              *ngIf="false"></i>
+          </p-header>
+          <ng-template pTemplate="content">
+            <form
+              novalidate
+              [formGroup]="titoloConduzioneForm"
+              (ngSubmit)="onSubmit()">
+              <div class="p-grid align-self-center">
+                <div class="p-col-6">
+                  <label for="tipologia-conduzione">Tipologia</label>
+                  <p-dropdown
+                    id="tipologia-conduzione"
+                    formControlName="ambito"
+                    (onChange)="onSelectTipologia($event)"
+                    [options]="ambitoConduzioneList"
+                    placeholder="Seleziona"></p-dropdown>
+                    <div *ngIf="titoloConduzioneForm.get('ambito').invalid && (titoloConduzioneForm.get('ambito').dirty || titoloConduzioneForm.get('ambito').touched)">
+                      <p-message
+                        *ngIf="titoloConduzioneForm.get('ambito').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                </div>
+                <div class="p-col-6">
+                  <label for="sotto-tipologia-conduzione">Sotto Tipologia</label>
+                  <p-dropdown
+                    id="sotto-tipologia-conduzione"
+                    formControlName="sottotipo"
+                    (onChange)="onSelectSottoTipologia($event)"
+                    [options]="sottotipoConduzioneList"
+                    placeholder="Seleziona"></p-dropdown>
+                    <div *ngIf="titoloConduzioneForm.get('sottotipo').invalid && (titoloConduzioneForm.get('sottotipo').dirty || titoloConduzioneForm.get('sottotipo').touched)">
+                      <p-message
+                        *ngIf="titoloConduzioneForm.get('sottotipo').errors?.required"
+                        class="font-12"
+                        severity="error"
+                        text="Campo Obbligatorio">
+                      </p-message>
+                    </div>
+                </div>
+              </div>
+            </form>
+          </ng-template>
+        </p-accordionTab>
+        <br>
+
+        <!-- Sezione DOCUMENTI -->
+        <p-accordionTab
+          cache="false"
+          [selected]="disabledDocumenti()"
+          [disabled]="!disabledDocumenti()">
+          <p-header>
+            Documenti
+            <i
+              class="accordion-icon pi pi-check"
+              *ngIf="false"></i>
+          </p-header>
+          <ng-template pTemplate="content">
+            <form
+              [formGroup]="documentiForm"
+              (ngSubmit)="onSubmit()">
+              <div class="p-grid align-self-center ">
+                <table
+                  formGroupName="documenti"
+                  class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th colspan="4">Documenti principali:</th>
+                    </tr>
+                    <tr formGroupName="documentiPrincipali" class="d-flex">
+                      <td class="col-sm-7" style="vertical-align: middle; width:100px">
+                        <p-dropdown
+                        class="mw-50"
+                        id="documenti-principali"
+                        formControlName="id"
+                        (onChange)="onSelectTipoDocumentoPrincipale($event)"
+                        [options]="tipoDocumentoPrincipaleConduzioneList"
+                        placeholder="{{tipoDocumentoPrincipaleConduzioneList.length == 1 ? tipoDocumentoPrincipaleConduzioneList[0].label : 'Seleziona il tipo di documento'}}">
+                        </p-dropdown>
+                        <div *ngIf="documentiForm.get('documenti').get('documentiPrincipali').get('id').invalid && (documentiForm.get('documenti').get('documentiPrincipali').get('id').dirty || documentiForm.get('documenti').get('documentiPrincipali').get('id').touched)">
+                          <p-message
+                            *ngIf="documentiForm.get('documenti').get('documentiPrincipali').get('id').errors?.required"
+                            class="font-12"
+                            severity="error"
+                            text="Campo Obbligatorio">
+                          </p-message>
+                        </div>
+                      </td>
+                      <td class="col-sm-5">
+                        <form>
+                          <button
+                            [style]="{'width':'50%'}"
+                            pButton
+                            type="button"
+                            label="Carica"
+                            (click)="uploadFile('documentoPrincipale')"
+                            [class]="'button-custom-bar-dark'">
+                          </button>
+                          <input
+                            type="file"
+                            style="display:none"
+                            id="documentoPrincipale"
+                            class="form-control"
+                            accept="{{fileExt}}"
+                            onclick="this.form.reset()"
+                            (change)="onFileChange($event)">
+                          <button
+                            [style]="{'width':'50%'}"
+                            pButton
+                            type="button"
+                            label="Visualizza"
+                            [disabled]="!disabledDownloadFile()"
+                            (click)="downloadFile()"
+                            [class]="'button-custom-bar-dark'">
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    <ng-container *ngIf="documentiSecondari().controls.length>0" 
+                      formArrayName="documentiSecondari">
+                      <tr>
+                        <th colspan="4">Documenti secondari:</th>
+                      </tr>
+                      <tr class="d-flex"
+                        *ngFor="let documento of documentiSecondari().controls; let i = index"
+                        [formGroupName] = "i">
+                        <td class="col-sm-7">
+                          <input
+                            id="tipoDSecondario-input"
+                            [maxlength]="300"
+                            type="text"
+                            class="text-left"
+                            pInputText 
+                            formControlName="descrizione"
+                            readonly>
+                        </td>
+                        <td class="col-sm-5" style="width:20%;">
+                          <form>
+                            <button
+                              [style]="{'width':'50%'}"
+                              pButton
+                              type="button"
+                              label="Carica"
+                              (click)="uploadFile('documentoSecondario', i)"
+                              [class]="'button-custom-bar-dark'">
+                            </button>
+                            <input
+                              type="file"
+                              style="display:none"
+                              id="{{'documentoSecondario' + i}}"
+                              class="form-control"
+                              accept="{{fileExt}}"
+                              onclick="this.form.reset()"
+                              (change)="onFileChange($event, i)">
+                            <button
+                              [style]="{'width':'50%'}"
+                              pButton
+                              type="button"
+                              label="Visualizza"
+                              [disabled]="!disabledDownloadFile(i)"
+                              (click)="downloadFile(i)"
+                              [class]="'button-custom-bar-dark'">
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </ng-template>
+        </p-accordionTab>
+        <br>
+
+        <!-- Sezione Particelle -->
+        <p-accordionTab
+          cache="false"
+          [selected]="true">
+          <p-header>
+            Particelle
+            <i
+              class="accordion-icon pi pi-check"
+              *ngIf="false"></i>
+          </p-header>
+          <ng-template pTemplate="content">
+            <form
+              [formGroup]="particelleForm"
+              (ngSubmit)="onSubmit()">
+              <table
+                class="table table-bordered"
+                formArrayName="particelle">
+                <tbody>
+                  <tr>
+                    <th
+                      colspan="7"
+                      style="border-top:hidden; border-left:hidden; border-right:hidden">
+                      <button
+                        type="button"
+                        (click)="addParticella()"
+                        class="btn btn-primary">
+                        Aggiungi
+                      </button>
+                    </th>
+                  </tr>
+                  <tr
+                    *ngFor="let particella of particelle().controls; let i=index"
+                    [formGroupName]="i">
+                    <td>
+                      Particella:
+                      <input
+                        type="text"
+                        formControlName="particella"
+                        class="form-control">
+                    </td>
+                    <td>
+                      Foglio:
+                      <input
+                        type="text"
+                        formControlName="foglio"
+                        class="form-control">
+                    </td>
+                    <td>
+                      Sub:
+                      <input
+                        type="text"
+                        formControlName="sub"
+                        class="form-control">
+                    </td>
+                    <td>
+                      Sezione:
+                      <input
+                        type="text"
+                        formControlName="sezione"
+                        class="form-control">
+                    </td>
+                    <td>
+                      Comune:
+                      <input
+                        type="text"
+                        formControlName="comune"
+                        class="form-control">
+                    </td>
+                    <td>
+                      Superficie:
+                      <input
+                        type="text"
+                        formControlName="superficieCondotta"
+                        class="form-control">
+                    </td>
+                    <td>
+                      <br>
+                      <button
+                        (click)="removeParticella(i)"
+                        class="btn btn-danger">
+                        Rimuovi
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </ng-template>
+        </p-accordionTab>
+      </p-accordion>
+      <!-- Separatore -->
+      <br>
+    </div>
+  </div>
+
+  <!-- Button bar -->
+  <div class="p-col-12 p-col-align-end ui-fluid">
+    <p-footer>
+      <div class="p-col-12">
+        <div class="ui-g-9 text-left"></div>
+        <div class="ui-g-3 text-right">
+          <button
+            [disabled]="READONLY_MODE"
+            pButton
+            [class]="idValidazione ? 'button-custom-grey':''"
+            class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-10m"
+            type="submit"
+            (click)="onSubmit()"
+            label="Salva titolo di conduzione">
+          </button>
+        </div>
+      </div>
+    </p-footer>
+  </div>
+</p-dialog>

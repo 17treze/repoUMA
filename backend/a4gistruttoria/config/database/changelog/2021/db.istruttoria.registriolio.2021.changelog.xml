@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<!-- ARCHIVIO_REGISTRAZIONI_PROD_OLIVE_2021_APPAG.xlsx -->
+	<changeSet id="ISTRUTTORIA_61.2" author="Lorenzo Martinelli">
+		<sql endDelimiter="/" dbms="oracle">
+			DECLARE
+			  ANNO_CAMPAGNA NUMBER := 2021;
+			
+			  COUNT_RECORD NUMBER(20);
+			  
+			  CURSOR elenco_cuaa_olio IS (
+			    SELECT '00125840223' AS cuaa FROM dual UNION ALL
+				SELECT '01720090222' AS cuaa FROM dual UNION ALL
+				SELECT '01801280221' AS cuaa FROM dual UNION ALL
+				SELECT '02286980228' AS cuaa FROM dual UNION ALL
+				SELECT 'BMBGRG41R03H330X' AS cuaa FROM dual UNION ALL
+				SELECT 'CRRCSR38S22A372K' AS cuaa FROM dual UNION ALL
+				SELECT 'CSRNCL54R27H645N' AS cuaa FROM dual UNION ALL
+				SELECT 'FRRGLC73D23H330A' AS cuaa FROM dual UNION ALL
+				SELECT 'GVNGNN65P27H330Z' AS cuaa FROM dual UNION ALL
+				SELECT 'LNRNCL82H14H612A' AS cuaa FROM dual UNION ALL
+				SELECT 'LTRGPP59P25D643U' AS cuaa FROM dual UNION ALL
+				SELECT 'MNFCHR63B67H330J' AS cuaa FROM dual UNION ALL
+				SELECT 'MNLRRT56D02A372Z' AS cuaa FROM dual UNION ALL
+				SELECT 'MNTCLD60S07H330M' AS cuaa FROM dual UNION ALL
+				SELECT 'MNTLGU60R05H330P' AS cuaa FROM dual UNION ALL
+				SELECT 'MSTFBA79L10H612L' AS cuaa FROM dual UNION ALL
+				SELECT 'MZZLVI42H29H330I' AS cuaa FROM dual UNION ALL
+				SELECT 'PLLGFR32L20H330K' AS cuaa FROM dual UNION ALL
+				SELECT 'PLNGRG59R10H330A' AS cuaa FROM dual UNION ALL
+				SELECT 'SCNGPR86D22H330N' AS cuaa FROM dual
+			);		
+			BEGIN
+			
+			  FOR rec_cuaa_olio IN elenco_cuaa_olio
+			    loop
+					COUNT_RECORD := 0;
+
+					select count(*) INTO COUNT_RECORD from A4GD_REG_OLIO_NAZIONALE registro where registro.CUAA_INTESTATARIO = rec_cuaa_olio.cuaa;
+					
+					IF (COUNT_RECORD > 0) THEN
+						update A4GD_REG_OLIO_NAZIONALE set FINE_CAMPAGNA = ANNO_CAMPAGNA where CUAA_INTESTATARIO = rec_cuaa_olio.cuaa;
+					else
+						insert into A4GD_REG_OLIO_NAZIONALE (id, versione, CUAA_INTESTATARIO, INIZIO_CAMPAGNA, FINE_CAMPAGNA)
+						values 
+						(NXTNBR.NEXTVAL, 0, rec_cuaa_olio.cuaa, ANNO_CAMPAGNA, ANNO_CAMPAGNA);
+					end if;
+			    
+			    END loop;
+			    
+			    COMMIT;
+			
+			    exception
+			      WHEN others THEN
+			        raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
+			        rollback;
+			
+			END;
+			/
+		</sql>
+	</changeSet>
+	
+	<!-- ARCHIVIO_OLIO_DOP_DU2021_APPAG.xls -->
+	<changeSet id="ISTRUTTORIA_39.2" author="Lorenzo Martinelli">
+		<sql endDelimiter="/" dbms="oracle">
+			DECLARE
+			  ANNO_CAMPAGNA NUMBER := 2021;
+			  
+			  COUNT_RECORD NUMBER(20);
+			  
+			  CURSOR elenco_cuaa_olio IS (
+                    SELECT 'TRBFLV73L21A372C' AS cuaa FROM dual UNION ALL
+                    SELECT '01801280221' AS cuaa FROM dual UNION ALL
+                    SELECT 'PDRGPP41L10A372V' AS cuaa FROM dual UNION ALL
+                    SELECT 'CRRCSR38S22A372K' AS cuaa FROM dual UNION ALL
+                    SELECT 'GRRTZN64H12H330Z' AS cuaa FROM dual UNION ALL
+                    SELECT 'GRRVTR66L11H330G' AS cuaa FROM dual UNION ALL
+                    SELECT 'FIASRN69D57A372D' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNGBRN47E22H330O' AS cuaa FROM dual UNION ALL
+                    SELECT 'RSOLDA54P08H612S' AS cuaa FROM dual UNION ALL
+                    SELECT 'SGNNLN54T28A372J' AS cuaa FROM dual UNION ALL
+                    SELECT 'MSTFBA79L10H612L' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNTLGU60R05H330P' AS cuaa FROM dual UNION ALL
+                    SELECT 'NDRFBA72C13H612S' AS cuaa FROM dual UNION ALL
+                    SELECT 'BNNNVE57T29H330F' AS cuaa FROM dual UNION ALL
+                    SELECT 'BMBGRG41R03H330X' AS cuaa FROM dual UNION ALL
+                    SELECT 'DCTGCR36D14H330V' AS cuaa FROM dual UNION ALL
+                    SELECT 'MZZLVI42H29H330I' AS cuaa FROM dual UNION ALL
+                    SELECT 'MRLDNL32A19A372U' AS cuaa FROM dual UNION ALL
+                    SELECT 'PLLFBA70A03H330O' AS cuaa FROM dual UNION ALL
+                    SELECT 'PLLGFR32L20H330K' AS cuaa FROM dual UNION ALL
+                    SELECT 'PLNGRG59R10H330A' AS cuaa FROM dual UNION ALL
+                    SELECT 'SSTGMN33H41F205F' AS cuaa FROM dual UNION ALL
+                    SELECT 'VVLNTN31D20H330H' AS cuaa FROM dual UNION ALL
+                    SELECT 'SGNLSN81E04H612K' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNTCLD60S07H330M' AS cuaa FROM dual UNION ALL
+                    SELECT 'ZNTPLA46L20H330F' AS cuaa FROM dual UNION ALL
+                    SELECT 'GLLLNI58L45H330Z' AS cuaa FROM dual UNION ALL
+                    SELECT 'GVNGNN65P27H330Z' AS cuaa FROM dual UNION ALL
+                    SELECT 'MRCRRT38B07F205J' AS cuaa FROM dual UNION ALL
+                    SELECT 'SCHNCL51C27A372N' AS cuaa FROM dual UNION ALL
+                    SELECT '02286980228' AS cuaa FROM dual UNION ALL
+                    SELECT 'BMBMTT77S23H612A' AS cuaa FROM dual UNION ALL
+                    SELECT 'BRTFNC35C27D371H' AS cuaa FROM dual UNION ALL
+                    SELECT '00125840223' AS cuaa FROM dual UNION ALL
+                    SELECT 'DTTCLD54E16L117Q' AS cuaa FROM dual UNION ALL
+                    SELECT 'LBRGRL80P10H612M' AS cuaa FROM dual UNION ALL
+                    SELECT 'VVLDRA38R27H330C' AS cuaa FROM dual UNION ALL
+                    SELECT 'GLNMNL88R21H330O' AS cuaa FROM dual UNION ALL
+                    SELECT 'NDRLRT88E15H330H' AS cuaa FROM dual UNION ALL
+                    SELECT 'LNRNCL82H14H612A' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNNWTR67C18H330N' AS cuaa FROM dual UNION ALL
+                    SELECT '02385720228' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNFCHR63B67H330J' AS cuaa FROM dual UNION ALL
+                    SELECT 'BNRLRT69T06H330A' AS cuaa FROM dual UNION ALL
+                    SELECT 'DPRPLA64L22C372W' AS cuaa FROM dual UNION ALL
+                    SELECT 'CHSWTR79P08H330N' AS cuaa FROM dual UNION ALL
+                    SELECT 'SCNGPR86D22H330N' AS cuaa FROM dual UNION ALL
+                    SELECT 'BRSMTT94L30H612F' AS cuaa FROM dual UNION ALL
+                    SELECT 'FRZFRZ75M29H330Q' AS cuaa FROM dual UNION ALL
+                    SELECT '01720090222' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNLRRT56D02A372Z' AS cuaa FROM dual UNION ALL
+                    SELECT 'LNEPLA68P21A372O' AS cuaa FROM dual UNION ALL
+                    SELECT 'NDRMRC65E13A372F' AS cuaa FROM dual UNION ALL
+                    SELECT 'BNMLRD86L28G224V' AS cuaa FROM dual UNION ALL
+                    SELECT 'MRICST89A23H330N' AS cuaa FROM dual UNION ALL
+                    SELECT '02445900224' AS cuaa FROM dual UNION ALL
+                    SELECT 'TNLSNT69D48H330E' AS cuaa FROM dual UNION ALL
+                    SELECT 'PRNNRC53C44H330L' AS cuaa FROM dual UNION ALL
+                    SELECT 'CMNDRD54L29H330J' AS cuaa FROM dual UNION ALL
+                    SELECT 'MTTCLD58H29L378J' AS cuaa FROM dual UNION ALL
+                    SELECT 'TVRNCL78R01H612D' AS cuaa FROM dual UNION ALL
+                    SELECT 'ZNNTLI42C06A372H' AS cuaa FROM dual UNION ALL
+                    SELECT 'PRRRCR91B07H501W' AS cuaa FROM dual UNION ALL
+                    SELECT 'TVRFRC49C12D371A' AS cuaa FROM dual UNION ALL
+                    SELECT 'MRNSVN58P10H330K' AS cuaa FROM dual UNION ALL
+                    SELECT 'FRRGLC73D23H330A' AS cuaa FROM dual UNION ALL
+                    SELECT 'FRLSFN63M21H330E' AS cuaa FROM dual UNION ALL
+                    SELECT 'ZNNNTN66T29H330Q' AS cuaa FROM dual UNION ALL
+                    SELECT 'LNLGNN68D02L270P' AS cuaa FROM dual UNION ALL
+                    SELECT 'MTTLRA48H57L378O' AS cuaa FROM dual UNION ALL
+                    SELECT '02379680222' AS cuaa FROM dual UNION ALL
+                    SELECT 'RPLSFN70E02L378Q' AS cuaa FROM dual UNION ALL
+                    SELECT '02558390221' AS cuaa FROM dual UNION ALL
+                    SELECT 'PSNFBN73B16H612T' AS cuaa FROM dual UNION ALL
+                    SELECT '02279470229' AS cuaa FROM dual UNION ALL
+                    SELECT 'MNFNNL59R63H612D' AS cuaa FROM dual UNION ALL
+                    SELECT '02567760224' AS cuaa FROM dual UNION ALL
+                    SELECT 'RGTLGU56D14H330Y' AS cuaa FROM dual UNION ALL
+                    SELECT 'PMPFLV55C06A952N' AS cuaa FROM dual UNION ALL
+                    SELECT 'CTLLBT63E47D653G' AS cuaa FROM dual
+			);		
+			BEGIN
+			
+			  FOR rec_cuaa_olio IN elenco_cuaa_olio
+			    loop
+					COUNT_RECORD := 0;
+
+					select count(*) INTO COUNT_RECORD from A4GD_REG_OLIO_QUALITA  registro where registro.CUAA_INTESTATARIO = rec_cuaa_olio.cuaa;
+					
+					IF (COUNT_RECORD > 0) THEN
+						update A4GD_REG_OLIO_QUALITA set FINE_CAMPAGNA = ANNO_CAMPAGNA where CUAA_INTESTATARIO = rec_cuaa_olio.cuaa;
+					else
+						insert into A4GD_REG_OLIO_QUALITA (id, versione, CUAA_INTESTATARIO, INIZIO_CAMPAGNA, FINE_CAMPAGNA)
+						values 
+						(NXTNBR.NEXTVAL, 0, rec_cuaa_olio.cuaa, ANNO_CAMPAGNA, ANNO_CAMPAGNA);
+					end if;
+			    
+			    END loop;
+			    
+			    COMMIT;
+			
+			    exception
+			      WHEN others THEN
+			        raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
+			        rollback;
+			
+			END;
+			/
+		</sql>
+	</changeSet>
+</databaseChangeLog>

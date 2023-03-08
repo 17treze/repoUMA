@@ -1,0 +1,71 @@
+<div *ngIf='getIstruttoriaCorrente()'>
+  <div class="card no-margin">
+    <h1>Istruttoria sostegno disaccoppiato</h1>
+    <fieldset class="border p-2">
+      <div class="ui-g">
+        <div class="ui-g-3">
+          <strong>
+            Tipologia Domanda</strong>
+        </div>
+        <div class="ui-g-3">
+          {{getIstruttoriaCorrente().descrizionePac}}
+        </div>
+        <div class="ui-g-3">
+          <strong>
+            Descrizione Domanda</strong>
+        </div>
+        <div class="ui-g-3">
+          {{getIstruttoriaCorrente().descrizioneDomanda}}
+        </div>
+        <div class="ui-g-3">
+          <strong>Anno di riferimento</strong>
+        </div>
+        <div class="ui-g-3">
+          {{getIstruttoriaCorrente().annoRiferimento}}
+        </div>
+        <div class="ui-g-3">
+          <strong>Stato</strong>
+        </div>
+        <div class="ui-g-3">
+          In Istruttoria
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="border p-2" style="margin-top: 2%;">
+      <legend class="w-auto">Riepilogo interventi</legend>
+      <p-treeTable [value]="files">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of cols">
+              {{col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr>
+            <td *ngFor="let col of cols; let i = index">
+              <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+              {{rowData[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-treeTable>
+    </fieldset>
+
+    <fieldset class="border p-2" style="margin-top: 2%;">
+      <legend class="w-auto">Stato di lavorazione domande</legend>
+      <p-table [value]="listaStatiLavorazione">
+        <ng-template pTemplate="header">
+          <th>Stato</th>
+          <th>Numero domande</th>
+        </ng-template>
+        <ng-template pTemplate="body" let-stato>
+          <tr>
+            <td>{{stato.stato}}</td>
+            <td>{{stato.counter}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </fieldset>
+  </div>

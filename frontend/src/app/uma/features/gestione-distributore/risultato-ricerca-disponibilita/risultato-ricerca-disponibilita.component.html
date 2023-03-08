@@ -1,0 +1,64 @@
+<div class="ui-g ui-fluid p-0">
+  <div class="ui-grid-fixed boxgrey">
+    <div class="layout-actionmenu">
+      <div class="p-grid">
+        <h5
+          class="p-col-4 text-primary"
+          *ngIf="denominazioneAzienda">
+           <strong>DENOMINAZIONE: </strong>
+           {{ denominazioneAzienda | clearString:'NO_DENOM' }}
+        </h5>
+        <h5
+          class="p-col-4 text-primary"
+          *ngIf="richiestaCarburanteDto?.cuaa">
+          <strong>CUAA:</strong>
+          {{ richiestaCarburanteDto?.cuaa }}
+        </h5>
+        <h5
+          class="p-col-4 text-primary"
+          *ngIf="richiestaCarburanteDto?.id">
+          <strong>ID DOMANDA: </strong>
+          {{richiestaCarburanteDto?.id }}
+        </h5>
+      </div>
+      <p-table
+        [columns]="cols"
+        [value]="this.rows"
+        [rows]="5"
+        [responsive]="true">
+        <ng-template
+          pTemplate="header"
+          let-columns>
+          <tr>
+            <th
+              *ngFor="let col of columns"
+              [width]="col.width"
+              [class]="col.align">
+              {{col.header}}
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template
+          ngFor
+          let-row
+          [ngForOf]="this.rows"
+          pTemplate="body">
+          <tr>
+            <td>{{row.header}}</td>
+            <td class="right">{{row.gasolio}}</td>
+            <td class="right">{{row.benzina}}</td>
+            <td class="right">{{row.gasolioSerre}}</td>
+          </tr>
+        </ng-template>
+        <ng-template
+          pTemplate="emptymessage"
+          let-columns>
+          <tr>
+            <td [attr.colspan]="cols?.length">Nessun risultato trovato.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

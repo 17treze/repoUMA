@@ -1,0 +1,64 @@
+<div class="ui-g ui-fluid">
+  <div
+    class="ui-g-12"
+    style="padding-bottom:0px !important;">
+    <div class="ui-grid-fixed">
+      <div
+        class="funzioni-grid tabsmall"
+        style="margin-bottom:0px !important; margin-top:40px !important;">
+        <p-tabMenu [model]="menu2"></p-tabMenu>
+      </div>
+    </div>
+  </div>
+  <div style="width:100%">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div class="ui-g-9">
+  <div class="layout-actionmenu">
+
+    <div class="ui-g">
+      <div class="ui-g-12 searchbutton">
+
+        <button
+          *ngIf="isEnableControlliLiquidabilita()"
+          pButton
+          type="button"
+          class="ui-button-success results_text_button"
+          (click)="avviaProcessoControlloLiquidabilita()">
+          {{ 'DOMANDA_UNICA_RISULTATI.avviaControlliLiquidabilita' | translate }}
+        </button>
+
+        <button
+          *ngIf="isEnableCalcoloDisaccoppiato()"
+          pButton
+          type="button"
+          class="ui-button-success results_text_button"
+          (click)="avviaProcessoCalcoloDisaccoppiato()">
+          {{ 'DOMANDA_UNICA_RISULTATI.avviaCalcoloDisaccoppiato' | translate }}
+        </button>
+
+        <button
+          pButton
+          *ngIf="isEnableProcessoAmmissibilita()"
+          pButton
+          type="button"
+          class="ui-button-success results_text_button"
+          (click)="avviaProcessoNonAmmissibilita()">
+          {{ 'DOMANDA_UNICA_RISULTATI.nonAmmissibile' | translate }}
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="ui-g-12"
+  style="padding-bottom:0px !important;">
+  <app-processi-di-controllo
+    *ngIf="processiDaControllare"
+    [processiDaControllare]="processiDaControllare">
+  </app-processi-di-controllo>
+</div>

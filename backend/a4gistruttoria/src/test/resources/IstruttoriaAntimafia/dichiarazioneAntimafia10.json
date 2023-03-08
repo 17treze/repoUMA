@@ -1,0 +1,490 @@
+{
+	"id": 8072,
+	"version": 3,
+	"datiDichiarazione": {
+		"richiedente": {
+			"nome": "MATTEO BRUNO",
+			"cognome": "LUNELLI",
+			"codiceFiscale": "LNLMTB74A31F205S",
+			"comuneNascita": "MILANO",
+			"provinciaNascita": "MI",
+			"dataNascita": "31/01/1974",
+			"sesso": "M",
+			"residenza": {
+				"indirizzo": "VIA MALPAGA 9",
+				"comune": "TRENTO",
+				"provincia": "TN",
+				"CAP": "38122"
+			},
+			"carica": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+			"dtInizioCarica": "04/05/2018",
+			"dtFineCarica": "ND"
+		},
+		"dettaglioImpresa": {
+			"formaGiuridicaCodice": "AU",
+			"formaGiuridicaDescrizione": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+			"denominazione": "FERRARI F.LLI LUNELLI S.P.A (IN BREVE FERRARI S.P.A.)",
+			"sedeLegale": "VIA DEL PONTE 15 38123 TRENTO TRENTO",
+			"estremiCCIAA": {
+				"sede": "TN",
+				"numeroIscrizione": "76693",
+				"dataIscrizione": "16/11/1970"
+			},
+			"oggettoSociale": "- LA PRODUZIONE, LA TRASFORMAZIONE E IL COMMERCIO DI PRODOTTI AGRICOLI EALIMENTARI IN GENERE ED IN PARTICOLARE, A SOLO TITOLO ESEMPLIFICATIVO, DI UVA,VINI, MOSTI, LIQUORI, SPUMANTI, DISTILLATI, DOLCIUMI E CAFFE' E L'ATTIVITA' DIIMPORT ED EXPORT DEI MEDESIMI PRODOTTI E LE ATTIVITA' CONNESSE;- L'ACQUISTO, LA VENDITA, LA PERMUTA E LA LOCAZIONE DI TERRENI AGRICOLI E NON;- L'ACQUISTO, LA VENDITA, LA PERMUTA, LA COSTRUZIONE E/O LA RISTRUTTURAZIONE DIBENI IMMOBILI, A SCOPO DI STABILE INVESTIMENTO CURANDONE ANCHE LA RELATIVAGESTIONE;- LA PRESTAZIONE DI SERVIZI DI ORGANIZZAZIONE AZIENDALE, AMMINISTRATIVA,COMMERCIALE E DI MARKETING NEI CONFRONTI DELLE SOCIETA' PARTECIPATE E NEICONFRONTI DELLE SOCIETA' DEL GRUPPO DI APPARTENENZA;- L'ASSUNZIONE O LA CESSIONE DI PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA',ITALIANE O ESTERE, A SCOPO DI STABILE INVESTIMENTO, PER GESTIONE E GODIMENTO,NON PROFESSIONALMENTE, NE' NEI CONFRONTI DEL PUBBLICO, BENSI' OCCASIONALMENTE EPER CONTO PROPRIO, NONCHE' COSTITUIRE O PARTECIPARE ALLA COSTITUZIONE DIASSOCIAZIONI TEMPORANEE DI IMPRESA;- LA GESTIONE DI RISTORANTI, ALBERGHI E/O COMUNQUE DI ATTIVITA' RICETTIVE;- L'ACQUISTO DI CREDITI D'IMPRESA NEI CONFRONTI DI CLIENTI, DALLA CONTROLLANTE,DA SOCIETA' CONTROLLATE E COLLEGATE E COMUNQUE DA SOCIETA' FACENTI PARTE DELLOSTESSO GRUPPO DI APPARTENENZA. IL TUTTO COME DISCIPLINATO DALLE NORME DEL CODICECIVILE.SEMPRE PER IL RAGGIUNGIMENTO DELL'OGGETTO SOCIALE, LA SOCIETA' POTRA' ALTRESI'COMPIERE OGNI OPERAZIONE COMMERCIALE, INDUSTRIALE ED IMMOBILIARE; A TALE FINEPOTRA' ALTRESI' COMPIERE IN VIA NON PREVALENTE E CON ESPRESSA ESCLUSIONE DIQUALSIASI ATTIVITA' SVOLTA NEI CONFRONTI DEL PUBBLICO, OPERAZIONI FINANZIARIE EMOBILIARI, CONCEDERE FINANZIAMENTI, ONEROSI E NON, NEI CONFRONTI DELLE SOCIETA'DEL GRUPPO DI APPARTENENZA, CONCEDERE FIDEJUSSIONI, AVALLI, CAUZIONI, GARANZIEANCHE A FAVORE DI TERZI.",
+			"codiceFiscale": "00123890220",
+			"partitaIva": "00123890220",
+			"indirizzoPEC": "INFO@PEC.CANTINEFERRARI.IT",
+			"dettaglioPersonaGiuridica": {
+				"formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+				"estremiCostituzione": "07/11/1970",
+				"capitaleSociale": "Dato non disponibile",
+				"durata": "31/12/2040"
+			},
+			"soggettiImpresa": [{
+					"nome": "LUIGI",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLLGU39D14L378O",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "14/04/1939",
+					"sesso": "M",
+					"indirizzoResidenza": "PIAZZA DUOMO N 9",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"href": "/antimafia/8072/allegatoFamiliariConviventi/8073",
+							"selezionato": true,
+							"dichiarazione": true
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MARCELLO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLMCL67R20L378W",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "20/10/1967",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MILANO 144",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "RE",
+							"tipologia": "RESPONSABILE",
+							"dataInizio": "31/10/2006",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}, {
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}, {
+							"codice": "VPA",
+							"tipologia": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+							"dataInizio": "13/06/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "PIETRO",
+					"cognome": "MONTI",
+					"codiceFiscale": "MNTPTR43L17A694C",
+					"comuneNascita": "BASELGA DI PINE'",
+					"provinciaNascita": "TN",
+					"dataNascita": "17/07/1943",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA BELLAVISTA SECONDA 21",
+					"comuneResidenza": "ROVERETO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38068",
+					"carica": [{
+							"codice": "SIS",
+							"tipologia": "SINDACO SUPPLENTE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BASELGA DI PINE'"
+				}, {
+					"nome": "MATTEO BRUNO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLMTB74A31F205S",
+					"comuneNascita": "MILANO",
+					"provinciaNascita": "MI",
+					"dataNascita": "31/01/1974",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MALPAGA 9",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}, {
+							"codice": "PCA",
+							"tipologia": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}, {
+							"codice": "AMD",
+							"tipologia": "AMMINISTRATORE DELEGATO",
+							"dataInizio": "13/06/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MILANO"
+				}, {
+					"nome": "EZIO",
+					"cognome": "GOBBI",
+					"codiceFiscale": "GBBZEI52H07L378V",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "07/06/1952",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA GUIDO BETTINAZZI 30 INT 5",
+					"comuneResidenza": "ARCO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38062",
+					"carica": [{
+							"codice": "SIE",
+							"tipologia": "SINDACO",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MAURIZIO",
+					"cognome": "POSTAL",
+					"codiceFiscale": "PSTMRZ57L03L378Z",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "03/07/1957",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA MARZOLA 74",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "PCS",
+							"tipologia": "PRESIDENTE DEL COLLEGIO SINDACALE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "CAMILLA",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLCLL75M70L378A",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "30/08/1975",
+					"sesso": "F",
+					"indirizzoResidenza": "VIA DELLA RESISTENZA N 56",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MAURIZIO",
+					"cognome": "SCOZZI",
+					"codiceFiscale": "SCZMRZ60B28B180Y",
+					"comuneNascita": "BRINDISI",
+					"provinciaNascita": "BR",
+					"dataNascita": "28/02/1960",
+					"sesso": "M",
+					"indirizzoResidenza": "STRADA DELLE TABARELLE, 25",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "SIS",
+							"tipologia": "SINDACO SUPPLENTE",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BRINDISI"
+				}, {
+					"nome": "ALESSANDRO",
+					"cognome": "LUNELLI",
+					"codiceFiscale": "LNLLSN78S05L378V",
+					"comuneNascita": "TRENTO",
+					"provinciaNascita": "TN",
+					"dataNascita": "05/11/1978",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA DON GIUSEPPE GRAZIOLI N 77",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38122",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "TRENTO"
+				}, {
+					"nome": "MARIA TERESA",
+					"cognome": "BERNELLI",
+					"codiceFiscale": "BRNMTR50M48F351V",
+					"comuneNascita": "MONDOVI'",
+					"provinciaNascita": "CN",
+					"dataNascita": "08/08/1950",
+					"sesso": "F",
+					"indirizzoResidenza": "VIA QUATTRO NOVEMBRE 29",
+					"comuneResidenza": "CAVEDINE",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38073",
+					"carica": [{
+							"codice": "SIE",
+							"tipologia": "SINDACO",
+							"dataInizio": "25/05/2017",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MONDOVI'"
+				}, {
+					"nome": "ARMANDO",
+					"cognome": "BRANCHINI",
+					"codiceFiscale": "BRNRND45R30A944H",
+					"comuneNascita": "BOLOGNA",
+					"provinciaNascita": "BO",
+					"dataNascita": "30/10/1945",
+					"sesso": "M",
+					"indirizzoResidenza": "FRAZ CASA STEFANONE 15",
+					"comuneResidenza": "ZAVATTARELLO",
+					"provinciaResidenza": "PV",
+					"capResidenza": "27059",
+					"carica": [{
+							"codice": "CON",
+							"tipologia": "CONSIGLIERE",
+							"dataInizio": "04/05/2018",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "BOLOGNA"
+				}, {
+					"nome": "BENIAMINO",
+					"cognome": "GAROFALO",
+					"codiceFiscale": "GRFBMN70E20C361R",
+					"comuneNascita": "CAVA DE' TIRRENI",
+					"provinciaNascita": "SA",
+					"dataNascita": "20/05/1970",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA SANTA CROCE 2",
+					"comuneResidenza": "MILANO",
+					"provinciaResidenza": "MI",
+					"capResidenza": "20122",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "CAVA DE' TIRRENI"
+				}, {
+					"nome": "RUGGERO ETTORE ANTONIO MARIA",
+					"cognome": "BRUGNARA",
+					"codiceFiscale": "BRGRGR52L18F205N",
+					"comuneNascita": "MILANO",
+					"provinciaNascita": "MI",
+					"dataNascita": "18/07/1952",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA TORINO 7",
+					"comuneResidenza": "SEGRATE",
+					"provinciaResidenza": "MI",
+					"capResidenza": "20090",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MILANO"
+				}, {
+					"nome": "CLAUDIO",
+					"cognome": "DIMARCO",
+					"codiceFiscale": "DMRCLD74S10E986P",
+					"comuneNascita": "MARTINA FRANCA",
+					"provinciaNascita": "TA",
+					"dataNascita": "10/11/1974",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA DELLA RESISTENZA N 46",
+					"comuneResidenza": "TRENTO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38123",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "MARTINA FRANCA"
+				}, {
+					"nome": "LORENZO",
+					"cognome": "LORO",
+					"codiceFiscale": "LROLNZ70L11H612I",
+					"comuneNascita": "ROVERETO",
+					"provinciaNascita": "TN",
+					"dataNascita": "11/07/1970",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA ARDARO 28/A",
+					"comuneResidenza": "RIVA DEL GARDA",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38066",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "ROVERETO"
+				}, {
+					"nome": "RENZO",
+					"cognome": "SANTATO",
+					"codiceFiscale": "SNTRNZ64E10H620A",
+					"comuneNascita": "ROVIGO",
+					"provinciaNascita": "RO",
+					"dataNascita": "10/05/1964",
+					"sesso": "M",
+					"indirizzoResidenza": "VIA GAETANO TACCHI 3",
+					"comuneResidenza": "ROVERETO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38068",
+					"carica": [{
+							"codice": "PP",
+							"tipologia": "PROCURATORE SPECIALE",
+							"dataInizio": "11/07/2016",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"estremiCCIAA": "ROVIGO"
+				}
+			],
+			"aziendeCollegate": [{
+					"cciaa": "TN",
+					"denominazione": "LUNELLI S.P.A.",
+					"codiceFiscale": "00598990224",
+					"comuneSede": "TRENTO",
+					"indirizzoSede": "VIA DEL PONTE",
+					"nCivico": "",
+					"provinciaSede": "TRENTO",
+					"capSede": "38123",
+					"carica": [{
+							"codice": "SOU",
+							"tipologia": "SOCIO UNICO",
+							"dataInizio": "29/07/2003",
+							"dataFine": "",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"selezionato": false
+				}, {
+					"cciaa": "MI",
+					"denominazione": "PRICEWATERHOUSECOOPERS S.P.A.",
+					"codiceFiscale": "12979880155",
+					"comuneSede": "MILANO",
+					"indirizzoSede": "VIA MONTE ROSA",
+					"nCivico": "",
+					"provinciaSede": "MILANO",
+					"capSede": "20149",
+					"carica": [{
+							"codice": "SDR",
+							"tipologia": "SOCIETA' DI REVISIONE",
+							"dataInizio": "06/05/2016",
+							"dataFine": "",
+							"selezionato": false,
+							"dichiarazione": false
+						}
+					],
+					"selezionato": false
+				}
+			]
+		}
+	},
+	"dtGenerazionePdf": null,
+	"dtInizioCompilazione": null,
+	"dtUltimoAggiornamento": null,
+	"dtUploadPdfFirmato": null,
+	"dtFine": null,
+	"idProtocollo": null,
+	"pdfFirmato": null,
+	"pdfGenerato": null,
+	"pdfFirmatoName": null,
+	"dtProtocollazione": null,
+	"a4gtAllegatoDicAntimafias": [],
+	"stato": {
+		"id": 11,
+		"identificativo": "BOZZA",
+		"descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+	},
+	"azienda": {
+		"id": 8,
+		"cuaa": "00123890220"
+	},
+	"assenzaDt": null,
+	"allegatoFamiliariConviventi": null
+}

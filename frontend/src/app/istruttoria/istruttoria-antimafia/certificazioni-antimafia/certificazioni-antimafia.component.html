@@ -1,0 +1,84 @@
+<div class="ui-g-12 ">
+  <div class="ui-grid-fixed">
+    <div class="funzioni-grid tab-new boxgrey">
+      <p-tabView [activeIndex]="index">
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.BOZZA' | translate }}
+              <span>{{itemBadges.bozza}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-bozza (aggiornaCertificazioniCounters)="aggiornaCounters($event)"
+              (runStatoAvanzamentoProcesso)="runStatoAvanzamentoProcesso($event, null)" [refreshFromParent]="refresh">
+            </app-cert-amf-bozza>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.PROTOCOLLATE' | translate }}
+              <span>{{itemBadges.protocollata}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-protocollate (aggiornaCertificazioniCounters)="aggiornaCounters($event)"
+              (runStatoAvanzamentoProcesso)="runStatoAvanzamentoProcesso($event, controlloAntimafia)" [refreshFromParent]="refresh">
+            </app-cert-amf-protocollate>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.IN_ISTRUTTORIA' | translate }}
+              <span>{{itemBadges.controllata}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-controllate (aggiornaCertificazioniCounters)="aggiornaCounters($event)"
+            (runStatoAvanzamentoProcesso)="runStatoAvanzamentoProcesso($event, processoImportaDomandePsr)" [refreshFromParent]="refresh">
+            </app-cert-amf-controllate>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.CONTROLLO_MANUALE' | translate }}
+              <span>{{itemBadges.controlloManuale}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-controllo-manuale (aggiornaCertificazioniCounters)="aggiornaCounters($event)">
+            </app-cert-amf-controllo-manuale>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.RIFIUTATE' | translate }}
+              <span>{{itemBadges.rifiutata}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-rifiutate (aggiornaCertificazioniCounters)="aggiornaCounters($event)">
+            </app-cert-amf-rifiutate>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.ESITO_POSITIVO' | translate }}
+              <span>{{itemBadges.positiva}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-esito-positivo></app-cert-amf-esito-positivo>
+          </ng-template>
+        </p-tabPanel>
+        <p-tabPanel>
+          <ng-template pTemplate="header">
+            <span class="ui-tabview-title ng-star-inserted">{{ 'ANTIMAFIA.VERIFICA_PERIODICA' | translate }}
+              <span>{{itemBadges.verificaPeriodica}}</span></span>
+          </ng-template>
+          <ng-template pTemplate="content">
+            <app-cert-amf-verifica-periodica (aggiornaCertificazioniCounters)="aggiornaCounters($event)">
+            </app-cert-amf-verifica-periodica>
+          </ng-template>
+        </p-tabPanel>
+      </p-tabView>
+      <div class="boxgrey">
+        <h5>{{ 'PROCESSI_DI_CONTROLLO' | translate }}</h5>
+        <div>{{processiInCorso}}</div>
+      </div>
+    </div>
+  </div>
+</div>

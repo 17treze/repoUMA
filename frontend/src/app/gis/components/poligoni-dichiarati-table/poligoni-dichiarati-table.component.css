@@ -1,0 +1,77 @@
+p-sidebar#dettaglioLavorazione div,
+p-sidebar.sidebar-detail div {
+    overflow-x: hidden !important;
+}
+
+.ui-accordion-content.ui-widget-content {
+    padding: 0 !important;
+}
+
+.zoom-icon-dichiarati {
+    background: transparent !important;
+}
+
+#poligoniDichiaratiTable>p-table>div>div>div>div.ui-table-scrollable-header.ui-widget-header>div>table>thead>tr>th {
+    padding: 2px;
+}
+
+#poligoniDichiaratiTable>p-table>div>div>div>div.ui-table-scrollable-body.ng-star-inserted>table>tbody>tr>td {
+    font-size: 13px;
+    padding: 5px 5px;
+}
+
+.td-zoom {
+    width: 25px !important;
+    padding: 0 !important;
+}
+
+.td-suolo {
+    width: 70px;
+}
+
+.td-stato {
+    width: 105px;
+}
+
+.td-utente-lavorazione {
+    width: 105px;
+}
+
+.td-esito {
+    width: 45px;
+    text-align: center;
+}
+
+.td-notifica {
+    width: 30px;
+}
+
+.icon-open-dettaglio {
+    margin-top: -30px;
+    margin-left: 225px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 999;
+}
+
+.td-esito>span>span>i.DA_LAVORARE {
+    font-size: 10px;
+    color: #fff;
+}
+
+.td-esito>span>span>i.APPROVATO {
+    color: #00985b;
+    font-size: 20px;
+}
+
+.td-esito>span>span>i.PARZIALE {
+    color: #ed9300;
+    font-size: 20px;
+}
+
+.td-esito>span>span>i.RESPINTO {
+    color: #950612;
+    font-size: 20px;
+}

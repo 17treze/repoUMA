@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="MEDIATOR_48NF.0" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id = "MEDIATOR_48NF.1" author="Massimo Nascivera">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+				START WITH 1
+				MAXVALUE 999999999999999999999999999
+				MINVALUE 1
+				NOCYCLE
+				NOCACHE
+				ORDER;
+
+			CREATE TABLE A4GT_LOGGING (
+				ID ${id.number.type} NOT NULL,
+				VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				UTENTE ${string.type}(500 CHAR) NOT NULL,
+				TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+				TABELLA ${string.type}(4000) NOT NULL,
+				ID_ENTITA NUMBER(19) NOT NULL,
+				DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+				CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		GRANT SELECT ON NXTNBR TO ${user.writer};
+		GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id = "MEDIATOR_48NF.2" author="Massimo Nascivera">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="PK_EVENTSTORED"/>
+			</column>
+			<column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false"/>
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false"/>
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)" defaultValueNumeric="0">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true"/>
+			</column>
+			<column name="USER_NAME" type="${string.type}(100)">
+				<constraints nullable="true"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+</databaseChangeLog>

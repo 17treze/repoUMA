@@ -1,0 +1,53 @@
+<p-tieredMenu #menu [style]="{color: 'black'}" [model]="items" [popup]="true"></p-tieredMenu>
+<div class="tophead">
+    <div class="ui-grid-fixed">
+
+
+        <a href="http://www.provincia.tn.it/" target="_blank" *ngIf="app.isHorizontal() && !app.isMobile()" class="topbar-logo"><img
+                alt="logo" src="assets/layout/images/logo_provincia.png" /> Provincia Autonoma di Trento <img alt="logo"
+                src="assets/layout/images/trentino-logo.png" /></a>
+
+
+        <div class="menu-btn-wrapper" style="display:none">
+            <a href="#" class="menu-btn" (click)="app.onMenuButtonClick($event)">
+                <i class="material-icons">&#xE5D2;</i>
+            </a>
+
+            <a href="#" class="topbar-menu-btn" (click)="app.onTopbarMobileMenuButtonClick($event)">
+                <i class="material-icons">&#xE853;</i>
+            </a>
+        </div>
+
+        <div class="menu-btn-wrapper">
+            <ul class="topbar-menu-btn" [ngClass]="{'topbar-menu-active': app.topbarMenuActive}" (click)="app.onTopbarMenuClick($event)" style="list-style-type:none;">
+                <li #profile class="profile-item" [ngClass]="{'active-topmenuitem': app.activeTopbarItem === profile}"
+                    (click)="app.onTopbarRootItemClick($event, profile)">
+                    <a [routerLink]="" (click)="menu.toggle($event)" style="text-decoration: none">
+                        <span class="topbar-item-name profile-name" style="vertical-align: middle;">{{userId}} </span>
+                        <button #btn type="button" pButton style="font-size: 16px;left: 8px;" label=" " class="topbar-item-name profile-name"><i class="pi pi-user"></i></button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div *ngIf="!isGis" class="layout-topbar" style="z-index:0;background-color: #00985a;">
+    <div class="ui-grid-fixed">
+        <a class="topbar-logo" *ngIf="!app.isMobile()">
+            <a href="/" style="text-decoration:none !important;"><img alt="logo" src="assets/layout/images/logo_appag.png" style="border: 1px solid #ffff;">
+                <h1 style="color: white;">APPAG Trento</h1>
+                <span style="color: white;">Sistema Informativo Integrato Agricoltura della Provincia Autonoma di Trento</span>
+            </a>
+            <!--    Momentaneamente commentantata perchè la funzione non è implementata
+            <span class="search-item">
+                <span class="md-inputfield">
+                    <input type="text" placeholder="Cerca" pInputText />
+                    <i class="topbar-icon material-icons">search</i>
+                </span>
+            </span>
+            -->
+
+        </a>
+    </div>
+</div>

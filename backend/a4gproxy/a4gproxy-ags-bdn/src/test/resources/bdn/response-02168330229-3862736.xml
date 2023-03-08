@@ -1,0 +1,1 @@
+<Get_Capi_Allevamento_PeriodoResponse xmlns="http://bdr.izs.it/webservices"><Get_Capi_Allevamento_PeriodoResult><root xmlns="http://bdr.izs.it/XMLSchema/ResponseQuery.xsd" type="doc"><error_info><error><id /><des /></error><info>0</info><warning /></error_info><dati /></root></Get_Capi_Allevamento_PeriodoResult></Get_Capi_Allevamento_PeriodoResponse>

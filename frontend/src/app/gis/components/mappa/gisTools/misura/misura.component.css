@@ -1,0 +1,35 @@
+.panel-misura {
+    position: absolute;
+    background: #ffffffde;
+    padding: 5px;
+    border-radius: 10px 0px 0px 10px;
+    z-index: 99999;
+    width: 195px;
+    right: 56px;
+    border-top: 2px solid #626262b8;
+    border-bottom: 2px solid #626262b8;
+    border-left: 2px solid #626262b8;
+}
+
+.panel-misura > div > div > select {
+    height: 26px;
+    padding: 0px 0px;
+}
+
+.panel-misura > div.p-grid {
+    float: left!important;
+}
+.panel-misura > div > div > label {
+    width: 40px;
+    height: 23px;
+    float:left;
+}
+.panel-misura > div > div > select {
+    height: 26px;
+    padding: 0px 0px;
+    width: 75%;
+    float: left;
+}
+.panel-misura > div.p-grid > div.p-col-12 {
+    padding: 8px 12px 0px;
+}

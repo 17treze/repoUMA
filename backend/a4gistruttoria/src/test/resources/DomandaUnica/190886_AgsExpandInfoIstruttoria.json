@@ -1,0 +1,549 @@
+{  
+   "infoGeneraliDomanda":{  
+      "pac":"PAC1420",
+      "tipoDomanda":"DU",
+      "campagna":2018,
+      "modulo":"PAGAMENTI DIRETTI",
+      "codModulo":"BPS_2018",
+      "cuaaIntestatario":"GNGMCR70P59H245W",
+      "ragioneSociale":"GANGI MARIA CRISTINA",
+      "numeroDomanda":190886,
+      "numeroDomandaRettificata":null,
+      "dataPresentazione":"2018-06-14T19:30:23.000+0200",
+      "codEnteCompilatore":"18",
+      "enteCompilatore":"CAA CIA - TRENTO - 001",
+      "dataProtocollazione":"2018-06-14T19:30:47.000+0200",
+      "dataPresentazOriginaria":null,
+      "dataProtocollazOriginaria":null
+   },
+   "controlliPresentazione":{  
+      "aggiornamentoFascicolo":"S",
+      "visioneAnomalie":"S",
+      "firmaDomanda":"S",
+      "archiviazioneDomanda":"S"
+   },
+   "richieste":{  
+      "sintesiRichieste":{  
+         "richiestaDisaccoppiato":true,
+         "richiestaSuperfici":true,
+         "richiestaZootecnia":false
+      }
+   },
+   "infoIstruttoriaDomanda":{  
+      "datiEleggibilita":[  
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082603,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":17,
+               "particella":"00057",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":1850,
+            "superficieSigeco":0,
+            "idParcella":701661,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082608,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00101",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":1,
+            "superficieSigeco":0,
+            "idParcella":701663,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082604,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":17,
+               "particella":"00164",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":546,
+            "superficieSigeco":0,
+            "idParcella":701661,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082606,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":84,
+               "particella":"00169",
+               "sub":" "
+            },
+            "codColtura3":"100-996-000",
+            "codColtura5":"685-000-000-000-000",
+            "superficieGis":1162,
+            "superficieSigeco":0,
+            "idParcella":701659,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082613,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00089",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":165,
+            "superficieSigeco":0,
+            "idParcella":701664,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082606,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":84,
+               "particella":"00169",
+               "sub":" "
+            },
+            "codColtura3":"160-111-000",
+            "codColtura5":"420-006-000-000-000",
+            "superficieGis":4478,
+            "superficieSigeco":0,
+            "idParcella":701659,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082606,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":84,
+               "particella":"00169",
+               "sub":" "
+            },
+            "codColtura3":"160-111-000",
+            "codColtura5":"420-006-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701660,
+            "livello":121
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082612,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00080",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":8283,
+            "superficieSigeco":0,
+            "idParcella":701664,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082601,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":12,
+               "particella":"00158",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":3232,
+            "superficieSigeco":0,
+            "idParcella":701662,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082614,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00104",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":3601,
+            "superficieSigeco":0,
+            "idParcella":701665,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082611,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00060",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":20278,
+            "superficieSigeco":0,
+            "idParcella":701663,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082610,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00070",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":12322,
+            "superficieSigeco":0,
+            "idParcella":701663,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082609,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00102",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":8453,
+            "superficieSigeco":0,
+            "idParcella":701667,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082607,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00071",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":19864,
+            "superficieSigeco":0,
+            "idParcella":701666,
+            "livello":111
+         },
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":4082606,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":84,
+               "particella":"00169",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":111,
+            "superficieSigeco":0,
+            "idParcella":701659,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":4082614,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00104",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701658,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":4082612,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00080",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701657,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"GDURO",
+            "particella":{  
+               "idParticella":4082613,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":98,
+               "particella":"00089",
+               "sub":" "
+            },
+            "codColtura3":"040-002-000",
+            "codColtura5":"002-011-000-000-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701657,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082609,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00102",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701673,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082603,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":17,
+               "particella":"00057",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701669,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082606,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":84,
+               "particella":"00169",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701668,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082607,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00071",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701672,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082601,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":12,
+               "particella":"00158",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701670,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082611,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00060",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701671,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082608,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00101",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701671,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082604,
+               "comune":"RESUTTANO (CL)",
+               "codNazionale":"H245",
+               "foglio":17,
+               "particella":"00164",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701669,
+            "livello":111
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"LEGUMIN",
+            "particella":{  
+               "idParticella":4082610,
+               "comune":"PETRALIA SOTTANA (PA)",
+               "codNazionale":"G511",
+               "foglio":85,
+               "particella":"00070",
+               "sub":" "
+            },
+            "codColtura3":"040-800-050",
+            "codColtura5":"800-002-050-043-000",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":701671,
+            "livello":111
+         }
+      ]
+   }
+}

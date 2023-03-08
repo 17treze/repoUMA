@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "A4G - Fascicolo Mediator",
+    "description": "Componente applicativo concepito per isolare le logiche trasversali ai vari moduli del fascicolo",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9007/fascicolo/mediator",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "StampaFascicoloController",
+      "description": "Espone i servizi di stampa inerenti il fascicolo aziendale"
+    },
+    {
+      "name": "FascicoloValidazioneController",
+      "description": "API per mediator"
+    },
+    {
+      "name": "ControlliCompletezzaController",
+      "description": "API per mediator"
+    }
+  ],
+  "paths": {
+    "/api/v1/fascicolo/{cuaa}/controllo-completezza": {
+      "get": {
+        "tags": [
+            "ControlliCompletezzaController"
+        ],
+        "summary": "Restituisce l'esito per ogni controllo di completezza del fascicolo. I controlli danno esituo TRUE se superati con successo, FALSE altrimenti",
+        "operationId": "getControlloCompletezzaFascicolo",
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "Cuaa azienda per cui si vogliono eseguire i controlli di completezza del fascicolo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/validazione-mandato": {
+      "post": {
+        "tags": [
+            "FascicoloValidazioneController"
+        ],
+        "operationId": "validazioneMandato",
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nextIdValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "schedaValidazioneFirmata": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/validazione-detenzione-autonoma": {
+      "post": {
+        "tags": [
+            "FascicoloValidazioneController"
+        ],
+        "operationId": "validazioneDetenzioneAutonoma",
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nextIdValidazione",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "schedaValidazioneFirmata": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/fascicolo/{cuaa}/stampa-fascicolo": {
+      "get": {
+        "tags": [
+            "StampaFascicoloController"
+        ],
+        "summary": "Stampa il PDF del fascicolo associato a un cuaa",
+        "operationId": "stampa",
+        "parameters": [
+          {
+            "name": "cuaa",
+            "in": "path",
+            "description": "Cuaa azienda per cui si vuole effettuare la stampa del fascicolo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/framework/events/{idEvent}/reprocess": {
+      "get": {
+        "tags": [
+            "event-store-controller"
+        ],
+        "operationId": "reprocessEvent",
+        "parameters": [
+          {
+            "name": "idEvent",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}

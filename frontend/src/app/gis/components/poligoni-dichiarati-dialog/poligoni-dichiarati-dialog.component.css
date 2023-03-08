@@ -1,0 +1,15 @@
+#dialog-dichiarati > gis-poligoni-dichiarati-dialog > p-dialog > div > div > div.ui-dialog-titlebar> div {
+    z-index: 9999;
+    position: relative;
+}
+#dialog-dichiarati > gis-poligoni-dichiarati-dialog > p-dialog > div > div > div.ui-dialog-titlebar.ui-widget-header > span {
+    padding: 0;
+}
+#dialog-dichiarati > gis-poligoni-dichiarati-dialog > p-dialog > div > div > div.ui-dialog-titlebar.ui-widget-header {
+    position: absolute;
+    z-index: 9999;
+    height: 45px;
+}
+.ui-dialog-content.ui-widget-content {
+    min-height: 60px;
+}

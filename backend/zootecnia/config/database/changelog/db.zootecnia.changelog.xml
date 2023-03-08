@@ -1,0 +1,480 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="ZOOTECNIA_33F.0" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE SEQUENCE NXTNBR
+            START WITH 1
+            MAXVALUE 999999999999999999999999999
+            MINVALUE 1
+            NOCYCLE
+            NOCACHE
+            ORDER;
+
+            CREATE TABLE A4GT_LOGGING (
+            ID ${id.number.type} NOT NULL,
+            VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+            UTENTE ${string.type}(500 CHAR) NOT NULL,
+            TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+            TABELLA ${string.type}(4000) NOT NULL,
+            ID_ENTITA NUMBER(19) NOT NULL,
+            DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+            CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+            ) TABLESPACE ${tablespace.data};
+        </sql>
+
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+            GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+        </sql>
+
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            GRANT SELECT ON NXTNBR TO ${user.writer};
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_33F.1" author="Gabriele Ninfa">
+        <createTable tableName="A4GT_PERSONA_ZOOTECNIA">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_PERSONA_ZOOTECNIA"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_FISCALE" type="${string.type}(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint columnNames="CODICE_FISCALE" tableName="A4GT_PERSONA_ZOOTECNIA" tablespace="${tablespace.index}" validate="true"/>
+        
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+        
+            CREATE TABLE A4GT_ALLEVAMENTO (
+                ID ${id.number.type} NOT NULL,
+                VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+                IDENTIFICATIVO VARCHAR(20),
+                IDENTIFICATIVO_FISCALE VARCHAR(16),
+                TIPOLOGIA_ALLEVAMENTO VARCHAR(100),
+                CF_PROPRIETARIO VARCHAR(16),
+                DENOMINAZIONE_PROPRIETARIO VARCHAR(200),
+                CF_DETENTORE VARCHAR(16),
+                DENOMINAZIONE_DETENTORE VARCHAR(200),
+                DT_INIZIO_DETENZIONE DATE,
+                DT_FINE_DETENZIONE DATE,
+                SOCCIDA VARCHAR(20),
+                SPECIE VARCHAR(100),
+                TIPOLOGIA_PRODUZIONE VARCHAR(100),
+                ORIENTAMENTO_PRODUTTIVO VARCHAR(100),
+                DT_APERTURA_ALLEVAMENTO DATE,
+                DT_CHIUSURA_ALLEVAMENTO DATE,
+                AUTORIZZAZIONE_SANITARIA_LATTE VARCHAR(20),
+                ID_PERSONA ${id.number.type},
+                CONSTRAINT PK_ALLEVAMENTO PRIMARY KEY (ID),
+                FOREIGN KEY (ID_PERSONA) REFERENCES A4GT_PERSONA_ZOOTECNIA (ID)
+            ) TABLESPACE ${tablespace.data};
+            
+            CREATE TABLE A4GT_STRUTTURA (
+                ID ${id.number.type} NOT NULL,
+                VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+                IDENTIFICATIVO VARCHAR(100),
+                INDIRIZZO VARCHAR(200),
+                CAP VARCHAR(100),
+                LOCALITA VARCHAR(200),
+                COMUNE VARCHAR(200),
+                LATITUDINE VARCHAR(100),
+                LONGITUDINE VARCHAR(100),
+                FOGLIO VARCHAR(100),
+                SEZIONE VARCHAR(100),
+                PARTICELLA VARCHAR(100),
+                SUBALTERNO VARCHAR(100),
+                ID_ALLEVAMENTO ${id.number.type},
+                CONSTRAINT PK_STRUTTURA PRIMARY KEY (ID),
+                FOREIGN KEY (ID_ALLEVAMENTO) REFERENCES A4GT_ALLEVAMENTO (ID)
+            ) TABLESPACE ${tablespace.data};
+            
+            GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_PERSONA_ZOOTECNIA TO ${user.writer};
+            GRANT SELECT ON A4GT_PERSONA_ZOOTECNIA TO ${user.reader};
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEVAMENTO TO ${user.writer};
+            GRANT SELECT ON A4GT_ALLEVAMENTO TO ${user.reader};
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_STRUTTURA TO ${user.writer};
+            GRANT SELECT ON A4GT_STRUTTURA TO ${user.reader};
+            
+            CREATE INDEX IDX_ALLEVAMENTO_PERSONA ON A4GT_ALLEVAMENTO (ID_PERSONA) TABLESPACE ${tablespace.index};
+            CREATE INDEX IDX_STRUTTURA_ALLEVAMENTO ON A4GT_STRUTTURA (ID_ALLEVAMENTO) TABLESPACE ${tablespace.index};
+            
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_33F.2" author="Gabriele Ninfa">
+    	<addColumn tableName="A4GT_ALLEVAMENTO" >
+			<column name="ID_STRUTTURA"
+					type="${id.number.type}">
+				<constraints foreignKeyName="FK_ALLEVAMENTO_STRUTTURA"
+							 referencedTableName="A4GT_STRUTTURA"
+							 referencedColumnNames="ID"
+							 nullable="true" />
+			</column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+        	ALTER TABLE A4GT_STRUTTURA
+			DROP COLUMN ID_ALLEVAMENTO;
+            
+            CREATE INDEX IDX_ALLEVAMENTO_STRUTTURA ON A4GT_ALLEVAMENTO (ID_STRUTTURA) TABLESPACE ${tablespace.index};
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.0" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_PERSONA_ZOOTECNIA ADD (foo VARCHAR2(16));
+            UPDATE A4GT_PERSONA_ZOOTECNIA SET foo = CODICE_FISCALE;
+            ALTER TABLE A4GT_PERSONA_ZOOTECNIA DROP COLUMN CODICE_FISCALE;
+            ALTER TABLE A4GT_PERSONA_ZOOTECNIA RENAME COLUMN foo TO CODICE_FISCALE;
+            ALTER TABLE A4GT_PERSONA_ZOOTECNIA MODIFY CODICE_FISCALE VARCHAR2( 16 ) NOT NULL;
+        </sql>
+        <addUniqueConstraint columnNames="CODICE_FISCALE"
+            constraintName="UIDX_PERSONA_CF"
+            tableName="A4GT_PERSONA_ZOOTECNIA"/>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.1" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">           
+            ALTER TABLE A4GT_ALLEVAMENTO ADD (foo ${id.number.type});
+            UPDATE A4GT_ALLEVAMENTO SET foo = ID_PERSONA;
+            ALTER TABLE A4GT_ALLEVAMENTO DROP COLUMN ID_PERSONA;
+            ALTER TABLE A4GT_ALLEVAMENTO RENAME COLUMN foo TO ID_PERSONA;
+        </sql>
+        <addForeignKeyConstraint
+             baseColumnNames="ID_PERSONA"
+             baseTableName="A4GT_ALLEVAMENTO"
+             constraintName="FK_ALLEVAMENTO_PERSONA"
+             referencedColumnNames="ID"
+             referencedTableName="A4GT_PERSONA_ZOOTECNIA"
+             />
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.2" author="Massimo Nascivera">
+         <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            CREATE INDEX IDX_ALLEVAMENTO_PERSONA ON A4GT_ALLEVAMENTO (ID_PERSONA) TABLESPACE ${tablespace.index};
+        </sql>
+    </changeSet>
+    
+	<changeSet id="ZOOTECNIA_35F.3" author="Gabriele Ninfa">
+		<createTable tableName="A4GT_FASCICOLO">
+			<column name="ID" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"
+			constraintName="PK_FASCICOLO" tableName="A4GT_FASCICOLO"
+			tablespace="${tablespace.index}" />
+		<addUniqueConstraint columnNames="ID_VALIDAZIONE, CUAA"
+            constraintName="UIDX_FASCICOLO_IDVAL_CUAA"
+            tableName="A4GT_FASCICOLO"/>
+		<createIndex indexName="IDX_FASCICOLO_IDVAL" tableName="A4GT_FASCICOLO">
+		      <column name="ID_VALIDAZIONE"/>
+		</createIndex>
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GT_FASCICOLO
+			SELECT ID, VERSIONE, CODICE_FISCALE, 0
+			FROM A4GT_PERSONA_ZOOTECNIA;
+		</sql>
+		
+	</changeSet>
+	
+	<changeSet id="ZOOTECNIA_35F.4" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_STRUTTURA">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_STRUTTURA SET ID_VALIDAZIONE = 0;
+		</sql>
+		<addColumn tableName="A4GT_ALLEVAMENTO">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		    <column name="STRUTTURA_ID_VALIDAZIONE" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		    <column name="FASCICOLO_ID_VALIDAZIONE" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_ALLEVAMENTO SET ID_VALIDAZIONE = 0, STRUTTURA_ID_VALIDAZIONE = 0, FASCICOLO_ID_VALIDAZIONE = 0;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ZOOTECNIA_35F.5" author="Gabriele Ninfa">
+        <addNotNullConstraint tableName="A4GT_STRUTTURA" columnName="ID_VALIDAZIONE" defaultNullValue="0"/>
+        <addNotNullConstraint tableName="A4GT_ALLEVAMENTO" columnName="ID_VALIDAZIONE" defaultNullValue="0"/>
+        <addNotNullConstraint tableName="A4GT_ALLEVAMENTO" columnName="STRUTTURA_ID_VALIDAZIONE" defaultNullValue="0"/>
+        <addNotNullConstraint tableName="A4GT_ALLEVAMENTO" columnName="FASCICOLO_ID_VALIDAZIONE" defaultNullValue="0"/>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.6" author="Gabriele Ninfa">
+    	<dropForeignKeyConstraint baseTableName="A4GT_ALLEVAMENTO"
+							  constraintName="FK_ALLEVAMENTO_PERSONA"/>
+		<dropForeignKeyConstraint baseTableName="A4GT_ALLEVAMENTO"
+							  constraintName="FK_ALLEVAMENTO_STRUTTURA"/>
+		<dropPrimaryKey constraintName="PK_STRUTTURA"  
+			dropIndex="true"             
+		    tableName="A4GT_STRUTTURA"/>
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"  
+			constraintName="PK_STRUTTURA"  
+			tableName="A4GT_STRUTTURA"  
+			tablespace="${tablespace.index}"/>
+		<dropPrimaryKey constraintName="PK_ALLEVAMENTO"  
+			dropIndex="true"             
+		    tableName="A4GT_ALLEVAMENTO"/>
+		<addPrimaryKey columnNames="ID, ID_VALIDAZIONE"  
+			constraintName="PK_ALLEVAMENTO"  
+			tableName="A4GT_ALLEVAMENTO"  
+			tablespace="${tablespace.index}"/>
+		<addForeignKeyConstraint baseColumnNames="ID_STRUTTURA, STRUTTURA_ID_VALIDAZIONE"
+			baseTableName="A4GT_ALLEVAMENTO"
+			constraintName="FK_ALLEVAMENTO_STRUTTURA"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_STRUTTURA"/>
+		<addColumn tableName="A4GT_ALLEVAMENTO">
+			<column name="FASCICOLO_ID" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		</addColumn>
+		<sql endDelimiter=";" splitStatements="true">
+			UPDATE A4GT_ALLEVAMENTO SET FASCICOLO_ID = ID_PERSONA;
+		</sql>
+		<addNotNullConstraint tableName="A4GT_ALLEVAMENTO" columnName="FASCICOLO_ID" defaultNullValue="0"/>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.7" author="Gabriele Ninfa">
+    	<addForeignKeyConstraint baseColumnNames="FASCICOLO_ID, FASCICOLO_ID_VALIDAZIONE"
+			baseTableName="A4GT_ALLEVAMENTO"
+			constraintName="FK_ALLEVAMENTO_FASCICOLO"
+			referencedColumnNames="ID, ID_VALIDAZIONE"
+			referencedTableName="A4GT_FASCICOLO"/>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.8" author="Gabriele Ninfa">
+    	<createIndex indexName="IDX_STRUTTURA_IDVAL" tableName="A4GT_STRUTTURA">
+		      <column name="ID_VALIDAZIONE"/>
+		</createIndex>
+		<dropIndex tableName="A4GT_ALLEVAMENTO" indexName="IDX_ALLEVAMENTO_STRUTTURA"/>
+		<createIndex indexName="IDX_ALLEVAMENTO_STRUTTURA" tableName="A4GT_ALLEVAMENTO">
+		      <column name="ID_STRUTTURA"/>
+		      <column name="STRUTTURA_ID_VALIDAZIONE"/>
+		</createIndex>
+		<createIndex indexName="IDX_ALLEV_STRUTTURA_ID_VAL" tableName="A4GT_ALLEVAMENTO">
+		      <column name="STRUTTURA_ID_VALIDAZIONE"/>
+		</createIndex>
+		<createIndex indexName="IDX_ALLEV_FASCICOLO_ID_VAL" tableName="A4GT_ALLEVAMENTO">
+		      <column name="FASCICOLO_ID_VALIDAZIONE"/>
+		</createIndex>
+		<createIndex indexName="IDX_ALLEV_FASCICOLO_ID" tableName="A4GT_ALLEVAMENTO">
+		      <column name="FASCICOLO_ID"/>
+		</createIndex>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.9" author="Gabriele Ninfa">
+    	<createIndex indexName="IDX_ALLEVAMENTO_FASCICOLO" tableName="A4GT_ALLEVAMENTO">
+		      <column name="FASCICOLO_ID"/>
+		      <column name="FASCICOLO_ID_VALIDAZIONE"/>
+		</createIndex>
+		<dropColumn tableName="A4GT_ALLEVAMENTO">
+            	<column  name="ID_PERSONA"/>
+            </dropColumn>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_35F.10" author="Gabriele Ninfa">
+    	<dropTable cascadeConstraints="true" tableName="A4GT_PERSONA_ZOOTECNIA"/>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_36F.0" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_FASCICOLO TO ${user.writer};
+            GRANT SELECT ON A4GT_FASCICOLO TO ${user.reader};
+        </sql>
+    </changeSet>
+    
+    <changeSet id = "ZOOTECNIA_36F.1" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="STATO" type="${string.type}(30)"/>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ZOOTECNIA_36F.2" author="Gabriele Ninfa">
+		<dropColumn tableName="A4GT_FASCICOLO">
+            	<column  name="STATO"/>
+            </dropColumn>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_36F.3" author="Gabriele Ninfa">
+		<addColumn tableName="A4GT_STRUTTURA">
+			<column name="CUAA" type="${string.type}(16)"/>
+		</addColumn>
+		<addUniqueConstraint columnNames="IDENTIFICATIVO, CUAA, ID_VALIDAZIONE"
+            constraintName="UIDX_STRUT_IDVAL_CUAA_IDENTIF"
+            tableName="A4GT_STRUTTURA"/>
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+            UPDATE a4gt_struttura s
+			SET s.cuaa = (SELECT DISTINCT cuaa
+			              FROM a4gt_fascicolo f
+			              WHERE f.ID = (SELECT DISTINCT fascicolo_id
+			                            FROM a4gt_allevamento A
+			                            WHERE A.id_struttura = s.ID));
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_36F.4" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_LOGGING">
+			<column name="ID_VALIDAZIONE" type="${version.number.type}">
+		    	<constraints nullable="true" />
+		    </column>
+		</addColumn>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_38F.0" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true">           
+            CREATE TABLE A4GT_LOGGING_VALIDAZIONE (
+            ID ${id.number.type} NOT NULL,
+            ID_VALIDAZIONE ${version.number.type},
+            VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+            UTENTE ${string.type}(500 CHAR) NOT NULL,
+            TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+            TABELLA ${string.type}(4000) NOT NULL,
+            ID_ENTITA NUMBER(19) NOT NULL,
+            DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+            CONSTRAINT A4GT_LOGGING_VALIDAZIONE_PK PRIMARY KEY (ID)
+            ) TABLESPACE ${tablespace.data};
+        </sql>
+
+        <sql endDelimiter=";" splitStatements="true" dbms="oracle">            
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING_VALIDAZIONE TO ${user.writer};
+        </sql>
+    </changeSet>
+     
+    <changeSet id="ZOOTECNIA_38F.1" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true">
+            INSERT INTO A4GT_LOGGING_VALIDAZIONE(ID, ID_VALIDAZIONE, VERSIONE, UTENTE, TIPO_EVENTO, TABELLA, ID_ENTITA, DT_EVENTO)
+            SELECT ID, ID_VALIDAZIONE, VERSIONE, UTENTE, TIPO_EVENTO, TABELLA, ID_ENTITA, DT_EVENTO
+            FROM A4GT_LOGGING
+            WHERE ID_VALIDAZIONE IS NOT NULL;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_38F.2" author="Massimo Nascivera">
+        <sql endDelimiter=";" splitStatements="true">
+            DELETE FROM A4GT_LOGGING
+            WHERE ID_VALIDAZIONE IS NOT NULL;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_38F.3" author="Massimo Nascivera">
+        <dropColumn tableName="A4GT_LOGGING">
+            <column name="ID_VALIDAZIONE"/>
+        </dropColumn>   
+    </changeSet>
+    
+    <changeSet id = "ZOOTECNIA_40F.0" author="Massimo Nascivera">
+        <createTable tableName="A4GT_EVENTSTORED">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="PK_EVENTSTORED"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EVENTO" type="${string.type}(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JSON_EVENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATA_INSERIMENTO" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMERO_RETRY" type="NUMBER(3)" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ERRORE" type="CLOB">
+                <constraints nullable="true"/>
+            </column>
+            <column name="USER_NAME" type="${string.type}(100)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT, INSERT, UPDATE, DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ZOOTECNIA_41F.0" author="Marco Dalla Torre">
+		<addColumn tableName="A4GT_FASCICOLO">
+			<column name="DT_AGGIORNAMENTO_FONTI_ESTERNE" type="DATE"/>
+		</addColumn>
+	</changeSet>
+
+    <changeSet id="ZOOTECNIA_49NF.0" author="Massimo Nascivera">
+        <createTable tableName="A4GT_CONTROLLO_COMPLETEZZA">
+            <column name="ID" type="${id.number.type}"></column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="CUAA" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="TIPO_CONTROLLO" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ESITO" type="${id.number.type}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_CONTROLLO" type="${id.number.type}">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DATA_ESECUZIONE" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UTENTE" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="ID"
+                       constraintName="PK_CONTROLLO_COMPLETEZZA"
+                       tableName="A4GT_CONTROLLO_COMPLETEZZA"
+                       tablespace="${tablespace.index}"/>
+        <addUniqueConstraint columnNames="ID, CUAA"
+                             constraintName="UIDX_CONTROLLO_ID_CUAA"
+                             tableName="A4GT_CONTROLLO_COMPLETEZZA"/>
+        <sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.writer};
+            GRANT SELECT ON A4GT_CONTROLLO_COMPLETEZZA TO ${user.reader};
+        </sql>
+    </changeSet>
+    <changeSet id="ZOOTECNIA_49NF.1" author="Massimo Nascivera">
+        <dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="DATA_ESECUZIONE"/>
+    </changeSet>
+    <changeSet id="ZOOTECNIA_49NF.2" author="Massimo Nascivera">
+        <dropNotNullConstraint tableName="A4GT_CONTROLLO_COMPLETEZZA" columnName="ESITO"/>
+    </changeSet>
+</databaseChangeLog>

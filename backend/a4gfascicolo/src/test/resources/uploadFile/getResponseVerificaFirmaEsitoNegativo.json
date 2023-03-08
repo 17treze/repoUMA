@@ -1,0 +1,23 @@
+{
+    "warningFault": [
+        {
+            "subjectCN": "Errore globale in deSign/signedData",
+            "subjectDN": "Errore globale in deSign/signedData",
+            "status": "KO",
+            "errorCode": "1403",
+            "errorMsg": "Il file non contiene una busta PKCS#7"
+        }
+    ],
+    "dettaglioFirmaDigitale": {
+        "datiFirmatari": [],
+        "parteFirmata": null,
+        "marcaDetached": null,
+        "datiGeneraliVerifica": "<deSign controlloCACRL=\"abilitato\" controlloCRLPKCS7=\"abilitato\" controlloCRLTS=\"abilitato\" controlloFirmeAnnidiate=\"appiattito\" controlloSHA1Agosto2010=\"abilitato\" controlloSHA1Luglio2011=\"forte\" controlloSigningCertificateAttr=\"disabilitato\" controlloValidita=\"abilitato\" downloadCRL=\"scarica quando e' scaduta\" release=\"Java 3.3.20\" releaseDate=\"21/12/2016\" serverRelease=\"3.4.2\" verificaTS101903=\"abilitata\">\n<!--Copyright (C) 2007 Metaware S.p.A. All rights reserved-->\n<!--Author: Maurizio Caneve (firma.digitale@infocert.it)-->\n    <signedData filename=\"\">\n        <errorCode>1403</errorCode>\n        <errorMessage>Il file non contiene una busta PKCS#7</errorMessage>\n        <status>KO</status>\n    </signedData>\n</deSign>",
+        "dataVerificaFirma": null,
+        "fileMarcato": false
+    },
+    "documento": {
+        "fileOriginale": "",
+        "mediaType": null
+    }
+}

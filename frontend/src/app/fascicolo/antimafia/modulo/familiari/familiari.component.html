@@ -1,0 +1,215 @@
+<div class="boxgrey layout-actionmenu">
+    <p-toast position="top-center" key='generic' [baseZIndex]="50000"></p-toast>
+
+    <p-toast position="center" key="checkDichiarazione" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirmCheckDichiarazione()" label="Si" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onRejectCheckDichiarazione()" label="No" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+
+    <!--INIZIO CTRL-BTN-UPLOAD-01 - CONTROLLO CHE VERIFICA LA PRESENZA DI UN FILE GIA' CARICATO PRIMA DI CARICARNE UN ALTRO-->
+    <p-toast position="center" key="warn-already-uploadedFile" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirmHasAlreadyUploadedFile()" label="Si" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onRejectHasAlreadyUploadedFile()" label="No" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+    <!--FINE CTRL-BTN-UPLOAD-01  -->
+
+    <div>
+        <h3 class="w-auto">{{textTitle}}
+             <span><a href="./assets/pages/informativa-familiari/informativa-familiari.html" target="_blank"> ? </a></span>
+        </h3>
+        <div class="table-responsive" margin-top="30px" *ngIf="this.listaSoggettiTable.length > 0; else noContent ">
+
+            <p-table [columns]="cols" [value]="listaSoggettiTable" [autoLayout]="true" [paginator]="true" [rows]="5"
+                [responsive]="true">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-soggetto let-i="rowIndex">
+                    <tr>
+                        <td>{{soggetto.cognome}}</td>
+                        <td>{{soggetto.nome}}</td>
+                        <td>{{soggetto.codiceFiscale}}</td>
+                        <td>{{soggetto.dataNascita}}</td>
+                        <td>{{soggetto.carica[0].tipologia}}</td>
+                        <td>{{ (soggetto.carica[0].dataInizio ) ? soggetto.carica[0].dataInizio : labels.nd }}</td>
+                        <td>{{ (soggetto.carica[0].dataFine ) ? soggetto.carica[0].dataFine : labels.illimitata }}</td>
+                        <td>
+                            <p-checkbox #primeCheckBox [(ngModel)]="soggetto.carica[0].selezionato" binary="true"
+                                (onChange)="compilazioneDichiarazione(soggetto,$event,primeCheckBox)"></p-checkbox>
+                        <td>
+                            <action-menu #actionMenu [item]="model" [reset]="reset" (click)="onDropdownMenuOpen(i,actionMenu,soggetto)"></action-menu>
+                            <input type="file" #file onclick="this.value = null" (change)="onFileChange($event)" accept=".p7m, .pdf"
+                                class="inputUploadFile" style="display: none">
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                        <td [attr.colspan]="10">
+                            Nessun contenuto disponibile
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <br />
+        <div *ngIf="soggettoSelezionato" class="contenitore_familiari">
+            <div class="ui-g">
+                <div class="ui-g-9">
+                    <h3 style="margin-bottom:0px;">Elenco familiari conviventi di {{soggettoSelezionato.cognome}}
+                        {{soggettoSelezionato.nome}}</h3>
+                </div>
+                <div class="ui-g-3 addfamiliari">
+                    <button pButton type="button" icon="ui-icon-add" title="Reply" class="remove-btn" (click)="aggiungiFamiliare()"></button> AGGIUNGI FAMILIARE
+                </div>
+               
+            </div>
+            <div *ngIf="!this.soggettoSelezionato.familiariConviventi || this.soggettoSelezionato.familiariConviventi.length == 0">
+                <p-checkbox [(ngModel)]="soggettoSelezionato.carica[0].dichiarazione" binary="true" label="Dichiaro che NON ci sono famigliari conviventi per il soggetto"
+                    (onChange)="onChangeDichiarazione($event)"></p-checkbox>
+            </div>
+
+
+            <div class="ui-g" *ngFor="let familiare of this.soggettoSelezionato.familiariConviventi; let i = index">
+                <div class="ui-g-12">
+                    <div class="box-familiare">
+                    <p-panel #familiarePanel [toggleable]="true" [collapsed]="true">
+                        <p-header>
+                            <div class="ui-g">
+                                    <div class="ui-g-1"><img  src="assets/layout/images/cittadino.png" style="width:80%;" ></div>
+                                <div class="ui-g-4 titlefamiliari">
+                                   <h4>{{familiare.nome}} {{familiare.cognome}}</h4>
+                                    <div *ngIf="!familiare.codiceFiscale" class="input-group mb-3">
+                                        <input #inputCodiceFiscale type="text" class="form-control" placeholder="Codice Fiscale"
+                                            aria-label="Codice Fiscale" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button appDebounceClick pButton class="btn btn-outline-secondary" type="button"
+                                                (debounceClick)="cercaPerCodiceFiscale(inputCodiceFiscale.value,familiare,familiarePanel,$event)"><i style="margin-top:7px;" class="material-icons">
+                                                        search
+                                                        </i></button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="familiare.codiceFiscale">
+                                        {{familiare.codiceFiscale}}
+                                    </div>
+                                </div>
+                                
+                                <div class="ui-g-4 ui-fluid">
+                                    <p-dropdown placeholder="Seleziona una opzione" [options]="gradoParentelaItems"
+                                        [(ngModel)]="familiare.gradoParentela" (onChange)="onGradoParentelaChange($event)"
+                                        class="dropdown"></p-dropdown>
+                                </div>
+                               
+                                <div class="ui-g-2"> 
+                                    <button pButton type="button" icon="ui-icon-close" title="Elimina" class="remove-btn blue-grey-btn"
+                                        style="margin-right:4px;" (click)=eliminaFamiliare(familiare)></button>
+                                </div>
+
+                                <div class="ui-g-1">
+                                    
+                                </div>
+
+                            </div>
+                            
+
+
+                        </p-header>
+                        <div class="ui-g">
+                            <div class="ui-g-3">
+                                <strong>{{labels.dataNascita}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.dataNascita | date: 'dd/MM/yyyy'}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.residenza}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.residenza.indirizzo}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.comuneNascita}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.comuneNascita}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.residenzaComune}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.residenza.comune}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.provinciaNascita}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.provinciaNascita}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.residenzaProvincia}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.residenza.provincia}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.sesso}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.sesso}}</label>
+                            </div>
+                            <div class="ui-g-3">
+                                <strong>{{labels.residenzaCAP}}</strong>
+                            </div>
+                            <div class="ui-g-3">
+                                <label>{{familiare.residenza.CAP}}</label>
+                            </div>
+                        </div>
+                    </p-panel>
+
+                </div></div>
+            </div>
+            <div>
+                <div style="text-align:right; margin-right:10px;">
+                <button appDebounceClick pButton label="SALVA" class="white-btn" (debounceClick)="salvaFamiliari()"></button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-step-action (next)="conferma()"></app-step-action>
+<!-- messaggio di errore -->
+<ng-template #noContent> Nessun contenuto disponibile </ng-template>

@@ -1,0 +1,47 @@
+<app-intestazione-uma [ctx]="tipoIntestazioneEnum?.GESTIONE_CARBURANTE_IN_ESUBERO"></app-intestazione-uma>
+
+<div class="ui-grid-fixed mt-5">
+  <div class="boxgrey">
+    <div class="p-col block-100">
+
+      <!-- Gestione esubero carburante header -->
+      <div class="ui-header-sezioni-uma">
+        <a class="auto-cursor">
+          <div class="p-grid p-justify-between m-0">
+            <div class="p-grid p-align-center m-0 p-2">
+              <div class="p-col p-col-align-center">
+                <strong>{{"UMA.GESTIONE_CARBURANTE_IN_ESUBERO" | translate | uppercase}}</strong>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+<!-- Gestione esubero carburante indice sezioni -->
+      <div class="p-grid p-nogutter">
+        <div class="p-col-6 p-0 cell border-right-0">
+          <div
+            class="pl-2 p-0 py-1 cell-content"
+            (click)="onClickTrasferimenti()">
+            <img
+              src="assets/img/icons/uma-icon/icon-prelievi.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.TRASFERIMENTI" | translate }}
+          </div>
+        </div>
+
+        <div class="p-col-6 p-0 cell">
+          <div
+            class="pl-2 p-0 py-1 cell-content"
+            (click)="onClickRavvedimentoOperoso()">
+            <img
+              src="assets/img/icons/uma-icon/icon-ricevuti.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.RAVVEDIMENTO_OPEROSO" | translate }}
+          </div>
+        </div>
+      </div>
+
+      </div>
+      </div>
+      </div>

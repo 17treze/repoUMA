@@ -1,0 +1,34 @@
+.pallinoVerde {
+    
+     border-radius: 50%; 
+     background-color: #8dbe26;
+      height: 12px;
+       width: 12px; 
+      margin: auto;
+}
+
+
+
+.header{
+    width: 100%;
+}
+
+.pallinoRosso{
+    
+    border-radius: 50%; 
+    background-color: #f13c3c;
+     height: 12px;
+      width: 12px; 
+     margin: auto;
+}
+
+.colori-per-numeri {
+    background: #00985a;
+    line-height: 0px;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 30px;
+    display: inline;
+    padding: 0px 7px;
+    }
+

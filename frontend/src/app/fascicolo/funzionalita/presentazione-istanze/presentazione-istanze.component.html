@@ -1,0 +1,212 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed">
+
+    <!-- <H6><b>{{ "UMA.PRESENTAZIONE_ISTANZE" | translate }}</b></H6> -->
+    <hr
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-antimafia.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "UMA.ANTIMAFIA" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onClickAntimafia()">
+                  {{ "UMA.DOMANDA_ANTIMAFIA" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <br>
+
+    <hr
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-domandaunica.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "UMA.DOMANDA_UNICA" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a>
+                  {{ "UMA.DICHIARAZIONE_UNICA" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <br>
+
+    <hr
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+    <div class="row">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-fascicolo.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "UMA.FASCICOLO" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onMandato()"
+                  *ngIf="linkAttivo">
+                  {{ "UMA.MANDATO" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+                <a *ngIf="!linkAttivo">
+                  {{ "UMA.MANDATO" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <br>
+
+    <hr
+      align="center"
+      size="1"
+      width="100%"
+      color="black"
+      noshade>
+
+    <!-- SEZIONE UMA -->
+    <div
+      class="row">
+      <div class="col-4">
+        <H5>
+          <img
+            src="assets/img/ico-UMA.jpg"
+            class="d-inline-block mr-3">
+          <b>{{ "UMA.UTENTI_MOTORI_AGRICOLI" | translate }}</b>
+        </H5>
+      </div>
+      <div class="col-8">
+        <table>
+          <tbody class="ui-table-tbody display-table">
+            <tr>
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onClickRichiestaRettificaUma()">
+                  {{ "UMA.RICHIESTA_O_RETTIFICA_CARBURANTE" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onClickDichiarazioneConsumi()">
+                  {{ "UMA.DICHIARAZIONE_CONSUMI.DICHIARAZIONE_CONSUMI" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td class="p-col-12">
+                <a
+                  [routerLink]
+                  (click)="onClickRettificaCarburante()">
+                  {{ "UMA.RETTIFICA_RICHIESTA_CARBURANTE" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <p-toast
+      position="center"
+      key="checkModificaDomanda"
+      (onClose)="onRejectCheckModificaDomanda()"
+      [modal]="true"
+      [baseZIndex]="5000">
+      <ng-template
+        let-message
+        pTemplate="message">
+        <div style="text-align: center">
+          <i
+            class="pi pi-exclamation-triangle"
+            style="font-size: 3em"></i>
+          <h3>{{message.summary}}</h3>
+          <p>{{message.detail}}</p>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-6">
+            <button
+              type="button"
+              pButton
+              (click)="onConfirmCheckModificaDomanda()"
+              label="Si"
+              class="ui-button-success"></button>
+          </div>
+          <div class="ui-g-6">
+            <button
+              type="button"
+              pButton
+              (click)="onRejectCheckModificaDomanda()"
+              label="No"
+              class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </ng-template>
+    </p-toast>
+    <p-toast
+      key="tst"
+      [style]="{ marginTop: '70px' }"></p-toast>
+  </div>
+</div>

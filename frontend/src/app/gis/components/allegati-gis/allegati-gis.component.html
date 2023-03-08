@@ -1,0 +1,36 @@
+<div class="content-allegati"
+infiniteScroll
+[infiniteScrollDistance]="2"
+[infiniteScrollThrottle]="50"
+(scrolled)="onScroll()"
+[immediateCheck]="true"
+[scrollWindow]="false">
+    <div class="table-allegati mgTop10">
+        <div class="thead-allegati">
+            <div class="row">
+                <div class="col col-th">Allegato</div>
+                <div class="col col-th tab100">Data</div>
+                <div class="col col-th tab100">Peso</div>
+                <div class="col col-th">Descrizione</div>
+                <div class="col col-th">CF</div>
+                <div class="col col-th">Profilo</div>
+            </div>
+        </div>
+        <div class="tbody-allegati">
+            <div class="row" *ngFor="let a of allegatiEvent.allegati; let i = index">
+                <div class="col col-tb td-download">
+                    <span><i class="pi pi-file" style="font-size: 30px;vertical-align: middle;"></i> </span>
+                    <span title="{{a.nomeFile}}" class="download-allegato" (click)="downloadAllegato(a.id)"> {{a.nomeFile}} </span> 
+                </div>
+                <div class="col col-tb tab100">{{a.dataInserimento | date: 'dd/MM/yyyy'}}</div>
+                <div class="col col-tb tab100">{{ a?.dimensione | fileSize }}</div>
+                <div class="col col-tb td-download"><span title="{{a.descrizione}}"> {{a.descrizione}} </span></div>
+                <div class="col col-tb">{{a.utente}}</div>
+                <div class="col col-tb">{{a.profiloUtente}}
+                        <i *ngIf="!richiestaConclusa()" (click)="cancellaAllegato(a.id)"class="pi pi-times-circle" style="font-size: 30px;vertical-align: middle;"></i>
+                </div>
+            </div>
+            <div class="col no-allegati" *ngIf="allegatiEvent.allegati && allegatiEvent.allegati.length == 0 && !loadingList">Non ci sono allegati</div>
+        </div>
+    </div>
+ </div>   

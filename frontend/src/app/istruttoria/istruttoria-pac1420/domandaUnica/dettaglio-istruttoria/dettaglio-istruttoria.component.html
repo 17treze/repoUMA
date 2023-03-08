@@ -1,0 +1,103 @@
+<div class="ui-grid-fixed">
+	<div *ngIf='getIstruttoriaCorrente()'>
+		<div class="funzioni-grid tab-new">
+			<p-tabView [activeIndex]="index">
+				<p-tabPanel>
+					<ng-template pTemplate="header">
+						<span class="ui-tabview-title ng-star-inserted">
+							<h4><b>Dati di dettaglio istruttoria</b></h4>
+						</span>
+					</ng-template>
+					<ng-template pTemplate="content">
+						<app-dettaglio-istruttoria-dati (aggiornaDomandeCounters)="aggiornaDomandeCounters($event)">
+						</app-dettaglio-istruttoria-dati>
+					</ng-template>
+				</p-tabPanel>
+				<p-tabPanel>
+					<ng-template pTemplate="header">
+						<span class="ui-tabview-title ng-star-inserted">
+							<h4><b>Dati di dettaglio istruttoria ACZ</b></h4>
+						</span>
+					</ng-template>
+					<ng-template pTemplate="content">
+						<app-dettaglio-istruttoria-dati-acz [premioAggregato]="premioAggregato"
+							(aggiornaPremioAggregato)=aggiornaPremioAggregato($event)>
+						</app-dettaglio-istruttoria-dati-acz>
+					</ng-template>
+				</p-tabPanel>
+				<p-tabPanel>
+					<ng-template pTemplate="header">
+						<span class="ui-tabview-title ng-star-inserted">
+							<h4><b>Dati di dettaglio istruttoria ACS</b></h4>
+						</span>
+					</ng-template>
+					<ng-template pTemplate="content">
+						<app-dettaglio-istruttoria-dati-acs [premioAggregatoACS]="premioAggregatoACS"
+							(aggiornaPremioAggregatoACS)=aggiornaPremioAggregatoACS($event)>
+						</app-dettaglio-istruttoria-dati-acs>
+					</ng-template>
+				</p-tabPanel>
+			</p-tabView>
+		</div>
+		<router-outlet></router-outlet>
+
+
+		<h2 class="h2title"><span>Riepilogo stato domande</span></h2>
+		<div class="">
+			<div class="ui-g">
+				<div class="ui-g-3">
+					<app-stato-domande-card [riepilogoStatoDomande]="listaRiepilogoStati[0]"
+						[dettaglioIstruttoria]="this"></app-stato-domande-card>
+					<div *ngIf="this.showProgressbarRicevibilita == true">
+						<div class="ui-g">
+							<div class="ui-g-4">Completamento</div>
+							<div class="ui-g-8">
+								<p-progressBar [value]="getPercentualeAvanzamentoProcesso('RICEV_AGS')"></p-progressBar>
+							</div>
+
+							<div class="ui-g-12 centerButton">
+								<button pButton type="button" label="Ok" class="ui-button-rounded ui-button-success"
+									(click)="collassaDivProgressBar('RICEV_AGS'); refresh()"
+									[disabled]="disableOkRicevibilita"></button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="ui-g-3">
+					<app-stato-domande-card [riepilogoStatoDomande]="listaRiepilogoStati[1]"
+						[dettaglioIstruttoria]="this"></app-stato-domande-card>
+					<div *ngIf=" this.showProgressbarIstruttoria == true">
+						<div class="ui-g">
+							<div class="ui-g-4">Completamento</div>
+							<div class="ui-g-8">
+								<p-progressBar [value]="getPercentualeAvanzamentoProcesso('AVV_IST')"></p-progressBar>
+							</div>
+
+
+							<div class="ui-g-12 centerButton">
+								<button pButton type="button" label="Ok" class="ui-button-rounded ui-button-success"
+									(click)="collassaDivProgressBar('AVV_IST'); refresh()"
+									[disabled]="disableOkIstruttoria"></button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="ui-g-3">
+					<app-stato-domande-card [riepilogoStatoDomande]="listaRiepilogoStati[2]"
+						[dettaglioIstruttoria]="this"></app-stato-domande-card>
+				</div>
+				<div class="ui-g-3">
+					<app-stato-domande-card [riepilogoStatoDomande]="listaRiepilogoStati[3]"
+						[dettaglioIstruttoria]="this"></app-stato-domande-card>
+				</div>
+				<!-- fine riga-->
+
+
+			</div>
+
+
+		</div>
+	</div>
+</div>

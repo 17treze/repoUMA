@@ -1,0 +1,66 @@
+<p-toast
+  key="tst-lav-altre"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="p-grid ui-fluid">
+  <form
+    class="p-grid m-0 w-100"
+    novalidate
+    [formGroup]="raggruppamentoForm">
+    <div class="p-col">
+
+      <!-- Prima riga Raggruppamento : Save -->
+      <div class="p-grid">
+        <div class="p-grid p-align-center py-4 w-100">
+          <div class="p-col">
+            <div class="p-grid m-0 p-align-center color-primary">
+              <img src="assets/img/icons/uma-icon/icon-altre_black.svg">
+              <span class="ml-2">
+                <strong class="fs-20">{{ 'UMA.LAVORAZIONI_ALTRE' | translate }} / Raggruppamenti</strong>
+              </span>
+            </div>
+          </div>
+          <div
+            class="p-col-fixed"
+            *ngIf="inCompilazione">
+            <button
+              pButton
+              class="w-10m"
+              type="button"
+              label="SALVA"
+              (click)="saveLavorazioni()"></button>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Accordion -->
+        <div class="p-grid w-100">
+          <div
+            class="p-col"
+            *ngIf="raggruppamenti?.length">
+            <p-accordion
+              #accordion
+              (onOpen)="onSelectAccordion($event)">
+              <ng-container *ngFor="let raggruppamento of raggruppamenti; let selectedAccordion = index">
+                <p-accordionTab>
+                  <p-header>
+                    {{raggruppamento.indice}} {{raggruppamento.nome}}
+                    <i
+                      class="accordion-icon pi pi-check"
+                      *ngIf="quantitaLavorata[selectedAccordion]>0"></i>
+                  </p-header>
+                  <div *ngFor="let table of tables; let i = index">
+                    <app-a4g-multi-table
+                      [title]="table.title"
+                      [cols]="colsArray[i]"
+                      [values]="table.datasource"
+                      [readonly]="!inCompilazione"
+                      (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                  </div>
+                </p-accordionTab>
+              </ng-container>
+            </p-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

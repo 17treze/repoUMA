@@ -1,0 +1,27 @@
+<getAzienda_STRResponse xmlns="http://bdr.izs.it/webservices">
+   <getAzienda_STRResult><![CDATA[<root xmlns="http://bdr.izs.it/XMLSchema/ResponseQuery.xsd" type="doc"><error_info><error><id /><des /></error><info>1</info><warning /></error_info><dati><dsAZIENDE_G xmlns="http://bdr.izs.it/dsAZIENDE_G.xsd">
+  <AZIENDE>
+    <AZIENDA_ID>560531</AZIENDA_ID>
+    <CODICE>012TN004</CODICE>
+    <LONGITUDINE>10.633360</LONGITUDINE>
+    <LATITUDINE>45.942710</LATITUDINE>
+    <CAP>38085</CAP>
+    <INDIRIZZO>VIA AL PONTE 14</INDIRIZZO>
+    <DT_APERTURA>1960-01-01T00:00:00+01:00</DT_APERTURA>
+    <DISTRETTO_ID>20</DISTRETTO_ID>
+    <DISTRETTO_CODICE>05</DISTRETTO_CODICE>
+    <ASL_ID>4</ASL_ID>
+    <ASL_CODICE>E101</ASL_CODICE>
+    <COM_ID>18471</COM_ID>
+    <COM_CODICE>232</COM_CODICE>
+    <TIPO_VARIAZIONE>M</TIPO_VARIAZIONE>
+    <DATA_ESTRAZIONE>2018-07-09T00:00:00+02:00</DATA_ESTRAZIONE>
+    <DT_INIVAL>2018-07-09T13:34:44+02:00</DT_INIVAL>
+    <DT_FINVAL>4712-12-31T00:00:00+01:00</DT_FINVAL>
+    <REF_ID>560531</REF_ID>
+    <NOTE>ACCORPAMENTO COMUNE DI VALDAONE</NOTE>
+    <UTENTE_ID>10357</UTENTE_ID>
+    <PARTICELLA>.201</PARTICELLA>
+  </AZIENDE>
+</dsAZIENDE_G></dati></root>]]></getAzienda_STRResult>
+</getAzienda_STRResponse>

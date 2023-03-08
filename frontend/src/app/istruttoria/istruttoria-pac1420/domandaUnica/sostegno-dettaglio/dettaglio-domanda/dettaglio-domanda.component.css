@@ -1,0 +1,8 @@
+:host >>> .ui-dialog .ui-dialog-titlebar {
+    background-color:#f6f6f7;
+}
+
+.error{
+    color: #D8000C;
+    background-color: #FFBABA;
+}

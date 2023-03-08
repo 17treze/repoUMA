@@ -1,0 +1,93 @@
+{
+  "id": 8193,
+  "version": 0,
+  "datiDichiarazione": {
+    "richiedente": {
+      "nome": "ALESSIO",
+      "cognome": "ZOMER",
+      "codiceFiscale": "ZMRLSS91R12H612S",
+      "comuneNascita": "ROVERETO",
+      "provinciaNascita": "TN",
+      "dataNascita": "12/10/1991",
+      "sesso": "M",
+      "residenza": {
+        "indirizzo": "LOC MAS 3 RONCHI",
+        "comune": "ALA",
+        "provincia": "TN",
+        "CAP": "38061"
+      },
+      "carica": "TITOLARE FIRMATARIO",
+      "dtInizioCarica": "",
+      "dtFineCarica": ""
+    },
+    "dettaglioImpresa": {
+      "formaGiuridicaCodice": "DI",
+      "formaGiuridicaDescrizione": "IMPRESA INDIVIDUALE",
+      "denominazione": "ZOMER ALESSIO",
+      "sedeLegale": "LOCALITA' PONZOLOTTI 00 38061 ALA TRENTO",
+      "estremiCCIAA": {
+        "sede": "TN",
+        "numeroIscrizione": "213893",
+        "dataIscrizione": "04/05/2013"
+      },
+      "codiceFiscale": "ZMRLSS91R12H612S",
+      "partitaIva": "02287930222",
+      "indirizzoPEC": "ALESSIO.ZOMER@PEC.AGRITEL.IT",
+      "dettaglioPersonaGiuridica": {
+        "formaGiuridica": "IMPRESA INDIVIDUALE",
+        "estremiCostituzione": "",
+        "capitaleSociale": "Dato non disponibile",
+        "durata": ""
+      },
+      "soggettiImpresa": [
+        {
+          "nome": "ALESSIO",
+          "cognome": "ZOMER",
+          "codiceFiscale": "ZMRLSS91R12H612S",
+          "comuneNascita": "ROVERETO",
+          "provinciaNascita": "TN",
+          "dataNascita": "12/10/1991",
+          "sesso": "M",
+          "indirizzoResidenza": "LOC MAS 3 RONCHI",
+          "comuneResidenza": "ALA",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38061",
+          "carica": [
+            {
+              "codice": "TIT",
+              "tipologia": "TITOLARE FIRMATARIO",
+              "dataInizio": "",
+              "dataFine": "",
+              "selezionato": true,
+              "dichiarazione": false
+            }
+          ],
+          "estremiCCIAA": "ROVERETO"
+        }
+      ],
+      "aziendeCollegate": []
+    }
+  },
+  "dtGenerazionePdf": null,
+  "dtInizioCompilazione": "2018-11-30",
+  "dtUltimoAggiornamento": null,
+  "dtUploadPdfFirmato": null,
+  "dtFine": null,
+  "idProtocollo": null,
+  "pdfFirmato": null,
+  "pdfGenerato": null,
+  "pdfFirmatoName": null,
+  "dtProtocollazione": null,
+  "a4gtAllegatoDicAntimafias": [],
+  "stato": {
+    "id": 11,
+    "identificativo": "BOZZA",
+    "descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+  },
+  "azienda": {
+    "id": 501,
+    "cuaa": "ZMRLSS91R12H612S"
+  },
+  "assenzaDt": null,
+  "allegatoFamiliariConviventi": null
+}

@@ -1,0 +1,34 @@
+@import '../../../../../uma.index.style.scss';
+
+:host {
+  .w-5m {
+    width: 5em;
+  }
+
+  .table-container {
+    height: 450px;
+    max-height: 450px;
+    overflow: auto;
+  }
+
+  .icon-button-square {
+    background-color: $primaryColor !important;
+    border-radius: unset;
+    height: 5em !important;
+    width: 5em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+}
+
+
+

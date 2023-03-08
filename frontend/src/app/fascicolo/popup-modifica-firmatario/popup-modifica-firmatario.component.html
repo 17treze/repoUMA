@@ -1,0 +1,277 @@
+<p-toast
+  key="tst-firmatario"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<p-toast
+  position="center"
+  key="checkPresenzaDocumento"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirmPresenzaDocumento()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="rejectPresenzaDocumento()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-dialog
+  header="{{ 'FAS_ANA.DATI_FIRMATARIO' | translate }}"
+  class="dialog-rappr-legale"
+  width="900"
+  [(visible)]="popupModificaFirmatarioOpen"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}"
+  (onHide)="closePopup()">
+  <form
+    #f="ngForm"
+    *ngIf="firmatarioFormGroup"
+    class="ui-fluid"
+    [formGroup]="firmatarioFormGroup">
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="codiceFiscale">
+          {{ 'FIRMATARIO.NOMINATIVO' | translate }}
+        </label>
+      </div>
+      <div class="p-col-8">
+        <div class="p-grid">
+          <div class="p-col">
+            <p-dropdown
+              [options]="firmatariList"
+              [(ngModel)]="selectedItem"
+              placeholder="Seleziona..."
+              [showClear]="true"
+              id="codiceFiscale"
+              formControlName="codiceFiscale"
+              (onChange)="onChangeFirmatario()">
+            </p-dropdown>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.codiceFiscale.invalid">
+              {{ 'FIRMATARIO.RAPP_LEGALE_OBBLIGATORIO' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="tipoDocumento">
+          {{ 'FIRMATARIO.TIPOLOGIA' | translate }}
+        </label>
+      </div>
+      <div class="p-col-8">
+        <div class="p-grid">
+          <div class="p-col">
+            <select
+              style="width: -webkit-fill-available"
+              id="tipoDocumento"
+              formControlName="tipoDocumento">
+              <option
+                *ngFor="let tipoDocumento of documentoIdentita | keyvalue"
+                [ngValue]="tipoDocumento.key">
+                {{tipoDocumento.value}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.tipoDocumento.invalid">
+              {{ 'FIRMATARIO.TIPOLOGIA_OBBLIGATORIA' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="numeroDocumento">{{ 'FIRMATARIO.NUMERO' | translate }}</label>
+      </div>
+      <div class="p-col-8">
+        <div class="p-grid">
+          <div class="p-col">
+            <input
+              size="40"
+              pInputText
+              id="numeroDocumento"
+              formControlName="numeroDocumento">
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.numeroDocumento.invalid">
+              {{ 'FIRMATARIO.NUMERO_OBBLIGATORIO' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="dataRilascio">
+          {{ 'FIRMATARIO.DATA_RILASCIO' | translate }}
+        </label>
+      </div>
+      <div class="p-col-8">
+        <div class="p-grid">
+          <div class="p-col">
+            <p-calendar
+              formControlName="dataRilascio"
+              dateFormat="dd/mm/yy"
+              [locale]="calendarService.localeITA">
+            </p-calendar>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.dataRilascio.invalid">
+              {{ 'FIRMATARIO.DATA_RILASCIO_OBBLIGATORIA' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="dataScadenza">
+          {{ 'FIRMATARIO.DATA_SCADENZA' | translate }}
+        </label>
+      </div>
+      <div class="p-col-8">
+        <div class="p-grid">
+          <div class="p-col">
+            <p-calendar
+              formControlName="dataScadenza"
+              dateFormat="dd/mm/yy"
+              [locale]="calendarService.localeITA">
+            </p-calendar>
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.dataScadenza.invalid">
+              {{ 'FIRMATARIO.DATA_SCADENZA_OBBLIGATORIA' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-4 text-uppercase">
+        <label for="documento">
+          {{ 'FIRMATARIO.DOCUMENTO' | translate }}
+        </label>
+      </div>
+      <div
+        class="p-col-4"
+        *ngIf="canEditFirmatario()">
+        <div class="p-grid">
+          <div class="p-col">
+            <button
+              pButton
+              type="button"
+              label="Carica"
+              (click)="uploadFile('documento')"
+              [class]="'button-custom-bar-dark'">
+            </button>
+            <input
+              type="file"
+              style="display:none"
+              id="documento"
+              name="documento"
+              accept="{{fileExt}}"
+              (change)="onFileChange($event)">
+          </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-col">
+            <small
+              class="p-invalid"
+              *ngIf="firmatarioFormGroup.controls.documento.invalid">
+              {{ 'FIRMATARIO.DOCUMENTO_OBBLIGATORIO' | translate }}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-4">
+        <div class="p-grid">
+          <div class="p-col">
+            <button
+              pButton
+              type="button"
+              label="Visualizza"
+              (click)="downloadFile()"
+              [disabled]="firmatarioFormGroup.controls.documento.invalid"
+              [class]="canEditFirmatario() ? 'button-custom-bar-dark' : 'button-custom-bar-dark-grey'">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="p-grid"
+      *ngIf="canEditFirmatario()">
+      <div class="p-col-12">
+        <div class="ui-g-6 text-left">
+          <button
+            pButton
+            type="button"
+            label="{{ 'ANNULLA' | translate }}"
+            (click)="closePopup()"
+            style="min-height:42px; box-shadow:none"
+            [class]="'button-custom-bar-dark'">
+          </button>
+        </div>
+        <div class="ui-g-6 text-right">
+          <button
+            pButton
+            type="submit"
+            (click)="onSaveFirmatario()"
+            label="{{ 'CONFERMA' | translate }}"
+            style="min-height:42px; box-shadow:none; margin-right:10px;"
+            [disabled]="f.invalid"
+            [class]="'button-custom-bar-dark'">
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</p-dialog>

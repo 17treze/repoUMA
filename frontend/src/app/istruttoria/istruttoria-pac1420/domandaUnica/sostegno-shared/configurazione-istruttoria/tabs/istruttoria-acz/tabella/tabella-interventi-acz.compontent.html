@@ -1,0 +1,49 @@
+<form *ngIf="importiTabellaForm" [formGroup]="importiTabellaForm">
+  <div formArrayName="importiControllo">
+    <p-table class="table--edit" [value]="interventiControllo" sortField="priorita" [reorderableColumns]="true"
+      (onRowReorder)="onRowReorder($event)">
+      <!-- <ng-template pTemplate="header">
+        <tr>
+          <th style="width:2.5em" width="3%" *ngIf="edit"></th>
+          <th pReorderableColumn width="3%"></th>
+          <th pReorderableColumn width="7%"></th>
+          <th pReorderableColumn width="10%"></th>
+          <th pReorderableColumn width="67%">{{intestazioneTabella}}</th>
+          <th pReorderableColumn width="10%" *ngIf="!edit"></th>
+          <th pReorderableColumn width="10%" *ngIf="edit"></th>
+        </tr>
+      </ng-template> -->
+      <ng-template pTemplate="body" let-index="rowIndex">
+        <ng-container [formGroupName]="index">
+          <tr [pReorderableRow]="index">
+            <td width="3%" *ngIf="edit">
+              <i class="pi pi-bars" style="display: flex;justify-content: center;" pReorderableRowHandle></i>
+            </td>
+            <td width="3%">
+              {{index + 1}}
+            </td>
+            <td width="7%">
+              <i style="display: flex;justify-content: center;">
+                <img src="assets/img/intervento-{{interventiControllo[index].intervento.codiceAgea}}.jpg" />
+              </i>
+
+            </td>
+            <td width="10%" align="center">
+              <strong>{{interventiControllo[index].intervento.codiceAgea}}</strong>
+            </td>
+            <td width="67%">
+              {{'CONFIGURAZIONE_ISTRUTTORIA.ZOOTECNIA.'+interventiControllo[index].intervento.codiceAgea| translate}}
+            </td>
+            <td width="10%" *ngIf="!edit" align="right">
+              {{interventiControllo[index].valoreUnitarioIntervento}}
+            </td>
+            <td width="10%" *ngIf="edit">
+              <input type="text" pInputText value="{{interventiControllo[index].valoreUnitarioIntervento}}"
+                formControlName="valoreUnitarioInterventoTabella" (keyup)="onKey($event)" />
+            </td>
+          </tr>
+        </ng-container>
+      </ng-template>
+    </p-table>
+  </div>
+</form>

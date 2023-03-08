@@ -1,0 +1,10 @@
+<div class="groupTool right-separator" [ngClass]="{'toolDisattivato':!canUse}">
+    <div id="redoButton" (click)="clickRedoTool()">
+    <button pTooltip="Ripristina" tooltipPosition="top" type="button" [disabled]="!canUse" class='btn btn-primary'><i
+        class="fa fa-redo"></i></button>
+  </div>
+  <div id="undoButton" (click)="clickUndoTool()">
+    <button pTooltip="Annulla" tooltipPosition="top" type="button" [disabled]="!canUse" class='btn btn-primary'><i
+        class="fa fa-undo"></i></button>
+  </div>
+</div> 

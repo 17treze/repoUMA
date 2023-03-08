@@ -1,0 +1,83 @@
+:host {
+  .auto-cursor {
+    cursor: auto;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .top-rettifica {
+    position: relative;
+    top: 40px;
+  }
+
+  .block-100 {
+    width: 100%;
+    display: block;
+  }
+
+  .button-accent-alt {
+    border: 2px solid #01985a;
+    color: #01985a !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.ui-button-icon-right.ui-clickable.pi.pi-trash {
+      color: #01985a;
+      font-size: x-large;
+    }
+
+    & > ::ng-deep span.ui-button-icon-right.ui-clickable.pi.pi-file-pdf {
+      color: #01985a;
+      font-size: x-large;
+    }
+  }
+
+  ::ng-deep p-steps > .ui-steps {
+    & > ul {
+      display: flex;
+      flex-wrap: wrap;
+
+      & li.ui-steps-item {
+        flex-grow: 1;
+        flex-basis: 0;
+        padding: 0.5em;
+      }
+    }
+  }
+
+  .position-unset {
+    position: unset;
+  }
+
+  .ui-dialog-visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > ::ng-deep div {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      // .ui-dialog-mask
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: auto;
+      // .ui-widget-overlay
+      background-color: rgba(88, 87, 92, 0.8);
+      opacity: 1;
+
+      & > ::ng-deep div.ui-confirmdialog {
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+  

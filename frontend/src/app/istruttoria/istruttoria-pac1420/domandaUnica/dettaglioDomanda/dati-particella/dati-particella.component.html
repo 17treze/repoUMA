@@ -1,0 +1,141 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati eleggibilità" [selected]="true">
+            <p-table #tableEle *ngIf="listaDettaglioParticelleTable" [columns]="cols"
+              [value]="this.listaDettaglioParticelleTable.risultati" [autoLayout]="true"
+              [totalRecords]="this.listaDettaglioParticelleTable.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageEle($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioParticella let-i="rowIndex">
+                <tr [pSelectableRow]="dettaglioParticella">
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.supImpegnata}}</td>
+                  <td>{{dettaglioParticella.supEleggibile}}</td>
+                  <td>{{dettaglioParticella.supSigeco}}</td>
+                  <td>{{dettaglioParticella.anomalieMantenimento}}</td>
+                  <td>{{dettaglioParticella.anomalieCoordinamento}}</td>
+                  <td>{{dettaglioParticella.supDeterminata}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="13">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati greening" [selected]="true">
+            <p-table #tableGreening *ngIf="listaDettaglioParticelleTableGreening" [columns]="colsGreening"
+              [value]="this.listaDettaglioParticelleTableGreening.risultati" [autoLayout]="true"
+              [totalRecords]="this.listaDettaglioParticelleTableGreening.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageGreen($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioParticella let-i="rowIndex">
+                <tr [pSelectableRow]="dettaglioParticella">
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.supDeterminata}}</td>
+                  <td>{{dettaglioParticella.tipoColtura}}</td>
+                  <td>{{dettaglioParticella.tipoSeminativo}}</td>
+                  <td>{{dettaglioParticella.colturaPrincipale}}</td>
+                  <td>{{dettaglioParticella.secondaColtura}}</td>
+                  <td>{{dettaglioParticella.azotoFissatrice}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="10">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <div class="accordion-wrapper dettaglioaccordion">
+        <p-accordion>
+          <p-accordionTab header="Dati mantenimento" [selected]="true">
+            <p-table #tableMan *ngIf="listaDettaglioParticelleTableMantenimento" [columns]="colsMantenimento"
+              [value]="this.listaDettaglioParticelleTableMantenimento.risultati" [autoLayout]="true"
+              [totalRecords]="this.listaDettaglioParticelleTableMantenimento.elementiTotali" [paginator]="true"
+              (onLazyLoad)="changePageMantenimento($event)" [rows]="this.elementiPerPagina" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null || col.field === 'descrizioneColtura'">
+                    <strong>{{col.header}}</strong>
+                    <p-sortIcon *ngIf="col.field !== 'descrizioneColtura'" [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioParticella let-i="rowIndex">
+                <tr [pSelectableRow]="dettaglioParticella">
+                  <td>{{dettaglioParticella.codNazionale}}</td>
+                  <td>{{dettaglioParticella.foglio}}</td>
+                  <td>{{dettaglioParticella.particella}}</td>
+                  <td>{{dettaglioParticella.sub}}</td>
+                  <td>{{dettaglioParticella.codColtura}}</td>
+                  <td>{{dettaglioParticella.descrizioneColtura}}</td>
+                  <td>{{dettaglioParticella.pascolo}}</td>
+                  <td>{{dettaglioParticella.supImpegnata}}</td>
+                  <td>{{dettaglioParticella.supEleggibile}}</td>
+                  <td>{{dettaglioParticella.supSigeco}}</td>
+                  <td>{{dettaglioParticella.anomalieMantenimento}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr *ngIf="listaDettaglioParticelleTable.risultati?.length > 0">
+                  <td [attr.colspan]="10">
+                    Non risultano presenti in domanda particelle afferenti a pascoli.
+                  </td>
+                </tr>
+                <tr *ngIf="listaDettaglioParticelleTable.risultati?.length === 0">
+                  <td [attr.colspan]="10">
+                    Calcolo disaccoppiato non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

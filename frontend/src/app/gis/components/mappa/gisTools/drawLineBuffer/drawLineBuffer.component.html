@@ -1,0 +1,19 @@
+<div class="drawNewBufferGroupTool right-separator" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <div class="number-input" style='left: 110px;' [hidden]="!isActive()">
+    <button (click)="setPt('decrease')" [disabled]="numInput==minSize" class="decrease">
+      <i class="fa fa-chevron-left"></i>    
+    </button>
+    <span class="numInput">
+      <input type="text" id="numInput" [(ngModel)]="numInput" class="inputNumInput"  (ngModelChange)="onChange($event)" appOnlynumber>
+      <span class="pts"> m </span>
+    </span>
+    <button (click)="setPt('increase')" class="increase">
+      <i class="fa fa-chevron-right"></i>    
+    </button>
+  </div>
+  <div id="drawNewBuffer" (click)="enableTool()" [class.active-tool]="isActive()">
+    <button pTooltip="Nuovo poligono strada" tooltipPosition="top" type="button" [disabled]="!canUseTool" class='btn btn-primary'><i
+        class="fa fa-car"></i></button>
+  </div>
+
+</div>

@@ -1,0 +1,65 @@
+.sidebar-settings .ui-sidebar-left.ui-sidebar-active{
+    width: 340px!important;
+    max-width: initial;
+    margin: 0;
+    float: right;
+    font-size: 13px;
+    left: -341px;
+    top: 1px;
+}
+
+#info-panel > p-sidebar > div > a {
+    visibility: hidden;
+}
+
+.border-selection-dropdown {
+    margin-left: 5px ;
+    border-top: 2px solid #0d5f3f;;
+    margin-right: 5px ;
+    padding-bottom: 12px;
+}
+
+.title-dropdown-options label {
+    color: #0d5f3f;page-break-inside: var();
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.settings-header-dropdown {
+   font-size: 140%;
+    color: #0d5f3f;
+    font-weight: bold;
+    padding-left:5px;
+}
+
+.settings-header-dropdown-subsection {
+    font-size: 120%;
+     color: #0d5f3f;
+     font-weight: bold;
+     padding-left:5px;
+ }
+
+.ui-dropdown-grid-inline {
+    color: black;
+    width: 50px;
+    border: 0px;
+    padding: 10px 0px;
+    margin: 0px;
+}
+
+#tipologiaMisura > p-dropdown > div div span.pi.pi-chevron-down:before {
+    top: -7.5px;
+    position: absolute;
+}
+
+#settings {
+    position:fixed;
+    bottom:30px
+}
+
+.label-misura-option{
+    color: #0d5f3f !important;
+}
+
+
+

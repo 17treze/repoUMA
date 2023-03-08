@@ -1,0 +1,103 @@
+:host >>> .ui-accordion .ui-accordion-header > a {
+  text-decoration: none;
+  vertical-align: center;
+  color: #000;
+  background-color: #fff;
+  border-top: 3px solid green;
+  border: 1;
+}
+
+.ui-accordion .ui-icon {
+  color: black;
+}
+
+:host >>> .ui-chkbox .ui-chkbox-box {
+  padding: 2px;
+  border: 2px solid #757575;
+  border-radius: 15px;
+  width: 1.75em;
+  height: 1.75em;
+  overflow: hidden;
+  transition: background-color 0.3s;
+  border: 1px solid grey;
+}
+
+:host >>> .ui-accordion .ui-accordion-content {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.144);
+  border-block-color: #000;
+}
+
+:host >>> .ui-accordion-header.ui-icon > a {
+  color: black;
+  background-color: white;
+}
+
+:host >>> .display-table {
+  display: table;
+  width: 100%;
+}
+
+:host >>> .accordion-custom {
+    width: 100%;
+    display: block;
+}
+
+:host >>> .accordion-custom .ui-accordion-toggle-icon.ui-accordion-toggle-icon {
+  margin-right: 10px;
+  color: #000000;
+  font-size: 36px;
+}
+
+:host >>> .accordion-custom .ui-accordion-content.ui-accordion-content {
+  padding: 0;
+  border: 0;
+}
+
+:host >>> .accordion-custom .ui-accordion .ui-accordion-header > a {
+  border-top: 3px solid green;
+  height: auto;
+  border-left: 1px solid #cacaca;
+  border-right: 1px solid #cacaca;
+}
+
+:host >>> .accordion-custom table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+:host >>> .accordion-custom table td {
+  border: 1px solid #cacaca;
+  padding: 0;
+  width: 50%;
+}
+
+:host >>> .accordion-custom td a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 16px 10px 16px 62px;
+
+  color: #16314e;
+}
+
+:host >>> .accordion-custom td a:hover {
+  background-color: #daeddb;
+  text-decoration: none;
+}
+
+:host >>> .accordion-custom td a:hover .pi {
+  color: #01985a;
+}
+
+:host >>> .accordion-custom td .pi {
+  font-size: 24px;
+  color: inherit;
+}
+
+:host >>> .section-question__header {
+    padding: 16px;
+    background-color: #01985a;
+}

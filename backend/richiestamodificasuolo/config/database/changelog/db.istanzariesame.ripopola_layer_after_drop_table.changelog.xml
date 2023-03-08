@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTANZARIESAME_S21.14" author="Marco Campisi" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'agea_2017','/proxy/geoserver','ortofoto','/pub_stem_s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_LAYER2','/proxy/geoserver','suoloVigenteCAA','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_LAYER2','/proxy/geoserver','suoloVigenteBO','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_DICHIARATO_LAYER2','/proxy/geoserver','suoloDichiaratoCAA','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_DICHIARATO_LAYER2','/proxy/geoserver','suoloDichiaratoBO','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_DICHIARATO_LAYER2','/proxy/geoserver','suoloDichiaratoLavBO','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_RILEVATO_LAYER2','/proxy/geoserver','suoloRilevatoCAA','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_SUOLO_RILEVATO_LAYER2','/proxy/geoserver','suoloRilevatoBO','/app_a4s');
+			insert into A4ST_LAYER (ID,VERSIONE,NOME_LAYER,URL,CODICE,workspace) VALUES (nxtnbr.nextval,1,'A4SV_WORKSPACE_LAV_SUOLO_LAYER2','/proxy/geoserver','workspaceBO','/app_a4s');
+
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'CAA');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'VITICOLO');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'CAA');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'VITICOLO');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'CAA');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'VITICOLO');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'VITICOLO');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'CAA');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'VITICOLO');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'BACKOFFICE');
+			insert into A4SR_LAYER_PROFILO (ID,VERSIONE,ID_LAYER,PROFILO_UTENTE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'VITICOLO');
+			
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'titolo','Ortofoto2017');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'cancellabile','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'posizione','0');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'Ispezionabile','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='ortofoto'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'titolo','Suolo Vigente');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'posizione','1');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'Ispezionabile','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteCAA'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'titolo','Suolo Vigente');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'posizione','1');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'Ispezionabile','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloVigenteBO'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'titolo','Workspace');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'posizione','3');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'AbilitatoDefault','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'gruppo','Lavorazione');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'collassaGruppo','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'formato','wfs');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'titolo','Suolo Dichiarato');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'posizione','2');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'gruppo','Lavorazione');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'collassaGruppo','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'formato','wfs');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'titolo','Suolo Rilevato');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'posizione','4');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'AbilitatoDefault','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'gruppo','Richiesta Modifica Suolo');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'collassaGruppo','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoCAA'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'titolo','Suolo Rilevato');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'posizione','4');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'AbilitatoDefault','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'gruppo','Richiesta Modifica Suolo');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'collassaGruppo','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloRilevatoBO'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'titolo','Suolo Dichiarato');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'posizione','5');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'gruppo','Richiesta Modifica Suolo');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'collassaGruppo','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoCAA'),'formato','wms');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'titolo','Suolo Dichiarato');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'cancellabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'posizione','5');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'Ispezionabile','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'AbilitatoDefault','si');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'gruppo','Richiesta Modifica Suolo');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'collassaGruppo','no');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoBO'),'formato','wms');
+			commit;
+
+		</sql>
+    </changeSet>
+	</databaseChangeLog>

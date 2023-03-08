@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="BDN_WRT_1.0" author="Cuel Alessandro" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_BDN_MOVIMENTI_PASCOLO FOR ${user.superuser}.A4GT_BDN_MOVIMENTI_PASCOLO;
+			CREATE OR REPLACE SYNONYM A4GT_BDN_CONSIST_PASCOLO FOR ${user.superuser}.A4GT_BDN_CONSIST_PASCOLO;
+        </sql>
+    </changeSet>
+	
+	<changeSet id="BDN_WRT_1.1" author="Cuel Alessandro" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	
+			CREATE OR REPLACE SYNONYM A4GT_BDN_SYNC_DATI FOR ${user.superuser}.A4GT_BDN_SYNC_DATI;
+        </sql>
+    </changeSet>
+	
+	<changeSet id="BDN_WRT_1.2" author="Cuel Alessandro" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	
+			CREATE OR REPLACE SYNONYM A4GT_BDN_CONS_ALLEVAMENTO FOR ${user.superuser}.A4GT_BDN_CONS_ALLEVAMENTO;
+        </sql>
+    </changeSet>
+
+	<changeSet id="BDN_WRT_1.3" author="Elisabetta Freschi" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	
+			CREATE OR REPLACE SYNONYM A4GT_BDN_AZIENDA FOR ${user.superuser}.A4GT_BDN_AZIENDA;
+        </sql>
+    </changeSet>
+    
+</databaseChangeLog>

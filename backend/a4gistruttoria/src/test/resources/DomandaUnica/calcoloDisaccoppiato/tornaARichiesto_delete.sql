@@ -1,0 +1,4 @@
+delete from A4GT_ISTRUTTORIA where id = 8672251;
+delete FROM A4GT_DOMANDA WHERE ID = 8661346;
+
+COMMIT;

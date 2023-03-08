@@ -1,0 +1,83 @@
+<div class="boxgrey layout-actionmenu">
+    <h3> Elenco dei dati richiesti per la certificazione antimafia </h3>
+    <p-toast position="top-center" key='tst' [baseZIndex]="50000"></p-toast>
+    <p-toast position="top-center" key='tst-protocolla' [baseZIndex]="50000" modal="true" (onClose)="onCloseMessageProtocolla()"></p-toast>
+
+    <!--INIZIO CTRL-BTN-UPLOAD-01 - CONTROLLO CHE VERIFICA LA PRESENZA DI UN FILE GIA' CARICATO PRIMA DI CARICARNE UN ALTRO-->
+    <p-toast position="center" key="warn-already-uploadedFile" (onClose)="onRejectHasAlreadyUploadedFile()" [modal]="true"
+        [baseZIndex]="5000" sticky="true">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirmHasAlreadyUploadedFile()" label="Si" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onRejectHasAlreadyUploadedFile()" label="No" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+    <!--FINE CTRL-BTN-UPLOAD-01  -->
+    <!--INIZIO WARNING SULL'ATTIVAZIONE DEL PULSANTE PROTOCOLLA -->
+<!-- commentato perche' ora la protocollazione e' asincrona
+    <p-toast position="center" key="warn-start-protocollazione" (onClose)="onRejectStartProtocollazione()" [modal]="true"
+        [baseZIndex]="5000" sticky="true">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirmStartProtocollazione()" label="{{ 'yes' | translate }}" class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onRejectStartProtocollazione()" label="{{ 'no' | translate }}" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+-->
+    <!-- FINE WARNING SULL'ATTIVAZIONE DEL PULSANTE PROTOCOLLA-->
+
+    <table class="table table-bordered table-hoover">
+        <thead class="thead-light">
+            <tr>
+                <th>{{labels.dato}}</th>
+                <th>{{labels.tipologia}}</th>
+                <th>{{labels.stato}}</th>
+                <th>{{labels.errori}}</th>
+                <th>{{labels.azioni}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let step of steps">
+                <td>{{colDato[step]}}</td>
+                <td>{{colTipologia[step]}}</td>
+                <td><span [ngClass]="colValidation[step]"></span></td>
+                <td>{{colErrori[step]}}</td>
+                <td>
+                    <div *ngIf="step === 'verifica'">
+                        <action-menu #actionMenu [item]="menuActionAllegatoAntimafia" [reset]="reset" (click)="onDropdownMenuOpen(actionMenu,false)"></action-menu>
+                        <input type="file" #file onclick="this.value = null" (change)="onFileChange($event,false)"
+                            accept=".p7m, .pdf" class="inputUploadFile" style="display: none">
+                    </div>
+                    <div *ngIf="step === 'privacy' && !isPrivacyOk">
+                        <action-menu #actionMenuPrivacy [item]="menuActionInformativaPrivacy" [reset]="reset" (click)="onDropdownMenuOpen(actionMenuPrivacy,true)"></action-menu>
+                        <input type="file" #filePrivacy onclick="this.value = null" (change)="onFileChange($event,true)"
+                            accept=".p7m, .pdf" class="inputUploadFile" style="display: none">
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="next-button">
+    <app-step-action [isProtocollaReady]="isProtocollaReady" (next)="startProtocollazioneAsincrona()"></app-step-action>
+</div>

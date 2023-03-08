@@ -1,0 +1,1575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<changeSet id="ISTRUTTORIA_50.0" author="Michele Finizio">
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLVMRA73M25H612H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MRTMRC61C24E565J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02173490224" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZFFPLA91B13H612O" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="RFFBNR67R02B153I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLNPLA67R13H612B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GRRMTN68S11H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZNDCST96E20H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMAFLV68R10B006U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02378480228" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRZSFN90R28H612J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CPRRSL78T68B006T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTMDA80P17B006R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TVZBRN62E16H612U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BTTFBA47M06L957L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02228060220" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZLLBRN61B27H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTGPP70P23B006L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNCFNC52R22L957R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FLLRNZ56H07H612P" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VLLLCU91R46H612I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRNFNC73D19L378E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CGHNDR70E14H612Z" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TNLSFN74P12H612D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BNNRNZ43B42G313H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CVTGTV47P05B153W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="NDRKTA74A63B006D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SNTVNT87H70H612W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TRRDRN58P16H612B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TRDGPL66L26H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMAPRC86R25B006E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTLLD63B64B006J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PDRDNL87R09H612B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRUMRZ69H50H612X" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZTTTZN91P04L378H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMPLNZ80C01H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CTTSVN58B44E565T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNFFBA61C19F728F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GRIVNI81M08H612D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZNDNDR71H26H612E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMPLRA91C56H612K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GTZHSM53H14Z112G" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LRNPLA77D18L378Z" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02566820227" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLVSFN89A06H612W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BLTDRN80S30H612I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MZZLSN76C17H612U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSCCLD89E46C372I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSSLVR48C07B153T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CPRMRC90L10L378R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PZZLCU87B13H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PLAPLA66R31B006F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GNLLRD48M14B006M" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="RZZMRN55A09F728Q" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRTBCM58T60L211E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCHNGL73B15H612C" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BNGLRD73M11H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02152040222" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNCMTT96B23H612P" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRSMTT94L30H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BNFFRZ96H20H612J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="RDNRNN61D16A839H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LNZFLV66R61B006S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FRSSFN87S25H612L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTSNO67C49B006K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02067780227" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZNTLVI66E26L378O" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BNDFDL49H15G313J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SMNPLA85C30Z602L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRNGMN71H26H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BLDMRC99M16H612C" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PNANTN51L18B153E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSSSRG77B23H612W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VLDMSM72M27H612S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VLDMRA51R24H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCRFNC52M09H612B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TRNGRL55P55H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02418980229" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="RZZMHL65M31H612J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="NCLFNC59H16H612G" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRTNDR78H04H612R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZNDMNL75L22H612R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CRLCST88B19L378W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FSUGPL70D30L174S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTDNL59B41H528Q" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LNRMSM65H14C700Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SLZVTR64A11H612R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02117850228" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PFFPRZ73A63Z112E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CNZMSM84A13H612H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRLNLL45B05B153L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="HFFWTR76M29B006N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VTTDNC65C15H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VSIDNL83S01H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="01608040224" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="DRGGCM95M04H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CVTSTR47R71B153D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNGRNZ60P11H612Z" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MLOFDN67C27F205E" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="NNNNNA55E71L220J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZRLSNO79S56L378Q" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LCCCLD73P12E565H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VLLFNC74E08H612Z" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLMVIO60M29H612A" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VTTGNN72L01H612D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="01932450222" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VCNMSM85H02L781U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSTLRT66L10H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CGHVCN73D15H612G" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLNMHL80M19H612R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CPPMNC61P47B006K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GSPRTR61B23H612H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSSCLD61H24H612K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="RZZLRT89E21H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PDRSLV78P65H612C" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VLNPLG59H21H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TVZMRK72P10H612K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CRLLGU58H17H612A" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02405710225" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZTTMRN85E43L378V" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRSGTN62P04H612S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SPPMHL83S23B006A" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCCDNT80L30H612M" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTPRK95C08B006P" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CCLSDR71C51B006U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="NRVDNL83B24B006B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MFFDVD97S14H612A" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TNNMRC63C22H612X" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PSNFBN73B16H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VSICRL79E12H612H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FRNGLI35A16L957V" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PLLRNI37S50E565B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LNZVTI48T26B006S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="NCLGRG78H26H612D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02481180228" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BSFFBA64H19H612S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZTTMRO76H59E565K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMALRT47D18H528K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02611340221" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BZZDNL00E20H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FRZRMO00H06H612H" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02525340226" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TNLVNI75C31H612I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CNLMRC90E06H612N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZRLGPP57C19H532N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GLNMNL43C21F929B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCRCHR64L44C372L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMPDNL90E12H612O" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FRPGNN93B13H612C" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMAMSM75P04B006B" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FZZNRC60L12B006W" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LKHKDJ75A41Z330Q" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRNLBN73C02H612P" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCNGPR86D22H330N" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRNFRC52H25E565I" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VSIRLA42P15B153F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TNNPLA64S20H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MRZTMS83E13H612Y" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CVTMLE55D29B153R" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCRNDR83C09H612F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="DLCCST77D18B006U" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BNGMRC78B18H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02286980228" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02453890226" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02140230224" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02165210226" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VTTNDR87B26L378L" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PTRMRN64A71B006D" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="DLPFNZ60A03H612S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRNGNN83P30H612G" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRTCRL67B24H612J" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="ZNDNRC96M22L174P" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TCISFN88R12H612S" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="CASUALE" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CSRLSN93C28L378F" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SSSDVD66P24Z226K" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MFFNTN83H12H612T" />
+			<column name="TIPO_CAMPIONE" value="SUPERFICIE" />
+			<column name="TIPO" value="RISCHIO" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="00185820222" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="00318870227" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02020110223" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02173490224" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02224320222" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02225420229" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02228010225" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02252080227" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02301480220" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02333890222" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02362820223" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02481630222" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="1" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="02482210222" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="11393671000" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BRLNLL45B05B153L" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="BSTDGI77E19L378B" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CMALRT47D18H528K" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="CRBGCM89M03H612W" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="0" />
+			<column name="OVINI" value="1" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="FLPNCL97P02L378G" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="0" />
+			<column name="OVINI" value="1" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GRDLRT64H23H330K" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="GRRMTN68S11H612N" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LNRMSM65H14C700Y" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LNRRCR76D01L378I" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="LRNPLA77D18L378Z" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNGMTN90E20C794Z" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MNTVTR57R18B006G" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MRTMRC61C24E565J" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="MZZLSN76C17H612U" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PPLFLV65D22Z133R" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="PRNFRC52H25E565I" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SCHRZO66B26H612V" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="SDLMTT93B03L378J" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TMNMLN82C21L378R" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="CASUALE" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="TRDGPL66L26H612Y" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VNZCST94S25C372W" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="0" />
+			<column name="OVINI" value="1" />
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="ANNO_CAMPAGNA" valueNumeric="2021" />
+			<column name="CUAA" value="VSIDNL83S01H612N" />
+			<column name="TIPO_CAMPIONE" value="ZOOTECNIA" />
+			<column name="TIPO" value="RISCHIO" />
+			<column name="BOVINI" value="1" />
+			<column name="OVINI" value="0" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_62.CAMP" author="Lorenzo Martinelli">
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR"/><column name="ANNO_CAMPAGNA" valueNumeric="2021"/><column name="CUAA" value="00421900226"/><column name="TIPO_CAMPIONE" value="ZOOTECNIA"/><column name="TIPO" value="RISCHIO"/><column name="BOVINI" value="1"/><column name="OVINI" value="0"/>
+		</insert>
+		<insert tableName="A4GT_CAMPIONE">
+			<column name="ID" valueSequenceNext="NXTNBR"/><column name="ANNO_CAMPAGNA" valueNumeric="2021"/><column name="CUAA" value="00335940227"/><column name="TIPO_CAMPIONE" value="ZOOTECNIA"/><column name="TIPO" value="RISCHIO"/><column name="BOVINI" value="1"/><column name="OVINI" value="0"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>

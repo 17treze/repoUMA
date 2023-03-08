@@ -1,0 +1,24 @@
+<div class="editTolbar" [hidden]="lavorazioniEvent.stato !== 'IN_CORSO' || lavorazioniEvent.readOnly===true">
+  <!-- TODO sarebbe più corretot gestire editLayer-->
+  <!-- *ngIf="lavorazioniEvent.stato === 'IN_CORSO'" quarto blocco-->
+  <gis-save></gis-save>
+  <gis-undoRedo></gis-undoRedo>
+  <gis-aggiungi-note></gis-aggiungi-note>
+  <!-- quarto blocco -->
+  <gis-ritagliaADL></gis-ritagliaADL>
+  <!-- terzo blocco-->
+  <gis-delete></gis-delete>
+  <gis-union></gis-union>
+  <gis-closeHole></gis-closeHole>
+  <gis-lineSplit></gis-lineSplit>
+  <!-- secondo blocco-->
+  <gis-select></gis-select>
+  <gis-trasforma></gis-trasforma>
+  <gis-modify></gis-modify>
+  <!-- primo blocco -->
+  <gis-drawHole></gis-drawHole>
+  <gis-drawLineBuffer></gis-drawLineBuffer>
+  <gis-drawRegular></gis-drawRegular>
+  <!-- <gis-drawTrace></gis-drawTrace>-->
+  <gis-draw></gis-draw>
+</div>

@@ -1,0 +1,7 @@
+<div id="enableSelectionSuolo" (click)="enableListener()"  [class.active-tool]="isActive" [ngClass]="{'toolDisattivato':!canUseListener}">
+  <button style="border: none;"  class='disableSelectionVigente'
+    [pTooltip]="isActive == false ? 'Abilita selezione in mappa': 'Disabilita selezione in mappa'"
+    tooltipPosition="right">
+    <i class="fa fa-location-arrow"></i>
+  </button>
+</div> 

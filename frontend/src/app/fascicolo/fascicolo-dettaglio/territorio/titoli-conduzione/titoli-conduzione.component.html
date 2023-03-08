@@ -1,0 +1,66 @@
+<app-popup-nuovo-titolo-conduzione
+  *ngIf="popupOpen"
+  [popupOpen]="popupOpen"
+  [cuaa]="cuaa"
+  [idValidazione]="idValidazione"
+  [tipoConduzione]="tipoConduzione"
+  (chiudiPopup)="popupConduzioneClose($event)"
+  (saveConduzione)="saveConduzione($event)"
+  (onHideDialog)="popupConduzioneClose($event)">
+</app-popup-nuovo-titolo-conduzione>
+
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}">
+</p-toast>
+
+<div class="ui-grid-fixed boxgrey">
+  <div class="funzioni-grid boxgrey">
+    <div class="p-grid m-0">
+      <div class="p-col p-0">
+        <a
+          [routerLink]
+          (click)="goBack()"
+          class="d-flex align-items-center text-decoration-none color-primary">
+          <i
+            class="pi pi-chevron-left"
+            style="font-size: 2rem; color: black"></i>
+          <img src="assets/img/ico-dotazione.jpg">
+          <span
+            class="ml-2"
+            [class]="isFascicoloAttuale() ? '' : 'back-grey'">
+        {{ "FascicoloAziendale.TERRITORIO" | translate }}
+      </span>
+        </a>
+      </div>
+      <div class="p-col w-100 p-0"></div>
+      <div class="p-col-fixed p-0">
+        <button
+          (click)="popupConduzioneOpen()"
+          [class]="isFascicoloAttuale() ? '' : 'button-custom-grey'"
+          class="w-10m button-large-icon"
+          pButton
+          icon="pi pi-plus-circle"
+          iconPos="right"
+          type="button"
+          label="AGGIUNGI"
+          [disabled]="readonly">
+        </button>
+      </div>
+    </div>
+
+    <br>
+    <div class="accordion-wrapper dettaglioaccordionmultiple">
+      <p-accordion
+        expandIcon
+        collapseIcon>
+        <p-accordionTab
+          header="TITOLI CONDUZIONE"
+          [selected]="true"
+          [class]="isFascicoloAttuale() ? '' : 'title-grey'">
+          TODO: lista titoli di conduzione
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</div>

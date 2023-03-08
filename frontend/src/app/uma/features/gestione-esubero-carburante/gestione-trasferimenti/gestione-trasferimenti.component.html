@@ -1,0 +1,79 @@
+<app-popup-ricerca-richiesta-carburante
+  #popupRicercaRichiesta
+  (chiudiPopup)="openInserisciEditaTrasferimentoPopup($event)"></app-popup-ricerca-richiesta-carburante>
+<app-popup-inserisci-edita-trasferimento
+  #popupInserisciEditaTrasferimento
+  (chiudiPopup)="caricaDatiTrasferimenti($event)"
+  [READONLY_MODE]="READONLY_MODE"></app-popup-inserisci-edita-trasferimento>
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="trasferimenti-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+  <p-confirmDialog
+  header="Attenzione"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="trasferimenti-dialog-save"
+  acceptLabel="OK"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<p-toast
+  key="tst-trasferimenti"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<app-intestazione-uma [ctx]="tipoIntestazioneEnum?.GESTIONE_CARBURANTE_IN_ESUBERO"></app-intestazione-uma>
+
+<div class="ui-g ui-fluid mt-5">
+  <div class="ui-grid-fixed mt-2">
+    <div class="ui-g">
+      <div class="p-col">
+        <div class="p-grid p-align-center">
+          <!-- Prima riga: Back -->
+          <div class="p-col py-3">
+            <a
+              [routerLink]
+              (click)="goBack()"
+              class="d-flex align-items-center text-decoration-none color-primary">
+              <i
+                class="pi pi-chevron-left"
+                style="font-size: 2rem; color: black"></i>
+              <img src="assets/img/icons/uma-icon/icon-trasferimenti_black.svg">
+              <span class="ml-2">
+              <strong class="fs-20">{{ 'UMA.DICHIARAZIONE_CONSUMI.TRASFERIMENTI' | translate | uppercase }}</strong>
+            </span>
+            </a>
+          </div>
+          <div class="p-col-fixed w-10m p-0 py-1">
+            <button
+              pButton
+              type="button"
+              label="NUOVO"
+              (click)="nuovoTrasferimento()"></button>
+          </div>
+          <!-- Seconda riga - Lista trasferimenti -->
+          <div class="p-grid">
+            <div class="boxgrey">
+              <div class="p-col-12 align-self-center w-100">
+                <app-a4g-multi-table
+                  [cols]="cols"
+                  [values]="datasource"
+                  (changedValueForm)="onChangeForm($event)"
+                  (clickIcon)="onClickIcon($event)"></app-a4g-multi-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

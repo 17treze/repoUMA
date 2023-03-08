@@ -1,0 +1,104 @@
+<div
+  id="confirm"
+  *ngIf="richiestaRevocaImmediata">
+  <p-dialog
+    [(visible)]="display"
+    header="{{ 'REVOCA_MANDATO_DLG.RIFIUTA_REVOCA_MANDATO' | translate }}"
+    [dismissableMask]="true"
+    width="710"
+    [modal]="true"
+    [focusOnShow]="false"
+    appendTo="body"
+    [closable]="true"
+    #rifiutoDialog
+    [closeOnEscape]="true">
+
+    <div class="popup-approvazione  popup--custom">
+      <div class="mb-4">
+        <h6>
+          {{ 'REVOCA_MANDATO_DLG.STAI_PER_RIFIUTARE' | translate }}
+          <strong>
+          {{ richiestaRevocaImmediata.denominazioneAzienda }}
+          </strong>
+          a
+          <strong>
+          {{ richiestaRevocaImmediata.denominazioneSportelloCaa }}
+          </strong>
+        </h6>
+      </div>
+      <div class="boxgrey  p-3  mb-3">
+        <h6 class="mb-3">
+          <strong>
+            {{ 'REVOCA_MANDATO_DLG.MOTIVO_RIFIUTO' | translate }}
+          </strong>
+        </h6>
+        <div>
+          <textarea
+            rows="6"
+            cols="30"
+            pInputTextarea
+            id="mail"
+            type="text"
+            [(ngModel)]="motivoRifiuto"
+            style="width: -webkit-fill-available"
+            autoResize="true"
+            required
+            placeholder="{{ 'REVOCA_MANDATO_DLG.INDICA_MOTIVAZIONI_RIFIUTO' | translate }}">
+          </textarea>
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex justify-content-end">
+        <button
+          pButton
+          icon="pi pi-ban"
+          type="submit"
+          label="{{ 'REVOCA_MANDATO_DLG.RIFIUTA_REVOCA_IMMEDIATA' | translate }}"
+          class="button--rifiuta"
+          (click)="rifiutaRevocaImmediata()">
+        </button>
+      </div>
+
+    </div>
+  </p-dialog>
+</div>
+<p-toast
+  key="tst-rifiutoDialog"
+  [style]="{marginTop: '70px'}"
+  [baseZIndex]="5000">
+</p-toast>
+<p-toast
+  position="center"
+  key="checkRifiuto"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirm()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="reject()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

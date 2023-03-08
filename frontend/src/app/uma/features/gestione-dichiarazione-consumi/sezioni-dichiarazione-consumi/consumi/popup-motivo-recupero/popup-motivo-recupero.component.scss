@@ -1,0 +1,33 @@
+@import "../../../../../uma.index.style.scss";
+
+:host {
+  ::ng-deep label.ui-radiobutton-label {
+    margin: 0;
+  }
+
+  .pr-0_5m {
+    padding-right: .5em;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .w-5m {
+    width: 5em;
+  }
+
+  .button-accent-alt {
+    border: 2px solid $accentColor;
+    color: $accentColor !important;
+    font-weight: bold;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  ::ng-deep .small-dialog {
+    width: 50vw;
+  }
+}

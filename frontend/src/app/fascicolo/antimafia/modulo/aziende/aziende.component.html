@@ -1,0 +1,43 @@
+<div class="boxgrey" *ngIf="!isImpresaDittaIndividuale()">
+  <h3 class="w-auto">{{textTitle}} 
+    <span><a href="./assets/pages/informativa-familiari/informativa-familiari.html" target="_blank"> ? </a></span>
+  </h3>
+  <p-table [columns]="cols" [value]="aziendeCollegate" [autoLayout]="true" [responsive]="true">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-azienda>
+        <tr>
+            <td>{{azienda.denominazione ? azienda.denominazione : intestazioni.nd}}</td>
+            <td>{{azienda.codiceFiscale ? azienda.codiceFiscale : intestazioni.nd}}</td>
+            <td>{{azienda.comuneSede ? azienda.comuneSede : intestazioni.nd}}</td>
+            <td>{{azienda.indirizzoSede ? azienda.indirizzoSede : intestazioni.nd}}</td>
+            <td>{{azienda.civicoSede ? azienda.civicoSede : intestazioni.nd}}</td>
+            <td>{{azienda.provinciaSede ? azienda.provinciaSede : intestazioni.nd}}</td>
+            <td>{{azienda.capSede ? azienda.capSede : intestazioni.nd}}</td>
+            <td>{{azienda.carica[0].tipologia ?  azienda.carica[0].tipologia : intestazioni.nessunaCarica }}</td>
+            <td>{{ (azienda.carica[0].dataInizio ) ? azienda.carica[0].dataInizio : intestazioni.nd }}</td>
+            <td>{{ (azienda.carica[0].dataFine ) ? azienda.carica[0].dataFine : intestazioni.illimitata}}</td>
+            <td> <p-checkbox #primeCheckBox [(ngModel)]="azienda.selezionato" binary="true"></p-checkbox></td>
+        </tr>
+    </ng-template>    
+    <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="11">
+                Nessuna Azienda Collegata
+            </td>
+        </tr>
+    </ng-template>    
+  </p-table>
+</div>
+<div class="card no-margin" *ngIf="isImpresaDittaIndividuale()">
+    <h5>
+      Informazioni disponibili solo per aziende
+    </h5>
+</div>
+<app-step-action (next)="conferma()"></app-step-action>

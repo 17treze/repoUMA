@@ -1,0 +1,23 @@
+.action-richiesta{
+    color: #01985A!important;
+    font-size: 15px!important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.action-richiesta-cancellata{
+    color: #ff0015!important;
+    font-size: 15px!important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.action-richiesta-no-open-dettaglio{
+    color: #000000!important;
+    font-size: 15px!important;
+}
+
+.action-richiesta-no-open-dettaglio-cancellata{
+    color: #ff0015!important;
+    font-size: 15px!important;
+}

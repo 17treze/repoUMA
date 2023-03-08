@@ -1,0 +1,3407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		 <changeSet id="ISTRUTTORIA_1.0" author="Lorenzo Martinelli">
+		 	<!-- Contenuto di 000_oggettiComuni.sql -->
+		 	<sql endDelimiter=";" splitStatements="true">
+		 		CREATE SEQUENCE NXTNBR
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				
+				CREATE TABLE A4GT_LOGGING (
+				   ID ${id.number.type} NOT NULL,
+				   VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				   UTENTE ${string.type}(500 CHAR) NOT NULL,
+				   TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+				   TABELLA ${string.type}(4000) NOT NULL,
+				   ID_ENTITA NUMBER(19) NOT NULL,
+				   DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+				   CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+		 	</sql>
+		 	
+		 	<!-- Contenuto di 001_tabelleRicevibilita.sql -->
+		 	<sql endDelimiter=";" splitStatements="true">
+		 		CREATE TABLE A4GD_STATO_DOMANDA (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 IDENTIFICATIVO ${string.type}(50) NOT NULL,
+				 DESCRIZIONE ${string.type}(500) NOT NULL,
+				 CONSTRAINT A4GD_STATO_DOMANDA_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				
+				CREATE TABLE A4GT_DATI_SETTORE (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 ANNO_RIFERIMENTO NUMBER(4) NOT NULL,
+				 CODICE_PAC ${string.type}(50) NOT NULL,
+				 DESCRIZIONE_PAC ${string.type}(500) NOT NULL,
+				 TIPO_DOMANDA ${string.type}(50) NOT NULL,
+				 DESCRIZIONE_DOMANDA ${string.type}(500) NOT NULL,
+				 DT_SCADENZA_DOMANDE DATE,
+				 DT_SCADENZA_DOMANDE_RITARDO DATE,
+				 DT_SCADENZA_DOMANDE_RITIROPARZ DATE,
+				 DT_SCADENZA_DOMANDE_RITIRO DATE,
+				 DT_RICEVIBILITA DATE,
+				 CONSTRAINT A4GT_DATI_SETTORE_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				
+				CREATE UNIQUE INDEX A4GT_DATI_SETTORE_UIDX ON A4GT_DATI_SETTORE (CODICE_PAC, ANNO_RIFERIMENTO, TIPO_DOMANDA) TABLESPACE ${tablespace.index};
+				
+				CREATE TABLE A4GT_DOMANDA (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 NUMERO_DOMANDA NUMBER(10) NOT NULL,
+				 COD_MODULO_DOMANDA ${string.type}(50) NOT NULL,
+				 DESC_MODULO_DOMANDA ${string.type}(500) NOT NULL,
+				 ID_DATI_SETTORE NUMBER(19) NOT NULL,
+				 ID_STATO NUMBER(19) NOT NULL,
+				 CUAA_INTESTATARIO ${string.type}(16) NOT NULL,
+				 DT_PRESENTAZIONE DATE NOT NULL,
+				 NUM_DOMANDA_RETTIFICATA NUMBER(10),
+				 COD_ENTE_COMPILATORE NUMBER(9) NOT NULL,
+				 DESC_ENTE_COMPILATORE ${string.type}(500) NOT NULL,
+				 CONSTRAINT A4GT_DOMANDA_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				
+				CREATE UNIQUE INDEX A4GT_DOMANDA_UIDX ON A4GT_DOMANDA (ID_DATI_SETTORE, CUAA_INTESTATARIO) TABLESPACE ${tablespace.index};
+
+				
+				CREATE TABLE A4GT_DATI_LAVORAZIONE (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 ID_DOMANDA NUMBER(10) NOT NULL,
+				 JSON_DATI_RICEVIBILITA CLOB NOT NULL,
+				 CONSTRAINT A4GT_DATI_LAVORAZIONE_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				
+				ALTER TABLE A4GT_DATI_LAVORAZIONE MOVE LOB(JSON_DATI_RICEVIBILITA) STORE AS (TABLESPACE ${tablespace.lob});
+				
+				
+				ALTER TABLE A4GT_DOMANDA ADD CONSTRAINT FK_A4GT_DOMANDA_0 FOREIGN KEY (ID_STATO) REFERENCES A4GD_STATO_DOMANDA (ID);
+				ALTER TABLE A4GT_DOMANDA ADD CONSTRAINT FK_A4GT_DOMANDA_1 FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID);
+				
+				
+				ALTER TABLE A4GT_DATI_LAVORAZIONE ADD CONSTRAINT FK_A4GT_DATI_LAVORAZIONE_0 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID);
+		 	</sql>
+		 	
+		 	<!-- ******************** INIZIALIZZAZIONE ******************** -->
+		 	<!-- Contenuto di 001b_init_a4gdStatoDomanda.sql -->
+		 	<sql endDelimiter=";" splitStatements="true">
+		 		INSERT INTO A4GD_STATO_DOMANDA (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE) VALUES (NXTNBR.nextval, '0', 'RICEVIBILE', 'Stato che identifica le domande ricevibili');
+				INSERT INTO A4GD_STATO_DOMANDA (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE) VALUES (NXTNBR.nextval, '0', 'NON RICEVIBILE', 'Stato che identifica le domande non ricevibili');
+				INSERT INTO A4GD_STATO_DOMANDA (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE) VALUES (NXTNBR.nextval, '0', 'ACQUISITA', 'Stato temporaneo che identifica le domande importate dal sistema AGS in attesa di verifiche sui criteri di ricevibilita''');
+		 	</sql>
+		 	
+	 		<!-- Contenuto di 002c_init_a4gtDatiSettore.sql -->
+		 	<sql endDelimiter=";" splitStatements="true">
+				INSERT INTO A4GT_DATI_SETTORE (ID, VERSIONE, ANNO_RIFERIMENTO, CODICE_PAC, DESCRIZIONE_PAC, TIPO_DOMANDA, DESCRIZIONE_DOMANDA, DT_SCADENZA_DOMANDE, DT_SCADENZA_DOMANDE_RITARDO, DT_SCADENZA_DOMANDE_RITIROPARZ, DT_SCADENZA_DOMANDE_RITIRO, DT_RICEVIBILITA) VALUES 
+					(NXTNBR.nextval,'0','2018','PAC1420','PAC 2014 – 2020','DU','Domanda Unica',to_date('31/07/2018','dd/mm/yyyy'),to_date('01/10/2018','dd/mm/yyyy'),to_date('15/11/2018','dd/mm/yyyy'),to_date('31/08/2018','dd/mm/yyyy'),to_date('15/07/2018','dd/mm/yyyy'));
+		 	</sql>
+		 	
+            <!-- ******************** GRANT ******************** -->
+            <!-- Tabelle di liquibase -->
+            <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+				GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+            </sql>
+            
+            <!-- Tabelle di a4g -->
+			<!-- Contenuto di 000_oggettiComuni.sql -->	
+            <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				GRANT SELECT ON NXTNBR TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+            </sql>
+            
+            <!-- Contenuto di 001_tabelleRicevibilita.sql -->
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_STATO_DOMANDA TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_SETTORE TO ${user.writer};
+				GRANT DELETE,INSERT,SELECT,UPDATE ON A4GT_DOMANDA TO ${user.writer};
+				GRANT DELETE,INSERT,SELECT,UPDATE ON A4GT_DATI_LAVORAZIONE TO ${user.writer};
+            </sql>
+		</changeSet>
+		
+		<changeSet id="ISTRUTTORIA_1.1" author="Lorenzo Martinelli">	
+			<!-- Contenuto di 002_tabelleControlli.sql -->		
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+             	CREATE TABLE A4GT_TIPO_CONTROLLO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 CATEGORIA ${string.type}(500) NOT NULL,
+				 IDENTIFICATIVO ${string.type}(500) NOT NULL,
+				 DESCRIZIONE ${string.type}(4000) NOT NULL,
+				 CONSTRAINT A4GT_TIPO_CONTROLLO_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GT_TIPO_CONTROLLO_UIDX ON A4GT_TIPO_CONTROLLO (CATEGORIA,IDENTIFICATIVO) TABLESPACE ${tablespace.index};
+				
+				
+				CREATE TABLE A4GT_ESITO_CONTROLLO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 ID_TIPO_CONTROLLO ${id.number.type} NOT NULL,
+				 ID_DOMANDA ${id.number.type} NOT NULL,
+				 ESITO_CONTROLLO NUMERIC(1) NOT NULL,
+				 MESSAGGIO_ERRORE ${string.type}(4000),
+				 DT_ESECUZIONE DATE NOT NULL,
+				 CONSTRAINT A4GT_ESITO_CONTROLLO_PK PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_TIPO_CONTROLLO) REFERENCES A4GT_TIPO_CONTROLLO (ID),
+				 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GT_ESITO_CONTROLLO_UIDX ON A4GT_ESITO_CONTROLLO (ID_TIPO_CONTROLLO,ID_DOMANDA,DT_ESECUZIONE) TABLESPACE ${tablespace.index};
+            </sql>
+            
+            <!-- Contenuto di 002b_init_a4gtTipoControllo.sql -->
+            <sql endDelimiter=";" splitStatements="true">
+            	INSERT INTO A4GT_TIPO_CONTROLLO VALUES 
+            		(NXTNBR.NEXTVAL, 0, 'RICEVIBILITA', 'CHECK_DATA_PRESENTAZIONE', 'Verifica che la data di presentazione non sia successiva alla data termine per istruttoria corrente ');
+				INSERT INTO A4GT_TIPO_CONTROLLO VALUES
+					(NXTNBR.NEXTVAL, 0, 'RICEVIBILITA', 'CHECK_AGGIORNAMENTO_FASCICOLO', 'Verifica che il fascicolo non risulti costituito/aggiornato o custodito presso ufficio del CAA compilatore come previsto dalla normativa vigente e dalla Convenzione APPAG/CAA e del relativo atto esecutivo');
+				INSERT INTO A4GT_TIPO_CONTROLLO VALUES
+					(NXTNBR.NEXTVAL, 0, 'RICEVIBILITA', 'CHECK_ARCHIVIAZIONE_DOMANDA', 'Verifica che domanda e relativi allegati risultino archiviati conformemente alle disposizioni APPAG');
+				INSERT INTO A4GT_TIPO_CONTROLLO VALUES
+					(NXTNBR.NEXTVAL, 0, 'RICEVIBILITA', 'CHECK_FIRMA_DOMANDA', 'Verifica che la domanda sia stata firmata dal produttore');
+				INSERT INTO A4GT_TIPO_CONTROLLO VALUES
+					(NXTNBR.NEXTVAL, 0, 'RICEVIBILITA', 'CHECK_ANOMALIE_COMPILAZIONE', 'Verifica la presenza di anomalie segnalate dal Sistema informativo in fase di compilazione');
+            </sql>
+            
+            <!-- Contenuto di 003_tabellaVersioneDb.sql -->
+            <sql endDelimiter=";" splitStatements="true">
+            	CREATE TABLE A4GT_LOG_VERSIONE_DB (
+				 ID ${id.number.type} NOT NULL,
+				 PROGETTO ${string.type}(500) NOT NULL,
+				 VERSIONE_DB ${string.type}(50) NOT NULL,
+				 DT_INSTALLAZIONE DATE NOT NULL,
+				 NOTE ${string.type}(4000),
+				 CONSTRAINT A4GT_LOG_VERSIONE_DB_PK PRIMARY KEY (ID)
+				);
+				
+				CREATE UNIQUE INDEX A4GT_LOG_VERSIONE_DB_UIDX ON A4GT_LOG_VERSIONE_DB (PROGETTO, VERSIONE_DB) TABLESPACE ${tablespace.index};
+            </sql>
+            
+            <!-- Contenuto mancante: 003a_init_tabellaVersioneDb.sql -->
+            <sql endDelimiter=";" splitStatements="true">
+            	INSERT INTO A4GT_LOG_VERSIONE_DB (ID,PROGETTO,VERSIONE_DB,DT_INSTALLAZIONE,NOTE) VALUES 
+            		(NXTNBR.nextval, 'A4GISTRUTTORIA', '1.0', SYSDATE, 'Inizializzazione database per la gestione dell''istruttoria DU.');
+            
+            </sql>
+            
+            <!-- Contenuto mancante: 003b_updateVersioneDb.sql -->
+            <sql endDelimiter=";" splitStatements="true">
+            	INSERT INTO A4GT_LOG_VERSIONE_DB (ID,PROGETTO,VERSIONE_DB,DT_INSTALLAZIONE,NOTE) VALUES 
+            		(NXTNBR.nextval, 'A4GISTRUTTORIA', '1.1', SYSDATE, 'Aggiunte tabelle per la memorizzazione degli esiti di controllo sulle domande.');
+            </sql>
+            
+            <!-- Contenuto di 002_tabelleControlli.sql -->
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ESITO_CONTROLLO TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_TIPO_CONTROLLO TO ${user.writer};
+            </sql>
+		</changeSet>
+		
+		<changeSet id="ISTRUTTORIA_1.2" author="Lorenzo Martinelli">
+			<!-- Contenuto di 001_tabelleProcessi.sql -->
+			<sql endDelimiter=";" splitStatements="true">
+				CREATE TABLE A4GD_STATO_PROCESSO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 IDENTIFICATIVO ${string.type}(100) NOT NULL,
+				 DESCRIZIONE ${string.type}(4000) NOT NULL,
+				 CONSTRAINT A4GD_STATO_PROCESSO_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GD_STATO_PROCESSO_UIDX ON A4GD_STATO_PROCESSO (IDENTIFICATIVO) TABLESPACE ${tablespace.index};
+				
+				
+				CREATE TABLE A4GD_TIPO_PROCESSO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 IDENTIFICATIVO ${string.type}(100) NOT NULL,
+				 DESCRIZIONE ${string.type}(4000) NOT NULL,
+				 PARALLELIZZABILE NUMBER(1) DEFAULT '0' NOT NULL,
+				 CONSTRAINT A4GD_TIPO_PROCESSO_PK PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GD_TIPO_PROCESSO_UIDX ON A4GD_TIPO_PROCESSO (IDENTIFICATIVO) TABLESPACE ${tablespace.index};
+				
+				CREATE TABLE A4GT_PROCESSO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				 ID_DATI_SETTORE ${id.number.type} NOT NULL,
+				 ID_TIPO ${id.number.type} NOT NULL,
+				 ID_STATO ${id.number.type} NOT NULL,
+				 DT_INIZIO DATE DEFAULT SYSDATE NOT NULL,
+				 DT_FINE DATE,
+				 PERCENTUALE_AVANZAMENTO NUMBER(3) DEFAULT 0 NOT NULL,
+				 DATI_ELABORAZIONE CLOB,
+				 CONSTRAINT A4GT_PROCESSO_PK PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID),
+				 FOREIGN KEY (ID_STATO) REFERENCES A4GD_STATO_PROCESSO (ID),
+				 FOREIGN KEY (ID_TIPO) REFERENCES A4GD_TIPO_PROCESSO (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE INDEX A4GT_PROCESSO_IDX ON A4GT_PROCESSO (ID_DATI_SETTORE,ID_TIPO) TABLESPACE ${tablespace.index};
+				
+				ALTER TABLE A4GT_PROCESSO MOVE LOB(DATI_ELABORAZIONE) STORE AS (TABLESPACE ${tablespace.lob});
+			</sql>
+			
+			
+			<!-- Contenuto di 003_updateVersioneDb.sql -->
+			<sql endDelimiter=";" splitStatements="true">
+				INSERT INTO A4GT_LOG_VERSIONE_DB (ID,PROGETTO,VERSIONE_DB,DT_INSTALLAZIONE,NOTE) VALUES 
+					(NXTNBR.nextval, 'A4GISTRUTTORIA', '1.2', SYSDATE, 'Aggiunte tabelle per la memorizzazione dei processi di istruttoria.');
+			</sql>
+			
+			<!-- Contenuto di 001_tabelleProcessi.sql -->
+			<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_STATO_PROCESSO TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_TIPO_PROCESSO TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PROCESSO TO ${user.writer};
+            </sql>
+		</changeSet>
+		
+		<changeSet id="ISTRUTTORIA_1.3" author="Lorenzo Martinelli">
+			<sql endDelimiter=";" splitStatements="true">
+				ALTER TABLE A4GT_TIPO_CONTROLLO RENAME TO A4GD_TIPO_CONTROLLO;
+			</sql>
+		</changeSet>
+		
+		<changeSet id="ISTRUTTORIA_1.4" author="Lorenzo Martinelli">
+			<!-- Contenuto di 004_aggiungiColonna_Domanda.sql -->
+           <sql endDelimiter=";" splitStatements="true">
+               ALTER TABLE A4GT_DOMANDA ADD RAGIONE_SOCIALE ${string.type}(4000);
+           </sql>
+        </changeSet>
+        
+        <changeSet id="ISTRUTTORIA_1.5" author="Lorenzo Martinelli">
+		   <!-- Contenuto di 004_aggiungiColonna_Domanda.sql -->
+           <sql endDelimiter=";" splitStatements="true">
+           		INSERT INTO A4GD_STATO_PROCESSO (id, versione, identificativo, descrizione) 
+           			VALUES (NXTNBR.NEXTVAL, 0, 'PROCESSO_START', 'Avvio del nuovo processo');
+				INSERT INTO A4GD_STATO_PROCESSO (id, versione, identificativo, descrizione)
+					VALUES (NXTNBR.NEXTVAL, 0, 'PROCESSO_OK', 'Processo terminato con successo');
+				INSERT INTO A4GD_STATO_PROCESSO (id, versione, identificativo, descrizione)
+					VALUES (NXTNBR.NEXTVAL, 0, 'PROCESSO_KO', 'Processo terminato con errori');
+				INSERT INTO A4GD_STATO_PROCESSO (id, versione, identificativo, descrizione)
+					VALUES (NXTNBR.NEXTVAL, 0, 'PROCESSO_RUN', 'Processo in esecuzione');
+				INSERT INTO A4GD_TIPO_PROCESSO (id, versione, identificativo, descrizione, parallelizzabile)
+					VALUES (NXTNBR.NEXTVAL, 0, 'RICEV_AGS', 'Processo di ricevibilita per le domande protocollate in AGS', 0);
+           </sql>
+        </changeSet>
+        
+    <changeSet id="ISTRUTTORIA_1.6" author="Lorenzo Martinelli">
+    	<dropTable tableName="A4GT_LOG_VERSIONE_DB"/>
+    </changeSet>
+
+	<changeSet id="ISTRUTTORIA_4.1" author="Francesco Marani">
+		<!--
+			database\script_db\a4gistruttoria\Sprint4-1.2_to_1.3\001_aggiuntaDateDomanda.sql;
+		-->
+       <sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			ALTER TABLE A4GT_DOMANDA RENAME COLUMN DT_PRESENTAZIONE TO DT_PROTOCOLLAZIONE;
+
+			ALTER TABLE A4GT_DOMANDA ADD DT_PRESENTAZIONE DATE;
+			ALTER TABLE A4GT_DOMANDA ADD DT_PRESENTAZ_ORIGINARIA DATE;
+			ALTER TABLE A4GT_DOMANDA ADD DT_PROTOCOLLAZ_ORIGINARIA DATE;
+
+			UPDATE A4GT_DOMANDA SET DT_PRESENTAZIONE = DT_PROTOCOLLAZIONE;
+			COMMIT;
+
+			ALTER TABLE A4GT_DOMANDA MODIFY DT_PRESENTAZIONE NOT NULL;
+
+			CREATE TABLE A4GT_PICCOLO_AGRICOLTORE (
+			 ID ${id.number.type} NOT NULL PRIMARY KEY,
+			 ANNO_RIFERIMENTO NUMBER(4) NOT NULL,
+			 CUAA ${string.type}(16 CHAR) NOT NULL,
+			 NOMINATIVO ${string.type}(500 CHAR) NOT NULL
+			) TABLESPACE ${tablespace.data};
+
+			CREATE UNIQUE INDEX A4GT_PICCOLO_AGRICOLTORE_UIDX ON A4GT_PICCOLO_AGRICOLTORE (ANNO_RIFERIMENTO,CUAA,NOMINATIVO);
+
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PICCOLO_AGRICOLTORE TO ${user.writer};
+
+			ALTER SEQUENCE NXTNBR MAXVALUE 99999999999999999999;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_4.2" author="Francesco Marani">
+		<!-- Aggiunta campo per dati di sintesi impegno -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			ALTER TABLE A4GT_DATI_LAVORAZIONE ADD JSON_DATI_SINTESI_IMPEGNI CLOB;
+    	</sql>
+    </changeSet>
+
+    <changeSet id="ISTRUTTORIA_4.3" author="Francesco Marani">
+		<!-- Inserimento aziende in regime di piccolo agricoltore per il 2018 -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','02413290228', 'AZIENDA AGRICOLA IL SOGNO DI DATRES DANIELE SOCIETA'' SEMPLICE AGRICOLA');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','CLLLCU76M05C794R', 'AZIENDA AGRICOLA LA REGINA DI COLLINI LUCA');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','BSTGNS39B43I354C', 'IOBSTRAIBIZER AGNESE');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','MSTFBA79L10H612L', 'MAESTRANZI FABIO');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','NRDMNL76T12L378S', 'NARDELLI MANUEL');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','02224320222', 'ROVERE DI VETTORAZZI LUCA E EZIO SOCIETA'' AGRICOLA SEMPLICE');
+			COMMIT;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_4.1" author="Alessio Siravo">
+		<!-- Inserimento decodifica dello stato domanda In Istruttoria e dei tipi di processo-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			INSERT INTO A4GD_STATO_DOMANDA (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE) VALUES (NXTNBR.nextval, 0, 'IN ISTRUTTORIA', 'Stato che identifica le domande per le quali e'' stata avviata l''istruttoria.');
+			INSERT INTO A4GD_TIPO_PROCESSO (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE, PARALLELIZZABILE) VALUES (NXTNBR.NEXTVAL, 0, 'AVV_IST', 'Processo di Avvio Istruttoria per le domande ricevibili.', 0);
+			COMMIT;
+		</sql>
+    </changeSet>
+
+
+    <changeSet id="ISTRUTTORIA_5.1" author="Alessandro Manganiello">
+		<!-- Inserimento controllo ammissibilita per agricoltore attivo-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			Insert into A4GD_TIPO_CONTROLLO (ID,VERSIONE,CATEGORIA,IDENTIFICATIVO,DESCRIZIONE) values (NXTNBR.NEXTVAL,0,'AMMISSIBILITA','CHECK_AGRICOLTORE_ATTIVO','Verifica che l''agricolore risulti attivo all''interno della banca dati SIAN');
+			COMMIT;
+		</sql>
+    </changeSet>    
+    
+    <changeSet id="ISTRUTTORIA_5.1" author="Alessio Siravo">
+		<!-- Creazione tabelle per memorizzare le informazioni relative alle richieste presenti in domanda unica-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">	
+			CREATE TABLE A4GD_INTERVENTO_DU (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} NOT NULL,
+			IDENTIFICATIVO_SOSTEGNO ${string.type}(50) NOT NULL,
+			DESCRIZIONE_SOSTEGNO ${string.type}(500),
+			IDENTIFICATIVO_SETTORE ${string.type}(50),
+			DESCRIZIONE_SETTORE ${string.type}(500),
+			IDENTIFICATIVO_INTERVENTO ${string.type}(50) NOT NULL,
+			DESCRIZIONE_INTERVENTO ${string.type}(500),
+			CONSTRAINT PK_A4GD_INTERVENTO_DU PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE UNIQUE INDEX A4GD_INTERVENTO_DU_UIDX ON A4GD_INTERVENTO_DU (IDENTIFICATIVO_INTERVENTO) TABLESPACE ${tablespace.index};
+
+			-- Grant
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_INTERVENTO_DU TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_5.2" author="Alessio Siravo">
+		<!-- Creazione tabelle per memorizzare le informazioni relative alle richieste presenti in domanda unica-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">	
+		
+		ALTER TABLE A4GD_INTERVENTO_DU
+		ADD CONSTRAINT A4GD_INTERVENTO_DU_UQ UNIQUE (IDENTIFICATIVO_INTERVENTO);
+		
+				CREATE TABLE A4GD_TIPO_DICHIARAZIONE_DU (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} NOT NULL,
+				 IDENTIFICATIVO ${string.type}(50) NOT NULL,
+				 DESCRIZIONE ${string.type}(500),
+				 CONSTRAINT PK_A4GD_TIPO_DICHIARAZIONE_DU PRIMARY KEY (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GD_TIPO_DICH_DU_UIDX ON A4GD_TIPO_DICHIARAZIONE_DU (IDENTIFICATIVO) TABLESPACE ${tablespace.index};
+				
+				ALTER TABLE A4GD_TIPO_DICHIARAZIONE_DU
+				ADD CONSTRAINT A4GD_TIPO_DICH_DU_UQ UNIQUE (IDENTIFICATIVO);
+				
+				CREATE TABLE A4GT_RICHIESTA_ALLEVAM_DU (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} NOT NULL,
+				 ID_DOMANDA NUMBER(10) NOT NULL,
+				 IDENTIFICATIVO_INTERVENTO ${string.type}(50) NOT NULL,
+				 CODICE_SPECIE ${string.type}(50) NOT NULL,
+				 DATI_ALLEVAMENTO CLOB,
+				 DATI_PROPRIETARIO CLOB,
+				 DATI_DETENTORE CLOB,
+				 CONSTRAINT PK_A4GT_RICHIESTE_ALLEVAM_DU PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+				 FOREIGN KEY (IDENTIFICATIVO_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU (IDENTIFICATIVO_INTERVENTO)
+				) TABLESPACE ${tablespace.data};
+				
+				ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU MOVE LOB(DATI_ALLEVAMENTO) STORE AS (TABLESPACE ${tablespace.lob});
+				ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU MOVE LOB(DATI_PROPRIETARIO) STORE AS (TABLESPACE ${tablespace.lob});
+				ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU MOVE LOB(DATI_DETENTORE) STORE AS (TABLESPACE ${tablespace.lob});
+				
+				CREATE TABLE AG4T_RICHIESTA_SUPERFICIE (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} NOT NULL,
+				 ID_DOMANDA NUMBER(10) NOT NULL,
+				 IDENTIFICATIVO_INTERVENTO ${string.type}(50) NOT NULL,
+				 SUP_RICHIESTA NUMBER(10) NOT NULL,
+				 SUP_IMPEGNATA_NETTA NUMBER(10),
+				 CODICE_COLTURA_3 CHAR(11) NOT NULL,
+				 CODICE_COLTURA_5 CHAR(19),
+				 INFO_CATASTALI CLOB,
+				 INFO_COLTIVAZIONE CLOB,
+				 RIFERIMENTI_CARTOGRAFICI CLOB,
+				 CONSTRAINT PK_AG4T_RICHIESTE_SUPERFICIE PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+				 FOREIGN KEY (IDENTIFICATIVO_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU (IDENTIFICATIVO_INTERVENTO)
+				) TABLESPACE ${tablespace.data};
+				
+				
+				ALTER TABLE AG4T_RICHIESTA_SUPERFICIE MOVE LOB(INFO_CATASTALI) STORE AS (TABLESPACE ${tablespace.lob});
+				ALTER TABLE AG4T_RICHIESTA_SUPERFICIE MOVE LOB(INFO_COLTIVAZIONE) STORE AS (TABLESPACE ${tablespace.lob});
+				ALTER TABLE AG4T_RICHIESTA_SUPERFICIE MOVE LOB(RIFERIMENTI_CARTOGRAFICI) STORE AS (TABLESPACE ${tablespace.lob});
+				
+				CREATE TABLE A4GT_DATI_PASCOLO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} NOT NULL,
+				 ID_DOMANDA NUMBER(10) NOT NULL,
+				 CODICE_PASCOLO ${string.type}(50) NOT NULL,
+				 DESCRIZIONE_PASCOLO ${string.type}(500),
+				 UBA_DICHIARATE NUMBER(10) NOT NULL,
+				 PARTICELLE_CATASTALI CLOB,
+				 CONSTRAINT PK_A4GT_DATI_PASCOLO PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID)
+				) TABLESPACE ${tablespace.data};
+				
+				ALTER TABLE A4GT_DATI_PASCOLO MOVE LOB(PARTICELLE_CATASTALI) STORE AS (TABLESPACE ${tablespace.lob});
+				
+				CREATE TABLE A4GT_DICHIARAZIONE_DU (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type} NOT NULL,
+				 ID_DOMANDA NUMBER(10) NOT NULL,
+				 IDENTIFICATIVO_TIPO ${string.type}(50) NOT NULL,
+				 CODICE ${string.type}(50) NOT NULL,
+				 DESCRIZIONE ${string.type}(500),
+				 VALORE_BOOL NUMBER(1),
+				 VALORE_DATA DATE,
+				 VALORE_NUMERO NUMBER(19),
+				 VALORE_STRINGA ${string.type}(500),
+				 CONSTRAINT PK_A4GT_DICHIARAZIONI_DU PRIMARY KEY (ID),
+				 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+				 FOREIGN KEY (IDENTIFICATIVO_TIPO) REFERENCES A4GD_TIPO_DICHIARAZIONE_DU (IDENTIFICATIVO)
+				) TABLESPACE ${tablespace.data};
+				
+				CREATE UNIQUE INDEX A4GT_DICHI_DU_UIDX ON A4GT_DICHIARAZIONE_DU (CODICE,ID_DOMANDA) TABLESPACE ${tablespace.index};
+				
+				-- Grant
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_TIPO_DICHIARAZIONE_DU TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_RICHIESTA_ALLEVAM_DU TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON AG4T_RICHIESTA_SUPERFICIE TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_PASCOLO TO ${user.writer};
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DICHIARAZIONE_DU TO ${user.writer};	
+		</sql>
+    </changeSet>   
+    
+    <changeSet id="ISTRUTTORIA_5.3" author="Alessio Siravo">
+		<!-- Inserimento informazioni di decodifica per interventi e dichiarazioni Domanda Unica-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			-- Decodifica categoria di dichiarazioni domanda unica.	
+			INSERT INTO A4GD_TIPO_DICHIARAZIONE_DU VALUES (NXTNBR.NEXTVAL, 0, 'DICH_GENERALI', 'Dichiarazioni compilate in Domanda Unica nel quadro DICHIARAZIONI');
+			INSERT INTO A4GD_TIPO_DICHIARAZIONE_DU VALUES (NXTNBR.NEXTVAL, 0, 'DICH_GIOVANE_AGRICOLTORE', 'Dichiarazioni compilate in Domanda Unica nel quadro GIOVANE AGRICOLTORE');
+			INSERT INTO A4GD_TIPO_DICHIARAZIONE_DU VALUES (NXTNBR.NEXTVAL, 0, 'DICH_RISERVA_NAZIONALE', 'Dichiarazioni compilate in Domanda Unica nel quadro RISERVA NAZIONALE');
+			INSERT INTO A4GD_TIPO_DICHIARAZIONE_DU VALUES (NXTNBR.NEXTVAL, 0, 'DICH_AGGIUNTIVE', 'Dichiarazioni compilate in Domanda Unica nel quadro DATI AGGIUNTIVI');
+			INSERT INTO A4GD_TIPO_DICHIARAZIONE_DU VALUES (NXTNBR.NEXTVAL, 0, 'DICH_PICCOLO_AGRICOLTORE', 'Dichiarazioni compilate in Domanda Unica nel quadro PICCOLO AGRICOLTORE');
+			
+			-- Decodifica interventi domanda unica.			
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'DISACCOPPIATO',	'Sostegno disaccoppiato', '', '', 'BPS', 'Regime pagamento base');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'DISACCOPPIATO',	'Sostegno disaccoppiato', '', '', 'GREE', 'Pagamento greening');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'DISACCOPPIATO',	'Sostegno disaccoppiato', '', '', 'GIOV', 'Pagamento giovane agricoltore');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'FRUMENTO', 'Frumento duro, colture proteiche e proteaginose',	'SOIA',	'Soia');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'FRUMENTO', 'Frumento duro, colture proteiche e proteaginose',	'GDURO', 'Frumento duro');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'FRUMENTO', 'Frumento duro, colture proteiche e proteaginose',	'CPROT', 'Colture proteaginose');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'FRUMENTO', 'Frumento duro, colture proteiche e proteaginose',	'LEGUMIN', 'Colture leguminose');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'POMODORO', 'Pomodoro', 'POMOD',	'Pomodoro da trasformazione');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'OLIO', 'Olio', 'OLIO', 'Olivicoltura');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'OLIO', 'Olio', 'OLIVE_PEND75', 'Oliveti in pendenza');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_SUPERFICI',	'Sostegno accoppiato superfici', 'OLIO', 'Olio', 'OLIVE_DISC',	'Olivicoltura di qualità');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'LATTE', 'Latte', 'LATTE',	'Vacche da latte');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'LATTE', 'Latte', 'LATTE_BMONT', 'Vacche da latte in zone di montagna');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'LATTE', 'Latte', 'LATTE BUFAL', 'Bufale');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_VAC', 'Vacche nutrici');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_VAC_SEL', 'Vacche nutrici con adesione a piani di gestione della razza');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_VAC_NO_ISCR', 'Vacche nutrici non iscritte');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_MAC', 'Bovini macellati');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_MAC_12M', 'Bovini macellati - Allevati 12 mesi');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'CARNI_BOVINE', 'Carni Bovine', 'BOVINI_MAC_ETIC', 'Bovini macellati - Etichettatura');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'OVICAPRINI', 'Ovicaprini', 'OVICAP_AGN', 'Agnelle');
+			Insert into A4GD_INTERVENTO_DU values (NXTNBR.nextval, 0 , 'ACC_ZOOTECNIA',	'Sostegno accoppiato zootecnia', 'OVICAPRINI', 'Ovicaprini', 'OVICAP_MAC', 'Ovicaprini macellati');
+						
+			COMMIT;
+		</sql>
+    </changeSet>  
+    
+    <changeSet id="ISTRUTTORIA_5.4" author="Alessio Siravo">
+		<!--Correzione nome tabella Ag4tRichiestaSuperficie in A4gtRichiestaSuperficie-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			RENAME AG4T_RICHIESTA_SUPERFICIE TO A4GT_RICHIESTA_SUPERFICIE;
+		</sql>
+    </changeSet>  
+    
+    <changeSet id="ISTRUTTORIA_5.5" author="Alessio Siravo">
+		<!--Rename campo A4gtRichiestaSuperficie.sup_impegnata_netta in A4gtRichiestaSuperficie.sup_richiesta_netta-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_RICHIESTA_SUPERFICIE RENAME COLUMN SUP_IMPEGNATA_NETTA TO SUP_RICHIESTA_NETTA;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_5.6" author="Alessandro Cuel">
+		<!-- Aggiornamento delle colonne per la defizione degli interventi -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">			
+			ALTER TABLE A4GD_INTERVENTO_DU RENAME COLUMN DESCRIZIONE_INTERVENTO TO DESCRIZIONE_BREVE;	
+			ALTER TABLE A4GD_INTERVENTO_DU ADD DESCRIZIONE_LUNGA ${string.type}(4000);
+			ALTER TABLE A4GD_INTERVENTO_DU ADD MISURA ${string.type}(10);
+			ALTER TABLE A4GD_INTERVENTO_DU ADD CODICE_AGEA ${string.type}(10);
+    	</sql>
+    </changeSet> 
+    
+    <changeSet id="ISTRUTTORIA_5.7" author="Alessandro Cuel">
+		<!-- inserimento dei dati nelle nuove colonne della tabella A4GD_INTERVENTO_DU -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">			
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Regime di pagamento di base', CODICE_AGEA = '026' WHERE	IDENTIFICATIVO_INTERVENTO =	'BPS';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Pagamento a favore delle pratiche agricole benefiche per il clima e l''ambiente', CODICE_AGEA = '008' WHERE	IDENTIFICATIVO_INTERVENTO =	'GREE';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Pagamento per i giovani agricoltori', CODICE_AGEA = '009' WHERE	IDENTIFICATIVO_INTERVENTO =	'GIOV'; 
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici coltivate a soia in Piemonte, Lombardia, Veneto, Fiuli Venezia Giulia ed Emilia Romagna', MISURA = 'M8', CODICE_AGEA = '122' WHERE	IDENTIFICATIVO_INTERVENTO =	'SOIA';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici coltivate a frumento duro in Toscana, Umbria, Marche, Lazio, Abruzzo, Molise, Campagna, Puglia, Basilicata, Calabria, Sicilia e Sardegna', MISURA = 'M9', CODICE_AGEA = '123' WHERE	IDENTIFICATIVO_INTERVENTO =	'GDURO';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici coltivate a colture proteaginose, leguminose da granella e erbai annuali di sole leguminose in Toscana, Umbria, Marche, Lazio', MISURA = 'M10', CODICE_AGEA = '124' WHERE	IDENTIFICATIVO_INTERVENTO =	'CPROT';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici coltivate a colture leguminose da granella e erbai annuali di sole leguminose in Abruzzo, Molise, Campagna, Puglia, Basilicata, Calabria, Sicilia e Sardegna', MISURA = 'M11', CODICE_AGEA = '125' WHERE	IDENTIFICATIVO_INTERVENTO =	'LEGUMIN';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici coltivate a pomodoro da trasformazione', MISURA = 'M14', CODICE_AGEA = '128' WHERE	IDENTIFICATIVO_INTERVENTO =	'POMOD';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici olivicole in Ligurie, Puglia e Calabria', MISURA = 'M15', CODICE_AGEA = '129' WHERE	IDENTIFICATIVO_INTERVENTO =	'OLIO';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici olivicole in Puglia e Calabria caratterizzate da una pendenza media superiore al 7,5%', MISURA = 'M16', CODICE_AGEA = '132' WHERE	IDENTIFICATIVO_INTERVENTO =	'OLIVE_PEND75';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Superfici olivicole che aderiscono a sistemi di qualità', MISURA = 'M17', CODICE_AGEA = '138' WHERE	IDENTIFICATIVO_INTERVENTO =	'OLIVE_DISC';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Vacche da latte', MISURA = 'M1', CODICE_AGEA = '310' WHERE	IDENTIFICATIVO_INTERVENTO =	'LATTE';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Vacche da latte associate ad allevamenti montani', MISURA = 'M2', CODICE_AGEA = '311' WHERE	IDENTIFICATIVO_INTERVENTO =	'LATTE_BMONT';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Bufale di età superiore a 30 mesi', MISURA = 'M3', CODICE_AGEA = '312' WHERE	IDENTIFICATIVO_INTERVENTO =	'LATTE BUFAL';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Vacche nutrici da carne e a duplice attitudine iscritte nei Libri genealogici o nel Registro anagrafico', MISURA = 'M4', CODICE_AGEA = '313' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_VAC';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Vacche a duplice attitudine iscritte nei Libri genealogici o nel registro anagrafico, inserite in piani selettivi o di gestione della razza', MISURA = 'M18', CODICE_AGEA = '314' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_VAC_SEL';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Vacche nutrici non iscritte nei libri genealogici o nel registro anagrafico e appartenenti ad allevamenti non iscritti nella BDN come allevamenti da latte', MISURA = 'M20', CODICE_AGEA = '322' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_VAC_NO_ISCR';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Capi bovini macellati di età compresa tra i 12 e 24 mesi allevati per un periodo non inferiore a sei mesi', MISURA = 'M5', CODICE_AGEA = '315' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_MAC';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Capi bovini macellati di età compresa tra i 12 e 24 mesi allevati per un periodo non inferiore ai dodici mesi', MISURA = 'M19', CODICE_AGEA = '316' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_MAC_12M';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Capi bovini macellati di età compresa tra i 12 e 24 mesi aderenti a sistemi di etichettatura facoltativa riconosciuti', MISURA = 'M19', CODICE_AGEA = '318' WHERE	IDENTIFICATIVO_INTERVENTO =	'BOVINI_MAC_ETIC';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Agnelle da Rimonta', MISURA = 'M6', CODICE_AGEA = '320' WHERE	IDENTIFICATIVO_INTERVENTO =	'OVICAP_AGN';
+			UPDATE A4GD_INTERVENTO_DU SET DESCRIZIONE_LUNGA = 'Capi ovini e caprini macellati', MISURA = 'M7', CODICE_AGEA = '321' WHERE	IDENTIFICATIVO_INTERVENTO =	'OVICAP_MAC';
+    	</sql>
+    </changeSet> 
+    
+       <changeSet id="ISTRUTTORIA_6.1" author="Salvatore De Luca">
+		<!--Eliminazione NOT NULL su ID_DATI_SETTORE per tabella processo-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_PROCESSO MODIFY ID_DATI_SETTORE NUMBER NULL;
+		</sql>
+    </changeSet> 
+    
+    <changeSet id="ISTRUTTORIA_6.1" author="Alessio Siravo">
+		<!--Creazione matrice di compatibilità coltura/intervento-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			 CREATE TABLE A4GD_COLTURA_INTERVENTO (
+				 ID ${id.number.type} NOT NULL,
+				 VERSIONE ${version.number.type},
+				 ID_DATI_SETTORE ${id.number.type},
+				 CODICE_COLTURA_3 CHAR(11),
+				 CODICE_COLTURA_5 CHAR(19),
+				 DESCRIZIONE_COLTURA ${string.type}(500),
+				 IDENTIFICATIVO_INTERVENTO ${string.type}(50),
+				 CONSTRAINT PK_A4GD_COLTURA_INTERVENTO PRIMARY KEY (ID),
+				 FOREIGN KEY (IDENTIFICATIVO_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU (IDENTIFICATIVO_INTERVENTO),
+				 FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+    </changeSet>
+    
+    <include file = "config/database/changelog/db.istruttoria.matriceColturaIntervento.changelog.xml"/>
+    
+    <changeSet id="ISTRUTTORIA_6.2" author="Alessandro Cuel">
+		<!-- Aggiornamento delle colonne per la defizione degli interventi -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_RICHIESTA_SUPERFICIE ADD ID_INTERVENTO NUMBER(19);	
+			ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU ADD ID_INTERVENTO NUMBER(19);	
+			ALTER TABLE A4GD_COLTURA_INTERVENTO ADD ID_INTERVENTO NUMBER(19);	
+    	</sql>
+	</changeSet> 
+
+	<changeSet id="ISTRUTTORIA_6.3" author="Alessandro Cuel">
+		<!-- valorizzazione dell'id intervento -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			UPDATE A4GT_RICHIESTA_SUPERFICIE I SET I.ID_INTERVENTO = (SELECT D.ID FROM A4GD_INTERVENTO_DU D WHERE D.IDENTIFICATIVO_INTERVENTO = I.IDENTIFICATIVO_INTERVENTO);
+			UPDATE A4GT_RICHIESTA_ALLEVAM_DU I SET I.ID_INTERVENTO = (SELECT D.ID FROM A4GD_INTERVENTO_DU D WHERE D.IDENTIFICATIVO_INTERVENTO = I.IDENTIFICATIVO_INTERVENTO);
+			UPDATE A4GD_COLTURA_INTERVENTO I SET I.ID_INTERVENTO = (SELECT D.ID FROM A4GD_INTERVENTO_DU D WHERE D.IDENTIFICATIVO_INTERVENTO = I.IDENTIFICATIVO_INTERVENTO);
+		</sql>
+	</changeSet> 
+
+	<changeSet id="ISTRUTTORIA_6.4" author="Alessandro Cuel">
+		<!-- aggiornamento dei vincoli -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_RICHIESTA_SUPERFICIE DROP COLUMN IDENTIFICATIVO_INTERVENTO CASCADE CONSTRAINTS;
+			ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU DROP COLUMN IDENTIFICATIVO_INTERVENTO CASCADE CONSTRAINTS;
+			ALTER TABLE A4GD_COLTURA_INTERVENTO DROP COLUMN IDENTIFICATIVO_INTERVENTO CASCADE CONSTRAINTS;
+			
+			ALTER TABLE A4GT_RICHIESTA_SUPERFICIE ADD CONSTRAINT FK_RICHIESTA_SUPERFICIE_1 FOREIGN KEY (ID_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU(ID);
+			ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU ADD CONSTRAINT FK_RICHIESTA_ALLEVAM_DU_1 FOREIGN KEY (ID_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU(ID);
+			ALTER TABLE A4GD_COLTURA_INTERVENTO ADD CONSTRAINT FK_COLTURA_INTERVENTO_1 FOREIGN KEY (ID_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU(ID);
+		</sql>
+	</changeSet> 
+	
+	  <changeSet id="ISTRUTTORIA_6.1" author="Armando D'Alessandro">
+		<!-- Creazione tabella A4GT_TITOLO_DU -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+			CREATE TABLE A4GT_TITOLO_DU (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} NOT NULL,
+			ID_DOMANDA ${id.number.type} NOT NULL,
+			ID_TITOLARE ${id.number.type} NOT NULL,
+			NUMERO_TITOLARE VARCHAR2(12) NOT NULL,
+			VALORE NUMBER(8) NOT NULL,
+			SUPERFICIE NUMBER(5) NOT NULL,
+			DATA_INIZIO_POSSESSO DATE,
+			DATA_FINE_POSSESSO DATE,
+			ANNO_CAMPAGNA_INIZIO NUMBER(4) NOT NULL,
+			ANNO_CAMPAGNA_FINE NUMBER(4),
+			CONSTRAINT PK_A4GT_TITOLO_DU PRIMARY KEY (ID),
+			FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID)
+			)TABLESPACE ${tablespace.data};
+
+		</sql>
+    </changeSet>
+    
+      <changeSet id="ISTRUTTORIA_6.2" author="Armando D'Alessandro">
+		<!-- Aggiungo riferimento per colonna fk -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+			ALTER TABLE A4GT_DICHIARAZIONE_DU ADD ID_TIPO_DICHIARAZIONE NUMBER(19);	
+			UPDATE A4GT_DICHIARAZIONE_DU SET ID_TIPO_DICHIARAZIONE = (SELECT ID FROM A4GD_TIPO_DICHIARAZIONE_DU WHERE IDENTIFICATIVO = IDENTIFICATIVO_TIPO);
+			ALTER TABLE A4GT_DICHIARAZIONE_DU DROP COLUMN IDENTIFICATIVO_TIPO CASCADE CONSTRAINTS;		
+		    ALTER TABLE A4GT_DICHIARAZIONE_DU ADD CONSTRAINT FK_DICHIARAZIONE_DU FOREIGN KEY (ID_TIPO_DICHIARAZIONE) REFERENCES A4GD_TIPO_DICHIARAZIONE_DU(ID);
+							
+		</sql>
+    </changeSet>
+    
+     <changeSet id="ISTRUTTORIA_6.3" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_TITOLO_DU TO ${user.writer};
+    
+    </sql>
+    </changeSet>
+    
+     <changeSet id="ISTRUTTORIA_6.4" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    
+           ALTER TABLE A4GT_TITOLO_DU MODIFY VALORE NUMBER(8,2);
+           ALTER TABLE A4GT_TITOLO_DU MODIFY SUPERFICIE NUMBER(5,2);
+    
+    </sql>
+    </changeSet>
+    
+    	<changeSet id="ISTRUTTORIA_6.1" author="Alessandro Manganiello">
+		<!--Creazione tabella A4GD_SOSTEGNO_DU-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GD_SOSTEGNO_DU (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} NOT NULL,
+			IDENTIFICATIVO ${string.type}(50) NOT NULL,
+			DESCRIZIONE ${string.type}(500),
+			CONSTRAINT PK_A4GD_SOSTEGNO_DU PRIMARY KEY(ID)
+			) TABLESPACE ${tablespace.data};
+			
+			 --GRANT
+			 GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_SOSTEGNO_DU TO ${user.writer};
+			 
+			 --POPOLAMENTO DEGLI IDENTIFICATIVI_SOSTEGNO.
+			 
+			 INSERT INTO A4GD_SOSTEGNO_DU(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'DISACCOPPIATO','Sostegno disaccoppiato');
+			 
+			  INSERT INTO A4GD_SOSTEGNO_DU(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'ACC_SUPERFICI','Sostegno accoppiato superfici');
+			 
+			  INSERT INTO A4GD_SOSTEGNO_DU(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'ACC_ZOOTECNIA','Sostegno accoppiato zootecnia');
+			 
+			 COMMIT;
+			 
+		</sql>
+	</changeSet>
+	
+	
+	<changeSet id="ISTRUTTORIA_6.2" author="Alessandro Manganiello">
+		<!--Modifica tabella A4GD_INTERVENTO_DU-->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+			ALTER TABLE A4GD_INTERVENTO_DU DROP COLUMN IDENTIFICATIVO_SOSTEGNO;
+			ALTER TABLE A4GD_INTERVENTO_DU DROP COLUMN DESCRIZIONE_SOSTEGNO;
+			ALTER TABLE A4GD_INTERVENTO_DU ADD ID_SOSTEGNO ${id.number.type};
+			
+			UPDATE A4GD_INTERVENTO_DU SET ID_SOSTEGNO = (SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO = 'DISACCOPPIATO') WHERE IDENTIFICATIVO_SETTORE IS NULL;
+			UPDATE A4GD_INTERVENTO_DU SET ID_SOSTEGNO = (SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO = 'ACC_SUPERFICI') WHERE IDENTIFICATIVO_SETTORE IN ('FRUMENTO', 'POMODORO', 'OLIO');
+			UPDATE A4GD_INTERVENTO_DU SET ID_SOSTEGNO = (SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO = 'ACC_ZOOTECNIA') WHERE IDENTIFICATIVO_SETTORE IN ('LATTE', 'CARNI_BOVINE', 'OVICAPRINI');
+			
+			ALTER TABLE A4GD_INTERVENTO_DU ADD CONSTRAINT FK_A4GD_INTERVENTO_DU_0 FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID);
+			
+			ALTER TABLE A4GD_INTERVENTO_DU MODIFY ID_SOSTEGNO ${id.number.type} NOT NULL;
+			COMMIT;
+		</sql>
+	</changeSet>
+	
+	
+   <changeSet id="ISTRUTTORIA_6.5" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+	    	 <!--Creazione tabella A4GD_STATO_LAV_SOSTEGNO  -->
+	    		
+	         CREATE TABLE A4GD_STATO_LAV_SOSTEGNO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 IDENTIFICATIVO VARCHAR2(50) NOT NULL,
+			 DESCRIZIONE VARCHAR2(500),
+			 CONSTRAINT PK_A4GD_STATO_LAV_SOSTEGNO PRIMARY KEY (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			 GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_STATO_LAV_SOSTEGNO TO ${user.writer};
+			 
+			 INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'RICHIESTO','Sostegno richiesto');
+				 
+		     INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'CONTROLLI_CALCOLO_KO','Controlli non superati in fase di calcolo');
+			 
+			 INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'CONTROLLI_CALCOLO_OK','Controlli superati in fase di calcolo');
+			 
+			 INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			 VALUES(NXTNBR.NEXTVAL,0,'NON_AMMISSIBILE','Domanda non ammissibile per il sostegno');
+			
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'LIQUIDABILE','Domanda Liquidabile');
+			
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'CONTROLLI_LIQUIDABILE_KO','Controlli di liquidabilità non superati');
+			
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'NON_LIQUIDABILE','Domanda non liquidabile');
+			
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'PAGAMENTO_AUTORIZZATO','Pagamento autorizzato a seguito dei controlli intersostegno');
+			
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'PAGAMENTO_NON_AUTORIZZATO','Pagamento non autorizzato a seguito dei controlli intersostegno');
+    
+    	</sql>
+    </changeSet> 
+    
+   <changeSet id="ISTRUTTORIA_6.6" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			<!-- Creazione tabella A4GT_LAVORAZIONE_SOSTEGNO -->
+		     CREATE TABLE A4GT_LAVORAZIONE_SOSTEGNO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type},
+			 ID_DOMANDA ${id.number.type},
+			 ID_SOSEGNO ${id.number.type},
+			 ID_STATO_LAVORAZIONE NUMBER(19),
+			 CONSTRAINT PK_A4GT_LAVORAZIONE_SOSTEGNO PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			 FOREIGN KEY (ID_SOSEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID),
+			 FOREIGN KEY (ID_STATO_LAVORAZIONE) REFERENCES A4GD_STATO_LAV_SOSTEGNO (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_STATO_LAV_SOSTEGNO TO ${user.writer};
+
+		</sql>
+    </changeSet>
+    
+      <changeSet id="ISTRUTTORIA_6.7" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			<!-- Creazione tabella A4GT_TRANSIZIONE_SOSTEGNO -->
+		     CREATE TABLE A4GT_TRANSIZIONE_SOSTEGNO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 ID_DOMANDA ${id.number.type} NOT NULL,
+			 ID_SOSTEGNO ${id.number.type} NOT NULL,
+			 ID_STATO_INIZIALE ${id.number.type} NOT NULL,
+			 ID_STATO_FINALE ${id.number.type} NOT NULL,
+			 DATA_ESECUZIONE DATE NOT NULL,
+			 CONSTRAINT PK_A4GT_TRANSIZIONE_SOSTEGNO PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			 FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID),
+			 FOREIGN KEY (ID_STATO_INIZIALE) REFERENCES A4GD_STATO_LAV_SOSTEGNO (ID),
+			 FOREIGN KEY (ID_STATO_FINALE) REFERENCES A4GD_STATO_LAV_SOSTEGNO (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_TRANSIZIONE_SOSTEGNO TO ${user.writer};
+
+		</sql>
+    </changeSet>
+    
+   <changeSet id="ISTRUTTORIA_6.8" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			<!-- Creazione tabella A4GT_PASSI_LAV_SOSTEGNO -->
+		     CREATE TABLE A4GT_PASSI_LAV_SOSTEGNO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 ID_TRANSIZ_SOSTEGNO ${id.number.type} NOT NULL,
+			 CODICE_PASSO VARCHAR2(50) NOT NULL,
+			 ESITO CHAR(2) NOT NULL,
+			 CODICE_ESITO VARCHAR2(50) NOT NULL,
+			 DATI_INPUT CLOB,
+			 DATI_OUTPUT CLOB,
+			 DATI_SINTESI_LAVORAZIONE CLOB,
+			 MSG_ERRORE VARCHAR2(500),
+			 CONSTRAINT PK_A4GT_PASSI_LAV_SOSTEGNO PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_TRANSIZ_SOSTEGNO) REFERENCES A4GT_TRANSIZIONE_SOSTEGNO (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PASSI_LAV_SOSTEGNO TO ${user.writer};
+	
+		</sql>
+    </changeSet>
+
+   
+    <changeSet id="ISTRUTTORIA_6.9" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		<!-- GRANT A4GT_LAVORAZIONE_SOSTEGNO -->
+    
+    	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LAVORAZIONE_SOSTEGNO TO ${user.writer};
+    	
+    	</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_6.9" author="Elisabetta Freschi">
+    	<renameTable newTableName="A4GISTR_LOGGING" oldTableName="A4GT_LOGGING"/>
+    </changeSet>   
+
+ 	<changeSet id="ISTRUTTORIA_6.10" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+		ALTER TABLE A4GT_LAVORAZIONE_SOSTEGNO RENAME COLUMN ID_SOSEGNO TO ID_SOSTEGNO;
+		
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.1" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_INCREMENTO_GREENING NUMBER(3,2);
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_INCREMENTO_GIOVANE NUMBER(3,2);
+			ALTER TABLE A4GT_DATI_SETTORE ADD LIMITE_GIOVANE NUMBER(*,4);
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_RIDUZIONE_LINEARE_1 NUMBER(3,2);
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_RIDUZIONE_LINEARE_2 NUMBER(3,2);		
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.2" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GD_TIPO_PROCESSO (id, versione, identificativo, descrizione, parallelizzabile) VALUES (NXTNBR.NEXTVAL, 0, 'CTRL_ANTIMAFIA', 'Processo per il controllo massivo delle domande antimafia protocollate', 0);
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.2" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DATI_SETTORE MODIFY PERC_INCREMENTO_GREENING NUMBER(5,4);
+			ALTER TABLE A4GT_DATI_SETTORE MODIFY PERC_INCREMENTO_GIOVANE NUMBER(5,4);
+			ALTER TABLE A4GT_DATI_SETTORE MODIFY PERC_RIDUZIONE_LINEARE_1 NUMBER(5,4);
+			ALTER TABLE A4GT_DATI_SETTORE MODIFY PERC_RIDUZIONE_LINEARE_2 NUMBER(5,4);
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_7.3" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_DOMANDE_COLLEGATE(
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			    CUUA VARCHAR2(16) NOT NULL,
+			    TIPO_DOMANDA VARCHAR2(50),
+			    ID_DOMANDA NUMBER(19) NOT NULL,
+			    DT_DOMANDA DATE NOT NULL,
+			    CAMPAGNA NUMBER(4),
+			    IMPORTO_RICHIESTO DECIMAL NOT NULL,
+			    DT_BDNA_OP DATE,
+			    DT_SILENZIO DATE,
+			    DT_BDNA DATE,
+			    PROTOCOLLO VARCHAR2(50),
+			    STATO_BDNA VARCHAR2(20),
+			    NOME_FILE_CSV VARCHAR2(40),
+			    FLAG_CONFERMATO NUMBER(1) DEFAULT 0,
+			    MISURE_PSR VARCHAR2(10),
+			 	CONSTRAINT PK_A4GT_DOMANDE_COLLEGATE PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DOMANDE_COLLEGATE TO ${user.writer};
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_7.4" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE RENAME COLUMN CUUA TO CUAA;
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_7.5" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE MODIFY IMPORTO_RICHIESTO DECIMAL(10,2);
+		</sql>
+    </changeSet> 
+     <changeSet id="ISTRUTTORIA_7.6" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE ADD DT_INIZIO_SILENZIO_ASSENSO DATE;
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE ADD DT_FINE_SILENZIO_ASSENSO DATE;
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE ADD DT_INIZIO_ESITO_NEGATIVO DATE;
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE ADD DT_FINE_ESITO_NEGATIVO DATE;
+			ALTER TABLE A4GT_DOMANDE_COLLEGATE ADD STATO_BDNA_AGGIORNATO VARCHAR2(20);
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_7.3" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_CAMPIONE (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 ANNO_CAMPAGNA NUMBER(4) NOT NULL,
+			 CUAA VARCHAR2(16) NOT NULL,
+			 TIPO_CAMPIONE VARCHAR2(50) NOT NULL,
+			 CONSTRAINT PK_A4GT_CAMPIONE PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};			
+			
+			CREATE UNIQUE INDEX A4GT_CAMPIONE_UIDX ON A4GT_CAMPIONE (ANNO_CAMPAGNA,CUAA,TIPO_CAMPIONE);
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CAMPIONE TO ${user.writer};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_COLTURA_INTERVENTO TO ${user.writer};
+		</sql>
+    </changeSet>
+	<changeSet id="ISTRUTTORIA_7.1" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DATI_LAVORAZIONE ADD JSON_DATI_ISTRUTTORIA CLOB;
+			ALTER TABLE A4GT_DATI_LAVORAZIONE ADD JSON_PREMI_ANNI_PREC CLOB;
+		</sql>
+    </changeSet>
+ 	<changeSet id="ISTRUTTORIA_7.2" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_DATI_LAVORAZIONE DROP COLUMN JSON_DATI_ISTRUTTORIA;
+			ALTER TABLE A4GT_DATI_LAVORAZIONE DROP COLUMN JSON_PREMI_ANNI_PREC;
+		</sql>
+    </changeSet> 
+	
+    <changeSet id="ISTRUTTORIA_7.5" author="Bettina Irler">
+        <createTable tableName="A4GT_DATI_ISTRUTTORIA">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_DATI_ISTRUTTORIA_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_DI_DOMANDA_FK"
+                             referencedTableName="A4GT_DOMANDA"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="TIPO" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="JSON_DATI" type="clob">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="A4GT_DATI_ISTRUTTORIA" indexName="A4GT_DI_D_TIPO_UIDX" unique="true">
+            <column name="ID_DOMANDA"/>
+            <column name="TIPO"/>
+        </createIndex>  	
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_ISTRUTTORIA TO ${user.writer};
+        </sql>
+		<rollback>
+            drop table A4GT_DATI_ISTRUTTORIA;
+        </rollback>         
+    </changeSet>
+	<changeSet id="ISTRUTTORIA_7.6" author="Bettina Irler">
+		 <sql>
+        	ALTER INDEX A4GT_DATI_ISTRUTTORIA_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        	ALTER INDEX A4GT_DI_D_TIPO_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			ALTER TABLE A4GT_DATI_ISTRUTTORIA MOVE LOB(JSON_DATI) STORE AS (TABLESPACE ${tablespace.lob});
+        </sql>
+    </changeSet> 
+     <changeSet id="ISTRUTTORIA_7.1" author="Armando D'Alessandro">
+		<!-- Inserimento processo per l'avvio del calcolo disaccoppiato -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">				
+			
+			INSERT INTO A4GD_TIPO_PROCESSO (id, versione, identificativo, descrizione, parallelizzabile)
+			 VALUES (NXTNBR.NEXTVAL, 0, 'CLC_DISACCOPPIATO', 'Processo per avvio del calcolo del disaccoppiato', 0);
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_7.4" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			
+			CREATE TABLE A4GT_DATI_PARTICELLA_COLTURA (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type},
+			 ID_DOMANDA NUMBER(19),
+			 ID_SOSTEGNO NUMBER(19),
+			 INFO_CATASTALI CLOB,
+			 CODICE_COLTURA_3 CHAR(11),
+			 DATI_PARTICELLA CLOB,
+			 CONSTRAINT PK_A4GT_DATI_PART_COLT PRIMARY KEY (ID),
+			FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			ALTER TABLE A4GT_DATI_PARTICELLA_COLTURA MOVE LOB(INFO_CATASTALI) STORE AS (TABLESPACE ${tablespace.lob});
+			ALTER TABLE A4GT_DATI_PARTICELLA_COLTURA MOVE LOB(DATI_PARTICELLA) STORE AS (TABLESPACE ${tablespace.lob});
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_PARTICELLA_COLTURA TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.5" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			ALTER TABLE A4GT_TRANSIZIONE_SOSTEGNO MODIFY ID_STATO_FINALE NUMBER NULL;
+		</sql>
+    </changeSet>
+       
+    <changeSet id="ISTRUTTORIA_7.6" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			DELETE FROM A4GD_COLTURA_INTERVENTO;
+			
+			ALTER TABLE A4GD_COLTURA_INTERVENTO ADD LEGUMINOSE CHAR(1);
+			ALTER TABLE A4GD_COLTURA_INTERVENTO ADD COD_COLTURA_DIVERSA NUMBER(15,0);
+			
+			COMMIT;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.1" author="Alessandro Cuel">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			
+			CREATE TABLE A4GT_PASCOLO_PARTICELLA (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type},
+			 ID_DOMANDA NUMBER(19),
+			 ID_SOSTEGNO NUMBER(19),
+			 ID_PASCOLO	   	NUMBER(19),	 
+			 COD_PASCOLO	   	CHAR(11),
+             DESC_PASCOLO		CHAR(40),
+			 INFO_PART_PASCOLO	CLOB,
+             SUP_NETTA_PASCOLO NUMBER(10),
+			 ESITO_MAN			CHAR(6),
+			 CONSTRAINT PK_A4GT_PASCOLO_PARTICELLA PRIMARY KEY (ID),
+			FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			ALTER TABLE A4GT_PASCOLO_PARTICELLA MOVE LOB(INFO_PART_PASCOLO) STORE AS (TABLESPACE ${tablespace.lob});
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PASCOLO_PARTICELLA TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.2" author="Alessandro Cuel">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			ALTER TABLE A4GT_DICHIARAZIONE_DU ADD ORDINE NUMBER(10);
+			
+			COMMIT;
+		</sql>
+    </changeSet>
+     <changeSet id="ISTRUTTORIA_7.7" author="Bettina Irler">
+        <createTable tableName="A4GT_DATI_FILTRO_DOMANDA">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_DATI_FILTRO_DOMANDA_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_DFD_DOMANDA_FK"
+                             referencedTableName="A4GT_DOMANDA"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="JSON_DATI" type="clob">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="A4GT_DATI_FILTRO_DOMANDA" indexName="A4GT_DFD_D_UIDX" unique="true">
+            <column name="ID_DOMANDA"/>
+        </createIndex>  	
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_FILTRO_DOMANDA TO ${user.writer};
+        </sql>
+		<rollback>
+            drop table A4GT_DATI_FILTRO_DOMANDA;
+        </rollback>         
+    </changeSet>
+    <include file = "config/database/changelog/db.istruttoria.matriceColturaIntervento_v2.changelog.xml"/>
+    
+      <changeSet id="ISTRUTTORIA_7.2" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			INSERT INTO A4GD_TIPO_PROCESSO (id, versione, identificativo, descrizione, parallelizzabile)
+					VALUES (NXTNBR.NEXTVAL, 0, 'CTRL_LIQUIDABILITA_DISACCOPPIATO', 'Processo per il controllo della Liquidabilità del Disaccoppiato', 0);
+		</sql>
+    </changeSet>
+      
+    <changeSet id="ISTRUTTORIA_7.8" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			ALTER TABLE A4GT_CAMPIONE ADD TIPO	CHAR(50);
+			ALTER TABLE A4GT_CAMPIONE ADD BOVINI CHAR(1);
+			ALTER TABLE A4GT_CAMPIONE ADD OVINI CHAR(1);
+			COMMIT;
+		</sql>
+    </changeSet>
+	
+	<changeSet id="ISTRUTTORIA_7.3" author="Alessandro Cuel">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+		ALTER TABLE a4gt_pascolo_particella MODIFY desc_pascolo VARCHAR2(40);
+		ALTER TABLE a4gt_pascolo_particella MODIFY cod_pascolo VARCHAR2(11);
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_7.4" author="Alessandro Cuel">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+		ALTER TABLE a4gt_pascolo_particella MODIFY ESITO_MAN VARCHAR2(6);
+		</sql>
+    </changeSet>
+	
+	<!-- id="ISTRUTTORIA_7.9" author="Bettina Irler"-->
+	<include file = "config/database/changelog/db.istruttoria.campione2018.changelog.xml"/>
+	
+	
+	<changeSet id="ISTRUTTORIA_7.1" author="Alessandro Manganiello">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+		CREATE TABLE A4GT_STAMPA_DOMANDA (
+		 ID ${id.number.type} NOT NULL,
+		 VERSIONE ${version.number.type} NOT NULL,
+		 ID_DOMANDA NUMBER(19) NOT NULL,
+		 ID_SOSTEGNO NUMBER(19) NOT NULL,
+		 TIPO_STAMPA VARCHAR2(50) NOT NULL,
+		 DOCUMENTO BLOB NOT NULL,
+		 CONSTRAINT PK_A4GT_STAMPA_DOMANDA PRIMARY KEY (ID),
+		 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+		 FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID)
+		)TABLESPACE ${tablespace.data};
+	</sql>
+	</changeSet>
+	
+		<changeSet id="ISTRUTTORIA_8.1" author="Salvatore Caccia">
+        <createTable tableName="A4GT_RICH_ALLEVAM_DU_ESITO">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="A4GT_RICH_ALLEVAM_DU_ESITO_PK"/>
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+			<column name="ID_ALLEVAM_DU" type="${id.number.type}">
+                <constraints foreignKeyName="A4GT_RICH_ALLEVAM_DU_ESITO_FK1"
+                             referencedTableName="A4GT_RICHIESTA_ALLEVAM_DU"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="CAPO_ID" type="${id.number.type}">
+                <constraints nullable="false"/>
+            </column>            
+            <column name="CODICE_CAPO" type="${string.type}(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ESITO" type="${string.type}(25)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MESSAGGIO" type="${string.type}(600)">
+                <constraints nullable="true"/>
+            </column>                              
+        </createTable> 	
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_RICH_ALLEVAM_DU_ESITO TO ${user.writer};
+        </sql>
+		<rollback>
+            drop table A4GT_RICH_ALLEVAM_DU_ESITO;
+        </rollback>         
+    </changeSet>
+
+
+	<changeSet id="ISTRUTTORIA_9.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GD_TIPO_PROCESSO(ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE,PARALLELIZZABILE) VALUES (NXTNBR.NEXTVAL, 0 , 'CLC_ACCOPPIATO_ZOOTECNIA', 'Processo per avvio calcolo accoppiato zootecnia', 0);
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_9.0" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON A4GD_STATO_DOMANDA TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_SETTORE TO ${user.reader};
+			GRANT SELECT ON A4GT_DOMANDA TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_LAVORAZIONE TO ${user.reader};
+			GRANT SELECT ON A4GT_ESITO_CONTROLLO TO ${user.reader};
+			GRANT SELECT ON A4GD_TIPO_CONTROLLO TO ${user.reader};
+			GRANT SELECT ON A4GD_STATO_PROCESSO TO ${user.reader};
+			GRANT SELECT ON A4GD_TIPO_PROCESSO TO ${user.reader};
+			GRANT SELECT ON A4GT_PROCESSO TO ${user.reader};			
+			GRANT SELECT ON A4GT_PICCOLO_AGRICOLTORE TO ${user.reader};
+			GRANT SELECT ON A4GD_INTERVENTO_DU TO ${user.reader};
+			GRANT SELECT ON A4GD_TIPO_DICHIARAZIONE_DU TO ${user.reader};
+			GRANT SELECT ON A4GT_RICHIESTA_ALLEVAM_DU TO ${user.reader};
+			GRANT SELECT ON A4GT_RICHIESTA_SUPERFICIE TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_PASCOLO TO ${user.reader};
+			GRANT SELECT ON A4GT_DICHIARAZIONE_DU TO ${user.reader};	
+			GRANT SELECT ON A4GT_TITOLO_DU TO ${user.reader};
+			GRANT SELECT ON A4GD_SOSTEGNO_DU TO ${user.reader};
+			GRANT SELECT ON A4GD_STATO_LAV_SOSTEGNO TO ${user.reader};
+			GRANT SELECT ON A4GD_STATO_LAV_SOSTEGNO TO ${user.reader};
+			GRANT SELECT ON A4GT_TRANSIZIONE_SOSTEGNO TO ${user.reader};
+			GRANT SELECT ON A4GT_PASSI_LAV_SOSTEGNO TO ${user.reader};
+			GRANT SELECT ON A4GT_LAVORAZIONE_SOSTEGNO TO ${user.reader};
+			GRANT SELECT ON A4GT_DOMANDE_COLLEGATE TO ${user.reader};
+			GRANT SELECT ON A4GT_CAMPIONE TO ${user.reader};
+			GRANT SELECT ON A4GD_COLTURA_INTERVENTO TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_ISTRUTTORIA TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_PARTICELLA_COLTURA TO ${user.reader};
+			GRANT SELECT ON A4GT_PASCOLO_PARTICELLA TO ${user.reader};
+			GRANT SELECT ON A4GT_DATI_FILTRO_DOMANDA TO ${user.reader};
+			GRANT SELECT ON A4GT_RICH_ALLEVAM_DU_ESITO TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	 <changeSet id="ISTRUTTORIA_9.1" author="Armando D'Alessandro">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			INSERT INTO A4GD_TIPO_PROCESSO (id, versione, identificativo, descrizione, parallelizzabile)
+					VALUES (NXTNBR.NEXTVAL, 0, 'LIQUIDAZIONE', 'Processo per la liquidazione', 0);
+		</sql>
+    </changeSet>
+
+	<changeSet id="ISTRUTTORIA_7.2" author="Alessandro Manganiello">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		ALTER TABLE A4GT_DATI_SETTORE ADD PERC_DISCIPLINA_FINANZIARIA NUMBER(7,6);
+		COMMIT;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_9.1" author="Alessio Siravo">
+	  <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.reader};
+		GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.reader};
+      </sql>
+    </changeSet>
+	
+	<changeSet id="ISTRUTTORIA_9.2" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_STAMPA_DOMANDA TO ${user.writer};
+			GRANT SELECT ON A4GT_STAMPA_DOMANDA TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_9.2" author="Salvatore Caccia">
+     	<addColumn tableName="A4GT_RICHIESTA_ALLEVAM_DU">
+     		<column name="STATO" type="${string.type}(25)"></column>
+     	</addColumn>
+    </changeSet> 	
+    
+    <changeSet id="ISTRUTTORIA_9.3" author="Alessio Siravo">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		    -- Creazione tabella per elenchi di liquidazione
+			CREATE TABLE A4GT_ELENCO_LIQUIDAZIONE (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 ID_DATI_SETTORE NUMBER(19) NOT NULL,
+			 ID_SOSTEGNO NUMBER(19) NOT NULL,
+			 COD_ELENCO VARCHAR2(50) NOT NULL,
+			 DT_CREAZIONE DATE NOT NULL,
+			 TRACCIATO_SOC CLOB NOT NULL,
+			 VERBALE_LIQUIDAZIONE BLOB,
+			 STATO VARCHAR2(50),
+			 CONSTRAINT PK_A4GT_ELENCO_LIQUIDAZIONE PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID),
+			 FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			ALTER TABLE A4GT_ELENCO_LIQUIDAZIONE MOVE LOB(TRACCIATO_SOC) STORE AS (TABLESPACE ${tablespace.lob});
+			ALTER TABLE A4GT_ELENCO_LIQUIDAZIONE MOVE LOB(VERBALE_LIQUIDAZIONE) STORE AS (TABLESPACE ${tablespace.lob});
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ELENCO_LIQUIDAZIONE TO ${user.writer};
+			GRANT SELECT ON A4GT_ELENCO_LIQUIDAZIONE TO ${user.reader};
+			
+			-- Creazione tabella di relazione domanda/elenco di liquidazione
+			CREATE TABLE A4GR_DOMANDA_ELENCO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 ID_DOMANDA NUMBER(19) NOT NULL,
+			 ID_ELENCO NUMBER(19) NOT NULL,
+			 CONSTRAINT PK_A4GR_DOMANDA_ELENCO PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			 FOREIGN KEY (ID_ELENCO) REFERENCES A4GT_ELENCO_LIQUIDAZIONE (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_DOMANDA_ELENCO TO ${user.writer};
+			GRANT SELECT ON A4GR_DOMANDA_ELENCO TO ${user.reader};
+			
+			-- Aggiornamento tablespace A4GT_STAMPA_DOMANDA
+			ALTER TABLE A4GT_STAMPA_DOMANDA MOVE LOB(DOCUMENTO) STORE AS (TABLESPACE ${tablespace.lob});
+		</sql>
+    </changeSet>
+    	
+    <changeSet id="ISTRUTTORIA_9.3" author="Daniele Faieta">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GD_TIPO_PROCESSO(ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE,PARALLELIZZABILE) VALUES (NXTNBR.NEXTVAL, 0 , 'CLC_ACCOPPIATO_SUPERFICIE', 'Processo per avvio calcolo accoppiato superficie', 0);
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_7.3" author="Alessandro Manganiello">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DELETE FROM A4GT_PICCOLO_AGRICOLTORE;
+		
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','BNLLNI74P06C372M', 'BONELLI LINO');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','PDRMRC34D26E850W', 'PEDROTTI MARCO');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','PRGLDI55M62L378W', 'PRIGHEL LIDIA');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','SGHFNC59M27L378J', 'SIGHEL FRANCO');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','SGHVNI81A06L378I', 'SIGHEL IVAN');
+			INSERT INTO A4GT_PICCOLO_AGRICOLTORE VALUES(NXTNBR.NEXTVAL,'2018','TVNRNT59P66H639V', 'TEVINI RENATA');
+			
+			COMMIT;
+	</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_7.5" author="Alessandro Cuel">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			ALTER TABLE A4GT_PASCOLO_PARTICELLA MODIFY ESITO_MAN VARCHAR2(30);
+			ALTER TABLE A4GT_PASCOLO_PARTICELLA ADD DATI_INPUT CLOB;
+			ALTER TABLE A4GT_PASCOLO_PARTICELLA ADD DATI_OUTPUT CLOB;
+			COMMIT;
+		</sql>
+		
+    </changeSet> 
+    
+    <changeSet id="ISTRUTTORIA_9.4" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_RIDUZIONE_LINEARE_3 NUMBER(7,6);
+			ALTER TABLE A4GT_DATI_SETTORE ADD PERC_RIDUZIONE_TITOLI NUMBER(7,6);
+			COMMIT;
+		</sql>	
+    </changeSet> 
+    <changeSet id="ISTRUTTORIA_9.5" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_PAGA_ZOOT_ETICHETT (
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			    CODICE_ORGANISMO_FORNITORE VARCHAR2 (10),
+			    DENOMINAZIONE_AZIENDA VARCHAR2 (100),
+			    CODICE_FISCALE VARCHAR2 (16),
+			    DT_ISCRIZIONE DATE,
+			    DT_INVIO_ORGANISMO DATE,
+			    CODICE_ASL VARCHAR2 (10),
+			    DT_FINE_VALIDITA DATE,
+			    CAMPAGNA NUMBER (4),
+			 	CONSTRAINT A4GT_PAGA_ZOOT_ETICHETT PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PAGA_ZOOT_ETICHETT TO ${user.writer};
+		</sql>
+    </changeSet>	
+    
+    <changeSet id="ISTRUTTORIA_9.6" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','La Rinascita di Carli Marco e Massimiliano Società Agricola','00386500227',{ts '2016-06-27 00:00:00'},null,'107TN030',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Mattei Bruno','MTTBRN61C09L174M',{ts '2016-06-15 00:00:00'},null,'107TN022',null,2017); 
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Pederzolli Andrea','PDRNDR70S30L378Y',{ts '2016-06-30 00:00:00'},null,'101TN011',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Valentini Elio','VLNLEI58P27M006K',{ts '2016-06-26 00:00:00'},null,'223TN005',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Pedergnana Ettore','PDRTTR69M30C794R',{ts '2016-06-29 00:00:00'},null,'033TN004',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Le Campagne di Bampi Daniele &#38; C. s.s.','01464420221',{ts '2016-06-16 00:00:00'},null,'061TN034',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','San Zeno di Pasini Fabiano','PSNFBN73B16H612T',{ts '2016-06-02 00:00:00'},null,'191TN008',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Ossana Luca','SSNLCU77M17F187U',{ts '2016-06-27 00:00:00'},null,'037TN015',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Zambotti Fabio','ZMBFBA66A23H330L',{ts '2016-06-26 00:00:00'},null,'107TN026',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Artini Rino','RTNRNI58F05L174B',{ts '2016-06-09 00:00:00'},null,'227TN001',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Maestranzi Fabio','MSTFBA79L10H612L',{ts '2016-06-28 00:00:00'},null,'006TN201',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Carli Denis','CRLDNS83L07L378Y',{ts '2016-06-21 00:00:00'},null,'107TN029',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Carli Marco','CRLMRC71B01H330G',{ts '2016-06-27 00:00:00'},null,'107TN030',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Allevamenti Carli di Carli Marco e Massimiliano Società Agricola','02103060220',{ts '2016-06-27 00:00:00'},null,'107TN030',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Azzolini Leonardo','ZZLLRD87P11L174B',{ts '2016-06-13 00:00:00'},null,'107TN002',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Allevamenti Cà Torbida di Carli Marco e Massimiliano Società Agricola','02228060220',{ts '2016-06-07 00:00:00'},null,'107TN030',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','S.Antonio Società Agricola Semplice di Giordani Luca e C.','02380280228',{ts '2016-06-24 00:00:00'},null,'083TN011',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','Allevamenti Cà Torbida di Carli Marco e Massimiliano Società Agricola','02228060220',{ts '2016-06-27 00:00:00'},null,'003FE330',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','La Rinascita di Carli Marco e Massimiliano Società Agricola','00386500227',{ts '2016-06-27 00:00:00'},null,'008FE346',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','BAMPI DANIELE ','BMPDNL74M02L378H',{ts '2003-02-02 00:00:00'},{ts '2018-03-28 00:00:00'},'061TN042 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','BERTOLDI CLAUDIO ','BRTCLD56E02H330N',{ts '2012-02-01 00:00:00'},{ts '2018-03-28 00:00:00'},'153TN022 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','CAUMO RITA ','CMARTI52E68B006T',{ts '2011-07-07 00:00:00'},{ts '2018-03-28 00:00:00'},'022TN009 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','DALPONTE CANDIDO ','DLPCDD44C16E658G',{ts '2002-12-06 00:00:00'},{ts '2018-03-28 00:00:00'},'107TN027 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','DALPONTE CANDIDO ','DLPCDD44C16E658G',{ts '2003-08-28 00:00:00'},{ts '2018-03-28 00:00:00'},'017TN063 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT010ET','DALPONTE ROBERTO ','DLPRRT81S03L174B',{ts '2017-04-01 00:00:00'},{ts '2018-03-28 00:00:00'},'017TN062 ',null,2017);
+			INSERT INTO A4GT_PAGA_ZOOT_ETICHETT (ID,VERSIONE,CODICE_ORGANISMO_FORNITORE,DENOMINAZIONE_AZIENDA,CODICE_FISCALE,DT_ISCRIZIONE,DT_INVIO_ORGANISMO,CODICE_ASL,DT_FINE_VALIDITA,CAMPAGNA) VALUES (NXTNBR.NEXTVAL,0,'IT001ET','La Quercia s.s. Azienda Agricola Zootecnica','00185820222',{ts '2016-06-23 00:00:00'},null,'116TN023',null,2017);
+			    
+    	</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_9.6" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_ALEV_MONTAGNA (
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			    CUAA ${string.type}(16 CHAR) NOT NULL,
+			    COD_ALLEV ${string.type}(16 CHAR) NOT NULL,
+			    FLAG_MONTAGNA NUMBER(1) DEFAULT 0,
+			 	CONSTRAINT A4GT_ALEV_MONTAGNA PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALEV_MONTAGNA TO ${user.writer};
+		</sql>
+    </changeSet>
+
+	<changeSet id="ISTRUTTORIA_9.7" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			 ALTER INDEX A4GT_ALEV_MONTAGNA REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			 ALTER INDEX A4GT_PAGA_ZOOT_ETICHETT REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+	</changeSet>	  
+	<changeSet id="ISTRUTTORIA_9.1" author="Vincenzo Caurio">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		ALTER TABLE A4GT_DATI_SETTORE MODIFY PERC_DISCIPLINA_FINANZIARIA NUMBER(9,8);
+		COMMIT;
+		</sql>
+	</changeSet>  
+	
+	<changeSet id="ISTRUTTORIA_9.2" author="Vincenzo Caurio">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		DELETE FROM A4GT_DATI_FILTRO_DOMANDA;
+		ALTER TABLE A4GT_DATI_FILTRO_DOMANDA DROP COLUMN JSON_DATI;
+		ALTER TABLE A4GT_DATI_FILTRO_DOMANDA ADD TIPO_FILTRO VARCHAR2(50) NOT NULL;
+		ALTER TABLE A4GT_DATI_FILTRO_DOMANDA ADD VALORE VARCHAR2(500) ;
+ 		COMMIT;
+		</sql>
+	</changeSet>  
+	
+	
+	<changeSet id="ISTRUTTORIA_9.3" author="Vincenzo Caurio">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		CREATE UNIQUE INDEX A4GT_DFD_DT_UIDX ON A4GT_DATI_FILTRO_DOMANDA(ID_DOMANDA, TIPO_FILTRO) ;
+		DROP INDEX A4GT_DFD_D_UIDX;
+ 		COMMIT;
+		</sql>
+	</changeSet>   
+
+	<changeSet id="ISTRUTTORIA_10.1" author="Salvatore De Luca">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(ID,VERSIONE,IDENTIFICATIVO,DESCRIZIONE)
+			VALUES(NXTNBR.NEXTVAL,0,'INTEGRATO','Pagamento da validare a seguito dei controlli Integrazione Ammissibilità');
+		</sql>
+	</changeSet>  
+	
+	<changeSet id="ISTRUTTORIA_10.2" author="Salvatore Caccoa">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				ALTER TABLE A4GT_ALEV_MONTAGNA	RENAME TO A4GT_ALLEV_MONTAGNA;
+				GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEV_MONTAGNA TO ${user.writer};
+				ALTER TABLE A4GT_RICHIESTA_ALLEVAM_DU DROP COLUMN STATO;
+		</sql>
+	</changeSet>  	
+ 
+	<changeSet id="ISTRUTTORIA_10.3" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_SOSTEGNO_PREMI (
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			 	DT_APERTURA_DOMANDA DATE NOT NULL,
+			 	DT_CHIUSURA_DOMANDA DATE NOT NULL,
+			    ID_DATI_SETTORE ${id.number.type} NOT NULL,
+			    ID_INTERVENTO ${id.number.type} NOT NULL,
+			    VALORE_UNITARIO_INTERVENTO DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+			 	CONSTRAINT FK_DATI_SETTORE FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID),
+ 			 	CONSTRAINT PK_SOSTEGNO_PREMI PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE UNIQUE INDEX INTERVENTO_UIDX ON A4GT_SOSTEGNO_PREMI (ID_INTERVENTO) TABLESPACE ${tablespace.index};
+			
+			ALTER INDEX PK_SOSTEGNO_PREMI REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_SOSTEGNO_PREMI TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_10.4" author="Salvatore De Luca">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_SOSTEGNO_PREMI ADD CONSTRAINT FK_PREMI_INTERVENTO FOREIGN KEY (ID_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU (ID);
+		</sql>
+    </changeSet>
+
+
+    <changeSet id="ISTRUTTORIA_10.1" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE A4GT_ELENCO_LIQUIDAZIONE MODIFY (TRACCIATO_SOC NULL);
+		</sql>
+    </changeSet>
+
+	<changeSet id="ISTRUTTORIA_10.6" author="Daniele Faieta">
+		<createTable tableName="A4GD_REG_OLIO_NAZIONALE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GD_REG_OLIO_NAZIONALE_PK"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA_INTESTATARIO" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX A4GD_REG_OLIO_NAZIONALE_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.7" author="Daniele Faieta">
+		<createTable tableName="A4GD_REG_OLIO_QUALITA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GD_REG_OLIO_QUALITA_PK"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA_INTESTATARIO" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX A4GD_REG_OLIO_QUALITA_PK REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+	</changeSet>
+	
+	<include file = "config/database/changelog/db.istruttoria.allevamentiMontagna.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_10.2" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_STAMPA_DOMANDA ADD DT_CREAZIONE DATE;
+			ALTER TABLE A4GT_ELENCO_LIQUIDAZIONE ADD TIPO_PAGAMENTO VARCHAR2(50);
+		</sql>
+	</changeSet>
+    
+    <changeSet id="ISTRUTTORIA_10.5" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			DROP TABLE A4GT_SOSTEGNO_PREMI;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_10.6" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GD_INTERVENTO_DU_PREMIO (
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			    ID_DATI_SETTORE ${id.number.type} NOT NULL,
+			    ID_INTERVENTO ${id.number.type} NOT NULL,
+			    VALORE_UNITARIO DECIMAL(10,2) DEFAULT 0.00 NOT NULL,
+			 	CONSTRAINT FK_DATI_SETTORE_PREMIO FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID),
+			 	CONSTRAINT FK_INTERVENTO_DU_PREMIO FOREIGN KEY (ID_INTERVENTO) REFERENCES A4GD_INTERVENTO_DU (ID),
+ 			 	CONSTRAINT PK_INTERVENTO_DU_PREMIO PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			
+			CREATE UNIQUE INDEX INTERVENTO_PREMIO_UIDX ON A4GD_INTERVENTO_DU_PREMIO (ID_INTERVENTO,ID_DATI_SETTORE) TABLESPACE ${tablespace.index};
+			
+			ALTER INDEX PK_INTERVENTO_DU_PREMIO REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_INTERVENTO_DU_PREMIO TO ${user.writer};
+			
+			CREATE TABLE A4GD_SOSTEGNO_DU_DI (
+			 	ID ${id.number.type} NOT NULL,
+			 	VERSIONE ${version.number.type} NOT NULL,
+			    ID_DATI_SETTORE ${id.number.type} NOT NULL,
+			    ID_SOSTEGNO ${id.number.type} NOT NULL,
+			    DT_APERTURA_DOMANDA DATE,
+			    DT_CHIUSURA_DOMANDA DATE,
+			 	CONSTRAINT FK_DATI_SETTORE_SOSTEGNO FOREIGN KEY (ID_DATI_SETTORE) REFERENCES A4GT_DATI_SETTORE (ID),
+			 	CONSTRAINT FK_SOSTEGNO_DU_DI FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID),
+ 			 	CONSTRAINT PK_SOSTEGNO_DU_DI PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			
+			
+			CREATE UNIQUE INDEX SOSTEGNO_DU_DI_UIDX ON A4GD_SOSTEGNO_DU_DI (ID_SOSTEGNO,ID_DATI_SETTORE) TABLESPACE ${tablespace.index};
+			
+			ALTER INDEX PK_SOSTEGNO_DU_DI REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_SOSTEGNO_DU_DI TO ${user.writer};
+		</sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_10.7" author="Paolo Procida">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    		INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '310') ,1.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '311'),2.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '313'),3.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '315'),4.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '316'),5.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '318'),6.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '320'),6.10);
+			INSERT INTO A4GD_INTERVENTO_DU_PREMIO(ID,VERSIONE,ID_DATI_SETTORE,ID_INTERVENTO,VALORE_UNITARIO)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '321'),6.10);
+
+			INSERT INTO A4GD_SOSTEGNO_DU_DI(ID,VERSIONE,ID_DATI_SETTORE,ID_SOSTEGNO,DT_APERTURA_DOMANDA,DT_CHIUSURA_DOMANDA)VALUES(NXTNBR.NEXTVAL,0,4,(SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO='ACC_ZOOTECNIA'),{TS '2019-01-01 00:00:00'},{TS '2019-01-01 00:00:00'});
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.8" author="Daniele Faieta">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_REG_OLIO_NAZIONALE TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_REG_OLIO_QUALITA TO ${user.writer};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.3" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GD_TIPO_PROCESSO (ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE, PARALLELIZZABILE) VALUES (NXTNBR.NEXTVAL, 0, 'NON_AMMISSIBILITA', 'Processo di Non Ammissibilita per le domande con stato CONTROLLO_CALCOLO_KO.', 0);
+			COMMIT;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.4" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_ELENCO_LIQUIDAZIONE ADD COD_TIPO_ELENCO VARCHAR2(50);
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.1" author="Vincenzo Caurio">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE TABLE A4GT_ANOM_DOMANDA_SOSTEGNO (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type},
+			 ID_DOMANDA NUMBER(19),
+			 ID_SOSTEGNO NUMBER(19),
+			 CODICE_ANOMALIA ${string.type}(50),
+			 LIVELLO_ANOMALIA ${string.type}(50),
+			 ESITO ${string.type}(50),
+			 CONSTRAINT PK_A4GT_ANOM_DOMANDA_SOSTEGNO PRIMARY KEY (ID),
+			 FOREIGN KEY (ID_DOMANDA) REFERENCES A4GT_DOMANDA (ID),
+			 FOREIGN KEY (ID_SOSTEGNO) REFERENCES A4GD_SOSTEGNO_DU (ID)
+			)TABLESPACE ${tablespace.data};
+			
+			ALTER INDEX PK_A4GT_ANOM_DOMANDA_SOSTEGNO REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ANOM_DOMANDA_SOSTEGNO TO ${user.writer};
+			GRANT SELECT ON A4GT_ANOM_DOMANDA_SOSTEGNO TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_10.5" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX A4GT_ANOM_SOST_COD_IDX ON A4GT_ANOM_DOMANDA_SOSTEGNO (ID_SOSTEGNO,CODICE_ANOMALIA) TABLESPACE ${tablespace.index};
+			CREATE INDEX A4GT_ANOM_SOST_LIV_IDX ON A4GT_ANOM_DOMANDA_SOSTEGNO (ID_SOSTEGNO,LIVELLO_ANOMALIA) TABLESPACE ${tablespace.index};
+			COMMIT;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.1" author="Antonio Pasca">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE TABLE A4GT_CONTROLLI_LATTE(
+				ID ${id.number.type} NOT NULL,
+				VERSION ${version.number.type} NOT NULL,
+				CUAA ${string.type}(16) NOT NULL,
+				ANNO_RIFERIMENTO NUMBER(4) NOT NULL,
+				DATA_CONSEGNA_O_VENDITA DATE,
+				CELLULE_SOMATICHE NUMBER(10,2),
+				CARICA_BATTERICA NUMBER(10,2),
+				CONTENUTO_PROTEINA NUMBER(10,2),
+				DATA_ANALISI DATE,
+				DATA_INIZIO_ALPEGGIO DATE,
+				DATA_FINE_ALPEGGIO DATE,
+				
+			   CONSTRAINT PK_CONTROLLI_LATTE PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+			
+			CREATE UNIQUE INDEX A4GT_CONTROLLI_LATTE_UIDX ON A4GT_CONTROLLI_LATTE (CUAA,ANNO_RIFERIMENTO)  TABLESPACE ${tablespace.index};
+			
+			ALTER INDEX PK_CONTROLLI_LATTE REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONTROLLI_LATTE TO ${user.writer};
+			
+		</sql>
+    </changeSet>
+
+    <include file="config/database/changelog/db.istruttoria.allevamentiMontagna_v2.changelog.xml"/>
+
+    <changeSet id="ISTRUTTORIA_11.2" author="Antonio Pasca">
+		<addDefaultValue columnName="VERSION"
+            defaultValueNumeric="0"
+            tableName="A4GT_CONTROLLI_LATTE"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.3" author="Lorenzo Martinelli">
+		<dropIndex tableName="A4GT_CONTROLLI_LATTE" indexName="A4GT_CONTROLLI_LATTE_UIDX"/>
+		<createIndex 
+            indexName="A4GT_CONTROLLI_LATTE_UIDX"
+            tableName="A4GT_CONTROLLI_LATTE"
+            tablespace="${tablespace.index}"
+            unique="false">
+        	<column name="CUAA"/>
+        	<column name="ANNO_RIFERIMENTO"/>
+    	</createIndex>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.4" author="Antonio Pasca">
+		
+		<dropTable tableName="A4GT_CONTROLLI_LATTE"/>
+		
+		<!-- Creazione Tabella Analisi Latte -->
+		<createTable tableName="A4GT_ANALISI_LATTE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_ANALISI_LATTE"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DATI_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_DT_SETT_ANA_LATTE"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+            <column name="CELLULE_SOMATICHE" type="NUMBER(10,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CARICA_BATTERICA" type="NUMBER(10,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="CONTENUTO_PROTEINA" type="NUMBER(10,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_ANALISI" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_ANALISI_LATTE REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+		
+		<!-- Creazione tabella produzione latte -->
+		<createTable tableName="A4GT_PRODUZIONE_LATTE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_PRODUZIONE_LATTE"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DATI_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_DT_SETT_PROD_LATTE"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="DT_CONS_VEND" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_PRODUZIONE_LATTE REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+		
+		<!-- Creazione tabella registrazione alpeggio -->
+		<createTable tableName="A4GT_REG_ALPEGGIO">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_REG_ALPEGGIO"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CUAA" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DATI_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_DT_SETT_REG_ALP"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="DT_INIZIO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_FINE" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_REG_ALPEGGIO REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.5" author="Antonio Pasca">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ANALISI_LATTE TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PRODUZIONE_LATTE TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_REG_ALPEGGIO TO ${user.writer};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.4" author="Paolo Procida">
+    	<createTable tableName="A4GT_DOMANDA_INTEGRATIVA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_DOMANDA_INTEGRATIVA"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_RICH_ALLEVAM_ESITO" type="${id.number.type}">
+                <constraints foreignKeyName="FK_RICH_ALLEVAM_ESITO"
+                             referencedTableName="A4GT_RICH_ALLEVAM_DU_ESITO"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="STATO" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="DT_ULTIMO_AGGIORNAMENTO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_DOMANDA_INTEGRATIVA REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DOMANDA_INTEGRATIVA TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet author="Paolo Procida" id="ISTRUTTORIA_11.7">
+		<renameColumn newColumnName="VERSIONE" oldColumnName="VERSION" tableName="A4GT_DOMANDA_INTEGRATIVA" />
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.6" author="Antonio Pasca">
+		<renameColumn tableName="A4GT_ANALISI_LATTE" newColumnName="VERSIONE" oldColumnName="VERSION"/>
+		<renameColumn tableName="A4GT_PRODUZIONE_LATTE" newColumnName="VERSIONE" oldColumnName="VERSION"/>
+		<renameColumn tableName="A4GT_REG_ALPEGGIO" newColumnName="VERSIONE" oldColumnName="VERSION"/>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.produzionelatte2018.changelog.xml"/>
+	
+    <include file = "config/database/changelog/db.istruttoria.matriceColturaIntervento_v3.changelog.xml"/>
+	<changeSet id="ISTRUTTORIA_12.2" author="Elisabetta Freschi">
+		<addUniqueConstraint columnNames="ID_TRANSIZ_SOSTEGNO, CODICE_PASSO" tableName="A4GT_PASSI_LAV_SOSTEGNO" constraintName="A4GTPASSLAVSOST_T_P_UIX"/>
+	</changeSet>
+
+    <include file = "config/database/changelog/db.istruttoria.matriceColturaIntervento_v3_integrazionimancanti.changelog.xml"/>
+    
+    <changeSet id="ISTRUTTORIA_12.4" author="Elisabetta Freschi">
+    	<update tableName="A4GD_INTERVENTO_DU">
+    		<column name="CODICE_AGEA">124</column>
+    		<column name="DESCRIZIONE_LUNGA">Superfici coltivate a frumento duro in Toscana, Umbria, Marche, Lazio, Abruzzo, Molise, Campania, Puglia, Basilicata, Calabria, Sicilia e Sardegna</column>
+    		<where>IDENTIFICATIVO_INTERVENTO = 'GDURO'</where>
+    	</update>
+    	<update tableName="A4GD_INTERVENTO_DU">
+    		<column name="CODICE_AGEA">123</column>
+    		<where>IDENTIFICATIVO_INTERVENTO = 'CPROT'</where>
+    	</update>
+    	<update tableName="A4GD_INTERVENTO_DU">
+    		<column name="DESCRIZIONE_LUNGA">Superfici coltivate a colture leguminose da granella e erbai annuali di sole leguminose in Abruzzo, Molise, Campania, Puglia, Basilicata, Calabria, Sicilia e Sardegna</column>
+    		<where>IDENTIFICATIVO_INTERVENTO = 'LEGUMIN'</where>
+    	</update>
+    </changeSet>
+    
+	<changeSet id="ISTRUTTORIA_11.7" author="Salvatore Caccia">
+		<update tableName="A4GD_INTERVENTO_DU">
+			 <column name="IDENTIFICATIVO_INTERVENTO" value='LATTE_BUFAL' />
+			 <where>CODICE_AGEA='312'</where>
+		</update>
+	</changeSet>
+	
+	<!-- Creazione tabella comuni limitrofi -->
+	<changeSet id="ISTRUTTORIA_11.1" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true" >
+			CREATE TABLE A4GT_COMUNI_LIMITROFI (
+			 ID ${id.number.type} NOT NULL,
+			 VERSIONE ${version.number.type} NOT NULL,
+			 CODICE_PROVINCIA NUMBER(10) NOT NULL,
+			 CODICE_COMUNE NUMBER(10),
+			 COD_NAZIONALE_COMUNE VARCHAR2(50) NOT NULL,
+			 NOME_COMUNE VARCHAR2(500),
+			 CODICE_PROVINCIA_CONFINANTE NUMBER(10) NOT NULL,
+			 CODICE_COMUNE_CONFINANTE NUMBER(10),
+			 COD_NAZ_COMUNE_CONFINANTE VARCHAR2(50) NOT NULL,
+			 NOME_COMUNE_CONFINANTE VARCHAR2(500),
+			 CONSTRAINT PK_A4GT_COMUNI_LIMITROFI PRIMARY KEY (ID)
+			);		
+			
+			ALTER INDEX PK_A4GT_COMUNI_LIMITROFI REBUILD TABLESPACE ${tablespace.index} ONLINE;
+				
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_COMUNI_LIMITROFI TO ${user.writer};
+			GRANT SELECT ON A4GT_COMUNI_LIMITROFI TO ${user.reader};
+		</sql>
+	</changeSet>
+    
+    <!-- Popolamento tabella comuni limitrofi -->
+    <include file = "config/database/changelog/db.istruttoria.comuniLimitrofiTn.changelog.xml"/>
+	<changeSet id="ISTRUTTORIA_11.8" author="Daniele Faieta">
+		<addColumn tableName="A4GD_REG_OLIO_NAZIONALE">
+			<column name="ID_DATI_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_DATI_SETT_REG_OLIO_NAZ"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_11.9" author="Daniele Faieta">
+		<addColumn tableName="A4GD_REG_OLIO_QUALITA">
+			<column name="ID_DATI_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_DATI_SETT_REG_OLIO_QUAL"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+		</addColumn>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.registriolio.changelog.xml"/>
+	
+
+	<changeSet id="ISTRUTTORIA_12.1" author="Paolo Procida">
+		    <dropColumn columnName="CODICE_ORGANISMO_FORNITORE" tableName="A4GT_PAGA_ZOOT_ETICHETT"/>
+		    <dropColumn columnName="DENOMINAZIONE_AZIENDA" tableName="A4GT_PAGA_ZOOT_ETICHETT"/>
+		    <dropColumn columnName="DT_INVIO_ORGANISMO" tableName="A4GT_PAGA_ZOOT_ETICHETT"/>
+		    <dropColumn columnName="CAMPAGNA" tableName="A4GT_PAGA_ZOOT_ETICHETT"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.2" author="Paolo Procida">
+    	<renameTable newTableName="A4GT_ETICHETTURA_CARNE" oldTableName="A4GT_PAGA_ZOOT_ETICHETT"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.3" author="Lorenzo Martinelli">
+		<addDefaultValue columnName="VERSIONE"
+            defaultValueNumeric="0"
+            tableName="A4GT_ETICHETTURA_CARNE"/>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.analisilatte2018.changelog.xml"/>
+	
+	<include file="config/database/changelog/db.istruttoria.etichettaturacarne2018.changelog.xml"/>
+    
+	<changeSet id="ISTRUTTORIA_12.3" author="Antonio Pasca">
+		<addColumn tableName="A4GT_DOMANDA_INTEGRATIVA">
+			<column name="DUPLICATO" type="BOOLEAN">
+            </column>
+            <column name="CONTROLLOSUPERATO" type="BOOLEAN">
+            </column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.4" author="Antonio Pasca">
+		<renameColumn tableName="A4GT_DOMANDA_INTEGRATIVA" newColumnName="CONTROLLO_SUPERATO" oldColumnName="CONTROLLOSUPERATO"/>
+	</changeSet>
+    
+	<changeSet id="ISTRUTTORIA_12.5" author="Antonio Pasca">
+		<addDefaultValue columnName="CONTROLLO_SUPERATO"
+            defaultValueBoolean="true"
+            tableName="A4GT_DOMANDA_INTEGRATIVA"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.6" author="Antonio Pasca">
+		<update tableName="A4GT_DOMANDA_INTEGRATIVA">
+			<column name="CONTROLLO_SUPERATO" value="1" />
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.7" author="Paolo Procida">
+		<renameColumn tableName="A4GT_ETICHETTURA_CARNE" newColumnName="CUAA" oldColumnName="CODICE_FISCALE"/>
+		<renameColumn tableName="A4GT_ETICHETTURA_CARNE" newColumnName="DT_INIZIO_VALIDITA" oldColumnName="DT_ISCRIZIONE"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.8" author="Antonio Pasca">
+		<addColumn tableName="A4GT_DOMANDA_INTEGRATIVA">
+			<column name="IDENTIFICATIVO" type="${string.type}(255)">
+            </column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.9" author="Antonio Pasca" >
+    <addUniqueConstraint tableName="A4GT_DOMANDA_INTEGRATIVA"
+            columnNames="ID_RICH_ALLEVAM_ESITO"
+            constraintName="A4GT_DOMANDA_INTEGRATIVA_UIDX"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.10" author="Antonio Pascaa">
+    	<createTable tableName="A4GT_CAPO_TRACKING">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_CAPO_TRACKING"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_RICH_ALLEVAM_ESITO" type="${id.number.type}">
+                <constraints foreignKeyName="FK_TRK_RICH_ALLEVAM_ESITO"
+                             referencedTableName="A4GT_RICH_ALLEVAM_DU_ESITO"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="DATI" type="clob">
+                <constraints nullable="false"/>
+            </column>
+			<column name="DT_ULTIMO_AGGIORNAMENTO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_CAPO_TRACKING REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CAPO_TRACKING TO ${user.writer};
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_12.11" author="Antonio Pasca">
+		<renameColumn tableName="A4GT_CAPO_TRACKING" newColumnName="VERSIONE" oldColumnName="VERSION"/>
+	</changeSet>
+
+    <changeSet id="ISTRUTTORIA_12.12" author="Elisabetta Freschi">
+    	<createTable tableName="A4GT_RICEVUTA_DOM_INT_ZOOT">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_RICEVUTA_DOM_INT_ZOOT"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+                <constraints foreignKeyName="FK_RICEVUTA_DOM_INT_ZOOT_DOMAN"
+                             referencedTableName="A4GT_DOMANDA"
+                             referencedColumnNames="ID"
+                             nullable="false" 
+                             unique=" true" 
+                             uniqueConstraintName="RICEV_DOM_INT_ZOOT_DOMAN_UIX" />
+            </column>
+			<column name="RICEVUTA" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+			<column name="DT_ULTIMO_AGGIORNAMENTO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_RICEVUTA_DOM_INT_ZOOT TO ${user.writer};
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_12.13" author="Elisabetta Freschi">
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER TABLE A4GT_RICEVUTA_DOM_INT_ZOOT MOVE LOB(RICEVUTA) STORE AS (TABLESPACE ${tablespace.lob});
+            ALTER TABLE A4GT_CAPO_TRACKING MOVE LOB(DATI) STORE AS (TABLESPACE ${tablespace.lob});
+        </sql>   
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.14" author="Antonio Pasca">
+		<sql endDelimiter=";"
+             splitStatements="true">
+            ALTER INDEX A4GT_DOMANDA_INTEGRATIVA_UIDX REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			ALTER INDEX PK_CAPO_TRACKING REBUILD TABLESPACE ${tablespace.index} ONLINE;
+        </sql>   
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.15" author="Daniele Faieta">
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CLC_PREMIO_ACCOPPIATO_ZOOTECNIA" />
+			<column name="DESCRIZIONE" value="Processo per avvio calcolo premio accoppiato zootecnia" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_12.1" author="Alessandro Manganiello">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle"> 
+			INSERT INTO A4GD_STATO_LAV_SOSTEGNO(id, versione, identificativo, descrizione)
+					VALUES (NXTNBR.NEXTVAL, 0, 'CONTROLLI_INTERSOSTEGNO_OK', 'Controlli intersostegno superati');
+		</sql>
+    </changeSet>
+    
+	<!-- Togliere il riferimento all'azienda (CUAA) dalla tabella e fare il controllo esclusivamente sul codice ASL -->
+	<changeSet id="ISTRUTTORIA_12.16" author="Bruno Conetta">
+    	<dropColumn columnName="CUAA" tableName="A4GT_ALLEV_MONTAGNA"/>
+	</changeSet>
+
+	<include file="config/database/changelog/db.istruttoria.produzionelatte2018_v2.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_13.2" author="Lorenzo Martinelli">
+		<addDefaultValue columnName="VERSIONE"
+            defaultValueNumeric="0"
+            tableName="A4GT_ALLEV_MONTAGNA"/>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.allevamentiMontagna_v3.changelog.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_13.4" author="Lorenzo Martinelli">
+		<addUniqueConstraint columnNames="COD_ALLEV" tableName="A4GT_ALLEV_MONTAGNA" constraintName="A4GT_ALLEV_MONTAGNA_UIDX"/>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.attestazioniAlpeggio2018.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_13.7" author="Lorenzo Martinelli">
+		<addUniqueConstraint columnNames="CUAA, ID_DATI_SETTORE" tableName="A4GT_REG_ALPEGGIO" constraintName="A4GT_REG_ALPEGGIO_UIDX"/>
+	</changeSet>
+	
+	
+	<changeSet id="ISTRUTTORIA_13.1" author="Vincenzo Caurio">
+		<sql endDelimiter=";" splitStatements="true">
+		ALTER TABLE A4GT_LAVORAZIONE_SOSTEGNO  ADD  BLOCCATA_BOOL number(1) DEFAULT 0;
+		CREATE INDEX A4GT_LAV_SOSTEGNO_IDX ON A4GT_LAVORAZIONE_SOSTEGNO (ID_DOMANDA, ID_SOSTEGNO) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_14.1" author="Paolo Procida">
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CTRL_LIQUIDABILITA_ACCOPPIATO_SUPERFICIE" />
+			<column name="DESCRIZIONE" value="Processo per il controllo della Liquidabilità accoppiato superficie" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CTRL_LIQUIDABILITA_ACCOPPIATO_ZOOTECNIA" />
+			<column name="DESCRIZIONE" value="Processo per il controllo della Liquidabilità accoppiato zootecnia" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_13.1" author="Alessandro Manganiello">
+		<update tableName="A4GT_DATI_FILTRO_DOMANDA">
+			<column name="VALORE" value="B - NUOVO AGRICOLTORE"/>
+        	<where>VALORE = 'B - NUOVO AGRICOLTORE '</where>
+		</update>
+		<update tableName="A4GT_DATI_FILTRO_DOMANDA">
+			<column name="VALORE" value="D - COMPENSAZIONE DI SVANTAGGI SPECIFICI"/>
+        	<where>VALORE = 'D - COMPENSAZIONE DI SVANTAGGI SPECIFICI '</where>
+		</update>
+	</changeSet>
+	
+	<!-- Aggiunta valori unitari premio accoppiato superficie -->
+	<changeSet id="ISTRUTTORIA_14.0" author="Daniele Faieta">
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '122')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '122')" />
+			<column name="VALORE_UNITARIO" valueNumeric="56.96" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '123')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '123')" />
+			<column name="VALORE_UNITARIO" valueNumeric="48.44" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '124')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '124')" />
+			<column name="VALORE_UNITARIO" valueNumeric="80.70" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '125')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '125')" />
+			<column name="VALORE_UNITARIO" valueNumeric="22.88" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '128')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '128')" />
+			<column name="VALORE_UNITARIO" valueNumeric="173.74" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '129')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '129')" />
+			<column name="VALORE_UNITARIO" valueNumeric="112.13" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '132')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '132')" />
+			<column name="VALORE_UNITARIO" valueNumeric="152.12" />
+		</insert>
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '138')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '138')" />
+			<column name="VALORE_UNITARIO" valueNumeric="155.67" />
+		</insert>
+	</changeSet>
+	
+	<!-- Aggiunta intervento 322 in valori premi istruttoria -->
+	<!-- Grant su user reader per tabella -->
+	<changeSet id="ISTRUTTORIA_14.1" author="Daniele Faieta">
+		<delete tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<where>ID_INTERVENTO = (SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '322')</where>
+		</delete>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '322')" />
+			<column name="VALORE_UNITARIO" valueNumeric="89.39" />
+		</insert>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON A4GD_INTERVENTO_DU_PREMIO TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_14.2" author="Daniele Faieta">
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CTRL_INTERSOSTEGNO_ACC_ZOOTECNIA" />
+			<column name="DESCRIZIONE" value="Processo per i controlli intersostegno accoppiato zootecnia" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CTRL_INTERSOSTEGNO_ACC_SUPERFICIE" />
+			<column name="DESCRIZIONE" value="Processo per i controlli intersostegno accoppiato superficie" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_15.1" author="Lorenzo Martinelli">
+		<insert tableName="A4GT_REG_ALPEGGIO"><column name="ID" valueSequenceNext="NXTNBR"/><column name="CUAA" value="PZZNNA40P65H146L"/><column name="DT_INIZIO" valueDate="2018-07-01"/><column name="DT_FINE" valueDate="2018-08-31"/><column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)"/></insert>
+		<insert tableName="A4GT_REG_ALPEGGIO"><column name="ID" valueSequenceNext="NXTNBR"/><column name="CUAA" value="DLLLRI74D51C794P"/><column name="DT_INIZIO" valueDate="2018-07-01"/><column name="DT_FINE" valueDate="2018-08-31"/><column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)"/></insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_15.2" author="Antonio Pasca">
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CS-21" />
+			<column name="DESCRIZIONE" value="Processo per iL calcolo statistiche BPS" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CS-22" />
+			<column name="DESCRIZIONE" value="Processo per iL calcolo statistiche Greening" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CS-25" />
+			<column name="DESCRIZIONE" value="Processo per iL calcolo statistiche Giovane" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+		<insert tableName="A4GD_TIPO_PROCESSO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO" value="CS-27" />
+			<column name="DESCRIZIONE" value="Processo per iL calcolo statistiche Accoppiato" />
+			<column name="PARALLELIZZABILE" value="0" />
+		</insert>
+	</changeSet>
+	
+	<include file="config/database/changelog/db.istruttoria.nuts.xml"/>
+	
+	<changeSet id="ISTRUTTORIA_15.3" author="Daniele Faieta">
+		<createTable tableName="A4GT_STATISTICA_DU">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_STATISTICA_DU"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="TIPO_STATISTICA" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DOMANDA" type="NUMBER(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="STATO" type="${string.type}(20)">
+				<constraints nullable="true" />
+			</column>
+			<column name="IMP_AMM" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C110" type="NUMBER(4)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C109" type="${string.type}(5)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C109A" type="${string.type}(5)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F100" type="${string.type}(4)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F200" type="${string.type}(16)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F201" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F202A" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F202B" type="NUMBER(5)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F202C" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F207" type="${string.type}(5)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F300" type="${string.type}(15)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C300A" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="F300B" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="C300C" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C400" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C401" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C402" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C403" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C403A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C404" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C405" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C406" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C407" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C551" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C552" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C554" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C554A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C557" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558B" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558C" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558D" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558E" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C558F" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C559" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C560" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C560A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C561" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C561A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C561B" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C600" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C605" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C611" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C620" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C621" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C633" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C640" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="C640A" type="NUMBER(20,2)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<createIndex tableName="A4GT_STATISTICA_DU" indexName="A4GT_SDU_D_TIPO_UIDX" unique="true">
+            <column name="ID"/>
+            <column name="TIPO_STATISTICA"/>
+        </createIndex>  	
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_STATISTICA_DU TO ${user.writer};
+        	GRANT SELECT ON A4GT_STATISTICA_DU TO ${user.reader};
+        </sql>
+		<rollback>
+            DROP TABLE A4GT_STATISTICA_DU;
+        </rollback>         
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_15.4" author="Daniele Faieta">
+		<modifyDataType tableName="A4GT_STATISTICA_DU" columnName="F201" newDataType="${string.type}(250)"/>
+		<modifyDataType tableName="A4GT_STATISTICA_DU" columnName="F202A" newDataType="${string.type}(250)"/>
+		<modifyDataType tableName="A4GT_STATISTICA_DU" columnName="F202C" newDataType="${string.type}(250)"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_15.5" author="Daniele Faieta">
+		<modifyDataType tableName="A4GT_STATISTICA_DU" columnName="STATO" newDataType="${string.type}(50)"/>
+	</changeSet>
+	
+	<!-- IDU-ANN-01 - sanzione per ritardo presentazione domanda di modifica (true: applica sanzione per ritardo presentazione) -->
+	<changeSet id="ISTRUTTORIA_16.1" author="Bruno Conetta">
+     	<addColumn tableName="A4GT_DOMANDA">
+     		<column name="SANZIONE_RITARDO" type="BOOLEAN"></column>
+     	</addColumn>
+    </changeSet> 	
+	<!-- Popolamento tabella comuni limitrofi per aggiunta dei Comuni esterni alla provincia di Trento - Segnalazione ID #60 -->
+    <include file = "config/database/changelog/db.istruttoria.comuniLimitrofiTn_v2.changelog.xml"/>
+    
+    <changeSet id="ISTRUTTORIA_16.2" author="Bruno Conetta">
+		<renameColumn newColumnName="ANNULLO_RIDUZIONE" oldColumnName="SANZIONE_RITARDO" tableName="A4GT_DOMANDA" />
+    </changeSet> 
+    
+    <changeSet id="ISTRUTTORIA_15.6" author="Daniele Faieta">
+		<modifyDataType tableName="A4GT_STATISTICA_DU" columnName="C600" newDataType="${string.type}(2)"/>
+	</changeSet>
+
+<changeSet id="ISTRUTTORIA_16.3" author="Bruno Conetta">
+		<createTable tableName="A4GT_DATI_EREDE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_DOMANDA_EREDE"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSION" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_DOMANDA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_ID_DOMANDA_EREDE"
+                             referencedTableName="A4GT_DOMANDA"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+			</column>
+			<column name="CERTIFICATO" type="BOOLEAN">
+				<constraints nullable="true" />
+			</column>
+            <column name="COGNOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="NOME" type="${string.type}(50)">
+				<constraints nullable="false" />
+			</column>
+            <column name="CODICE_FISCALE" type="${string.type}(16)">
+				<constraints nullable="false" />
+			</column>
+			<column name="IBAN" type="${string.type}(34)">
+				<constraints nullable="false" />
+			</column>
+			<column name="INDIRIZZO" type="${string.type}(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_ISTAT" type="${string.type}(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="PROVINCIA" type="${string.type}(2)">
+				<constraints nullable="false" />
+			</column>
+			<column name="CAP" type="${string.type}(5)">
+				<constraints nullable="false" />
+			</column>
+			<!--  DATI facoltativi -->
+			<column name="SESSO" type="${string.type}(1)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DATA_NASCITA" type="DATE">
+				<constraints nullable="true" />
+			</column>
+			<column name="COD_ISTAT_NASCITA" type="${string.type}(10)">
+				<constraints nullable="true" />
+			</column>
+			<column name="PROVINCIA_NASCITA" type="${string.type}(2)">
+				<constraints nullable="true" />
+			</column>
+			<column name="DT_ULTIMO_AGGIORNAMENTO" type="DATE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+    </changeSet> 
+    
+    <changeSet id="ISTRUTTORIA_16.4" author="Bruno Conetta">
+		<renameColumn tableName="A4GT_DATI_EREDE" newColumnName="VERSIONE" oldColumnName="VERSION"/>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_16.5" author="Bruno Conetta">
+		<renameColumn tableName="A4GT_DATI_EREDE" newColumnName="DT_NASCITA" oldColumnName="DATA_NASCITA"/>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_16.6" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_DOMANDA_EREDE REBUILD TABLESPACE ${tablespace.index} ONLINE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_16.7" author="Antonio Pasca">
+		<createTable tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_SOGLIA_ACQUISIZIONE"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="SETTORE" type="${string.type}(50)">
+                <constraints nullable="false" />
+            </column>
+			<column name="DATA_PRESENTAZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INIZIO_APPLICAZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_FINE_APPLICAZIONE" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="SOGLIA" type="NUMBER(20)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_SOGLIA_ACQUISIZIONE TO ${user.writer};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_16.8" author="Antonio Pasca">
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="DOMANDA_UNICA" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="2019-12-31" />
+			<column name="SOGLIA" value="10000" />
+		</insert>
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="PSR_SUPERFICIE_EU" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="2019-12-31" />
+			<column name="SOGLIA" value="10000" />
+		</insert>
+		<insert tableName="A4GT_SOGLIA_ACQUISIZIONE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="SETTORE" value="PSR_STRUTTURALI_EU" />
+			<column name="DATA_PRESENTAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_INIZIO_APPLICAZIONE" valueDate="2017-19-11" />
+			<column name="DATA_FINE_APPLICAZIONE" valueDate="2019-12-31" />
+			<column name="SOGLIA" value="10000" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_16.9" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DATI_EREDE TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_17.0" author="Daniele Faieta">
+		<addColumn tableName="A4GT_DATI_SETTORE">
+			<column name="TIPO_ISTRUTTORIA" type="${string.type}(20)">
+				<constraints nullable="true" />
+			</column>
+			<column name="PERC_PAGAMENTO" defaultValue="0" type="NUMBER(20,8)" />
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_17.1" author="Daniele Faieta">
+		<update tableName="A4GT_DATI_SETTORE">
+			<column name="TIPO_ISTRUTTORIA" value="SALDO" />
+			<where>TIPO_ISTRUTTORIA IS NULL</where>
+		</update>
+		<update tableName="A4GT_DATI_SETTORE">
+			<column name="PERC_PAGAMENTO" valueNumeric="100" />
+			<where>TIPO_ISTRUTTORIA = 'SALDO'</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_17.11" author="Daniele Faieta">
+		<update tableName="A4GT_DATI_SETTORE">
+			<column name="PERC_PAGAMENTO" valueNumeric="1" />
+			<where>TIPO_ISTRUTTORIA = 'SALDO'</where>
+		</update>
+	</changeSet>
+	
+	<!-- Inserimento dati settore per anno 2019 -->
+	<changeSet id="ISTRUTTORIA_18.1" author="Paolo Procida">
+		<insert tableName="A4GT_DATI_SETTORE">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ANNO_RIFERIMENTO" value="2019" />
+			<column name="CODICE_PAC" value='PAC1420' />
+			<column name="DESCRIZIONE_PAC" value='PAC 2014 – 2020' />
+			<column name="TIPO_DOMANDA" value="DU" />
+			<column name="DESCRIZIONE_DOMANDA" value="Domanda Unica" />
+			<column name="DT_SCADENZA_DOMANDE" valueDate="2019-15-06" />
+			<column name="DT_SCADENZA_DOMANDE_RITARDO" valueDate="2019-01-10" />
+			<column name="DT_SCADENZA_DOMANDE_RITIROPARZ" valueDate="2019-15-09" />
+			<column name="DT_SCADENZA_DOMANDE_RITIRO" valueDate="2019-31-08" />
+			<column name="DT_RICEVIBILITA" valueDate="2019-15-07" />
+			<column name="PERC_INCREMENTO_GREENING" valueNumeric="0.4979" />
+			<column name="PERC_INCREMENTO_GIOVANE" valueNumeric="0.5" />
+			<column name="LIMITE_GIOVANE" value="90" />
+			<column name="PERC_RIDUZIONE_LINEARE_1" valueNumeric="0.05" />
+			<column name="PERC_RIDUZIONE_LINEARE_2" valueNumeric="0.04" />
+			<column name="PERC_RIDUZIONE_LINEARE_3" valueNumeric="0.8" />
+			<column name="PERC_RIDUZIONE_TITOLI" valueNumeric="0.09" />
+			<column name="TIPO_ISTRUTTORIA" value="ANTICIPO" />
+			<column name="PERC_PAGAMENTO" valueNumeric="10.65" />
+		</insert>
+	</changeSet>
+	
+	<!-- Inserimento finestra temporale per domanda integrativa zootecnia per anno 2019 -->
+	<changeSet id="ISTRUTTORIA_18.2" author="Paolo Procida">
+			<insert tableName="A4GD_SOSTEGNO_DU_DI">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_SOSTEGNO" valueComputed="(SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO = 'ACC_ZOOTECNIA')" />
+			<column name="DT_APERTURA_DOMANDA" valueDate="2019-01-04" />
+			<column name="DT_CHIUSURA_DOMANDA" valueDate="2019-02-05" />
+		</insert>
+	</changeSet>
+	
+	<!-- Inserimento premi zootecnia e superficie per anno 2019 -->
+	<changeSet id="ISTRUTTORIA_18.3" author="Paolo Procida">
+		<!-- Premi superficie -->
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '122')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '123')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '124')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '125')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '128')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '129')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '132')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '138')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		
+		<!-- Premi zootecnia -->
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '311')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '313')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '315')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '316')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '318')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '320')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '321')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+		<insert tableName="A4GD_INTERVENTO_DU_PREMIO">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_DATI_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2019)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '322')" />
+			<column name="VALORE_UNITARIO" valueNumeric="0.0" />
+		</insert>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_18.4" author="Paolo Procida">
+		<update tableName="A4GT_DATI_SETTORE">
+			<column name="PERC_PAGAMENTO" valueNumeric="80.00"  />
+			<where>ANNO_RIFERIMENTO = 2019 AND TIPO_ISTRUTTORIA = 'ANTICIPO'</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_18.5" author="Elisabetta Freschi">
+		<insert tableName="A4GD_INTERVENTO_DU">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="IDENTIFICATIVO_SETTORE" value="RISO" />
+			<column name="DESCRIZIONE_SETTORE" value="Riso" />
+			<column name="IDENTIFICATIVO_INTERVENTO" value="RISO" />
+			<column name="DESCRIZIONE_BREVE" value="Riso" />
+			<column name="DESCRIZIONE_LUNGA" value="Superficie coltivata a riso" />
+			<column name="MISURA" value="M12" />
+			<column name="CODICE_AGEA" value="126" />
+			<column name="ID_SOSTEGNO" valueComputed="(SELECT ID FROM A4GD_SOSTEGNO_DU WHERE IDENTIFICATIVO = 'ACC_SUPERFICI')" />
+		</insert>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_18.6" author="Elisabetta Freschi">
+		<update tableName="A4GD_INTERVENTO_DU">
+			<column name="IDENTIFICATIVO_INTERVENTO" value="RISONE" />
+			<column name="DESCRIZIONE_LUNGA" value="Superfici coltivate a riso" />
+			<where>CODICE_AGEA = '126'</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_18.7" author="Antonio Pascaa">
+    	<createTable tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="PK_CAPITOLO_SPESA"
+					primaryKeyTablespace="${tablespace.index}" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_INTERVENTO" type="${id.number.type}">
+                <constraints foreignKeyName="FK_ID_INTERVENTO"
+                             referencedTableName="A4GD_INTERVENTO_DU"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="ID_SETTORE" type="${id.number.type}">
+                <constraints foreignKeyName="FK_ID_SETTORE"
+                             referencedTableName="A4GT_DATI_SETTORE"
+                             referencedColumnNames="ID"
+                             nullable="false" />
+            </column>
+			<column name="TIPO" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="CAPITOLO" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+			<column name="DESCRIZIONE_CAPITOLO" type="${string.type}(500)">
+                <constraints nullable="true"/>
+            </column>
+			<column name="CODICE_PRODOTTO" type="${id.number.type}">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER INDEX PK_CAPITOLO_SPESA REBUILD TABLESPACE ${tablespace.index} ONLINE;
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_CAPITOLO_SPESA TO ${user.writer};
+		</sql>
+    </changeSet>
+	
+	
+	<!-- insert A4GD_CAPITOLO_SPESA -->
+	<changeSet id="ISTRUTTORIA_18.8" author="Antonio Pasca">
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '026')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="1101826101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="REGIME DI PAGAMENTO DI BASE - CON DISCIPLINA FINANZIARIA - 0% RIDUZIONE - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801026" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '026')" />
+			<column name="TIPO" value="RIDUZIONE 50" />
+			<column name="CAPITOLO" value="1101830101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="REGIME DI PAGAMENTO DI BASE – 50% RIDUZIONE - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="802026" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '026')" />
+			<column name="TIPO" value="RIDUZIONE 100" />
+			<column name="CAPITOLO" value="1101832101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="REGIME DI PAGAMENTO DI BASE – 100% RIDUZIONE - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="803026" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '026')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="1101825101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="REGIME DI PAGAMENTO DI BASE - SENZA DISCIPLINA FINANZIARIA - 0% RIDUZIONE - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800026" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '008')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="1111807101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="PAGAMENTO PER LE PRATICHE AGRICOLE BENEFICHE PER IL CLIMA E L AMBIENTE - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800008" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '008')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="1111808101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="PAGAMENTO PER LE PRATICHE AGRICOLE BENEFICHE PER IL CLIMA E L AMBIENTE - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801008" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '009')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="1131821101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="PAGAMENTO PER I GIOVANI AGRICOLTORI - REGIME DI PAGAMENTO DI BASE - RISERVA NAZIONALE, RIDUZIONE LINEARE - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800013" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '009')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="1131822101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="PAGAMENTO PER I GIOVANI AGRICOLTORI - REGIME DI PAGAMENTO DI BASE - RISERVA NAZIONALE, RIDUZIONE LINEARE – CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801013" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '310')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 1 (LATTE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800310" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '310')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813201" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 1 (LATTE) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801310" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '311')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813301" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 2 (LATTE MONTAGNA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800311" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '311')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813401" />
+			<column name="DESCRIZIONE_CAPITOLO" value="OSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 2 (LATTE MONTAGNA) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801311" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '313')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813701" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 4 (VACCHE NUTRICI) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800313" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '313')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813801" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 4 (VACCHE NUTRICI) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801313" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '315')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601813901" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 5 (BOVINI MACELLATI 12-24 mesi - art. 21 c.7) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800315" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '320')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814201" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 6 (AGNELLE DA RIMONTA) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801320" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '315')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814001" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 5 (BOVINI MACELLATI 12-24 mesi - art. 21 c.7) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801315" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '320')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 6 (AGNELLE DA RIMONTA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800320" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '321')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814301" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 7 (OVI CAPRINI MACELLATI) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800321" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '321')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814401" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 7 (OVI CAPRINI MACELLATI) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801321" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '122')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814501" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 8 (SOIA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800122" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '122')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814601" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 8 (SOIA) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801122" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '124')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814701" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 9 (FRUMENTO DURO) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800124" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '124')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814801" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 9 (FRUMENTO DURO) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801124" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '123')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601814901" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 10 (PROTEAGINOSE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800123" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '123')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815001" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 10 (PROTEAGINOSE) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801123" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '125')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 11 (LEGUMINOSE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800125" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '125')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815201" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 11 (LEGUMINOSE) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801125" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '128')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815701" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 14 (POMODORO) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800128" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '128')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815801" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 14 (POMODORO) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801128" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '129')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601815901" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 15 (OLIVO) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800129" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '129')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816001" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 15 (OLIVO) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801129" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '132')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816101" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 16 (OLIVO IN PENDENZA) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800132" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '132')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816201" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 16 (OLIVO IN PENDENZA) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801132" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '138')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816301" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 17 (OLIVO DI QUALITA’) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800138" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '138')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816401" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 17 (OLIVO DI QUALITA’) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801138" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '316')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816701" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI 12-24 mesi - art. 21 c.9) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800316" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '316')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816801" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI 12-24 mesi - art. 21 c.9) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801316" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '322')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816901" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 20 (VACCHE NUTRICI NON ISCRITTE) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800322" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '322')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601817001" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 20 (VACCHE NUTRICI NON ISCRITTE) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801322" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '318')" />
+			<column name="TIPO" value="SENZA DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816701" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI 12-24 mesi - art. 21 c.9) - SENZA DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="800318" />
+		</insert>
+		<insert tableName="A4GD_CAPITOLO_SPESA">
+			<column name="ID" valueSequenceNext="NXTNBR" />
+			<column name="VERSIONE" value="0" />
+			<column name="ID_SETTORE" valueComputed="(SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018)" />
+			<column name="ID_INTERVENTO" valueComputed="(SELECT ID FROM A4GD_INTERVENTO_DU WHERE CODICE_AGEA = '318')" />
+			<column name="TIPO" value="CON DISCIPLINA" />
+			<column name="CAPITOLO" value="2601816801" />
+			<column name="DESCRIZIONE_CAPITOLO" value="SOSTEGNO ACCOPPIATO FACOLTATIVO - MISURA 19 (BOVINI MACELLATI 12-24 mesi - art. 21 c.9) - CON DISCIPLINA FINANZIARIA - ANNO 2018" />
+			<column name="CODICE_PRODOTTO" valueNumeric="801318" />
+		</insert>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_18.9" author="Daniele Faieta">
+				<addColumn tableName="A4GT_LAVORAZIONE_SOSTEGNO">
+			<column name="ERRORE_CALCOLO" type="BOOLEAN" />
+		</addColumn>
+		<addDefaultValue columnName="ERRORE_CALCOLO"
+            defaultValueBoolean="false"
+            tableName="A4GT_LAVORAZIONE_SOSTEGNO"/>
+		<update tableName="A4GT_LAVORAZIONE_SOSTEGNO">
+			<column name="ERRORE_CALCOLO" value="0" />
+		</update>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_18.10" author="Daniele Faieta">
+		<addColumn tableName="A4GT_LAVORAZIONE_SOSTEGNO">
+			<column name="DATA_ULTIMO_CALCOLO" type="BOOLEAN">
+				<constraints nullable="true" />
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_18.11" author="Daniele Faieta">
+		<modifyDataType tableName="A4GT_LAVORAZIONE_SOSTEGNO" columnName="DATA_ULTIMO_CALCOLO" newDataType="DATE" />
+	</changeSet>
+	
+</databaseChangeLog>
+

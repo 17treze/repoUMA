@@ -1,0 +1,163 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="ANAGRAFICA_WRT_22.0" author="Gabriele Ninfa" dbms="oracle">
+       	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+        </sql>
+
+		<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM A4GT_SOGGETTO FOR ${user.superuser}.A4GT_SOGGETTO;
+			CREATE OR REPLACE SYNONYM A4GT_FASCICOLO FOR ${user.superuser}.A4GT_FASCICOLO;
+			CREATE OR REPLACE SYNONYM A4GT_MANDATO FOR ${user.superuser}.A4GT_MANDATO;
+			CREATE OR REPLACE SYNONYM A4GT_DETENZIONE FOR ${user.superuser}.A4GT_DETENZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_23.0" author="Gabriele Ninfa" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM A4GT_SPORTELLO FOR ${user.superuser}.A4GT_SPORTELLO;
+        </sql>
+    </changeSet>
+
+	<changeSet id="ANAGRAFICA_WRT_23.1" author="Antonio Trombetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_PERSONA FOR ${user.superuser}.A4GT_PERSONA;
+		</sql>
+	</changeSet>
+	<changeSet id="ANAGRAFICA_WRT_23.2" author="Antonio Trombetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_SOGGETTO;
+		</sql>
+	</changeSet>
+	<changeSet id="ANAGRAFICA_WRT_24.0" author="Gabriele Ninfa" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_PERSONA_FISICA FOR ${user.superuser}.A4GT_PERSONA_FISICA;
+			CREATE OR REPLACE SYNONYM A4GT_PERSONA_GIURIDICA FOR ${user.superuser}.A4GT_PERSONA_GIURIDICA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_WRT_25.1" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_ATTIVITA_ATECO FOR ${user.superuser}.A4GT_ATTIVITA_ATECO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ANAGRAFICA_WRT_25.2" author="Antonio Avitabile" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CAA FOR ${user.superuser}.A4GT_CAA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_WRT_25.2" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ANAGRAFICA_WRT_27.0" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_PERSONA_FISICA_CON_CARICA FOR ${user.superuser}.A4GT_PERSONA_FISICA_CON_CARICA;
+            CREATE OR REPLACE SYNONYM A4GT_CARICA FOR ${user.superuser}.A4GT_CARICA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_28.1" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_REVOCA_IMMEDIATA FOR ${user.superuser}.A4GT_REVOCA_IMMEDIATA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_29.0" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_PERSONA_GIURIDICA_CARICA FOR ${user.superuser}.A4GT_PERSONA_GIURIDICA_CARICA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_30.0" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_MODO_PAGAMENTO FOR ${user.superuser}.A4GT_MODO_PAGAMENTO;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_33F.0" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_UNITA_TECNICO_ECNONOMICHE FOR ${user.superuser}.A4GT_UNITA_TECNICO_ECNONOMICHE;
+            CREATE OR REPLACE SYNONYM A4GT_DESTINAZIONE_USO FOR ${user.superuser}.A4GT_DESTINAZIONE_USO;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_33F.1" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            DROP SYNONYM A4GT_UNITA_TECNICO_ECNONOMICHE;
+            CREATE OR REPLACE SYNONYM A4GT_UNITA_TECNICO_ECONOMICHE FOR ${user.superuser}.A4GT_UNITA_TECNICO_ECONOMICHE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_33F.2" author="Gabrele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_ISCRIZIONE_SEZIONE FOR ${user.superuser}.A4GT_ISCRIZIONE_SEZIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_38F.0" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">            
+            CREATE OR REPLACE SYNONYM A4GT_LOGGING_VALIDAZIONE FOR ${user.superuser}.A4GT_LOGGING_VALIDAZIONE;
+        </sql>
+    </changeSet>
+
+    <changeSet id="ANAGRAFICA_WRT_42F.0" author="Giustino De Vincentiis" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">            
+            CREATE OR REPLACE SYNONYM A4GT_ORGANIZZAZIONE FOR ${user.superuser}.A4GT_ORGANIZZAZIONE;
+            CREATE OR REPLACE SYNONYM A4GT_FASCICOLO_ORGANIZZAZIONE FOR ${user.superuser}.A4GT_FASCICOLO_ORGANIZZAZIONE;
+        </sql>
+    </changeSet>
+
+    <changeSet id="ANAGRAFICA_WRT_43F.0" author="Giustino De Vincentiis" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">            
+            CREATE OR REPLACE SYNONYM A4GT_DETENZIONE_IN_PROPRIO FOR ${user.superuser}.A4GT_DETENZIONE_IN_PROPRIO;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_47NF.0" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">            
+            CREATE OR REPLACE SYNONYM A4GT_DOCUMENTO_IDENTITA FOR ${user.superuser}.A4GT_DOCUMENTO_IDENTITA;
+        </sql>
+    </changeSet>
+
+    <changeSet id="ANAGRAFICA_WRT_49NF.0" author="Massimo Nascivera" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_CONTROLLO_COMPLETEZZA FOR ${user.superuser}.A4GT_CONTROLLO_COMPLETEZZA;
+        </sql>
+    </changeSet>
+
+    <changeSet id="ANAGRAFICA_WRT_56NF.1" author="Giustino De Vincentiis" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_SOSPENSIONE FOR ${user.superuser}.A4GT_SOSPENSIONE;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ANAGRAFICA_WRT_60NF.0" author="Gabriele Ninfa" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+            CREATE OR REPLACE SYNONYM A4GT_EREDE FOR ${user.superuser}.A4GT_EREDE;
+        </sql>
+    </changeSet>
+
+	<changeSet id="ANAGRAFICA_WRT_60.1" author="Bruno Conetta" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_SOSPENSIONE;
+			CREATE OR REPLACE SYNONYM A4GT_MOVIMENTAZIONE_FASCICOLO FOR ${user.superuser}.A4GT_MOVIMENTAZIONE_FASCICOLO;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ANAGRAFICA_WRT_3N.5" author="Angelo Vacca" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM NXTPDFID FOR ${user.superuser}.NXTPDFID;
+		</sql>
+	</changeSet>
+    
+</databaseChangeLog>

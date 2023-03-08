@@ -1,0 +1,69 @@
+<p-dialog
+  width="1100"
+  [(visible)]="popupVisibile"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="false"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}">
+  <p-toast
+    key="tst-dlg"
+    [baseZIndex]="50000"></p-toast>
+  <p-toast
+    position="top-center"
+    key="tst-dlg-protocollazione"
+    [baseZIndex]="50000"
+    (onClose)="onCloseToastProtocollazione()"></p-toast>
+  <p-header>
+    {{ "UMA.PROTOCOLLAZIONE_DICHIARAZIONE" | translate }}
+  </p-header>
+
+  <div class="p-grid w-100">
+    <div class="p-col">
+      <div class="popup-approvazione popup--custom">
+        <h6><p [innerHtml]="'UMA.PROTOCOLLAZIONE_DICHIARAZIONE_MSG' | translate"></p></h6>
+        <div class="p-grid">
+          <div class="p-col-4">
+            <app-box
+              [header]="getHeader('UMA.SCARICA_DICHIARAZIONE', 'UMA.DESC_SCARICA_DICHIARAZIONE', 'assets/img/icons/icon-download2.png')"
+              [button]="getButtonModel('UMA.SCARICA', 'pi pi-arrow-down', BUTTONS_ENUM.download_dichiarazione, BUTTONS_TYPE_ENUM.button)"
+              [enableBox]="enabledDownload"
+              (onClickButton)="onClickBoxButton($event)"></app-box>
+          </div>
+          <div class="p-col-4">
+            <app-box
+              [name]="'dichiarazione'" 
+              [header]="getHeader('UMA.FIRMA_DICHIARAZIONE', 'UMA.DESC_FIRMA_DICHIARAZIONE', 'assets/img/icons/icon-signature.svg' )"
+              [button]="getButtonModel('UMA.CARICA', 'pi pi-arrow-up', BUTTONS_ENUM.carica_dichiarazione_firmata, BUTTONS_TYPE_ENUM.file)"
+              [enableBox]="enabledUpload"
+              [document]="fileDichiarazione"
+              (onClickButton)="onClickBoxButton($event, fileInput)"></app-box>
+            <input
+              #fileInput
+              id="caricaFileInput"
+              name="caricaFileInput"
+              [hidden]="true"
+              type="file"
+              (change)="onFileChange($event, 'dichiarazione')"
+              accept="{{fileConfig.fileExt}}">
+          </div>
+          <div class="p-col-4">
+            <app-box
+              [header]="getHeader('UMA.PROTOCOLLA_DICHIARAZIONE', 'UMA.DESC_PROTOCOLLA_DICHIARAZIONE', 'assets/img/icons/icon-file-check.svg' )"
+              [button]="getButtonModel('UMA.PROTOCOLLA', '', BUTTONS_ENUM.protocolla_dichiarazione, BUTTONS_TYPE_ENUM.button)"
+              [enableBox]="enabledProtocolla"
+              (onClickButton)="onClickBoxButton($event)"></app-box>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between">
+    <button
+      pButton
+      (click)="annulla()"
+      class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none">
+      {{ "chiudi" | translate }}
+    </button>
+  </div>
+</p-dialog>

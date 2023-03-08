@@ -1,0 +1,137 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}">
+</p-toast>
+<app-popup-erede
+  *ngIf="popupEredeOpen"
+  [popupEredeOpen]="popupEredeOpen"
+  [cuaa]="cuaa"
+  [erede]="erede"
+  [idValidazione]="idValidazione"
+  (chiudiPopup)="closePopupErede($event)"
+  (saveErede)="saveErede($event)">
+</app-popup-erede>
+<div class="ui-grid-fixed boxgrey">
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <em
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></em>
+    <img src="assets/img/ico-anagraf.jpg">
+    <span class="ml-2">
+      {{ "FascicoloAziendale.DATI_ANAGRAFICI_E_FISCALI" | translate }}
+    </span>
+  </a>
+  <br>
+  <h3 class="mb-3">{{ 'Eredi' }}</h3>
+  <div style="text-align:left">
+    <button
+      type="button"
+      pButton
+      icon="pi pi-plus"
+      (click)="aggiungiErede()"
+      [disabled]="!fascicoloEditable()"
+      label="Aggiungi"></button>
+  </div>
+  <p-table
+    [value]="listaEredi"
+    [autoLayout]="true"
+    [(selection)]="selectedErede">
+    <ng-template pTemplate="header">
+      <tr style="text-align: center">
+        <th rowspan="2">Codice fiscale</th>
+        <th rowspan="2">Cognome</th>
+        <th rowspan="2">Nome</th>
+        <th rowspan="2">Data di nascita</th>
+        <th rowspan="2">Comune di nascita</th>
+        <th rowspan="2">Provincia di nascita</th>
+        <th colspan="4">Residenza</th>
+        <th
+          rowspan="2"
+          style="width: 110px;">
+          Azioni
+        </th>
+      </tr>
+      <tr style="text-align: center">
+        <th>Via</th>
+        <th>Comune</th>
+        <th>Provincia</th>
+        <th>Cap</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td>{{rowData.cfErede}}</td>
+        <td>{{rowData.cognome}}</td>
+        <td>{{rowData.nome}}</td>
+        <td>
+          {{rowData.dataNascita | date : 'dd/MM/yyyy'}}
+        </td>
+        <td>{{rowData.comuneNascita}}</td>
+        <td>{{rowData.provinciaNascita}}</td>
+        <td>{{rowData.indirizzo.descrizioneEstesa}}</td>
+        <td>{{rowData.indirizzo.comune}}</td>
+        <td>{{rowData.indirizzo.provincia}}</td>
+        <td>{{rowData.indirizzo.cap}}</td>
+        <td>
+          <button
+            type="button"
+            pButton
+            title="Rimuovi erede"
+            style="background-color: red"
+            icon="pi pi-trash"
+            (click)="cancellaErede(rowData.id, rowData.cfErede)"
+            [disabled]="!fascicoloEditable()"
+            label="{{ 'ELIMINA' | translate }}"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="summary"
+      let-rowData>
+      <div class="p-d-flex p-ai-center p-jc-between">{{footerTabella()}}</div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-toast
+  position="center"
+  key="cancellaErede"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid p-formgrid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confermaCancellaErede()"
+          [disabled]="!fascicoloEditable()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="AnnullaCancellaErede()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

@@ -1,0 +1,109 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<!-- Da versione 1.1 di fascicolo -->
+    <changeSet id="UTENTE_WRT_1.0" author="Lorenzo Martinelli" dbms="oracle">
+        <!-- Contenuto di 001a_tabelleProfili-Sinonimi.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM A4GT_PROFILO FOR  ${user.superuser}.A4GT_PROFILO;
+			CREATE OR REPLACE SYNONYM A4GR_PROFILO_FUNZIONE FOR  ${user.superuser}.A4GR_PROFILO_FUNZIONE;
+			CREATE OR REPLACE SYNONYM A4GT_FUNZIONE FOR  ${user.superuser}.A4GT_FUNZIONE;
+        </sql>
+        
+        <!-- Contenuto di 002a_tabelleUtenti-Sinonimi.sql -->
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE SYNONYM A4GT_UTENTE FOR ${user.superuser}.A4GT_UTENTE;
+			CREATE SYNONYM A4GR_UTENTE_AZIENDA FOR ${user.superuser}.A4GR_UTENTE_AZIENDA;
+			CREATE SYNONYM A4GR_UTENTE_PROFILO FOR ${user.superuser}.A4GR_UTENTE_PROFILO;
+			CREATE SYNONYM A4GT_ENTE FOR ${user.superuser}.A4GT_ENTE;
+			CREATE SYNONYM A4GR_UTENTE_ENTE FOR ${user.superuser}.A4GR_UTENTE_ENTE;
+        </sql>
+    </changeSet>
+    
+    <!-- Da versione 1.3 di fascicolo -->
+    <changeSet id="UTENTE_WRT_1.1" author="Lorenzo Martinelli" dbms="oracle">
+    	<!-- Contenuto di 001a_AS_DomandaRegistrazioneUtente-Sinonimi.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DOMANDA_REGISTRAZIONE FOR ${user.superuser}.A4GT_DOMANDA_REGISTRAZIONE;
+		</sql>
+    </changeSet>
+    
+    <!-- Da versione 1.5 di fascicolo -->
+    <changeSet id="UTENTE_WRT_1.2" author="Lorenzo Martinelli" dbms="oracle">
+    	<!-- Contenuto di 001a_tabellaAllegatoResponsabilita-Sinonimo.sql -->
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_ALLEGATO_RESPONSABILITA FOR ${user.superuser}.A4GT_ALLEGATO_RESPONSABILITA;
+		</sql>
+    </changeSet>
+
+    <changeSet id="UTENTE_WRT_1.3" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_PERSONA FOR ${user.superuser}.A4GT_PERSONA;
+			CREATE OR REPLACE SYNONYM A4GT_PRIVACY_PERSONA FOR ${user.superuser}.A4GT_PRIVACY_PERSONA;
+		</sql>
+    </changeSet>
+
+    <changeSet id="UTENTE_WRT_1.4" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GD_RUOLO FOR ${user.superuser}.A4GD_RUOLO;
+			CREATE OR REPLACE SYNONYM A4GR_PROFILO_RUOLO FOR ${user.superuser}.A4GR_PROFILO_RUOLO;
+		</sql>
+    </changeSet>
+	<changeSet id="UTENTE_WRT_5.1" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_LOAD_UTENTE_CAA FOR ${user.superuser}.A4GT_LOAD_UTENTE_CAA;
+		</sql>
+    </changeSet>
+	<changeSet id="UTENTE_WRT_5.4" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FIRMA_DOMANDA_REG FOR ${user.superuser}.A4GT_FIRMA_DOMANDA_REG;
+		</sql>
+    </changeSet>
+	<changeSet id="UTENTE_WRT_5.5" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_FIRMA_DOMANDA_REG FOR ${user.superuser}.A4GT_FIRMA_DOMANDA_REG;
+		</sql>
+    </changeSet>
+	<changeSet id="UTENTE_WRT_6.1" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GUTE_LOGGING FOR ${user.superuser}.A4GUTE_LOGGING;
+		</sql>
+    </changeSet>
+	<changeSet id="UTENTE_WRT_6.2" author="Fabio Strada" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_ISTRUTTORIA FOR ${user.superuser}.A4GT_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_WRT_6.3" author="Fabio Strada" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GR_PROFILO_ISTRUTTORIA FOR ${user.superuser}.A4GR_PROFILO_ISTRUTTORIA;
+			CREATE OR REPLACE SYNONYM A4GR_ENTE_ISTRUTTORIA FOR ${user.superuser}.A4GR_ENTE_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_WRT_6.4" author="Fabio Strada" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GR_PROFILO_DIS_ISTRUTTORIA FOR ${user.superuser}.A4GR_PROFILO_DIS_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_WRT_24.0" author="Massimo Nascivera" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_EVENTSTORED FOR ${user.superuser}.A4GT_EVENTSTORED;
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_WRT_25.0" author="Massimo Nascivera" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+			CREATE OR REPLACE SYNONYM A4GUTE_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+		</sql>
+	</changeSet>
+	<changeSet id="UTENTE_WRT_36.0" author="Pietro De Vigili" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DISTRIBUTORE FOR ${user.superuser}.A4GT_DISTRIBUTORE;
+			CREATE OR REPLACE SYNONYM A4GR_UTENTE_DISTRIBUTORE FOR ${user.superuser}.A4GR_UTENTE_DISTRIBUTORE;
+		</sql>
+	</changeSet>
+	
+</databaseChangeLog>

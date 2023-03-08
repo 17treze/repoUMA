@@ -1,0 +1,29 @@
+.centerButton{
+    text-align: center;
+}
+
+.piu{
+    font-size: 2em; 
+    color:green;
+     padding-left: 10%; 
+    vertical-align: auto;
+}
+
+.meno{
+    font-size: 2em;
+     color:crimson;
+      padding-left: 10%;
+       vertical-align: auto;
+}
+
+.noMargin{
+    padding: 0 !important ;
+}
+
+.spostaSinistra{
+    padding-left: 5% !important;
+}
+
+.label-font {
+    color: #0D5F3D!important;
+}

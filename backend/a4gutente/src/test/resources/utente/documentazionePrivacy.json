@@ -1,0 +1,17 @@
+{
+	"mittente":{
+		"name":"Massimo",
+		"surname":"Nascivera",
+		"email":"email@gmail.com",
+		"nationalIdentificationNumber":"NSCMSM74A22H612G",
+		"description":"Massimo Nascivera - NSCMSM74A22H612G"
+    },
+	"allegati": null,
+	"documento":{
+		"content":null,
+		"mimeType":"application/pdf",
+		"name":"InformativaGeneralePrivacy.pdf"
+	},
+	"oggetto":"A4G - INFORMATIVA GENERALE PRIVACY - Massimo Nascivera - NSCMSM74A22H612G",
+	"tipologiaDocumentoPrincipale":"PRIVACY"
+}

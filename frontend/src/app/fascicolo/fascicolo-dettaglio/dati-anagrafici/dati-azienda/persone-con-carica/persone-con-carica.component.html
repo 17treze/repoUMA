@@ -1,0 +1,232 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="funzioni-grid boxgrey">
+  <div class="accordion-wrapper dettaglioaccordionmultiple">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <div class="globalfilter">
+          <i class="material-icons">search</i>
+          <input
+            type="text"
+            pInputText
+            size="50"
+            placeholder="Ricerca..."
+            (input)="filter($event)"
+            class="filter"
+            style="width:auto">
+        </div>
+      </div>
+    </div>
+    <!-- PERSONE FISICHE -->
+    <p-accordion>
+      <p-accordionTab
+        header="PERSONE FISICHE"
+        [selected]="true">
+        <p-table
+          #tableFisiche
+          [columns]="cols"
+          [value]="personaFisicaConCarica"
+          expandableRows="true"
+          [autoLayout]="true"
+          [paginator]="false"
+          [responsive]="true"
+          dataKey="codiceFiscale"
+          [globalFilterFields]="[cols[1].field, cols[2].field, cols[3].field, 'descrizione', 'dataInizio']">
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                <strong>{{ col.header }}</strong>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-personaFisica
+            let-expanded="expanded"
+            let-columns="columns"
+            let-rowIndex="rowIndex">
+            <tr>
+              <td>
+                <a
+                  href="#"
+                  [pRowToggler]="personaFisica">
+                  <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+              </td>
+              <td>{{personaFisica.cognome}}</td>
+              <td>{{personaFisica.nome}}</td>
+              <td>{{personaFisica.codiceFiscale}}</td>
+              <td>
+                <div *ngFor="let carica of personaFisica.cariche">
+                  {{ carica.dataInizio ? carica.descrizione + ' dal ' + (carica.dataInizio  | date : 'dd/MM/yyyy') : carica.descrizione}}
+                </div>
+              </td>
+              <td>
+                {{ ((personaFisica.verificaCodiceFiscale && personaFisica.verificaCodiceFiscale != verificaCodiceFiscaleEnum.CORRETTO)? ('FascicoloAziendale.'+personaFisica.verificaCodiceFiscale)  : '') | translate}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="rowexpansion"
+            let-personaFisica
+            let-columns="columns"
+            let-rowIndex="rowIndex">
+            <ng-template [ngIf]="personaFisica">
+              <tr>
+                <td [attr.colspan]="columns.length">
+                  <tbody>
+                    <tr>
+                      <th>Dati persona fisica</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td>Cognome:</td>
+                      <td>{{personaFisica.cognome}}</td>
+                    </tr>
+                    <tr>
+                      <td>Nome:</td>
+                      <td>{{personaFisica.nome}}</td>
+                    </tr>
+                    <tr>
+                      <td>Codice Fiscale:</td>
+                      <td>{{personaFisica.codiceFiscale}}</td>
+                    </tr>
+                    <tr>
+                      <td>Sesso:</td>
+                      <td>
+                        {{personaFisica.sesso? personaFisica.sesso : 'ND'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Luogo di nascita:</td>
+                      <td>
+                        {{personaFisica.comuneNascita? personaFisica.comuneNascita : 'ND'}} ({{personaFisica.siglaProvinciaNascita? personaFisica.siglaProvinciaNascita : 'ND'}})
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Data di nascita:</td>
+                      <td>
+                        {{personaFisica.dataNascita? (personaFisica.dataNascita ? (personaFisica.dataNascita | date: "dd/MM/yyyy") : 'ND') : 'ND'}}
+                      </td>
+                    </tr>
+                    <br>
+                    <tr>
+                      <th>Domicilio fiscale</th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td>Indirizzo:</td>
+                      <td>
+                        {{personaFisica.domicilioFiscale? costruisciIndirizzo(personaFisica.domicilioFiscale) : 'ND'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Comune:</td>
+                      <td>
+                        {{personaFisica.domicilioFiscale.comune? personaFisica.domicilioFiscale.comune : 'ND'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>CAP:</td>
+                      <td>
+                        {{personaFisica.domicilioFiscale.cap? personaFisica.domicilioFiscale.cap : 'ND'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Provincia:</td>
+                      <td>
+                        {{personaFisica.domicilioFiscale.provincia? personaFisica.domicilioFiscale.provincia : 'ND'}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </td>
+              </tr>
+            </ng-template>
+          </ng-template>
+          <ng-template
+            pTemplate="emptymessage"
+            let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">Nessun contenuto disponibile</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+    </p-accordion>
+    <!-- PERSONE GIURIDICHE -->
+    <p-accordion>
+      <p-accordionTab
+        header="PERSONE GIURIDICHE"
+        [selected]="true">
+        <p-table
+          #tableGiuridiche
+          [columns]="cols2"
+          [value]="personaGiuridicaConCarica"
+          expandableRows="true"
+          [autoLayout]="true"
+          [paginator]="false"
+          [responsive]="true"
+          dataKey="codiceFiscale"
+          [globalFilterFields]="[cols2[1].field, cols2[2].field, 'descrizione', 'dataInizio']">
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                <strong>{{col.header}}</strong>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-personaGiuridica
+            let-expanded="expanded"
+            let-columns="columns"
+            let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="personaGiuridica">
+              <td>
+                <a
+                  href="#"
+                  [pRowToggler]="personaGiuridica">
+                  <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+              </td>
+              <td>
+                {{ personaGiuridica.denominazione }}
+              </td>
+              <td>
+                {{ personaGiuridica.codiceFiscale }}
+              </td>
+              <td>
+                <div *ngFor="let carica of personaGiuridica.cariche">
+                  {{ carica.dataInizio ? carica.descrizione + ' dal ' + (carica.dataInizio  | date : 'dd/MM/yyyy') : carica.descrizione}}
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="rowexpansion"
+            let-personaGiuridicaConCarica
+            let-columns="columns"
+            let-rowIndex="rowIndex">
+            <ng-template [ngIf]="personaGiuridicaConCarica">
+              <tr>
+                <!-- TODO -->
+              </tr>
+            </ng-template>
+          </ng-template>
+          <ng-template
+            pTemplate="emptymessage"
+            let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length">Nessun contenuto disponibile</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

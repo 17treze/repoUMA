@@ -1,0 +1,52 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed boxgrey">
+    <div class="layout-actionmenu">
+      <h2 class="richiesta-title">
+        <div>
+          {{ "FASCICOLO_AZIENDALE.REVOCA_IMMEDIATA_RICERCA_FASCICOLI_PER_ACQUISIZIONE_MANDATO" | translate }}
+        </div>
+      </h2>
+      <div class="ui-g ui-fluid">
+        <div class="boxgrey">
+          <div class>
+            <form
+                    #f="ngForm"
+                    (ngSubmit)="onSubmit(f)">
+              <div
+                      class="ui-g-12 ui-md-1"
+                      style="padding: 18px;">
+                <label class="labelricerca">{{ "CUAA" | translate }}</label>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <input
+                        type="text"
+                        [(ngModel)]="cuaa"
+                        (ngModelChange)="cuaa = $event.toUpperCase()"
+                        name="cuaa"
+                        pInputText
+                        appValidaCuaaCompleto>
+              </div>
+              <div class="ui-g-12 ui-md-3">
+                <div class="searchbutton">
+                  <button
+                          pButton
+                          type="button"
+                          class="ui-button-success"
+                          type="submit"
+                          [disabled]="!f.valid || !f.value.cuaa">
+                    <div>
+                      {{ "FASCICOLO_AZIENDALE.ACQUISIZIONE_MANDATO" | translate }}
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <p-toast
+                  key="tst"
+                  [style]="{ marginTop: '70px' }"></p-toast>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

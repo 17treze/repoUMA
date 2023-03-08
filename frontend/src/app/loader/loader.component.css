@@ -1,0 +1,54 @@
+
+
+.hidden {
+    visibility: hidden;
+  }
+
+  .loading-indicator {
+    position: fixed;
+    z-index: 9999999999999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  
+  /* Transparent Overlay */
+  .loading-indicator:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+  }
+  /*
+  .loader-overlay {
+    position: absolute;
+    width: 100%;
+    z-index: 500000;
+    top: 0;
+  }
+  .loader {
+    height: 4px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #FFF;
+  }
+  .loader:before {
+    display: block;
+    position: absolute;
+    content: "";
+    left: -200px;
+    width: 200px;
+    height: 4px;
+    animation: loading 2s linear infinite;
+  }
+  */

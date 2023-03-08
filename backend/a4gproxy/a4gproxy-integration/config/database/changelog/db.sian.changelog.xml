@@ -1,0 +1,699 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="PROXY_5.0" author="Caccia Salvatore">
+        <sql endDelimiter=";" splitStatements="true">
+			 CREATE TABLE "AABAANTI_TAB" 
+			   ("ID_ANTI"        ${id.number.type}  NOT NULL ENABLE, 
+			   	"VERSIONE"		 ${version.number.type} DEFAULT 0 NOT NULL,
+				"CUAA"           VARCHAR2(16 BYTE) NOT NULL ENABLE, 
+				"TIPO_PERS"      NUMBER NOT NULL ENABLE, 
+				"DATA_INIZ_VALI" DATE NOT NULL ENABLE, 
+				"DATA_FINE_VALI" DATE DEFAULT (to_date('31-12-9999', 'dd-mm-yyyy')) , 
+				"DATA_INVI_PREF" DATE , 
+				"ID_ORPA"        NUMBER, 
+				"DATA_INSE"      DATE, 
+				"DATA_AGGI"      DATE, 
+				"ID_ALL1"        ${id.number.type}, 
+				"ID_ALL2"        ${id.number.type}, 
+				 CONSTRAINT "PK_AABAANTI_TAB" PRIMARY KEY ("ID_ANTI")
+			   ) TABLESPACE ${tablespace.data}
+			;
+			  
+             CREATE SEQUENCE AABAESAN_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			  
+			 CREATE TABLE "AABAESAN_TAB" 
+			   ("ID_ESAN"        ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"ID_ANTI"        ${id.number.type} NOT NULL ENABLE, 
+				"DECO_ESIT"      NUMBER, 
+				"PROT_ESIT"      ${string.type}(50 BYTE), 
+				"CUAA"           ${string.type}(16 BYTE) NOT NULL ENABLE, 
+				"DATA_INIZ_VALI" DATE NOT NULL ENABLE, 
+				"DATA_FINE_VALI" DATE NOT NULL ENABLE, 
+				 CONSTRAINT "PK_AABAESAN_TAB" PRIMARY KEY ("ID_ESAN"),
+				 FOREIGN KEY ("ID_ANTI") REFERENCES "AABAANTI_TAB" ("ID_ANTI") ENABLE
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABAALL1_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABAALL1_TAB" 
+			   ("ID_ALL1"        ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"DESC_IMPR"      ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"DESC_PROV_IMPR" ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"CODI_NUME_ISCR" ${string.type}(100 BYTE) NOT NULL ENABLE, 
+				"DATA_ISCR"      DATE NOT NULL ENABLE, 
+				"DESC_OGGE_SOCI" ${string.type}(4000 BYTE), 
+				"CODI_FISC"      ${string.type}(16 BYTE) NOT NULL ENABLE, 
+				"CODI_PART_IVAA" ${string.type}(11 BYTE) NOT NULL ENABLE, 
+				"DESC_SEDE_LEGA" ${string.type}(500 BYTE), 
+				"DESC_PEC"       ${string.type}(300 BYTE), 
+				"DATA_INSE"      DATE, 
+				"DATA_AGGI"      DATE, 
+				"CUAA"           VARCHAR2(16 BYTE) , 
+				 CONSTRAINT "PK_AABAALL1_TAB" PRIMARY KEY ("ID_ALL1")
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABAALL2_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABAALL2_TAB" 
+			   ("ID_ALL2"        ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"DESC_IMPR"      ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"DESC_PROV_IMPR" ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"CODI_NUME_ISCR" ${string.type}(100 BYTE) NOT NULL ENABLE, 
+				"DATA_ISCR"      DATE NOT NULL ENABLE, 
+				"DESC_FORM_GIUR" ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"DESC_ATTO_COST" ${string.type}(300 BYTE) NOT NULL ENABLE, 
+				"DESC_CAPI_SOCI" ${string.type}(300 BYTE), 
+				"DESC_DURA_SOCI" ${string.type}(300 BYTE), 
+				"DESC_OGGE_SOCI" ${string.type}(4000 BYTE), 
+				"CODI_FISC"      ${string.type}(16 BYTE), 
+				"DESC_SEDE_LEGA" ${string.type}(500 BYTE), 
+				"DESC_PEC"       ${string.type}(300 BYTE), 
+				"DATA_INSE"      DATE, 
+				"DATA_AGGI"      DATE, 
+				"CUAA"           VARCHAR2(16 BYTE) , 
+				 CONSTRAINT "PK_AABAALL2_TAB" PRIMARY KEY ("ID_ALL2")
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABAAZCO_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABAAZCO_TAB" 
+			   ("ID_AZCO"             ${id.number.type}, 
+			   	"VERSIONE"		 	  ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"ID_ALL2"             ${id.number.type}, 
+				"FLAG_VISURA"         NUMBER DEFAULT 0,
+				"CUAA"                ${string.type}(16 BYTE),
+				"CODI_CARI"           ${string.type}(10 BYTE),
+				"DATA_INIZ_VALI_CARI" DATE,
+				"DATA_INIZ_VALI"      DATE, 
+				"DATA_FINE_VALI"      DATE, 
+				"DATA_INSE"           DATE, 
+				"DATA_AGGI"           DATE, 
+				 CONSTRAINT "PK_AABAAZCO_TAB" PRIMARY KEY ("ID_AZCO"),
+				 FOREIGN KEY ("ID_ALL2") REFERENCES "AABAALL2_TAB" ("ID_ALL2") ENABLE
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABASGCA_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABASGCA_TAB" 
+			   ("ID_SGCA"             ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 	  ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"ID_ALL1"             ${id.number.type} , 
+				"ID_ALL2"             ${id.number.type} , 
+				"FLAG_VISURA"         NUMBER DEFAULT 0, 
+				"CUAA"                ${string.type}(16 BYTE), 
+				"CODI_CARI"           ${string.type}(10 BYTE), 
+				"DATA_INIZ_VALI_CARI" DATE, 
+				"DATA_INSE"           DATE, 
+				"DATA_AGGI"           DATE, 
+				 CONSTRAINT "PK_AABASGCA_TAB" PRIMARY KEY ("ID_SGCA"), 
+				 FOREIGN KEY ("ID_ALL1") REFERENCES "AABAALL1_TAB" ("ID_ALL1") ENABLE, 
+				 FOREIGN KEY ("ID_ALL2") REFERENCES "AABAALL2_TAB" ("ID_ALL2") ENABLE
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABAALL3_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABAALL3_TAB" 
+			   ("ID_ALL3"        ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"ID_SGCA"        ${id.number.type} NOT NULL ENABLE, 
+				"ID_ALL1"        ${id.number.type} , 
+				"DESC_PEC"       ${string.type}(300 BYTE), 
+				"DATA_INSE"      DATE, 
+				"DATA_AGGI"      DATE, 
+				 CONSTRAINT "PK_AABAALL3_TAB" PRIMARY KEY ("ID_ALL3"), 
+				 FOREIGN KEY ("ID_ALL1") REFERENCES "AABAALL1_TAB" ("ID_ALL1") ENABLE
+			   ) TABLESPACE ${tablespace.data}
+			;
+			
+             CREATE SEQUENCE AABAFACO_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+				  			
+			 CREATE TABLE "AABAFACO_TAB" 
+			   ("ID_FACO"             ${id.number.type} NOT NULL ENABLE, 
+			   	"VERSIONE"		 	  ${version.number.type} DEFAULT 0 NOT NULL,			   
+				"CUAA"                ${string.type}(16 BYTE) NOT NULL ENABLE, 
+				"DESC_COGN"           ${string.type}(50 BYTE), 
+				"DESC_NOME"           ${string.type}(50 BYTE), 
+				"DATA_NASC"           DATE, 
+				"DESC_COMU_NASC"      ${string.type}(50 BYTE), 
+				"CODI_SIGL_PROV_NASC" ${string.type}(2 BYTE), 
+				"CODI_BELF_NASC"      CHAR(4 BYTE), 
+				"CODI_SESS"           CHAR(1 BYTE), 
+				"DESC_INDI_STRD"      ${string.type}(100 BYTE), 
+				"DESC_GEOG_CIVI"      ${string.type}(20 BYTE), 
+				"CODI_GEOG_BELF"      CHAR(4 BYTE), 
+				"CODI_GEOG_CAPP"      CHAR(5 BYTE), 
+				"DESC_GEOG_FRAZ"      ${string.type}(50 BYTE), 
+				"CODI_GEOG_SIGL_PROV" CHAR(2 BYTE), 
+				"DESC_GEOG_COMU"      ${string.type}(60 BYTE), 
+				"ID_ALL3"             ${id.number.type}, 
+				"DECO_TIPO_PARE"      NUMBER, 
+				 CONSTRAINT "PK_AABAFACO_TAB" PRIMARY KEY ("ID_FACO"), 
+				 FOREIGN KEY ("ID_ALL3") REFERENCES "AABAALL3_TAB" ("ID_ALL3") ENABLE
+			   ) TABLESPACE ${tablespace.data}
+			;        
+		</sql>
+		
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAANTI_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAESAN_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL1_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL2_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAAZCO_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABASGCA_TAB TO ${user.writer};	
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL3_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAFACO_TAB TO ${user.writer};							
+		</sql>	
+		
+ 		<!-- ******************** GRANT SEQUENCE ******************** -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON AABAESAN_SEQ TO ${user.writer};
+			GRANT SELECT ON AABAALL1_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAALL2_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAAZCO_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABASGCA_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAALL3_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAFACO_SEQ TO ${user.writer};									
+		</sql>
+					
+        <!-- ******************** GRANT ******************** -->
+		<!-- Tabelle di liquibase -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>		
+		
+        <!-- ******************** SINCRONIZZAZIONE ******************** -->
+		<!-- Tabelle di liquibase -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE AABAANTI_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAESAN_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL1_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL2_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAAZCO_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABASGCA_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL3_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAFACO_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+		</sql>			
+    </changeSet>
+    <changeSet id="PROXY_5.0" author="Lorenzo Martinelli" labels="QUAL,PROD">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT ON AABAANTI_TAB TO ${user.agent};
+			GRANT SELECT ON AABAESAN_TAB TO ${user.agent};
+			GRANT SELECT ON AABAALL1_TAB TO ${user.agent};
+			GRANT SELECT ON AABAALL2_TAB TO ${user.agent};
+			GRANT SELECT ON AABAAZCO_TAB TO ${user.agent};
+			GRANT SELECT ON AABASGCA_TAB TO ${user.agent};	
+			GRANT SELECT ON AABAALL3_TAB TO ${user.agent};
+			GRANT SELECT ON AABAFACO_TAB TO ${user.agent};
+        </sql>			
+    </changeSet>
+    <changeSet id="PROXY_6.0" author="Lorenzo Martinelli">
+        <sql endDelimiter=";" splitStatements="true">
+        	ALTER TABLE AABAANTI_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAESAN_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL1_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL2_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAAZCO_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABASGCA_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL3_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAFACO_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+        </sql>			
+    </changeSet>
+    <changeSet id="PROXY_7.0" author="Salvatore Caccia">
+        <sql endDelimiter=";" splitStatements="true">  
+			DROP TABLE  AABAFACO_TAB;
+			DROP TABLE  AABAALL3_TAB;
+			DROP TABLE  AABAAZCO_TAB;
+			DROP TABLE  AABASGCA_TAB;
+			DROP TABLE  AABAALL2_TAB;
+			DROP TABLE  AABAALL1_TAB;
+			DROP TABLE  AABAESAN_TAB;
+			DROP TABLE  AABAANTI_TAB;
+			
+			CREATE TABLE AABAALL1_TAB 
+			   (	ID_ALL1 ${id.number.type}, 
+			   	VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				DESC_IMPR ${string.type}(300 BYTE), 
+				DESC_PROV_IMPR ${string.type}(300 BYTE), 
+				CODI_NUME_ISCR ${string.type}(100 BYTE), 
+				DATA_ISCR DATE, 
+				DESC_OGGE_SOCI ${string.type}(4000 BYTE), 
+				CODI_FISC ${string.type}(16 BYTE), 
+				CODI_PART_IVAA ${string.type}(11 BYTE), 
+				DESC_PEC ${string.type}(300 BYTE), 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE, 
+				CUAA ${string.type}(16 BYTE), 
+				DESC_COGN ${string.type}(100 BYTE), 
+				DESC_NOME ${string.type}(100 BYTE), 
+				CODI_SEX ${string.type}(1 BYTE), 
+				DATA_NASC DATE, 
+				CODI_NATU_GIUR ${string.type}(10 BYTE), 
+				CODI_BELF_NASC ${string.type}(4 BYTE), 
+				CODI_SIGL_PROV_NASC ${string.type}(2 BYTE), 
+				DESC_COMU_NASC ${string.type}(100 BYTE), 
+				CODI_BELF_RECA ${string.type}(4 BYTE), 
+				CODI_SIGL_PROV_RECA ${string.type}(2 BYTE), 
+				DESC_COMU_RECA ${string.type}(100 BYTE), 
+				CODI_CAPP_RECA ${string.type}(5 BYTE), 
+				DESC_INDI_RECA ${string.type}(100 BYTE), 
+				NUME_CIVI_RECA ${string.type}(10 BYTE),
+				CONSTRAINT PK_AABAALL1_TAB_NA PRIMARY KEY (ID_ALL1)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			
+			CREATE TABLE AABAALL2_TAB 
+			   (	ID_ALL2 ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				DESC_IMPR ${string.type}(300 BYTE), 
+				DESC_PROV_IMPR ${string.type}(300 BYTE), 
+				CODI_NUME_ISCR ${string.type}(100 BYTE), 
+				DATA_ISCR DATE, 
+				DESC_FORM_GIUR ${string.type}(300 BYTE), 
+				DESC_ATTO_COST ${string.type}(300 BYTE), 
+				DESC_CAPI_SOCI ${string.type}(300 BYTE), 
+				DESC_DURA_SOCI ${string.type}(300 BYTE), 
+				DESC_OGGE_SOCI ${string.type}(4000 BYTE), 
+				CODI_FISC ${string.type}(16 BYTE), 
+				DESC_PEC ${string.type}(300 BYTE), 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE, 
+				CUAA ${string.type}(16 BYTE),
+				DESC_RAGI_SOCI ${string.type}(100 BYTE), 
+				CODI_NATU_GIUR ${string.type}(10 BYTE), 
+				CODI_BELF_RECA ${string.type}(2 BYTE), 
+				CODI_SIGL_PROV_RECA ${string.type}(2 BYTE), 
+				DESC_COMU_RECA ${string.type}(100 BYTE), 
+				CODI_CAPP_RECA ${string.type}(5 BYTE), 
+				DESC_INDI_RECA ${string.type}(100 BYTE), 
+				NUME_CIVI_RECA ${string.type}(10 BYTE),
+				CONSTRAINT PK_AABAALL2_TAB_NA PRIMARY KEY (ID_ALL2)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			  
+			
+			
+			CREATE TABLE AABAALL3_TAB 
+			   (	ID_ALL3 ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_SGCA NUMBER, 
+				ID_ALL1 NUMBER, 
+				DESC_PEC ${string.type}(300 BYTE), 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE,
+				CONSTRAINT PK_AABAALL3_TAB_NA PRIMARY KEY (ID_ALL3)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			 
+			
+			
+			CREATE TABLE AABAANTI_TAB 
+			   (	ID_ANTI ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				CUAA ${string.type}(16 BYTE), 
+				TIPO_PERS NUMBER, 
+				DATA_INIZ_VALI DATE, 
+				DATA_FINE_VALI DATE, 
+				DATA_INVI_PREF DATE, 
+				ID_ORPA NUMBER, 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE, 
+				ID_ALL1 NUMBER, 
+				ID_ALL2 NUMBER,
+				CONSTRAINT PK_AABAANTI_TAB_NA PRIMARY KEY (ID_ANTI)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			 
+			
+			CREATE TABLE AABAAZCO_TAB 
+			   (	ID_AZCO ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_ALL2 NUMBER, 
+				CUAA ${string.type}(16 BYTE), 
+				FLAG_VISURA NUMBER DEFAULT 0, 
+				CODI_CARI ${string.type}(10 BYTE), 
+				DATA_INIZ_CARI DATE, 
+				DATA_INIZ_VALI DATE, 
+				DATA_FINE_VALI DATE, 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE,
+				 CONSTRAINT PK_AABAAZCO_TAB_NA PRIMARY KEY (ID_AZCO)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			
+			CREATE TABLE AABAESAN_TAB 
+			   (	ID_ESAN ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_ANTI NUMBER, 
+				DECO_ESIT NUMBER, 
+				PROT_ESIT ${string.type}(50 BYTE), 
+				CUAA ${string.type}(16 BYTE), 
+				DATA_INIZ_VALI DATE, 
+				DATA_FINE_VALI DATE,
+				 CONSTRAINT PK_AABAESAN_TAB_NA PRIMARY KEY (ID_ESAN)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			
+			 
+			
+			CREATE TABLE AABAFACO_TAB 
+			   (	ID_FACO ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				CUAA ${string.type}(16 BYTE), 
+				DATA_NASC DATE, 
+				DESC_COMU_NASC ${string.type}(100 BYTE), 
+				CODI_SIGL_PROV_NASC ${string.type}(2 BYTE), 
+				CODI_BELF_NASC CHAR(4 BYTE), 
+				CODI_SEX CHAR(1 BYTE), 
+				DESC_INDI_STRD ${string.type}(100 BYTE), 
+				DESC_GEOG_CIVI ${string.type}(20 BYTE), 
+				CODI_GEOG_BELF CHAR(4 BYTE), 
+				CODI_GEOG_CAPP CHAR(5 BYTE), 
+				DESC_GEOG_FRAZ ${string.type}(50 BYTE), 
+				CODI_GEOG_SIGL_PROV CHAR(2 BYTE), 
+				DESC_GEOG_COMU ${string.type}(60 BYTE), 
+				ID_ALL3 NUMBER, 
+				DECO_TIPO_PARE NUMBER, 
+				CODI_NATU_GIUR ${string.type}(10 BYTE), 
+				CODI_BELF_RECA ${string.type}(4 BYTE), 
+				CODI_SIGL_PROV_RECA ${string.type}(2 BYTE), 
+				DESC_COMU_RECA ${string.type}(100 BYTE), 
+				CODI_CAPP_RECA ${string.type}(5 BYTE), 
+				DESC_INDI_RECA ${string.type}(100 BYTE), 
+				NUME_CIVI_RECA ${string.type}(10 BYTE), 
+				DESC_COGN ${string.type}(100 BYTE), 
+				DESC_NOME ${string.type}(100 BYTE),
+				CONSTRAINT PK_AABAFACO_TAB_NA PRIMARY KEY (ID_FACO)
+			   ) 
+			  TABLESPACE ${tablespace.data} ;
+			  
+			  
+			CREATE TABLE AABASGCA_TAB 
+			   (	ID_SGCA ${id.number.type}, 
+			    VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+				ID_ALL1 NUMBER, 
+				ID_ALL2 NUMBER, 
+				FLAG_VISURA NUMBER DEFAULT 0, 
+				CUAA ${string.type}(16 BYTE), 
+				CODI_CARI ${string.type}(10 BYTE), 
+				DATA_INIZ_VALI DATE, 
+				DATA_INSE DATE, 
+				DATA_AGGI DATE, 
+				DESC_COGN ${string.type}(100 BYTE), 
+				DESC_NOME ${string.type}(100 BYTE), 
+				CODI_SEX ${string.type}(1 BYTE), 
+				DATA_NASC DATE, 
+				CODI_NATU_GIUR ${string.type}(10 BYTE), 
+				CODI_BELF_NASC ${string.type}(4 BYTE), 
+				CODI_SIGL_PROV_NASC ${string.type}(2 BYTE), 
+				DESC_COMU_NASC ${string.type}(100 BYTE), 
+				CODI_BELF_RECA ${string.type}(4 BYTE), 
+				CODI_SIGL_PROV_RECA ${string.type}(2 BYTE), 
+				DESC_COMU_RECA ${string.type}(100 BYTE), 
+				CODI_CAPP_RECA ${string.type}(5 BYTE), 
+				DESC_INDI_RECA ${string.type}(100 BYTE), 
+				NUME_CIVI_RECA ${string.type}(10 BYTE),
+				CONSTRAINT PK_AABASGCA_TAB_NA PRIMARY KEY (ID_SGCA)
+			   ) 
+			   TABLESPACE ${tablespace.data} ;
+		
+        </sql>			
+    </changeSet>          
+    <changeSet id="PROXY_7.1" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAANTI_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAESAN_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL1_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL2_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAAZCO_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABASGCA_TAB TO ${user.writer};	
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAALL3_TAB TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON AABAFACO_TAB TO ${user.writer};							
+		</sql>	
+ 		<!-- ******************** GRANT SEQUENCE ******************** -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON AABAESAN_SEQ TO ${user.writer};
+			GRANT SELECT ON AABAALL1_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAALL2_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAAZCO_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABASGCA_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAALL3_SEQ TO ${user.writer};	
+			GRANT SELECT ON AABAFACO_SEQ TO ${user.writer};									
+		</sql>
+					
+        <!-- ******************** GRANT ******************** -->
+		<!-- Tabelle di liquibase -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>		
+        <!-- ******************** SINCRONIZZAZIONE ******************** -->
+		<!-- Tabelle di liquibase -->
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			ALTER TABLE AABAANTI_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAESAN_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL1_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL2_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAAZCO_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABASGCA_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL3_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAFACO_TAB ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+		</sql>	    
+        <sql endDelimiter=";" splitStatements="true">
+        	ALTER TABLE AABAANTI_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAESAN_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL1_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL2_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAAZCO_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABASGCA_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAALL3_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+			ALTER TABLE AABAFACO_TAB DROP SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+        </sql>        		
+    </changeSet>
+    <changeSet id="PROXY_7.2" author="Salvatore Caccia" labels="QUAL,PROD">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT ON AABAANTI_TAB TO ${user.agent};
+			GRANT SELECT ON AABAESAN_TAB TO ${user.agent};
+			GRANT SELECT ON AABAALL1_TAB TO ${user.agent};
+			GRANT SELECT ON AABAALL2_TAB TO ${user.agent};
+			GRANT SELECT ON AABAAZCO_TAB TO ${user.agent};
+			GRANT SELECT ON AABASGCA_TAB TO ${user.agent};	
+			GRANT SELECT ON AABAALL3_TAB TO ${user.agent};
+			GRANT SELECT ON AABAFACO_TAB TO ${user.agent};
+        </sql>			
+    </changeSet>    
+    <changeSet id="PROXY_9.1" author="Salvatore Caccia">
+        <sql endDelimiter=";" splitStatements="true">     
+        	ALTER TABLE AABAALL2_TAB MODIFY CODI_BELF_RECA VARCHAR2(4); 
+        </sql>			
+    </changeSet>      
+    <changeSet id="PROXY_10.0" author="Daniele Faieta">
+	    <createTable tableName="APPO_SUPE_ACCERT">
+	    	<column name="ID_SUPE_ACCERT" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="PK_ID_SUPE_ACCERT" nullable="false" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="CUAA" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="NUME_CAMP" type="${number.type}(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ID_UFFI_ORPA" type="${number.type}(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="CODI_ATTO_OPR" type="${string.type}(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="CODI_INTE" type="${string.type}(32)">
+                <constraints nullable="false" />
+            </column>
+            <column name="SUPE_ACCE_AMMI" type="${number.type}(8)">
+                <constraints nullable="false" />
+            </column>
+            <column name="SUPE_DETE" type="${number.type}(8)">
+                <constraints nullable="false" />
+            </column>
+            <column name="MOTIVAZIONE_A1" type="${string.type}(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="MOTIVAZIONE_A2" type="${string.type}(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="MOTIVAZIONE_A3" type="${string.type}(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="MOTIVAZIONE_B0" type="${string.type}(2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="DATA_INIZIO_VAL" type="DATE" />
+            <column name="DATA_FINE_VAL" type="DATE" />
+	    </createTable>
+    </changeSet>
+    <changeSet id="PROXY_10.1" author="Daniele Faieta">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON APPO_SUPE_ACCERT TO ${user.writer};
+		</sql>
+    </changeSet>
+    <changeSet id="PROXY_10.2" author="Daniele Faieta" labels="QUAL,PROD">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT ON APPO_SUPE_ACCERT TO ${user.agent};
+        </sql>			
+    </changeSet>
+    <changeSet id="PROXY_10.3" author="Daniele Faieta">
+    	<modifyDataType tableName="APPO_SUPE_ACCERT" columnName="SUPE_ACCE_AMMI" newDataType="${number.type}(12,2)"/>
+    	<modifyDataType tableName="APPO_SUPE_ACCERT" columnName="SUPE_DETE" newDataType="${number.type}(12,2)"/>
+    </changeSet>
+    <changeSet id="PROXY_10.4" author="Daniele Faieta">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    		CREATE SEQUENCE APPO_SUPE_ACCERT_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+    	</sql>
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    		GRANT SELECT ON APPO_SUPE_ACCERT_SEQ TO ${user.writer};
+    	</sql>
+    </changeSet>
+    <changeSet id="PROXY_11.0" author="Daniele Faieta">
+	    <createTable tableName="PAGAMENTI">
+	    	<column name="PK_ID_PAGAM" type="${id.number.type}">
+                <constraints primaryKey="true" primaryKeyName="PK_ID_PAGAM_PK" nullable="false" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+			<column name="NUME_PROG_DECR" type="${number.type}(6)">
+                <constraints nullable="false" />
+            </column>
+            <column name="NUME_CAMP_RIFE" type="${number.type}(4)" />
+			<column name="ID_ENTE" type="${number.type}(4)" />
+			<column name="DESC_ENTE" type="${string.type}(128)" />
+			<column name="BC_ATTO_AMMI" type="${string.type}(10)" />
+			<column name="ID_ATTO_AMMI" type="${number.type}(1)" />
+            <column name="CODI_FISC" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+			<column name="CODI_ATTO_OPR" type="${string.type}(20)">
+                <constraints nullable="false" />
+            </column>
+			<column name="ID_INTE" type="${number.type}(1)" />
+			<column name="CODI_INTE" type="${number.type}(38)" />
+			<column name="IMPO_DETE" type="${number.type}(14,2)" />
+			<column name="IMPO_LIQUI" type="${number.type}(14,2)" />
+			<column name="IMPO_RICHIESTO" type="${number.type}(14,2)" />
+			<column name="DATA_AGGI" type="DATE" />
+			<column name="DECO_STAT_PAGA" type="${number.type}(4)" />
+			<column name="DATA_INIZ_VALI" type="DATE" />
+			<column name="DATA_FINE_VALI" type="DATE" />
+			<column name="DECO_STAT" type="${number.type}(4)" />
+	    </createTable>
+    </changeSet>
+    <changeSet id="PROXY_11.1" author="Daniele Faieta">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON PAGAMENTI TO ${user.writer};
+		</sql>
+    </changeSet>
+    <changeSet id="PROXY_11.2" author="Daniele Faieta" labels="QUAL,PROD">
+        <sql endDelimiter=";" splitStatements="true">
+        	GRANT SELECT ON PAGAMENTI TO ${user.agent};
+        </sql>			
+    </changeSet>
+    <changeSet id="PROXY_11.3" author="Daniele Faieta">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    		CREATE SEQUENCE PAGAMENTI_SEQ
+				  START WITH 1
+				  MAXVALUE 999999999999999999999999999
+				  MINVALUE 1
+				  NOCYCLE
+				  NOCACHE
+				  ORDER;
+    	</sql>
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+    		GRANT SELECT ON PAGAMENTI_SEQ TO ${user.writer};
+    	</sql>
+    </changeSet>
+    <changeSet id="PROXY_11.4" author="Daniele Faieta">
+    	<modifyDataType tableName="PAGAMENTI" columnName="NUME_PROG_DECR" newDataType="${number.type}(38)"/>
+    </changeSet>
+    
+    <changeSet id="PROXY_22.0" author="Antonio Avitabile">
+        <sql endDelimiter=";" splitStatements="true">     
+        	ALTER TABLE APPO_SUPE_ACCERT ADD MOTIVAZIONE_B1 VARCHAR2(2); 
+        </sql>			
+    </changeSet>
+    <changeSet id="PROXY_23.1" author="Antonio Avitabile">
+        <addColumn tableName="APPO_SUPE_ACCERT">
+            <column name="FONTE" type="${string.type}(5)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+     <changeSet id="PROXY_23.2" author="Antonio Avitabile">
+        <addColumn tableName="PAGAMENTI">
+            <column name="FONTE" type="${string.type}(5)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

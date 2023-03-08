@@ -1,0 +1,133 @@
+<app-popup-nuovo-prelievo-istruttore-uma
+  #popupNuovoPrelievo
+  [distributoriVM]="distributoriVM"
+  (onHide)="onCloseDialog($event)"></app-popup-nuovo-prelievo-istruttore-uma>
+
+<p-toast
+  key="tst-ricerca"
+  [style]="{ marginTop: '70px' }"></p-toast>
+
+<!-- Ricerca -->
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed">
+    <div class="layout-actionmenu boxgrey">
+      <form
+        class="w-100"
+        novalidate
+        [formGroup]="ricercaForm"
+        (ngSubmit)="onSubmit()">
+        <div class="p-grid p-align-baseline">
+          <div class="p-col-1 text-right">
+            <label class="labelricerca">CUAA</label>
+          </div>
+          <div class="p-col">
+            <input
+              formControlName="cuaa"
+              appValidaCuaaCompleto
+              placeholder="Inserire cuaa"
+              type="text"
+              maxlength="16"
+              pInputText>
+            <div *ngIf="ricercaForm.get('cuaa').invalid && ricercaForm.get('cuaa').dirty && ricercaForm.get('cuaa').touched">
+              <p-message
+                *ngIf="ricercaForm.get('cuaa').errors?.required"
+                class="font-12"
+                severity="error"
+                text="{{umaMessages.mandatory}}">
+              </p-message>
+              <p-message
+                *ngIf="ricercaForm.get('cuaa').errors?.cuaaErratoCompleto"
+                class="font-12"
+                severity="error"
+                text="{{a4gMessages.cuaaErratoCompleto}}">
+              </p-message>
+            </div>
+          </div>
+          <div class="p-col-1 text-right">
+            <label class="labelricerca">Anno</label>
+          </div>
+          <div class="p-col">
+            <p-dropdown
+              formControlName="campagna"
+              [options]="valoriCampagna"
+              placeholder="Selezionare anno"></p-dropdown>
+            <div *ngIf="ricercaForm.get('campagna').invalid && ricercaForm.get('campagna').dirty && ricercaForm.get('campagna').touched">
+              <p-message
+                *ngIf="ricercaForm.get('campagna').errors?.required"
+                class="font-12"
+                severity="error"
+                text="{{umaMessages.mandatory}}">
+              </p-message>
+              <p-message
+                *ngIf="ricercaForm.get('campagna').errors?.pattern"
+                class="font-12"
+                severity="error"
+                text="Formato non valido">
+              </p-message>
+            </div>
+          </div>
+          <div class="p-col-2">
+            <div class="searchbutton">
+              <button
+                pButton
+                class="ui-button-success"
+                label="VISUALIZZA AZIENDA"
+                type="submit">
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tabella Risultati Ricerca -->
+    <div *ngIf="idDomanda != null">
+      <app-risultato-ricerca-disponibilita-istruttore-uma
+        (updatePrelevabile)="onChangePrelevabile($event)"
+        [querySearch]="querySearchRicercaDisponibilita"></app-risultato-ricerca-disponibilita-istruttore-uma>
+    </div>
+
+    <!-- Nuova Ricerca & Nuovo Prelievo -->
+    <div
+      *ngIf="idDomanda != null"
+      class="p-grid p-justify-end">
+      <div class="p-col-2">
+        <button
+          pButton
+          type="button"
+          label="NUOVA RICERCA"
+          (click)="nuovaRicerca()"
+          class="ui-button-success">
+        </button>
+      </div>
+      <div
+        class="p-col-2 mb-30"
+        *ngIf="idDomanda != null && prelevabile">
+        <button
+          pButton
+          type="button"
+          label="NUOVO PRELIEVO"
+          (click)="nuovoPrelievo()"
+          class="ui-button-success"
+          [disabled]="disabledNuovoPrelievo()">
+        </button>
+      </div>
+    </div>
+
+    <!-- Visualizza Prelievo -->
+    <div
+      *ngIf="datasourcePrelievi?.length"
+      class="p-grid p-align-center">
+      <div class="p-col">
+        <app-a4g-multi-table
+          [title]="'GESTIONE PRELIEVI DISTRIBUTORE'"
+          [cols]="cols"
+          [values]="datasourcePrelievi"
+          [customSort]="true"
+          [readonly]="false"
+          (changedValueForm)="onChangeForm($event)"
+          (clickIcon)="onClickIcon($event)"></app-a4g-multi-table>
+      </div>
+    </div>
+  </div>
+</div>

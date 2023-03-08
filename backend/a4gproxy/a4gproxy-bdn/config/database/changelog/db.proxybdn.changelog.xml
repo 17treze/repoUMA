@@ -1,0 +1,1742 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    
+    <changeSet id="BDN_1.0" author="Alessandro Cuel">
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE SEQUENCE NXTNBR
+			  START WITH 1
+			  MAXVALUE 999999999999999999999999999
+			  MINVALUE 1
+			  NOCYCLE
+			  NOCACHE
+			  ORDER;
+			
+			CREATE TABLE A4GT_BDN_MOVIMENTI_PASCOLO(
+			  ID_MOVI        NUMBER NOT NULL,
+			  ID_ALLE        NUMBER,
+			  CODI_ASLL      VARCHAR2(8),
+			  CODI_FISC_ALLE VARCHAR2(16),
+			  CODI_SPEC      VARCHAR2(4),
+			  CODI_FISC_DETE VARCHAR2(16),
+			  CODI_ASL_AZIE  VARCHAR2(4),
+			  ID_PASC        NUMBER,
+			  CODI_PASC      VARCHAR2(8),
+			  DESC_COMU_PASC VARCHAR2(150),
+			  ASL_PASC       VARCHAR2(4),
+			  DATA_INGR_PASC DATE,
+			  DATA_USCI_PASC DATE,
+			  NUME_OVIN      NUMBER,
+			  DATA_COMU_AUTO DATE,
+			  CODI_DOCU      VARCHAR2(80),
+			  DATA_DOCU      DATE,
+			  TIPO_MOVI      VARCHAR2(2),
+			  NUME_CAMP      NUMBER(4),
+			  FLAG_CONT      NUMBER(1),
+			  DATA_INSE      DATE,
+			  DATA_REVI      DATE,
+			  DATA_FINE      DATE,
+			  CONSTRAINT A4GT_BDN_MOVIMENTI_PASCOLO_PK PRIMARY KEY (ID_MOVI)
+			);
+			
+			create table A4GT_BDN_CONSIST_PASCOLO
+			(
+			  ID_CPWS        NUMBER NOT NULL,
+			  CODI_FISC_SOGG VARCHAR2(16),
+			  NUME_CAMP      NUMBER,
+			  CODI_PASC      CHAR(8),
+			  FASC_ETAA      VARCHAR2(10),
+			  NUME_CAPI      NUMBER(9,3),
+			  NUME_CAPI_MEDI NUMBER(9,3),
+			  GIOR_PASC      NUMBER,
+			  CODI_GRUP_SPEC VARCHAR2(4),
+			  CODI_SPEC      VARCHAR2(4),
+			  DESC_SPEC      VARCHAR2(250),
+			  COOR_LATI      NUMBER,
+			  COOR_LONG      NUMBER,
+			  NUME_FOGL      NUMBER(5),
+			  NUME_PART      CHAR(5),
+			  CODI_SEZI      CHAR(1),
+			  CODI_SUBA      CHAR(4),
+			  CODI_SIGL_PROV CHAR(2),
+			  CODI_PROV      CHAR(3),
+			  CODI_COMU      CHAR(3),
+			  DESC_LOCA      VARCHAR2(250),
+			  CODI_FISC_RESP VARCHAR2(16),
+			  DECO_STAT      NUMBER,
+			  DATA_INIZ      DATE,
+			  DATA_FINE      DATE,
+			  DATA_AGGI      DATE,
+			  USER_NAME      VARCHAR2(20),
+			  CONSTRAINT A4GT_BDN_CONSIST_PASCOLO_PK PRIMARY KEY (ID_CPWS)
+			);
+
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_BDN_MOVIMENTI_PASCOLO TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_BDN_CONSIST_PASCOLO TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+        </sql>
+       
+    </changeSet>
+	
+	<changeSet id="BDN_1.1" author="Alessandro Cuel">
+        <sql endDelimiter=";" splitStatements="true">
+			
+			CREATE TABLE A4GT_BDN_SYNC_DATI
+			(	
+				ID NUMBER NOT NULL,
+				ANNO NUMBER(4), 
+				CUAA VARCHAR2(16), 
+				STATO_ESECUZIONE VARCHAR2(20), 
+				DATA_ESECUZIONE DATE,
+				CONSTRAINT A4GT_BDN_SYNC_DATI_PK PRIMARY KEY (ID)
+			);
+
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_BDN_SYNC_DATI TO ${user.writer};
+
+        </sql>
+       
+    </changeSet>
+	 
+	<changeSet id="BDN_1.2" author="Alessandro Cuel">
+        <sql endDelimiter=";" splitStatements="true"> 
+		GRANT SELECT ON NXTNBR TO ${user.writer};
+	 </sql> 
+    </changeSet>
+	
+	<changeSet id="BDN_1.3" author="Alessandro Cuel">
+        <sql endDelimiter=";" splitStatements="true">
+			
+		CREATE TABLE A4GT_BDN_CONS_ALLEVAMENTO
+		(
+		  ID_CAWS           NUMBER NOT NULL,
+		  CODI_FISC_SOGG    VARCHAR2(16),
+		  NUME_CAMP         NUMBER(4),
+		  ID_ALLE_BDN       NUMBER,
+		  CODI_SPEC         VARCHAR2(4),
+		  CODI_ASLL         CHAR(8),
+		  CODI_FISC_PROP    VARCHAR2(16),
+		  CODI_FISC_DETE    VARCHAR2(16),
+		  CONS_CAPI_0_6     NUMBER(9,3),
+		  CONS_CAPI_6_24    NUMBER(9,3),
+		  CONS_CAPI_OVER_24 NUMBER(9,3),
+		  CONS_TOTA         NUMBER(9,3),
+		  CONS_VACC_OVER_20 NUMBER(9,3),
+		  DATA_INIZ_DETE    DATE,
+		  DATA_FINE_DETE    DATE,
+		  DECO_STAT         NUMBER,
+		  DATA_INIZ         DATE,
+		  DATA_FINE         DATE,
+		  DATA_AGGI         DATE,
+		  USER_NAME         VARCHAR2(20),
+		  CONSTRAINT A4GT_BDN_CONS_ALLEVAMENTO_PK PRIMARY KEY (ID_CAWS)
+		);
+
+		GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_BDN_CONS_ALLEVAMENTO TO ${user.writer};
+
+        </sql>
+       
+    </changeSet>
+    
+    <changeSet id="BDN_1.1" author="Alessio Siravo">
+        <sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT ON A4GT_BDN_CONS_ALLEVAMENTO TO ${user.reader};
+			GRANT SELECT ON A4GT_BDN_SYNC_DATI TO ${user.reader};
+			GRANT SELECT ON A4GT_BDN_MOVIMENTI_PASCOLO TO ${user.reader};
+			GRANT SELECT ON A4GT_BDN_CONSIST_PASCOLO TO ${user.reader};
+			GRANT SELECT ON DATABASECHANGELOG TO ${user.reader};
+			GRANT SELECT ON DATABASECHANGELOGLOCK TO ${user.reader};
+        </sql>   
+    </changeSet>
+	 
+	<changeSet id="BDN_1.2" author="Alessio Siravo">
+	  <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+		GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.reader};
+		GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.reader};
+      </sql>
+    </changeSet>
+    
+    <changeSet id="BDN_1.3" author="Elisabetta Freschi">
+    	<createTable tableName=" A4GT_BDN_AZIENDA">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GT_BDN_AZIENDA_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="CODICE_AZIENDA" type="${string.type}(8)">
+				<constraints unique="true" uniqueConstraintName="A4GT_BDN_AZIENDA_UIDX" />
+			</column>
+			<column name="CODICE_COMUNE" type="${string.type}(3)">
+				<constraints nullable="false" />
+			</column>
+    	</createTable>
+    </changeSet>
+	 
+	<changeSet id="BDN_1.4" author="Elisabetta Freschi">
+	  <sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON A4GT_BDN_AZIENDA TO ${user.reader};
+      </sql>
+    </changeSet>
+	 
+    <changeSet id="BDN_1.5" author="Elisabetta Freschi">
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN032</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN037</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN015</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN038</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN012</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN018</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">065TN039</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">076TN001</column>
+			<column name="CODICE_COMUNE">237</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">076TN002</column>
+			<column name="CODICE_COMUNE">237</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">012TN002</column>
+			<column name="CODICE_COMUNE">232</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">012TN004</column>
+			<column name="CODICE_COMUNE">232</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">014TN002</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">014TN007</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">014TN022</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">016TN033</column>
+			<column name="CODICE_COMUNE">228</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">016TN008</column>
+			<column name="CODICE_COMUNE">228</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">016TN002</column>
+			<column name="CODICE_COMUNE">228</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">016TN004</column>
+			<column name="CODICE_COMUNE">228</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">019TN005</column>
+			<column name="CODICE_COMUNE">239</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">019TN001</column>
+			<column name="CODICE_COMUNE">239</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">019TN003</column>
+			<column name="CODICE_COMUNE">239</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">020TN025</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">020TN019</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">020TN011</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">020TN013</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">024TN007</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">024TN008</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">024TN003</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">028TN012</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">028TN002</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">028TN003</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">028TN016</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">057TN002</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">057TN015</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN033</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN011</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN041</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN004</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN040</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN003</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN002</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">066TN006</column>
+			<column name="CODICE_COMUNE">238</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN030</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN020</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN008</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN081</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN069</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN001</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN041</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN085</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN012</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN087</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN013</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN088</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN083</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN022</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">067TN004</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">075TN005</column>
+			<column name="CODICE_COMUNE">233</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">075TN002</column>
+			<column name="CODICE_COMUNE">233</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">075TN014</column>
+			<column name="CODICE_COMUNE">233</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN017</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN021</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN001</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN016</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN022</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">077TN003</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">099TN002</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">099TN902</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">100TN008</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">100TN011</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">100TN007</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">100TN019</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN060</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN005</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN008</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN019</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN038</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN006</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN047</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN003</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN064</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN002</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">119TN062</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+    </changeSet>
+	<changeSet id="BDN_1.6" author="Elisabetta Freschi">
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">141TN018</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">141TN017</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">141TN002</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">141TN019</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">141TN006</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+
+
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN017</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN065</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN069</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN035</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN003</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN058</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN028</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN022</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN006</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN087</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN027</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN026</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN051</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN077</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN057</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN037</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">145TN033</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">151TN002</column>
+			<column name="CODICE_COMUNE">247</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">151TN020</column>
+			<column name="CODICE_COMUNE">247</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">151TN004</column>
+			<column name="CODICE_COMUNE">247</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN042</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN010</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN017</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN064</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN003</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN066</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN001</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN026</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN027</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN041</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN024</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">158TN009</column>
+			<column name="CODICE_COMUNE">246</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN046</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN049</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN036</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN001</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN002</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN029</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">166TN003</column>
+			<column name="CODICE_COMUNE">231</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN022</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN001</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN013</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN008</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN004</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN002</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN007</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">174TN010</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN033</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN005</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN011</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN012</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN016</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">185TN032</column>
+			<column name="CODICE_COMUNE">240</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN003</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN010</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN018</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN016</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN028</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN029</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN016</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN037</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN041</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN009</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN019</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN006</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN018</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN017</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN021</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">198TN007</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">197TN030</column>
+			<column name="CODICE_COMUNE">229</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN039</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN030</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN037</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN010</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN029</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN001</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN042</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN002</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN905</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN900</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN028</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN024</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN034</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN008</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN911</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN004</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN027</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN038</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN012</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN015</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN009</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN036</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">201TN910</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN004</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN031</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN008</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN026</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN041</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN034</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN900</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN002</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN062</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN007</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN061</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN015</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN046</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN066</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN011</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN032</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN023</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN018</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN030</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN043</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN003</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN017</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN005</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN013</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN027</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN019</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN021</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">204TN022</column>
+			<column name="CODICE_COMUNE">245</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN006</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN008</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN034</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN043</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN003</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN009</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN025</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN002</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN032</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">206TN039</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">207TN011</column>
+			<column name="CODICE_COMUNE">249</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">207TN037</column>
+			<column name="CODICE_COMUNE">249</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">207TN009</column>
+			<column name="CODICE_COMUNE">249</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">207TN045</column>
+			<column name="CODICE_COMUNE">249</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">212TN003</column>
+			<column name="CODICE_COMUNE">236</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">212TN004</column>
+			<column name="CODICE_COMUNE">236</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">212TN005</column>
+			<column name="CODICE_COMUNE">236</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">212TN012</column>
+			<column name="CODICE_COMUNE">236</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">214TN014</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">214TN031</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">214TN028</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">214TN005</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">214TN018</column>
+			<column name="CODICE_COMUNE">230</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">215TN001</column>
+			<column name="CODICE_COMUNE">248</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">215TN039</column>
+			<column name="CODICE_COMUNE">248</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">215TN058</column>
+			<column name="CODICE_COMUNE">248</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">215TN064</column>
+			<column name="CODICE_COMUNE">248</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">215TN055</column>
+			<column name="CODICE_COMUNE">248</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN048</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN047</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN019</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN035</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN010</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN030</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN002</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN029</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN017</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">217TN018</column>
+			<column name="CODICE_COMUNE">250</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">220TN004</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">220TN012</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">220TN002</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN005</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN007</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN011</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN043</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN046</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">223TN045</column>
+			<column name="CODICE_COMUNE">244</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">227TN001</column>
+			<column name="CODICE_COMUNE">239</column>
+		</insert>
+		<insert tableName="A4GT_BDN_AZIENDA">
+			<column name="ID" valueComputed="NXTNBR.NEXTVAL" />
+			<column name="VERSIONE">0</column>
+			<column name="CODICE_AZIENDA">227TN005</column>
+			<column name="CODICE_COMUNE">239</column>
+		</insert>
+	</changeSet>	 
+    <changeSet id="BDN_1.7" author="Elisabetta Freschi">
+        <sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_BDN_AZIENDA TO ${user.writer};
+        </sql>   
+    </changeSet>
+</databaseChangeLog>

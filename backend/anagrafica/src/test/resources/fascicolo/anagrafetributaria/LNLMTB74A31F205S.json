@@ -1,0 +1,72 @@
+{
+    "codiceFiscale": "LNLMTB74A31F205S",
+    "anagrafica": {
+        "nome": "MATTEO BRUNO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1974-01-31",
+        "comuneNascita": "MILANO",
+        "provinciaNascita": "MI"
+    },
+    "domicilioFiscale": {
+        "toponimo": null,
+        "via": null,
+        "civico": null,
+        "comune": "RUMO",
+        "frazione": null,
+        "cap": "38020",
+        "codiceIstat": null,
+        "provincia": "TN",
+        "denominazioneEstesa": "FRAZIONE LANZA 25/B"
+    },
+    "deceduta": false,
+    "impresaIndividuale": {
+        "partitaIva": "01696010220",
+        "denominazione": "TORRESANI                CRISTIAN",
+        "sedeLegale": {
+            "indirizzo": {
+                "toponimo": null,
+                "via": null,
+                "civico": null,
+                "comune": "RUMO",
+                "frazione": null,
+                "cap": "38020",
+                "codiceIstat": null,
+                "provincia": "TN",
+                "denominazioneEstesa": "FRAZIONE LANZA 25/B"
+            },
+            "attivitaAteco": [
+                {
+                    "codice": "A.01.41.00",
+                    "descrizione": "ALLEVAMENTO DI BOVINI E BUFALE DA LATTE, PRODUZIONE DI LATTE CRUDO",
+                    "importanza": null
+                },
+                {
+                    "codice": "A.01.21.0",
+                    "descrizione": "COLTIVAZIONE DI UVA",
+                    "importanza": null
+                },
+                {
+                    "codice": "D.35.11.00",
+                    "descrizione": "PRODUZIONE DI ENERGIA ELETTRICA",
+                    "importanza": null
+                },
+                {
+                    "codice": "A.01.21.0",
+                    "descrizione": "ALLEVAMENTO DI BOVINI E BUFALINI, PRODUZIONE DI LATTE CRUDO",
+                    "importanza": null
+                },
+                {
+                    "codice": "A.01.41",
+                    "descrizione": "ALLEVAMENTO DI BOVINI DA LATTE",
+                    "importanza": null
+                }
+            ],
+            "iscrizioneRegistroImprese": null,
+            "telefono": null,
+            "indirizzoPec": null
+        },
+        "oggettoSociale": null,
+        "formaGiuridica": null
+    }
+}

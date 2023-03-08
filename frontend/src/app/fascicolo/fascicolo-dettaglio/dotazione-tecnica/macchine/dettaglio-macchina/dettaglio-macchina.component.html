@@ -1,0 +1,290 @@
+<p-toast
+  key="tst-macchine"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <div class="funzioni-grid boxgrey">
+    <a
+      [routerLink]
+      (click)="handleClick()"
+      class="d-flex align-items-center text-decoration-none color-primary">
+      <i
+        class="pi pi-chevron-left"
+        style="font-size: 2rem; color: black"></i>
+      <img src="assets/img/ico-dotazione.jpg">
+      <span class="text-uppercase ml-2">
+      {{ "FascicoloAziendale.DOTAZIONE_TECNICA" | translate }} /
+      {{ "FascicoloAziendale.MACCHINE" | translate }}
+    </span>
+    </a>
+    <br>
+    <form
+      [formGroup]="modificaMacchina"
+      (ngSubmit)="onSubmit()">
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+        <p-accordion
+          expandIcon
+          collapseIcon>
+          <p-accordionTab
+            header="DETTAGLIO MACCHINA"
+            [selected]="true">
+            <p align="right">
+            <button
+                class="pull-right"
+                pButton
+                style="background-color: green"
+                label="MODIFICA"
+                [disabled]="modificaAttiva"
+                (click)="modificaDettaglio()"
+                pButton>
+              </button>
+          </p>
+            <table class="table table-hoover">
+              <tbody>
+                <tr>
+                  <td width="25%">
+                    <strong>Tipologia:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.classe? (macchinario.classe.tipologia? macchinario.classe.tipologia : 'ND') : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <p-dropdown
+                        [options]="tipologiaOptions"
+                        placeholder="Seleziona tipologia macchina"
+                        optionLabel="tipologia"
+                        optionValue="id"
+                        formControlName="tipologiaMacchina">
+                      </p-dropdown>
+                    </div>
+                  </td>
+                  <td width="15%"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Modello:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.descrizione? macchinario.descrizione : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="modelloMacchina"
+                          [formControl]="modificaMacchina.controls.modelloMacchina">
+                          </span>
+                      <div
+                        *ngIf="modificaMacchina.controls['modelloMacchina'].invalid && (modificaMacchina.controls['modelloMacchina'].dirty || modificaMacchina.controls['modelloMacchina'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaMacchina.controls['modelloMacchina'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Targa:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.targa? macchinario.targa : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="20"
+                          style="border: 1px solid rgb(180, 178, 178)"
+                          pInputText
+                          id="targaMacchina"
+                          [formControl]="modificaMacchina.controls.targaMacchina">
+                          </span>
+                      <div
+                        *ngIf="modificaMacchina.controls['targaMacchina'].invalid && (modificaMacchina.controls['targaMacchina'].dirty || modificaMacchina.controls['targaMacchina'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaMacchina.controls['targaMacchina'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Carburante:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.alimentazione? (macchinario.alimentazione.alimentazione? macchinario.alimentazione.alimentazione : 'ND') : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <p-dropdown
+                        [options]="alimentazioneOptions"
+                        placeholder="Seleziona alimentazione macchina"
+                        optionLabel="alimentazione"
+                        optionValue="id"
+                        formControlName="alimentazioneMacchina">
+                      </p-dropdown>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Possesso:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.possesso? macchinario.possesso : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="possessoMacchina"
+                          [formControl]="modificaMacchina.controls.possessoMacchina">
+                          </span>
+                      <div
+                        *ngIf="modificaMacchina.controls['possessoMacchina'].invalid && (modificaMacchina.controls['possessoMacchina'].dirty || modificaMacchina.controls['possessoMacchina'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaMacchina.controls['possessoMacchina'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Motore:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.marca? macchinario.marca : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <span class="md-inputfield">
+                            <input
+                          size="80"
+                          style="border: 1px solid rgb(180, 178, 178); width: 100%"
+                          pInputText
+                          id="marcaMacchina"
+                          [formControl]="modificaMacchina.controls.marcaMacchina">
+                          </span>
+                      <div
+                        *ngIf="modificaMacchina.controls['marcaMacchina'].invalid && (modificaMacchina.controls['marcaMacchina'].dirty || modificaMacchina.controls['marcaMacchina'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaMacchina.controls['marcaMacchina'].errors.required">{{"Campo Obbligatorio"}}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Rimorchio:</strong>
+                  </td>
+                  <td>
+                    {{macchinario.rimorchio? macchinario.rimorchio : 'ND'}}
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Immatricolazione:</strong>
+                  </td>
+                  <td>
+                    {{macchinario.immatricolazione? (macchinario.immatricolazione | date: "dd/MM/yyyy") : 'ND'}}
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Documento Possesso:</strong>
+                  </td>
+                  <td>
+                    {{macchinario.documentoPossesso? macchinario.documentoPossesso : 'ND'}}
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Data Iscrizione:</strong>
+                  </td>
+                  <td>
+                    <div *ngIf="!modificaAttiva">
+                      {{macchinario.dataIscrizione? (macchinario.dataIscrizione | date: "dd/MM/yyyy") : 'ND'}}
+                    </div>
+                    <div *ngIf="modificaAttiva">
+                      <p-calendar
+                        class="form-control"
+                        formControlName="dataIscrizione"
+                        [locale]="language"
+                        dateFormat="dd/mm/yy"
+                        required
+                        [formControl]="modificaMacchina.controls.dataIscrizione">
+                      </p-calendar>
+                      <div
+                        *ngIf="modificaMacchina.controls['dataIscrizione'].invalid && (modificaMacchina.controls['dataIscrizione'].dirty || modificaMacchina.controls['dataIscrizione'].touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="modificaMacchina.controls['dataIscrizione'].errors.required">
+                          {{'ANTIMAFIA.CAMPO_OBBLIGATORIO' | translate }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Data Chiusura:</strong>
+                  </td>
+                  <td>
+                    {{macchinario.dataChiusura? (macchinario.dataChiusura | date: "dd/MM/yyyy") : 'ND'}}
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="modificaAttiva">
+              <br>
+              <div class="p-grid">
+                <div class="p-col-10"></div>
+                <div class="p-col-1">
+                  <p align="right">
+                      <button
+                      class="pull-right"
+                      pButton
+                      style="background-color: green"
+                      label="ANNULLA"
+                      [disabled]="!modificaAttiva"
+                      (click)="annullaModifica()"
+                      pButton>
+                    </button>
+                    </p>
+                </div>
+                <div class="p-col-1">
+                  <p align="right">
+                      <button
+                      class="pull-right"
+                      pButton
+                      style="background-color: green"
+                      label="SALVA"
+                      [disabled]="!modificaAttiva"
+                      type="submit"
+                      pButton>
+                    </button>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </form>
+  </div>
+</div>

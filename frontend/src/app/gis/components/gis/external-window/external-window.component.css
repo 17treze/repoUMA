@@ -1,0 +1,61 @@
+button.closeWindow {
+    float: left;
+    width: 100%;
+    font-size: 12px;
+    background: #3d3d3d;
+    text-align: right;
+}
+
+#body-external-window > gis-lavorazioneworkspace > div.workspaceDiv,
+#body-external-window > gis-lavorazioneworkspace > #tablePoligoniWorkspace  {
+    display: none;
+}
+
+#body-external-window > gis-lavorazioneworkspace > div > p-table.tablePoligoniWorkspaceExt {
+    display: block;
+}
+
+#body-external-window > gis-lavorazioneworkspace > div > p-table.tablePoligoniWorkspaceExt > div > div > div > div.ui-table-scrollable-body {
+padding-bottom: 15px!important;
+max-height: 750px!important;
+}
+
+td.td-pad {
+    padding: 8px 4px!important;
+}
+td.zoom-td {
+    width: 5%;
+}
+
+td.id-td,
+td.codUso-td,
+td.statoColt-td {
+    width: 10%;
+}
+
+td.codUsoDesc-td,
+td.statoColtDesc-td {
+    width: 25%;
+    overflow-x: hidden;
+    white-space: initial!important;
+}
+
+td.area-td{
+    width: 15%;
+    text-align: right;
+}
+
+#body-external-window > gis-lavorazioneworkspace > div > p-table > div > div > div > div.ui-table-scrollable-body > table > tbody > 
+tr > td.zoom-td > div > span > i::before {
+    content: ''!important;
+}
+
+#body-external-window > gis-lavorazioneworkspace > div:nth-child(4) > p-table > div > div > div > div.ui-table-scrollable-body
+ > table > tbody > tr > td.zoom-td > div > span > i {
+    background-image: url("/dipendente/a4g/assets/img/gis-icons/crosshairs.png")!important;
+    background-size: 25px!important;
+    background-repeat: no-repeat!important;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+}

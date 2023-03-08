@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="UTENTE_DATI_1.0" author="Elisabetta Freschi" dbms="oracle">
+    	<!-- Popolamento matrice compatibilità coltura intervento -->
+        <sql endDelimiter=";" splitStatements="true">
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval, '140','CAA COOPTN - CP - FERRARI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '140');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'252','CAA COOPTN - CP - BAZZANELLA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '252');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'266','CAA COOPTN - CP - PISONI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '266');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'273','CAA COOPTN - CP - TENUTE LUNELLI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '273');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1','APPAG - PROVINCIA AUTONOMA DI TRENTO','APPAG' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'3','CAA COLDIRETTI DEL TRENTINO - 001','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '3');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'4','CAA COLDIRETTI DEL TRENTINO - 003','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '4');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'5','CAA COLDIRETTI DEL TRENTINO - 004','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '5');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'6','CAA COLDIRETTI DEL TRENTINO - 005','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '6');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'7','CAA COLDIRETTI DEL TRENTINO - 006','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '7');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'8','CAA COLDIRETTI DEL TRENTINO - 007','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '8');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'9','CAA COLDIRETTI DEL TRENTINO - 008','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '9');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'10','CAA COLDIRETTI DEL TRENTINO - 009','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '10');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'11','CAA COLDIRETTI DEL TRENTINO - 010','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '11');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'12','CAA COLDIRETTI DEL TRENTINO - 011','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '12');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'13','CAA ACLI - TRENTO - 001','ACLI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '13');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'14','CAA ACLI - TRENTO - 002','ACLI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '14');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'16','CAA ACLI - TRENTO - 004','ACLI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '16');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'17','CAA ACLI - TRENTO - 005','ACLI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '17');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'18','CAA CIA - TRENTO - 001','CIA' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '18');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'19','CAA CIA - CLES - 002','CIA' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '19');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'20','CAA ATS - 001 - TRENTO','ATS' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '20');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'21','UFFICIO DI TEST','APPAG' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '21');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'50','CENTRO ASSISTENZA COLDIRETTI DEL TRENTINO SRL','APPAG' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '50');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'53','AGRICOLTURA TRENTINA SERVIZI SRL','APPAG' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '53');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'89','CAA COOPTN - CS - ALA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '89');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'55','CAA ATS - 003 - CLES','ATS' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '55');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'91','CAA COOPTN - CS - AVIO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '91');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'92','CAA COOPTN - CS - GROPPELLO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '92');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'95','CAA COOPTN - CS - LIPROVIT','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '95');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'98','CAA COOPTN - CS - MORI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '98');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'104','CAA COOPTN - CS - ISERA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '104');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'105','CAA COOPTN - CS - TOBLINO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '105');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'141','CAA COOPTN - CP - POJER','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '141');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'142','CAA COOPTN - CP - BOLOGNANI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '142');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'143','CAA COOPTN - CP - SPAGNOLLI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '143');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1445','CAA COOPTN - MF - CASA ','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1445');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'22','CAA COOPTN - SEDE','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '22');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'56','CAA ATS - 004 - MEZZOLOMBARDO','ATS' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '56');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'103','CAA CIA - BORGO VALSUGANA - 003','CIA' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '103');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'90','CAA COOPTN - CS - ALDENO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '90');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'93','CAA COOPTN - CS - LAVIS','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '93');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'94','CAA COOPTN - CS - TRENTO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '94');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'96','CAA COOPTN - CS - MEZZACORONA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '96');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'97','CAA COOPTN - CS - MEZZOLOMBARDO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '97');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'99','CAA COOPTN - CS - NOMI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '99');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'100','CAA COOPTN - CS - ROVERE''','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '100');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'101','CAA COOPTN - CS - RIVA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '101');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'102','CAA COOPTN - CS - SAV','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '102');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'764','CAA CIA - ROVERETO - 004','CIA' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '764');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'777','CAA COOPTN - CP - BAILONI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '777');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'766','CAA COOPTN - CP - MONFORT','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '766');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'686','CAA COOPTN - CP - DORIGATI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '686');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'668','CAA COLDIRETTI DEL TRENTINO - 012','COLDIRETTI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '668');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'778','CAA ACLI - TRENTO - 006','ACLI' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '778');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1006','CAA COOPTN - MF - COBA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1006');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1007','CAA COOPTN - MF - COBAV','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1007');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1010','CAA COOPTN - MF - COFSAC','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1010');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1013','CAA COOPTN - MF - COPAG','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1013');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1018','CAA COOPTN - MF - SANT''ORSOLA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1018');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1021','CAA COOPTN - MF - SFC','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1021');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1022','CAA COOPTN - MF - SFT','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1022');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1028','CAA COOPTN - MF - 5 COMUNI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1028');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1015','CAA COOPTN - MF - LEVICOFRUTTA - COVAL','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1015');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1016','CAA COOPTN - MF - MONDOAGRICOLO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1016');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1017','CAA COOPTN - MF - SABAC','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1017');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1037','CAA COOPTN - CP - ENDRIZZI','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1037');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1055','CAA COOPTN - CP - VILLA CORNIOLE','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1055');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1003','CAA COOPTN - MF - AGRINOVANTA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1003');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1000','CAA COOPTN - CP - VALLAGARINA CONC','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1000');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1011','CAA COOPTN - MF - COL','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1011');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1012','CAA COOPTN - MF - CONTA''','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1012');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1014','CAA COOPTN - MF - FAT','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1014');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1019','CAA COOPTN - MF - SARC','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1019');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1023','CAA COOPTN - MF - TERZA SPONDA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1023');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1024','CAA COOPTN - MF - UF COREDO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1024');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1025','CAA COOPTN - MF - UF RALLO','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1025');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1027','CAA COOPTN - MF - VAL DI GRESTA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1027');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1029','CAA COOPTN - MF - VALLI DEL SARCA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1029');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1004','CAA COOPTN - MF - AVN','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1004');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1008','CAA COOPTN - MF - COCEA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1008');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1009','CAA COOPTN - MF - COFAV','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1009');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1020','CAA COOPTN - MF - SCAF','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1020');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1026','CAA COOPTN - MF - UNIFRUTTA','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1026');
+			Insert into A4GT_ENTE (ID, IDENTIFICATIVO,DESCRIZIONE,CAA) select NXTNBR.nextval,'1005','CAA COOPTN - MF - CF CLES','COOP' from dual where not exists (select 1 from A4GT_ENTE where identificativo = '1005');
+       </sql>
+    </changeSet>
+		
+	</databaseChangeLog>

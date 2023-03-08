@@ -1,0 +1,32 @@
+<div class="boxgrey">
+  <h3>
+    Procedimenti
+  </h3>
+  <div class="ui-g">
+    <form  #userForm="ngForm">
+      <div class="ui-g-12">
+        <p-checkbox name="groupProcedimenti" value="DU" label="{{'DICH_AMF.DU' | translate}}"
+          [(ngModel)]="dichirazioneAntimafia.procedimenti">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-12">
+        <p-checkbox name="groupProcedimenti" value="PSR_SUPERFICIE" label="{{'DICH_AMF.PSR_SUPERFICIE' | translate}}"
+          [(ngModel)]="dichirazioneAntimafia.procedimenti">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-12">
+        <p-checkbox name="groupProcedimenti" value="PSR_INVESTIMENTO"
+          label="{{'DICH_AMF.PSR_INVESTIMENTO' | translate}}" [(ngModel)]="dichirazioneAntimafia.procedimenti">
+        </p-checkbox>
+      </div>
+      <div class="ui-g-12">
+        <p-checkbox name="groupProcedimenti" value="PAI" label="{{'DICH_AMF.PAI' | translate}}"
+          [(ngModel)]="dichirazioneAntimafia.procedimenti">
+        </p-checkbox>
+      </div>
+    </form>
+  </div>
+</div>
+<app-step-action (next)="conferma(userForm)"></app-step-action>
+
+<p-toast key="errorAssenzaProcedimento" [style]="{ marginTop: '70px' }"></p-toast>

@@ -1,0 +1,11 @@
+
+<div class="groupTool right-separator" [ngClass]="{'toolDisattivato':!canUse}">
+  <div id="cancellaButton" (click)="click()">
+    <button 
+    pTooltip="Elimina" tooltipPosition="top"
+    type="button"
+    [disabled]="!canUse" 
+    class='btn btn-primary'
+  ><i class="fa fa-trash"></i></button>
+  </div>
+</div>

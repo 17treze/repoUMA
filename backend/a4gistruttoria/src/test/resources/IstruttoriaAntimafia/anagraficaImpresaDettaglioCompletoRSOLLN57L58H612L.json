@@ -1,0 +1,170 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Dettaglio completo impresa",
+        "esito": "OK"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": {
+            "estremiimpresa": {
+                "denominazione": "ZOMER ALESSIO",
+                "codicefiscale": "ZMRLSS91R12H612S",
+                "partitaiva": "02287930222",
+                "formagiuridica": {
+                    "cformagiuridica": "DI",
+                    "descrizione": "IMPRESA INDIVIDUALE"
+                },
+                "datiiscrizioneri": {
+                    "numerori": "TN-2013-11815",
+                    "data": "20130508",
+                    "sezioni": {
+                        "sezione": [
+                            {
+                                "csezione": "P",
+                                "descrizione": "PICCOLO IMPRENDITORE",
+                                "dtiscrizione": "20130508",
+                                "coltdiretto": "COLTIVATORE DIRETTO"
+                            }
+                        ]
+                    }
+                },
+                "datiiscrizionerea": [
+                    {
+                        "nrea": "213893",
+                        "cciaa": "TN",
+                        "flagsede": "SI",
+                        "itrasferimentosede": null,
+                        "faggiornamento": null,
+                        "data": "20130504",
+                        "dtultaggiornamento": "20151126",
+                        "cfonte": "RI",
+                        "cessazione": null
+                    }
+                ],
+                "elemento": null
+            },
+            "oggettosociale": null,
+            "dtfondazione": null,
+            "codiceformaammv": null,
+            "descformaammv": null,
+            "duratasocieta": null,
+            "capitali": null,
+            "capitaleinvestito": null,
+            "informazionisede": {
+                "insegna": null,
+                "indirizzo": {
+                    "provincia": "TRENTO",
+                    "comune": "ALA",
+                    "ccomune": "022001",
+                    "toponimo": null,
+                    "via": "LOCALITA' PONZOLOTTI",
+                    "ncivico": "00",
+                    "cap": "38061",
+                    "stato": null,
+                    "frazione": null,
+                    "altreindicazioni": null,
+                    "stradario": null,
+                    "telefono": null,
+                    "fax": null,
+                    "indirizzopec": "ALESSIO.ZOMER@PEC.AGRITEL.IT"
+                },
+                "attivita": "",
+                "infoattivita": {
+                    "dtinizioattivita": "20130326",
+                    "statoattivita": null
+                },
+                "codiciistat02": null,
+                "codiceatecoul": {
+                    "attivitaistat": [
+                        {
+                            "cattivita": "015",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazioni agricole associate all'allevamento di animali: attivita' mista",
+                            "cimportanza": "I",
+                            "dtinizioattivita": null
+                        },
+                        {
+                            "cattivita": "015",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Coltivazioni agricole associate all'allevamento di animali: attivita' mista",
+                            "cimportanza": "P",
+                            "dtinizioattivita": null
+                        }
+                    ]
+                },
+                "ruoliloc": null,
+                "datiartigiani": null,
+                "commerciodettaglio": null,
+                "cessazione": null,
+                "procedureconcorsuali": null
+            },
+            "personesede": {
+                "persona": [
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "213893",
+                            "progressivopersona": "1",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "ZOMER",
+                            "nome": "ALESSIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "ROVERETO",
+                                "ccomune": "022161",
+                                "stato": null,
+                                "data": "19911012"
+                            },
+                            "codicefiscale": "ZMRLSS91R12H612S",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "ALA",
+                                "ccomune": "022001",
+                                "toponimo": null,
+                                "via": "LOCALITA' PONZOLOTTI",
+                                "ncivico": "00",
+                                "cap": "38061",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "TITOLARE FIRMATARIO",
+                                    "ccarica": "TIT",
+                                    "dtinizio": null,
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "1"
+                    }
+                ],
+                "totale": "1"
+            },
+            "localizzazioni": []
+        },
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": null
+    }
+}

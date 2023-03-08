@@ -1,0 +1,36 @@
+{
+	"dataElenco": "2018-06-14",
+	"codiceElenco": "009-801-20190513-9999999",
+	"campagna": "2018",
+	"tipoPagamento": "SALDO",
+	"intervento": "BASE, GREENING, GIOVANE AGRICOLTORE",
+	"elencoDomande": [{
+			"counter": 1,
+			"numeroDomanda": "400000",
+			"numeroProtocollo": null,
+			"nome": "MARCOLLA DIEGO",
+			"cuaa": "MRCDGI66B26C794L",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioBps": "0,00",
+			"quotaPremioGreening": "316,89",
+			"quotaPremioGiovane": "0,00",
+			"totalePremio": "316,89"
+		}, {
+			"counter": 2,
+			"numeroDomanda": "400002",
+			"numeroProtocollo": null,
+			"nome": "TINGLERHOF SOCIETA' AGRICOLA SEMPLICE",
+			"cuaa": "02227750227",
+			"domicilio": null,
+			"quote": null,
+			"dataPresentazione": "2018-04-13",
+			"quotaPremioBps": "1.265,75",
+			"quotaPremioGreening": "948,10",
+			"quotaPremioGiovane": "564,28",
+			"totalePremio": "2.778,13"
+		}
+	],
+	"totaleElencoLiquidazione": "3.095,02"
+}

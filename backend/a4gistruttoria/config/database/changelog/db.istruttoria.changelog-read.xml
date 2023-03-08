@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="ISTRUTTORIA_READ_9.0" author="Alessio Siravo" dbms="oracle">
+    	<!-- Contenuto di 000a_oggettiComuni-Sinonimi.sql -->
+        <sql endDelimiter=";" splitStatements="true">        				    
+        	CREATE OR REPLACE SYNONYM A4GD_STATO_DOMANDA FOR ${user.superuser}.A4GD_STATO_DOMANDA;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_SETTORE FOR ${user.superuser}.A4GT_DATI_SETTORE;
+			CREATE OR REPLACE SYNONYM A4GT_DOMANDA FOR ${user.superuser}.A4GT_DOMANDA;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_LAVORAZIONE FOR ${user.superuser}.A4GT_DATI_LAVORAZIONE;
+			CREATE OR REPLACE SYNONYM A4GD_TIPO_CONTROLLO FOR ${user.superuser}.A4GD_TIPO_CONTROLLO;
+			CREATE OR REPLACE SYNONYM A4GT_ESITO_CONTROLLO FOR ${user.superuser}.A4GT_ESITO_CONTROLLO;
+			CREATE OR REPLACE SYNONYM A4GD_TIPO_PROCESSO FOR ${user.superuser}.A4GD_TIPO_PROCESSO;
+			CREATE OR REPLACE SYNONYM A4GD_STATO_PROCESSO FOR ${user.superuser}.A4GD_STATO_PROCESSO;
+			CREATE OR REPLACE SYNONYM A4GT_PROCESSO FOR ${user.superuser}.A4GT_PROCESSO;
+			CREATE OR REPLACE SYNONYM A4GT_PICCOLO_AGRICOLTORE FOR ${user.superuser}.A4GT_PICCOLO_AGRICOLTORE;
+			CREATE OR REPLACE SYNONYM A4GD_INTERVENTO_DU FOR ${user.superuser}.A4GD_INTERVENTO_DU;
+			CREATE OR REPLACE SYNONYM A4GD_TIPO_DICHIARAZIONE_DU FOR ${user.superuser}.A4GD_TIPO_DICHIARAZIONE_DU;
+			CREATE OR REPLACE SYNONYM A4GT_RICHIESTA_ALLEVAM_DU FOR ${user.superuser}.A4GT_RICHIESTA_ALLEVAM_DU;
+			CREATE OR REPLACE SYNONYM A4GT_RICHIESTA_SUPERFICIE FOR ${user.superuser}.A4GT_RICHIESTA_SUPERFICIE;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_PASCOLO FOR ${user.superuser}.A4GT_DATI_PASCOLO;
+			CREATE OR REPLACE SYNONYM A4GT_DICHIARAZIONE_DU FOR ${user.superuser}.A4GT_DICHIARAZIONE_DU;
+			CREATE OR REPLACE SYNONYM A4GD_COLTURA_INTERVENTO FOR ${user.superuser}.A4GD_COLTURA_INTERVENTO;
+			CREATE OR REPLACE SYNONYM A4GD_SOSTEGNO_DU	FOR ${user.superuser}.A4GD_SOSTEGNO_DU;
+			CREATE OR REPLACE SYNONYM A4GT_TITOLO_DU FOR ${user.superuser}.A4GT_TITOLO_DU;
+			CREATE OR REPLACE SYNONYM A4GD_STATO_LAV_SOSTEGNO FOR ${user.superuser}.A4GD_STATO_LAV_SOSTEGNO;
+			CREATE OR REPLACE SYNONYM A4GT_LAVORAZIONE_SOSTEGNO FOR ${user.superuser}.A4GT_LAVORAZIONE_SOSTEGNO;
+			CREATE OR REPLACE SYNONYM A4GT_TRANSIZIONE_SOSTEGNO FOR ${user.superuser}.A4GT_TRANSIZIONE_SOSTEGNO;
+			CREATE OR REPLACE SYNONYM A4GT_PASSI_LAV_SOSTEGNO FOR ${user.superuser}.A4GT_PASSI_LAV_SOSTEGNO;			
+			CREATE OR REPLACE SYNONYM A4GT_DOMANDE_COLLEGATE FOR ${user.superuser}.A4GT_DOMANDE_COLLEGATE;
+			CREATE OR REPLACE SYNONYM A4GT_CAMPIONE FOR ${user.superuser}.A4GT_CAMPIONE;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_ISTRUTTORIA FOR ${user.superuser}.A4GT_DATI_ISTRUTTORIA;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_PARTICELLA_COLTURA FOR ${user.superuser}.A4GT_DATI_PARTICELLA_COLTURA;
+			CREATE OR REPLACE SYNONYM A4GT_PASCOLO_PARTICELLA FOR ${user.superuser}.A4GT_PASCOLO_PARTICELLA;
+			CREATE OR REPLACE SYNONYM A4GT_DATI_FILTRO_DOMANDA FOR ${user.superuser}.A4GT_DATI_FILTRO_DOMANDA;
+			CREATE OR REPLACE SYNONYM A4GT_STAMPA_DOMANDA FOR ${user.superuser}.A4GT_STAMPA_DOMANDA;
+			CREATE OR REPLACE SYNONYM A4GT_RICH_ALLEVAM_DU_ESITO FOR ${user.superuser}.A4GT_RICH_ALLEVAM_DU_ESITO;			
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_READ_9.1" author="Alessio Siravo">
+    	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			CREATE OR REPLACE SYNONYM A4GT_ELENCO_LIQUIDAZIONE FOR ${user.superuser}.A4GT_ELENCO_LIQUIDAZIONE;
+			CREATE OR REPLACE SYNONYM A4GR_DOMANDA_ELENCO FOR ${user.superuser}.A4GR_DOMANDA_ELENCO;
+		</sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_READ_10.1" author="Vincenzo Caurio" dbms="oracle">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_ANOM_DOMANDA_SOSTEGNO FOR ${user.superuser}.A4GT_ANOM_DOMANDA_SOSTEGNO;			
+        </sql>
+    </changeSet>
+    
+       <changeSet id="ISTRUTTORIA_WRT_11.1" author="Antonio Pasca" dbms="oracle">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_CONTROLLI_LATTE FOR ${user.superuser}.A4GT_CONTROLLI_LATTE;			
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_WRT_11.2" author="Antonio Pasca" dbms="oracle">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_ANALISI_LATTE FOR ${user.superuser}.A4GT_ANALISI_LATTE;	
+            CREATE OR REPLACE SYNONYM A4GT_PRODUZIONE_LATTE FOR ${user.superuser}.A4GT_PRODUZIONE_LATTE;
+            CREATE OR REPLACE SYNONYM A4GT_REG_ALPEGGIO FOR ${user.superuser}.A4GT_REG_ALPEGGIO;		
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_READ_11.1" author="Alessio Siravo">
+    	<sql endDelimiter=";" splitStatements="true" >	
+			CREATE OR REPLACE SYNONYM A4GT_COMUNI_LIMITROFI FOR ${user.superuser}.A4GT_COMUNI_LIMITROFI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_WRT_12.10" author="Antonio Pasca">
+    	<sql endDelimiter=";" splitStatements="true" >	
+			CREATE OR REPLACE SYNONYM A4GT_CAPO_TRACKING FOR ${user.superuser}.A4GT_CAPO_TRACKING;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_WRT_12.11" author="Elisabetta Freschi">
+    	<sql endDelimiter=";" splitStatements="true" >	
+			CREATE OR REPLACE SYNONYM A4GT_RICEVUTA_DOM_INT_ZOOT FOR ${user.superuser}.A4GT_RICEVUTA_DOM_INT_ZOOT;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTRUTTORIA_WRT_16.1" author="Antonio Pasca">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_SOGLIA_ACQUISIZIONE FOR ${user.superuser}.A4GT_SOGLIA_ACQUISIZIONE;			
+        </sql>
+    </changeSet>
+    <changeSet id="ISTRUTTORIA_WRT_16.2" author="Bruno Conetta">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_DATI_EREDE FOR ${user.superuser}.A4GT_DATI_EREDE;			
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_READ_16.3" author="Antonio Pasca">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GD_CAPITOLO_SPESA FOR ${user.superuser}.A4GD_CAPITOLO_SPESA;
+        </sql>
+    </changeSet>
+    
+    <changeSet id="ISTRUTTORIA_WRT_20.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_TRASMISSIONE_BDNA FOR ${user.superuser}.A4GT_TRASMISSIONE_BDNA;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_WRT_24.0" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DOMANDA_INTEGRATIVA FOR ${user.superuser}.A4GT_DOMANDA_INTEGRATIVA;
+			CREATE OR REPLACE SYNONYM A4GT_CAPO_TRACKING FOR ${user.superuser}.A4GT_CAPO_TRACKING;
+			CREATE OR REPLACE SYNONYM A4GT_RICHIESTA_ALLEVAM_DU FOR ${user.superuser}.A4GT_RICHIESTA_ALLEVAM_DU;
+		</sql>
+	</changeSet>
+    
+    <changeSet id="ISTRUTTORIA_WRT_30.0" author="Elisabetta Freschi">        
+		<sql endDelimiter=";" splitStatements="true" >
+            CREATE OR REPLACE SYNONYM A4GT_ISTRUTTORIA FOR ${user.superuser}.A4GT_LAVORAZIONE_SOSTEGNO;			
+        </sql>
+    </changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_31.0" author="Fabio Strada">
+		<sql endDelimiter=";" splitStatements="true" >
+			CREATE OR REPLACE SYNONYM A4GT_ESITO_MAN_PASCOLO FOR ${user.superuser}.A4GT_ESITO_MAN_PASCOLO;
+		</sql>
+	</changeSet>
+	
+    <changeSet id="ISTRUTTORIA_READ_D26.2" author="Caccia Salvatore">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_DATI_ISTRUTTORE_DIS FOR ${user.superuser}.A4GT_DATI_ISTRUTTORE_DIS;
+		</sql>
+	</changeSet>	
+
+	<changeSet id="ISTRUTTORIA_READ_RI30.0" author="Elisabetta Freschi">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONF_ISTR_DISACCOPPIATO FOR ${user.superuser}.A4GT_CONF_ISTR_DISACCOPPIATO;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_READ_RI30.1" author="Antonio Trombetta">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_CONF_ISTRUTTORIA FOR ${user.superuser}.A4GT_CONF_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+	
+    <changeSet id="ISTRUTTORIA_READ_18.2" author="Salvatore Caccia">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_POLITICA_AGRICOLA FOR ${user.superuser}.A4GT_POLITICA_AGRICOLA;
+		</sql>
+	</changeSet>	
+	<changeSet id="ISTRUTTORIA_READ_20.1" author="Gabriele Ninfa">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4GT_SOSTEGNO FOR ${user.superuser}.A4GT_SOSTEGNO;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

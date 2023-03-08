@@ -1,0 +1,38 @@
+<p-dialog
+  [(visible)]="isPopupVisible"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closeOnEscape]="true"
+  (onHide)="close()">
+  <p-header>
+    {{'FAS_ANA.ANNULLA_PROCESSO_DI_VALIDAZIONE' | translate | uppercase}}
+  </p-header>
+  
+  <div class="popup-conferma">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <div>
+          Stai per annullare il processo di validazione.<br>
+          Sei sicuro di voler continuare?
+        </div>
+      </div>
+      <div class="p-col-12"></div>
+      <div class="p-col-12"></div>
+      <div class="p-col-6">
+        <div class="button-annulla" (click)="close()">
+          No, continua il processo
+        </div>
+      </div>
+      <div class="p-col-6">
+        <button
+          *ngIf="isFascicoloAggiornabile()"
+          pButton
+          class="button-custom"
+          label="SI, ANNULLA IL PROCESSO"
+          (click)="changeStatusInAggiornamentoFascicolo()">
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

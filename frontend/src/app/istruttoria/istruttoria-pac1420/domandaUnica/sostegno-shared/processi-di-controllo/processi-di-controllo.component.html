@@ -1,0 +1,15 @@
+<div class="ui-grid-fixed">
+  <div class="layout-actionmenu">
+    <div class="messaggiprocesso boxgrey_bottom ui-g-9">
+      <h5>Processi di Controllo</h5>
+      <div *ngIf="processi && processi.length > 0">
+        <div *ngFor="let processo of processi">
+          {{ getCountAvanzamentoProcessi(processo) }}
+        </div>
+      </div>
+      <div *ngIf="!(processi && processi.length > 0)">
+        {{ label }}
+      </div>
+    </div>
+  </div>
+</div>

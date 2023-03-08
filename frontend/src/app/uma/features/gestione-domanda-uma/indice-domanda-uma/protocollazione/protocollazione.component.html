@@ -1,0 +1,69 @@
+<p-toast
+  position="top-center"
+  key="tst-dlg"
+  [baseZIndex]="50000"></p-toast>
+<p-toast
+  position="top-center"
+  key="tst-dlg-protocollazione"
+  [baseZIndex]="50000"
+  (onClose)="onCloseToastProtocollazione()"></p-toast>
+<div class="p-grid ui-fluid">
+
+  <!-- Prima riga: Protocolla & Back -->
+  <div class="p-grid w-100">
+    <div class="p-col">
+      <button
+        pButton
+        type="button"
+        class="w-10m"
+        icon="pi pi-chevron-circle-left"
+        iconPos="left"
+        label="INDIETRO"
+        (click)="goPrevStep()"></button>
+    </div>
+  </div>
+
+  <!-- Seconda riga Protocollazione -->
+  <div class="p-grid w-100">
+    <div class="p-col">
+      <div class="popup-approvazione popup--custom">
+        <div class="text-center">
+          <h6><p [innerHtml]="'UMA.MESSAGGIO_DLG' | translate"></p></h6>
+        </div>
+        <div class="p-grid">
+          <div class="p-col-4">
+            <app-box
+              [header]="getHeader('UMA.SCARICA_RICHIESTA', 'UMA.DESC_SCARICA_RICHIESTA', 'assets/img/icons/icon-download2.png')"
+              [button]="getButtonModel('UMA.SCARICA', 'pi pi-arrow-down', BUTTONS_ENUM.download_richiesta, BUTTONS_TYPE_ENUM.button)"
+              [enableBox]="enabledDownload"
+              (onClickButton)="onClickBoxButton($event)"></app-box>
+          </div>
+          <div class="p-col-4">
+            <app-box
+              [name]="'richiesta'"
+              [header]="getHeader('UMA.FIRMA_RICHIESTA', 'UMA.DESC_FIRMA_RICHIESTA', 'assets/img/icons/icon-signature.svg' )"
+              [button]="getButtonModel('UMA.CARICA', 'pi pi-arrow-up', BUTTONS_ENUM.carica_richiesta_firmata, BUTTONS_TYPE_ENUM.file)"
+              [enableBox]="enabledUpload"
+              [document]="fileRichiesta"
+              (onClickButton)="onClickBoxButton($event, fileInput)"></app-box>
+            <input
+              #fileInput
+              id="caricaFileInput"
+              name="caricaFileInput"
+              [hidden]="true"
+              type="file"
+              (change)="onFileChange($event, 'richiesta')"
+              accept="{{fileConfig.fileExt}}">
+          </div>
+          <div class="p-col-4">
+            <app-box
+              [header]="getHeader('UMA.PROTOCOLLA_RICHIESTA', 'UMA.DESC_PROTOCOLLA_RICHIESTA', 'assets/img/icons/icon-file-check.svg' )"
+              [button]="getButtonModel('UMA.PROTOCOLLA', '', BUTTONS_ENUM.protocolla_richiesta, BUTTONS_TYPE_ENUM.button)"
+              [enableBox]="enabledProtocolla"
+              (onClickButton)="onClickBoxButton($event)"></app-box>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

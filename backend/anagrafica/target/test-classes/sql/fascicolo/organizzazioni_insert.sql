@@ -1,0 +1,1 @@
+INSERT INTO A4GT_ORGANIZZAZIONE (ID, VERSIONE, DENOMINAZIONE) values ('1', '0', 'Consorzio difesa produttori agricoli Co.Di.Pr.A');

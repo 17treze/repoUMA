@@ -1,0 +1,11 @@
+{
+  "mittente": {
+    "name": "Roberto",
+    "surname": "Bianchi",
+    "description": "Azienda agricola Roberto Bianchi",
+    "vatNumber": "01234567891"
+  },
+  "codiceFascicolo": "3.5-2018-864",
+  "oggetto": "Domanda n. X per la certificazione antimafia",
+  "tipologiaDocumentoPrincipale" : "MANDATO"
+}

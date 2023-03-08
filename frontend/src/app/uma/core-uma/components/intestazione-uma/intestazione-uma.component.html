@@ -1,0 +1,90 @@
+<p-toast
+  key="tst-intestazione-uma"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="p-grid">
+  <div class="p-grid no-gutters tophome">
+    <div class="ui-grid-fixed">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4>{{title}}</h4>
+      </div>
+      <div class="subhome">
+        <div class="p-grid">
+          <div class="p-col-3 border-r">
+            <h6 class="mb-0">{{'UMA.INTESTAZIONE.CUAA' | translate | uppercase}}:</h6>
+            <span class="fw-700">
+                  {{richiestaOrDichiarazione?.cuaa}}
+                </span>
+          </div>
+          <div class="p-col-6 border-r d-flex flex-column">
+            <h6 class="mb-0">{{'UMA.INTESTAZIONE.DENOMINAZIONE' | translate}}:</h6>
+            <span class="fw-700 d-block">
+                   {{richiestaOrDichiarazione?.denominazione}}
+                </span>
+          </div>
+          <div class="p-col-3">
+            <div class="d-flex align-items-center">
+              <h6 class="mb-0 mr-2">{{'UMA.INTESTAZIONE.STATO_DOMANDA' | translate}}:</h6>
+            </div>
+            <div
+              class="d-flex align-items-center"
+              style="padding: 8px 0 0 0">
+              <span class="btn btn-outline-light">
+                    {{ richiestaOrDichiarazione?.stato | replaceWithSpaceBy:'_' }}
+                  </span>
+            </div>
+            <ng-container *ngIf="ctx === tipoIntestazioneEnum.DICHIARAZIONE_CONSUMI then dichiarazioneTpl; else richiestaTpl;"></ng-container>
+           
+            <!-- template dichiarazione consumi -->
+            <ng-template #dichiarazioneTpl>
+              <div class="box-border-bottom">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.ID_DICHIARAZIONE' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.id}}</span>
+              </div>
+              <div
+                class="box-border-bottom"
+                *ngIf="richiestaOrDichiarazione?.dataPresentazione">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.DATA_INSERIMENTO' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.dataPresentazione | date: "dd/MM/yyyy"}}</span>
+              </div>
+              <div
+                class="box-border-bottom"
+                *ngIf="richiestaOrDichiarazione?.dataProtocollazione">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.DATA_PROTOCOLLAZIONE' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.dataProtocollazione || '01/01/2001' | date: "dd/MM/yyyy"}}</span>
+              </div>
+              <div class="box-border-bottom">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.RIF_RICHIESTA' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.idRichiesta}}</span>
+              </div>
+            </ng-template>
+
+            <!-- template richiesta/rettifica carburante -->
+            <ng-template #richiestaTpl>
+              <div class="box-border-bottom">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.ID_RICHIESTA' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.id}}</span>
+              </div>
+              <div
+                class="box-border-bottom"
+                *ngIf="richiestaOrDichiarazione?.idRettificata">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.ID_RICHIESTA_RETTIFICATA' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.idRettificata }}</span>
+              </div>
+              <div class="box-border-bottom">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.DATA_INSERIMENTO' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.dataPresentazione  | date: "dd/MM/yyyy"}}</span>
+              </div>
+              <div
+                *ngIf="richiestaOrDichiarazione?.dataProtocollazione"
+                class="box-border-bottom">
+                <h6 class="mb-0">{{'UMA.INTESTAZIONE.DATA_PROTOCOLLAZIONE' | translate}}</h6>
+                <span class="fw-700">{{richiestaOrDichiarazione?.dataProtocollazione  | date: "dd/MM/yyyy"}}</span>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-grid no-gutters h-15m"></div>
+</div>

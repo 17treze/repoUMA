@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTANZARIESAME_S42.02" author="Bettina Irler" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+			DELETE FROM A4SD_RANKING_COD_USO;
+			commit;
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('410','1',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('420','2',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('430','3',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('492','4',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('495','5',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('494','6',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('493','7',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('491','8',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('497','9',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('490','10',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('651','11',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('685','12',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('151','13',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('681','14',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('668','15',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('666','16',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('669','17',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('557','18',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('638','19',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('138','20',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('166','21',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('667','22',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('659','23',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('654','24',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('657','25',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('656','26',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('783','27',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('784','28',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('785','29',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('786','30',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('787','31',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('788','32',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('790','33',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('793','34',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('789','35',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('791','36',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('792','37',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('780','38',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('500','39',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('650','40',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('660','41',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('690','42',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+			Insert into A4SD_RANKING_COD_USO (COD_USO,RANKING,DATA_INIZIO,DATA_FINE) values ('770','43',to_date('08-06-2020','DD-MM-YYYY'),to_date('31-12-9999','DD-MM-YYYY'));
+						
+			commit;
+		</sql>
+    </changeSet>
+	</databaseChangeLog>

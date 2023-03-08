@@ -1,0 +1,73 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+        <p-accordion *ngFor="let allevamento of allevamenti" (onOpen)="onTabOpen($event,allevamento)">
+          <p-accordionTab
+            header="{{allevamento.datiAllevamento.descrizioneAllevamento}} - {{allevamento.datiAllevamento.codiceAllevamento}} - {{allevamento.codiceIntervento}} - Numero Capi: {{allevamento.count}}"
+            [selected]="false">
+            <div class="ui-g">
+              <div class="ui-g-4 titlefamiliari">
+                <div class="input-group mb-3">
+                  <input #inputCodiceFiscale type="text" class="form-control"
+                    placeholder="{{ intestazioni.marcaAuricolare }}" aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                    <button appDebounceClick pButton class="btn btn-outline-secondary" type="button"
+                      (debounceClick)="cerca(inputCodiceFiscale.value, allevamento)"><i style="margin-top:7px;"
+                        class="material-icons">search</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p-table *ngIf="allevamento.tableVisible" #dt [columns]="cols"
+              [value]="allevamento.richiesteAllevamentoDuEsito" [autoLayout]="true" [paginator]="true"
+              [rows]="elementiPagina" [totalRecords]="allevamento.count" [responsive]="true" dataKey="codiceCapo"
+              (onLazyLoad)="changePage($event, allevamento)" [lazy]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null">
+                    {{ col.header }}
+                    <p-sortIcon *ngIf="col.field != null" [field]="col.header"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dettaglioCapiRichiesti let-expanded="expanded" let-columns="columns">
+                <tr>
+                  <td>{{dettaglioCapiRichiesti.codiceCapo}}</td>
+                  <td>{{allevamento.codiceSpecie}}</td>
+                  <td>{{dettaglioCapiRichiesti.capoBdn.razzaCodice}}</td>
+                  <td>{{dettaglioCapiRichiesti.esito}}</td>
+                  <td>{{dettaglioCapiRichiesti.messaggio}}</td>
+                  <td style="text-align: center">
+                    <p-checkbox [(ngModel)]="dettaglioCapiRichiesti.duplicato" binary="true"
+                      [disabled]="istruttoriaDU.stato === 'PAGAMENTO_AUTORIZZATO'"
+                      (onChange)="aggiornaCapo(dettaglioCapiRichiesti)">
+                    </p-checkbox>
+                  </td>
+                  <td style="text-align: center">
+                    <p-checkbox [(ngModel)]="dettaglioCapiRichiesti.controlloNonSuperato" binary="true"
+                      [disabled]="istruttoriaDU.stato === 'PAGAMENTO_AUTORIZZATO'"
+                      (onChange)="aggiornaCapo(dettaglioCapiRichiesti)"></p-checkbox>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    Calcolo accoppiato zootecnia non ancora effettuato per la domanda.
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-accordionTab>
+        </p-accordion>
+        <div *ngIf='allevamenti.length == 0'>
+          Nessun controllo eseguito
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

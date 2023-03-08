@@ -1,0 +1,54 @@
+<div>
+  <div class="content-scroll" style="border-bottom: 1px solid #d8d8d8;">
+    <label for="Risultati">{{totals}} risultati</label>
+  </div>
+
+  <div *ngIf="searchResults && !poligoniDichiarati && !panelEvent.searchLavorazioni">
+    <div class="for-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()" (scrolledUp)="onUp()" [immediateCheck]="true" [scrollWindow]="false">
+      <div *ngFor="let n of searchResults ; let i = index">
+        <div class="content-scroll" [ngClass]="{'activeElement': clickedElement === i && showDetail}">
+          <div class="stato-content">
+            <div for="STATO" class="label-stato" [ngClass]="n.stato"><span>{{ n.statoRichiestaMappato }}</span> </div>
+          </div>
+          <label class="result-label" for="ID"><span>ID</span> {{ n.id }}</label>
+          <label class="result-label" for="DATA"><span>INSERIMENTO</span> {{ n.data | date: 'dd/MM/yyyy' }}</label>
+          <label class="result-label label-azienda" for="AZIENDA"><span>AZIENDA</span>
+            {{n.aziendaAgricola.ragioneSociale
+            }} </label>
+          <label class="result-label-light" for="CUAA"><span>CUAA</span> {{n.aziendaAgricola.cuaa }} </label>
+          <div class="detail-btn">
+            <div id="button-green-card">
+              <span (click)="centerMap(n.extent)" pTooltip="Centra in mappa" tooltipPosition="right">
+                <i class="fa fa-crosshairs" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div id="button-green-card">
+              <span pTooltip="Apri il dettaglio della richiesta modifica suolo" tooltipPosition="top"><i
+                  (click)="getDetails(n.id, i);visible = true" id="search-gis" class="pi pi-search"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!searchResults && poligoniDichiarati && !panelEvent.searchLavorazioni" class="card-content">
+    <div class="for-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+      (scrolled)="onScrollLavorazione()" [immediateCheck]="true" [scrollWindow]="false">
+
+
+      <div *ngFor="let n of poligoniDichiarati; let i = index">
+        <div class="content-scroll" [hidden]="!n.visible"
+          [ngClass]="{'activeElement': clickedElement === i && showDetail}">
+
+          <gis-suolo-dichiarato [activeOpenPanelDettaglioRichiesta] ="true" [suoloDichiarato]="n" [index]="i"
+            (actionSuoloDichiarato)="receiveActionSuoloDichiarato($event)" [contextAction]="'add'">
+          </gis-suolo-dichiarato>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+      <div class="accordion-wrapper dettaglioaccordionmultiple">
+        <div *ngFor="let allevamento of this.allevamenti">
+          <div *ngIf="allevamento.richiesteAllevamentoDuEsito && allevamento.richiesteAllevamentoDuEsito.length > 0">
+            <p-accordion>
+              <p-accordionTab
+                header="{{allevamento.datiAllevamento.descrizioneAllevamento}} - {{allevamento.datiAllevamento.codiceAllevamento}} - {{allevamento.codiceIntervento}} - Numero Capi: {{allevamento.richiesteAllevamentoDuEsito.length}}"
+                [selected]="false">
+                <div class="globalfilter">
+                  <i class="material-icons">search</i>
+                  <input type="text" pInputText size="50" placeholder="Ricerca..."
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+                <p-table #dt [columns]="cols" [value]="allevamento.richiesteAllevamentoDuEsito" [autoLayout]="true"
+                  [paginator]="true" [rows]="elementiPagina" [responsive]="true" dataKey="codiceCapo">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                        [pSortableColumnDisabled]="col.field == null">
+                        {{ col.header }}
+                        <p-sortIcon [field]="col.header"></p-sortIcon>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-dettaglioCapiRichiesti let-expanded="expanded"
+                    let-columns="columns">
+                    <tr>
+                      <td>{{dettaglioCapiRichiesti.codiceCapo}}</td>
+                      <td>{{allevamento.codiceSpecie}}</td>
+                      <td>{{dettaglioCapiRichiesti.esito}}</td>
+                      <td>{{dettaglioCapiRichiesti.messaggio}}</td>
+                      <td style="text-align: center">
+                        <p-checkbox [(ngModel)]="dettaglioCapiRichiesti.duplicato" binary="true"
+                          (click)="updateCapo(dettaglioCapiRichiesti)"></p-checkbox>
+                      </td>
+                      <td style="text-align: center">
+                        <p-checkbox [(ngModel)]="!dettaglioCapiRichiesti.controlloSuperato" binary="true"
+                          (click)="updateControlloSuperato(dettaglioCapiRichiesti)"></p-checkbox>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td [attr.colspan]="columns.length + 1">
+                        Calcolo accoppiato zootecnia non ancora effettuato per la domanda.
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </p-accordionTab>
+            </p-accordion>
+          </div>
+        </div>
+        <div *ngIf='this.allevamenti.length == 0 || nessunCapoPresentato'>
+          Nessun capo richiesto
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

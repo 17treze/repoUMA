@@ -1,0 +1,18 @@
+.valida-btn {
+    background: #00985b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 4px 6px;
+    margin-top: -3px;
+    float: right;
+    cursor: pointer;
+}
+.label-stato.esito span {
+    text-transform: uppercase;
+}
+.for-poligoni #triggerNewWin {
+    display: none;
+}

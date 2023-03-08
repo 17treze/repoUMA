@@ -1,0 +1,35 @@
+:host {
+  ::ng-deep button.ui-datepicker-trigger.ui-calendar-button {
+    width: 5.5em !important;
+    height: 5.5em !important;
+    background: transparent !important;
+    position: absolute;
+  }
+
+  ::ng-deep label.ui-chkbox-label {
+    margin: 0;
+    padding-left: 1px;
+  }
+
+  .w-5m {
+    width: 5em;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  .pr-0_5m {
+    padding-right: .5em;
+  }
+
+  p-dropdown > ::ng-deep .ui-dropdown {
+    label.ui-dropdown-label {
+      font-weight: normal !important;
+    }
+  }
+
+  ::ng-deep span.ui-message-text {
+    font-size: 1em !important;
+  }
+}

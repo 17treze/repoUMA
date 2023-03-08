@@ -1,0 +1,108 @@
+<p-dialog
+  #dialogScaricaElenchiUma
+  id="popup-scarica-elenchi-uma"
+  [(visible)]="display"
+  header="Download dati"
+  [focusOnShow]="false"
+  [modal]="true"
+  [closable]="false"
+  [closeOnEscape]="true"
+  [blockScroll]="true"
+  position="center"
+  [style]="{width: '80vw', height: '90vh'}"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden'}"
+  [dismissableMask]="true"
+  styleClass="large-dialog">
+
+  <p-toast
+    key="tst-scarica-elenchi-uma"
+    [style]="{marginTop: '70px'}"></p-toast>
+
+  <div class="p-grid ui-fluid">
+    <div class="p-col">
+      <form
+        novalidate
+        [formGroup]="downloadForm">
+        <div class="p-grid p-align-center p-justify-start">
+          <div class="p-col-2 mr-2">
+            <p-dropdown
+              formControlName="anni"
+              [options]="anni"></p-dropdown>
+          </div>
+        </div>
+        <div class="p-align-center p-justify-center">
+          <p-table
+            #table
+            [columns]="cols"
+            [value]="listaElenchi"
+            [rowHover]="true"
+            [autoLayout]="true"
+            [responsive]="true">
+            <ng-template
+              pTemplate="header"
+              let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  class="text-left"
+                  [style.width]="col.width">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-elenco
+              let-i="rowIndex">
+              <tr class="text-left">
+                <td>{{ elenco.nome }}</td>
+                <td class="text-center">
+                  <div class="p-grid p-align-center p-justify-between">
+                    <div class="p-col">
+                      <button
+                        pButton
+                        icon="pi pi-file-pdf"
+                        iconPos="right"
+                        label="SCARICA"
+                        (click)="!elenco.loading && downloadElenco(elenco)"></button>
+                    </div>
+                    <div
+                      *ngIf="elenco.loading"
+                      class="p-col text-left p-0 p-align-center mt-2">
+                      <p-progressSpinner
+                        [style]="{width: '25px', height: '25px'}"
+                        fill="transparent"
+                        strokeWidth="4"></p-progressSpinner>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="emptymessage"
+              let-columns>
+              <tr>
+                <td [attr.colspan]="2">Nessun elemento presente</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Button bar -->
+  <p-footer>
+    <div class="p-grid mt-2 p-justify-between p-align-end">
+      <div>
+        <button
+          pButton
+          class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Chiudi"
+          (click)="chiudi()"></button>
+      </div>
+    </div>
+  </p-footer>
+
+</p-dialog>

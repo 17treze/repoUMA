@@ -1,0 +1,26 @@
+{
+	"allevamenti": [{
+			"descAllevamento": "155TN034",
+			"descProprietario": "ZUCAL ENRICO E MARCO SSA ALLEVAM",
+			"capi": [{
+					"codCapo": "IT022990212518",
+					"codSpecie": "BOVINI",
+					"interventi": [{
+							"codice": "310",
+							"esito": "AMMISSIBILE",
+							"idEsito": 1556756,
+							"selezionato": true
+						}, {
+							"codice": "322",
+							"esito": "AMMISSIBILE",
+							"idEsito": 1556757,
+							"selezionato": true
+						} 
+					]
+				}
+			]
+		}
+	],
+	"stato": "CALCOLATO",
+	"identificativo": "DI_579"
+}

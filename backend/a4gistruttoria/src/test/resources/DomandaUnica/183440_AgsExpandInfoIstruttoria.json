@@ -1,0 +1,112 @@
+{  
+   "infoGeneraliDomanda":{  
+      "pac":"PAC1420",
+      "tipoDomanda":"DU",
+      "campagna":2018,
+      "modulo":"PAGAMENTI DIRETTI",
+      "codModulo":"BPS_2018",
+      "cuaaIntestatario":"GRCNGL64E14B809W",
+      "ragioneSociale":"GRECO ANGELO",
+      "numeroDomanda":183448,
+      "numeroDomandaRettificata":null,
+      "dataPresentazione":"2018-04-26T18:04:13.000+0200",
+      "codEnteCompilatore":"6",
+      "enteCompilatore":"CAA COLDIRETTI DEL TRENTINO - 005",
+      "dataProtocollazione":"2018-04-26T18:04:39.000+0200",
+      "dataPresentazOriginaria":null,
+      "dataProtocollazOriginaria":null
+   },
+   "controlliPresentazione":{  
+      "aggiornamentoFascicolo":"S",
+      "visioneAnomalie":"S",
+      "firmaDomanda":"S",
+      "archiviazioneDomanda":"S"
+   },
+   "richieste":{  
+      "sintesiRichieste":{  
+         "richiestaDisaccoppiato":true,
+         "richiestaSuperfici":true,
+         "richiestaZootecnia":false
+      }
+   },
+   "infoIstruttoriaDomanda":{  
+      "datiEleggibilita":[  
+         {  
+            "sostegno":"BPS",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"BPS",
+            "particella":{  
+               "idParticella":3405620,
+               "comune":"CAROVIGNO (BR)",
+               "codNazionale":"B809",
+               "foglio":43,
+               "particella":"00017",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":8524,
+            "superficieSigeco":8520,
+            "idParcella":266203,
+            "livello":121
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIO",
+            "particella":{  
+               "idParticella":3405620,
+               "comune":"CAROVIGNO (BR)",
+               "codNazionale":"B809",
+               "foglio":43,
+               "particella":"00017",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":266201,
+            "livello":121
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_DISC",
+            "particella":{  
+               "idParticella":3405620,
+               "comune":"CAROVIGNO (BR)",
+               "codNazionale":"B809",
+               "foglio":43,
+               "particella":"00017",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":266205,
+            "livello":121
+         },
+         {  
+            "sostegno":"PACC",
+            "superficieAnomaliaCoor":0,
+            "codIntervento":"OLIVE_PEND75",
+            "particella":{  
+               "idParticella":3405620,
+               "comune":"CAROVIGNO (BR)",
+               "codNazionale":"B809",
+               "foglio":43,
+               "particella":"00017",
+               "sub":" "
+            },
+            "codColtura3":"160-111-011",
+            "codColtura5":"420-006-000-000-011",
+            "superficieGis":0,
+            "superficieSigeco":0,
+            "idParcella":266204,
+            "livello":121
+         }
+      ]
+   }
+}

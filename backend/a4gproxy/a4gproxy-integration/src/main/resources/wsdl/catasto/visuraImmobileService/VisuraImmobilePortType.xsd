@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.regione.taa.it/FaultType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.regione.taa.it/FaultType/schemas">
+  <xs:annotation>
+    <xs:appinfo>Sistema Regione Trentino Alto Adige</xs:appinfo>
+    <xs:documentation>Schema contenente tipi ed elementi per la gestione delle eccezioni</xs:documentation>
+  </xs:annotation>
+  <xs:complexType abstract="true" name="CustomFaultType">
+    <xs:annotation>
+      <xs:documentation>Tipo da estendere per le eccezioni specifiche per un determinato errore</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="FaultType">
+    <xs:annotation>
+      <xs:documentation>Tipo che modella l'eccezione che puo' essere ritornata da una qualsiasi operazione</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="type" type="tns:TipologiaFaultType" use="required">
+      <xs:annotation>
+        <xs:documentation>La tipologia di eccezione, ovvero se e' un errore utente o di sistema</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="errorCode" type="xs:integer" use="required"/>
+    <xs:attribute name="userMessage" type="xs:string"/>
+  </xs:complexType>
+  <xs:simpleType name="TipologiaFaultType">
+    <xs:annotation>
+      <xs:documentation>Lista di possibili tipologie di eccezioni: USER_FAULT indica che l'errore e' stato generato dall'utente; SYSTEM_FAULT indica che l'errore e' stato generato dal sistema</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="USER_FAULT"/>
+      <xs:enumeration value="SYSTEM_FAULT"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="WSFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:FaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType final="restriction" name="ConvenzioneErrataFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se non esistono prenotazioni su una particella</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="PeriodoNonConformeFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si indica un periodo non conforme ai requisiti (ad esempio un arco temporale troppo lungo).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="DatiInputObbligatoriMancantiFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il client ha omesso dei dati obbligatori tra quelli previsti da una certa operation.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConvenzioneErrataFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ConvenzioneErrataFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PeriodoNonConformeFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:PeriodoNonConformeFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DatiInputObbligatoriMancantiFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:DatiInputObbligatoriMancantiFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

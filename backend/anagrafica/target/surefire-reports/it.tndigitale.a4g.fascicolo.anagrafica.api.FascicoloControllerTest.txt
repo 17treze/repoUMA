@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: it.tndigitale.a4g.fascicolo.anagrafica.api.FascicoloControllerTest
+-------------------------------------------------------------------------------
+Tests run: 67, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 26.38 s - in it.tndigitale.a4g.fascicolo.anagrafica.api.FascicoloControllerTest

@@ -1,0 +1,28 @@
+<app-in-istruttoria-dialog [display]="displayInIstruttoriaDialog" [dettaglioIstruttoria]="dettaglioIstruttoria" (displayChange)="onIstruttoriaDialogClose($event)" *ngIf="riepilogoStatoDomande.stato == 'IN ISTRUTTORIA'"></app-in-istruttoria-dialog>
+<div class="card-domande">
+<p-card id="sfondo-p-card">
+  <p-header>
+      <div><img class="dimensioni-icona" src="assets/img/img-antimafia.png">
+       
+        <label class="label-font" > {{riepilogoStatoDomande.stato}}</label></div>
+   
+  </p-header>
+  <div><label class="size-numero-domande label-font">{{riepilogoStatoDomande.counter}}</label></div>
+  <p-footer>
+
+    <div class="label-font">
+      <button pButton type="button" label="VISUALIZZA DOMANDE" class="btn-white" *ngIf="riepilogoStatoDomande.stato != 'PROTOCOLLATA'"  id="visualizza-domande" (click)="dettaglioIstruttoria.goListaDomande(riepilogoStatoDomande.stato)" [disabled]="riepilogoStatoDomande.counter ==0" ></button>
+
+    </div>
+   
+    <div>
+      <button pButton type="button" class="btn-green" label="AVVIA RICEVIBILITA" *ngIf="riepilogoStatoDomande.stato == 'PROTOCOLLATA'" (click)="dettaglioIstruttoria.avviaProcessoIstruttoria('RICEV_AGS')" [disabled]="dettaglioIstruttoria.disableAvviaRicevibilita"></button>
+      <button pButton type="button" class="btn-green" label="AVVIA ISTRUTTORIA"  *ngIf="riepilogoStatoDomande.stato == 'RICEVIBILE'" (click)="dettaglioIstruttoria.avviaProcessoIstruttoria('AVV_IST')"
+							 [disabled]="dettaglioIstruttoria.disableAvviaIstruttoria"></button>
+      
+      <p-button  label="DETTAGLI"  (click)="displayDialog()" *ngIf="riepilogoStatoDomande.stato == 'IN ISTRUTTORIA'"> </p-button>
+      <br>
+    </div>
+  </p-footer>
+</p-card>
+</div>

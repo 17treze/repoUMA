@@ -1,0 +1,70 @@
+<p-toast
+  key="tst-impostazioni"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<p-dialog
+  #dialog
+  id="dialog-impostazioni-istruttore"
+  [(visible)]="display"
+  [focusOnShow]="false"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="false"
+  [blockScroll]="true"
+  [contentStyle]="{'overflow-y':'auto', 'overflow-x':'hidden','max-height':'90%', 'height':'auto'}"
+  header="{{ 'UMA.ISTRUTTORE_IMPOSTAZIONI' | translate }}"
+  styleClass="x-small-dialog">
+
+  <form
+    novalidate
+    [formGroup]="impostazioniForm">
+    <div class="p-grid p-align-center">
+      <div class="p-col-3">
+        <strong>Data prelievo</strong>
+      </div>
+      <div class="p-col-9">
+        <p-calendar
+          #dataPrelievoRef
+          formControlName="dataPrelievoDefault"
+          appendTo="body"
+          dateFormat="dd MM yy"
+          [locale]="calendarService.localeITA"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+          [showIcon]="true">
+        </p-calendar>
+        <div *ngIf="impostazioniForm.get('dataPrelievoDefault').invalid && impostazioniForm.get('dataPrelievoDefault').dirty && impostazioniForm.get('dataPrelievoDefault').touched">
+          <p-message
+            *ngIf="impostazioniForm.get('dataPrelievoDefault').errors?.required"
+            class="font-12"
+            severity="error"
+            text="{{umaMessages.mandatory}}">
+          </p-message>
+        </div>
+      </div>
+    </div>
+
+    <!-- Separatore -->
+    <br>
+
+    <!-- Button Bar -->
+    <div class="p-grid p-justify-end">
+      <div>
+        <button
+          pButton
+          class="ui-button-secondary ui-button-text-only p-1 text-lowercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Annulla"
+          (click)="annulla()"></button>
+      </div>
+      <div class="pr-0_5m">
+        <button
+          pButton
+          class="ui-button-text-only p-1 text-uppercase font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Salva"
+          (click)="salva()"></button>
+      </div>
+    </div>
+  </form>
+
+</p-dialog>

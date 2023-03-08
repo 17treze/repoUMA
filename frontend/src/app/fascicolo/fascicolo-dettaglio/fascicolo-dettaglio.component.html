@@ -1,0 +1,279 @@
+<p-toast
+  key="tst"
+  [style]="{ marginTop: '70px' }"
+  [baseZIndex]="50000">
+</p-toast>
+<p-toast
+  key="tst-controllo-completezza-piano-colturale"
+  [style]="{ marginTop: '70px' }"></p-toast>
+
+<div class="ui-grid-fixed mt-70">
+  <div class="boxgrey">
+    <div class="p-grid p-justify-end" *ngIf="false">
+    </div>
+    <div class="ui-g">
+      <p-accordion
+        [multiple]="true"
+        class="accordion-custom">
+        <!-- Dati anagrafici e fiscali -->
+        <p-accordionTab [selected]="true">
+          <p-header style="color: black">
+            <img
+              src="assets/img/ico-anagraf.jpg"
+              class="d-inline-block mr-3">
+            <strong>{{
+              "FascicoloAziendale.DATI_ANAGRAFICI_E_FISCALI" | translate
+            }}</strong>
+          </p-header>
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td
+                  class="p-col-6"
+                  class="cell-link">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('dati-azienda')">
+                    {{ "FascicoloAziendale.DATI_AZIENDA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('modalita-pagamento')">
+                    {{ "FascicoloAziendale.MODALITA_PAGAMENTO" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr *ngIf="showSectionEredi()">
+                <td
+                  class="p-col-6"
+                  class="cell-link">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('eredi')">
+                    {{ "FascicoloAziendale.EREDI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6"></td>
+              </tr>
+            </tbody>
+          </table>
+        </p-accordionTab>
+        <br>
+        <!-- Zootecnia -->
+        <p-accordionTab [selected]="true">
+          <p-header style="color: black">
+            <img
+              src="assets/img/ico-zootecnia.jpg"
+              class="d-inline-block mr-3">
+            <strong>{{ "FascicoloAziendale.ZOOTECNIA" | translate }}</strong>
+          </p-header>
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('allevamenti')">
+                    {{ "FascicoloAziendale.ALLEVAMENTI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.CAPI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.CONSISTENZA_ZOOTENICA" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6"></td>
+              </tr>
+            </tbody>
+          </table>
+        </p-accordionTab>
+        <br>
+        <!-- Dotazione tecnica -->
+        <p-accordionTab [selected]="true">
+          <p-header style="color: black">
+            <img
+              src="assets/img/ico-dotazione.jpg"
+              class="d-inline-block mr-3">
+            <strong>{{
+              "FascicoloAziendale.DOTAZIONE_TECNICA" | translate
+            }}</strong>
+          </p-header>
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('fabbricati')">
+                    {{ "FascicoloAziendale.FABBRICATI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="handleClick('macchine')">
+                    {{ "FascicoloAziendale.MACCHINE" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </p-accordionTab>
+        <br>
+
+        <!-- Territorio -->
+        <p-accordionTab [selected]="true">
+          <p-header style="color: black">
+            <img
+              src="assets/img/ico-territorio.jpg"
+              class="d-inline-block mr-3">
+            <strong>{{ "FascicoloAziendale.TERRITORIO" | translate }}</strong>
+          </p-header>
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    *ngIf="!production"
+                    [routerLink]
+                    (click)="handleClick('titoli-conduzione')">
+                    {{ "FascicoloAziendale.TITOLI_CONDUZIONE" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                  <a
+                    *ngIf="production"
+                    style="color: gray; cursor: not-allowed;">
+                    {{ "FascicoloAziendale.TITOLI_CONDUZIONE" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.PIANI_CULTURALI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.PORTAFOGLIO_TITOLI" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.SCHEDARIO_VITICOLO" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{
+                      "FascicoloAziendale.SCHEDARIO_ORTOFRUTTICOLO" | translate
+                    }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+                <td class="p-col-6">
+                  <a
+                    [routerLink]
+                    (click)="linkPagina()">
+                    {{ "FascicoloAziendale.SCHEDARIO_OLIVICOLO" | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </p-accordionTab>
+        <br>
+
+      <!-- Domande -->
+      <p-accordionTab [selected]="true">
+        <p-header style="color: black">
+          <img
+            src="assets/img/ico-domande.jpg"
+            class="d-inline-block mr-3">
+          <strong>{{ "FascicoloAziendale.DOMANDE" | translate }}</strong>
+        </p-header>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  [routerLink]
+                  (click)="onClickDomandaAntimafia()">
+                  {{ "FascicoloAziendale.DOMANDA_ANTIMAFIA" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+              <td>
+                <a
+                  [routerLink]
+                  (click)="onClickRichiestaRettificaUma()">
+                  {{ "FascicoloAziendale.RICHIESTA_CARBURANTE" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  [routerLink]
+                  (click)="onClickDichiarazioneConsumi()">
+                  {{ "FascicoloAziendale.DICHIARAZIONE_CONSUMI" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+              <td>
+                <a
+                  [routerLink]
+                  (click)="onClickGestioneCarburanteInEsubero()">
+                  {{ "FascicoloAziendale.GESTIONE_CARBURANTE_ESUBERO" | translate }}
+                  <i class="pi pi-arrow-right"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </p-accordionTab>
+      <br>
+
+
+      </p-accordion>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<istanzeonline>
+    <serviceprovider value="A4G">
+        <oraautenticazione>09:38</oraautenticazione>
+        <numerocertificato>280008</numerocertificato>
+        <nome>CCC</nome>
+        <moduloId>MODULO REGISTRAZIONE</moduloId>
+        <hashcertificato>37445480</hashcertificato>
+        <datascadenzacertificato>24062022</datascadenzacertificato>
+        <datarilasciocertificato>24062016</datarilasciocertificato>
+        <dataautenticazione>07/12/2018</dataautenticazione>
+        <cognome>CC</cognome>
+        <codicefiscale>CCCCC</codicefiscale>
+        <certificationauthority>CN=Provincia autonoma Trento - CA Cittadini, OU=Servizi di Certificazione, O=Actalis S.p.A., C=IT</certificationauthority>
+        <sicurezza>yS7yO6nsfo5UPMC/gVtMfPTjfXIyNaRyzs8WeeZ4qV4t/Qd5NbGLEdI9I3TNHYWU</sicurezza>
+        <autenticationmethod>SMARTCARD</autenticationmethod>
+        <hashdati>5b64d47181f09633aa890fc3bbfdb6b6fd0aa031f676d496722cbe3ba44850a5</hashdati>
+        <hashdocumento>5b64d47181f09633aa890fc3bbfdb6b6fd0aa031f676d496722cbe3ba44850a5</hashdocumento>
+    </serviceprovider>
+</istanzeonline>

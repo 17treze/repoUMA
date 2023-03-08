@@ -1,0 +1,61 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <em
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></em>
+    <img src="assets/img/ico-anagraf.jpg">
+    <span class="ml-2">
+      {{ "FascicoloAziendale.DATI_ANAGRAFICI_E_FISCALI" | translate }}
+    </span>
+  </a>
+  <br>
+  <h3 class="mb-3">{{ "FascicoloAziendale.DATI_SOSPENSIONE" | translate }}</h3>
+  <p-table
+    [columns]="cols"
+    [value]="sospensioniList"
+    [autoLayout]="true">
+    <ng-template
+      pTemplate="header"
+      let-columns>
+      <tr>
+        <th style="display:none;">ID</th>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon
+            *ngIf="col.field"
+            [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData>
+      <tr>
+        <td>
+          {{rowData.dataInizio | date: "dd/MM/yyyy"}}
+        </td>
+        <td>{{rowData.motivazioneInizio}}</td>
+        <td>
+          {{rowData.dataFine | date: "dd/MM/yyyy"}}
+        </td>
+        <td>{{rowData.motivazioneFine}}</td>
+        <td>{{rowData.utente}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="cols.length">
+          {{ "FascicoloAziendale.LISTA_NO_ELEMENTI" | translate }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

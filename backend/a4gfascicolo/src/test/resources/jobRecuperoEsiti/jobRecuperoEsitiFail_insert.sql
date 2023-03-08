@@ -1,0 +1,14 @@
+--Azienda Agricola
+INSERT INTO A4GT_AZIENDA_AGRICOLA
+(ID, VERSIONE, CUAA)
+VALUES(372016, 0, 'PCHNMR60D69F132C');
+--Stato Dichiarazione
+INSERT INTO A4GD_STATO_DIC_ANTIMAFIA
+(ID, VERSIONE, IDENTIFICATIVO, DESCRIZIONE)
+VALUES(677562, 0, 'CONTROLLATA', 'Controllata');
+--Dichiarazione Antimafia
+INSERT INTO A4GT_DICHIARAZIONE_ANTIMAFIA
+(ID, VERSIONE, ID_AZIENDA_AGRICOLA, DATI_DICHIARAZIONE, ID_STATO, PDF_GENERATO, DT_GENERAZIONE_PDF, PDF_FIRMATO, DT_UPLOAD_PDF_FIRMATO, DT_INIZIO_COMPILAZIONE, DT_ULTIMO_AGGIORNAMENTO, ASSENZA_DT, DT_PROTOCOLLAZIONE, ID_PROTOCOLLO, DT_FINE, ESITO, ESITO_DATA_ELABORAZIONE, ESITO_DESCRIZIONE, ESITO_INVIO_AGEA, ESITO_INVIO_BDNA)
+VALUES(961305, 9, 372016, '{"richiedente":{"nome":"ANNAMARIA","cognome":"PICHLER","codiceFiscale":"PCHNMR60D69F132C","comuneNascita":"MERANO .MERAN.","provinciaNascita":"BZ","dataNascita":"29/04/1960","sesso":"F","residenza":{"indirizzo":"VIA LANZA 3","comune":"RUMO","provincia":"TN","CAP":"38020"},"carica":"TITOLARE","dtInizioCarica":"ND","dtFineCarica":"ND"},"dettaglioImpresa":{"formaGiuridicaCodice":"DI","formaGiuridicaDescrizione":"IMPRESA INDIVIDUALE","denominazione":"PICHLER ANNAMARIA","sedeLegale":"VIA LANZA 3 38020 RUMO TRENTO","sede":{"provincia":"TRENTO","comune":"RUMO","ccomune":"022163","toponimo":"VIA","via":"LANZA","ncivico":"3","cap":"38020","telefono":"0463530152"},"estremiCCIAA":{"sede":"TN","numeroIscrizione":"154371","dataIscrizione":"04/12/1996"},"codiceFiscale":"PCHNMR60D69F132C","partitaIva":"01405410224","indirizzoPEC":"ANNAMARIA.PICHLER@PEC.AGRITEL.IT","dettaglioPersonaGiuridica":{"formaGiuridica":"IMPRESA INDIVIDUALE","estremiCostituzione":"","capitaleSociale":"Dato non disponibile","durata":""},"soggettiImpresa":[{"nome":"ANNAMARIA","cognome":"PICHLER","codiceFiscale":"PCHNMR60D69F132C","comuneNascita":"MERANO .MERAN.","provinciaNascita":"BZ","dataNascita":"29/04/1960","sesso":"F","indirizzoResidenza":"VIA LANZA 3","comuneResidenza":"RUMO","provinciaResidenza":"TN","capResidenza":"38020","carica":[{"codice":"TI","tipologia":"TITOLARE","dataInizio":"04/12/1996","dataFine":"","href":"/antimafia/34408/allegatoFamiliariConviventi/34414","selezionato":true,"tipoAllegato":"pdf.p7m","dichiarazione":false}],"familiariConviventi":[{"nome":"CLAUDIO","cognome":"TEVINI","codiceFiscale":"TVNCLD52P26H639P","comuneNascita":"RUMO","provinciaNascita":"TN","dataNascita":"-544842000000","sesso":"M","residenza":{"indirizzo":"LANZA 3","comune":"RUMO","provincia":"TN","CAP":"38020"},"gradoParentela":"Coniuge"}],"estremiCCIAA":"MERANO .MERAN."}],"aziendeCollegate":[]}}', 677562, NULL, NULL, NULL, TIMESTAMP '2019-12-11 10:22:33.000000', TIMESTAMP '2019-11-26 09:55:22.000000', TIMESTAMP '2019-12-11 11:27:11.000000', 1, TIMESTAMP '2019-12-11 10:23:38.000000', 'PAT/RFS151-11/12/2019-0797137', NULL, 'OK', TIMESTAMP '2020-06-04 00:00:00', 'AUTODICHIARAZIONE INSERITA IN AGEA', 'OK', 'ND');
+
+COMMIT;

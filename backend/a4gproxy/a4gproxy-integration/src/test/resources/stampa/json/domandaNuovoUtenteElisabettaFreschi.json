@@ -1,0 +1,43 @@
+{"domandaNuovoUtente": {
+    "data": "08/10/2018",
+    "cognome": "Freschi",
+    "luogo": "Trento",
+    "qualita": {
+        "legaleRappresentante": {
+            "denominazione": "Pinco Pallino",
+            "cuaa": "0123456789012345"
+        },
+        "liberoProfessionista": {
+            "niscrizione": 54321,
+            "denominazione": "Pinco Pallino",
+            "ordineAppartenenza": "blabla",
+            "cuaa": "0123456789012345",
+            "rappresentante": "Pinco Pallino"
+        },
+        "pat": {
+            "dirigente": "capo dei  capi",
+            "struttura": "S110 - Autonomie Locali",
+            "matricola": "pr54321"
+        },
+        "caa": {
+            "ente": "CAA ACLI TRENTO",
+            "sede": "sede 1",
+            "responsabile": "Pippo Pluto"
+        },
+        "ente": {
+            "piva": "0123456789012345",
+            "denominazione": "Pinco Pallino",
+            "responsabile": "Pippo Pluto"
+        },
+        "titolareIndividuale": ""
+    },
+    "nome": "Elisabetta",
+    "telefono": "0461 800111",
+    "codiceFiscale": "FRS LBT 76H42 E625Z",
+    "email": "elisabetta.freschi@infotn.it",
+    "sistemi": {"sistema": {
+        "srt": true,
+        "a4g": true,
+        "ags": true
+    }}
+}}

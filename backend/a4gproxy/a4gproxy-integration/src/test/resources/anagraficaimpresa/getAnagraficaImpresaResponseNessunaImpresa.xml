@@ -1,0 +1,11 @@
+<ns0:RISPOSTA xmlns:ns0="http://InfoTn/2007/AnagraficaImprese">
+	<ns0:HEADER>
+		<ns0:ESECUTORE>PROVINCIA AUTONOMA DI TRENTO</ns0:ESECUTORE>
+		<ns0:SERVIZIO>Ricerca impresa non cessata per codice fiscale</ns0:SERVIZIO>
+		<ns0:ESITO>OK</ns0:ESITO>
+	</ns0:HEADER>
+	<ns0:DATI>
+		<ns0:LISTA_IMPRESE totale="0">
+		</ns0:LISTA_IMPRESE>
+	</ns0:DATI>
+</ns0:RISPOSTA>

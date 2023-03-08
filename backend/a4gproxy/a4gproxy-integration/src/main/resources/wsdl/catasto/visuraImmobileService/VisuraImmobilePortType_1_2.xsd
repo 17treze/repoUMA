@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/CatastoFaultType/schemas" xmlns:ex="http://www.regione.taa.it/FaultType/schemas">
+  <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="VisuraImmobilePortType.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene le eccezioni specifiche dei servizi del catasto</xs:documentation>
+  </xs:annotation>
+  <xs:complexType final="restriction" name="NessunaPrenotazioneFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se non esistono prenotazioni su una particella</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="FrazionamentoInesistenteFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se non esiste il frazionamento</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ParticellaEstintaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su una particella estinta.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="NessunaProprietaAllaDataFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ParticellaNonValidaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su una particella estinta oppure nello stato prenotato.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ParticellaValidataFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni sui frazionamenti di una particella validata (ovvero che non ha dei frazionamenti).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UnitaImmobiliareNonValidaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata quando l'unita' immobiliare e' presente in base dati ma solo ad una data successiva a quella richiesta</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UnitaImmobiliareSoppressaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata nel caso in cui l'unita' immobiliare sia soppressa alla data richiesta.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UnitaImmobiliareSenzaTitolariFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata nel caso in cui l'unita' immobiliare non abbia titolarita' valide alla data richiesta (es: bene comune censibile)</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="SoggettoNonTitolareFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il soggetto non e' titolare , alla data richiesta, di unita' immobiliari</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UnitaImmobiliareSenzaPlanimetrieFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'unita' immobiliare non ha planimetrie</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ParticellaEdificialeSenzaElaboratiPlanimetriciFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se la particella edificiale non ha elaborati planimetrici</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UnitaImmobiliareSenzaDatiMetriciFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'unita' immobiliare non ha dati metrici</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="MappaParticellaNonPubblicabileFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se la mappa di una certa particella non e' pubblicabile</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="AnnoNonValidoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'anno di riferimento della Domanda Unica è errato</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="NomeFileNonValidoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il nome del file inviato non corrisponde ai requisiti</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="InvioFileDuplicatoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il file è già stato inviato</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ErroreDecodificaFileFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il file non viene decodificato correttamente da base64</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="FileNotWellFormedFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se il file non viene decodificato correttamente da base64</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UtenteNonAttivoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'utente non è attivo</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UtenteNonAbilitatoCatastoFondiarioFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'utente non è attivo</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="UtenteNonAbilitatoServizioFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'utente non è abilitato al servizio</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="IPUtenteNonAbilitatoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se l'utente non è attivo</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NessunaPrenotazioneFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:NessunaPrenotazioneFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FrazionamentoInesistenteFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:FrazionamentoInesistenteFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticellaEstintaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ParticellaEstintaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NessunaProprietaAllaDataFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:NessunaProprietaAllaDataFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticellaNonValidaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ParticellaNonValidaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticellaValidataFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ParticellaValidataFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnitaImmobiliareNonValidaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UnitaImmobiliareNonValidaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnitaImmobiliareSoppressaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UnitaImmobiliareSoppressaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnitaImmobiliareSenzaTitolariFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UnitaImmobiliareSenzaTitolariFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SoggettoNonTitolareFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:SoggettoNonTitolareFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnitaImmobiliareSenzaPlanimetrieFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UnitaImmobiliareSenzaPlanimetrieFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticellaEdificialeSenzaElaboratiPlanimetriciFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ParticellaEdificialeSenzaElaboratiPlanimetriciFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnitaImmobiliareSenzaDatiMetriciFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UnitaImmobiliareSenzaDatiMetriciFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MappaParticellaNonPubblicabileFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:MappaParticellaNonPubblicabileFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnnoNonValidoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:AnnoNonValidoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NomeFileNonValidoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:NomeFileNonValidoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InvioFileDuplicatoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:InvioFileDuplicatoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ErroreDecodificaFileFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ErroreDecodificaFileFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileNotWellFormedFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:FileNotWellFormedFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UtenteNonAttivoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UtenteNonAttivoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UtenteNonAbilitatoCatastoFondiarioFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UtenteNonAbilitatoCatastoFondiarioFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UtenteNonAbilitatoServizioFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:UtenteNonAbilitatoServizioFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IPUtenteNonAbilitatoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:IPUtenteNonAbilitatoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

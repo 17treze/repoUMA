@@ -1,0 +1,289 @@
+p-sidebar.sidebar-results > div.ui-sidebar-left {
+    margin: auto;
+    margin-left: 356px;
+    margin-top: 1px;
+    background: #fcfcfceb;
+    z-index: 100!important;
+}
+
+p-sidebar.sidebar-detail > div.ui-sidebar-left {
+    margin: auto;
+    margin-left: 657px;
+    margin-top: 1px;
+    background: #fcfcfceb;
+}
+.for-results {
+    overflow-y: scroll;
+    max-height: 680px;
+    /*width: 305px;*/
+    border-radius: 4px;
+    overflow-x: hidden;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+label.result-label {
+    color: #30373D;
+    font-size: 14px;
+    text-align: left;
+    margin-right: 10px;
+}
+
+label.result-label-light {
+    font-weight: 600!important;
+}
+
+label.switch-label {
+    color: #30373D;
+    font-size: 14px;
+    text-align: left;
+}
+
+.ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+    background-color: #00985b !important;
+}
+.ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider:before {
+    background-color: #e9ecef !important;
+    border: 1px solid #30373d;
+}
+.switch-label > p-inputswitch {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.label-azienda {
+    font-size: 16px!important;
+    text-transform: uppercase;
+}
+label.result-label span {
+    color: #9A9A9A;
+    font-size: 13px;
+    text-align: left;
+    font-weight: 600!important;
+    display: flex;
+}
+
+/* labels stati */
+.stato-content {
+    margin: 0 2px 0 10px;
+    float: right;
+    right: 0px;
+    left: 60%;
+    font-weight: bold;
+    font-size: 13px;
+    color: #30373d;
+    width: 125px;
+    text-align: center;
+}
+.label-stato {
+    border-radius: 10px;
+}
+
+.label-stato span {
+    margin: 0 10px;
+    text-transform: lowercase;
+}
+
+.IN_LAVORAZIONE, .IN_CREAZIONE {
+    background: #66CA9E;
+}
+
+.SOSPESA {
+    background: #ffbc18;
+    float: right;
+}
+
+.CHIUSA, .CONCLUSA {
+    background: #424242;
+    float: right;
+    color: #ffffff;
+}
+
+.APERTA, .IN_CORSO {
+    background: #92D5EF;
+ /*   float: right;*/
+}
+
+.LAVORABILE, .CONSOLIDATA_SU_SUOLO_A4S_E_A4G {
+    background: #88c47e;
+    float: right;
+}
+
+.CANCELLATA {
+    background: #ff0015;
+    float: right;
+}
+
+
+div.content-scroll.activeElement > div.detail-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+/* Scrollbar */
+.for-results::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+.for-results::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+.for-results::-webkit-scrollbar {
+    width: 7px;
+}
+
+.detail-btn {
+    margin-top: -66px;
+    text-align: right;
+}
+
+.content-scroll {
+    padding: 5px 5px;
+    border-bottom: 1px solid #d8d8d8;
+}
+.content-scroll.activeElement {
+    background-color: #e9ecef;
+}
+
+
+
+
+/* Dettaglio lavorazione override style */
+
+label.result-lav-light {
+    font-weight: 500!important;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+label.result-lav-light span {
+    vertical-align: middle;
+}
+
+label.suolo-label span {
+    color: #30373D;
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    width: 45%;
+    float: left;
+    margin-top: 3px;
+}
+
+label.dett-lavorazione-label span {
+    color: #30373D;
+    font-size: 12px;
+    text-align: left;
+    display: flex;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    width: 36%;
+    float: left;
+    margin-top: 3px;
+}
+
+label.intestazione-suolo span {
+    color: #9A9A9A;
+    font-size: 12px;
+    text-align: left;
+    font-weight: 600!important;
+    display: flex;
+    text-transform: uppercase;
+}
+
+.tag-content {
+    margin: 0 2px 0 10px;
+    float: right;
+    right: 0px;
+    left: 60%;
+    font-weight: bold;
+    font-size: 13px;
+    color: #30373d;
+    width: 40px;
+    text-align: center;
+}
+
+.label-tag {
+    border-radius: 10px;
+}
+
+.lavorazione-div {
+    margin-bottom: 15px;
+}
+
+.div-suolo {
+    width: 55%;
+    font-size: 14px;
+    float: left;
+}
+.label-tag span {
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+label.suolo-label, label.dett-lavorazione-label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.label-tag.VIT {
+    background-color: #B4A5BC;
+}
+
+.label-tag.FAG {
+    background-color: #D1BCA4;
+}
+
+.label-tag.FRU {
+    background-color: #F0B77C;
+}
+
+.label-tag.BO {
+    background-color: #BECFD5;
+}
+
+.label-tag.PAS {
+    background-color: #BCDEA1;
+}
+
+.label-tag.OLE {
+    background-color: #d2ffa8;
+}
+
+button.lavorazione-btn {
+    margin-left: 0px;
+    float: right;
+    padding: 0px 0px;
+    border: none;
+    background: none!important;
+    text-align: center;
+}
+
+.lavorazione-btn-group {
+    width: 45%;
+    float: left;
+    position: relative;
+}
+
+div.lavorazione-btn-group > button.lavorazione-btn >span> i {
+    margin: 0 5px;
+    color: #ffffff;
+    font-size: 26px;
+    background-color: #00985b;;
+}
+
+button.lavorazione-btn:focus, button.lavorazione-btn:hover {
+    outline: none;
+}
+
+div.lavorazione-btn-group > button.lavorazione-btn >span> i:hover{
+    background-color: #1a2c24 !important;
+    -o-transition: background-color 0.5s;
+    -webkit-transition: background-color 0.5s;
+    -moz-transition: background-color 0.5s;
+    -ms-transition: background-color 0.5s;
+    transition: background-color 0.5s; 
+}

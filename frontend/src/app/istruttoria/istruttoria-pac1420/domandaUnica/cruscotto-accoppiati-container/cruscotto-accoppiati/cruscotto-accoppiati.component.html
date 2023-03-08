@@ -1,0 +1,17 @@
+<div class="ui-g ui-fluid">
+  <div class="tophome">
+    <div class="ui-grid-fixed">
+      <h4>{{title}}</h4>
+    </div>
+  </div>
+  <div class="top-sub-green">
+    <div class="ui-g-12">
+      <div class="ui-grid-fixed">
+        <p-tabMenu [model]="menu1"></p-tabMenu>
+      </div>
+    </div>
+  </div>
+  <div style="width:100%" class="disaccoppiato">
+    <router-outlet></router-outlet>
+  </div>
+</div>

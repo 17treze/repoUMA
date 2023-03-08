@@ -1,0 +1,32 @@
+:host {
+  $accentColor: #01985a;
+
+  ::ng-deep .ui-dialog {
+    max-height: 100%;
+
+    & .ui-dialog-content {
+      height: 100%;
+    }
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+  @keyframes ui-progress-spinner-color {
+    100%,
+    0% {
+        stroke: grey;
+    }
+    40% {
+        stroke: grey;
+    }
+    66% {
+        stroke: grey;
+    }
+    80%,
+    90% {
+        stroke: grey;
+    }
+  }
+}

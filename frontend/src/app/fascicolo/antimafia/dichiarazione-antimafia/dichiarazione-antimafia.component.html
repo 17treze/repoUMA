@@ -1,0 +1,23 @@
+<br>
+<br>
+<div class="ui-grid-fixed">
+  <h2 class="richiesta-title">
+    {{textTitle}}
+  </h2>
+  <div class="ui-g">
+    <p-steps
+      #stepModule
+      [model]="stepsAntimafia"
+      [activeIndex]="stepEvent.stepIndex"></p-steps>
+  </div>
+  <div class="greybox">
+    <app-procedimenti *ngIf="stepModule.activeIndex == 0"></app-procedimenti>
+    <app-richiedente *ngIf="stepModule.activeIndex == 1"></app-richiedente>
+    <app-impresa *ngIf="stepModule.activeIndex == 2"></app-impresa>
+    <app-soggetti *ngIf="stepModule.activeIndex == 3"></app-soggetti>
+    <app-aziende *ngIf="stepModule.activeIndex == 4"></app-aziende>
+    <app-familiari *ngIf="stepModule.activeIndex == 5"></app-familiari>
+    <app-verifica *ngIf="stepModule.activeIndex == 6"></app-verifica>
+  </div>
+  <div style="margin-bottom:10px;"></div>
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<changeSet id="TERRITORIO_4N.8" author="Alessandro Porcu">
+        <sql endDelimiter=";" splitStatements="true">
+		
+		-- INSERT NUOVI DATI A4GR_DOCUMENTO_DIPENDENZA: id / versione / idDocumentoConduzione / idDocumentoDipendente
+			
+			INSERT INTO A4GR_DOCUMENTO_DIPENDENZA VALUES ( nxtnbr.nextval, 0, ( SELECT A4GR_SOTTOTIPO_DOCUMENTO.ID FROM A4GR_SOTTOTIPO_DOCUMENTO inner join A4GD_DOCUMENTO_CONDUZIONE on A4GR_SOTTOTIPO_DOCUMENTO.ID_DOCUMENTO_CONDUZIONE = A4GD_DOCUMENTO_CONDUZIONE.ID WHERE A4GD_DOCUMENTO_CONDUZIONE.CODICE = 'DEG'), ( SELECT A4GR_SOTTOTIPO_DOCUMENTO.ID FROM A4GR_SOTTOTIPO_DOCUMENTO inner join A4GD_DOCUMENTO_CONDUZIONE on A4GR_SOTTOTIPO_DOCUMENTO.ID_DOCUMENTO_CONDUZIONE = A4GD_DOCUMENTO_CONDUZIONE.ID WHERE A4GD_DOCUMENTO_CONDUZIONE.CODICE ='DUR'));
+
+	       </sql>
+		<rollback>
+		</rollback>
+    </changeSet>
+    
+</databaseChangeLog>

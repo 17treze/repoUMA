@@ -1,0 +1,54 @@
+{
+	"header": {
+		"esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+		"servizio": "Ricerca impresa non cessata per codice fiscale",
+		"esito": "OK"
+	},
+	"dati": {
+		"listaimprese": {
+			"estremiimpresa": [{
+					"denominazione": "TORRESANI CRISTIAN",
+					"codicefiscale": "TRRCST78B08C794X",
+					"partitaiva": "01696010220",
+					"formagiuridica": {
+						"cformagiuridica": "DI",
+						"descrizione": "IMPRESA INDIVIDUALE"
+					},
+					"datiiscrizioneri": {
+						"numerori": "TN-2001-15388",
+						"data": "20010523",
+						"sezioni": {
+							"sezione": [{
+									"csezione": "P",
+									"descrizione": "PICCOLO IMPRENDITORE",
+									"dtiscrizione": "20010523",
+									"coltdiretto": "COLTIVATORE DIRETTO"
+								}
+							]
+						}
+					},
+					"datiiscrizionerea": [{
+							"nrea": "173710",
+							"cciaa": "TN",
+							"flagsede": "SI",
+							"itrasferimentosede": null,
+							"faggiornamento": null,
+							"data": "20010509",
+							"dtultaggiornamento": "20130724",
+							"cfonte": "RI",
+							"cessazione": null
+						}
+					],
+					"elemento": "1"
+				}
+			],
+			"totale": "1"
+		},
+		"datiimpresa": null,
+		"listaul": null,
+		"schedaul": null,
+		"listapersone": null,
+		"schedapersona": null,
+		"errore": null
+	}
+}

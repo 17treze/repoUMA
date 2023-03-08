@@ -1,0 +1,109 @@
+{  
+      "datiAnagrafici":{  
+         "codiceFiscale":"BZZFLV52E14A178I",
+         "nome":"FLAVIO",
+         "cognome":"BEOZZO",
+         "email":"b.f@gmail.com",
+         "telefono":"9999"
+      },
+      "servizi":[  
+         "SRT",
+         "A4G",
+         "AGS"
+      ],
+      "responsabilitaRichieste":{  
+         "responsabilitaTitolare":[  
+            {  
+               "cuaa":"TRRCST78B08C794X2",
+               "denominazione":"TORRESANI CRISTIAN2"
+            },
+            {  
+               "cuaa":"TRRCST78B08C794X",
+               "denominazione":"TORRESANI CRISTIAN"
+            }
+         ],
+		 "responsabilitaLegaleRappresentante":[  
+            {  
+               "cuaa":"TRRCST78B08C794X3",
+               "denominazione":"TORRESANI CRISTIAN4"
+            },
+            {  
+               "cuaa":"TRRCST78B08C794X4",
+               "denominazione":"TORRESANI CRISTIAN4"
+            }
+         ],
+         "responsabilitaCaa":[  
+            {  
+               "idResponsabilita":3,
+               "responsabile":"bbbb",
+               "sedi":[  
+                  {  
+                     "descrizione":"CAA ACLI - TRENTO - 001",
+                     "identificativo":13
+                  },
+                  {  
+                     "descrizione":"CAA ACLI - TRENTO - 002",
+                     "identificativo":14
+                  },
+                  {  
+                     "descrizione":"CAA ACLI - TRENTO - 004",
+                     "identificativo":16
+                  },
+                  {  
+                     "descrizione":"CAA ACLI - TRENTO - 005",
+                     "identificativo":17
+                  },
+                  {  
+                     "descrizione":"CAA ACLI - TRENTO - 006",
+                     "identificativo":778
+                  }
+               ],
+               "codResponsabilita":"CAA",
+               "allegato":null
+            },
+            {  
+               "idResponsabilita":2,
+               "responsabile":"AAA",
+               "sedi":[  
+                  {  
+                     "descrizione":"AGRICOLTURA TRENTINA SERVIZI SRL",
+                     "identificativo":53
+                  },
+                  {  
+                     "descrizione":"APPAG - PROVINCIA AUTONOMA DI TRENTO",
+                     "identificativo":1
+                  },
+                  {  
+                     "descrizione":"CENTRO ASSISTENZA COLDIRETTI DEL TRENTINO SRL",
+                     "identificativo":50
+                  },
+                  {  
+                     "descrizione":"UFFICIO DI TEST",
+                     "identificativo":21
+                  }
+               ],
+               "codResponsabilita":"CAA",
+               "allegato":null
+            }
+         ],
+         "responsabilitaPat":[  
+            {  
+               "idResponsabilita":4,
+               "dirigente": "capo dei  capi",
+               "struttura": "S110 - Autonomie Locali",
+               "matricola": "pr54321",
+               "codResponsabilita":"PAT",
+               "allegato":null
+            },
+            {  
+               "idResponsabilita":5,
+               "dirigente": "capo dei  capi1",
+               "struttura": "S110 - Autonomie Locali1",
+               "matricola": "pr543211",
+               "codResponsabilita":"PAT",
+               "allegato":null
+            }
+         ]
+      },
+      "id":315
+}

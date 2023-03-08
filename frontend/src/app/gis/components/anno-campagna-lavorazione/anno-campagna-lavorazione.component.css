@@ -1,0 +1,15 @@
+.annolavorazione {
+    text-align: center;
+    color: #d8d8d8;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+.annolavorazione:focus {
+    color: #fff;
+}
+
+.annolavorazione.form-control:disabled {
+    cursor: not-allowed;
+}

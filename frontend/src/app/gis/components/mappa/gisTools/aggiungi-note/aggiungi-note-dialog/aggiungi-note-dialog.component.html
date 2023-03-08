@@ -1,0 +1,19 @@
+<div id="dialog-note">
+  <p-dialog [(visible)]="showDialog" (onHide)="closeDialog()" [resizable]="false" [draggable]="false"
+    [baseZIndex]="9999" position="bottom" [style]="{'width': '420px', 'height': '275px', 'bottom':'80px'}">
+    <p-header>
+      Aggiungi note
+    </p-header>
+    <div class="insert-text">
+      <h6>Poligoni selezionati:<strong>{{selectedElements}}</strong></h6>
+      <textarea type="text" class="form-control" [(ngModel)]="note" placeholder="Aggiungi una nota..."></textarea>
+    </div>
+    <p-footer>
+      <div class="button-bar-note">
+        <button pButton type="button" label="Annulla" class="button-annulla" (click)="closeDialog();"></button>
+        <button pButton type="button" label="Salva" class="button-salva" (click)="salvaNote(note);"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>
+<div id="overlayDialog" *ngIf="panelEvent.showNoteFeatures"></div>

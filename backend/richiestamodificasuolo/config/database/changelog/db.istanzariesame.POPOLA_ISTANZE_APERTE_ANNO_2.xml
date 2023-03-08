@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">	
+
+	<changeSet id="ISTANZARIESAME_S37.011_fix" author="Bettina Irler">
+		<sql endDelimiter="?" splitStatements="true">
+		create or replace PROCEDURE POPOLA_ISTANZE_APERTE_ANNO (sovrascrivi_all boolean, panno number default 2020) AS 
+    tipo_suolo varchar2(50);
+    Chiave_richiesta number;
+    countMessaggi number;
+    countDocumenti number;
+
+    PROCEDURE checkExists(rile_exist number, codiRileIn varchar2, codiProdRileIn varchar2, codiRileOut out varchar2, codiProdRileOut out varchar2, note out varchar2) is
+    begin
+        codiRileOut := codiRileIn;
+        codiProdRileOut := codiProdRileIn;
+        note :=  null;
+
+        if(rile_exist = 0) then 
+             note :=  'CODI_RILE: '|| codiRileIn || ' CODI_PROD_RILE: '|| codiProdRileOut;
+             codiRileOut := null;
+             codiProdRileOut := null;
+        end if;
+    end;
+
+    PROCEDURE insertNuovaRichiesta(pchiave_richiesta number, pid_istanza_riesame number, pcuaa varchar2, pazienda varchar2, putente varchar2, pdata_richiesta date, pcampagna number) as
+        Chiave_suolo number;
+        uso varchar2(3);
+        varieta varchar2(3);
+        note varchar2(250);
+        rile_exist number;
+    begin
+        insert into A4ST_RICHIESTA_MODIFICA_SUOLO (ID, UTENTE, DATA_RICHIESTA, TIPO, STATO, CUAA, AZIENDA, CAMPAGNA, ID_ISTANZA_RIESAME)
+            values (pchiave_richiesta, putente, pdata_richiesta, 'ISTANZA_DI_RIESAME', 'APERTA', pcuaa, pazienda, pcampagna, pid_istanza_riesame);            
+            commit;
+
+            for rec2 in (select *  from A4ST_TEMP_ISTANZE_RIES_RILEV a where a.id_istanza_riesame = pid_istanza_riesame) loop
+                    select count(*) into rile_exist from A4SD_CODI_RILE_PCG where codi_rile = rec2.COD_USO_RILEV and codi_prod_rile = rec2.COD_VARIETA_RILEV;
+
+                    checkExists(
+                     rile_exist,
+                     rec2.COD_USO_RILEV,
+                     rec2.COD_VARIETA_RILEV,
+                     uso,
+                     varieta,
+                     note
+                    );   
+
+                    insert into A4ST_SUOLO_RILEVATO (ID, ID_RICHIESTA, CODI_RILE_RILEVATO, CODI_PROD_RILE_RILEVATO, ID_SUOL_GIS_RILEVATO, ID_ISOLA, SHAPE, NOTE_CARICAMENTO, AREA)
+                    values (nxtnbr.nextval, pchiave_richiesta, uso, varieta, rec2.ID_SUOL_GIS, rec2.ID_ISOL, rec2.shape, note, rec2.area);
+            end loop;
+
+            commit;
+
+            for rec in (select *  from A4ST_TEMP_ISTANZE_APERTE where id_istanza_riesame = pid_istanza_riesame) loop
+                Chiave_suolo := nxtnbr.nextval;
+
+                select count(*) into rile_exist from A4SD_CODI_RILE_PCG where codi_rile = rec.COD_USO_DICHIARATO and codi_prod_rile = rec.COD_varieta_DICHIARATO;
+
+                checkExists(
+                 rile_exist,
+                 rec.COD_USO_DICHIARATO,
+                 rec.COD_varieta_DICHIARATO,
+                 uso,
+                 varieta,
+                 note
+                );
+
+                insert into A4ST_SUOLO_DICHIARATO (ID, ID_RICHIESTA, cod_sezione ,SHAPE, CODI_RILE_DICHIARATO, CODI_PROD_RILE_DICHIARATO, ID_ISOLA, ID_SUOL_GIS, COD_ISOLA, NOTE_CARICAMENTO, AREA, AREA_ORI)
+                        values (Chiave_suolo, pchiave_richiesta, rec.cod_sezione,rec.shape, uso, varieta, rec.ID_ISOL, rec.ID_SUOL_GIS, replace(rec.COD_ISOL, '/', '/ '), note, rec.area, rec.AREA_ORI);
+
+                 insert into A4SR_SUPPORTO_TAG_TIPO_SUOLO (ID, ID_SUOLO_DICHIARATO, ID_SUOLO_RILEVATO, UPAS_DICHIARATO)
+                        values (
+                        nxtnbr.nextval,
+                        Chiave_suolo,
+                        (select id from A4ST_SUOLO_RILEVATO where ID_SUOL_GIS_RILEVATO = rec.ID_SUOL_GIS_RILEV and ID_RICHIESTA = pchiave_richiesta),
+                        nvl(rec.UPAS_DICHIARATO, 0)
+                        );
+
+
+            end loop;
+            commit;
+
+            update A4ST_TEMP_ISTANZE_APERTE
+            set importato = 1 where id_istanza_riesame = pid_istanza_riesame;
+
+        exception
+            when others then
+                dbms_output.put_line('Errore: '||pid_istanza_riesame || '-'|| pchiave_richiesta ||'-'||SQLERRM);
+                rollback;
+                delete from A4SR_SUPPORTO_TAG_TIPO_SUOLO where ID_SUOLO_DICHIARATO in (select ID from A4ST_SUOLO_DICHIARATO where ID_RICHIESTA = pchiave_richiesta);
+                delete from A4ST_SUOLO_DICHIARATO where ID_RICHIESTA = pchiave_richiesta;
+                delete from A4ST_SUOLO_RILEVATO where ID_RICHIESTA = pchiave_richiesta;
+                delete from A4ST_RICHIESTA_MODIFICA_SUOLO where id = pchiave_richiesta;
+                commit;
+    end;
+
+    FUNCTION ottieniTipoSuolo (idSuoloDichiarato number, isDichiarato number) return VARCHAR2 AS 
+        ptipo_suoloBO varchar2(3) := 'BO';
+        ptipo_suoloPAS varchar2(3) := 'PAS';
+        ptipo_suolo varchar2(3) := ptipo_suoloBO;
+        pcodi_rile varchar2(3);
+        pcodi_prod_rile varchar2(3);
+        pupas number;
+      begin 
+
+        if(isDichiarato > 0) then 
+            select  CODI_RILE_DICHIARATO, CODI_PROD_RILE_DICHIARATO, nvl(UPAS_DICHIARATO, 0) 
+            into pcodi_rile, pcodi_prod_rile, pupas
+            from A4ST_SUOLO_DICHIARATO sp
+            inner join A4SR_SUPPORTO_TAG_TIPO_SUOLO st
+            on st.id_suolo_DICHIARATO = sp.id
+            where sp.id = idSuoloDichiarato;
+
+            select nvl(max(b.tipo_suolo_dichiarato), ptipo_suoloBO)  
+            into ptipo_suolo
+            from A4SR_TIPO_SUOLO_CODI b
+            where b.codi = pcodi_prod_rile;
+
+            if(ptipo_suolo = ptipo_suoloBO) then 
+                select nvl(max(b.tipo_suolo_dichiarato), ptipo_suoloBO)  
+                into ptipo_suolo
+                from A4SR_TIPO_SUOLO_CODI b
+                where  b.codi = pcodi_rile;
+            end if; 
+        else
+            select CODI_RILE_RILEVATO, CODI_PROD_RILE_RILEVATO, nvl(UPAS_DICHIARATO, 0) 
+             into pcodi_rile, pcodi_prod_rile, pupas
+            from A4ST_SUOLO_RILEVATO sr
+            inner join A4SR_SUPPORTO_TAG_TIPO_SUOLO st
+            on st.id_suolo_rilevato = sr.id
+            and st.id_suolo_dichiarato = idSuoloDichiarato;
+
+            select nvl(max(b.TIPO_SUOLO_RILEVATO), ptipo_suoloBO)  
+            into ptipo_suolo
+            from A4SR_TIPO_SUOLO_CODI b
+            where b.codi = pcodi_prod_rile;
+
+            if(ptipo_suolo = ptipo_suoloBO) then 
+                 select nvl(max(b.TIPO_SUOLO_RILEVATO), ptipo_suoloBO)  
+                into ptipo_suolo
+                from A4SR_TIPO_SUOLO_CODI b
+                where b.codi = pcodi_rile;
+            end if; 
+        end if;
+
+        if(ptipo_suolo = ptipo_suoloPAS and pupas &lt;&gt; 1) then
+            ptipo_suolo := ptipo_suoloBO;
+        end if;
+
+        return ptipo_suolo;
+
+        exception 
+            when others then 
+                return ptipo_suoloBO;
+      end;
+
+    PROCEDURE cancellaRichiesta(pchiave_richiesta number) is
+    begin
+        delete from A4SR_SUPPORTO_TAG_TIPO_SUOLO where ID_SUOLO_DICHIARATO in (select ID from A4ST_SUOLO_DICHIARATO where ID_RICHIESTA = pchiave_richiesta);
+        delete from A4ST_SUOLO_DICHIARATO where ID_RICHIESTA = pchiave_richiesta;
+        delete from A4ST_SUOLO_RILEVATO where ID_RICHIESTA = pchiave_richiesta;
+        delete from A4ST_RICHIESTA_MODIFICA_SUOLO where ID = pchiave_richiesta;
+        commit;
+    end;
+
+  BEGIN 
+    --return;
+    -- ignora sovrascrivi_all (da togliere)
+
+    for richiesta in (select r.* from A4ST_RICHIESTA_MODIFICA_SUOLO r 
+                        left join (select distinct id_istanza_riesame, campagna from A4ST_TEMP_ISTANZE_APERTE) i 
+                        on r.ID_ISTANZA_RIESAME = i.id_istanza_riesame and r.CAMPAGNA = i.CAMPAGNA 
+                        where i.id_istanza_riesame is null and r.campagna >= panno) loop
+
+        if(richiesta.STATO = 'APERTA') then 
+            select count(*) into countDocumenti from A4ST_DOCUMENTAZIONE_RICHIESTA where id_richiesta = richiesta.id;
+            select count(*) into countMessaggi from A4ST_MESSAGGIO_RICHIESTA where id_richiesta = richiesta.id;
+
+            if(countDocumenti = 0 and countMessaggi = 0) then
+                dbms_output.put_line('Richiesta da cancellare ' || richiesta.id || ' campagna ' || richiesta.campagna);
+                cancellaRichiesta(richiesta.id);
+            end if;
+        end if;
+
+        -- se è stato cancellato prima non fa nulla
+        update A4ST_RICHIESTA_MODIFICA_SUOLO set STATO = 'CANCELLATA' where id = richiesta.id and STATO &lt;&gt; 'CONCLUSA';
+        commit;
+
+    end loop;
+
+    -- segno le istanze già importate importati
+    update A4ST_TEMP_ISTANZE_APERTE i set importato = 1 where exists (select 1 from A4ST_RICHIESTA_MODIFICA_SUOLO r 
+    where r.ID_ISTANZA_RIESAME = i.id_istanza_riesame and r.CAMPAGNA = i.CAMPAGNA);
+    commit;
+
+    -- inserisco le istanze nuove
+    for istanza in (select distinct id_istanza_riesame, cuaa, azienda, utente, data_richiesta, campagna 
+                        from A4ST_TEMP_ISTANZE_APERTE where nvl(importato,0) = 0 and CAMPAGNA >= panno) loop
+        dbms_output.put_line('Istanza da aggiungere ' || istanza.id_istanza_riesame || ' campagna ' || istanza.campagna); 
+        Chiave_richiesta := nxtnbr.nextval;
+        insertNuovaRichiesta(Chiave_richiesta, istanza.id_istanza_riesame, istanza.cuaa, istanza.azienda, istanza.utente, istanza.data_richiesta, istanza.campagna);
+
+        for rec in (select id from A4ST_SUOLO_DICHIARATO where ID_RICHIESTA = Chiave_richiesta) loop 
+            tipo_suolo := ottieniTipoSuolo(rec.id, 1);
+            update A4ST_SUOLO_DICHIARATO set TIPO_SUOLO_DICHIARATO = tipo_suolo where id = rec.id;
+
+            tipo_suolo := ottieniTipoSuolo(rec.id, 0);
+            update A4ST_SUOLO_DICHIARATO set TIPO_SUOLO_RILEVATO = tipo_suolo where id = rec.id;
+        end loop;
+        commit;
+    end loop;
+
+END POPOLA_ISTANZE_APERTE_ANNO;
+?
+</sql>
+	<sql endDelimiter=";" splitStatements="true">
+		GRANT EXECUTE ON POPOLA_ISTANZE_APERTE_ANNO TO ${user.writer};
+	</sql>
+	</changeSet>
+</databaseChangeLog>

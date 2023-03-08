@@ -1,0 +1,41 @@
+:host {
+    $accentColor: #01985a;
+  
+    p-dropdown > ::ng-deep .ui-dropdown {
+      label.ui-dropdown-label {
+        height: 100%;
+        font-weight: normal !important;
+      }
+    }
+  
+    input.ui-inputtext:disabled {
+      border-bottom: 1px dotted;
+      opacity: .9;
+      background: #e8f5e9;
+    }
+  
+    ::ng-deep p-dropdown span {
+      text-overflow: ellipsis;
+    }
+  
+    ::ng-deep input.ui-inputtext.ui-spinner-input:disabled {
+      border-bottom: 1px dotted;
+      opacity: .9;
+      background: #e8f5e9;
+    }
+  
+    ::ng-deep .ui-dropdown.ui-state-disabled {
+      .ui-dropdown-label-container > .ui-dropdown-label.ui-inputtext {
+        border-bottom: 1px dotted;
+        opacity: .9;
+        background: #b1ddb5;
+      }
+    }
+
+    #documenti-principali .ui-dropdown-label-container {
+      width: 33em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+  }
+  }

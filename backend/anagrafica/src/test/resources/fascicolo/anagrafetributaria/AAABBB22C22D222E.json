@@ -1,0 +1,61 @@
+{
+  "codiceFiscale": "AAABBB22C22D222E",
+  "anagrafica": {
+    "nome": "FABRIZIO",
+    "cognome": "DE PODA",
+    "sesso": "MASCHIO",
+    "dataNascita": "1965-03-21",
+    "comuneNascita": "CLES",
+    "provinciaNascita": "TN"
+  },
+  "deceduta": true,
+  "impresaIndividuale": {
+    "partitaIva": "01300210224",
+    "denominazione": "DE PODA                  FABRIZIO",
+    "sedeLegale": {
+      "indirizzo": {
+        "toponimo": null,
+        "via": null,
+        "civico": null,
+        "comune": "CONTA'",
+        "frazione": null,
+        "cap": "38093",
+        "codiceIstat": null,
+        "provincia": "TN",
+        "denominazioneEstesa": "VIA PROVINCIALE 5"
+      },
+      "attivitaAteco": [
+        {
+          "codice": "A.01.50.00",
+          "descrizione": "COLTIVAZIONI AGRICOLE ASSOCIATE ALL'ALLEVAMENTO DI ANIMALI: ATTIVITA' MISTA",
+          "importanza": null
+        },
+        {
+          "codice": "D.35.11.00",
+          "descrizione": "PRODUZIONE DI ENERGIA ELETTRICA",
+          "importanza": null
+        },
+        {
+          "codice": "A.01.13.4",
+          "descrizione": "COLTURE FRUTTICOLE DIVERSE, COLTIVAZIONE DI PRODOTTI DESTINATI ALLA PREPARAZIONE DI BEVANDE E SPEZIE",
+          "importanza": null
+        },
+        {
+          "codice": "A.01.2",
+          "descrizione": "COLTIVAZIONE DI COLTURE PERMANENTI",
+          "importanza": null
+        },
+        {
+          "codice": "A.01.41",
+          "descrizione": "ALLEVAMENTO DI BOVINI DA LATTE",
+          "importanza": null
+        }
+      ],
+      "iscrizioneRegistroImprese": null,
+      "telefono": null,
+      "indirizzoPec": null
+    },
+    "oggettoSociale": null,
+    "formaGiuridica": "Impresa individuale"
+  }
+}

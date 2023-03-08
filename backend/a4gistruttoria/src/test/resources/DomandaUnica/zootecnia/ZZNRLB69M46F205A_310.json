@@ -1,0 +1,56 @@
+{
+	"errCod": "something goes wrong",
+	"errDescr": "bdn non disponibile",
+	"numeroCapi": 18,
+	"listaCapi": {
+		"clsCapo": []
+	},
+	"listaCapiMacellati": {
+		"clsCapoMacellato": []
+	},
+	"listaCapiOvicaprini": {
+		"clsCapoOvicaprino": []
+	},
+	"listaVacche": {
+		"clsCapoVacca": [
+			{
+				"capoId": 109814037,
+				"codice": "CAPO_4",
+				"codLibro": "308",
+				"descrLibro": "ammissibile + controlli latte ok",
+				"dtNascita": 1204844400000,
+				"dtNascitaVitello": 1514588400000,
+				"razzaCodice": "SIM",
+				"codiceVitello": "IT022990294814",
+				"dtInizioDetenzione": 1510268400000,
+				"dtFineDetenzione": 1518908400000,
+				"aziendaCodice": "003FE330",
+				"allevId": 729337,
+				"aziendaLongitudine": 10.96925,
+				"aziendaLatitudine": 46.38212,
+				"flagIBR": null,
+				"flagRispettoPrevalenzaIBR": null,
+				"sessoVitello": "M",
+				"vaccaDtIngresso": 1442786400000,
+				"vaccaDtComAutoritaIngresso": 1443088800000,
+				"vaccaDtInserimentoBdnIngresso": 1443391200000,
+				"vitelloDtApplMarchio": 1514847600000,
+				"vitelloDtComAutoritaNascita": 1514847600000,
+				"vitelloDtInserimentoBdnNascita": 1517526000000,
+				"flagProrogaMarcatura": "N",
+				"cuaa": "PDRTTR69M30C794R",
+				"sesso": "F",
+				"vitelloCapoId": 117725671,
+				"vitelloTipoOrigine": "N",
+				"vitelloDtComAutoritaIngresso": 1514847600000,
+				"vitelloDtInserimentoBdnIngresso": 1514847600000,
+				"flagDelegatoIngressoVacca": "N",
+				"ruoloUtenteIngressoVacca": "REG",
+				"flagDelegatoNascitaVitello": "S",
+				"ruoloUtenteNascitaVitello": "REG",
+				"flagDelegatoIngressoVitello": "R",
+				"ruoloUtenteIngressoVitello": "REG"
+			}
+		]
+	}
+}

@@ -1,0 +1,11 @@
+<div>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="myFile">{{this.title}}</label>
+      <br/>
+      <input type="file" id="myFile" name="myFile" (change)="onFileChange($event)" accept="{{fileExt}}">
+      <button type="button" (click)="clearFile()">Svuota file</button>
+    </div>
+    <button type="submit" [disabled]="f.invalid || loading">Invia file</button>
+  </form>
+</div>

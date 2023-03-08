@@ -1,0 +1,24 @@
+<!-- LAYER SWITCHER BTN -->
+<div id="layer-switcher" [ngClass]="{'active-tool': panelEvent.showLayerSwitcher}" 
+[ngClass]="{'toolDisattivato':rightToolbarEvent.spegniVettorialiActived}" (click)="openLayerSwitcher()">
+  <button class='btn btn-primary' pTooltip="Livelli" tooltipPosition="left" [disabled]="rightToolbarEvent.spegniVettorialiActived" >
+    <i class="fa fa-layer-group"></i>
+  </button>
+</div> 
+
+<!-- LAYER SWITCHER CONTENT -->
+<div id="info-panel" class="card-content" [hidden]="!panelEvent.showLayerSwitcher" [ngClass]="{'onlyLs': panelEvent.showLayerSwitcher 
+ && panelEvent.identifyTableContent.length == 0}">
+  <p-sidebar class="sidebar-results sidebar-ls" 
+  [(visible)]="panelEvent.showLayerSwitcher" [(dismissible)]="dismissible"
+   [(blockScroll)]="blockScroll" position="left">
+   <h1 style="text-transform: none!important;">Livelli</h1>
+   <!-- SWITCHER OPACITY BAR -->
+   <gis-opacitySwitcher [rootMap]="rootMap"></gis-opacitySwitcher>
+   <div class="layerSwitcher" #layerSwitcher [ngClass]="{'onlyLs': panelEvent.showLayerSwitcher 
+   && panelEvent.identifyTableContent.length == 0}" (click)="checkLayerVisibility($event)">
+   </div>
+  </p-sidebar>
+</div>
+
+

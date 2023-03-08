@@ -1,0 +1,44 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+            <div class="ui-grid-fixed">
+    <div class="accordion-wrapper dettaglioaccordion" *ngIf='tipiControllo && passiLavorazione'>
+      <ng-template ngFor let-tipoControllo let-last="last" [ngForOf]="tipiControllo">
+        <p-accordion>
+          <p-accordionTab header="{{tipoControllo.descrizione1}}" [selected]="true">
+            <ng-template ngFor let-passoLavorazione let-last="last" [ngForOf]="passiLavorazione | tipoFilter : 'codice1' : tipoControllo.codice1">
+              <div class="table-responsive nobrd" style="margin-top:30px">
+                <p-table [columns]="cols" [value]="controlli | tipoFilter : 'codice1' : tipoControllo.codice1 | tipoFilter : 'codice2' : passoLavorazione.codice2"
+                  [autoLayout]="true" [paginator]="false" [responsive]="true">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                        <strong *ngIf='col.header'>{{passoLavorazione.descrizione2}}</strong>
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-dato let-i="rowIndex">
+                    <tr>
+                      <!--<td>{{dato.controllo}}</td>
+                      <td>{{dato.controlloDescrizione}}</td>-->
+                      <td style="font-weight:bold">{{dato.valore}}</td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage" let-columns>
+                    <tr>
+                      <td [attr.colspan]="10">
+                        Controllo non eseguito
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </ng-template>
+          </p-accordionTab>
+        </p-accordion>
+      </ng-template>
+    </div>
+    <div *ngIf='!istruttoriaDUCorrente.dataUltimoCalcolo && !tipiControllo && !passiLavorazione'>
+      {{ "CONTROLLI_SOSTEGNO.nessunControlloEseguito" | translate }}
+    </div>
+  </div>
+</div></div>

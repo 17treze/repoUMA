@@ -1,0 +1,12 @@
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\StatoFascicoloEnum.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\EntitaDominioFascicoloId.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\UpdateFascicoloValidatoException.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\FascicoloNonValidabileException.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\FascicoloIdValidazioneGenerator.class
+it\tndigitale\a4g\framework\ext\validazione\repository\handler\LoggingValidazioneUser.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\EntitaDominioFascicolo_.class
+it\tndigitale\a4g\framework\ext\validazione\repository\handler\PersistenzaEntitaFascicoloHandler.class
+it\tndigitale\a4g\framework\ext\validazione\FrameworkExtValidazioneApplication.class
+it\tndigitale\a4g\framework\ext\validazione\repository\handler\LoggingValidazioneDao.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\EntitaDominioFascicolo.class
+it\tndigitale\a4g\framework\ext\validazione\fascicolo\FascicoloIdGenerator.class

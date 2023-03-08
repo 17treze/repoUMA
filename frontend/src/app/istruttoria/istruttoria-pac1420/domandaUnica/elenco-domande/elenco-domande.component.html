@@ -1,0 +1,78 @@
+<div  *ngIf="getIstruttoriaCorrente()">
+
+
+   
+
+                <div  class="ui-g ui-fluid">
+                    <div  class="tophome riepilogo">
+                      <div  class="ui-grid-fixed">
+                        <h4 >ISTRUTTORIA</h4>
+                        <div  class="subhome">
+                          <div  class="ui-g">
+
+                              <div class="ui-md-3">
+                                  <strong >PAC</strong>
+                                  <br>{{getIstruttoriaCorrente().descrizionePac}}
+                              </div>
+                              <div class="ui-md-3">
+                                  <strong >Tipologia Domanda</strong>
+                                  <br>{{getIstruttoriaCorrente().descrizioneDomanda}}
+                              </div>
+                              <div class="ui-md-3">
+                                  <strong >Anno di riferimento</strong>
+                                  <br>{{getIstruttoriaCorrente().annoRiferimento}}
+                              </div>
+                              <div class="ui-md-3">
+                                  <strong >Stato</strong>
+                                  <br>{{toUpperCase()}}
+                              </div>
+
+
+                            </div></div></div></div></div>
+
+
+                            <div  class="ui-g ui-fluid">
+                              <div  class="ui-grid-fixed">
+                                <div  class="ui-g-12">
+
+
+ 
+    <legend class="richiesta-title" style="padding: 10px 0;">{{titoloPagina}}</legend>
+    <p-table [columns]="cols" [lazy]="true" [totalRecords]="this.paginaDomande.elementiTotali" (onLazyLoad)="changePage($event)"
+      [value]="this.paginaDomande.risultati" [rows]="this.elementiPerPagina" [paginator]="true">
+      <ng-template pTemplate="header" class="header">
+        <tr>
+          <th style="width: 14%"><strong>CUAA</strong></th>
+          <th style="width: 16%"><strong>Ragione sociale</strong></th>
+          <th style="width: 7%"><strong>Numero Domanda</strong></th>
+          <th style="width: 9%"><strong>Modulo</strong></th>
+          <th style="width: 9%"><strong>Data pres.</strong></th>
+          <th style="width: 7%"><strong>Numero Domanda rett.</strong></th>
+          <th style="width: 9%"><strong>Data pres. iniz.</strong></th>
+          <th style="width: 22%"><strong>Ente</strong></th>
+          <th *ngIf="statoDomande !== 'IN ISTRUTTORIA'" style="width: 7%"><strong>Anomalie</strong></th>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-domanda>
+        <tr>
+          <td>{{domanda.infoGeneraliDomanda.cuaaIntestatario}}</td>
+          <td>{{domanda.infoGeneraliDomanda.ragioneSociale}}</td>
+          <td>{{domanda.infoGeneraliDomanda.numeroDomanda}}</td>
+          <td>{{domanda.infoGeneraliDomanda.modulo}}</td>
+          <td>{{domanda.infoGeneraliDomanda.dataPresentazione | date: "dd/MM/yyyy"}}</td>
+          <td>{{domanda.infoGeneraliDomanda.numeroDomandaRettificata}}</td>
+          <td>{{domanda.infoGeneraliDomanda.dataPresentazioneDomandaRettificata | slice:0:10}}</td>
+          <td>{{domanda.infoGeneraliDomanda.enteCompilatore}}</td>
+          <td *ngIf="statoDomande == 'NON RICEVIBILE'">
+            <div class="pallinoRosso"></div>
+          </td>
+          <td *ngIf="statoDomande == 'RICEVIBILE'">
+            <div class="pallinoVerde"></div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div></div></div>
+
+</div>

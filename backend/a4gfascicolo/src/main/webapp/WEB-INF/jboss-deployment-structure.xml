@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure
+        xsi:schemaLocation="urn:jboss:deployment-structure:1.3 jboss-deployment-structure-1_3.xsd" xmlns="urn:jboss:deployment-structure:1.3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <deployment>
+        <exclusions>
+            <module name="com.fasterxml.jackson.core.jackson-core" />
+            <module name="com.fasterxml.jackson.core.jackson-databind" />
+            <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" />
+            <module name="org.jboss.resteasy.resteasy-jackson2-provider" />
+            <module name="com.fasterxml.jackson.datatype.jackson-datatype-jdk8" />
+            <module name="com.fasterxml.jackson.datatype.jackson-datatype-jsr310" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>

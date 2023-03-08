@@ -1,0 +1,8 @@
+<ns2:richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll xmlns:ns2="http://cooperazione.sian.it/schema/interscambio/" xmlns:ns3="http://cooperazione.sian.it/schema/interscambio/globals" xmlns:ns4="http://cooperazione.sian.it/schema/interscambio/users">
+    <ns2:identificativo>
+        <ns2:CodiceFiscalePersonaFisica>RGNPLA67A63E783V</ns2:CodiceFiscalePersonaFisica>
+    </ns2:identificativo>
+    <ns2:utente>
+        <ns4:utenteCF>PGLPLG72E23C352Q</ns4:utenteCF>
+    </ns2:utente>
+</ns2:richiesta_RichiestaRispostaSincrona_ricercaAnagraficaAll>

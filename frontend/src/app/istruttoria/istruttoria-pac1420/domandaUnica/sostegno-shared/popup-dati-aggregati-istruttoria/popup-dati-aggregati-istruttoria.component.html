@@ -1,0 +1,38 @@
+<p-dialog
+  [(visible)]="popupVisibile"
+  [responsive]="true"
+  [modal]="true"
+  showEffect="fade"
+  [closable]="true"
+  [positionTop]="0"
+  (onHide)="closePopup()"
+  [blockScroll]="true">
+  <!-- [positionLeft]="0" [positionTop]="0" -->
+  <p-header>
+    Domanda unica campagna {{ annoCampagna }} -
+    {{
+      "IstruttorieDatiAggregati." + tipoIstruttoria + "_" + tipoSostegno
+        | translate
+    }}
+  </p-header>
+  <div class="boxpopup">
+    <app-tabella-dati-aggregati-istruttoria
+      [tipoSostegno]="tipoSostegno"
+      [tipoIstruttoria]="tipoIstruttoria"
+      [annoCampagna]="annoCampagna"
+      (datiAggregatiModelEmitter)="setDatiAggregatiModel($event)">
+    </app-tabella-dati-aggregati-istruttoria>
+
+    <!-- <app-tabella-totali-dati-aggregati-istruttoria *ngIf="datiAggregatiModel">
+    </app-tabella-totali-dati-aggregati-istruttoria> -->
+
+  </div>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      class="btn btn-darkgreen mt-0 mr-0"
+      (click)="closePopup()"
+      label="{{ 'chiudi' | translate }}"></button>
+  </p-footer>
+</p-dialog>

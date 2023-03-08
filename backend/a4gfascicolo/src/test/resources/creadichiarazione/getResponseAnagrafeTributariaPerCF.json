@@ -1,0 +1,150 @@
+{
+	"risposta": {
+		"persona": {
+			"dittaIndividuale": {
+				"attivita": [{
+						"codice": "A.01.24.00",
+						"descrizione": "COLTIVAZIONE DI POMACEE E FRUTTA A NOCCIOLO",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 1391990400000,
+							"fonte": null
+						}
+					}, {
+						"codice": "D.35.11.00",
+						"descrizione": "PRODUZIONE DI ENERGIA ELETTRICA",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 1391990400000,
+							"fonte": null
+						}
+					}, {
+						"codice": "A.01.25.00",
+						"descrizione": "COLTIVAZIONE DI ALTRI ALBERI DA FRUTTA, FRUTTI DI BOSCO E FRUTTA IN GUSCIO",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 1391990400000,
+							"fonte": null
+						}
+					}, {
+						"codice": "H.55.23.5",
+						"descrizione": "AGRITURISMO",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 1120172400000,
+							"fonte": null
+						}
+					}, {
+						"codice": "I.56.10.12",
+						"descrizione": "ATTIVITA' DI RISTORAZIONE CONNESSE ALLE AZIENDE AGRICOLE",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 599616000000,
+							"fonte": null
+						}
+					}, {
+						"codice": "A.01.2",
+						"descrizione": "COLTIVAZIONE DI COLTURE PERMANENTI",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 599616000000,
+							"fonte": null
+						}
+					}, {
+						"codice": "A.01.13",
+						"descrizione": "COLTIVAZIONE DI ORTAGGI E MELONI, RADICI E TUBERI",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 599616000000,
+							"fonte": null
+						}
+					}, {
+						"codice": "A.01.21",
+						"descrizione": "COLTIVAZIONE DI UVA",
+						"infoDate": {
+							"dataFine": null,
+							"dataInizio": 599616000000,
+							"fonte": null
+						}
+					}
+				],
+				"depositario": null,
+				"domicilioFiscale": {
+					"infoDate": null,
+					"ubicazione": {
+						"altro": null,
+						"cap": "38071",
+						"codiceCatastale": null,
+						"comune": "BLEGGIO SUPERIORE",
+						"distretto": null,
+						"numCivico": null,
+						"provincia": "TN",
+						"tipologia": null,
+						"toponimo": "LOC MATTON"
+					}
+				},
+				"partitaIva": {
+					"confluenzaPiva": null,
+					"date": {
+						"dataFine": null,
+						"dataInizio": 599616000000,
+						"fonte": null
+					},
+					"motivoCessazione": null,
+					"piva": "01239960220",
+					"stato": null
+				},
+				"rappresentante": null,
+				"sede": {
+					"infoDate": null,
+					"ubicazione": {
+						"altro": null,
+						"cap": "38071",
+						"codiceCatastale": null,
+						"comune": "BLEGGIO SUPERIORE",
+						"distretto": null,
+						"numCivico": null,
+						"provincia": "TN",
+						"tipologia": null,
+						"toponimo": "LOC MATTON"
+					}
+				},
+				"denominazione": "AZ. AGR. MASO PRA' CAVAI"
+			},
+			"personaFisica": {
+				"cognome": "BROCHETTI",
+				"datiNascita": {
+					"comune": "BLEGGIO SUPERIORE",
+					"data": -217987200000,
+					"provincia": "TN"
+				},
+				"nome": "RODOLFO",
+				"codiceFiscale": "BRCRLF63B04A902X",
+				"sesso": {
+					"valore": "M"
+				},
+				"decesso": null,
+				"domicilioFiscale": {
+					"infoDate": null,
+					"ubicazione": {
+						"altro": null,
+						"cap": "38071",
+						"codiceCatastale": null,
+						"comune": "BLEGGIO SUPERIORE",
+						"distretto": null,
+						"numCivico": null,
+						"provincia": "TN",
+						"tipologia": null,
+						"toponimo": "LOC MATTON"
+					}
+				}
+			}
+		},
+		"soggetto": null,
+		"segnalazione": null
+	},
+	"esito": {
+		"codice": "012",
+		"descrizione": "Operazione correttamente eseguita (RicercaAnagrafica)"
+	}
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas">
+  <xs:annotation>
+    <xs:documentation>Contiene i data type descrittivi di un comune catastale</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="ChiaveComuneCatastaleType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano univocamente un comune catastale</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="codice" type="xs:integer" use="required">
+      <xs:annotation>
+        <xs:documentation>Identificativo univoco del comune catastale.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ComuneCatastaleType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni di un comune catastale</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="chiave" type="tns:ChiaveComuneCatastaleType">
+        <xs:annotation>
+          <xs:documentation>Informazioni identificative del comune</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="descrizione" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>Informazione descrittiva del comune catastale.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

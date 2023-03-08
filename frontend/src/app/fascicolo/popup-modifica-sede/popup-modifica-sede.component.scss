@@ -1,0 +1,31 @@
+:host {
+  $primaryLightestColor: #e8f5e9;
+
+  ::ng-deep .x-medium-dialog {
+    width: 50vw;
+  }
+
+  ::ng-deep span.ui-calendar.ui-calendar-w-btn {
+    bottom: 1em;
+  }
+
+  ::ng-deep button.ui-datepicker-trigger.ui-calendar-button {
+    background: transparent !important;
+    top: 1.8em;
+    
+    & > span {
+      font-size: xx-large;
+
+      &:hover {
+        background-color: $primaryLightestColor !important;
+        border-radius: 1em;
+      }
+    }
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+  }
+}

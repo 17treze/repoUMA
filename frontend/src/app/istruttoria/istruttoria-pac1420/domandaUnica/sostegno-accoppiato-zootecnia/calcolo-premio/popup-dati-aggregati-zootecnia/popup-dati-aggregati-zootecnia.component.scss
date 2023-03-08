@@ -1,0 +1,13 @@
+::ng-deep p-dialog .ui-dialog {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .ui-dialog-content {
+        overflow-y: auto;
+    }
+}
+
+::ng-deep table.tableDatiAggregati tr:last-child {
+    font-weight: bold;
+}

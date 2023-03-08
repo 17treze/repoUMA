@@ -1,0 +1,147 @@
+<div class="boxgrey  layout-actionmenu">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h3>{{ textTitle }}</h3>
+      <p-accordion [multiple]="true">
+        <p-accordionTab header="{{intestazioni.PSR_SUPERFICIE_EU}}" [selected]="true">
+          <div class="boxgrey">
+            <p-table [columns]="colsSUPDU" [value]="domandeSuperficieView" [autoLayout]="true" [paginator]="true"
+              [rows]="5" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.header"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                <tr>
+                  <td>{{domandaCollegata.idDomanda}}</td>
+                  <td>
+                    {{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date: "dd/MM/yyyy") :  intestazioni.nd }}
+                  </td>
+                  <td>{{domandaCollegata.campagna}}</td>
+                  <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                  <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                    (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                    (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                    (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineEsitoNegativo ? (domandaCollegata.dtFineEsitoNegativo
+                    | date: "dd/MM/yyyy") : intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.statoBdna}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="17">
+                    {{ intestazioni.noTableContent }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <!----app-dettaglio-domande-collegate [changeView]="changeView"></app-dettaglio-domande-collegate-->
+        </p-accordionTab>
+        <p-accordionTab header="{{intestazioni.PSR_STRUTTURALI_EU}}" [selected]="true">
+          <div class="boxgrey">
+            <p-table [columns]="colsPSRStr" [value]="domandeStrutturaliView" [autoLayout]="true" [paginator]="true"
+              [rows]="5" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.header"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                <tr>
+                  <td>{{domandaCollegata.misurePsr}}</td>
+                  <td>{{domandaCollegata.idDomanda}}</td>
+                  <td>
+                    {{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date: "dd/MM/yyyy") :  intestazioni.nd }}
+                  </td>
+                  <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                  <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                    (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                    (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                    (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineEsitoNegativo ? (domandaCollegata.dtFineEsitoNegativo
+                    | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.statoBdna}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="18">
+                    {{ intestazioni.noTableContent }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+        <p-accordionTab header="{{intestazioni.DOMANDA_UNICA}}" [selected]="true">
+          <div class="boxgrey">
+            <p-table [columns]="colsSUPDU" [value]="domandeUnicheView" [autoLayout]="true" [paginator]="true" [rows]="5"
+              [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+                    [pSortableColumnDisabled]="col.field == null">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.header"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                <tr>
+                  <td>{{domandaCollegata.idDomanda}}</td>
+                  <td>
+                    {{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date: "dd/MM/yyyy") :  intestazioni.nd }}
+                  </td>
+                  <td>{{domandaCollegata.campagna}}</td>
+                  <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                  <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                    (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                    (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                    (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.dtFineEsitoNegativo ? (domandaCollegata.dtFineEsitoNegativo
+                    | date: "dd/MM/yyyy") :
+                    intestazioni.nd}}</td>
+                  <td>{{domandaCollegata.statoBdna}}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="17">
+                    {{ intestazioni.noTableContent }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+[
+	{
+		"id": 37280,
+		"cuaa": "02413290228",
+		"tipoDomanda": "DOMANDA_UNICA",
+		"idDomanda": 188723,
+		"dtDomanda": "2018-06-04",
+		"campagna": 2018,
+		"importoRichiesto": 81610.05,
+		"dtBdnaOp": null,
+		"dtBdna": "2019-04-02",
+		"protocollo": "PR_TNUTG_Ingresso_20190402",
+		"statoBdna": "CHIUSA_CON_ESITO_NEGATIVO",
+		"misurePsr": null,
+		"dtInizioSilenzioAssenso": "2019-05-02",
+		"dtInizioEsitoNegativo": "2019-04-02",
+		"dtFineSilenzioAssenso": "2019-10-29",
+		"dtFineEsitoNegativo": "2020-04-01"
+	}
+]

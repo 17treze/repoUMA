@@ -1,0 +1,201 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "PLOLNZ71B07E565W",
+        "ragioneSociale": "POLA LORENZO",
+        "numeroDomanda": 183109,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-25T10:13:45.000+0200",
+        "codEnteCompilatore": "668",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 012",
+        "dataProtocollazione": "2018-04-25T10:14:18.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        },
+        "sostegniSuperficie": [
+            {
+                "sostegno": "BPS",
+                "idIntervento": 18,
+                "codIntervento": "BPS",
+                "descIntervento": "IMPEGNO TITOLI",
+                "particella": {
+                    "idParticella": 1461799,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02461",
+                    "sub": " "
+                },
+                "idParcella": 253441,
+                "idIsola": 768425,
+                "codIsola": "IT25/PLOLNZ71B07E565W/AAA03",
+                "supDichiarata": 1847,
+                "idPianoColture": 6086179,
+                "idColtura": 20210,
+                "codColtura3": "040-622-000",
+                "descColtura": "MELILOTO (cod. Agea: 622-000)",
+                "coeffTara": 1,
+                "codColtura5": "622-000-000-000-000",
+                "codLivello": "121",
+                "supImpegnata": 1847,
+                "descMantenimento": "PASCOLAMENTO CON ANIMALI DI TERZI"
+            },
+            {
+                "sostegno": "BPS",
+                "idIntervento": 18,
+                "codIntervento": "BPS",
+                "descIntervento": "IMPEGNO TITOLI",
+                "particella": {
+                    "idParticella": 1461799,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02461",
+                    "sub": " "
+                },
+                "idParcella": 253441,
+                "idIsola": 768425,
+                "codIsola": "IT25/PLOLNZ71B07E565W/AAA03",
+                "supDichiarata": 1847,
+                "idPianoColture": 6086179,
+                "idColtura": 20210,
+                "codColtura3": "040-622-000",
+                "descColtura": "MELILOTO (cod. Agea: 622-000)",
+                "coeffTara": 1,
+                "codColtura5": "622-000-000-000-000",
+                "codLivello": "121",
+                "supImpegnata": 10000,
+                "descMantenimento": "PASCOLAMENTO CON ANIMALI DI TERZI"
+            },
+            {
+                "sostegno": "BPS",
+                "idIntervento": 18,
+                "codIntervento": "BPS",
+                "descIntervento": "IMPEGNO TITOLI",
+                "particella": {
+                    "idParticella": 1461775,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02472",
+                    "sub": " "
+                },
+                "idParcella": 253441,
+                "idIsola": 768425,
+                "codIsola": "IT25/PLOLNZ71B07E565W/AAA03",
+                "supDichiarata": 525,
+                "idPianoColture": 6086174,
+                "idColtura": 20210,
+                "codColtura3": "040-622-000",
+                "descColtura": "MELILOTO (cod. Agea: 622-000)",
+                "coeffTara": 1,
+                "codColtura5": "622-000-000-000-000",
+                "codLivello": "121",
+                "supImpegnata": 5250,
+                "descMantenimento": "PASCOLAMENTO CON ANIMALI DI TERZI"
+            },
+            {
+                "sostegno": "BPS",
+                "idIntervento": 18,
+                "codIntervento": "BPS",
+                "descIntervento": "IMPEGNO TITOLI",
+                "particella": {
+                    "idParticella": 1461776,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02471",
+                    "sub": " "
+                },
+                "idParcella": 253441,
+                "idIsola": 768425,
+                "codIsola": "IT25/PLOLNZ71B07E565W/AAA03",
+                "supDichiarata": 1176,
+                "idPianoColture": 6086175,
+                "idColtura": 20210,
+                "codColtura3": "040-622-000",
+                "descColtura": "MELILOTO (cod. Agea: 622-000)",
+                "coeffTara": 1,
+                "codColtura5": "622-000-000-000-000",
+                "codLivello": "121",
+                "supImpegnata": 11764,
+                "descMantenimento": "PASCOLAMENTO CON ANIMALI DI TERZI"
+            },
+            {
+                "sostegno": "BPS",
+                "idIntervento": 18,
+                "codIntervento": "BPS",
+                "descIntervento": "IMPEGNO TITOLI",
+                "particella": {
+                    "idParticella": 1461774,
+                    "comune": "CALDONAZZO (TN)",
+                    "codNazionale": "B404",
+                    "foglio": 9999,
+                    "particella": "02473",
+                    "sub": " "
+                },
+                "idParcella": 253441,
+                "idIsola": 768425,
+                "codIsola": "IT25/PLOLNZ71B07E565W/AAA03",
+                "supDichiarata": 2190,
+                "idPianoColture": 6086173,
+                "idColtura": 20210,
+                "codColtura3": "040-622-000",
+                "descColtura": "MELILOTO (cod. Agea: 622-000)",
+                "coeffTara": 1,
+                "codColtura5": "622-000-000-000-000",
+                "codLivello": "121",
+                "supImpegnata": 2190,
+                "descMantenimento": "PASCOLAMENTO CON ANIMALI DI TERZI"
+            }
+        ],
+        "dichiarazioniDomandaUnica": [
+            {
+                "codDocumento": "AGGIUNTIVA",
+                "idCampo": "TITOLI_SFALCIO",
+                "descCampo": "Sfalcio",
+                "valCheck": true,
+                "valDate": null,
+                "valNumber": 0,
+                "valString": null,
+                "ordine": 30
+            },
+            {
+                "codDocumento": "GENERALE",
+                "idCampo": "DUDICH_16",
+                "descCampo": "A) dichiaro di essere in possesso di Partita IVA attivata in campo agricolo fino al  1 agosto 2014 o di aver fatto l'iscrizione all'Inps, come coltivatore diretto, imprenditore agricolo professionale, colono o mezzadro",
+                "valCheck": true,
+                "valDate": null,
+                "valNumber": 0,
+                "valString": null,
+                "ordine": 20
+            },
+            {
+                "codDocumento": "RISERVA_NAZIONALE",
+                "idCampo": "DURN_7",
+                "descCampo": "C - ABBANDONO DI TERRE",
+                "valCheck": true,
+                "valDate": null,
+                "valNumber": 0,
+                "valString": null,
+                "ordine": 100
+            }
+        ]
+    }
+}

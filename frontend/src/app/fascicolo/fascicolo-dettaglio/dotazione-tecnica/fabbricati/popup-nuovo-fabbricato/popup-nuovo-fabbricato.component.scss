@@ -1,0 +1,198 @@
+@import '../../../../../uma/uma.index.style.scss';
+
+:host {
+  ::ng-deep .ui-dialog {
+    max-height: 100%;
+
+    & .ui-dialog-content {
+      height: 100%;
+    }
+  }
+
+  p-dropdown > ::ng-deep .ui-dropdown {
+    label.ui-dropdown-label {
+      height: 100%;
+      font-weight: normal !important;
+    }
+  }
+
+  input.ui-inputtext:disabled {
+    border-bottom: 1px dotted;
+    opacity: .9;
+    background: #e8f5e9;
+  }
+
+  ::ng-deep input.ui-inputtext.ui-spinner-input:disabled {
+    border-bottom: 1px dotted;
+    opacity: .9;
+    background: #e8f5e9;
+  }
+
+  ::ng-deep .ui-dropdown.ui-state-disabled {
+    .ui-dropdown-label-container > .ui-dropdown-label.ui-inputtext {
+      border-bottom: 1px dotted;
+      opacity: .9;
+      background: #b1ddb5;
+    }
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  ::ng-deep .large-switch > .ui-inputswitch {
+    height: 1.5em;
+    width: 4em !important;
+  }
+
+  ::ng-deep .large-switch > .ui-inputswitch .ui-inputswitch-slider {
+    font-size: 1.5em;
+  }
+
+  ::ng-deep .large-switch > .ui-accordion .ui-accordion-header {
+    margin-top: 0.25em;
+  }
+
+  .button-accent-alt {
+    border: 2px solid $accentColor;
+    color: $accentColor !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.ui-button-icon-right.pi {
+      color: $accentColor !important;
+      font-size: x-large !important;
+    }
+  }
+
+  .no-wrap {
+    white-space: nowrap;
+  }
+
+  .pr-0_5m {
+    padding-right: .5em;
+  }
+
+  .h-90 {
+    height: 90%;
+  }
+
+  .button-custom-grey {
+    background-color: rgb(155, 155, 155) !important;
+  }
+
+  .title-grey {
+    ::ng-deep .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+      color: #9b9b9b !important;
+    }
+  }
+
+  ::ng-deep .ui-tabview .ui-tabview-nav > li {
+    &.ui-state-active {
+      background-color: white; // #7cb342;
+      border-color: white; //#7CB342;
+      .ui-tabview-title {
+        color: white;
+      }
+    }
+  }
+
+  ::ng-deep .ui-tabview .ui-tabview-nav > li .ui-tabview-title {
+    color: white;
+  }
+
+  .w-5m {
+    width: 5em;
+  }
+
+  .w-10m {
+    width: 10em;
+  }
+
+
+  // accordion tema fascicolo
+  ::ng-deep .ui-accordion .ui-accordion-header {
+    border-top: 3px solid green;
+  }
+
+  ::ng-deep .ui-accordion .ui-accordion-header > a {
+    text-decoration: none;
+    vertical-align: center;
+    color: #000;
+    background-color: #fff;
+    border: 1;
+  }
+
+  ::ng-deep .ui-accordion .ui-icon {
+    color: black;
+  }
+
+  ::ng-deep .ui-accordion .ui-accordion-content {
+    width: 100%;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.144);
+    border-block-color: #000;
+  }
+
+  ::ng-deep .ui-accordion-header.ui-icon > a {
+    color: black;
+    background-color: white;
+  }
+
+  ::ng-deep .ui-accordion .ui-accordion-content {
+    border: 1;
+  }
+
+  ::ng-deep .ui-accordion .ui-accordion-header > a .ui-accordion-toggle-icon {
+    color: #0d5f3f;
+    float: right;
+  }
+
+  ::ng-deep .ui-accordion .ui-accordion-header > a .ui-accordion-header-text {
+    color: #0d5f3f;
+    border-bottom: solid;
+    font-size: 24px;
+    font-weight: 700;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  ::ng-deep .ui-dialog-content {
+    padding: 0 !important;
+  }
+
+  // icona di modifica/cancella particella
+  .icon-button-square {
+    background-color: white !important;
+    border: 1px solid $accentColor;
+    border-radius: unset;
+    height: 4em !important;
+    width: 4em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+
+    &:hover {
+      background-color: $accentHoverColor !important;
+    }
+
+    & > ::ng-deep span.pi {
+      font-size: x-large !important;
+      color: $accentColor !important;
+    }
+  }
+  #div-with-line {
+    margin-top: 36px;
+    font-size: 50px;
+    text-align: center;
+    font-weight: 100;
+  }
+
+  ::ng-deep p-dropdown span {
+    text-overflow: ellipsis;
+  }
+
+}

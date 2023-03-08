@@ -1,0 +1,49 @@
+<h1 class="h5 text-uppercase font-weight-bold my-4">
+  {{ "DOMANDA_UNICA_FILTRI.ricercaFascicolo" | translate }}
+</h1>
+<div class="boxgrey mb-0 pb-0">
+  <form
+    [formGroup]="filtersFormGroup"
+    (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-5">
+        <span class="p-input-icon-left">
+          <p-autoComplete
+            class="globalfilter d-block long-auto mb-0"
+            formControlName="cuaa"
+            minLength="3"
+            placeholder="{{ 'cuaa' | translate }}"
+            [suggestions]="cuaList"
+            (completeMethod)="querySearch($event, 'CUAA')">
+          </p-autoComplete>
+        </span>
+      </div>
+      <div class="col-5">
+        <p-autoComplete
+          class="globalfilter d-block long-auto mb-0"
+          formControlName="ragioneSociale"
+          minLength="3"
+          placeholder="{{ 'DENOMINAZIONE' | translate }}"
+          name="codiceFiscale"
+          [suggestions]="descrizioneImpresaList"
+          (completeMethod)="querySearch($event, 'RAGIONE_SOCIALE')">
+        </p-autoComplete>
+      </div>
+      <div class="col-2">
+        <div class="searchbutton h-100">
+          <button
+            pButton
+            type="button"
+            class="ui-button bg-primary no-shadow text-uppercase w-100 h-100"
+            type="submit"
+            [disabled]="!filtersFormGroup.valid"
+            label="{{ 'DOMANDA_UNICA_FILTRI.filter' | translate }}"></button>
+        </div>
+      </div>
+    </div>
+    <label class="labelricerca my-3">
+      {{ resultsNumber }}
+      {{ "DOMANDA_UNICA_FILTRI.fascicoli" | translate }}
+    </label>
+  </form>
+</div>

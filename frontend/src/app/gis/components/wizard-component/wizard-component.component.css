@@ -1,0 +1,19 @@
+.btn-indietro {
+    border: 1px solid #00985b;
+    background: #fff;
+    padding: 11px 37px;
+    color: #00985b;
+    font-weight: 600;
+}
+
+.btn-indietro:hover, .btn-indietro:focus {
+    background: #4caf50;
+    color: #fff!important;
+}
+
+.crea-lavorazione {
+    max-width: 129px;
+    padding: 4px 0px;
+    font-weight: 600;
+    font-size: 15px;
+}

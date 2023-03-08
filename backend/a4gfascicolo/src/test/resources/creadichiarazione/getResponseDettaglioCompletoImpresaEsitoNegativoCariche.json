@@ -1,0 +1,311 @@
+{
+	"header": {
+		"esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+		"servizio": "Dettaglio completo impresa",
+		"esito": "OK"
+	},
+	"dati": {
+		"listaimprese": null,
+		"datiimpresa": {
+			"estremiimpresa": {
+				"denominazione": "BEOZZO PAOLO",
+				"codicefiscale": "BZZPLA64A31A178M",
+				"partitaiva": "01109110229",
+				"formagiuridica": {
+					"cformagiuridica": "DI",
+					"descrizione": "IMPRESA INDIVIDUALE"
+				},
+				"datiiscrizioneri": {
+					"numerori": "TN-1997-14047",
+					"data": "19961204",
+					"sezioni": {
+						"sezione": [{
+								"csezione": "P",
+								"descrizione": "PICCOLO IMPRENDITORE",
+								"dtiscrizione": "19961204",
+								"coltdiretto": "COLTIVATORE DIRETTO"
+							}
+						]
+					}
+				},
+				"datiiscrizionerea": [{
+						"nrea": "148771",
+						"cciaa": "TN",
+						"flagsede": "SI",
+						"itrasferimentosede": null,
+						"faggiornamento": null,
+						"data": "19961204",
+						"dtultaggiornamento": "20130708",
+						"cfonte": "RI",
+						"cessazione": null
+					}
+				],
+				"elemento": null
+			},
+			"oggettosociale": null,
+			"dtfondazione": null,
+			"codiceformaammv": null,
+			"descformaammv": null,
+			"duratasocieta": null,
+			"capitali": null,
+			"capitaleinvestito": null,
+			"informazionisede": {
+				"insegna": null,
+				"indirizzo": {
+					"provincia": "TRENTO",
+					"comune": "ALDENO",
+					"ccomune": "022003",
+					"toponimo": "VIA",
+					"via": "VERDI",
+					"ncivico": "2",
+					"cap": "38060",
+					"stato": null,
+					"frazione": null,
+					"altreindicazioni": null,
+					"stradario": null,
+					"telefono": "0461842536",
+					"fax": null,
+					"indirizzopec": "PAOLO.BEOZZO@PEC.CONFAGRICOLTURATN.IT"
+				},
+				"attivita": "",
+				"infoattivita": {
+					"dtinizioattivita": "19851212",
+					"statoattivita": null
+				},
+				"codiciistat02": null,
+				"codiceatecoul": {
+					"attivitaistat": [{
+							"cattivita": "012",
+							"tcodifica": "07",
+							"cfonte": null,
+							"descattivita": "Coltivazioni di colture permanenti",
+							"cimportanza": "P",
+							"dtinizioattivita": "19851212"
+						}
+					]
+				},
+				"ruoliloc": null,
+				"datiartigiani": null,
+				"commerciodettaglio": null,
+				"cessazione": null,
+				"procedureconcorsuali": null
+			},
+			"personesede": {
+				"persona": [{
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "148771",
+							"progressivopersona": "1",
+							"progressivoloc": "0"
+						},
+						"personafisica": {
+							"cognome": "BEOZZO",
+							"nome": "PAOLO",
+							"sesso": "MASCHILE",
+							"estreminascita": {
+								"provincia": "TRENTO",
+								"comune": "ALDENO",
+								"ccomune": "022003",
+								"stato": null,
+								"data": "19640131"
+							},
+							"codicefiscale": "BZZPLA64A31A178M",
+							"cittadinanza": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "ALDENO",
+								"ccomune": "022003",
+								"toponimo": "VIA",
+								"via": "DELLA CROCE",
+								"ncivico": "7",
+								"cap": "38060",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"personagiuridica": null,
+						"cariche": {
+							"carica": [{
+									"descrizione": "TITOLARE",
+									"ccarica": "TI",
+									"dtinizio": null,
+									"dtfine": "20010523"
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": null,
+						"elemento": "1"
+					}, {
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "148771",
+							"progressivopersona": "1",
+							"progressivoloc": "0"
+						},
+						"personafisica": null,
+						"personagiuridica": {
+							"cciaa": "TN",
+							"niscrizionerea": "1176001",
+							"denominazione": "LUNELLI S.P.A.",
+							"codicefiscale": "00598990224",
+							"dtcostituzione": "19831006",
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"toponimo": "VIA",
+								"via": "DEL PONTE",
+								"ncivico": "7",
+								"cap": "38123",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"cariche": {
+							"carica": [{
+									"descrizione": "SOCIO",
+									"ccarica": "TI1",
+									"dtinizio": null,
+									"dtfine": "20400523"
+								}, {
+									"descrizione": "SOCIO1",
+									"ccarica": "TI1",
+									"dtinizio": null,
+									"dtfine": "20000523"
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": null,
+						"elemento": "2"
+					}, {
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "148771",
+							"progressivopersona": "1",
+							"progressivoloc": "0"
+						},
+						"personafisica": {
+							"cognome": "BEOZZO",
+							"nome": "PAOLO",
+							"sesso": "MASCHILE",
+							"estreminascita": {
+								"provincia": "TRENTO",
+								"comune": "ALDENO",
+								"ccomune": "022003",
+								"stato": null,
+								"data": "19640131"
+							},
+							"codicefiscale": "TRRCST78B08C794X",
+							"cittadinanza": null,
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "ALDENO",
+								"ccomune": "022003",
+								"toponimo": "VIA",
+								"via": "DELLA CROCE",
+								"ncivico": "7",
+								"cap": "38060",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"personagiuridica": null,
+						"cariche": {
+							"carica": [{
+									"descrizione": "TITOLARE",
+									"ccarica": "XX",
+									"dtinizio": null,
+									"dtfine": "20400523"
+								}, {
+									"descrizione": "TITOLARE1",
+									"ccarica": "XX",
+									"dtinizio": null,
+									"dtfine": "20000523"
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": null,
+						"elemento": "3"
+					}, {
+						"identificativo": {
+							"pressocciaa": "TN",
+							"pressonrea": "148771",
+							"progressivopersona": "1",
+							"progressivoloc": "0"
+						},
+						"personafisica": null,
+						"personagiuridica": {
+							"cciaa": "TN",
+							"niscrizionerea": "1176001",
+							"denominazione": "LUNELLI S.P.A.",
+							"codicefiscale": "00598990224",
+							"dtcostituzione": "19831006",
+							"indirizzo": {
+								"provincia": "TRENTO",
+								"comune": "TRENTO",
+								"ccomune": "022205",
+								"toponimo": "VIA",
+								"via": "DEL PONTE",
+								"ncivico": "7",
+								"cap": "38123",
+								"stato": null,
+								"frazione": null,
+								"altreindicazioni": null,
+								"stradario": null,
+								"telefono": null,
+								"fax": null,
+								"indirizzopec": null
+							}
+						},
+						"cariche": {
+							"carica": [{
+									"descrizione": "SOCIO",
+									"ccarica": "TI",
+									"dtinizio": null,
+									"dtfine": "20000523"
+								}, {
+									"descrizione": "SOCIO1",
+									"ccarica": "TI1",
+									"dtinizio": null,
+									"dtfine": "20000523"
+								}
+							]
+						},
+						"fallimentopersona": null,
+						"elettore": null,
+						"rappresentante": null,
+						"elemento": "3"
+					}
+				],
+				"totale": "4"
+			},
+			"localizzazioni": []
+		},
+		"listaul": null,
+		"schedaul": null,
+		"listapersone": null,
+		"schedapersona": null,
+		"errore": null
+	}
+}

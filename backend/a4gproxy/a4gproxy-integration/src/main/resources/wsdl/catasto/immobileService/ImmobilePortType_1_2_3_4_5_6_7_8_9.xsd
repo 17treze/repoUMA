@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.librofondiario.regione.taa.it/BeneType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.librofondiario.regione.taa.it/BeneType/schemas" xmlns:particella="http://www.catasto.regione.taa.it/ParticellaType/schemas" xmlns:locale="http://www.locale.regione.taa.it/LocaleType/schemas" xmlns:cc="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas">
+  <xs:import namespace="http://www.locale.regione.taa.it/LocaleType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6_7_8_9_10.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6_7_8.xsd"/>
+  <xs:import namespace="http://www.catasto.regione.taa.it/ParticellaType/schemas" schemaLocation="ImmobilePortType_1_2_3_4_5_6_7.xsd"/>
+  <xs:complexType name="ChiavePartitaTavolareType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano univocamente una partita tavolare.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="comuneCatastale" type="cc:ChiaveComuneCatastaleType">
+        <xs:annotation>
+          <xs:documentation>Il comune catastale della partita tavolare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="sezione" type="tns:SezioneType" use="required">
+      <xs:annotation>
+        <xs:documentation>Indica la sezione della partita tavolare</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="numero" type="xs:integer" use="required">
+      <xs:annotation>
+        <xs:documentation>Indica il numero della partita tavolare</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="BeneTavolareType">
+    <xs:annotation>
+      <xs:documentation>Modella i beni del tavolare (contenuti in una Partita Tavolare)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="particelle">
+          <xs:annotation>
+            <xs:documentation>Modella una partita tavolare con la lista di particelle ad essa associata (partita tavolare non divisa).</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="particella" type="tns:ParticellaTavolareType">
+                <xs:annotation>
+                  <xs:documentation>Modella una singola particella.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="porzioniMateriali">
+          <xs:annotation>
+            <xs:documentation>Modella una partita tavolare con una particella edificiale e le sue porzioni materiali (partita tavolare divisa).</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="porzioneMateriale" type="tns:PorzioneMaterialeTavolareType">
+                <xs:annotation>
+                  <xs:documentation>Modella una singola porzione materiale.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <!--<xs:complexType name="ParticellaEdificialeType">
+		<xs:annotation>
+			<xs:documentation>Modella le informazioni che identificano una particella edificiale</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tns:ParticellaType">
+				<xs:sequence>
+					<xs:element name="porzioneMateriale" type="tns:PorzioneMaterialeType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>-->
+  <xs:complexType name="PorzioneMaterialeType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una porzione materiale. Tali informazioni sono tipiche del mondo tavolare dove dovrebbero essere spostate.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="numero" type="xs:integer" use="required"/>
+    <xs:attribute default="VALIDATA" name="stato" type="particella:StatoEntitaCatastaleType">
+      <xs:annotation>
+        <xs:documentation>Indica lo stato di una porzione materiale, ovvero se ESTINTA oppure no.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ChiavePorzioneMaterialeType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una porzione materiale. Tali informazioni sono tipiche del mondo tavolare dove dovrebbero essere spostate.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:PorzioneMaterialeType">
+        <xs:sequence>
+          <xs:element name="particellaEdificiale" type="particella:ChiaveParticellaType"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PorzioneMaterialeTavolareType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una porzione materiale con le informazioni specifiche del Libro Fondiario.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="porzione" type="tns:PorzioneMaterialeType"/>
+      <xs:element name="particella">
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="tns:ParticellaTavolareType">
+              <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" name="descrizionePartiComuni" type="locale:DescrizioneMultilinguaType">
+                  <xs:annotation>
+                    <xs:documentation>Contiene la descrizione delle parti comuni a tutte le porzioni materiali presenti nella particella edificiale.</xs:documentation>
+                  </xs:annotation>
+                </xs:element>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="descrizioneEnti" type="locale:DescrizioneMultilinguaType">
+        <xs:annotation>
+          <xs:documentation>Contiene la descrizione di quali enti e' costituita la porzione materiale.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParticellaTavolareType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni che identificano una particella edificiale o fondiaria dal punto di vista tavolare</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="chiave" type="tns:ChiaveParticellaTavolareType">
+        <xs:annotation>
+          <xs:documentation>Informazioni identificative della particella.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="listaQualita">
+        <xs:annotation>
+          <xs:documentation>Elenco delle qualita di coltura della particella</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="qualita" type="particella:QualitaColturaParticellaType">
+              <xs:annotation>
+                <xs:documentation>Singola qualita' di coltura di una particella.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute default="VALIDATA" name="stato" type="particella:StatoEntitaCatastaleType">
+      <xs:annotation>
+        <xs:documentation>Indica lo stato di un entita' catastale (in questo caso una particella), ovvero se ESTINTA oppure no.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ChiaveParticellaTavolareType">
+    <xs:complexContent>
+      <xs:extension base="particella:ChiaveParticellaType">
+        <xs:sequence>
+          <xs:element name="partitaTavolare" type="tns:ChiavePartitaTavolareType"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ChiavePorzioneMaterialeTavolareType">
+    <xs:complexContent>
+      <xs:extension base="tns:ChiavePorzioneMaterialeType">
+        <xs:sequence>
+          <xs:element name="partitaTavolare" type="tns:ChiavePartitaTavolareType"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="SezioneType">
+    <xs:annotation>
+      <xs:documentation>Dichiara la sezione della partita, ovvero se e' un maso chiuso o un qualsiasi altro immobile. Vale I per i masi chiusi; II per tutti gli altri immobili.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="I"/>
+      <xs:enumeration value="II"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

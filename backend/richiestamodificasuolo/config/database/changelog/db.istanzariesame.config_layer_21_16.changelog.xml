@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTANZARIESAME_S21.16" author="Bettina Irler" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'contesto','LavorazioneEditing');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'campoFiltro','ID_LAVORAZIONE');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='workspaceBO'),'editabile','si');
+				
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'contesto','LavorazioneEditing');
+			insert into A4ST_PROPRIETA_LAYER (ID,VERSIONE,ID_LAYER,NOME,VALORE) VALUES (nxtnbr.nextval,1,(select ID from a4st_layer where codice='suoloDichiaratoLavBO'),'campoFiltro','ID_LAVORAZIONE');
+
+			update A4ST_PROPRIETA_LAYER set VALORE = 'si' where  ID_LAYER = (select ID from a4st_layer where codice='workspaceBO') and NOME = 'AbilitatoDefault';
+			
+			commit;
+		</sql>
+    </changeSet>
+	</databaseChangeLog>

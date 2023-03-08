@@ -1,0 +1,72 @@
+.page-ricerca-utenti {
+    .next-button.next-button .ui-button { height: 100% !important; }
+
+    .card.card { box-shadow: none !important; }
+
+    p-accordiontab {
+        display: block;
+        margin-bottom: .75rem;
+
+        .ui-accordion-header {
+            border-radius: 0;
+            border-top: 2px solid green;
+            border-left: 1px solid #dedede;
+            border-bottom: 1px solid #dedede;
+            border-right: 1px solid #dedede;
+
+            color: var(--dark);
+            background-color: var(--white);
+
+            &:hover { background-color: var(--white) !important; }
+
+            & > a {
+                display: flex;
+                align-items: center;
+
+                color: var(--dark);
+
+                &:hover { text-decoration: none; }
+            }
+
+            p-header {
+                display: flex;
+                flex: 1 1 auto;
+                align-items: center;
+            }
+
+            &.ui-state-active {
+                background-color: var(--white);
+
+                .pi,
+                & > a { color: var(--dark); }
+            }
+        }
+
+        .ui-accordion-content {
+            border: 0;
+            padding: 0;
+            background-color: transparent;
+        }
+    }
+
+
+    .box-user-role {
+        padding: 1rem;
+        border: 1px solid #dedede;
+        border-top: 0;
+    }
+
+    .ui-button {
+        box-shadow: none;
+        border-radius: 0;
+
+        .pi {
+            font-size: 1.5rem;
+            color: var(--white) !important;
+        }
+        .ui-button-text {
+            padding-left: 0.25rem;
+            font-size: 1.25rem;
+        }
+    }
+}

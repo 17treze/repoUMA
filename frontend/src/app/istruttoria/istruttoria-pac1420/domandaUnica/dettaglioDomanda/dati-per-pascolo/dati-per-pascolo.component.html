@@ -1,0 +1,61 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12">
+    <div class="ui-grid-fixed">
+      <div class="accordion-wrapper dettaglioaccordion mlp">
+        <p-accordion>
+          <p-accordionTab *ngFor="let pascolo of arrayPascoli; let i=index" header={{arrayPascoli[i].descPascolo}}>
+            <div *ngFor="let esito of pascolo.listaEsitiPascolo; let i=index" >
+              <p-accordionTab *ngIf="esito !== null && esito !== undefined" header={{esito.descrizione1}} [selected]="true" [disabled]="true">
+                {{esito?.valore}}
+              </p-accordionTab>
+            </div>
+            <p-table [columns]="cols" [value]="dati" [autoLayout]="true" [paginator]="false" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                    <strong *ngIf='col.header'>{{col.header}}</strong>
+
+                  </th>
+                  <th>
+
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dato let-i="rowIndex">
+                <tr *ngFor="let dati of pascolo.datiInput">
+                  <td>{{dati.valString.split("**")[0]}}</td>
+                  <td>{{dati.valString.split("**")[1]}}</td>
+                </tr>
+
+              </ng-template>
+
+            </p-table>
+
+            <p-table [columns]="cols2" [value]="dati" [autoLayout]="true" [paginator]="false" [responsive]="true">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [ngStyle]="{'width': col.width}">
+                    <strong *ngIf='col.header'>{{col.header}}</strong>
+
+                  </th>
+                  <th>
+
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-dato let-i="rowIndex">
+                <tr *ngFor="let dati of pascolo.datiOutput">
+                  <td>{{dati.valString.split("**")[0]}}</td>
+                  <td>{{dati.valString.split("**")[1]}}</td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+
+          </p-accordionTab>
+
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

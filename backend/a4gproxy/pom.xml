@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>it.tndigitale</groupId>
+	<artifactId>a4gproxy</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>pom</packaging>
+	<name>a4gproxy</name>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.3.RELEASE</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<maven-jaxb2-plugin.version>0.14.0</maven-jaxb2-plugin.version>
+		<swagger2.version>2.8.0</swagger2.version>
+		<windward.version>1.1.0</windward.version>
+		<oracle.version>12.1.0</oracle.version>
+	</properties>
+
+	<modules>
+		<module>a4gproxy-integration</module>
+		<module>wsbdnagea</module>
+		<module>wsbdndu</module>
+		<module>wsbdninterrogazioni</module>
+		<module>a4gproxy-bdn</module>
+		<module>a4gproxy-ags-bdn</module>
+  	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>it.infotn.report</groupId>
+				<artifactId>windward-restclient</artifactId>
+				<version>${windward.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.oracle</groupId>
+				<artifactId>ojdbc7</artifactId>
+				<version>${oracle.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>

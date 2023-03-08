@@ -1,0 +1,77 @@
+{
+	"codiceFiscale": "BLDGDN61M17L378K",
+	"anagrafica": {
+		"nome": "GIORDANO",
+		"cognome": "BALDESSARI",
+		"sesso": "MASCHIO",
+		"dataNascita": "1961-08-17",
+		"comuneNascita": "TRENTO",
+		"provinciaNascita": "TRENTO"
+	},
+	"domicilioFiscale": {
+		"toponimo": "VIA",
+		"via": "12 SETTEMBRE",
+		"civico": "12",
+		"comune": "TRENTO",
+		"frazione": "VIGOLO BASELGA",
+		"cap": "38070",
+		"codiceIstat": "022205",
+		"provincia": "TRENTO",
+		"denominazioneEstesa": null
+	},
+	"deceduta": null,
+	"impresaIndividuale": {
+		"partitaIva": "01849820228",
+		"denominazione": "BALDESSARI GIORDANO",
+		"sedeLegale": {
+			"indirizzo": {
+				"toponimo": "VIA",
+				"via": "12 SETTEMBRE",
+				"civico": "12",
+				"comune": "TRENTO",
+				"frazione": "VIGOLO BASELGA",
+				"cap": "38070",
+				"codiceIstat": "022205",
+				"provincia": "TRENTO",
+				"denominazioneEstesa": null
+			},
+			"attivitaAteco": [
+				{
+					"codice": "0113",
+					"descrizione": "Coltivazione di ortaggi e meloni, radici e tuberi",
+					"importanza": "SECONDARIO"
+				},
+				{
+					"codice": "012",
+					"descrizione": "Coltivazioni di colture permanenti",
+					"importanza": "PRIMARIO"
+				}
+			],
+			"iscrizioneRegistroImprese": {
+				"numero": "187738",
+				"dataIscrizione": "2005-04-13",
+				"codiceRea": 187738,
+				"provinciaRea": "TN",
+				"cessata": true
+			},
+			"telefono": "0461865122",
+			"indirizzoPec": null
+		},
+		"oggettoSociale": null,
+		"formaGiuridica": "IMPRESA INDIVIDUALE"
+	},
+	"iscrizioniSezione": [
+		{
+			"sezione": "ORDINARIA",
+			"dataIscrizione": "2019-01-01",
+			"qualifica": "",
+			"coltivatoreDiretto": ""
+		},
+		{
+			"sezione": "SPECIALE",
+			"dataIscrizione": "2019-01-01",
+			"qualifica": "Test descrizione qualifica",
+			"coltivatoreDiretto": "coltivatore diretto"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<property name="tablespace.data" value="A4GD13" dbms="oracle" labels="SVIL"/>
+	<property name="tablespace.index" value="A4GX13" dbms="oracle" labels="SVIL"/>
+    <property name="tablespace.lob" value="A4GB13" dbms="oracle" labels="SVIL"/>
+	
+	<property name="tablespace.data" value="A4GD14" dbms="oracle" labels="TEST"/>
+	<property name="tablespace.index" value="A4GX14" dbms="oracle" labels="TEST"/>
+    <property name="tablespace.lob" value="A4GB14" dbms="oracle" labels="TEST"/>
+	
+	<property name="tablespace.data" value="A4GD07" dbms="oracle" labels="QUAL,PROD"/>
+	<property name="tablespace.index" value="A4GX07" dbms="oracle" labels="QUAL,PROD"/>
+    <property name="tablespace.lob" value="A4GB07" dbms="oracle" labels="QUAL,PROD"/>
+	
+	<property name="id.number.type" value="NUMBER(20)" dbms="oracle,h2"/>
+	<property name="version.number.type" value="NUMBER(10)" dbms="oracle,h2"/>
+	
+	<property name="string.type" value="VARCHAR2" dbms="oracle"/>
+    <property name="string.type" value="VARCHAR" dbms="h2"/>
+	
+	<include file="config/database/changelog/db.zootecnia.changelog.xml"/>
+
+</databaseChangeLog>

@@ -1,0 +1,452 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "BRGNGL64C30C794G",
+        "ragioneSociale": "AZ. AGR. BERGAMO ANGELO",
+        "numeroDomanda": 183430,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-26T17:18:39.000+0200",
+        "codEnteCompilatore": "19",
+        "enteCompilatore": "CAA CIA - CLES - 002",
+        "dataProtocollazione": "2018-04-26T17:19:15.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        }
+    },
+    "infoIstruttoriaDomanda": {
+        "datiEleggibilita": [
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1728260,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00185",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2935,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2232627,
+                    "comune": "CLES - CLES (TN)",
+                    "codNazionale": "P428",
+                    "foglio": 9999,
+                    "particella": "01931",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 81,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729324,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00829",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 111,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729345,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00826",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 146,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729346,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00827",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729324,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00829",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2346,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729345,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00826",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 254,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729346,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00827",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 6375,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729371,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00841",
+                    "sub": "3"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1243,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729370,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00841",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1658,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729881,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00916",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 125,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729867,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00915",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 391,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1729883,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00914",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1523,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1730222,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "01499",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1534,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1953003,
+                    "comune": "VILLE D'ANAUNIA - TUENNO (TN)",
+                    "codNazionale": "L457",
+                    "foglio": 9999,
+                    "particella": "01951",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1289,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1952414,
+                    "comune": "VILLE D'ANAUNIA - TUENNO (TN)",
+                    "codNazionale": "L457",
+                    "foglio": 9999,
+                    "particella": "01925",
+                    "sub": "1"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1731,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1952989,
+                    "comune": "VILLE D'ANAUNIA - TUENNO (TN)",
+                    "codNazionale": "L457",
+                    "foglio": 9999,
+                    "particella": "01943",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1893,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2526920,
+                    "comune": "SANZENO - BANCO (TN)",
+                    "codNazionale": "P568",
+                    "foglio": 9999,
+                    "particella": "01203",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 111,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2526859,
+                    "comune": "SANZENO - BANCO (TN)",
+                    "codNazionale": "P568",
+                    "foglio": 9999,
+                    "particella": "01149",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 314,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2526883,
+                    "comune": "SANZENO - BANCO (TN)",
+                    "codNazionale": "P568",
+                    "foglio": 9999,
+                    "particella": "01150",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 2401,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2526924,
+                    "comune": "SANZENO - BANCO (TN)",
+                    "codNazionale": "P568",
+                    "foglio": 9999,
+                    "particella": "01066",
+                    "sub": "2"
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1730,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2527179,
+                    "comune": "SANZENO - BANCO (TN)",
+                    "codNazionale": "P568",
+                    "foglio": 9999,
+                    "particella": "00819",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 4358,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2232617,
+                    "comune": "CLES - CLES (TN)",
+                    "codNazionale": "P428",
+                    "foglio": 9999,
+                    "particella": "01925",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 860,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2232629,
+                    "comune": "CLES - CLES (TN)",
+                    "codNazionale": "P428",
+                    "foglio": 9999,
+                    "particella": "01929",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1643,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 2232628,
+                    "comune": "CLES - CLES (TN)",
+                    "codNazionale": "P428",
+                    "foglio": 9999,
+                    "particella": "01930",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 367,
+                "superficieSigeco": 0
+            },
+            {
+                "sostegno": "BPS",
+                "codIntervento": "BPS",
+                "particella": {
+                    "idParticella": 1728046,
+                    "comune": "VILLE D'ANAUNIA - NANNO (TN)",
+                    "codNazionale": "F837",
+                    "foglio": 9999,
+                    "particella": "00169",
+                    "sub": " "
+                },
+                "codColtura3": "360-441-000",
+                "codColtura5": "044-005-000-000-000",
+                "superficieGis": 1209,
+                "superficieSigeco": 0
+            }
+        ]
+    }
+}

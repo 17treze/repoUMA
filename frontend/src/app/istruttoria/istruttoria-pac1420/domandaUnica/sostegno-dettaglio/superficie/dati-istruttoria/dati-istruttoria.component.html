@@ -1,0 +1,163 @@
+<div *ngIf="statoSostegno$ | async as statoSostegno">
+  <div [a4gHasPermission]="'MODIFICABILE'" [annoCampagna]="istruttoriaDUCorrente.domanda.campagna"
+    [tipoIstruttoria]="istruttoriaDUCorrente.tipo" [statoSostegno]="istruttoriaDUCorrente.stato" class="boxgrey"
+    style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+      <div class="ui-grid-fixed">
+        <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+        <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dati Controlli in Loco e Certificazione Antimafia
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox [(ngModel)]="this.datiIstruttoriaDaInserire.controlloSigecoLoco"
+              binary="true" label="Si certifica che sono stati effettuati i controlli amministrativi in loco">
+            </p-checkbox>
+            <br />
+            <p-checkbox [(ngModel)]="this.datiIstruttoriaDaInserire.controlloAntimafia"
+              binary="true"
+              label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+            </p-checkbox>
+          </div>
+        </div>
+        <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dichiarazione riduzione annullamento sanzione
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox [(ngModel)]="this.datiIstruttoriaDaInserire.annulloRiduzione"
+              binary="true" label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+            </p-checkbox>
+          </div>
+        </div>
+        <div *ngIf="this.tipoDettaglio == 'datiIstruttoriaACS'">
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%;">
+            <div class="ui-g-12">
+              <h3>
+                <span>
+                  Dati Superfici Determinate
+                </span>
+              </h3>
+              <div *ngFor="let dato of this.dati.items">
+                <div class="ui-g-5">
+                  <label class="labelricerca">
+                    {{dato.label}}
+                  </label>
+                </div>
+                <div class="ui-g-3">
+                  <div class="ui-inputgroup">
+                    <input #input="ngModel" name="{{dato.id}}"
+                      [(ngModel)]="this.datiIstruttoriaDaInserire[dato.id]" type="number"
+                      step="0.0001" min="0" style='width:100%' pInputText appValidaNumero4dec>
+                    <span class="ui-inputgroup-addon"
+                      style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">
+
+                      {{dato.target}}
+
+                    </span>
+                  </div>
+                  <div *ngIf="input && input.errors">
+                    <p *ngIf="input.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                      {{input.errors.erroreNumero}}
+                    </p>
+                  </div>
+                </div>
+                <div class="ui-g-4"></div>
+              </div>
+              <br />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ui-g-12 ui-md-2 searchbutton">
+            <br />
+            <button pButton type="button" type="submit" (click)="onSubmit()" class="ui-button-success">SALVA</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [a4gHasPermission]="'NON_MODIFICABILE'" [statoSostegno]="istruttoriaDUCorrente.stato"
+    [tipoIstruttoria]="istruttoriaDUCorrente.tipo"
+    [annoCampagna]="istruttoriaDUCorrente.domanda.campagna" class=" boxgrey"
+    style="padding-top:50px; display: inline-block">
+    <div class="ui-g-12">
+      <div class="ui-grid-fixed">
+        <p-toast key="tst" [style]="{marginTop: '70px'}"> </p-toast>
+        <div style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dati Controlli in Loco e Certificazione Antimafia
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox disabled [(ngModel)]="this.datiIstruttoriaDaInserire.controlloSigecoLoco"
+              binary="true" label="Si certifica che sono stati effettuati i controlli amministrativi in loco">
+            </p-checkbox>
+            <br />
+            <p-checkbox disabled [(ngModel)]="this.datiIstruttoriaDaInserire.controlloAntimafia"
+              binary="true"
+              label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+            </p-checkbox>
+          </div>
+        </div>
+        <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="background: #fff; padding: 30px; display: inline-block; width: 100%; margin-bottom:30px;">
+          <h3>
+            <span>
+              Dichiarazione riduzione annullamento sanzione
+            </span>
+          </h3>
+          <div style="font-size: 15px;">
+            <p-checkbox disabled [(ngModel)]="this.datiIstruttoriaDaInserire.annulloRiduzione"
+              binary="true" label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+            </p-checkbox>
+          </div>
+        </div>
+        <div *ngIf="this.tipoDettaglio == 'datiIstruttoriaACS'">
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%;">
+            <div class="ui-g-12">
+              <h3>
+                <span>
+                  Dati Superfici Determinate
+                </span>
+              </h3>
+              <div *ngFor="let dato of this.dati.items">
+                <div class="ui-g-5">
+                  <label class="labelricerca">
+                    {{dato.label}}
+                  </label>
+                </div>
+                <div class="ui-g-3">
+                  <div class="ui-inputgroup">
+                    <input disabled #input="ngModel" name="{{dato.id}}"
+                      [(ngModel)]="this.datiIstruttoriaDaInserire[dato.id]" type="number"
+                      step="0.0001" min="0" style='width:100%' pInputText appValidaNumero4dec>
+                    <span class="ui-inputgroup-addon"
+                      style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">
+
+                      {{dato.target}}
+
+                    </span>
+                  </div>
+                  <div *ngIf="input && input.errors">
+                    <p *ngIf="input.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                      {{input.errors.erroreNumero}}
+                    </p>
+                  </div>
+                </div>
+                <div class="ui-g-4"></div>
+              </div>
+              <br />
+            </div>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

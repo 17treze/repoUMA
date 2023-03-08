@@ -1,0 +1,243 @@
+<div class="boxgrey  layout-actionmenu">
+    <p-toast position="top-center" key='tst' [baseZIndex]="50000"></p-toast>
+    <p-toast position="top-center" key='tst-esito-positivo' [baseZIndex]="50000" (onClose)="goBack()" [modal]="true">
+    </p-toast>
+    <p-toast position="center" key="aggiorna-stato" (onClose)="onRejectAggiornaStato()" [modal]="true" [baseZIndex]="5000"
+        sticky="true">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirmAggiornaStato()" label="Si"
+                        class="ui-button-success"></button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onRejectAggiornaStato()" label="No"
+                        class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <h3>{{ textTitle }}</h3>
+            <p-accordion [activeIndex]="activeIndex" (onClose)="onTabClose($event)" (onOpen)="onTabOpen($event)">
+                <p-accordionTab header="{{intestazioni.PSR_SUPERFICIE_EU}}">
+                    <div class="boxgrey">
+                        <h3>{{ textTitleInner }}</h3>
+                        <div class="tabella-full">
+                            <p-table [columns] = "colsSUPDU" [value]="domandeSuperficieView" [autoLayout]="false" [paginator]="true"
+                            [rows]="5" [responsive]="true">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+                                            {{ col.header }}
+                                            <p-sortIcon [field]="col.header"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                                    <tr>
+                                        <td>{{domandaCollegata.cuaa}}</td>
+                                        <td>{{domandaCollegata.idDomanda}}</td>
+                                        <td>{{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date:
+                                            "dd/MM/yyyy") : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.campagna}}</td>
+                                        <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                                        <td>{{domandaCollegata.dtBdnaOp ? (domandaCollegata.dtBdnaOp | date:
+                                            "dd/MM/yyyy")
+                                            : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                                            (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                                            (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                                            (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineEsitoNegativo ?
+                                            (domandaCollegata.dtFineEsitoNegativo
+                                            | date: "dd/MM/yyyy") : intestazioni.nd}}</td>
+                                        <td pEditableColumn class="editabile">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <p-calendar [(ngModel)]="domandaCollegata.dtBdna" [showIcon]="true"
+                                                        dateFormat="dd/mm/yy"></p-calendar>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{domandaCollegata.dtBdna | date: "dd/MM/yyyy"}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td class="editabile">
+                                            <input type="text" pInputText [(ngModel)]="domandaCollegata.protocollo" />
+                                        </td>
+                                        <td>{{domandaCollegata.statoBdna | translate}}</td>
+                                        <td class="pos-drop">
+                                            <action-menu #actionMenu [item]="menuActionDomanda" [reset]="reset"
+                                                (click)="onDropdownMenuOpen(0,domandaCollegata)"></action-menu>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage" let-columns>
+                                    <tr>
+                                        <td [attr.colspan]="14">
+                                            {{ intestazioni.noTableContent }}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-accordionTab>
+                <p-accordionTab header="{{intestazioni.PSR_STRUTTURALI_EU}}">
+                    <div class="boxgrey">
+                        <h3>{{ textTitleInner }}</h3>
+                        <div class="tabella-full">
+                            <p-table [columns]="colsPSRStr" [value]="domandeStrutturaliView" [autoLayout]="false" [paginator]="true"
+                            [rows]="5" [responsive]="true">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+                                            {{ col.header }}
+                                            <p-sortIcon [field]="col.header"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                                    <tr>
+                                        <td>{{domandaCollegata.misurePsr}}</td>
+                                        <td>{{domandaCollegata.cuaa}}</td>
+                                        <td>{{domandaCollegata.idDomanda}}</td>
+                                        <td>{{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date:
+                                            "dd/MM/yyyy") : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                                        <td>{{domandaCollegata.dtBdnaOp ? (domandaCollegata.dtBdnaOp | date:
+                                            "dd/MM/yyyy")
+                                            : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                                            (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                                            (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                                            (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineEsitoNegativo ?
+                                            (domandaCollegata.dtFineEsitoNegativo
+                                            | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td class="editabile" pEditableColumn>
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <p-calendar [(ngModel)]="domandaCollegata.dtBdna" [showIcon]="true"
+                                                        [baseZIndex]="1000000000" dateFormat="dd/mm/yy"></p-calendar>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{domandaCollegata.dtBdna | date: "dd/MM/yyyy"}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td class="editabile">
+                                            <input type="text" pInputText [(ngModel)]="domandaCollegata.protocollo" />
+                                        </td>
+                                        <td>{{domandaCollegata.statoBdna | translate}}</td>
+                                        <td class="pos-drop">
+                                            <action-menu #actionMenu [item]="menuActionDomanda" [reset]="reset"
+                                                (click)="onDropdownMenuOpen(1,domandaCollegata)"></action-menu>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage" let-columns>
+                                    <tr>
+                                        <td [attr.colspan]="14">
+                                            {{ intestazioni.noTableContent }}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-accordionTab>
+                <p-accordionTab header="{{intestazioni.DOMANDA_UNICA}}">
+                    <div class="boxgrey">
+                        <h3>{{ textTitleInner }}</h3>
+                        <div class="tabella-full">
+                            <p-table [columns]="colsSUPDU" [value]="domandeUnicheView" [responsive]="true" [autoLayout]="false" [paginator]="true"
+                            [rows]="5" [responsive]="true">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+                                            {{ col.header }}
+                                            <p-sortIcon [field]="col.header"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-domandaCollegata let-i="rowIndex">
+                                    <tr>
+                                        <td>{{domandaCollegata.cuaa}}</td>
+                                        <td>{{domandaCollegata.idDomanda}}</td>
+                                        <td>{{domandaCollegata.dtDomanda ? (domandaCollegata.dtDomanda | date:
+                                            "dd/MM/yyyy") : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.campagna}}</td>
+                                        <td>{{domandaCollegata.importoRichiesto | number:'1.2-2':'it'}}</td>
+                                        <td>{{domandaCollegata.dtBdnaOp ? (domandaCollegata.dtBdnaOp | date:
+                                            "dd/MM/yyyy")
+                                            : intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioSilenzioAssenso ?
+                                            (domandaCollegata.dtInizioSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineSilenzioAssenso ?
+                                            (domandaCollegata.dtFineSilenzioAssenso | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtInizioEsitoNegativo ?
+                                            (domandaCollegata.dtInizioEsitoNegativo | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td>{{domandaCollegata.dtFineEsitoNegativo ?
+                                            (domandaCollegata.dtFineEsitoNegativo
+                                            | date: "dd/MM/yyyy") :
+                                            intestazioni.nd}}</td>
+                                        <td pEditableColumn class="editabile">
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <p-calendar [(ngModel)]="domandaCollegata.dtBdna" [showIcon]="true"
+                                                        [baseZIndex]="1000000000" dateFormat="dd/mm/yy"></p-calendar>
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{domandaCollegata.dtBdna | date: "dd/MM/yyyy"}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                        <td class="editabile">
+                                            <input type="text" pInputText [(ngModel)]="domandaCollegata.protocollo" />
+                                        </td>
+                                        <td>{{domandaCollegata.statoBdna | translate}}</td>
+                                        <td class="pos-drop">
+                                            <action-menu #actionMenu [item]="menuActionDomanda" [reset]="reset"
+                                                (click)="onDropdownMenuOpen(2,domandaCollegata)"></action-menu>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="emptymessage" let-columns>
+                                    <tr>
+                                        <td [attr.colspan]="14">
+                                            {{ intestazioni.noTableContent }}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </p-accordionTab>
+            </p-accordion>
+            <button type="button" class="btn btn-darkgreen" (click)="goBack()">Indietro</button>
+        </div>
+    </div>
+</div>

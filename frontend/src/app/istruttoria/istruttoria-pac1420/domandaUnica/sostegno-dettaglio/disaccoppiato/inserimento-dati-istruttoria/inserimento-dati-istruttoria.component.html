@@ -1,0 +1,415 @@
+<div *ngIf="istruttoriaDUCorrente">
+  <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+  <div [a4gHasPermission]="'MODIFICABILE'" [annoCampagna]="getAnnoRiferimento()"
+    [statoSostegno]="istruttoriaDUCorrente.stato"
+    [tipoIstruttoria]="istruttoriaDUCorrente.tipo">
+    <div class="boxgrey" style="padding-top:50px; display: inline-block">
+      <div class="ui-g-12">
+        <div class="ui-grid-fixed">
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%;">
+            <div>
+              <h3><span>Dati istruttoria</span></h3>
+            </div>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="ui-g-12" *ngIf="datiIstruttoriaDaInserire">
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox name="controlloAntimafia" [(ngModel)]="datiIstruttoriaDaInserire.controlloAntimafia"
+                  binary="true"
+                  label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+                </p-checkbox>
+              </div>
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox name="domAnnoPrecNonLiquidabile"
+                  [(ngModel)]="datiIstruttoriaDaInserire.domAnnoPrecNonLiquidabile" binary="true"
+                  label="Si attesta che la domanda unica dell'anno precedente dell'azienda non è liquidabile">
+                </p-checkbox>
+              </div>
+              <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox name="annulloRiduzione"
+                  [(ngModel)]="datiIstruttoriaDaInserire.annulloRiduzione" binary="true"
+                  label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+                </p-checkbox>
+              </div>
+              <br />
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox name="bpsSanzioniAnnoPrecedente"
+                  [(ngModel)]="datiIstruttoriaDaInserire.bpsSanzioniAnnoPrecedente" binary="true"
+                  label="Si attesta che l'azienda è stata soggetta, negli anni precedenti, a sanzioni per il premio di base e che nella domanda dell'anno precedente è stata scontata una sanzione, da recuperare quest'anno, di importo:"
+                  (onChange)="cleanBpsImportoSanzioniAnnoPrecedente($event)">
+                </p-checkbox>
+              </div>
+              <div class="ui-inputgroup input-width">
+                <input type="text" style='width:80%'
+                  [(ngModel)]="datiIstruttoriaDaInserire.bpsImportoSanzioniAnnoPrecedente"
+                  name="bpsImportoSanzioniAnnoPrecedente" #bpsImportoSanzioniAnnoPrecedenteInput="ngModel" pInputText
+                  appValidaNumero2dec [disabled]="!datiIstruttoriaDaInserire.bpsSanzioniAnnoPrecedente" required>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="bpsImportoSanzioniAnnoPrecedenteInput && bpsImportoSanzioniAnnoPrecedenteInput.errors">
+                <p *ngIf="bpsImportoSanzioniAnnoPrecedenteInput.errors?.erroreNumero"
+                  class="ui-message ui-messages-error ui-corner-all">
+                  {{bpsImportoSanzioniAnnoPrecedenteInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox name="gioSanzioniAnnoPrecedente"
+                  [(ngModel)]="datiIstruttoriaDaInserire.gioSanzioniAnnoPrecedente" binary="true"
+                  label="Si attesta che l'azienda è stata soggetta, negli anni precedenti, a sanzioni per il premio giovane e che nella domanda dell'anno precedente è stata scontata una sanzione, da recuperare quest'anno, di importo:"
+                  (onChange)="cleanGioImportoSanzioniAnnoPrecedente($event)">
+                </p-checkbox>
+              </div>
+              <div class="ui-inputgroup input-width">
+                <input type="text" style='width:80%'
+                  [(ngModel)]="datiIstruttoriaDaInserire.gioImportoSanzioniAnnoPrecedente"
+                  name="gioImportoSanzioniAnnoPrecedente" #gioImportoSanzioniAnnoPrecedenteInput="ngModel" pInputText
+                  appValidaNumero2dec [disabled]="!datiIstruttoriaDaInserire.gioSanzioniAnnoPrecedente" required>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="gioImportoSanzioniAnnoPrecedenteInput && gioImportoSanzioniAnnoPrecedenteInput.errors">
+                <p *ngIf="gioImportoSanzioniAnnoPrecedenteInput.errors?.erroreNumero"
+                  class="ui-message ui-messages-error ui-corner-all">
+                  {{gioImportoSanzioniAnnoPrecedenteInput.errors.erroreNumero}}
+                </p>
+              </div>
+
+              <br />
+              <div><label class="labelricerca">BPS - Superficie determinata dall'istruttore</label></div>
+              <div class="ui-inputgroup input-width">
+                <input type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.bPSSuperficie"
+                  name="bPSSuperficie" #bPSSuperficieInput="ngModel" pInputText appValidaNumero4dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+              </div>
+              <div *ngIf="bPSSuperficieInput && bPSSuperficieInput.errors">
+                <p *ngIf="bPSSuperficieInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{bPSSuperficieInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Greening - Superficie non ammissibile mancato rispetto Inverdimento
+                  Istruttore</label></div>
+              <div class="ui-inputgroup  input-width">
+                <input type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.greeningSuperficie"
+                  name="greeningSuperficie" #greeningInput="ngModel" pInputText appValidaNumero4dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+              </div>
+              <div *ngIf="greeningInput && greeningInput.errors">
+                <p *ngIf="greeningInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{greeningInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Importo Salari Azienda</label></div>
+              <div class="ui-inputgroup input-width">
+                <input type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.importoSalari"
+                  name="importoSalari" #importoSalariInput="ngModel" pInputText appValidaNumero2dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="importoSalariInput && importoSalariInput.errors">
+                <p *ngIf="importoSalariInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{importoSalariInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Note</label></div>
+              <div class="ui-inputgroup input-width">
+                <textarea style="width: 100%" name="noteIstruttore" rows="5" cols="30" pInputTextarea
+                  autoResize="autoResize" [(ngModel)]="datiIstruttoriaDaInserire.noteIstruttore"></textarea>
+              </div>
+              <br />
+              <div>
+                <div class="ui-g-12 ui-md-2 searchbutton">
+                  <button pButton type="button" class="ui-button-success" type="submit"
+                    [disabled]="!f.valid">SALVA</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <div  [a4gHasPermission]="'MODIFICABILE'" 
+            [annoCampagna]="getAnnoRiferimento()"
+            [statoSostegno]="istruttoriaDUCorrente.stato"
+            [tipoIstruttoria]="istruttoriaDUCorrente.tipo" class="boxgrey"
+        style="padding-top:50px; display: inline-block">
+        <div class="ui-grid-fixed">
+          <div *ngIf="arrayPascoli.length > 0" class="boxgrey">
+            <div>
+              <h3><span>Dati istruttoria pascoli</span> </h3>
+              <form [formGroup]="formPascoli">
+                <div class="accordion-wrapper dettaglioaccordion mlp">
+                  <p-accordion>
+                    <p-accordionTab *ngFor="let pascolo of arrayPascoli; let i=index" header={{pascolo.descPascolo}}>
+                      <div>
+                        <div><label class="labelricerca">Pascolo - Superfice determinata dall'istruttore</label></div>
+                        <div class="ui-inputgroup">
+                          <input type="text" style='width:100%' [(ngModel)]="pascolo.superficie" pInputText
+                            formControlName="{{i+'superficie'}}">
+                          <span class="ui-inputgroup-addon"
+                            style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+                        </div>
+                        <div *ngIf="!formPascoli.controls[i+'superficie'].valid">
+                          <p class="ui-message ui-messages-error ui-corner-all">
+                            Numero non valido
+                          </p>
+                        </div>
+                      </div>
+                      <div *ngIf="pascolo.hasOwnProperty('man3')">
+                        <div><label class="labelricerca">Pascolo - Verifica documentazione di trasporto (MAN3)</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                          <p-dropdown [options]="scelteMAN3" [(ngModel)]="pascolo.man3" formControlName="{{i+'man3' }}">
+                          </p-dropdown>
+                        </div>
+
+                      </div>
+                      <div *ngIf="pascolo.hasOwnProperty('man4')">
+                        <div><label class="labelricerca">Pascolo - CUAA del responsabile del pascolo (MAN4)</label>
+                        </div>
+                        <div class="ui-inputgroup">
+                          <input type="text" style='width:100%' [(ngModel)]="pascolo.man4" pInputText
+                            formControlName="{{i+'man4' }}">
+
+                        </div>
+                        <div *ngIf="!formPascoli.controls[i+'man4'].valid">
+                          <p class="ui-message ui-messages-error ui-corner-all">
+                            CUAA non valido
+                          </p>
+                        </div>
+                      </div>
+                      <div *ngIf="pascolo.hasOwnProperty('man5')">
+                        <div><label class="labelricerca">Pascolo - Esito del controllo del mantenimento delle superfici
+                            per
+                            i
+                            pascoli fuori provincia (MAN5)</label></div>
+                        <div class="ui-inputgroup">
+
+                          <p-dropdown [options]="scelteMAN5" [(ngModel)]="pascolo.man5" formControlName="{{i+'man5' }}">
+                          </p-dropdown>
+                        </div>
+                      </div>
+
+                    </p-accordionTab>
+
+                  </p-accordion>
+                </div>
+                <div class="ui-g-12 ui-md-2 searchbutton">
+                  <button pButton type="button" class="ui-button-success" type="submit" (click)="salvaDatiIstruttoria()"
+                    *ngIf="arrayPascoli.length > 0">SALVA</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div  [a4gHasPermission]="'NON_MODIFICABILE'" 
+        [statoSostegno]="istruttoriaDUCorrente.stato"
+        [tipoIstruttoria]="istruttoriaDUCorrente.tipo"
+        [annoCampagna]="getAnnoRiferimento()">
+    <div class="boxgrey" style="padding-top:50px; display: inline-block">
+      <div class="ui-g-12">
+        <div class="ui-grid-fixed">
+          <div style="background: #fff; padding: 30px; display: inline-block; width: 100%;">
+            <h3><span>Dati istruttoria</span></h3>
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="ui-g-12" *ngIf="datiIstruttoriaDaInserire">
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox disabled name="controlloAntimafia"
+                  [(ngModel)]="datiIstruttoriaDaInserire.controlloAntimafia" binary="true"
+                  label="Si attesta che la certificazione antimafia è stata acquisita in maniera cartacea o che il pagamento viene effettuato su conduzione risolutiva legata all'esito degli accertamenti">
+                </p-checkbox>
+
+              </div>
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox disabled name="domAnnoPrecNonLiquidabile"
+                  [(ngModel)]="datiIstruttoriaDaInserire.domAnnoPrecNonLiquidabile" binary="true"
+                  label="Si attesta che la domanda unica dell'anno precedente dell'azienda non è liquidabile">
+                </p-checkbox>
+              </div>
+              <div *ngIf="showCheckboxAnnulloRitardoPresentazione" style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox disabled name="annulloRiduzione"
+                  [(ngModel)]="datiIstruttoriaDaInserire.annulloRiduzione" binary="true"
+                  label="Si attesta che la domanda di modifica presentata in ritardo non introduce nuovi impegni e dunque non si applicano le riduzioni per ritardata presentazione">
+                </p-checkbox>
+              </div>
+              <br />
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox disabled name="bpsSanzioniAnnoPrecedente"
+                  [(ngModel)]="datiIstruttoriaDaInserire.bpsSanzioniAnnoPrecedente" binary="true"
+                  label="Si attesta che l'azienda è stata soggetta, negli anni precedenti, a sanzioni per il premio di base e che nella domanda dell'anno precedente è stata scontata una sanzione, da recuperare quest'anno, di importo:"
+                  (onChange)="cleanBpsImportoSanzioniAnnoPrecedente($event)">
+                </p-checkbox>
+              </div>
+              <div class="ui-inputgroup input-width">
+                <input disabled type="text" style='width:80%'
+                  [(ngModel)]="datiIstruttoriaDaInserire.bpsImportoSanzioniAnnoPrecedente"
+                  name="bpsImportoSanzioniAnnoPrecedente" #bpsImportoSanzioniAnnoPrecedenteInput="ngModel" pInputText
+                  appValidaNumero2dec [disabled]="!datiIstruttoriaDaInserire.bpsSanzioniAnnoPrecedente" required>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="bpsImportoSanzioniAnnoPrecedenteInput && bpsImportoSanzioniAnnoPrecedenteInput.errors">
+                <p *ngIf="bpsImportoSanzioniAnnoPrecedenteInput.errors?.erroreNumero"
+                  class="ui-message ui-messages-error ui-corner-all">
+                  {{bpsImportoSanzioniAnnoPrecedenteInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div style="font-size: 15px; font-weight: normal !important;">
+                <p-checkbox disabled name="gioSanzioniAnnoPrecedente"
+                  [(ngModel)]="datiIstruttoriaDaInserire.gioSanzioniAnnoPrecedente" binary="true"
+                  label="Si attesta che l'azienda è stata soggetta, negli anni precedenti, a sanzioni per il premio giovane e che nella domanda dell'anno precedente è stata scontata una sanzione, da recuperare quest'anno, di importo:"
+                  (onChange)="cleanGioImportoSanzioniAnnoPrecedente($event)">
+                </p-checkbox>
+              </div>
+              <div class="ui-inputgroup input-width">
+                <input disabled type="text" style='width:80%'
+                  [(ngModel)]="datiIstruttoriaDaInserire.gioImportoSanzioniAnnoPrecedente"
+                  name="gioImportoSanzioniAnnoPrecedente" #gioImportoSanzioniAnnoPrecedenteInput="ngModel" pInputText
+                  appValidaNumero2dec [disabled]="!datiIstruttoriaDaInserire.gioSanzioniAnnoPrecedente" required>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="gioImportoSanzioniAnnoPrecedenteInput && gioImportoSanzioniAnnoPrecedenteInput.errors">
+                <p *ngIf="gioImportoSanzioniAnnoPrecedenteInput.errors?.erroreNumero"
+                  class="ui-message ui-messages-error ui-corner-all">
+                  {{gioImportoSanzioniAnnoPrecedenteInput.errors.erroreNumero}}
+                </p>
+              </div>
+
+              <br />
+              <div><label class="labelricerca">BPS - Superficie determinata dall'istruttore</label></div>
+              <div class="ui-inputgroup input-width">
+                <input disabled type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.bPSSuperficie"
+                  name="bPSSuperficie" #bPSSuperficieInput="ngModel" pInputText appValidaNumero4dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+              </div>
+              <div *ngIf="bPSSuperficieInput && bPSSuperficieInput.errors">
+                <p *ngIf="bPSSuperficieInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{bPSSuperficieInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Greening - Superficie non ammissibile mancato rispetto Inverdimento
+                  Istruttore</label></div>
+              <div class="ui-inputgroup  input-width">
+                <input disabled type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.greeningSuperficie"
+                  name="greeningSuperficie" #greeningInput="ngModel" pInputText appValidaNumero4dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+              </div>
+              <div *ngIf="greeningInput && greeningInput.errors">
+                <p *ngIf="greeningInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{greeningInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Importo Salari Azienda</label></div>
+              <div class="ui-inputgroup input-width">
+                <input disabled type="text" style='width:80%' [(ngModel)]="datiIstruttoriaDaInserire.importoSalari"
+                  name="importoSalari" #importoSalariInput="ngModel" pInputText appValidaNumero2dec>
+                <span class="ui-inputgroup-addon"
+                  style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Euro</span>
+              </div>
+              <div *ngIf="importoSalariInput && importoSalariInput.errors">
+                <p *ngIf="importoSalariInput.errors?.erroreNumero" class="ui-message ui-messages-error ui-corner-all">
+                  {{importoSalariInput.errors.erroreNumero}}
+                </p>
+              </div>
+              <br />
+              <div><label class="labelricerca">Note</label></div>
+              <div class="ui-inputgroup input-width">
+                <textarea disabled style="width: 100%" name="noteIstruttore" rows="5" cols="30" pInputTextarea
+                  autoResize="autoResize" [(ngModel)]="datiIstruttoriaDaInserire.noteIstruttore"></textarea>
+              </div>
+              <br />
+              <div>
+                <div class="ui-g-12 ui-md-2 searchbutton">
+                  <!-- <button pButton type="button" class="ui-button-success" type="submit"
+                    [disabled]="!f.valid">SALVA</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  [a4gHasPermission]="'NON_MODIFICABILE'"
+          [statoSostegno]="istruttoriaDUCorrente.stato"
+          [tipoIstruttoria]="istruttoriaDUCorrente.tipo"
+          [annoCampagna]="getAnnoRiferimento()" class=" boxgrey"
+      style="padding-top:50px; display: inline-block">
+
+      <div class="ui-grid-fixed">
+        <div *ngIf="arrayPascoli.length > 0" class="boxgrey">
+          <div>
+            <h3><span>Dati istruttoria pascoli</span> </h3>
+            <form [formGroup]="formPascoli">
+              <div class="accordion-wrapper dettaglioaccordion mlp">
+                <p-accordion>
+                  <p-accordionTab *ngFor="let pascolo of arrayPascoli; let i=index" header={{pascolo.descPascolo}}>
+                    <div>
+                      <div><label class="labelricerca">Pascolo - Superfice determinata dall'istruttore</label></div>
+                      <div class="ui-inputgroup">
+                        <input type="text" style='width:100%' [(ngModel)]="pascolo.superficie" pInputText
+                          formControlName="{{i+'superficie'}}" disabled>
+                        <span class="ui-inputgroup-addon"
+                          style="padding: 10px 20px; background: #f0f0f0; border: 1px solid #dedede;">Ha</span>
+                      </div>
+                      <div *ngIf="!formPascoli.controls[i+'superficie'].valid">
+                        <p class="ui-message ui-messages-error ui-corner-all">
+                          Numero non valido
+                        </p>
+                      </div>
+                    </div>
+                    <div *ngIf="pascolo.hasOwnProperty('man3')">
+                      <div><label class="labelricerca">Pascolo - Verifica documentazione di trasporto (MAN3)</label>
+                      </div>
+                      <div class="ui-inputgroup">
+                        <p-dropdown [options]="scelteMAN3" [(ngModel)]="pascolo.man3" formControlName="{{i+'man3' }}">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                    <div *ngIf="pascolo.hasOwnProperty('man4')">
+                      <div><label class="labelricerca">Pascolo - CUAA del responsabile del pascolo (MAN4)</label></div>
+                      <div class="ui-inputgroup">
+                        <input type="text" style='width:100%' [(ngModel)]="pascolo.man4" pInputText
+                          formControlName="{{i+'man4' }}" disabled>
+
+                      </div>
+                      <div *ngIf="!formPascoli.controls[i+'man4'].valid">
+                        <p class="ui-message ui-messages-error ui-corner-all">
+                          CUAA non valido
+                        </p>
+                      </div>
+                    </div>
+                    <div *ngIf="pascolo.hasOwnProperty('man5')">
+                      <div><label class="labelricerca">Pascolo - Esito del controllo del mantenimento delle superfici
+                          per
+                          i
+                          pascoli fuori provincia (MAN5)</label></div>
+                      <div class="ui-inputgroup">
+                        <p-dropdown [options]="scelteMAN5" [(ngModel)]="pascolo.man5" formControlName="{{i+'man5' }}">
+                        </p-dropdown>
+                      </div>
+                    </div>
+                  </p-accordionTab>
+                </p-accordion>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

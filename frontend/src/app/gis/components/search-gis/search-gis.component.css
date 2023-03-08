@@ -1,0 +1,187 @@
+.gis-form .p-field {
+    margin: 8px 0px 5px 0px;
+}
+
+.gis-form input,
+.gis-form select,
+.gis-form span.ui-calendar,
+.gis-form textarea {
+    background-color: #e9ecef;
+    border: none;
+    font-size: 15px;
+}
+
+.gis-form span.ui-calendar {
+    /* border: 1px solid #ced4da; */
+    border-radius: 5px;
+    min-height: 38px;
+}
+
+#sidebar-gis>gis-sidebar>div>p-sidebar>div>gis-search>form>div>p-calendar>span>input {
+    width: 100%;
+}
+
+
+.ui-dropdown.ui-widget.ui-state-default {
+    background: white;
+    max-height: 28px;
+}
+
+span.ui-dropdown-trigger-icon.ui-clickable.pi.pi-caret-down {
+    margin: -20px -15px;
+}
+
+
+span.ui-calendar input {
+    max-width: 137px;
+}
+
+.gis-form select>option {
+    background: #e9ecef;
+    color: #434343;
+}
+
+/* Validation */
+.form-invalid-control {
+    color: #ce0909;
+    position: absolute;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.is-invalid input {
+    border: 1px solid #e91b1b;
+}
+
+/* Buttons */
+button.gis-button {
+    background: #00985b;
+    border-radius: 0;
+    padding: 12px 40px;
+    float: right;
+    height: inherit;
+    text-transform: uppercase;
+    margin-right: 5px;
+}
+
+button.gis-button:focus {
+    background: #00985b !important;
+}
+
+gis-search>form>div:nth-child(3)>p-autocomplete>span>button {
+    background: initial !important;
+    height: 36px;
+}
+
+/* width */
+.half {
+    width: 50%
+}
+
+gis-sidebar>div>p-sidebar.ng-tns-c10-2>div>div>gis-search>form>div>p-calendar>span>input[type="text"] {
+    padding-left: 40px;
+    margin: 5px 0;
+    max-width: 139px;
+}
+
+.ui-state-highlight {
+    background-color: #e9ecef !important;
+    color: #333333 !important;
+    font-weight: bold !important;
+}
+
+#comuniCatastali>span>input {
+    height: 36px !important;
+    width: 100% !important;
+    border-radius: 4px;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    padding: 0 10px !important;
+}
+
+#comuniCatastali>span>button>span.ui-button-icon-left.ui-clickable.pi.pi-caret-down {
+    margin-top: -18px;
+}
+
+span.ui-autocomplete {
+    height: 36px !important;
+    width: 100% !important;
+}
+
+.pi.pi-caret-down:before {
+    font-size: 25px;
+    color: #202020d6;
+    margin-left: -10px;
+    text-shadow: 0 0 1px #767879;
+    margin-top: -18px;
+}
+
+body .ui-dialog .ui-dialog-footer .ui-button .pi {
+    color: #ffffff;
+}
+
+#statoLavSelect {
+    background: #e9ecef;
+    width: 100%;
+}
+
+#utenteLavSelect {
+    background: #e9ecef;
+    width: 100%;
+}
+
+#statoLavSelect>div.ui-dropdown {
+    background: #e9ecef;
+}
+
+#utenteLavSelect>div.ui-dropdown {
+    background: #e9ecef;
+}
+
+#utenteLavSelect>.ui-dropdown .ui-dropdown-label.ui-inputtext {
+    background: #e9ecef;
+    border: 0;
+}
+
+#statoLavSelect>.ui-dropdown .ui-dropdown-label.ui-inputtext {
+    background: #e9ecef;
+    border: 0;
+}
+
+#statoLavSelect>div>div.ui-dropdown-trigger.ui-state-default.ui-corner-right>span::before {
+    top: -10px;
+    right: -40px;
+    color: transparent;
+    position: absolute;
+}
+
+#utenteLavSelect>div>div.ui-dropdown-trigger.ui-state-default.ui-corner-right>span::before {
+    top: -10px;
+    right: -40px;
+    color: transparent;
+    position: absolute;
+}
+
+#statoLavSelect>div>div.ui-dropdown-label-container>i {
+    right: 5px;
+    position: absolute;
+    z-index: 999
+}
+
+#utenteLavSelect>div>div.ui-dropdown-label-container>i {
+    right: 5px;
+    position: absolute;
+    z-index: 999
+}
+
+#statoLavSelect>div>div.ng-trigger.ng-trigger-overlayAnimation.ui-dropdown-panel.ui-widget.ui-widget-content.ui-corner-all.ui-shadow>div {
+    width: 285px;
+    left: -10px;
+    position: relative;
+}
+
+#utenteLavSelect>div>div.ng-trigger.ng-trigger-overlayAnimation.ui-dropdown-panel.ui-widget.ui-widget-content.ui-corner-all.ui-shadow>div {
+    width: 285px;
+    left: -10px;
+    position: relative;
+}

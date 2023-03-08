@@ -1,0 +1,19 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Ricerca impresa non cessata per codice fiscale",
+        "esito": "KO"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": null,
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": {
+            "tipo": "IMP_occorrenza_0",
+            "msgerr": "NESSUNA IMPRESA TROVATA"
+        }
+    }
+}

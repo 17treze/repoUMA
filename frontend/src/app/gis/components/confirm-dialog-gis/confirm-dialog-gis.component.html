@@ -1,0 +1,13 @@
+<p-dialog id="custom-dialog" header="Lavorazione" [(visible)]="closeLavorazioneStep3" [modal]="true" [responsive]="true" [resizable]="false" 
+[style]="{'width': '550px', 'minWidth': '200px'}" [minY]="70" [baseZIndex]="10000">
+  <div class="div-icona">
+      <i class="custom-dialog-icon-header pi pi-info-circle ui-confirmdialog-icon" ng-reflect-klass="pi pi-info-circle" ng-reflect-ng-class="ui-confirmdialog-icon"></i>
+  </div>
+  <div class="p-col-12 ui-dialog-content ui-widget-content">
+      <i class=" ui-confirmdialog-icon ng-star-inserted"></i><span class="custom-dialog-title">Sono presenti modifiche non salvate</span>
+  </div>
+  <div class="ui-dialog-footer">
+      <button type="button" pButton icon="pi pi-check" (click)="saveCloseLavorazione();" label="Salva e chiudi" class="dialog-btn"></button>
+      <button type="button" pButton icon="pi pi-times" (click)="noSaveCloseLavorazione();" label="Chiudi senza salvare" class="dialog-btn"></button>
+  </div>
+</p-dialog>

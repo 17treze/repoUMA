@@ -1,0 +1,18 @@
+package it.tndigitale.a4g.framework.ext.validazione.fascicolo;
+
+public enum StatoFascicoloEnum {
+	IN_AGGIORNAMENTO,
+	ALLA_FIRMA_AZIENDA,
+	VALIDATO,
+	IN_VALIDAZIONE,
+	ALLA_FIRMA_CAA,
+	FIRMATO_CAA,
+	IN_ATTESA_TRASFERIMENTO,
+	TRASFERITO,
+	CONTROLLI_IN_CORSO,
+	CONTROLLATO_OK,
+	CHIUSO,
+	DORMIENTE,
+	SOSPESO,
+	IN_CHIUSURA
+}

@@ -1,0 +1,183 @@
+<p-toast
+  key="tstSchedaValidazione"
+  [style]="{ marginTop: '70px' }"
+  [baseZIndex]="50000">
+</p-toast>
+<!-- <p-toast
+  position="center"
+  key="checkSchedaValidazione"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirm()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="reject()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast> -->
+<p-dialog
+  header="{{ 'FAS_ANA.VALIDA_FASCICOLO' | translate }}"
+  class="dialog-scheda-validazione"
+  width="700"
+  [(visible)]="popupSchedaValidazioneOpen"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [contentStyle]="{'overflow':'auto','max-height':'900px'}"
+  (onHide)="closePopup()">
+  <div class="popup-approvazione popup--custom">
+    <div
+      class="p-grid ui-g-12"
+      style="text-align:center">
+
+      <div class="p-col-6">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-signature.svg" />
+          <h3 class="box__title"><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.FIRMA' | translate: {idSchedaValidazione: idSchedaValidazione}"></p></h3>
+          <div class="align-left text-normal">
+            <p class="box__subtitle">
+              {{ 'SCHEDA_VALIDAZIONE_DLG.DESC_SCELTA' | translate }}
+            </p>
+            <div class="p-field-radiobutton">
+                <p-radioButton name="scelta" value="FIRMATO_CAA" [(ngModel)]="statoFascicoloAllaFirmaCaa" inputId="scelta1" (click)="modificaScelta()"></p-radioButton>
+                <div class="label">Solo operatore CAA</div>
+            </div>
+            <div class="p-field-radiobutton">
+                <p-radioButton name="scelta" value="IN_VALIDAZIONE" [(ngModel)]="statoFascicoloAllaFirmaCaa" inputId="scelta2" (click)="modificaScelta()"></p-radioButton>
+                <div class="label">Operatore CAA e azienda</div>
+              </div>
+          </div>
+          <span
+            class="box-confirm"
+            [ngClass]="{
+              'is--done': verificaScelta
+            }"
+          >
+            <i class="pi pi-check" style="color: white;font-weight: bold;"></i>
+          </span>
+        </div>
+      </div>
+      <div class="p-col-6">
+        <div class="box box-fasc">
+          <img class="box-icon" src="assets/img/icons/icon-carica.png" />
+          <h3 class="box__title"><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.DESC_CARICA_SCHEDA' | translate"></p></h3>
+          <p *ngIf="file" class="row-border box-attachment">
+            <span>{{ file.name }}</span>
+            <img
+              class="ml-2"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteFile()"
+            />
+          </p>
+          <button
+            *ngIf="!file"
+            type="button"
+            class="box__button"
+            [disabled]="!verificaScelta"
+            (click)="confirm()"
+          >
+            {{ "FAS_ANA.ALLEGA" | translate }}
+          </button>
+          <input
+            type="file"
+            #schedaValidazioneFile
+            id="schedaValidazioneFile"
+            name="schedaValidazioneFile"
+            onclick="this.value = null"
+            (change)="onFileChange($event)"
+            accept="{{ fileExt }}"
+            class="inputUploadFile"
+            style="display: none">
+          <span
+            class="box-confirm"
+            [ngClass]="{
+              'is--done': verificaUploadFile
+            }"
+          >
+            <i class="pi pi-check" style="color: white;font-weight: bold;"></i>
+          </span>
+        </div>
+      </div>
+      <!-- <div class="p-col-4">
+        <img
+          class="box-icon"
+          src="assets/img/icons/icon-carica.png">
+        <div>
+          <br>
+          <h4><b><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.DESC_CARICA_SCHEDA' | translate"></p></b></h4>
+        </div>
+        <br>
+        <div>
+          <button
+            pButton
+            label="{{ 'SCHEDA_VALIDAZIONE_DLG.CARICA_SCHEDA' | translate }}"
+            class="btn-green"
+            (click)="uploadModulo()"
+            [disabled]="statoFascicolo != statoFascicoloAllaFirmaCaa">
+          </button>
+          <input
+            type="file"
+            #schedaValidazioneFile
+            id="schedaValidazioneFile"
+            name="schedaValidazioneFile"
+            onclick="this.value = null"
+            (change)="onFileChange($event)"
+            accept="{{ fileExt }}"
+            class="inputUploadFile"
+            style="display: none">
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- <p-footer> -->
+    <div class="p-grid margin">
+      <div class="p-col-6 align-left">
+        <button
+          pButton
+          class="ui-button-secondary ui-button-text-only p-1 font-weight-normal shadow-none w-5m"
+          type="button"
+          label="Annulla"
+          (click)="closePopup()"></button>
+      </div>
+      <div class="p-col-6 align-right">
+        <div *ngIf="verificaScelta">
+          <button
+            pButton
+            [disabled]="!file" 
+            type="button"
+            class="box-button"
+            (click)="inviaFile()"
+          >
+            {{ testoPulsanteAllega }}
+          </button>
+        </div>
+      </div>
+    </div>
+  <!-- </p-footer> -->
+
+</p-dialog>

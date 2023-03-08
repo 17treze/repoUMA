@@ -1,0 +1,48 @@
+<h1 class="h5 text-uppercase font-weight-bold my-4">
+  {{ "DOMANDA_UNICA_FILTRI.ricercaFascicolo" | translate }}
+</h1>
+<div class="boxgrey mb-0 pb-0">
+  <div class="ui-g ui-fluid">
+    <div class="ui-grid-fixed boxgrey">
+      <form
+        [formGroup]="filtersFormGroup"
+        (ngSubmit)="onSubmit(filtersFormGroup)">
+        <div class="row">
+          <div class="ui-g-12 ui-md-5">
+            <input
+              type="text"
+              formControlName="cuaa"
+              name="cuaa"
+              #cuaa
+              [ngClass]="{'is-invalid': cuaa.invalid && cuaa.touched}"
+              placeholder="Cuaa"
+              pInputText
+              appValidaCuaa>
+          </div>
+          <div class="ui-g-12 ui-md-5">
+            <input
+              type="text"
+              formControlName="denominazione"
+              name="denominazione"
+              #denominazione
+              [ngClass]="{'is-invalid': denominazione.invalid && denominazione.touched}"
+              placeholder="Denominazione"
+              pInputText
+              appValidaDenominazione>
+          </div>
+          <div class="ui-g-12 ui-md-2">
+            <div class="searchbutton h-100">
+              <button
+                pButton
+                type="button"
+                class="ui-button bg-primary no-shadow text-uppercase w-100 h-100"
+                type="submit"
+                [disabled]="filtersFormGroup.invalid"
+                label="{{ 'DOMANDA_UNICA_FILTRI.filter' | translate }}"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  width="400"
+  #cd>
+  <p-footer>
+    <button
+      type="button"
+      pButton
+      (click)="cd.accept()"
+      label="Ok"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-confirmDialog>
+<exitConfirmDialog></exitConfirmDialog>
+<div
+  class="layout-wrapper"
+  (click)="onWrapperClick()"
+  [ngClass]="{'layout-wrapper-static': layoutMode === 'static',
+                'layout-wrapper-active': mobileMenuActive,
+                'layout-menu-horizontal': layoutMode === 'horizontal',
+                'layout-rtl': isRTL}">
+
+  <!-- <app-menu [reset]="resetMenu"></app-menu> -->              
+
+  <p-toast
+    key="tst"
+    [style]="{marginTop: '70px'}"></p-toast>  
+  <div class="layout-main">
+    <a4g-loader></a4g-loader>
+    <app-topbar></app-topbar>
+    <!-- <app-topbar *ngIf="!isGis"></app-topbar>
+    <gis-header *ngIf="isGis"></gis-header> -->
+    <app-breadcrumb></app-breadcrumb>
+    <div class="layout-content">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer *ngIf="!isGis"></app-footer>
+    <div
+      class="layout-main-mask"
+      *ngIf="mobileMenuActive"></div>
+  </div>
+</div>

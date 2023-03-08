@@ -1,0 +1,60 @@
+<p-toast
+  key="psf-toast"
+  [style]="{ marginTop: '70px' }">
+</p-toast>
+<p-dialog
+  [(visible)]="display"
+  header="{{ 'SOSPENSIONE.SOSPENDI_FASCICOLO' | translate }}"
+  [dismissableMask]="true"
+  width="710"
+  [modal]="true"
+  [focusOnShow]="false"
+  appendTo="body"
+  [closable]="true"
+  #dialog
+  [closeOnEscape]="true"
+  (onHide)="onClose()">
+  <div class="popup-approvazione  popup--custom">
+    <div class="mb-4">
+      <h6>{{ isStatoSospeso() ? 'Stai per riportare IN AGGIORNAMENTO il fascicolo di' : 'Stai per sospendere il fascicolo di' }}
+        <strong>
+          {{ fascicoloCorrente.denominazione.toUpperCase() }}
+        </strong>
+      </h6>
+    </div>
+    <form
+      #f="ngForm"
+      *ngIf="sospensioneFormGroup"
+      class="ui-fluid"
+      [formGroup]="sospensioneFormGroup">
+      <div class="boxgrey p-3 mb-3">
+        <h6 class="mb-3"><strong>{{ (isStatoSospeso() ? 'SOSPENSIONE.DATA_FINE' : 'SOSPENSIONE.DATA_INIZIO') | translate }} *</strong></h6>
+        <p-calendar
+          formControlName="data"
+          dateFormat="dd/mm/yy"
+          [locale]="calendarService.localeITA">
+        </p-calendar>
+      </div>
+      <div class="boxgrey p-3 mb-3">
+        <h6 class="mb-3"><strong>{{ (isStatoSospeso() ? 'SOSPENSIONE.MOTIVAZIONE_FINE' : 'SOSPENSIONE.MOTIVAZIONE_INIZIO') | translate }} *</strong></h6>
+        <textarea
+          pInputTextarea
+          id="motivazione"
+          type="text"
+          formControlName="motivazione"
+          style="width: -webkit-fill-available"
+          autoResize="true">
+        </textarea>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          pButton
+          type="submit"
+          label="{{ (isStatoSospeso() ? 'SOSPENSIONE.RIMUOVI_SOSPENSIONE' : 'SOSPENSIONE.SOSPENDI') | translate }}"
+          class="button--success"
+          (click)="sospendi()"
+          [disabled]="f.invalid"></button>
+      </div>
+    </form>
+  </div>
+</p-dialog>

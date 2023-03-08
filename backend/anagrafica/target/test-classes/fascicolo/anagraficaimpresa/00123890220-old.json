@@ -1,0 +1,312 @@
+{
+  "codiceFiscale": "00123890220",
+  "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+  "denominazione": "FERRARI F.LLI LUNELLI S.P.A (IN BREVE FERRARI S.P.A.)",
+  "partitaIva": "00123890220",
+  "oggettoSociale": "- LA PRODUZIONE, LA TRASFORMAZIONE E IL COMMERCIO DI PRODOTTI AGRICOLI EALIMENTARI IN GENERE ED IN PARTICOLARE, A SOLO TITOLO ESEMPLIFICATIVO, DI UVA,VINI, MOSTI, LIQUORI, SPUMANTI, DISTILLATI, DOLCIUMI E CAFFE' E L'ATTIVITA' DIIMPORT ED EXPORT DEI MEDESIMI PRODOTTI E LE ATTIVITA' CONNESSE;- L'ACQUISTO, LA VENDITA, LA PERMUTA E LA LOCAZIONE DI TERRENI AGRICOLI E NON;- L'ACQUISTO, LA VENDITA, LA PERMUTA, LA COSTRUZIONE E/O LA RISTRUTTURAZIONE DIBENI IMMOBILI, A SCOPO DI STABILE INVESTIMENTO CURANDONE ANCHE LA RELATIVAGESTIONE;- LA PRESTAZIONE DI SERVIZI DI ORGANIZZAZIONE AZIENDALE, AMMINISTRATIVA,COMMERCIALE E DI MARKETING NEI CONFRONTI DELLE SOCIETA' PARTECIPATE E NEICONFRONTI DELLE SOCIETA' DEL GRUPPO DI APPARTENENZA;- L'ASSUNZIONE O LA CESSIONE DI PARTECIPAZIONI IN IMPRESE, ENTI O SOCIETA',ITALIANE O ESTERE, A SCOPO DI STABILE INVESTIMENTO, PER GESTIONE E GODIMENTO,NON PROFESSIONALMENTE, NE' NEI CONFRONTI DEL PUBBLICO, BENSI' OCCASIONALMENTE EPER CONTO PROPRIO, NONCHE' COSTITUIRE O PARTECIPARE ALLA COSTITUZIONE DIASSOCIAZIONI TEMPORANEE DI IMPRESA;- LA GESTIONE DI RISTORANTI, ALBERGHI E/O COMUNQUE DI ATTIVITA' RICETTIVE;- L'ACQUISTO DI CREDITI D'IMPRESA NEI CONFRONTI DI CLIENTI, DALLA CONTROLLANTE,DA SOCIETA' CONTROLLATE E COLLEGATE E COMUNQUE DA SOCIETA' FACENTI PARTE DELLOSTESSO GRUPPO DI APPARTENENZA. IL TUTTO COME DISCIPLINATO DALLE NORME DEL CODICECIVILE.SEMPRE PER IL RAGGIUNGIMENTO DELL'OGGETTO SOCIALE, LA SOCIETA' POTRA' ALTRESI'COMPIERE OGNI OPERAZIONE COMMERCIALE, INDUSTRIALE ED IMMOBILIARE; A TALE FINEPOTRA' ALTRESI' COMPIERE IN VIA NON PREVALENTE E CON ESPRESSA ESCLUSIONE DIQUALSIASI ATTIVITA' SVOLTA NEI CONFRONTI DEL PUBBLICO, OPERAZIONI FINANZIARIE EMOBILIARI, CONCEDERE FINANZIAMENTI, ONEROSI E NON, NEI CONFRONTI DELLE SOCIETA'DEL GRUPPO DI APPARTENENZA, CONCEDERE FIDEJUSSIONI, AVALLI, CAUZIONI, GARANZIEANCHE A FAVORE DI TERZI.",
+  "rappresentanteLegale": {
+    "codiceFiscale": "MRCDLD62B09Z600Z",
+    "nominativo": "DANIEL ADRIAN MARCHISIO"
+  },
+  "sedeLegale": {
+    "indirizzo": {
+      "toponimo": "VIA",
+      "via": "DEL PONTE",
+      "civico": "15",
+      "comune": "TRENTO",
+      "frazione": "RAVINA",
+      "cap": "38123",
+      "codiceIstat": "022205",
+      "provincia": "TRENTO",
+      "denominazioneEstesa": "VIA DEL PONTE 15, RAVINA, TRENTO, 38123 TRENTO"
+    },
+    "attivitaAteco": [
+      {
+        "codice": "0121",
+        "descrizione": "Coltivazione di uva",
+        "importanza": "SECONDARIO"
+      },
+      {
+        "codice": "0126",
+        "descrizione": "Coltivazione di frutti oleosi",
+        "importanza": "SECONDARIO"
+      },
+      {
+        "codice": "11022",
+        "descrizione": "Produzione di vino spumante e altri vini speciali",
+        "importanza": "PRIMARIO"
+      },
+      {
+        "codice": "4725",
+        "descrizione": "Commercio al dettaglio di bevande",
+        "importanza": "SECONDARIO"
+      }
+    ],
+    "iscrizioneRegistroImprese": {
+      "numero": "76693",
+      "dataIscrizione": "1970-11-16",
+      "codiceRea": 76693,
+      "provinciaRea": "TN",
+      "cessata": false
+    },
+    "telefono": "0461800488",
+    "indirizzoPec": "INFO@PEC.CANTINEFERRARI.IT"
+  },
+  "cariche": [
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "LNLLGU39D14L378O",
+      "anagrafica": {
+        "nome": "LUIGI",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1939-04-14",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "LNLMCL67R20L378W",
+      "anagrafica": {
+        "nome": "MARCELLO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1967-10-20",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "VICE PRESIDENTE DEL CONSIGLIO D'AMMINISTRAZIONE",
+      "codiceFiscale": "LNLMCL67R20L378W",
+      "anagrafica": {
+        "nome": "MARCELLO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1967-10-20",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "SINDACO SUPPLENTE",
+      "codiceFiscale": "MNTPTR43L17A694C",
+      "anagrafica": {
+        "nome": "PIETRO",
+        "cognome": "MONTI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1943-07-17",
+        "comuneNascita": "BASELGA DI PINE'",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "LNLMTB74A31F205S",
+      "anagrafica": {
+        "nome": "MATTEO BRUNO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1974-01-31",
+        "comuneNascita": "MILANO",
+        "provinciaNascita": "MILANO"
+      }
+    },
+    {
+      "descrizione": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+      "codiceFiscale": "LNLMTB74A31F205S",
+      "anagrafica": {
+        "nome": "MATTEO BRUNO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1974-01-31",
+        "comuneNascita": "MILANO",
+        "provinciaNascita": "MILANO"
+      }
+    },
+    {
+      "descrizione": "AMMINISTRATORE DELEGATO",
+      "codiceFiscale": "LNLMTB74A31F205S",
+      "anagrafica": {
+        "nome": "MATTEO BRUNO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1974-01-31",
+        "comuneNascita": "MILANO",
+        "provinciaNascita": "MILANO"
+      }
+    },
+    {
+      "descrizione": "SINDACO",
+      "codiceFiscale": "GBBZEI52H07L378V",
+      "anagrafica": {
+        "nome": "EZIO",
+        "cognome": "GOBBI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1952-06-07",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "PRESIDENTE DEL COLLEGIO SINDACALE",
+      "codiceFiscale": "PSTMRZ57L03L378Z",
+      "anagrafica": {
+        "nome": "MAURIZIO",
+        "cognome": "POSTAL",
+        "sesso": "MASCHIO",
+        "dataNascita": "1957-07-03",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "LNLCLL75M70L378A",
+      "anagrafica": {
+        "nome": "CAMILLA",
+        "cognome": "LUNELLI",
+        "sesso": "FEMMINA",
+        "dataNascita": "1975-08-30",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "SINDACO SUPPLENTE",
+      "codiceFiscale": "SCZMRZ60B28B180Y",
+      "anagrafica": {
+        "nome": "MAURIZIO",
+        "cognome": "SCOZZI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1960-02-28",
+        "comuneNascita": "BRINDISI",
+        "provinciaNascita": "BRINDISI"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "LNLLSN78S05L378V",
+      "anagrafica": {
+        "nome": "ALESSANDRO",
+        "cognome": "LUNELLI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1978-11-05",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "SINDACO",
+      "codiceFiscale": "BRNMTR50M48F351V",
+      "anagrafica": {
+        "nome": "MARIA TERESA",
+        "cognome": "BERNELLI",
+        "sesso": "FEMMINA",
+        "dataNascita": "1950-08-08",
+        "comuneNascita": "MONDOVI'",
+        "provinciaNascita": "CUNEO"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "BRNRND45R30A944H",
+      "anagrafica": {
+        "nome": "ARMANDO",
+        "cognome": "BRANCHINI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1945-10-30",
+        "comuneNascita": "BOLOGNA",
+        "provinciaNascita": "BOLOGNA"
+      }
+    },
+    {
+      "descrizione": "CONSIGLIERE",
+      "codiceFiscale": "BNSLNI43T02H201D",
+      "anagrafica": {
+        "nome": "LINO",
+        "cognome": "BENASSI",
+        "sesso": "MASCHIO",
+        "dataNascita": "1943-12-02",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "PROCURATORE SPECIALE",
+      "codiceFiscale": "DMRCLD74S10E986P",
+      "anagrafica": {
+        "nome": "CLAUDIO",
+        "cognome": "DIMARCO",
+        "sesso": "MASCHIO",
+        "dataNascita": "1974-11-10",
+        "comuneNascita": "MARTINA FRANCA",
+        "provinciaNascita": "TARANTO"
+      }
+    },
+    {
+      "descrizione": "PROCURATORE SPECIALE",
+      "codiceFiscale": "LROLNZ70L11H612I",
+      "anagrafica": {
+        "nome": "LORENZO",
+        "cognome": "LORO",
+        "sesso": "MASCHIO",
+        "dataNascita": "1970-07-11",
+        "comuneNascita": "ROVERETO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "PROCURATORE SPECIALE",
+      "codiceFiscale": "SNTRNZ64E10H620A",
+      "anagrafica": {
+        "nome": "RENZO",
+        "cognome": "SANTATO",
+        "sesso": "MASCHIO",
+        "dataNascita": "1964-05-10",
+        "comuneNascita": "ROVIGO",
+        "provinciaNascita": "ROVIGO"
+      }
+    },
+    {
+      "descrizione": "PROCURATORE SPECIALE",
+      "codiceFiscale": "MSASMN70S09L378Y",
+      "anagrafica": {
+        "nome": "SIMONE",
+        "cognome": "MASE'",
+        "sesso": "MASCHIO",
+        "dataNascita": "1970-11-09",
+        "comuneNascita": "TRENTO",
+        "provinciaNascita": "TRENTO"
+      }
+    },
+    {
+      "descrizione": "INSTITORE",
+      "codiceFiscale": "TMSRCR70C05F918C",
+      "anagrafica": {
+        "nome": "RICCARDO PAOLO",
+        "cognome": "TAMASSIA",
+        "sesso": "MASCHIO",
+        "dataNascita": "1970-03-05",
+        "comuneNascita": "NOGARA",
+        "provinciaNascita": "VERONA"
+      }
+    },
+    {
+      "descrizione": "PROCURATORE SPECIALE",
+      "codiceFiscale": "MRCDLD62B09Z600Z",
+      "anagrafica": {
+        "nome": "DANIEL ADRIAN",
+        "cognome": "MARCHISIO",
+        "sesso": "MASCHIO",
+        "dataNascita": "1962-02-09",
+        "comuneNascita": "SAN MIGUEL DE TUCUMAN",
+        "provinciaNascita": null
+      }
+    }
+  ],
+  "dataCostituzione": null,
+  "dataTermine": null,
+  "capitaleSocialeDeliberato": null
+}

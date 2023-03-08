@@ -1,0 +1,13 @@
+<div class="ui-g-12" style="padding-bottom:0px !important;">
+  <div class="ui-grid-fixed">
+    <div class="funzioni-grid" style="margin-bottom:0px !important; margin-top:40px !important;">
+      <app-hack-ptab-menu [model]="menu2" [activeItem]="activeTab">
+        <ng-template pTemplate="item" let-item let-i="index">
+          <span class="ui-menuitem-text">{{item.label}} <span *ngIf="item.value>=0"
+              class="colori-per-numeri">{{item.value}}</span> </span>
+        </ng-template>
+      </app-hack-ptab-menu>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

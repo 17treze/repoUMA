@@ -1,0 +1,211 @@
+<p-toast
+  key="tst-dialog"
+  [style]="{marginTop: '70px'}"
+  [baseZIndex]="5000">
+</p-toast>
+<p-toast
+  position="center"
+  key="checkPresenzaRevocaFile"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirmPresenzaRevocaFile()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="rejectPresenzaRevocaFile()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-toast
+  position="center"
+  key="checkRichiestaRevocaImmediata"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirmRichiestaRevoca()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="rejectRichiestaRevoca()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<div
+  id="confirm"
+  class="ui-g ui-fluid">
+  <div class="ui-grid-col-12">
+      <p-dialog
+        [(visible)]="display"
+        header="{{ 'REVOCA_MANDATO_DLG.TITLE' | translate }}"
+        [dismissableMask]="true"
+        [modal]="true"
+        [focusOnShow]="false"
+        appendTo="body"
+        [closable]="true"
+        [style]="{width: '65%', minWidth: '65%'}"
+        [contentStyle]="{minHeight: '700px'}"
+        [closeOnEscape]="true">
+        <div class="popup-approvazione popup--custom">
+          <div class="mb-4">
+            <h6>{{ 'REVOCA_MANDATO_DLG.STAI_PER_REVOCARE' | translate }}
+              <strong>
+                {{ datiMandato?.sportello?.denominazione?
+                   datiMandato.sportello.denominazione
+                   : ("ND" | translate) }}</strong>
+            </h6>
+          </div>
+          <div class="p-grid ui-g-12" style="text-align:center">
+            <div class="p-col-12"></div>
+            <div class="p-col-4">
+              <img
+                      class="box__icon"
+                      src="assets/img/icons/icon-download.png">
+              <div>
+                <br>
+                <h4><b><p [innerHtml]="'REVOCA_MANDATO_DLG.DESC_SCARICA_MODULO' | translate"></p></b></h4>
+              </div>
+              <br>
+              <div>
+                <button
+                        pButton
+                        label="{{ 'REVOCA_MANDATO_DLG.SCARICA_MODULO' | translate }}"
+                        class="button--success"
+                        (click)="downloadModulo()"></button>
+              </div>
+            </div>
+            <div class="p-col-4">
+              <img
+                      class="box__icon"
+                      src="assets/img/icons/icon-signature.svg">
+              <div>
+                <br>
+                <h4><b><p [innerHtml]="'REVOCA_MANDATO_DLG.FIRMA_DIGITALMENTE' | translate"></p></b></h4>
+              </div>
+              <br>
+              <div>
+                <h6>{{ 'REVOCA_MANDATO_DLG.DESC_APPONI_FIRMA' | translate }}</h6>
+              </div>
+            </div>
+            <div class="p-col-4">
+              <img
+                      class="box__icon"
+                      src="assets/img/icons/icon-upload.png">
+              <div>
+                <br>
+                <h4><b>{{ 'REVOCA_MANDATO_DLG.DESC_CARICA_MODULO' | translate }}</b></h4>
+              </div>
+              <br>
+              <div>
+                <button
+                        pButton
+                        label="{{ 'REVOCA_MANDATO_DLG.CARICA_MODULO' | translate }}"
+                        class="button--success"
+                        (click)="uploadModulo('revocaFile')"></button>
+                <input
+                        type="file"
+                        #revocaFile
+                        id="revocaFile"
+                        name="revocaFile"
+                        onclick="this.value = null"
+                        (change)="onFileChange($event)"
+                        accept="{{ fileExt }}"
+                        class="inputUploadFile"
+                        style="display: none">
+              </div>
+            </div>
+          </div>
+          <div class="boxgrey p-3 mb-3 ui-g-12">
+            <div class="ui-g-12">
+              <h6 class="mb-3"><strong>{{ 'REVOCA_MANDATO_DLG.MOTIVO' | translate }}</strong></h6>
+              <textarea
+                pInputTextarea
+                id="causaRichiesta"
+                type="text"
+                placeholder="{{ 'REVOCA_MANDATO_DLG.DESC_MOTIVAZIONI' | translate }}"
+                [(ngModel)]="causaRichiesta"
+                style="width: -webkit-fill-available"
+                autoResize="true">
+              </textarea>
+            </div>
+            <br>
+            <div class="ui-g-7">
+              <h6 class="mb-3"><strong>{{ 'SEDE_NUOVO_SPORTELLO_CAA' | translate }} *</strong></h6>
+            </div>
+            <div class="ui-g-5">
+            </div>
+            <div class="ui-g-7">
+                <p-dropdown
+                  [options]="sportelloList"
+                  [(ngModel)]="selectedSportello"
+                  placeholder="Seleziona.."
+                  optionLabel="denominazione"
+                  [showClear]="true"
+                  [required]>
+                </p-dropdown>
+            </div>
+            <div class="ui-g-5">
+                {{
+                selectedSportello?.comune
+                        ? selectedSportello.comune
+                        : ""
+                }}
+            </div>
+          </div>
+          <hr>
+          <div class="ui-g-7"></div>
+          <div class="d-flex justify-content-end ui-g-5">
+            <button
+              pButton
+              icon="fa ui-icon-check"
+              type="submit"
+              label="{{ 'REVOCA_MANDATO_DLG.INVIA_RICHIESTA' | translate }}"
+              class="button--success"
+              (click)="revocaMandato()"></button>
+          </div>
+        </div>
+      </p-dialog>
+  </div>
+</div>

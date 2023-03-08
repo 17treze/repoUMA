@@ -1,0 +1,879 @@
+<p-toast
+  key="tst"
+  style="z-index: 99"
+  [style]="{ marginTop: '70px' }"
+></p-toast>
+<p-toast
+  position="center"
+  key="warn-check-societaServizi"
+  (onClose)="onRejectHasCheckSocietaServizi()"
+  [modal]="true"
+  [baseZIndex]="5000"
+>
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+      <h3>{{ message.summary }}</h3>
+      <p>{{ message.detail }}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="onConfirmHasCheckSocietaServizi()"
+          label="Si"
+          class="ui-button-success"
+        ></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="onRejectHasCheckSocietaServizi()"
+          label="Annulla"
+          class="ui-button-secondary"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-toast
+  key="tst-protocolla"
+  [baseZIndex]="50000"
+  modal="true"
+></p-toast>
+
+<app-popup-carta-servizi
+  [tipoDaCaricare]="tipoDaCaricare"
+  [popupVisibile]="popupVisibile"
+  (chiudiPopup)="closePopupCartaServizi($event)"
+>
+</app-popup-carta-servizi>
+
+<app-popup-richiesta-trasferimento
+  [popupRichiestaTrasferimentoOpen]="popupRichiestaTrasferimentoOpen"
+  (chiudiPopup)="closePopupRichiestaTrasferimento($event)"
+  (getReportTrasferimentoOp)="getReportTrasferimentoOp($event)">
+</app-popup-richiesta-trasferimento>
+
+<div class="ui-g ui-fluid" *ngIf="anagraficaTributaria">
+  <div class="tophome riepilogo">
+    <div class="ui-grid-fixed">
+      <h4>{{ title }}</h4>
+      <div class="subhome">
+        <div class="ui-g">
+          <ng-container *ngFor="let dato of dati">
+            <div class="ui-md-4 separator-fsc">
+              <strong>{{ dato.chiave }}</strong>
+              <br />
+              {{ dato.valore }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui-grid-fixed">
+    <div class="p-grid">
+      <div class="p-col">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-signature.svg" />
+          <h3 class="box__title">{{ "FAS_ANA.FIRMA_AZIENDA" | translate }}</h3>
+          <p class="box__subtitle">
+            {{ "FAS_ANA.DESC_MANDATO_AZIENDA" | translate }}
+          </p>
+          <button
+            *ngIf="!verificaDownloadMandato"
+            type="button"
+            class="box__button"
+            (click)="downloadMandato()"
+          >
+            <span style="vertical-align: top">{{
+              "FAS_ANA.SCARICA_MANDATO" | translate
+            }}</span>
+            <i
+              class="pi pi-download"
+              style="vertical-align: top; font-size: x-large"
+            ></i>
+          </button>
+          <button
+            *ngIf="verificaDownloadMandato && !verificaUploadMandato"
+            class="box__button"
+            (click)="uploadFile('mandatoFile')"
+          >
+            <span style="vertical-align: top">{{
+              "FAS_ANA.CARICA_MANDATO" | translate
+            }}</span>
+            <i class="pi pi-upload" style="vertical-align: top"></i>
+          </button>
+          <span
+            class="box__confirm"
+            [ngClass]="{
+              'is--done': verificaUploadMandato && !verificaRepertoriazione
+            }"
+          >
+            <i class="pi pi-check"></i>
+          </span>
+          <input
+            type="file"
+            #mandatoFile
+            id="mandatoFile"
+            name="mandatoFile"
+            onclick="this.value = null"
+            (change)="onFileChange($event, 'mandatoFile')"
+            accept="{{ fileExt }}"
+            class="inputUploadFile"
+            style="display: none"
+          />
+          <p *ngIf="verificaUploadMandato" class="h6 text-uppercase">
+            <span>{{ "FAS_ANA.DOC_FIRMATO" | translate }}</span>
+            <img
+              class="ml-2"
+              *ngIf="verificaUploadMandato && !verificaRepertoriazione"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteMandato()"
+            />
+            <!-- *ngIf="verificaUploadMandato && !verificaRepertoriazione" -->
+          </p>
+          <div class="mt-auto">
+            <button
+              *ngIf="verificaDownloadMandato && !verificaUploadMandato"
+              type="button"
+              class="btn btn-link fs-14"
+              (click)="downloadMandato()"
+            >
+              {{ "FAS_ANA.RISCARICA_DOC" | translate }}
+            </button>
+            <button
+              *ngIf="verificaDownloadMandato && !verificaUploadMandato"
+              type="button"
+              class="btn btn-link fs-14"
+              (click)="deleteMandato()"
+            >
+              {{ "FAS_ANA.MODIFICA_DOC" | translate }}
+            </button>
+          </div>
+          <!-- <button *ngIf="verificaUploadMandato" pButton type="button"
+              class="btn fs-16 btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+              (click)="visualizzaMandato()">{{ 'FAS_ANA.VISUALIZZA_DOC_MANDATO' | translate }}</button> -->
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-attachment.svg" />
+          <h3 class="box__title">{{ "FAS_ANA.CARTA_SERVIZI" | translate }}</h3>
+          <p class="box__subtitle">
+            {{ "FAS_ANA.DESC_CARTA_SERVIZI" | translate }}
+          </p>
+          <p
+            *ngIf="verificaUploadCartaServizi && cartaServiziFile"
+            class="h6 text-uppercase mb-4"
+          >
+            <span>{{ "FAS_ANA.CARTA_SERVIZI_ALLEGATA" | translate }}</span>
+            <img
+              class="ml-2"
+              *ngIf="!verificaRepertoriazione"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteCartaServizi()"
+            />
+          </p>
+          <p *ngIf="allegatoFile_1" class="row-border box-attachment">
+            <span>{{ descrizioneAllegato_1 }}</span>
+            <img
+              class="ml-2"
+              *ngIf="!verificaRepertoriazione"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteAllegato(1)"
+            />
+          </p>
+          <p *ngIf="allegatoFile_2" class="row-border box-attachment">
+            <span>{{ descrizioneAllegato_2 }}</span>
+            <img
+              class="ml-2"
+              *ngIf="!verificaRepertoriazione"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteAllegato(2)"
+            />
+          </p>
+          <p *ngIf="allegatoFile_3" class="row-border box-attachment">
+            <span>{{ descrizioneAllegato_3 }}</span>
+            <img
+              class="ml-2"
+              *ngIf="!verificaRepertoriazione"
+              src="assets/img/ico-x.jpg"
+              (click)="deleteAllegato(3)"
+            />
+          </p>
+          <button
+            *ngIf="
+              (!cartaServiziFile ||
+                !allegatoFile_1 ||
+                !allegatoFile_2 ||
+                !allegatoFile_3) &&
+              !verificaRepertoriazione
+            "
+            type="button"
+            class="box__button"
+            (click)="uploadCartaServizi()"
+          >
+            {{ "FAS_ANA.ALLEGA" | translate }}
+          </button>
+          <span
+            class="box__confirm"
+            [ngClass]="{
+              'is--done': verificaUploadCartaServizi && cartaServiziFile
+            }"
+          >
+            <i class="pi pi-check"></i>
+          </span>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-shield.svg" />
+          <h3 class="box__title">{{ "FAS_ANA.INFO_PRIVACY" | translate }}</h3>
+          <p class="box__subtitle">
+            {{ "FAS_ANA.DESC_INFO_PRIVACY" | translate }}
+          </p>
+          <button
+            *ngIf="!verificaPresenzaPrivacy && !verificaDownloadPrivacy"
+            class="box__button"
+            (click)="downloadPrivacy()"
+          >
+            <span style="vertical-align: top">{{
+              "FAS_ANA.SCARICA_INFO" | translate
+            }}</span>
+            <i
+              class="pi pi-download"
+              style="vertical-align: top; font-size: x-large"
+            ></i>
+          </button>
+          <button
+            *ngIf="
+              !verificaPresenzaPrivacy &&
+              verificaDownloadPrivacy &&
+              !verificaUploadPrivacy
+            "
+            class="box__button"
+            (click)="uploadFile('privacyFile')"
+          >
+            <span style="vertical-align: top">{{
+              "FAS_ANA.CARICA_INFO" | translate
+            }}</span>
+            <i class="pi pi-upload" style="vertical-align: top"></i>
+          </button>
+          <input
+            type="file"
+            #privacyFile
+            id="privacyFile"
+            name="privacyFile"
+            onclick="this.value = null"
+            (change)="onFileChange($event, 'privacyFile')"
+            accept="{{ fileExt }}"
+            class="inputUploadFile"
+            style="display: none"
+          />
+          <p
+            *ngIf="verificaPresenzaPrivacy || verificaUploadPrivacy"
+            class="h6 text-uppercase mb-4"
+          >
+            <span>{{ "FAS_ANA.INFO_FIRMATA" | translate }}</span>
+          </p>
+          <button
+            *ngIf="verificaPresenzaPrivacy || verificaUploadPrivacy"
+            type="button"
+            class="btn btn-link"
+            (click)="downloadPrivacy()"
+          >
+            {{ "FAS_ANA.VISUALIZZA_DOC" | translate }}
+          </button>
+          <button
+            *ngIf="
+              !verificaPresenzaPrivacy &&
+              verificaDownloadPrivacy &&
+              !verificaUploadPrivacy
+            "
+            type="button"
+            class="btn btn-link"
+            (click)="downloadPrivacy()"
+          >
+            {{ "FAS_ANA.RISCARICA_DOC" | translate }}
+          </button>
+          <span
+            class="box__confirm"
+            [ngClass]="{
+              'is--done': verificaPresenzaPrivacy || verificaUploadPrivacy
+            }"
+          >
+            <i class="pi pi-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- START BOX REVOCA ORDINARIA DI UN MANDATO -->
+      <div *ngIf="ctx === IMPORTA_ENUM.REVOCA" class="p-col">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-file-check.svg" />
+          <h3 class="box__title">{{ "FAS_ANA.REVOCA_ORDINARIA" | translate }}</h3>
+          <p class="box__subtitle">
+            {{ "FAS_ANA.DESC_REVOCA_MANDATO" | translate }}
+          </p>
+          <div *ngIf="verificaUploadMandato" class="w-100 text-left">
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong>{{ "DATA_SOTTOSCRIZIONE_V2" | translate }}:</strong>
+                </div>
+                <div class="col-5">
+                  {{ dataSottoscrizione | date: "dd/MM/yyyy" }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong>{{ "DATA_INIZIO_DECORRENZA_V2" | translate }}:</strong>
+                </div>
+                <div class="col-5">
+                  {{ dataInizioDecorrenza | date: "dd/MM/yyyy" }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong>{{ "DATA_SCADENZA_V2" | translate }}:</strong>
+                </div>
+                <div class="col-5">
+                  {{ dataScadenza }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-100">
+            <button
+              *ngIf="!isRevocaInviata"
+              class="box__button w-100"
+              (click)="revoca()"
+              [disabled]="
+                !(
+                  verificaUploadMandato &&
+                  verificaUploadCartaServizi &&
+                  (verificaUploadPrivacy || verificaPresenzaPrivacy)
+                )
+              "
+            >
+              {{ "FAS_ANA.REVOCA_MANDATO" | translate }}
+            </button>
+            <h6
+              *ngIf="isRevocaInviata"
+              class="text-confirm"
+              style="padding: 0 !important"
+            >
+              <i class="pi pi-check"></i>
+              <span>{{ "FAS_ANA.DOC_REVOCATO" | translate }}</span>
+            </h6>
+          </div>
+          <span
+            class="box__confirm"
+            [ngClass]="{
+              'is--done':
+                verificaUploadMandato &&
+                verificaUploadCartaServizi &&
+                (verificaUploadPrivacy || verificaPresenzaPrivacy)
+            }"
+          >
+            <i class="pi pi-check"></i>
+          </span>
+        </div>
+      </div>
+      <!-- END BOX REVOCA MANDATO -->
+
+      <!-- START BOX APRI FASCICOLO -->           
+      <div *ngIf="ctx === IMPORTA_ENUM.APRI
+                || ctx === IMPORTA_ENUM.APRI_TRASFERISCI
+                || ctx === IMPORTA_ENUM.TRASFERISCI
+                || ctx === IMPORTA_ENUM.RIAPRI
+                || ctx === IMPORTA_ENUM.MIGRA
+                || ctx === IMPORTA_ENUM.ACQUISIZIONE_MANDATO" class="p-col">
+        <div class="box box-fasc">
+          <img class="box__icon" src="assets/img/icons/icon-file-check.svg" />
+          <h3 class="box__title">
+            <div [ngSwitch]="ctx">
+              <div *ngSwitchCase="IMPORTA_ENUM.APRI_TRASFERISCI">{{ "FAS_ANA.COSTITUZIONE_E_TRASFERIMENTO_FASCICOLO" | translate }}</div>
+              <div *ngSwitchCase="IMPORTA_ENUM.TRASFERISCI">{{ "FAS_ANA.TRASFERIMENTO_FASCICOLO" | translate }}</div>
+              <div *ngSwitchCase="IMPORTA_ENUM.RIAPRI">{{ "FAS_ANA.RIAPRI" | translate }}</div>
+              <div *ngSwitchCase="IMPORTA_ENUM.MIGRA">{{ "FAS_ANA.MIGRAZIONE" | translate }}</div>
+              <div *ngSwitchCase="IMPORTA_ENUM.ACQUISIZIONE_MANDATO">{{ "FAS_ANA.ACQUISIZIONE_MANDATO" | translate }}</div>
+              <div *ngSwitchDefault>{{ "FAS_ANA.APERTURA_FASCICOLO" | translate }}</div>
+            </div>
+          </h3>
+          <div [ngSwitch]="ctx">
+            <div *ngSwitchCase="IMPORTA_ENUM.APRI_TRASFERISCI"><p class="box__subtitle">{{ "FAS_ANA.DESC_COSTITUZIONE_TRASFERIMENTO_FASCICOLO" | translate }}</p></div>
+            <div *ngSwitchCase="IMPORTA_ENUM.TRASFERISCI"><p class="box__subtitle">{{ "FAS_ANA.DESC_TRASFERIMENTO_FASCICOLO" | translate }}</p></div>
+            <div *ngSwitchCase="IMPORTA_ENUM.RIAPRI"><p class="box__subtitle">{{ "FAS_ANA.DESC_RIAPERTURA" | translate }}</p></div>
+            <div *ngSwitchCase="IMPORTA_ENUM.MIGRA"><p class="box__subtitle">{{ "FAS_ANA.DESC_MIGRAZIONE" | translate }}</p></div>
+            <div *ngSwitchCase="IMPORTA_ENUM.ACQUISIZIONE_MANDATO"><p class="box__subtitle">{{ "FAS_ANA.DESC_ACQUISIZIONE_MANDATO" | translate }}</p></div>
+            <div *ngSwitchDefault><p class="box__subtitle">{{ "FAS_ANA.DESC_PROTOCOLLAZIONE_MANDATO" | translate }}</p></div>
+          </div>
+          <div *ngIf="ctx === IMPORTA_ENUM.MIGRA" class="w-100 text-left">
+            <div class="p-col-12">
+              <p-checkbox name="Macchinari" label="Macchinari" [formControl]="schedeForm.controls['macchinari']" binary = "true"></p-checkbox>
+            </div>
+            <div class="p-col-12">
+              <p-checkbox name="Fabbricati" label="Fabbricati" [formControl]="schedeForm.controls['fabbricati']" binary = "true"></p-checkbox>
+            </div>
+            <div class="p-col-12">
+              <p-checkbox name="modPagamenti" label="Modalità Pagamenti" [formControl]="schedeForm.controls['modPagamento']" binary = "true"></p-checkbox>
+            </div>
+          </div>
+          <div *ngIf="verificaUploadMandato" class="w-100 text-left">
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong> {{ "DATA_SOTTOSCRIZIONE_V2" | translate }}: </strong>
+                </div>
+                <div class="col-5">
+                  {{ dataSottoscrizione | date: "dd/MM/yyyy" }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong>
+                    {{ "DATA_INIZIO_DECORRENZA_V2" | translate }}:
+                  </strong>
+                </div>
+                <div class="col-5">
+                  {{ dataInizioDecorrenza | date: "dd/MM/yyyy" }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row-border">
+              <div class="row">
+                <div class="col-7">
+                  <strong> {{ "DATA_SCADENZA_V2" | translate }}: </strong>
+                </div>
+                <div class="col-5">{{ dataScadenza | date: "dd/MM/yyyy" }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="w-100">
+            <button
+              *ngIf="!verificaRepertoriazione"
+              class="box__button w-100"
+              (click)="repertoriazione()"
+              [disabled]="
+                !(
+                  verificaUploadMandato &&
+                  verificaUploadCartaServizi &&
+                  (verificaUploadPrivacy || verificaPresenzaPrivacy)
+                )
+              "
+            >
+              <div [ngSwitch]="ctx">
+                <div *ngSwitchCase="IMPORTA_ENUM.APRI_TRASFERISCI">{{ "FAS_ANA.COSTITUZIONE_TRASFERIMENTO" | translate }}</div>
+                <div *ngSwitchCase="IMPORTA_ENUM.TRASFERISCI">{{ "FAS_ANA.TRASFERIMENTO" | translate }}</div>
+                <div *ngSwitchCase="IMPORTA_ENUM.RIAPRI">{{ "FAS_ANA.REPERTORIA_RIAPRI" | translate }}</div>
+                <div *ngSwitchCase="IMPORTA_ENUM.MIGRA">{{ "FAS_ANA.MIGRAZIONE" | translate }}</div>
+                <div *ngSwitchCase="IMPORTA_ENUM.ACQUISIZIONE_MANDATO">{{ "FAS_ANA.PROTOCOLLA_ACQUISISCI_MANDATO" | translate }}</div>
+                <div *ngSwitchDefault>{{ "FAS_ANA.REPERTORIA" | translate }}</div>
+              </div>
+            </button>
+            <h6
+              *ngIf="verificaRepertoriazione"
+              class="text-confirm"
+              style="padding: 0 !important"
+            >
+              <i class="pi pi-check"></i>
+              <span>{{ "FAS_ANA.DOC_REPERTORIATO" | translate }}</span>
+            </h6>
+          </div>
+          <span
+            class="box__confirm"
+            [ngClass]="{
+              'is--done':
+                verificaUploadMandato &&
+                verificaUploadCartaServizi &&
+                (verificaUploadPrivacy || verificaPresenzaPrivacy)
+            }"
+          >
+            <i class="pi pi-check"></i>
+          </span>
+        </div>
+      </div>
+      <!-- END BOX APRI FASCICOLO -->
+    </div>
+  </div>
+  <div class="ui-grid-fixed">
+    <!-- <section class="box-fasc-data clearfix"> -->
+      <div *ngIf="ctx != IMPORTA_ENUM.MIGRA" class="boxgrey ui-g-12 d-flex align-items-center caa-dropdown flex-wrap pt-3">
+        <strong class="mr-3">{{ "SPORTELLO" | translate }}</strong>
+        <p-dropdown
+          [options]="sportelliCAA"
+          [(ngModel)]="selectedSportello"
+          placeholder="Seleziona lo sportello"
+          optionLabel="denominazione"
+          [showClear]="true"
+          [required]
+        >
+        </p-dropdown>
+      </div><br>
+    <!-- </section> -->
+    <section class="box-fasc-data clearfix">
+      <header class="box-fasc-data__header">
+        <h3 class="h6">
+          {{ "FAS_ANA.DATI_AZIENDA" | translate }}
+        </h3>
+      </header>
+      <div *ngIf="isPersonaFisica()" class="ui-g-6">
+        <div class="ui-g-12">
+          <h5 class="fw-700 text-uppercase">
+            {{ "FAS_ANA.PERSONA" | translate }}
+          </h5>
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CODICE_FISCALE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.codiceFiscale
+              ? anagraficaTributaria.datiAnagraficiRappresentante.codiceFiscale
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "NOMINATIVO" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.nominativo
+              ? anagraficaTributaria.datiAnagraficiRappresentante.nominativo
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PROV_NASC" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.provinciaNascita
+              ? anagraficaTributaria.datiAnagraficiRappresentante
+                  .provinciaNascita
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "COM_NASC" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.comuneNascita
+              ? anagraficaTributaria.datiAnagraficiRappresentante.comuneNascita
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "DATA_NASC" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.dataNascita
+              ? (anagraficaTributaria.datiAnagraficiRappresentante.dataNascita
+                | date: "dd/MM/yyyy")
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PROVINCIA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.domicilioFiscaleRappresentante?.provincia
+              ? anagraficaTributaria.domicilioFiscaleRappresentante.provincia
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "COMUNE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.domicilioFiscaleRappresentante?.comune
+              ? anagraficaTributaria.domicilioFiscaleRappresentante.comune
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "LOCALITA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.domicilioFiscaleRappresentante?.localita
+              ? anagraficaTributaria.domicilioFiscaleRappresentante.localita
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "INDIRIZZO" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{ indirizzoLR ? indirizzoLR : ("ND" | translate) }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CAP" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.domicilioFiscaleRappresentante?.cap
+              ? anagraficaTributaria.domicilioFiscaleRappresentante.cap
+              : ("ND" | translate)
+          }}
+        </div>
+      </div>
+      <div *ngIf="!isPersonaFisica()" class="ui-g-6">
+        <div class="ui-g-12">
+          <h5 class="fw-700 text-uppercase">
+            {{ "FAS_ANA.PERSONA" | translate }}
+          </h5>
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CODICE_FISCALE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.codiceFiscale
+              ? anagraficaTributaria.codiceFiscale
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PARTITA_IVA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.partitaIva
+              ? anagraficaTributaria.partitaIva
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "DENOMINAZIONE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.denominazione
+              ? anagraficaTributaria.denominazione
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "NATURA_GIURIDICA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.naturaGiuridica
+              ? anagraficaTributaria.naturaGiuridica
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PROVINCIA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.ubicazioneDitta?.provincia
+              ? anagraficaTributaria.ubicazioneDitta.provincia
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "COMUNE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.ubicazioneDitta?.comune
+              ? anagraficaTributaria.ubicazioneDitta.comune
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "LOCALITA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.ubicazioneDitta?.localita
+              ? anagraficaTributaria.ubicazioneDitta.localita
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "INDIRIZZO" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{ indirizzoAzienda ? indirizzoAzienda : ("ND" | translate) }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CAP" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.ubicazioneDitta?.cap
+              ? anagraficaTributaria.ubicazioneDitta.cap
+              : ("ND" | translate)
+          }}
+        </div>
+      </div>
+      <div *ngIf="isPersonaFisica()" class="ui-g-6">
+        <div class="ui-g-12">
+          <h5 class="fw-700 text-uppercase">
+            {{ "FAS_ANA.IMPRESA_INDIVIDUALE" | translate }}
+          </h5>
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "DENOMINAZIONE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.denominazione
+              ? anagraficaTributaria.denominazione
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PARTITA_IVA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.partitaIva
+              ? anagraficaTributaria.partitaIva
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "NATURA_GIURIDICA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.naturaGiuridica
+              ? anagraficaTributaria.naturaGiuridica
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "INDIRIZZO" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{ indirizzoAzienda ? indirizzoAzienda : ("ND" | translate) }}
+        </div>
+      </div>
+      <div *ngIf="!isPersonaFisica()" class="ui-g-6">
+        <div class="ui-g-12">
+          <h5 class="fw-700 text-uppercase">
+            {{ "FAS_ANA.TITOLARE_RL" | translate }}
+          </h5>
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "NOMINATIVO" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.nominativo
+              ? anagraficaTributaria.datiAnagraficiRappresentante.nominativo
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CODICE_FISCALE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            anagraficaTributaria?.datiAnagraficiRappresentante?.codiceFiscale
+              ? anagraficaTributaria.datiAnagraficiRappresentante.codiceFiscale
+              : ("ND" | translate)
+          }}
+        </div>
+      </div>
+    </section>
+    <section *ngIf="datiCAA && sportelliCAA" class="box-fasc-data clearfix">
+      <header class="box-fasc-data__header">
+        <h3 class="h6">
+          {{ "FAS_ANA.DATI_CAA" | translate }}
+        </h3>
+      </header>
+      <div class="ui-g-6">
+        <div class="ui-g-6">
+          <strong>{{ "DENOMINAZIONE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            datiCAA?.denominazione ? datiCAA.denominazione : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "CODICE_FISCALE" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            datiCAA?.codiceFiscale ? datiCAA.codiceFiscale : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "PARTITA_IVA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{ datiCAA?.partitaIVA ? datiCAA.partitaIVA : ("ND" | translate) }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "SEDE_AMMINISTRATIVA_CAA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            datiCAA?.indirizzo?.via
+              ? datiCAA.indirizzo.via +
+                " - " +
+                datiCAA.indirizzo.denominazioneComune
+              : ("ND" | translate)
+          }}
+        </div>
+      </div>
+      <div class="ui-g-6">
+        <div class="ui-g-6">
+          <strong>{{ "LOCALITA_SPORTELLO_CAA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            selectedSportello?.comune? selectedSportello.comune
+              : ("ND" | translate)
+          }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "ATTO_CAA" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{ datiCAA?.estremiAtto ? datiCAA.estremiAtto : ("ND" | translate) }}
+        </div>
+        <div class="ui-g-6">
+          <strong>{{ "SOCIETA_SERVIZI" | translate }}</strong>
+        </div>
+        <div class="ui-g-6">
+          {{
+            datiCAA?.societaServizi
+              ? datiCAA.societaServizi
+              : ("ND" | translate)
+          }}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<app-popup-run-migrazione
+  [popupRunMigrazioneOpen]="popupRunMigrazioneOpen"
+  (chiudiPopup)="closePopupRunMigrazione($event)">
+</app-popup-run-migrazione>

@@ -1,0 +1,23 @@
+<p-dialog *ngIf="panelEvent.showUploadVettoriali" [(visible)]="panelEvent.showUploadVettoriali" (onHide)="closeDialog()" class="uploadAttachmentsPopup"
+[resizable]="false" [draggable]="false">
+	<h3 style="color: #30373D; font-size: 18px; font-weight: bold;"> Carica layer esterno (*json, *geojson) </h3>
+  <div>
+    <input id="file-upload" type="file" (change)="onLoadFile($event.target.files)" style="display: none;"/>
+    <label for="file-upload" class="custom-file-upload">
+        Sfoglia
+    </label>
+    <span>
+    {{fileName}}
+    </span>
+    <button id="salvaJson" [disabled]="formatError" [hidden]="!featureFile" (click)="onUpload($event)" pTooltip="Carica" tooltipPosition="top">
+      <i class="fa fa-upload"></i>
+    </button>
+  </div>
+    <div *ngIf="formatError" class="errorDiv">
+      {{errorFile}}
+    </div>
+    <div *ngIf="errorProjection" class="errorDiv">
+     il sistema di riferimento deve essere EPSG:25832
+    </div>
+</p-dialog>
+<div id="overlayDialog" *ngIf="panelEvent.showUploadVettoriali"></div>

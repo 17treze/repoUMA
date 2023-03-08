@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.anagrafica.regione.taa.it/PersonaType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.anagrafica.regione.taa.it/PersonaType/schemas" xmlns:locale="http://www.locale.regione.taa.it/LocaleType/schemas">
+  <xs:import namespace="http://www.locale.regione.taa.it/LocaleType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8_9_10.xsd"/>
+  <xs:complexType name="ChiavePersonaFisicaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni identificative di una persona fisica</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="anagraficaNascita" type="tns:AnagraficaType"/>
+    </xs:sequence>
+    <xs:attribute name="nome" type="xs:string" use="required"/>
+    <xs:attribute name="cognome" type="xs:string" use="required"/>
+    <xs:attribute name="sesso" type="tns:SessoType" use="optional"/>
+    <xs:attribute name="codiceFiscale" type="tns:CodiceFiscaleType" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="AnagraficaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni anagrafiche descrittive delle informazioni spazio temporali di un evento anagrafico quale la nascita o la morte di una persona</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="localita" type="locale:DescrizioneMultilinguaType">
+        <xs:annotation>
+          <xs:documentation>Modella le informazioni di una localita' per gli scenari in cui vi sono informazioni destrutturate in cui si possono trovare nazioni, comuni o qualsiasi luoghi geografici.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="data" type="xs:date" use="optional"/>
+    <xs:attribute name="comune" type="xs:string" use="optional"/>
+    <xs:attribute name="nazione" type="xs:string" use="optional"/>
+    <!--<xs:attribute name="localita" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Modella le informazioni di una localita' per gli scenari in cui vi sono informazioni destrutturate in cui si possono trovare nazioni, comuni o qualsiasi luoghi geografici.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>-->
+  </xs:complexType>
+  <xs:complexType name="ChiavePersonaGiuridicaType">
+    <xs:annotation>
+      <xs:documentation>Modella le informazioni identificative di una persona fisica</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="ragioneSociale" type="locale:DescrizioneMultilinguaType">
+        <xs:annotation>
+          <xs:documentation>Contiene la denominazione della persona giuridica</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="sede" type="locale:DescrizioneMultilinguaType">
+        <xs:annotation>
+          <xs:documentation>Indica la sede ove e' ubicata l'azienda (Bolzano, Merano, Trento, Rovereto e cosi' via)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="partitaIVA" type="tns:PartitaIVAType" use="optional"/>
+  </xs:complexType>
+  <xs:simpleType name="CodiceFiscaleType">
+    <xs:restriction base="xs:string">
+      <xs:length fixed="true" value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CodiceFiscalePersonaGiuridicaType">
+    <xs:restriction base="xs:string">
+      <xs:length fixed="true" value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PartitaIVAType">
+    <xs:restriction base="xs:string">
+      <xs:length fixed="true" value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SessoType">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="FEMMINA"/>
+      <xs:enumeration value="MASCHIO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

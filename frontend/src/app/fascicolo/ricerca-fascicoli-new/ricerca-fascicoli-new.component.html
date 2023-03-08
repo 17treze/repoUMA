@@ -1,0 +1,81 @@
+<div class="ui-grid-fixed">
+  <p-toast
+    key="tst"
+    [style]="{ marginTop: '70px' }"></p-toast>
+  <app-filtro-ricerca-fascicoli-new
+    [resultsNumber]="elementiTotali"
+    (search)="onSearch($event)"></app-filtro-ricerca-fascicoli-new>
+  <div class="boxgrey pt-0">
+    <div class="layout-actionmenu">
+      <div
+        class="table-responsive"
+        margin-top="30px">
+        <!-- A4G TABLE -->
+        <app-a4g-paged-table
+          #dt
+          [columns]="cols"
+          [value]="fascicoliList"
+          [totalRecords]="elementiTotali"
+          [(selectedItems)]="fascicoliListSelezionati"
+          [(isSelectedAll)]="isSelectedAll"
+          (onLazyLoadPage)="loadData($event)"
+          [lazy]="true"
+          [sizeArray]="intestazioni.sizePerPagina">
+          <!-- HEADER -->
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th
+                *ngFor="let col of columns"
+                [pSortableColumnWrapper]="col.field"
+                [pSortableColumnDisabled]="col.field == null">
+                {{ col.header }}
+                <p-sortIcon-wrapper
+                  *ngIf="col.field != null"
+                  [field]="col.field"></p-sortIcon-wrapper>
+              </th>
+              <th style="width: 3em">{{ intestazioni.azioni }}</th>
+            </tr>
+          </ng-template>
+          <!-- BODY -->
+          <ng-template
+            pTemplate="body"
+            let-cert
+            let-i="rowIndex">
+            <tr [pSelectableRowWrapper]="cert">
+              <td>{{ cert.cuaa }}</td>
+              <td>{{ cert.denominazione }}</td>
+              <td>
+                {{
+                  cert?.detenzione?.sportello?.denominazione
+                    ? cert.detenzione.sportello.denominazione
+                    : ("ND" | translate)
+                }}
+              </td>
+              <td>
+                {{ "FAS_ANA.STATO." + cert.stato | translate }}
+              </td>
+              <td>
+                <button
+                  pButton
+                  class="command-button no-border-radius p-button-lg py-1 px-4 d-block bg-primary"
+                  icon="pi pi-arrow-right"
+                  iconPos="left"
+                  (click)="$event.stopPropagation(); visualizzaDettaglioFascicolo(cert)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <!-- EMPTY -->
+          <ng-template
+            pTemplate="emptymessage"
+            let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length + 1">{{ intestazioni.noContent }}</td>
+            </tr>
+          </ng-template>
+        </app-a4g-paged-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+		<changeSet id="ISTRUTTORIA_12.3" author="Elisabetta Freschi" dbms="oracle">
+    	<!-- Compatibilità coltura intervento: record mancanti perché su foglio c'era x e non X -->
+        <sql endDelimiter=";" splitStatements="true">
+			INSERT INTO A4GD_COLTURA_INTERVENTO VALUES (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018 AND CODICE_PAC = 'PAC1420' AND TIPO_DOMANDA = 'DU' ), '040-004-500', '004-011-000-022-000', 'Superfici seminabili - SOIA - FAVE - USO ENERGETICO -', (SELECT ID FROM A4GD_INTERVENTO_DU WHERE IDENTIFICATIVO_INTERVENTO = 'CPROT	'), '1', 33124000);
+
+			INSERT INTO A4GD_COLTURA_INTERVENTO VALUES (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018 AND CODICE_PAC = 'PAC1420' AND TIPO_DOMANDA = 'DU' ), '040-004-013', '004-111-000-000-000', 'Superfici seminabili - SOIA - FAVE - EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -', (SELECT ID FROM A4GD_INTERVENTO_DU WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA'), '1', 33124000);
+
+			INSERT INTO A4GD_COLTURA_INTERVENTO VALUES (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018 AND CODICE_PAC = 'PAC1420' AND TIPO_DOMANDA = 'DU' ), '040-004-513', '004-111-000-022-000', 'Superfici seminabili - SOIA - FAVE - USO ENERGETICO-EFA - AREA DI INTERESSE ECOLOGICO - Colture azotofissatrici -', (SELECT ID FROM A4GD_INTERVENTO_DU WHERE IDENTIFICATIVO_INTERVENTO = 'SOIA'), '1', 33124000);
+
+
+			INSERT INTO A4GD_COLTURA_INTERVENTO VALUES (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018 AND CODICE_PAC = 'PAC1420' AND TIPO_DOMANDA = 'DU' ), '040-004-000', '004-011-000-000-000', 'SUPERFICI SEMINABILI - SOIA - SOIA', (SELECT ID FROM A4GD_INTERVENTO_DU WHERE IDENTIFICATIVO_INTERVENTO = 'CPROT'), '1', 33124000);
+
+			INSERT INTO A4GD_COLTURA_INTERVENTO VALUES (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DATI_SETTORE WHERE ANNO_RIFERIMENTO = 2018 AND CODICE_PAC = 'PAC1420' AND TIPO_DOMANDA = 'DU' ), '040-690-500', '004-002-000-022-000', 'Superfici seminabili - SOIA - DA FORAGGIO - USO ENERGETICO -', (SELECT ID FROM A4GD_INTERVENTO_DU WHERE IDENTIFICATIVO_INTERVENTO = 'CPROT'), '1', 33124000);
+
+
+			COMMIT;
+      </sql>
+    </changeSet>
+		
+	
+	
+	</databaseChangeLog>

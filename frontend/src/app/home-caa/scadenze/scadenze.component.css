@@ -1,0 +1,9 @@
+.inline {
+    border-radius: 2px;
+    display: inline-block;
+    margin: 1rem;
+    margin-bottom: 10px;
+    position: relative;
+    height: 180px;
+    width: 280px;
+}

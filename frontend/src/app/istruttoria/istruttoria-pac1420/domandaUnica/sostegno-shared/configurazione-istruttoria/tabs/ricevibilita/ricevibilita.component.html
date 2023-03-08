@@ -1,0 +1,93 @@
+<div class="">
+  <div class="ui-g">
+    <div class="ui-g-3" *ngFor="let istruttoria of listaRiepilogoStati">
+      <app-stato-domande-ricevibilita [riepilogoStatoDomande]="istruttoria" [dettaglioIstruttoria]="istruttoria">
+      </app-stato-domande-ricevibilita>
+    </div>
+  </div>
+</div>
+
+<form *ngIf="dateForm" [formGroup]="dateForm">
+  <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+  <p-toast position="center" key="checkSalvataggio" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+        <h3>{{message.summary}}</h3>
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="confermaSalvataggio()" label="Si" class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="rejectSalvataggio()" label="No" class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <div class="boxgrey" style="display: inline-block">
+    <div class="d-flex  align-items-center  mb-3">
+      <h3 class="mr-auto  mb-0 pb-0">Scadenziario per ricevibilità</h3>
+      <button *ngIf="edit" type="button" class="btn  btn-green  fs-16  mr-2" (click)="annulla()">ANNULLA</button>
+      <button *ngIf="edit" type="button" class="btn  btn-green  fs-16" (click)="salva()"
+        [disabled]="!dateForm.valid">SALVA</button>
+      <button *ngIf="!edit" type="button" class="btn  btn-white  mb-0  fs-16  w-auto" (click)="modifica()">MODIFICA</button>
+    </div>
+
+    <div class="row  row--edit">
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[3]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dtScadenzaDomandeIniziali" [locale]="language" dateFormat="dd/mm/yy" [(disabled)]="!edit">
+        </p-calendar>
+      </div>
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[1]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dataScadenzaDomandaInizialeInRitardo" [locale]="language" dateFormat="dd/mm/yy"
+          [(disabled)]="!edit"></p-calendar>
+      </div>
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[6]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dtScadenzaDomandeModifica" [locale]="language" dateFormat="dd/mm/yy" [(disabled)]="!edit">
+        </p-calendar>
+      </div>
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[7]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dataScadenzaDomandaModificaInRitardo" [locale]="language" dateFormat="dd/mm/yy" [(disabled)]="!edit">
+        </p-calendar>
+      </div>
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[0]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dataScadenzaDomandaRitiroParziale" [locale]="language" dateFormat="dd/mm/yy"
+        [(disabled)]="!edit"></p-calendar>
+      </div>
+      <div class="col-6  d-flex  align-items-center">
+        <span class="mr-auto  w-75">{{labels[2]}}</span>
+        <p-calendar class="ml-3  w-25" formControlName="dataRicevibilita" [locale]="language" dateFormat="dd/mm/yy" [(disabled)]="!edit">
+        </p-calendar>
+      </div>
+    </div>
+  </div>
+    <div class="boxgrey" style="display: inline-block">
+      <h3>Liquidazione</h3>
+
+      <div class="row  row--edit">
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75">{{labels[4]}}</span>
+          <span class="ml-3  w-25  text-right">
+            <span *ngIf="!edit">{{confIstruttoria.percentualeDisciplinaFinanziaria | percent : '0.0-6'}}</span>
+            <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="percentualeDisciplinaFinanziaria" />
+          </span>
+        </div>
+        <div class="col-6  d-flex  align-items-center">
+          <span class="mr-auto  w-75">{{labels[5]}}</span>
+          <span class="ml-3  w-25  text-right">
+            <span *ngIf="!edit">{{confIstruttoria.percentualePagamento | percent : '0.0-2'}}</span>
+            <input  *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="percentualePagamento"
+              [readonly]="disabledPercentualePagamento" />
+          </span>
+        </div>
+      </div>
+    </div>
+
+</form>

@@ -1,0 +1,1064 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="UMA_28U.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE SEQUENCE NXTNBR
+			START WITH 1
+			MAXVALUE 999999999999999999999999999
+			MINVALUE 1
+			NOCYCLE
+			NOCACHE
+			ORDER;
+
+			CREATE TABLE A4GT_LOGGING (
+			ID ${id.number.type} NOT NULL,
+			VERSIONE ${version.number.type} DEFAULT 0 NOT NULL,
+			UTENTE ${string.type}(500 CHAR) NOT NULL,
+			TIPO_EVENTO ${string.type}(500 CHAR) NOT NULL,
+			TABELLA ${string.type}(4000) NOT NULL,
+			ID_ENTITA NUMBER(19) NOT NULL,
+			DT_EVENTO TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,
+			CONSTRAINT A4GT_LOGGING_PK PRIMARY KEY (ID)
+			) TABLESPACE ${tablespace.data};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOG TO ${user.writer};
+			GRANT SELECT, INSERT, UPDATE, DELETE ON DATABASECHANGELOGLOCK TO ${user.writer};
+		</sql>
+
+		<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+			GRANT SELECT ON NXTNBR TO ${user.writer};
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_LOGGING TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_29U.0" author="Bruno Conetta">
+        <createTable tableName="A4GT_RICHIESTA_CARBURANTE">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_RICHIESTA_CARBURANTE"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="CUAA" type="${string.type}(16)">
+                <constraints nullable="false"/>
+            </column>    
+            <column name="CAMPAGNA" type="NUMBER(4)">
+                <constraints nullable="false"/>
+            </column>    
+            <column name="DATA_PRESENTAZIONE" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="CF_RICHIEDENTE" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="STATO" type="${string.type}(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROTOCOLLO" type="${string.type}(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DATA_PROTOCOLLAZIONE" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+			<column name="GASOLIO" type="NUMBER(7)"></column>
+			<column name="BENZINA" type="NUMBER(7)"></column>
+			<column name="GASOLIO_SERRE" type="NUMBER(7)"></column>
+			<column name="GASOLIO_TERZI" type="NUMBER(7)"></column>
+			<column name="NOTE" type="${string.type}(500)"></column>
+			<column name="DT_AGGIORNAMENTO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+        </createTable>
+           
+        <sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_RICHIESTA_CARBURANTE TO ${user.writer};
+            GRANT SELECT ON A4GT_RICHIESTA_CARBURANTE TO ${user.reader};
+        </sql>
+    </changeSet>
+    
+    <changeSet id="UMA_29U.1" author="Bruno Conetta">
+        <createTable tableName="A4GT_UTILIZZO_MACCHINARI">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_UTILIZZO_MACCHINARI"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_RICHIESTA_MACCHINARI"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="DESCRIZIONE" type="${string.type}(50)">
+            </column>
+            <column name="CLASSE" type="${string.type}(50)">
+            </column>
+            <column name="MARCA" type="${string.type}(50)">
+            </column>
+            <column name="ALIMENTAZIONE" type="${string.type}(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TARGA" type="${string.type}(50)">
+            </column>
+            <column name="POSSESSO" type="${string.type}(50)">
+            </column>
+			<column name="FLAG_UTILIZZO" type="BOOLEAN" defaultValueBoolean="false">
+				<constraints nullable="false"/>
+            </column>
+			<column name="IDENTIFICATIVO_AGS" type="${id.number.type}">
+				<constraints nullable="false"/>
+			</column>
+        </createTable>
+           
+        <sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_UTILIZZO_MACCHINARI TO ${user.writer};
+            GRANT SELECT ON A4GT_UTILIZZO_MACCHINARI TO ${user.reader};
+        </sql>
+        <sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_MACCHINARI_ID_RICHIESTA ON A4GT_UTILIZZO_MACCHINARI (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+		</sql>
+    </changeSet>
+
+	<changeSet id="UMA_29U.2" author="Bruno Conetta">
+        <createTable tableName="A4GD_GRUPPI_LAVORAZIONE">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_GRUPPI_LAVORAZIONE"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="INDICE" type="NUMBER(4)">
+            </column>  
+            <column name="NOME" type="${string.type}(200)">
+                <constraints nullable="false"/>
+            </column>    
+            <column name="AMBITO" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>    
+            <column name="ANNO_INIZIO" type="NUMBER(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ANNO_FINE" type="NUMBER(4)"></column>
+        </createTable>
+        
+      	<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_GRUPPI_LAVORAZIONE TO ${user.writer};
+            GRANT SELECT ON A4GD_GRUPPI_LAVORAZIONE TO ${user.reader};
+        </sql>
+	</changeSet>
+	
+	<changeSet id="UMA_29U.3" author="Bruno Conetta">
+        <createTable tableName="A4GR_COLTURA_GRUPPI">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_COLTURA_GRUPPI"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="CODICE_SUOLO" type="${string.type}(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_DEST_USO" type="${string.type}(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_USO" type="${string.type}(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODICE_QUALITA" type="${string.type}(3)">
+                <constraints nullable="false"/>
+            </column>
+             <column name="CODICE_VARIETA" type="${string.type}(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_GRUPPO_LAVORAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_GRUPPO_LAVORAZIONE"
+							 referencedTableName="A4GD_GRUPPI_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="ANNO_INIZIO" type="NUMBER(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ANNO_FINE" type="NUMBER(4)"></column>
+        </createTable>
+        
+      	<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_COLTURA_GRUPPI TO ${user.writer};
+            GRANT SELECT ON A4GR_COLTURA_GRUPPI TO ${user.reader};
+        </sql>
+        <sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_LAV_COLTURA_ID_GRUPPI_LAV ON A4GR_COLTURA_GRUPPI (ID_GRUPPO_LAVORAZIONE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_29U.4" author="Bruno Conetta">
+        <createTable tableName="A4GD_LAVORAZIONE">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_LAVORAZIONE"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="INDICE" type="NUMBER(4)">
+            </column>
+            <column name="NOME" type="${string.type}(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIPOLOGIA" type="${string.type}(50)">
+            </column>
+             <column name="UNITA_DI_MISURA" type="${string.type}(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_GRUPPO_LAVORAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_LAV_GRUPPO_LAVORAZIONE"
+							 referencedTableName="A4GD_GRUPPI_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+        </createTable>
+        
+      	<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_LAVORAZIONE TO ${user.writer};
+            GRANT SELECT ON A4GD_LAVORAZIONE TO ${user.reader};
+        </sql>
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_LAVORAZIONE_ID_GRUPPI_LAV ON A4GD_LAVORAZIONE (ID_GRUPPO_LAVORAZIONE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_29U.5" author="Bruno Conetta">
+        <createTable tableName="A4GT_FABBISOGNO">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_FABBISOGNO"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FABBISOGNO_RICHIESTA"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="QUANTITA" type="NUMBER(8,1)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CARBURANTE" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_LAVORAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FABBISOGNO_LAVORAZIONE"
+							 referencedTableName="A4GD_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>            
+        </createTable>
+        
+      	<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBISOGNO TO ${user.writer};
+            GRANT SELECT ON A4GT_FABBISOGNO TO ${user.reader};
+        </sql>
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_FABBISOGNO_ID_RICHIESTA ON A4GT_FABBISOGNO (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_FABBISOGNO_LAVORAZIONE ON A4GT_FABBISOGNO (ID_LAVORAZIONE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_32U.0" author="Bruno Conetta">
+        <createTable tableName="A4GR_FABBRICATO_GRUPPI">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_R_FABBRICATO_GRUPPI"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}" defaultValue="0">
+                <constraints nullable="false" />
+            </column>
+			<column name="CODICE_FABBRICATO" type="${string.type}(7)">
+				<constraints nullable="false" />
+			</column>
+            <column name="TIPO_FABBRICATO" type="${string.type}(200)">
+				<constraints nullable="false" />
+			</column>
+            <column name="ID_GRUPPO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_R_GRUPPO_FABBRICATI"
+							 referencedTableName="A4GD_GRUPPI_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>            
+        </createTable>
+        
+      	<sql endDelimiter=";" splitStatements="true">
+            GRANT SELECT,INSERT,UPDATE,DELETE ON A4GR_FABBRICATO_GRUPPI TO ${user.writer};
+            GRANT SELECT ON A4GR_FABBRICATO_GRUPPI TO ${user.reader};
+        </sql>
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_R_GRUPPO_FABBRICATI ON A4GR_FABBRICATO_GRUPPI (ID_GRUPPO) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+	
+	<include file = "config/database/changelog/definizioni/db.uma.gruppi-lavorazione.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.gruppi-colture.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.gruppi-fabbricati.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.lavorazioni.superficie.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.lavorazioni.zootecnia.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.lavorazioni.fabbricati.changelog.xml"/>
+	<include file = "config/database/changelog/definizioni/db.uma.lavorazioni.altre.changelog.xml"/>
+	
+	<changeSet id="UMA_34U.0" author="Bruno Conetta">
+		<addColumn tableName="A4GT_RICHIESTA_CARBURANTE">
+			<column name="DOCUMENTO" type="BLOB"></column>
+		</addColumn>
+		
+		<dropColumn tableName="A4GT_RICHIESTA_CARBURANTE" columnName="DT_AGGIORNAMENTO"/>
+	</changeSet>
+	
+	<changeSet id="UMA_34U.1" author="Bruno Conetta">
+		<createTable tableName="A4GT_EVENTSTORED">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true"
+					primaryKeyName="A4GT_EVENTSTORED_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="EVENTO" type="${string.type}(500)">
+				<constraints nullable="false" />
+			</column>
+			<column name="JSON_EVENT" type="CLOB">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATA_INSERIMENTO" type="DATE">
+				<constraints nullable="false" />
+			</column>
+			<column name="NUMERO_RETRY" type="NUMBER(3)"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ERRORE" type="CLOB">
+				<constraints nullable="true" />
+			</column>
+			<column name="USER_NAME" type="${string.type}(100)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT
+			SELECT,INSERT,UPDATE,DELETE ON A4GT_EVENTSTORED TO ${user.writer};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_35U.0" author="Bruno Conetta">
+		<createTable tableName="A4GT_DICHIARAZIONE_CONSUMI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_DICHIARAZIONE_CONSUMI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CONSUMI_RICHIESTA"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="DATA_PRESENTAZIONE" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="CF_RICHIEDENTE" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="STATO" type="${string.type}(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PROTOCOLLO" type="${string.type}(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DATA_PROTOCOLLAZIONE" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DATA_CONDUZIONE" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DICHIARAZIONE_CONSUMI TO ${user.writer};
+			GRANT SELECT ON A4GT_DICHIARAZIONE_CONSUMI TO ${user.reader};
+		</sql>
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CONSUMI_RICHIESTA ON A4GT_DICHIARAZIONE_CONSUMI (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+	
+	<changeSet id="UMA_35U.1" author="Bruno Conetta">		
+		<update tableName="A4GD_LAVORAZIONE">
+			<column name="TIPOLOGIA" value="BASE"/>
+			<where>INDICE = 10 AND NOME = 'ESSICCAZIONE (PRODOTTO VERDE)' AND ID_GRUPPO_LAVORAZIONE = (SELECT ID FROM A4GD_GRUPPI_LAVORAZIONE WHERE NOME LIKE '%PIANTE OFFICINALI-AROMATICHE%' AND INDICE = 16 AND AMBITO = 'ALTRO')</where>
+		</update>
+		<update tableName="A4GD_LAVORAZIONE">
+			<column name="TIPOLOGIA" value="BASE"/>
+			<where>INDICE = 11 AND NOME = 'DISTILLAZIONE (PRODOTTO VERDE)' AND ID_GRUPPO_LAVORAZIONE = (SELECT ID FROM A4GD_GRUPPI_LAVORAZIONE WHERE NOME LIKE '%PIANTE OFFICINALI-AROMATICHE%' AND INDICE = 16 AND AMBITO = 'ALTRO')</where>
+		</update>
+	</changeSet>
+	
+	<changeSet id="UMA_35U.2" author="Bruno Conetta">		
+		<createTable tableName="A4GT_CLIENTE">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_CLIENTE_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CONSUMI" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CONSUMI_CLIENTI"
+							 referencedTableName="A4GT_DICHIARAZIONE_CONSUMI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="CUAA" type="${string.type}(16)">
+                <constraints nullable="false" />
+            </column>
+            <column name="DENOMINAZIONE" type="${string.type}(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_FASCICOLO" type="${id.number.type}">
+                <constraints nullable="false"/>
+            </column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CLIENTE TO ${user.writer};
+			GRANT SELECT ON A4GT_CLIENTE TO ${user.reader};
+		</sql>
+       	<sql endDelimiter=";" splitStatements="true">
+				CREATE INDEX IDX_CONSUMI_CLIENTE ON A4GT_CLIENTE (ID_CONSUMI) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+
+	<changeSet id="UMA_35U.3" author="Bruno Conetta">		
+		<createTable tableName="A4GT_FATTURE_CLIENTI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_FATTURE_CLIENTI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CLIENTE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FATTURE_CLIENTI"
+							 referencedTableName="A4GT_CLIENTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+			<column name="DOCUMENTO" type="BLOB">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FATTURE_CLIENTI TO ${user.writer};
+			GRANT SELECT ON A4GT_FATTURE_CLIENTI TO ${user.reader};
+		</sql>
+       	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_FATTURE_CLIENTE ON A4GT_FATTURE_CLIENTI (ID_CLIENTE) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+
+	<changeSet id="UMA_35U.4" author="Bruno Conetta">		
+		<createTable tableName="A4GT_CONSUMI_CLIENTI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_CONSUMI_CLIENTI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CLIENTE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CONSUMI_CLIENTE"
+							 referencedTableName="A4GT_CLIENTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="QUANTITA" type="NUMBER(8,1)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CARBURANTE" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_LAVORAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CLIENTI_LAVORAZIONE"
+							 referencedTableName="A4GD_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column> 
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONSUMI_CLIENTI TO ${user.writer};
+			GRANT SELECT ON A4GT_CONSUMI_CLIENTI TO ${user.reader};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_36U.1" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP INDEX IDX_CONSUMI_CLIENTE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_36U.2" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CLIENTE_ID_CONSUMI ON A4GT_CLIENTE (ID_CONSUMI) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_36U.3" author="Lorenzo Martinelli">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CONSUMI_CLIENTI_ID_CLIENTE ON A4GT_CONSUMI_CLIENTI (ID_CLIENTE) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_36U.0" author="Bruno Conetta">
+		<delete tableName="A4GR_FABBRICATO_GRUPPI">  
+        	<where>CODICE_FABBRICATO ='000014' AND TIPO_FABBRICATO = 'ALTRI FABBRICATI AGRICOLI'</where>  
+    	</delete>  
+    	<insert tableName="A4GR_FABBRICATO_GRUPPI"><column name="ID" valueSequenceNext="NXTNBR"/><column name="TIPO_FABBRICATO" value="FRANTOIO"/><column name="CODICE_FABBRICATO" value="000025"/><column name="ID_GRUPPO" valueComputed="(SELECT ID FROM A4GD_GRUPPI_LAVORAZIONE WHERE NOME LIKE '%TRASFORMAZIONE DELLE OLIVE IN OLIO%' AND INDICE = 28 )"/></insert>
+		<insert tableName="A4GR_FABBRICATO_GRUPPI"><column name="ID" valueSequenceNext="NXTNBR"/><column name="TIPO_FABBRICATO" value="FABBRICATO ORTOFRUTTICOLO"/><column name="CODICE_FABBRICATO" value="000026"/><column name="ID_GRUPPO" valueComputed="(SELECT ID FROM A4GD_GRUPPI_LAVORAZIONE WHERE NOME LIKE '%TRASFORMAZIONE PRODOTTI ORTOFRUTTICOLI%' AND INDICE = 28 )"/></insert>
+	</changeSet>
+	
+	<changeSet id="UMA_36U.1" author="Bruno Conetta">
+		<update tableName="A4GD_GRUPPI_LAVORAZIONE">
+			<column name="AMBITO" value="SERRE"/>
+			<where>INDICE = 19 AND NOME = 'COLTIVAZIONI SOTTO SERRA' </where>
+		</update>		
+	</changeSet>
+
+	<changeSet id="UMA_37U.0" author="Bruno Conetta">
+		<createTable tableName="A4GT_DISTRIBUTORI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_DISTRIBUTORI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+            <column name="DENOMINAZIONE" type="${string.type}(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMUNE" type="${string.type}(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="INDIRIZZO" type="${string.type}(100)">
+                <constraints nullable="false"/>
+            </column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_DISTRIBUTORI TO ${user.writer};
+			GRANT SELECT ON A4GT_DISTRIBUTORI TO ${user.reader};
+		</sql>	
+	</changeSet>
+	
+	<changeSet id="UMA_37U.1" author="Bruno Conetta">
+		<createTable tableName="A4GT_PRELIEVI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_PRELIEVI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+            <column name="ID_DISTRIBUTORE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_PRELIEVI_DISTRIBUTORE"
+							 referencedTableName="A4GT_DISTRIBUTORI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_PRELIEVI_RICHIESTA"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column> 
+			<column name="GASOLIO" type="NUMBER(7)"></column>
+			<column name="BENZINA" type="NUMBER(7)"></column>
+			<column name="GASOLIO_SERRE" type="NUMBER(7)"></column>
+            <column name="DATA" type="DATE"></column>
+            
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_PRELIEVI TO ${user.writer};
+			GRANT SELECT ON A4GT_PRELIEVI TO ${user.reader};
+		</sql>	
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_PRELIEVI_DISTRIBUTORE ON A4GT_PRELIEVI (ID_DISTRIBUTORE) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_PRELIEVI_RICHIESTA ON A4GT_PRELIEVI (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<include file = "config/database/changelog/definizioni/db.uma.distributori.changelog.xml"/>
+	
+	<changeSet id="UMA_37U.3" author="Bruno Conetta">
+		<addNotNullConstraint tableName="A4GT_PRELIEVI" columnName="DATA"/>
+	</changeSet>
+	
+	<!-- Carburante ceduto da aziende verso distributori o altre aziende -->
+	<changeSet id="UMA_37U.4" author="Bruno Conetta">
+		<createTable tableName="A4GT_TRASFERIMENTI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_TRASFERIMENTI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_TRASFERIMENTI_RICHIESTA"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+			<column name="GASOLIO" type="NUMBER(7)"></column>
+			<column name="BENZINA" type="NUMBER(7)"></column>
+			<column name="GASOLIO_SERRE" type="NUMBER(7)"></column>
+            <column name="DATA" type="DATE">
+            	<constraints nullable="false" />
+            </column>
+            <column name="CUAA_DESTINATARIO" type="${string.type}(16)"></column>
+            <column name="ID_DISTRIBUTORE_DESTINATARIO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_TRASFERIMENTI_DISTRIBUTORE"
+							 referencedTableName="A4GT_DISTRIBUTORI"
+							 referencedColumnNames="ID"
+							 />			
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_TRASFERIMENTI TO ${user.writer};
+			GRANT SELECT ON A4GT_TRASFERIMENTI TO ${user.reader};
+		</sql>	
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_TRASFERIMENTI_DISTRIBUTORE ON A4GT_TRASFERIMENTI (ID_DISTRIBUTORE_DESTINATARIO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_TRASFERIMENTI_RICHIESTA ON A4GT_TRASFERIMENTI (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_TRASFERIMENTI_CUAA ON A4GT_TRASFERIMENTI (CUAA_DESTINATARIO) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<!-- constraint sui destinatari del carburante: distibutore XOR azienda  -->
+	<changeSet id="UMA_37U.5" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_TRASFERIMENTI ADD CONSTRAINT CK_TRASFERIMENTO_VALIDO CHECK ((CUAA_DESTINATARIO IS NOT NULL AND ID_DISTRIBUTORE_DESTINATARIO IS NULL) OR (CUAA_DESTINATARIO IS NULL AND ID_DISTRIBUTORE_DESTINATARIO IS NOT NULL));		
+		</sql>		
+	</changeSet>
+	
+	<changeSet id="UMA_37U.6" author="Bruno Conetta">
+		<addColumn tableName="A4GT_FATTURE_CLIENTI" >
+			<column name="NOME_FILE" type="${string.type}(50)">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>		
+	</changeSet>
+	
+	<changeSet id="UMA_38U.0" author="Bruno Conetta">
+		<createTable tableName="A4GT_FABBRICATI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_FABBRICATI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FABBRICATI_RICHIESTA"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="ID_TIPO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FABBRICATI_TIPO"
+							 referencedTableName="A4GR_FABBRICATO_GRUPPI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>			
+            <column name="COMUNE" type="${string.type}(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PROVINCIA" type="${string.type}(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SIGLA_PROVINCIA" type="${string.type}(2)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="VOLUME" type="NUMBER(10)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PARTICELLA" type="${string.type}(10)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SUBALTERNO" type="${string.type}(10)">
+                <constraints nullable="true"/>
+            </column>
+			<column name="IDENTIFICATIVO_AGS" type="${id.number.type}">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBRICATI TO ${user.writer};
+			GRANT SELECT ON A4GT_FABBRICATI TO ${user.reader};
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_FABBRICATI_RICHIESTA ON A4GT_FABBRICATI (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+
+	<changeSet id="UMA_38U.1" author="Bruno Conetta">
+		<createTable tableName="A4GT_FABBISOGNO_FABBRICATI">
+			<column name="ID" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FAB_FABBISOGNO"
+							 referencedTableName="A4GT_FABBISOGNO"
+							 referencedColumnNames="ID"
+							 nullable="false"
+							 primaryKey="true"
+							 primaryKeyName="A4GT_FABBISOGNO_FAB_PK"  />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+            <column name="ID_FABBRICATO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_FAB_FABBRICATO"
+							 referencedTableName="A4GT_FABBRICATI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>			
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_FABBISOGNO_FABBRICATI TO ${user.writer};
+			GRANT SELECT ON A4GT_FABBISOGNO_FABBRICATI TO ${user.reader};
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_FAB_FABBRICATO ON A4GT_FABBISOGNO_FABBRICATI (ID_FABBRICATO) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+	
+	<changeSet id="UMA_38U.2" author="Bruno Conetta">
+		<createTable tableName="A4GD_COEFFICIENTI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GD_COEFFICIENTI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_LAVORAZIONE" type="${id.number.type}">
+				<constraints foreignKeyName="FK_COEFFICIENTI_LAVORAZIONE"
+							 referencedTableName="A4GD_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="COEFFICIENTE" type="NUMBER(12,8)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="ANNO_INIZIO" type="NUMBER(4)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ANNO_FINE" type="NUMBER(4)"></column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GD_COEFFICIENTI TO ${user.writer};
+			GRANT SELECT ON A4GD_COEFFICIENTI TO ${user.reader};
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_COEFFICIENTI_LAV ON A4GD_COEFFICIENTI (ID_LAVORAZIONE) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+	
+	<include file = "config/database/changelog/definizioni/db.uma.coefficienti.changelog.xml"/>
+	
+	<changeSet id="UMA_38U.4" author="Bruno Conetta">
+		<createTable tableName="A4GT_CONSUNTIVI_CONSUMI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_CONSUNTIVI_CONSUMI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CONSUMI" type="${id.number.type}">
+				<constraints foreignKeyName="FK_CONSUNTIVI_DIC_CONSUMI"
+							 referencedTableName="A4GT_DICHIARAZIONE_CONSUMI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="TIPO" type="${string.type}(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="CARBURANTE" type="${string.type}(20)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="QUANTITA" type="NUMBER(7)">
+                <constraints nullable="false" />
+            </column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONSUNTIVI_CONSUMI TO ${user.writer};
+			GRANT SELECT ON A4GT_CONSUNTIVI_CONSUMI TO ${user.reader};
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_CONSUNTIVI_DIC_CONSUMI ON A4GT_CONSUNTIVI_CONSUMI (ID_CONSUMI) TABLESPACE ${tablespace.index};
+		</sql>	
+	</changeSet>
+	
+	<changeSet id="UMA_38U.5" author="Bruno Conetta">
+		<addUniqueConstraint columnNames="CARBURANTE, ID_CONSUMI, TIPO" tableName="A4GT_CONSUNTIVI_CONSUMI" constraintName="A4GT_CONSUNTIVI_CONSUMI_UIDX"/>
+	</changeSet>
+
+	<changeSet id="UMA_39U.0" author="Bruno Conetta">
+		<addColumn tableName="A4GT_CONSUNTIVI_CONSUMI">
+			<column name="MOTIVAZIONE" type="${string.type}(50)"></column>
+		</addColumn>				
+	</changeSet>
+	
+	<changeSet id="UMA_39U.1" author="Bruno Conetta">	
+		<createTable tableName="A4GT_ALLEGATI_CONSUNTIVI">
+			<column name="ID" type="${id.number.type}">
+				<constraints primaryKey="true" primaryKeyName="A4GT_ALLEGATI_CONSUNTIVI_PK" />
+			</column>
+			<column name="VERSIONE" type="${version.number.type}"
+				defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="ID_CONSUNTIVO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_ALLEGATI_CON_CONSUNTIVI"
+							 referencedTableName="A4GT_CONSUNTIVI_CONSUMI"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="NOME_FILE" type="${string.type}(50)">
+            	<constraints nullable="false"/>
+            </column>
+            <column name="DESCRIZIONE_FILE" type="${string.type}(50)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="TIPO_DOCUMENTO" type="${string.type}(50)">
+            	<constraints nullable="true"/>
+            </column>
+            <column name="DOCUMENTO" type="BLOB">
+            	<constraints nullable="false"/>
+            </column>
+		</createTable>
+		<sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEGATI_CONSUNTIVI TO ${user.writer};
+			GRANT SELECT ON A4GT_ALLEGATI_CONSUNTIVI TO ${user.reader};
+		</sql>
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_ALLEGATI_CON_CONSU ON A4GT_ALLEGATI_CONSUNTIVI (ID_CONSUNTIVO) TABLESPACE ${tablespace.index};
+		</sql>				
+	</changeSet>
+	
+	<changeSet id="UMA_40U.0" author="Paolo Cristofaro">
+		<addColumn tableName="A4GT_DICHIARAZIONE_CONSUMI">
+			<column name="MOTIVAZIONE_ACCISA" type="${string.type}(100)">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>				
+	</changeSet>
+	
+	<changeSet id="UMA_40U.1" author="Paolo Cristofaro">
+		<addColumn tableName="A4GT_DICHIARAZIONE_CONSUMI">
+			<column name="DOCUMENTO" type="BLOB">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>				
+	</changeSet>
+	
+	<changeSet id="UMA_41U.0" author="Antonio Avitabile">
+		<addColumn tableName="A4GT_RICHIESTA_CARBURANTE">
+			<column name="DENOMINAZIONE" type="${string.type}(200)" defaultValue="NO_DENOM">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="UMA_42U.0" author="Bruno Conetta">
+		<addNotNullConstraint tableName="A4GT_DICHIARAZIONE_CONSUMI" columnName="DATA_CONDUZIONE" defaultValueComputed="to_date(CONCAT(CONCAT('01/11/', EXTRACT(YEAR FROM sysdate)), ' 23:59:59'), ' dd/mm/yyyy HH24:MI:SS')"/>
+	</changeSet>
+	
+	<changeSet id="UMA_42U.1" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			ALTER TABLE A4GT_TRASFERIMENTI DROP CONSTRAINT CK_TRASFERIMENTO_VALIDO;
+		</sql>	
+		<dropColumn tableName="A4GT_TRASFERIMENTI" columnName="ID_DISTRIBUTORE_DESTINATARIO"/>
+		<addNotNullConstraint tableName="A4GT_TRASFERIMENTI" columnName="CUAA_DESTINATARIO"/>
+	</changeSet>
+	
+	<changeSet id="UMA_42U.2" author="Paolo Cristofaro">
+		<sql endDelimiter=";" splitStatements="true">
+			DELETE FROM A4GT_PRELIEVI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_42U.3" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			DELETE FROM A4GT_DISTRIBUTORI;
+		</sql>
+	</changeSet>
+
+	<changeSet id="UMA_42U.4" author="Bruno Conetta">
+		<addColumn tableName="A4GT_DISTRIBUTORI">
+			<column name="PROVINCIA" type="${string.type}(50)">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+		<addColumn tableName="A4GT_DISTRIBUTORI">
+			<column name="IDENTIFICATIVO" type="${id.number.type}">
+				<constraints nullable="false"/>
+			</column>
+		</addColumn>
+		<addUniqueConstraint columnNames="IDENTIFICATIVO" tableName="A4GT_DISTRIBUTORI"/>
+	</changeSet>
+	
+	<changeSet id="UMA_42U.5" author="Antonio Avitabile">
+        <addColumn tableName="A4GT_PRELIEVI">
+            <column name="CONSEGNATO" type="BOOLEAN" defaultValueBoolean="false">
+            	<constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="A4GT_PRELIEVI">
+            <column name="ESTREMI_DOC_FISCALE" type="${string.type}(50)">
+            </column>
+        </addColumn>
+    </changeSet>
+	
+	<changeSet id="UMA_49U.0" author="Antonio Avitabile">
+        <createTable tableName="A4GT_CONF">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_CONF"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>  
+            <column name="CAMPAGNA" type="NUMBER(4)">
+                <constraints nullable="false"/>
+            </column>    
+            <column name="DATA_LIMITE_PRELIEVI" type="DATE">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_CONF TO ${user.writer};
+			GRANT SELECT ON A4GT_CONF TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_50U.0" author="Paolo Cristofaro">
+		<addColumn tableName="A4GT_RICHIESTA_CARBURANTE">
+			<column name="FIRMA" type="BOOLEAN" defaultValueBoolean="true">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="UMA_50U.1" author="Paolo Cristofaro">
+		<addColumn tableName="A4GT_DICHIARAZIONE_CONSUMI">
+			<column name="FIRMA" type="BOOLEAN" defaultValueBoolean="true">
+				<constraints nullable="true"/>
+			</column>
+		</addColumn>
+	</changeSet>
+	
+	<changeSet id="UMA_52.0" author="Bruno Conetta">
+		<modifyDataType tableName="A4GT_UTILIZZO_MACCHINARI"
+			columnName="DESCRIZIONE" newDataType="${string.type}(100)" />
+	</changeSet>
+	
+	<changeSet id="UMA_53.0" author="Immacolata Conti">
+		<modifyDataType tableName="A4GT_RICHIESTA_CARBURANTE"
+			columnName="NOTE" newDataType="${string.type}(1000)"></modifyDataType>
+	</changeSet>
+	
+	<changeSet id="UMA_53U.0" author="Antonio Avitabile">
+        <createTable tableName="A4GT_SUPERFICIE_MASSIMA">
+            <column name="ID" type="${id.number.type}">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_SUPERFICIE_MASSIMA"
+                             primaryKeyTablespace="${tablespace.index}" />
+            </column>
+            <column name="VERSIONE" type="${version.number.type}"
+                    defaultValue="0">
+                <constraints nullable="false" />
+            </column>  
+            <column name="ID_RICHIESTA" type="${id.number.type}">
+				<constraints foreignKeyName="FK_RICHIESTA_CARBURANTE"
+							 referencedTableName="A4GT_RICHIESTA_CARBURANTE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+			<column name="ID_GRUPPO" type="${id.number.type}">
+				<constraints foreignKeyName="FK_GRUPPO_LAV"
+							 referencedTableName="A4GD_GRUPPI_LAVORAZIONE"
+							 referencedColumnNames="ID"
+							 nullable="false" />
+			</column>
+            <column name="SUP_MASSIMA" type="NUMBER(20)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <sql endDelimiter=";" splitStatements="true">
+			GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_SUPERFICIE_MASSIMA TO ${user.writer};
+			GRANT SELECT ON A4GT_SUPERFICIE_MASSIMA TO ${user.reader};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_55U.0" author="Bruno Conetta">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_SUP_MAX_RICH ON A4GT_SUPERFICIE_MASSIMA (ID_RICHIESTA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_SUP_MAX_GRUPPO ON A4GT_SUPERFICIE_MASSIMA (ID_GRUPPO) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_RICH_CUAA ON A4GT_RICHIESTA_CARBURANTE (CUAA) TABLESPACE ${tablespace.index};
+			CREATE INDEX IDX_RICH_CAMPAGNA ON A4GT_RICHIESTA_CARBURANTE (CAMPAGNA) TABLESPACE ${tablespace.index};
+		</sql>
+	</changeSet>
+	
+	<changeSet id="UMA_58U.0" author="Antonio Avitabile">
+	<sql endDelimiter=";" splitStatements="true">
+			CREATE INDEX IDX_LOGGING ON A4GT_LOGGING (TIPO_EVENTO, TABELLA, ID_ENTITA) TABLESPACE ${tablespace.index};
+		</sql>
+		<addColumn tableName="A4GT_RICHIESTA_CARBURANTE">
+			<column name="DENOMINAZIONE_SPORTELLO" type="${string.type}(100)"></column>
+		</addColumn>	
+		<addColumn tableName="A4GT_DICHIARAZIONE_CONSUMI">
+			<column name="DENOMINAZIONE_SPORTELLO" type="${string.type}(100)"></column>
+		</addColumn>				
+	</changeSet>
+	
+	<changeSet id="UMA_59.0" author="Bruno Conetta">
+		<renameColumn tableName="A4GT_RICHIESTA_CARBURANTE" oldColumnName="DENOMINAZIONE_SPORTELLO" newColumnName="ENTE_PRESENTATORE"/>
+		<renameColumn tableName="A4GT_DICHIARAZIONE_CONSUMI" oldColumnName="DENOMINAZIONE_SPORTELLO" newColumnName="ENTE_PRESENTATORE"/>				
+	</changeSet>
+</databaseChangeLog>

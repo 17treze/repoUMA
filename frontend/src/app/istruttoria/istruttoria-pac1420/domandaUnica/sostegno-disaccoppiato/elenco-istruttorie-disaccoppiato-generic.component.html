@@ -1,0 +1,212 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-g-3">
+    <app-filtri-disaccoppiato (selectedFiltersSubmit)="onFiltersSubmit($event)"
+        [autoCompleteParams]="autoCompleteParams" [resultsNumber]="elementiTotali">
+    </app-filtri-disaccoppiato>
+</div>
+<div class="ui-g-9">
+    <div class="layout-actionmenu">
+        <div class="table-responsive" margin-top="30px">
+            <app-a4g-paged-table #table [columns]="cols"
+                *ngIf="!isPagamentoAutorizzato(); else tabellaPagamentoAutorizzato"
+                [value]="istruttorieTrovate" [totalRecords]="elementiTotali"
+                [(selectedItems)]="istruttorieSelezionate"
+                [(isSelectedAll)]="isSelectedAll"
+                (onLazyLoadPage)="loadData($event)" [lazy]="true"
+                [rows]="elementiPerPagina">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th style="width: 3em" [a4gHasPermission]="'MODIFICABILE'">
+                            <app-a4g-paged-table-checkbox></app-a4g-paged-table-checkbox>
+                        </th>
+                        <th *ngFor="let col of columns" [pSortableColumnWrapper]="col.field"
+                            [pSortableColumnDisabled]="col.field == null">
+                            {{ col.header }}
+                            <p-sortIcon-wrapper [field]="col.field">
+                            </p-sortIcon-wrapper>
+                        </th>
+                        <th *ngIf="isShowDettagli()"></th>
+                        <th *ngIf="isShowBloccato()">
+                            <strong>{{ 'DOMANDA_UNICA_RISULTATI.blocco' | translate }}</strong>
+                        </th>
+                        <th *ngIf="isShowErroriCalcolo()">
+                            <strong>{{ 'DOMANDA_UNICA_RISULTATI.erroriCalcolo' | translate }}</strong>
+                        </th>
+                        <th *ngIf="isShowAzioni()"><strong>
+                            {{ 'DOMANDA_UNICA_RISULTATI.azioni' | translate }}
+                        </strong></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-istruttoria let-i="rowIndex">
+                    <tr [pSelectableRowWrapper]="istruttoria">
+                        <td [a4gHasPermission]="'MODIFICABILE'">
+                            <p-tableCheckbox-wrapper [value]="istruttoria"></p-tableCheckbox-wrapper>
+                        </td>
+                        <td>{{istruttoria.cuaaIntestatario}}</td>
+                        <td>{{istruttoria.numeroDomanda}}</td>
+                        <td>{{istruttoria.ragioneSociale}}</td>
+                        <td *ngIf="isShowDettagli()">
+                            <div class="searchbutton">
+                                <button pButton type="button"
+                                    class="btn btn-green ui-button ui-widget ui-state-default ui-corner-all ui-button-text-empty"
+                                    (click)="$event.stopPropagation(); apriDettaglio(istruttoria)">
+                                    {{ 'DOMANDA_UNICA_RISULTATI.dettagli' | translate }}
+                                </button>
+                            </div>
+                        </td>
+                        <td *ngIf="isShowBloccato()" style="text-align: center">
+                            <img src="assets/layout/images/lucchetto_bloccato.png" 
+                                *ngIf="istruttoria.isBloccata; else istruttoriaNonBloccata"/>
+                            <ng-template #istruttoriaNonBloccata>
+                                <img src="assets/layout/images/lucchetto_sbloccato.png"/>
+                            </ng-template>
+                        </td>
+                        <td *ngIf="isShowErroriCalcolo()" style="text-align: center">
+                            <span *ngIf="istruttoria.isErroreCalcolo" class="ui-icon-error"
+                                style="vertical-align: middle;"
+                                pTooltip="Errore di calcolo in data {{ istruttoria.dataUltimoCalcolo | date: DATE_FORMAT }}"
+                                tooltipPosition="left">
+                            </span>
+                        </td>
+                        <td *ngIf="isShowAzioni()" style="text-align: center">
+                            <span>
+                                <action-menu #actionMenu
+                                    [item]="items"
+                                    (click)="onDropdownMenuOpen(actionMenu, istruttoria, i)">
+                                </action-menu>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="10">
+                            {{ 'DOMANDA_UNICA_RISULTATI.nessunaDomandaTrovata' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </app-a4g-paged-table>
+
+            <ng-template #tabellaPagamentoAutorizzato>
+                <app-a4g-paged-table #table [columns]="cols"
+                [value]="istruttorieTrovate" [totalRecords]="elementiTotali"
+                [(selectedItems)]="istruttorieSelezionate"
+                [(isSelectedAll)]="isSelectedAll"
+                (onLazyLoadPage)="loadData($event)" [lazy]="true"
+                [rows]="elementiPerPagina">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th style="width: 3em">
+                                <app-a4g-paged-table-checkbox></app-a4g-paged-table-checkbox>
+                            </th>
+                            <th *ngFor="let col of columns" [pSortableColumnWrapper]="col.field"
+                                [pSortableColumnDisabled]="col.field == null">
+                                {{ col.header }}
+                                <p-sortIcon-wrapper [field]="col.field">
+                                </p-sortIcon-wrapper>
+                            </th>
+                            <th><strong>{{ 'DOMANDA_UNICA_RISULTATI.azioni' | translate }}</strong></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-istruttoria let-i="rowIndex">
+                        <tr [pSelectableRowWrapper]="istruttoria">
+                        <td>
+                            <p-tableCheckbox-wrapper [value]="istruttoria"></p-tableCheckbox-wrapper>
+                        </td>
+                        <td>{{istruttoria.cuaaIntestatario}}</td>
+                        <td>{{istruttoria.numeroDomanda}}</td>
+                        <td>{{istruttoria.ragioneSociale}}</td>
+                        <td>
+                            <button type="button" class="btn btn-link"
+                            (click)="stampaElencoLiquidazione(istruttoria.elencoLiquidazione)">
+                            {{ istruttoria.elencoLiquidazione.codElenco }}
+                            </button>
+                        </td>
+                        <td>
+                            <action-menu #actionMenu [item]="items"
+                                (click)="onDropdownMenuOpen(actionMenu, istruttoria, i)">
+                            </action-menu>
+                        </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                        <td [attr.colspan]="10">
+                            {{ 'DOMANDA_UNICA_RISULTATI.nessunaDomandaTrovata' | translate }}
+                        </td>
+                        </tr>
+                    </ng-template>
+                </app-a4g-paged-table>
+            </ng-template>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 searchbutton">  
+                <button pButton type="button" class="ui-button-success results_text_button"
+                    [disabled]="isNotIstruttorieSelezionate()"
+                    (click)="downloadCsv()">
+                        {{ 'SCARICA_DATI' | translate }}
+                </button>
+                <button *ngIf="isEnableControlliLiquidabilita()"
+                pButton type="button" class="ui-button-success results_text_button results_text_button_longtext_fix"
+                [disabled]="isNotIstruttorieSelezionate()"
+                (click)="avviaProcessoControlloLiquidabilita()">
+                    {{ 'DOMANDA_UNICA_RISULTATI.avviaControlliLiquidabilita' | translate }}
+                </button>
+
+                <button *ngIf="isEnableProcessoIntegrazione()"
+                pButton type="button" class="ui-button-success results_text_button"
+                [disabled]="isNotIstruttorieSelezionate()"
+                (click)="avviaProcessoIntegrazione()">
+                    {{ 'DOMANDA_UNICA_RISULTATI.INTEGRAZIONE' | translate }}
+                </button>
+                
+                <button *ngIf="isEnableCalcoloDisaccoppiato()"
+                pButton type="button" class="ui-button-success results_text_button"
+                [disabled]="isNotIstruttorieSelezionate()"
+                (click)="avviaProcessoCalcoloDisaccoppiato()">
+                    {{ 'DOMANDA_UNICA_RISULTATI.avviaCalcoloDisaccoppiato' | translate }}
+                </button>
+                
+                <button pButton *ngIf="isEnableProcessoLiquidazione()"
+                type="button" class="ui-button-success results_text_button"
+                [disabled]="isNotIstruttorieSelezionate()"
+                (click)="avviaProcessoLiquidazione()">
+                    {{ 'DOMANDA_UNICA_RISULTATI.creaElencoLiquidazione' | translate }}
+                </button>
+                
+                <button pButton *ngIf="isEnableProcessoAmmissibilita()" type="button"
+                class="ui-button-success results_text_button"
+                [disabled]="isNotIstruttorieSelezionate()"
+                (click)="avviaProcessoNonAmmissibilita()">
+                    {{ 'DOMANDA_UNICA_RISULTATI.nonAmmissibile' | translate }}
+                </button>
+                <button *ngIf="isEnableResetIstruttoria()"
+                    pButton type="button"
+                    class="ui-button-success results_text_button"
+                    [disabled]="isNotIstruttorieSelezionate()"
+                    (click)="resetIstruttoria()">
+                    {{'DOMANDA_UNICA_RISULTATI.TORNA_A_RICHIESTO' | translate}} 
+                </button>
+            </div>
+        </div>
+        <div class="ui-g">
+            <div class="ui-g-12 searchbutton"> 
+                <div *ngIf="isEnableBloccoIstruttoria()">
+                    <button pButton type="button" class="ui-button-success results_text_button"
+                    [disabled]="isNotIstruttorieSelezionate()"
+                    (click)="bloccoIstruttorie()">
+                        {{ 'DOMANDA_UNICA_RISULTATI.bloccaIstruttoria' | translate }}
+                    </button>
+                    <button pButton type="button" class="ui-button-success results_text_button"
+                    [disabled]="isNotIstruttorieSelezionate()"
+                    (click)="sbloccoIstruttorie()">
+                        {{ 'DOMANDA_UNICA_RISULTATI.sbloccaIstruttoria' | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <app-processi-di-controllo *ngIf="processiDaControllare"
+            [processiDaControllare]="processiDaControllare">
+        </app-processi-di-controllo>
+    </div>
+</div>

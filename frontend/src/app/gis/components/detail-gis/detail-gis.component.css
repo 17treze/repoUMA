@@ -1,0 +1,93 @@
+.uploadAttachmentsPopup{
+background:#e1e1e1; 
+margin: 0 auto;
+width:160px; 
+position:relative; 
+top: 25%;
+z-index: 9999;
+
+}
+
+.uploadAttachmentsPopup div.ui-dialog {
+    top: -165px!important;
+    width: 1060px;
+    z-index: 9999!important;
+    position: relative;
+}
+
+.sidebar-detail.search-detail > div > detail-gis > div.p-field > p-dialog > div {
+    left: -300px!important;
+}
+
+.sidebar-detail.onlyDetail > div > detail-gis > div.p-field > p-dialog > div {
+    left: 0!important;
+}
+
+.sidebar-detail.fixPositionDet > div > detail-gis > div.p-field > p-dialog > div {
+    left: -300px!important;
+}
+
+
+label.label-dettaglio {
+    margin: 0;
+    height: 46px;
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+label.result-label span p {
+    color: #30373d;
+    font-size: 14px;
+}
+
+hr{
+    border-top: 1px solid #D8D8D8!important;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+body .ui-inputswitch {
+    height: 15px;
+    width: 41px !important;
+}
+.ui-inputswitch.ui-widget {
+    overflow: hidden;
+}
+.ui-datepicker .ui-datepicker-header select.ui-datepicker-year {
+    background: antiquewhite;
+    border-radius: 7px;
+    font-size: 14px!important;
+    padding: 0 5px;
+}
+
+.lista-comuni {
+    font-weight: 600!important;
+    max-height: 38px; 
+    overflow: hidden;
+}
+.ui-inputtext:disabled {
+    border-bottom: none !important;
+}
+/* Allegati */
+.notifications-count {
+    position: absolute;
+    top: 18px;
+    left: 35px;
+    width: 26px;
+    height: 25px;
+    color: #f8f8f8;
+    font-size: 15px;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 4px 4px;
+    background-color: #00985b;
+    border-radius: 50%;
+    border: 1px solid #4caf50;
+}
+
+.no-click {
+    pointer-events: none;
+}
+/* Messagi su messaggi-gis.component.css*/

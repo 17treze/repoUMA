@@ -1,0 +1,90 @@
+{
+	"infoGeneraliDomanda": {
+		"pac": "PAC1420",
+		"tipoDomanda": "DU",
+		"campagna": 2018,
+		"modulo": "PAGAMENTI DIRETTI",
+		"codModulo": "BPS_2018",
+		"cuaaIntestatario": "BRGNGL64C30C7941",
+		"ragioneSociale": "AZ. AGR. BERGAMO ANGELO",
+		"numeroDomanda": 6183430,
+		"numeroDomandaRettificata": null,
+		"dataPresentazione": "2018-04-26T17:18:39.000+0200",
+		"codEnteCompilatore": "19",
+		"enteCompilatore": "CAA CIA - CLES - 002",
+		"dataProtocollazione": "2018-04-26T17:19:15.000+0200",
+		"dataPresentazOriginaria": null,
+		"dataProtocollazOriginaria": null
+	},
+	"controlliPresentazione": {
+		"aggiornamentoFascicolo": "S",
+		"visioneAnomalie": "S",
+		"firmaDomanda": "S",
+		"archiviazioneDomanda": "S"
+	},
+	"richieste": {
+		"sintesiRichieste": {
+			"richiestaDisaccoppiato": true,
+			"richiestaSuperfici": false,
+			"richiestaZootecnia": false
+		}
+	},
+	"calcoliSostegno": [
+		{
+			"idCalcolo": 614222,
+			"idDefCalcolo": 151,
+			"codCalcolo": "DU_2017_SALDO_BGG",
+			"variabiliCalcolo": [
+				{
+					"variabile": "SUPEACCECORR",
+					"descVariabile": "Superficie Accertata corretta d''ufficio",
+					"valore": "7.028",
+					"codGruppo": "CORRETTIVE",
+					"ordine": 8
+				},
+				{
+					"variabile": "SUPEDETEBPS",
+					"descVariabile": "BPS - Sup. SUPELEGISNETTA al netto di parc. min. (200mq) + Man",
+					"valore": "7.0165",
+					"codGruppo": "SUPEBPS",
+					"ordine": 17
+				},
+				{
+					"variabile": "SUPRICHBPS",
+					"descVariabile": "BPS - Sup. Richiesta (min. tra SUPETITO2017 e SUPEDOMANETTA)",
+					"valore": "6.19",
+					"codGruppo": "SUPEBPS",
+					"ordine": 18
+				},
+				{
+					"variabile": "RID_407_3",
+					"descVariabile": "BPS - Riduzione da scostamento di superficie",
+					"valore": 100,
+					"codGruppo": "BPS",
+					"ordine": 29
+				},
+				{
+					"variabile": "SANZ_407_83",
+					"descVariabile": "BPS - Sanz. Scost. oltre il 3% ed entro il 10%",
+					"valore": null,
+					"codGruppo": "SUPEBPS",
+					"ordine": 32
+				},
+				{
+					"variabile": "SANZ_407_84",
+					"descVariabile": "BPS - Sanz. Scost. oltre il 10% ed entro il 66.67%",
+					"valore": null,
+					"codGruppo": "SUPEBPS",
+					"ordine": 33
+				},
+				{
+					"variabile": "SANZ_407_85",
+					"descVariabile": "BPS - Sanz. Scost. oltre il 66.67%",
+					"valore": null,
+					"codGruppo": "SUPEBPS",
+					"ordine": 34
+				}
+			]
+		}	
+		]
+}

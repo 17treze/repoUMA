@@ -1,0 +1,3091 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Servizi di richiesta di accesso ai sistemi di appag e gestione delle utenze",
+		"version": "1.0.0",
+		"title": "A4G - Identity and access management"
+	},
+	"host": "localhost:9100",
+	"basePath": "/a4gutente",
+	"tags": [{
+			"name": "accesso-controller",
+			"description": "Rappresenta le interrogazioni che si possono fare relative ai dati dell'accesso dell'utente che fa la chiamata"
+		}, {
+			"name": "basic-error-controller",
+			"description": "Basic Error Controller"
+		}, {
+			"name": "domanda-registrazione-utente-controller",
+			"description": "Rappresenta le operazioni relative alle domande di registrazione degli utenti"
+		}, {
+			"name": "event-store-controller",
+			"description": "Event Store Controller"
+		}, {
+			"name": "istruttoria-controller",
+			"description": "Istruttoria Controller"
+		}, {
+			"name": "persona-controller",
+			"description": "Rappresenta le operazioni relative ai dati delle persone fisiche"
+		}, {
+			"name": "profilo-controller",
+			"description": "Rappresenta la lista dei profili"
+		}, {
+			"name": "utente-controller",
+			"description": "Rappresenta le interrogazioni che si possono fare relative ai dati dell'utente che fa la chiamata"
+		}, {
+			"name": "utente-private-controller",
+			"description": "Rappresenta le interrogazioni che si possono fare relative ai dati dell'utente che fa la chiamata"
+		}
+	],
+	"paths": {
+		"/api/v1/domande": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Ricerca le domande di accesso al sistema secondo dei criteri di ricerca (stato)",
+				"operationId": "ricercaDomandeUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "stato",
+						"in": "query",
+						"description": "Stato delle domande da ricercare",
+						"required": false,
+						"type": "string",
+						"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+					}, {
+						"name": "filtroGenerico",
+						"in": "query",
+						"description": "Filtro generico su Nome, Cognome, Codice fiscale e Protocollo",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "codiceFiscale",
+						"in": "query",
+						"description": "Codice fiscale a cui fanno riferimento le domande da ricercare (puntuale, non in upperlike)",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "nome",
+						"in": "query",
+						"description": "Nome dell'utente a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "cognome",
+						"in": "query",
+						"description": "Cognome dell'utente a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "idProtocollo",
+						"in": "query",
+						"description": "Identificativo del protocollo a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "dataInizio",
+						"in": "query",
+						"description": "Data inizio del periodo di riferimento relativo la data di protocollazione",
+						"required": false,
+						"type": "string",
+						"format": "date"
+					}, {
+						"name": "dataFine",
+						"in": "query",
+						"description": "Data fine del periodo di riferimento relativo la data di protocollazione",
+						"required": false,
+						"type": "string",
+						"format": "date"
+					}, {
+						"name": "codiceFiscaleUpperLike",
+						"in": "query",
+						"description": "Codice fiscale a cui fanno riferimento le domande da ricercare (in upperlike)",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "numeroElementiPagina",
+						"in": "query",
+						"description": "Numero elementi per pagina. Valore di default: 10",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					}, {
+						"name": "pagina",
+						"in": "query",
+						"description": "Numero di pagina. Valore di default: 0",
+						"required": false,
+						"type": "integer",
+						"format": "int32"
+					}, {
+						"name": "proprieta",
+						"in": "query",
+						"description": "Proprieta' dell'ordinamento (Default: id)",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "ordine",
+						"in": "query",
+						"description": "Direzione dell'ordinamento (ASC o DESC). Valore di default: ASC",
+						"required": false,
+						"type": "string",
+						"enum": ["ASC", "DESC"]
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Rappresenta l'oggetto contenente i risultati di una ricerca paginata«DatiDomandaRegistrazioneUtenteSintesi»"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"post": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Registro la domanda di registrazione nuovo utente",
+				"operationId": "registraDomandaUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "domandaRegistrazioneUtente",
+						"description": "domandaRegistrazioneUtente",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"put": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Registro la domanda di registrazione nuovo utente",
+				"operationId": "aggiornaDomandaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "domandaRegistrazioneUtente",
+						"description": "domandaRegistrazioneUtente",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/EntiCAA": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Restituisce la lista di caa/sedi",
+				"operationId": "ricercaUfficiCaaUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/EnteCAA"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/counters": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Conta domande di accesso al sistema secondo dei criteri di ricerca (stato)",
+				"operationId": "contaDomandeUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "stato",
+						"in": "query",
+						"description": "Stato delle domande da ricercare",
+						"required": false,
+						"type": "string",
+						"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+					}, {
+						"name": "filtroGenerico",
+						"in": "query",
+						"description": "Filtro generico su Nome, Cognome, Codice fiscale e Protocollo",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "codiceFiscale",
+						"in": "query",
+						"description": "Codice fiscale a cui fanno riferimento le domande da ricercare (puntuale, non in upperlike)",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "nome",
+						"in": "query",
+						"description": "Nome dell'utente a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "cognome",
+						"in": "query",
+						"description": "Cognome dell'utente a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "idProtocollo",
+						"in": "query",
+						"description": "Identificativo del protocollo a cui fanno riferimento le domande da ricercare",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "dataInizio",
+						"in": "query",
+						"description": "Data inizio del periodo di riferimento relativo la data di protocollazione",
+						"required": false,
+						"type": "string",
+						"format": "date"
+					}, {
+						"name": "dataFine",
+						"in": "query",
+						"description": "Data fine del periodo di riferimento relativo la data di protocollazione",
+						"required": false,
+						"type": "string",
+						"format": "date"
+					}, {
+						"name": "codiceFiscaleUpperLike",
+						"in": "query",
+						"description": "Codice fiscale a cui fanno riferimento le domande da ricercare (in upperlike)",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CounterStato"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/dipartimenti": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Restituisce la lista di dipartimenti",
+				"operationId": "ricercaDipartimentoUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/distributori": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Restituisce la lista di distributori",
+				"operationId": "ricercaDistributoriUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Distributore"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/registrazione-firma": {
+			"post": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Funzione che effettua la registrazione utenti tramite salvataggio dati utente e firma del documento in maniera atomica",
+				"operationId": "registrazioneFirmaDocumentoUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "domandaRegistrazioneUtente",
+						"description": "domandaRegistrazioneUtente",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DomandaRegistrazioneCreataResponse"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/ultima-domanda-utente-corrente": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Ricerca le domande di accesso al sistema secondo dei criteri di ricerca (stato e tipo)",
+				"operationId": "ultimaDomandaUtenteCorrentePerDataProtocollazioneUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "statoDomanda",
+						"in": "query",
+						"description": "statoDomanda",
+						"required": false,
+						"type": "string",
+						"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+					}, {
+						"name": "tipoDomanda",
+						"in": "query",
+						"description": "tipoDomanda",
+						"required": false,
+						"type": "string",
+						"enum": ["RIDOTTA_AZIENDA", "COMPLETA", "RIDOTTA_AZIENDA_ANAGRAFICO"]
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{idDomanda}/approva": {
+			"put": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Approva una richiesta di accesso utente",
+				"operationId": "approvaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idDomanda",
+						"in": "path",
+						"description": "Identificativo della domanda",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}, {
+						"in": "body",
+						"name": "richiesta",
+						"description": "richiesta",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello di una richiesta di approvazione di una domanda utente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{idDomanda}/rifiuta": {
+			"put": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Rifiuta una richiesta di accesso utente",
+				"operationId": "rifiutaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idDomanda",
+						"in": "path",
+						"description": "Identificativo della domanda",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}, {
+						"in": "body",
+						"name": "richiesta",
+						"description": "richiesta",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello di una richiesta di rfiuto di una domanda utente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{id}": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Restituisce la domanda per id",
+				"operationId": "getDomandaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{id}/export": {
+			"get": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Effettua l'export della domanda in formato PDF/A",
+				"operationId": "stampaDomandaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "string",
+							"format": "byte"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{id}/firma": {
+			"post": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Firma, attraverso i dati di accesso dell'utente, il modulo di domanda di registrazione",
+				"operationId": "firmaDomandaUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{id}/presaincarico": {
+			"put": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Aggiorna lo stato della domanda da protocollata a in lavorazione",
+				"operationId": "prendiInCaricoUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/domande/{id}/protocolla": {
+			"put": {
+				"tags": ["domanda-registrazione-utente-controller"],
+				"summary": "Protocolla la domanda di registrazione utente e la relativa firma",
+				"operationId": "protocollaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DatiDomandaRegistrazioneUtente"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/framework/events/{idEvent}/reprocess": {
+			"get": {
+				"tags": ["event-store-controller"],
+				"summary": "reprocessEvent",
+				"operationId": "reprocessEventUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idEvent",
+						"in": "path",
+						"description": "idEvent",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/istruttoria/domanda": {
+			"post": {
+				"tags": ["istruttoria-controller"],
+				"summary": "Crea una nuova istruttoria relativa una domanda",
+				"operationId": "creaUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "istruttoria",
+						"description": "istruttoria",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello relativo l'istruttoria di una domanda di richiesta utente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"put": {
+				"tags": ["istruttoria-controller"],
+				"summary": "Modifica una esistente istruttoria relativa a una domanda",
+				"operationId": "aggiornaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "istruttoria",
+						"description": "istruttoria",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello relativo l'istruttoria di una domanda di richiesta utente"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/istruttoria/domanda/{idDomanda}": {
+			"get": {
+				"tags": ["istruttoria-controller"],
+				"summary": "Restituisce l'istruttoria relativa la domanda con identificativo specificato",
+				"operationId": "findByIdDomandaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idDomanda",
+						"in": "path",
+						"description": "Identificativo della domanda",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello relativo l'istruttoria di una domanda di richiesta utente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/istruttoria/utente/{idUtente}": {
+			"post": {
+				"tags": ["istruttoria-controller"],
+				"summary": "Crea una nuova istruttoria senza domanda per una richiesta di modifica abilit azioni utente (profili/sedi)",
+				"operationId": "creaSenzaDomandaUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idUtente",
+						"in": "path",
+						"description": "Id dell'utente",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}, {
+						"in": "body",
+						"name": "istruttoriaSenzaDomanda",
+						"description": "istruttoriaSenzaDomanda",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello utilizzato per creare una istruttoria senza domanda, per l'aggiornamento abilitazione utente (profili e sedi"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/istruttoria/utente/{idUtente}/storico": {
+			"get": {
+				"tags": ["istruttoria-controller"],
+				"summary": "Visualizza storico utente",
+				"operationId": "storicoUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "idUtente",
+						"in": "path",
+						"description": "Identificativo dell'utente",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Rappresenta il modello relativo allo storico delle istruttorie di un utente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/persone": {
+			"get": {
+				"tags": ["persona-controller"],
+				"summary": "Esegue la ricerca",
+				"operationId": "ricercaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "params",
+						"in": "query",
+						"description": "Criteri di ricerca per persona: formato JSON prevede il filtro codiceFiscale (ricerca esatta)",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Persona"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"post": {
+				"tags": ["persona-controller"],
+				"summary": "Inserisce le informazioni relative alla persona",
+				"operationId": "inserisciPersonaUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "body",
+						"name": "persona",
+						"description": "persona",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Persona"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/persone/{id}": {
+			"get": {
+				"tags": ["persona-controller"],
+				"summary": "Restituisce i dati della persona fisica",
+				"operationId": "caricaDatiPersonaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "Identificativo della persona",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Persona"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"put": {
+				"tags": ["persona-controller"],
+				"summary": "Aggiorna le informazioni relative alla persona",
+				"operationId": "aggiornaPersonaUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}, {
+						"in": "body",
+						"name": "persona",
+						"description": "persona",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Persona"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Persona"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/profili": {
+			"get": {
+				"tags": ["profilo-controller"],
+				"summary": "Esegue la ricerca dei profili",
+				"operationId": "ricercaUsingGET_1",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Rappresenta il modello del profilo di un utente"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/profili/utente": {
+			"get": {
+				"tags": ["profilo-controller"],
+				"summary": "Esegue la ricerca dei profili utente",
+				"operationId": "ricercaProfiliUtenteUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Rappresenta il modello del profilo di un utente"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/headers": {
+			"get": {
+				"tags": ["accesso-controller"],
+				"summary": "Restituisce i parametri degli header della request",
+				"operationId": "headersUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object",
+							"additionalProperties": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/idutente/{id}": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce i dati di dettaglio dell'utente con ID specificato",
+				"operationId": "caricaByIdUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "Identificativo dell'utente",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Utente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/log": {
+			"get": {
+				"tags": ["accesso-controller"],
+				"summary": "Restituisce OK e fa log",
+				"operationId": "logUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "string"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/private/{cuaa}/report-scheda-validazione": {
+			"get": {
+				"tags": ["utente-private-controller"],
+				"summary": "getReportValidazione",
+				"operationId": "getReportValidazioneUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"description": "cuaa",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ReportValidazioneDto"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/ricerca": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Effettua la ricerca degli utenti",
+				"operationId": "ricercaUsingGET_2",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "nome",
+						"in": "query",
+						"description": "Filtro nome della ricerca utenti",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "cognome",
+						"in": "query",
+						"description": "Filtro cognome della ricerca utenti",
+						"required": false,
+						"type": "string"
+					}, {
+						"name": "codiceFiscale",
+						"in": "query",
+						"description": "Filtro codiceFiscale della ricerca utenti",
+						"required": false,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Utente"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce i dati di dettaglio dell'utente",
+				"operationId": "caricaMieiDatiUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Utente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/anagrafica": {
+			"get": {
+				"tags": ["accesso-controller"],
+				"summary": "Restituisce i dati anagrafici recuperandoli dall'header della request",
+				"operationId": "caricaMieiDatiDaHeaderUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/DatiAnagrafici"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/avvio-protocollazione": {
+			"post": {
+				"tags": ["utente-controller"],
+				"summary": "Avvio protocollazione utente",
+				"operationId": "avviaProtocollazioneUtenteUsingPOST",
+				"consumes": ["multipart/form-data"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"in": "formData",
+						"name": "nome",
+						"description": "nome utente",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"in": "formData",
+						"name": "cognome",
+						"description": "cognome utente",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"in": "formData",
+						"name": "codiceFiscale",
+						"description": "codice fiscale utente",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"in": "formData",
+						"name": "info",
+						"description": "Informazioni di creazione del nuovo documento: metadati, file principale, allegati, informazioni sul mittente e fascicolo",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "documento",
+						"in": "formData",
+						"description": "Documento da protocollare",
+						"required": false,
+						"type": "file"
+					}, {
+						"name": "allegati",
+						"in": "formData",
+						"description": "Allegati al documento da protocollare",
+						"required": false,
+						"type": "array",
+						"items": {
+							"type": "file"
+						},
+						"collectionFormat": "multi"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/aziende": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce la lista dei codici delle mie aziende",
+				"operationId": "getAziendeUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/distributori": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce la lista dei distributori associati all'utente connesso",
+				"operationId": "getDistributoriUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Distributore"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/distributori/{id}": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce il distributore dato l'identificativo se l'utente è abilitato a visualizzarlo",
+				"operationId": "getDistributoreByIdUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Distributore"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/enti": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce la lista dei codici ente su cui risulto abilitato",
+				"operationId": "getEntiUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/firma": {
+			"post": {
+				"tags": ["accesso-controller"],
+				"summary": "Esegue l'operazione di firma del documento come previsto dai servizi online, a partire dai dati di accesso del sistema",
+				"operationId": "firmaUsingPOST",
+				"consumes": ["multipart/form-data"],
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "documento",
+						"in": "formData",
+						"description": "Documento da firmare",
+						"required": true,
+						"type": "file"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Firma"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/isRegistrabile": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Verifica se l'utente puo' presentare domanda di registrazione utente",
+				"operationId": "isRegistrabileUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/profili": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce la lista dei profili su cui risulto abilitato",
+				"operationId": "getProfiliUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Rappresenta il modello del profilo di un utente"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utente/ruoli": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce la lista dei codici funzione su cui risulto abilitato",
+				"operationId": "getRuoliUtenteUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/utentia4gcsv": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "download di un file .csv per gli utenti a4g",
+				"operationId": "downloadCsvA4gUtenzeUsingGET",
+				"produces": ["*/*"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Resource"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/api/v1/utenti/{identificativo}": {
+			"get": {
+				"tags": ["utente-controller"],
+				"summary": "Restituisce i dati di dettaglio dell'utente con identificativo specificato",
+				"operationId": "caricaUsingGET",
+				"produces": ["*/*"],
+				"parameters": [{
+						"name": "identificativo",
+						"in": "path",
+						"description": "Identificativo dell'utente",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Utente"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/error": {
+			"get": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingGET",
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"head": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingHEAD",
+				"consumes": ["application/json"],
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			},
+			"post": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingPOST",
+				"consumes": ["application/json"],
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"put": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingPUT",
+				"consumes": ["application/json"],
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingDELETE",
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			},
+			"options": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingOPTIONS",
+				"consumes": ["application/json"],
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			},
+			"patch": {
+				"tags": ["basic-error-controller"],
+				"summary": "errorHtml",
+				"operationId": "errorHtmlUsingPATCH",
+				"consumes": ["application/json"],
+				"produces": ["text/html"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/ModelAndView"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Azienda": {
+			"type": "object",
+			"properties": {
+				"cuaa": {
+					"type": "string",
+					"description": "Caa dell'azienda",
+					"allowEmptyValue": false
+				},
+				"dataAggiornamento": {
+					"type": "string",
+					"format": "date-time",
+					"description": "Data di aggiornamento dell'azienda",
+					"allowEmptyValue": false
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Identificativo dell'azienda",
+					"allowEmptyValue": false
+				},
+				"idCarica": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Identificativo Carica dell'azienda",
+					"allowEmptyValue": false
+				}
+			},
+			"title": "Azienda",
+			"description": "Rappresenta il modello per rappresentare un azienda associata all'utente"
+		},
+		"CollaboratoreAltriEnti": {
+			"type": "object",
+			"properties": {
+				"allegato": {
+					"type": "string",
+					"format": "byte"
+				},
+				"codResponsabilita": {
+					"type": "string",
+					"enum": ["AMMINISTRATORE", "TITOLARE", "LEGALE", "CAA", "PAT", "ALTRI", "LPC", "DIPENDENTE_DISTRIBUTORE"]
+				},
+				"denominazione": {
+					"type": "string"
+				},
+				"dirigente": {
+					"type": "string"
+				},
+				"idResponsabilita": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"note": {
+					"type": "string"
+				},
+				"piva": {
+					"type": "string"
+				}
+			},
+			"title": "CollaboratoreAltriEnti"
+		},
+		"Consulente": {
+			"type": "object",
+			"properties": {
+				"allegato": {
+					"type": "string",
+					"format": "byte"
+				},
+				"codResponsabilita": {
+					"type": "string",
+					"enum": ["AMMINISTRATORE", "TITOLARE", "LEGALE", "CAA", "PAT", "ALTRI", "LPC", "DIPENDENTE_DISTRIBUTORE"]
+				},
+				"cuaa": {
+					"type": "string"
+				},
+				"denominazione": {
+					"type": "string"
+				},
+				"idResponsabilita": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"iscrizione": {
+					"type": "string"
+				},
+				"ordine": {
+					"type": "string"
+				},
+				"rappresentante": {
+					"type": "string"
+				}
+			},
+			"title": "Consulente"
+		},
+		"CounterStato": {
+			"type": "object",
+			"properties": {
+				"count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"stato": {
+					"type": "string",
+					"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+				}
+			},
+			"title": "CounterStato"
+		},
+		"DatiAnagrafici": {
+			"type": "object",
+			"properties": {
+				"codiceFiscale": {
+					"type": "string"
+				},
+				"cognome": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"nome": {
+					"type": "string"
+				},
+				"telefono": {
+					"type": "string"
+				}
+			},
+			"title": "DatiAnagrafici"
+		},
+		"DatiDomandaRegistrazioneUtente": {
+			"type": "object",
+			"properties": {
+				"codiceFiscale": {
+					"type": "string"
+				},
+				"cognome": {
+					"type": "string"
+				},
+				"data": {
+					"type": "string"
+				},
+				"dataProtocollazione": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"datiAnagrafici": {
+					"$ref": "#/definitions/DatiAnagrafici"
+				},
+				"email": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"idProtocollo": {
+					"type": "string"
+				},
+				"luogo": {
+					"type": "string"
+				},
+				"nome": {
+					"type": "string"
+				},
+				"responsabilitaRichieste": {
+					"$ref": "#/definitions/ResponsabilitaRichieste"
+				},
+				"servizi": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": ["AGS", "A4G", "SRT"]
+					}
+				},
+				"stato": {
+					"type": "string",
+					"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+				},
+				"telefono": {
+					"type": "string"
+				},
+				"tipoDomandaRegistrazione": {
+					"type": "string",
+					"enum": ["RIDOTTA_AZIENDA", "COMPLETA", "RIDOTTA_AZIENDA_ANAGRAFICO"]
+				}
+			},
+			"title": "DatiDomandaRegistrazioneUtente"
+		},
+		"DatiDomandaRegistrazioneUtenteSintesi": {
+			"type": "object",
+			"properties": {
+				"configurato": {
+					"type": "boolean"
+				},
+				"dataApprovazione": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"dataProtocollazione": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"dataRifiuto": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"datiAnagrafici": {
+					"$ref": "#/definitions/DatiAnagrafici"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"idProtocollo": {
+					"type": "string"
+				},
+				"stato": {
+					"type": "string",
+					"enum": ["IN_COMPILAZIONE", "PROTOCOLLATA", "CHIUSA", "IN_LAVORAZIONE", "APPROVATA", "RIFIUTATA"]
+				}
+			},
+			"title": "DatiDomandaRegistrazioneUtenteSintesi"
+		},
+		"Distributore": {
+			"type": "object",
+			"properties": {
+				"comune": {
+					"type": "string"
+				},
+				"dataFine": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"dataInizio": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"denominazioneAzienda": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"indirizzo": {
+					"type": "string"
+				},
+				"provincia": {
+					"type": "string"
+				}
+			},
+			"title": "Distributore"
+		},
+		"DomandaRegistrazioneCreataResponse": {
+			"type": "object",
+			"properties": {
+				"base64Content": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "DomandaRegistrazioneCreataResponse"
+		},
+		"EnteCAA": {
+			"type": "object",
+			"properties": {
+				"codice": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"descrizione": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"sedi": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EnteSede"
+					}
+				}
+			},
+			"title": "EnteCAA"
+		},
+		"EnteSede": {
+			"type": "object",
+			"properties": {
+				"caa": {
+					"type": "string",
+					"enum": ["ATS", "ACLI", "CIA", "COOP", "APPAG", "COLDIRETTI"]
+				},
+				"descrizione": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"identificativo": {
+					"type": "integer",
+					"format": "int64"
+				}
+			},
+			"title": "EnteSede"
+		},
+		"File": {
+			"type": "object",
+			"properties": {
+				"absolute": {
+					"type": "boolean"
+				},
+				"absoluteFile": {
+					"$ref": "#/definitions/File"
+				},
+				"absolutePath": {
+					"type": "string"
+				},
+				"canonicalFile": {
+					"$ref": "#/definitions/File"
+				},
+				"canonicalPath": {
+					"type": "string"
+				},
+				"directory": {
+					"type": "boolean"
+				},
+				"executable": {
+					"type": "boolean"
+				},
+				"file": {
+					"type": "boolean"
+				},
+				"freeSpace": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"hidden": {
+					"type": "boolean"
+				},
+				"lastModified": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"name": {
+					"type": "string"
+				},
+				"parent": {
+					"type": "string"
+				},
+				"parentFile": {
+					"$ref": "#/definitions/File"
+				},
+				"path": {
+					"type": "string"
+				},
+				"readable": {
+					"type": "boolean"
+				},
+				"totalSpace": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"usableSpace": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"writable": {
+					"type": "boolean"
+				}
+			},
+			"title": "File"
+		},
+		"Firma": {
+			"type": "object",
+			"properties": {
+				"pdf": {
+					"type": "string",
+					"format": "byte"
+				},
+				"xml": {
+					"type": "string"
+				}
+			},
+			"title": "Firma"
+		},
+		"InputStream": {
+			"type": "object",
+			"title": "InputStream"
+		},
+		"ModelAndView": {
+			"type": "object",
+			"properties": {
+				"empty": {
+					"type": "boolean"
+				},
+				"model": {
+					"type": "object"
+				},
+				"modelMap": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "object"
+					}
+				},
+				"reference": {
+					"type": "boolean"
+				},
+				"status": {
+					"type": "string",
+					"enum": ["100 CONTINUE", "101 SWITCHING_PROTOCOLS", "102 PROCESSING", "103 CHECKPOINT", "200 OK", "201 CREATED", "202 ACCEPTED", "203 NON_AUTHORITATIVE_INFORMATION", "204 NO_CONTENT", "205 RESET_CONTENT", "206 PARTIAL_CONTENT", "207 MULTI_STATUS", "208 ALREADY_REPORTED", "226 IM_USED", "300 MULTIPLE_CHOICES", "301 MOVED_PERMANENTLY", "302 FOUND", "302 MOVED_TEMPORARILY", "303 SEE_OTHER", "304 NOT_MODIFIED", "305 USE_PROXY", "307 TEMPORARY_REDIRECT", "308 PERMANENT_REDIRECT", "400 BAD_REQUEST", "401 UNAUTHORIZED", "402 PAYMENT_REQUIRED", "403 FORBIDDEN", "404 NOT_FOUND", "405 METHOD_NOT_ALLOWED", "406 NOT_ACCEPTABLE", "407 PROXY_AUTHENTICATION_REQUIRED", "408 REQUEST_TIMEOUT", "409 CONFLICT", "410 GONE", "411 LENGTH_REQUIRED", "412 PRECONDITION_FAILED", "413 PAYLOAD_TOO_LARGE", "413 REQUEST_ENTITY_TOO_LARGE", "414 URI_TOO_LONG", "414 REQUEST_URI_TOO_LONG", "415 UNSUPPORTED_MEDIA_TYPE", "416 REQUESTED_RANGE_NOT_SATISFIABLE", "417 EXPECTATION_FAILED", "418 I_AM_A_TEAPOT", "419 INSUFFICIENT_SPACE_ON_RESOURCE", "420 METHOD_FAILURE", "421 DESTINATION_LOCKED", "422 UNPROCESSABLE_ENTITY", "423 LOCKED", "424 FAILED_DEPENDENCY", "425 TOO_EARLY", "426 UPGRADE_REQUIRED", "428 PRECONDITION_REQUIRED", "429 TOO_MANY_REQUESTS", "431 REQUEST_HEADER_FIELDS_TOO_LARGE", "451 UNAVAILABLE_FOR_LEGAL_REASONS", "500 INTERNAL_SERVER_ERROR", "501 NOT_IMPLEMENTED", "502 BAD_GATEWAY", "503 SERVICE_UNAVAILABLE", "504 GATEWAY_TIMEOUT", "505 HTTP_VERSION_NOT_SUPPORTED", "506 VARIANT_ALSO_NEGOTIATES", "507 INSUFFICIENT_STORAGE", "508 LOOP_DETECTED", "509 BANDWIDTH_LIMIT_EXCEEDED", "510 NOT_EXTENDED", "511 NETWORK_AUTHENTICATION_REQUIRED"]
+				},
+				"view": {
+					"$ref": "#/definitions/View"
+				},
+				"viewName": {
+					"type": "string"
+				}
+			},
+			"title": "ModelAndView"
+		},
+		"Persona": {
+			"type": "object",
+			"properties": {
+				"codiceFiscale": {
+					"type": "string"
+				},
+				"cognome": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"nome": {
+					"type": "string"
+				},
+				"nrProtocolloPrivacyGenerale": {
+					"type": "string"
+				},
+				"version": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"versione": {
+					"type": "integer",
+					"format": "int32"
+				}
+			},
+			"title": "Persona"
+		},
+		"Rappresenta il modello del profilo di un utente": {
+			"type": "object",
+			"required": ["id", "identificativo"],
+			"properties": {
+				"descrizione": {
+					"type": "string",
+					"description": "Descrizione del profilo",
+					"allowEmptyValue": false
+				},
+				"disabled": {
+					"type": "boolean",
+					"example": false,
+					"description": "Flag che dice se il profilo è stato disabilitato",
+					"allowEmptyValue": false
+				},
+				"haRuoli": {
+					"type": "boolean",
+					"example": false,
+					"description": "Flag che dice se il profilo possiede dei ruoli",
+					"allowEmptyValue": false
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id del profilo",
+					"allowEmptyValue": false
+				},
+				"identificativo": {
+					"type": "string",
+					"description": "Identificativo del profilo",
+					"allowEmptyValue": false
+				},
+				"responsabilita": {
+					"type": "string",
+					"description": "Responsabilità associata al profilo",
+					"allowEmptyValue": false,
+					"enum": ["DIPENDENTE_PAT", "DIPENDENTE_CAA", "TITOLARE_AZIENDA_AGRICOLA", "LIBERO_PROFESSIONISTA", "UTENZA_TECNICA", "DIPENDENTE_ALTRI_ENTI", "DIPENDENTE_TNDIGIT", "DIPENDENTE_DISTRIBUTORE", "DIPENDENTE_DOGANE"]
+				}
+			},
+			"title": "Rappresenta il modello del profilo di un utente"
+		},
+		"Rappresenta il modello di una richiesta di approvazione di una domanda utente": {
+			"type": "object",
+			"properties": {
+				"note": {
+					"type": "string"
+				},
+				"testoMail": {
+					"type": "string"
+				}
+			},
+			"title": "Rappresenta il modello di una richiesta di approvazione di una domanda utente"
+		},
+		"Rappresenta il modello di una richiesta di rfiuto di una domanda utente": {
+			"type": "object",
+			"properties": {
+				"motivazioneRifiuto": {
+					"type": "string"
+				},
+				"note": {
+					"type": "string"
+				},
+				"testoMail": {
+					"type": "string"
+				}
+			},
+			"title": "Rappresenta il modello di una richiesta di rfiuto di una domanda utente"
+		},
+		"Rappresenta il modello relativo allo storico delle istruttorie di un utente": {
+			"type": "object",
+			"properties": {
+				"istruttorie": {
+					"type": "array",
+					"description": "Rappresenta la lista delle istruttorie per lo storico",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/Rappresenta una istruttoria per lo storico"
+					}
+				},
+				"utente": {
+					"description": "Rappresenta l'utente a cui è riferito lo storico delle istruttorie",
+					"allowEmptyValue": false,
+					"$ref": "#/definitions/Utente"
+				}
+			},
+			"title": "Rappresenta il modello relativo allo storico delle istruttorie di un utente"
+		},
+		"Rappresenta il modello relativo l'istruttoria di una domanda di richiesta utente": {
+			"type": "object",
+			"required": ["idDomanda"],
+			"properties": {
+				"id": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id dell'istruttoria",
+					"allowEmptyValue": false
+				},
+				"idDomanda": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id della domanda a cui è riferita l'istruttoria",
+					"allowEmptyValue": false
+				},
+				"istruttore": {
+					"description": "Istruttore che ha eseguito la modifica",
+					"allowEmptyValue": false,
+					"$ref": "#/definitions/Utente"
+				},
+				"motivazioneRifiuto": {
+					"type": "string",
+					"description": "Eventuale motivazione rifiuto",
+					"allowEmptyValue": false
+				},
+				"note": {
+					"type": "string",
+					"description": "Note dell'istruttoria",
+					"allowEmptyValue": false
+				},
+				"profili": {
+					"type": "array",
+					"description": "Lista dei profili selezionati",
+					"allowEmptyValue": false,
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"sedi": {
+					"type": "array",
+					"description": "Lista degli identificativi degli enti (sedi) selezionati",
+					"allowEmptyValue": false,
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"testoComunicazione": {
+					"type": "string",
+					"description": "Testo della comunicazione",
+					"allowEmptyValue": false
+				},
+				"testoMail": {
+					"type": "string",
+					"description": "Testo della mail inviata",
+					"allowEmptyValue": false
+				},
+				"variazioneRichiesta": {
+					"type": "string",
+					"description": "Variazione richiesta",
+					"allowEmptyValue": false
+				},
+				"version": {
+					"type": "integer",
+					"format": "int32",
+					"description": "Versione",
+					"allowEmptyValue": false
+				}
+			},
+			"title": "Rappresenta il modello relativo l'istruttoria di una domanda di richiesta utente"
+		},
+		"Rappresenta il modello utilizzato per creare una istruttoria senza domanda, per l'aggiornamento abilitazione utente (profili e sedi": {
+			"type": "object",
+			"properties": {
+				"motivazioneDisattivazione": {
+					"type": "string",
+					"enum": ["PENSIONAMENTO", "FINE_RAPPORTO", "ALTRO"]
+				},
+				"profili": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"profiliDaDisattivare": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"sedi": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					}
+				},
+				"variazioneRichiesta": {
+					"type": "string"
+				}
+			},
+			"title": "Rappresenta il modello utilizzato per creare una istruttoria senza domanda, per l'aggiornamento abilitazione utente (profili e sedi"
+		},
+		"Rappresenta l'oggetto contenente i risultati di una ricerca paginata«DatiDomandaRegistrazioneUtenteSintesi»": {
+			"type": "object",
+			"properties": {
+				"count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"risultati": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DatiDomandaRegistrazioneUtenteSintesi"
+					}
+				}
+			},
+			"title": "Rappresenta l'oggetto contenente i risultati di una ricerca paginata«DatiDomandaRegistrazioneUtenteSintesi»"
+		},
+		"Rappresenta una istruttoria per lo storico": {
+			"type": "object",
+			"properties": {
+				"aziende": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Azienda"
+					}
+				},
+				"dataTermineIstruttoria": {
+					"type": "string",
+					"format": "date-time",
+					"description": "Data di validazione dell’istruttoria",
+					"allowEmptyValue": false
+				},
+				"distributori": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Distributore"
+					}
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id dell'istruttoria",
+					"allowEmptyValue": false
+				},
+				"idDomanda": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id della domanda a cui è riferita l'istruttoria",
+					"allowEmptyValue": false
+				},
+				"istruttore": {
+					"description": "Istruttore che ha eseguito la modifica",
+					"allowEmptyValue": false,
+					"$ref": "#/definitions/Utente"
+				},
+				"motivazioneDisattivazione": {
+					"type": "string",
+					"description": "Eventuale motivo della disattivazione",
+					"allowEmptyValue": false,
+					"enum": ["PENSIONAMENTO", "FINE_RAPPORTO", "ALTRO"]
+				},
+				"motivazioneRifiuto": {
+					"type": "string",
+					"description": "Eventuale motivazione rifiuto",
+					"allowEmptyValue": false
+				},
+				"note": {
+					"type": "string",
+					"description": "Note dell'istruttoria",
+					"allowEmptyValue": false
+				},
+				"profili": {
+					"type": "array",
+					"description": "Lista dei profili (attivati/disattivati)",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/Rappresenta il modello del profilo di un utente"
+					}
+				},
+				"sedi": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EnteSede"
+					}
+				},
+				"testoComunicazione": {
+					"type": "string",
+					"description": "Testo della comunicazione",
+					"allowEmptyValue": false
+				},
+				"testoMail": {
+					"type": "string",
+					"description": "Testo della mail inviata",
+					"allowEmptyValue": false
+				},
+				"variazioneRichiesta": {
+					"type": "string",
+					"description": "Variazione richiesta",
+					"allowEmptyValue": false
+				}
+			},
+			"title": "Rappresenta una istruttoria per lo storico"
+		},
+		"ReportValidazioneDto": {
+			"type": "object",
+			"properties": {
+				"codiceFiscale": {
+					"type": "string"
+				},
+				"cognome": {
+					"type": "string"
+				},
+				"nome": {
+					"type": "string"
+				}
+			},
+			"title": "ReportValidazioneDto"
+		},
+		"Resource": {
+			"type": "object",
+			"properties": {
+				"description": {
+					"type": "string"
+				},
+				"file": {
+					"$ref": "#/definitions/File"
+				},
+				"filename": {
+					"type": "string"
+				},
+				"inputStream": {
+					"$ref": "#/definitions/InputStream"
+				},
+				"open": {
+					"type": "boolean"
+				},
+				"readable": {
+					"type": "boolean"
+				},
+				"uri": {
+					"$ref": "#/definitions/URI"
+				},
+				"url": {
+					"$ref": "#/definitions/URL"
+				}
+			},
+			"title": "Resource"
+		},
+		"ResponsabilitaRichieste": {
+			"type": "object",
+			"properties": {
+				"responsabilitaAltriEnti": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CollaboratoreAltriEnti"
+					}
+				},
+				"responsabilitaCaa": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RuoloCAA"
+					}
+				},
+				"responsabilitaConsulente": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Consulente"
+					}
+				},
+				"responsabilitaDistributore": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RuoloDistributore"
+					}
+				},
+				"responsabilitaLegaleRappresentante": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/TitolareImpresa"
+					}
+				},
+				"responsabilitaPat": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/RuoloPAT"
+					}
+				},
+				"responsabilitaTitolare": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/TitolareImpresa"
+					}
+				}
+			},
+			"title": "ResponsabilitaRichieste"
+		},
+		"RuoloCAA": {
+			"type": "object",
+			"properties": {
+				"allegato": {
+					"type": "string",
+					"format": "byte"
+				},
+				"codResponsabilita": {
+					"type": "string",
+					"enum": ["AMMINISTRATORE", "TITOLARE", "LEGALE", "CAA", "PAT", "ALTRI", "LPC", "DIPENDENTE_DISTRIBUTORE"]
+				},
+				"elencoCaa": {
+					"type": "string"
+				},
+				"idResponsabilita": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"responsabile": {
+					"type": "string"
+				},
+				"sedi": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EnteSede"
+					}
+				}
+			},
+			"title": "RuoloCAA"
+		},
+		"RuoloDistributore": {
+			"type": "object",
+			"properties": {
+				"allegato": {
+					"type": "string",
+					"format": "byte"
+				},
+				"codResponsabilita": {
+					"type": "string",
+					"enum": ["AMMINISTRATORE", "TITOLARE", "LEGALE", "CAA", "PAT", "ALTRI", "LPC", "DIPENDENTE_DISTRIBUTORE"]
+				},
+				"distributori": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Distributore"
+					}
+				},
+				"idResponsabilita": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"responsabile": {
+					"type": "string"
+				}
+			},
+			"title": "RuoloDistributore"
+		},
+		"RuoloPAT": {
+			"type": "object",
+			"properties": {
+				"allegato": {
+					"type": "string",
+					"format": "byte"
+				},
+				"codResponsabilita": {
+					"type": "string",
+					"enum": ["AMMINISTRATORE", "TITOLARE", "LEGALE", "CAA", "PAT", "ALTRI", "LPC", "DIPENDENTE_DISTRIBUTORE"]
+				},
+				"dipartimento": {
+					"type": "string"
+				},
+				"dirigente": {
+					"type": "string"
+				},
+				"idResponsabilita": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"matricola": {
+					"type": "string"
+				},
+				"note": {
+					"type": "string"
+				}
+			},
+			"title": "RuoloPAT"
+		},
+		"TitolareImpresa": {
+			"type": "object",
+			"properties": {
+				"cuaa": {
+					"type": "string"
+				},
+				"denominazione": {
+					"type": "string"
+				}
+			},
+			"title": "TitolareImpresa"
+		},
+		"URI": {
+			"type": "object",
+			"properties": {
+				"absolute": {
+					"type": "boolean"
+				},
+				"authority": {
+					"type": "string"
+				},
+				"fragment": {
+					"type": "string"
+				},
+				"host": {
+					"type": "string"
+				},
+				"opaque": {
+					"type": "boolean"
+				},
+				"path": {
+					"type": "string"
+				},
+				"port": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"query": {
+					"type": "string"
+				},
+				"rawAuthority": {
+					"type": "string"
+				},
+				"rawFragment": {
+					"type": "string"
+				},
+				"rawPath": {
+					"type": "string"
+				},
+				"rawQuery": {
+					"type": "string"
+				},
+				"rawSchemeSpecificPart": {
+					"type": "string"
+				},
+				"rawUserInfo": {
+					"type": "string"
+				},
+				"scheme": {
+					"type": "string"
+				},
+				"schemeSpecificPart": {
+					"type": "string"
+				},
+				"userInfo": {
+					"type": "string"
+				}
+			},
+			"title": "URI"
+		},
+		"URL": {
+			"type": "object",
+			"properties": {
+				"authority": {
+					"type": "string"
+				},
+				"content": {
+					"type": "object"
+				},
+				"defaultPort": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"deserializedFields": {
+					"$ref": "#/definitions/URLStreamHandler"
+				},
+				"file": {
+					"type": "string"
+				},
+				"host": {
+					"type": "string"
+				},
+				"path": {
+					"type": "string"
+				},
+				"port": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"protocol": {
+					"type": "string"
+				},
+				"query": {
+					"type": "string"
+				},
+				"ref": {
+					"type": "string"
+				},
+				"serializedHashCode": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"userInfo": {
+					"type": "string"
+				}
+			},
+			"title": "URL"
+		},
+		"URLStreamHandler": {
+			"type": "object",
+			"title": "URLStreamHandler"
+		},
+		"Utente": {
+			"type": "object",
+			"properties": {
+				"aziende": {
+					"type": "array",
+					"description": "Lista delle aziende",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/Azienda"
+					}
+				},
+				"codiceFiscale": {
+					"type": "string",
+					"description": "Codice fiscale dell'utente",
+					"allowEmptyValue": false
+				},
+				"cognome": {
+					"type": "string",
+					"description": "Cognome dell'utente",
+					"allowEmptyValue": false
+				},
+				"distributori": {
+					"type": "array",
+					"description": "Lista dei distributori",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/Distributore"
+					}
+				},
+				"id": {
+					"type": "integer",
+					"format": "int64",
+					"description": "Id del database",
+					"allowEmptyValue": false
+				},
+				"identificativo": {
+					"type": "string",
+					"description": "Identificativo dell'utente",
+					"allowEmptyValue": false
+				},
+				"motivazioneDisattivazione": {
+					"type": "string",
+					"description": "Motivazione di un eventuale disattivazione",
+					"allowEmptyValue": false,
+					"enum": ["PENSIONAMENTO", "FINE_RAPPORTO", "ALTRO"]
+				},
+				"nome": {
+					"type": "string",
+					"description": "Nome dell'utente",
+					"allowEmptyValue": false
+				},
+				"profili": {
+					"type": "array",
+					"description": "Lista dei profili",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/Rappresenta il modello del profilo di un utente"
+					}
+				},
+				"sedi": {
+					"type": "array",
+					"description": "Lista delle sedi Caa di appartenenza",
+					"allowEmptyValue": false,
+					"items": {
+						"$ref": "#/definitions/EnteSede"
+					}
+				}
+			},
+			"title": "Utente",
+			"description": "Rappresenta il modello per rappresentare un utente del sistema"
+		},
+		"View": {
+			"type": "object",
+			"properties": {
+				"contentType": {
+					"type": "string"
+				}
+			},
+			"title": "View"
+		}
+	}
+}

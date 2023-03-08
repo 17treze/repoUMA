@@ -1,0 +1,734 @@
+{
+    "infoGeneraliDomanda": {
+        "pac": "PAC1420",
+        "tipoDomanda": "DU",
+        "campagna": 2018,
+        "modulo": "PAGAMENTI DIRETTI",
+        "codModulo": "BPS_2018",
+        "cuaaIntestatario": "PLOLNZ71B07E565W",
+        "ragioneSociale": "POLA LORENZO",
+        "numeroDomanda": 183109,
+        "numeroDomandaRettificata": null,
+        "dataPresentazione": "2018-04-25T10:13:45.000+0200",
+        "codEnteCompilatore": "668",
+        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 012",
+        "dataProtocollazione": "2018-04-25T10:14:18.000+0200",
+        "dataPresentazOriginaria": null,
+        "dataProtocollazOriginaria": null
+    },
+    "controlliPresentazione": {
+        "aggiornamentoFascicolo": "S",
+        "visioneAnomalie": "S",
+        "firmaDomanda": "S",
+        "archiviazioneDomanda": "S"
+    },
+    "richieste": {
+        "sintesiRichieste": {
+            "richiestaDisaccoppiato": true,
+            "richiestaSuperfici": false,
+            "richiestaZootecnia": false
+        }
+    },
+    "calcoliSostegno": [
+        {
+            "idCalcolo": 614222,
+            "idDefCalcolo": 151,
+            "codCalcolo": "DU_2017_SALDO_BGG",
+            "variabiliCalcolo": [
+                {
+                    "variabile": "ID_DECR",
+                    "descVariabile": "Riferimento per calcolo",
+                    "valore": "21030",
+                    "codGruppo": "VARI",
+                    "ordine": 1
+                },
+                {
+                    "variabile": "VALMEDTITO",
+                    "descVariabile": "Valore Medio Titoli",
+                    "valore": "74.74",
+                    "codGruppo": "TITO",
+                    "ordine": 2
+                },
+                {
+                    "variabile": "SUPETITO2017",
+                    "descVariabile": "Superficie Totale Titoli Ordinari 2017",
+                    "valore": "6.19",
+                    "codGruppo": "TITO",
+                    "ordine": 3
+                },
+                {
+                    "variabile": "NUMETITO2017",
+                    "descVariabile": "Numero Titoli Ordinari 2017",
+                    "valore": "7",
+                    "codGruppo": "TITO",
+                    "ordine": 4
+                },
+                {
+                    "variabile": "SUPEDICHLORDA",
+                    "descVariabile": "BPS - Superficie Dichiarata Lorda",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 5
+                },
+                {
+                    "variabile": "SUPEDICHNETTA",
+                    "descVariabile": "BPS - Superficie Dichiarata Netta",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 6
+                },
+                {
+                    "variabile": "SUPEDICHCORR",
+                    "descVariabile": "Superficie Dichiarata corretta d'ufficio",
+                    "valore": "7.0165",
+                    "codGruppo": "CORRETTIVE",
+                    "ordine": 7
+                },
+                {
+                    "variabile": "SUPEACCECORR",
+                    "descVariabile": "Superficie Accertata corretta d'ufficio",
+                    "valore": "7.028",
+                    "codGruppo": "CORRETTIVE",
+                    "ordine": 8
+                },
+                {
+                    "variabile": "SUPEDIFFCTRLOCO",
+                    "descVariabile": "Differenza di superficie da controllo in loco",
+                    "valore": null,
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 9
+                },
+                {
+                    "variabile": "IMPLIQTOT",
+                    "descVariabile": "Importo Totale In Liquidazione",
+                    "valore": "197.08",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 10
+                },
+                {
+                    "variabile": "IMPLIQPREC",
+                    "descVariabile": "Importo totale gia' liquidato (tutti gli interventi)",
+                    "valore": "500.54",
+                    "codGruppo": "TOT",
+                    "ordine": 11
+                },
+                {
+                    "variabile": "IMPOCALCTOT",
+                    "descVariabile": "Importo totale calcolato ancora da pagare (tutti gli interventi)",
+                    "valore": "197.08",
+                    "codGruppo": "TOT",
+                    "ordine": 12
+                },
+                {
+                    "variabile": "IMPTRATFIN",
+                    "descVariabile": "Trattenuta Totale calcolata per Disciplina Finanziaria",
+                    "valore": "0",
+                    "codGruppo": "TOT",
+                    "ordine": 13
+                },
+                {
+                    "variabile": "SUPEDOMALORDA",
+                    "descVariabile": "BPS - Superficie Impegnata Lorda",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 14
+                },
+                {
+                    "variabile": "SUPEDOMANETTA",
+                    "descVariabile": "BPS - Superficie Impegnata Netta",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 15
+                },
+                {
+                    "variabile": "SUPELEGISNETTA",
+                    "descVariabile": "BPS - Superficie Eleggibile (GIS) Netta",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 16
+                },
+                {
+                    "variabile": "SUPEDETEBPS",
+                    "descVariabile": "BPS - Sup. SUPELEGISNETTA al netto di parc. min. (200mq) + Man",
+                    "valore": "7.0165",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 17
+                },
+                {
+                    "variabile": "SUPRICHBPS",
+                    "descVariabile": "BPS - Sup. Richiesta (min. tra SUPETITO2017 e SUPEDOMANETTA)",
+                    "valore": "6.19",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 18
+                },
+                {
+                    "variabile": "SUPAMMBPS",
+                    "descVariabile": "BPS - Sup. Ammissibile (min. tra SUPRICHBPS e SUPEDETEBPS e SUPEACCECORR)",
+                    "valore": "6.19",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 19
+                },
+                {
+                    "variabile": "SCOSTASSOBPS",
+                    "descVariabile": "BPS - Scostamento Assoluto (SUPRICHBPS - SUPAMMBPS)",
+                    "valore": "0",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 20
+                },
+                {
+                    "variabile": "FASCSCOST",
+                    "descVariabile": "BPS - Fascia Scostamento",
+                    "valore": "0%",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 21
+                },
+                {
+                    "variabile": "PERCSCOSTBPS",
+                    "descVariabile": "BPS - Percentuale Scostamento",
+                    "valore": "0",
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 22
+                },
+                {
+                    "variabile": "RID_407_12",
+                    "descVariabile": "BPS - Riduzione per gg. di ritardo presentazione domanda",
+                    "valore": null,
+                    "codGruppo": "BPS",
+                    "ordine": 23
+                },
+                {
+                    "variabile": "SUPLIQUBPS",
+                    "descVariabile": "BPS - Superficie In Liquidazione",
+                    "valore": "0",
+                    "codGruppo": "BPS",
+                    "ordine": 24
+                },
+                {
+                    "variabile": "IMPAMMBPS",
+                    "descVariabile": "BPS - Importo Ammissibile",
+                    "valore": "462.64",
+                    "codGruppo": "BPS",
+                    "ordine": 25
+                },
+                {
+                    "variabile": "IMPLIQBPS",
+                    "descVariabile": "BPS - Importo In Liquidazione (ancora da pagare)",
+                    "valore": "128.79",
+                    "codGruppo": "BPS",
+                    "ordine": 26
+                },
+                {
+                    "variabile": "IMPRICHBPS",
+                    "descVariabile": "BPS - Importo Richiesto",
+                    "valore": "462.64",
+                    "codGruppo": "BPS",
+                    "ordine": 27
+                },
+                {
+                    "variabile": "TRATTDF_407_73",
+                    "descVariabile": "BPS - Trattenuta per disciplina finanziaria",
+                    "valore": null,
+                    "codGruppo": "BPS",
+                    "ordine": 28
+                },
+                {
+                    "variabile": "RID_407_3",
+                    "descVariabile": "BPS - Riduzione da scostamento di superficie",
+                    "valore": null,
+                    "codGruppo": "BPS",
+                    "ordine": 29
+                },
+                {
+                    "variabile": "SANZ_407_83",
+                    "descVariabile": "BPS - Sanz. Scost. oltre il 3% ed entro il 10%",
+                    "valore": null,
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 32
+                },
+                {
+                    "variabile": "SANZ_407_84",
+                    "descVariabile": "BPS - Sanz. Scost. oltre il 10% ed entro il 66.67%",
+                    "valore": null,
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 33
+                },
+                {
+                    "variabile": "SANZ_407_85",
+                    "descVariabile": "BPS - Sanz. Scost. oltre il 66.67%",
+                    "valore": null,
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 34
+                },
+                {
+                    "variabile": "SANZ_R1393",
+                    "descVariabile": "BPS - Sanzione 2016 'sospesa', ai sensi Reg.2016/1393",
+                    "valore": null,
+                    "codGruppo": "SUPEBPS",
+                    "ordine": 35
+                },
+                {
+                    "variabile": "SUPE_ANOM_MAN01",
+                    "descVariabile": "Supe. MAN-01 (soggetto non detentore dell''allevamento)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 36
+                },
+                {
+                    "variabile": "SUPE_ANOM_MAN02",
+                    "descVariabile": "Supe. MAN-02 (carico UBA non risp., allev. nel comune o limitrofo)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 37
+                },
+                {
+                    "variabile": "SUPE_ANOM_MAN03",
+                    "descVariabile": "Supe. MAN-03 (carico UBA non risp., allev. in comune non limitrofo)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 38
+                },
+                {
+                    "variabile": "SUPE_ANOM_MAN04",
+                    "descVariabile": "Supe. MAN-04 (pascolamento non conforme direttive provinciali)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 39
+                },
+                {
+                    "variabile": "SUPE_ANOM_MAN05",
+                    "descVariabile": "Supe. MAN-05 (conformità usi e consuet. locali altre Regioni)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 40
+                },
+                {
+                    "variabile": "SUPE_ANOM_MPT01",
+                    "descVariabile": "Supe. MPT-01 (sup. pratiche tradiz. - sogg. non detent. allevamento)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 41
+                },
+                {
+                    "variabile": "SUPE_ANOM_MPT02",
+                    "descVariabile": "Supe. MPT-02 (sup. prat. tradiz. - carico UBA non risp., nel comune)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 42
+                },
+                {
+                    "variabile": "SUPE_ANOM_MPT03",
+                    "descVariabile": "Supe. MPT-03 (sup. prat. tradiz. - carico UBA non risp., fuori comune)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 43
+                },
+                {
+                    "variabile": "SUPE_ANOM_MPT04",
+                    "descVariabile": "Supe. MPT-04 (sup. prat. tradiz. - allev. non prevede pascolamento)",
+                    "valore": null,
+                    "codGruppo": "ANOMMAN",
+                    "ordine": 44
+                },
+                {
+                    "variabile": "SUPE_ANOM_COORD",
+                    "descVariabile": "Superficie totale anomalie di coordinamento",
+                    "valore": null,
+                    "codGruppo": "ANOMCOORD",
+                    "ordine": 45
+                },
+                {
+                    "variabile": "PERCGREEN",
+                    "descVariabile": "Greening - Percentuale di incremento del premio",
+                    "valore": "50.79",
+                    "codGruppo": "GREENING",
+                    "ordine": 46
+                },
+                {
+                    "variabile": "SUPRICHGREEN",
+                    "descVariabile": "Greening - Superficie Richiesta",
+                    "valore": "6.19",
+                    "codGruppo": "GREENING",
+                    "ordine": 47
+                },
+                {
+                    "variabile": "SUPAMMISSGREE",
+                    "descVariabile": "Greening - Superficie ammissibile",
+                    "valore": "6.19",
+                    "codGruppo": "GREENING",
+                    "ordine": 48
+                },
+                {
+                    "variabile": "SUPLIQUGREEN",
+                    "descVariabile": "Greening - Superficie In Liquidazione (ancora da pagare)",
+                    "valore": "0",
+                    "codGruppo": "GREENING",
+                    "ordine": 49
+                },
+                {
+                    "variabile": "GREEN_AZIENDA_BIO",
+                    "descVariabile": "Greening - Azienda Biologica",
+                    "valore": "No",
+                    "codGruppo": "GREENING",
+                    "ordine": 50
+                },
+                {
+                    "variabile": "GREEN_ESITO",
+                    "descVariabile": "Greening - Fascia dello scostamento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 51
+                },
+                {
+                    "variabile": "GREEN_ESON_DIVE",
+                    "descVariabile": "Greening - Esonero per Diversificazione",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 52
+                },
+                {
+                    "variabile": "GREEN_ESON_EFA",
+                    "descVariabile": "Greening - Esonero per EFA",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 53
+                },
+                {
+                    "variabile": "GREEN_SCOST_PERC",
+                    "descVariabile": "Greening - Percentuale scostamento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 54
+                },
+                {
+                    "variabile": "SUPENORISPINV",
+                    "descVariabile": "Greening - Superficie Mancato Rispetto Inverdimento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 55
+                },
+                {
+                    "variabile": "GREEN_PERC_P_AVVIC",
+                    "descVariabile": "Greening - Perc. Prati Avvicendati",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 56
+                },
+                {
+                    "variabile": "GREEN_PERC_P_PERM",
+                    "descVariabile": "Greening - Perc. Prati Permanenti",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 57
+                },
+                {
+                    "variabile": "GREEN_SANZ_SUPP",
+                    "descVariabile": "Greening - Superf. ridotta per l’ultima fascia di scostamento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 58
+                },
+                {
+                    "variabile": "GREEN_SEMI_BIOL",
+                    "descVariabile": "Greening - Superf. seminativi biologica",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 59
+                },
+                {
+                    "variabile": "GREEN_SUPE_1COLT",
+                    "descVariabile": "Greening - Superf. Diversificazione Prima Coltura",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 60
+                },
+                {
+                    "variabile": "GREEN_SUPE_2COLT",
+                    "descVariabile": "Greening - Superf. Diversificazione Seconda Coltura",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 61
+                },
+                {
+                    "variabile": "GREEN_SUPE_3COLT",
+                    "descVariabile": "Greening - Superf. Diversificazione Terza Coltura",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 62
+                },
+                {
+                    "variabile": "GREEN_SUPE_BASE_SEMI",
+                    "descVariabile": "Greening - Superf. seminativi sanzionata",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 63
+                },
+                {
+                    "variabile": "GREEN_SUPE_EFA",
+                    "descVariabile": "Greening - Superf. EFA",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 64
+                },
+                {
+                    "variabile": "GREEN_SUPE_FORAG",
+                    "descVariabile": "Greening - Superf. Foraggera",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 65
+                },
+                {
+                    "variabile": "GREEN_SUPE_PPERM",
+                    "descVariabile": "Greening - Superf. Prati Permanenti",
+                    "valore": "0",
+                    "codGruppo": "GREENING",
+                    "ordine": 66
+                },
+                {
+                    "variabile": "GREEN_SUPE_PPERM_N2K",
+                    "descVariabile": "Greening - Superf. Prati Permanenti in zone Natura2000",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 67
+                },
+                {
+                    "variabile": "GREEN_SUPE_SANZ",
+                    "descVariabile": "Greening - Superf. Sanzionata",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 68
+                },
+                {
+                    "variabile": "GREEN_SUPE_SANZ_APPL",
+                    "descVariabile": "Greening - Superf. sanz. appl. (min. tra _SANZ_CALC e _SANZ_LIMI)",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 69
+                },
+                {
+                    "variabile": "GREEN_SUPE_SANZ_CALC",
+                    "descVariabile": "Greening - Superf. sanzionata calcolata",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 70
+                },
+                {
+                    "variabile": "GREEN_SUPE_SANZ_LIMI",
+                    "descVariabile": "Greening - Superf. sanzionata entro limiti",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 71
+                },
+                {
+                    "variabile": "GREEN_SUPE_SANZ_SEMI",
+                    "descVariabile": "Greening - Superf. seminativi sanzionata",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 72
+                },
+                {
+                    "variabile": "GREEN_SUPE_SEMI",
+                    "descVariabile": "Greening - Superf. Seminativo",
+                    "valore": "0",
+                    "codGruppo": "GREENING",
+                    "ordine": 73
+                },
+                {
+                    "variabile": "GREEN_TOTA_RIDU",
+                    "descVariabile": "Greening - Superf. Totale Riduzioni",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 74
+                },
+                {
+                    "variabile": "IMPRICHGREEN",
+                    "descVariabile": "Greening - Importo Richiesto",
+                    "valore": "234.98",
+                    "codGruppo": "GREENING",
+                    "ordine": 75
+                },
+                {
+                    "variabile": "IMPAMMGREEN",
+                    "descVariabile": "Greening - Importo Ammissibile",
+                    "valore": "234.98",
+                    "codGruppo": "GREENING",
+                    "ordine": 76
+                },
+                {
+                    "variabile": "IMPOCALCGREEN",
+                    "descVariabile": "Greening - Importo Liquidabile",
+                    "valore": "68.29",
+                    "codGruppo": "GREENING",
+                    "ordine": 77
+                },
+                {
+                    "variabile": "IMPLIQGREEN",
+                    "descVariabile": "Greening - Importo In Liquidazione (ancora da pagare)",
+                    "valore": "68.29",
+                    "codGruppo": "GREENING",
+                    "ordine": 78
+                },
+                {
+                    "variabile": "RID_68173_12",
+                    "descVariabile": "Greening - Riduzione per gg. di ritardo presentazione domanda",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 79
+                },
+                {
+                    "variabile": "RID_68173_3",
+                    "descVariabile": "Greening - Riduzione da scostamento di superficie",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 80
+                },
+                {
+                    "variabile": "RIDU_68173_87",
+                    "descVariabile": "Greening - Riduzione per mancato rispetto inverdimento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 81
+                },
+                {
+                    "variabile": "SANZ_68173_80",
+                    "descVariabile": "Greening - Mancato Rispetto Inverdimento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 82
+                },
+                {
+                    "variabile": "SANZ_68173_88",
+                    "descVariabile": "Greening - Sanzione per mancato rispetto inverdimento",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 83
+                },
+                {
+                    "variabile": "SANZ_68173_4",
+                    "descVariabile": "Greening - Sanz. Scost. tra 3% e 20%",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 84
+                },
+                {
+                    "variabile": "SANZ_68173_66",
+                    "descVariabile": "Greening - Sanz. Scost. oltre il 20% ed entro il 50%",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 85
+                },
+                {
+                    "variabile": "TRATTDF_68173_73",
+                    "descVariabile": "Greening - Trattenuta per disciplina finanziaria",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 86
+                },
+                {
+                    "variabile": "SANZ_68173_67",
+                    "descVariabile": "Greening - Sanz. Scost. oltre il 50%",
+                    "valore": null,
+                    "codGruppo": "GREENING",
+                    "ordine": 87
+                },
+                {
+                    "variabile": "RICH_GIOV",
+                    "descVariabile": "Giovane Agr. - Richiesta Premio",
+                    "valore": "No",
+                    "codGruppo": "GIOVANE",
+                    "ordine": 88
+                },
+                {
+                    "variabile": "PERCGIOV",
+                    "descVariabile": "Giovane Agr. - Percentuale di incremento premio",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 89
+                },
+                {
+                    "variabile": "SUPRICHGIOV",
+                    "descVariabile": "Giovane Agr. - Superficie Richiesta",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 90
+                },
+                {
+                    "variabile": "SUPAMMGIO",
+                    "descVariabile": "Giovane Agr. - Superficie Ammissibile",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 91
+                },
+                {
+                    "variabile": "SUPLIQUGIOV",
+                    "descVariabile": "Giovane Agr. - Superficie In Liquidazione (ancora da pagare)",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 92
+                },
+                {
+                    "variabile": "IMPRICHGIOV",
+                    "descVariabile": "Giovane Agr. - Importo Richiesto",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 93
+                },
+                {
+                    "variabile": "IMPAMMGIOV",
+                    "descVariabile": "Giovane Agr. - Importo Ammissibile",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 94
+                },
+                {
+                    "variabile": "IMPLIQGIOV",
+                    "descVariabile": "Giovane Agr. - Importo In Liquidazione (ancora da pagare)",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 95
+                },
+                {
+                    "variabile": "RID_490_12",
+                    "descVariabile": "Giovane - Riduzione per gg. di ritardo presentazione domanda",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 96
+                },
+                {
+                    "variabile": "RID_490_3",
+                    "descVariabile": "Giovane - Riduzione da scostamento di superficie",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 97
+                },
+                {
+                    "variabile": "SANZ_490_83",
+                    "descVariabile": "Giovane - Sanz. Scost. oltre il 3% ed entro il 10%",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 98
+                },
+                {
+                    "variabile": "SANZ_490_84",
+                    "descVariabile": "Giovane - Sanz. Scost. oltre il 10% ed entro il 66.67%",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 99
+                },
+                {
+                    "variabile": "SANZ_490_85",
+                    "descVariabile": "Giovane - Sanz. Scost. oltre il 66.67%",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 100
+                },
+                {
+                    "variabile": "TRATTDF_490_73",
+                    "descVariabile": "Giovane - Trattenuta per disciplina finanziaria",
+                    "valore": null,
+                    "codGruppo": "GIOVANE",
+                    "ordine": 101
+                }
+            ]
+        }
+    ]
+}

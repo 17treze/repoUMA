@@ -1,0 +1,223 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="funzioni-grid boxgrey">
+  <div class="accordion-wrapper dettaglioaccordionmultiple">
+    <p-accordion>
+      <p-accordionTab
+        header="UNITÀ LOCALI"
+        [selected]="true">
+        <p-table
+          #tableUnita
+          [columns]="cols"
+          [value]="unitaTecnicoEconomiche"
+          [autoLayout]="true"
+          [paginator]="false"
+          [responsive]="true"
+          dataKey="identificativoUte">
+          <ng-template
+            pTemplate="header"
+            let-columns>
+            <tr>
+              <th style="width: 3em"></th>
+              <th
+                *ngFor="let col of columns"
+                [pSortableColumn]="col.field"
+                [pSortableColumnDisabled]="col.field == null">
+                <strong>{{col.header}}</strong>
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-unitaTE
+            let-expanded="expanded"
+            let-columns="columns"
+            let-rowIndex="rowIndex">
+            <tr>
+              <td>
+                <a
+                  href="#"
+                  [pRowToggler]="unitaTE">
+                  <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+              </td>
+              <td>{{unitaTE.identificativoUte}}</td>
+              <td>{{unitaTE.attivita}}</td>
+              <td>{{getIndirizzo(unitaTE)}}</td>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="rowexpansion"
+            let-unitaTE
+            let-columns="columns">
+            <tr>
+              <td [attr.colspan]="columns.length + 1">
+                <tbody>
+                  <tr></tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.DT_APERTURA" | translate }}:
+                    </td>
+                    <td>
+                      {{unitaTE.dataApertura | date : 'dd/MM/yyyy'}}
+                    </td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <th>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.DATI_CESSAZIONE" | translate }}
+                    </th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.DT_CESSAZIONE" | translate }}:
+                    </td>
+                    <td>
+                      {{unitaTE.dataCessazione | date : 'dd/MM/yyyy'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.DT_DENUNCIA_CESSAZIONE" | translate }}:
+                    </td>
+                    <td>
+                      {{unitaTE.dataDenunciaCessazione | date : 'dd/MM/yyyy'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.MOTIVO_CESSAZIONE" | translate }}:
+                    </td>
+                    <td>{{unitaTE.causaleCessazione}}</td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <th>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.COMMERCIO_DETTAGLIO" | translate }}
+                    </th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.DT_INIZIO_ATT_COMM_DETT" | translate }}:
+                    </td>
+                    <td>
+                      {{unitaTE.dataDenunciaInizioAttivita | date : 'dd/MM/yyyy'}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.SETTORE_MERCEOLOGICO" | translate }}:
+                    </td>
+                    <td>{{unitaTE.settoreMerceologico}}</td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.RECAPITO_TEL" | translate }}:
+                    </td>
+                    <td>{{unitaTE.telefono}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.PEC" | translate }}:
+                    </td>
+                    <td>{{unitaTE.indirizzoPec}}</td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <th>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.INDIRIZZO" | translate }}
+                    </th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.TOPONIMO" | translate }}:
+                    </td>
+                    <td>{{unitaTE.toponimo}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.VIA" | translate }}:
+                    </td>
+                    <td>{{unitaTE.via}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.CIVICO" | translate }}:
+                    </td>
+                    <td>{{unitaTE.numeroCivico}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.COMUNE" | translate }}:
+                    </td>
+                    <td>{{unitaTE.comune}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.CAP" | translate }}:
+                    </td>
+                    <td>{{unitaTE.cap}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.CODICE_ISTAT" | translate }}:
+                    </td>
+                    <td>{{unitaTE.codiceIstatComune}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.FRAZIONE" | translate }}:
+                    </td>
+                    <td>{{unitaTE.frazione}}</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.PROVINCIA" | translate }}:
+                    </td>
+                    <td>{{unitaTE.provincia}}</td>
+                  </tr>
+                  <br>
+                  <tr>
+                    <th>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.LISTA_DEST_USO" | translate }}
+                    </th>
+                    <th></th>
+                  </tr>
+                  <tr *ngFor="let destinazioneUso of unitaTE.destinazioniUso">
+                    <td>{{destinazioneUso.descrizione}}</td>
+                    <th></th>
+                  </tr>
+                  <br>
+                  <tr>
+                    <th>
+                      {{ "FascicoloAziendale.UNITA_TECNICO_ECONOMICHE.LISTA_ATTIVITA_ATECO" | translate }}
+                    </th>
+                    <th></th>
+                  </tr>
+                  <tr *ngFor="let attivita of unitaTE.attivitaAteco">
+                    <td>{{attivita.codice}}</td>
+                    <td>{{attivita.descrizione}}</td>
+                    <br>
+                  </tr>
+                </tbody>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="emptymessage"
+            let-columns>
+            <tr>
+              <td [attr.colspan]="columns.length + 1">Nessun contenuto disponibile</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

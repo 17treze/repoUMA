@@ -1,0 +1,28 @@
+{
+	"datiAnagrafici": {
+		"codiceFiscale": "codiceFiscale",
+		"nome": "Nome",
+		"cognome": "Cognome",
+		"email": "email@gmail.com",
+		"telefono": "0461 800 111"
+	},
+	"responsabilitaRichieste":{  
+      "responsabilitaTitolare":[  
+         {  
+            "cuaa":"TRRCST78B08C794X",
+            "denominazione":"TORRESANI CRISTIAN"
+         }
+      ],
+      "responsabilitaLegaleRappresentante":[  
+         {  
+            "cuaa":"92009950228",
+            "denominazione":"SOCIETA' MALGA VAL SOCIETA' AGRICOLA"
+         }
+      ]
+   },
+	"servizi": [
+		"A4G",
+		"SRT"
+	],
+	"tipoDomandaRegistrazione": "COMPLETA"
+}

@@ -1,0 +1,18 @@
+.ui-g-6 h6 {
+    font-size: 18px;
+    letter-spacing: -0.2px;
+    padding: 27px 0px;
+    margin: 0;
+}
+
+.disabled {
+    text-decoration: line-through;
+}
+
+.variazione {
+    text-align: justify;
+}
+
+.icon-disabled {
+    font-size: 120%;
+}

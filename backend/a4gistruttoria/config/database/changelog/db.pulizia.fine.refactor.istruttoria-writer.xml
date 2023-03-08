@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<!-- Aggiungere la DROP dei vecchi sinonimi e la ricreazione del nuovo sinonimo associandolo 
+	al nome tabella nuovo -->
+	<changeSet id="ISTRUTTORIA_WRT_RIF17.0" author="Lorenzo Martinelli" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+        	DROP SYNONYM A4GT_TRANSIZIONE_SOSTEGNO;
+        	CREATE OR REPLACE SYNONYM A4GT_TRANSIZIONE_ISTRUTTORIA FOR ${user.superuser}.A4GT_TRANSIZIONE_ISTRUTTORIA;
+        </sql>
+    </changeSet>	
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF17.0" author="GianFilippo Autellitano" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+        	DROP SYNONYM A4GT_TITOLO_DU;
+        </sql>
+    </changeSet>	
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF17.1" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_PASSI_LAV_SOSTEGNO;
+			CREATE OR REPLACE SYNONYM A4GT_PASSO_TRANSIZIONE FOR ${user.superuser}.A4GT_PASSO_TRANSIZIONE;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.1" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GD_INTERVENTO_DU_PREMIO;
+			DROP SYNONYM A4GD_SOSTEGNO_DU_DI;
+
+			CREATE OR REPLACE SYNONYM A4GT_IMPORTO_UNITARIO FOR ${user.superuser}.A4GT_IMPORTO_UNITARIO;
+			CREATE OR REPLACE SYNONYM A4GT_CONF_ISTR_ZOOTECNIA FOR ${user.superuser}.A4GT_CONF_ISTR_ZOOTECNIA;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTRUTTORIA_WRT_RIF28.0" author="Marco Dalla Torre" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_STAMPA_DOMANDA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.2" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_ISTRUTTORIA;
+			DROP SYNONYM A4GT_LAVORAZIONE_SOSTEGNO;
+
+			CREATE OR REPLACE SYNONYM A4GT_ISTRUTTORIA FOR ${user.superuser}.A4GT_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.3" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_ALEV_MONTAGNA;
+			DROP SYNONYM A4GT_CONTROLLI_LATTE;
+			DROP SYNONYM A4GT_DATI_ISTRUTTORE_DIS;
+			DROP SYNONYM A4GT_LOGGING;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.4" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_ERRORE_RICEVIBILITA;
+			DROP SYNONYM A4GT_ESITO_CONTROLLO;
+
+			CREATE OR REPLACE SYNONYM A4GT_ERRORE_RICEVIBILITA FOR ${user.superuser}.A4GT_ERRORE_RICEVIBILITA;
+		</sql>
+	</changeSet>
+
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.5" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_PAGA_ZOOT_ETICHETT;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.6" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GT_DATI_ISTRUTTORIA;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTRUTTORIA_WRT_RIF27.7" author="Lorenzo Martinelli" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			DROP SYNONYM A4GD_TIPO_CONTROLLO;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

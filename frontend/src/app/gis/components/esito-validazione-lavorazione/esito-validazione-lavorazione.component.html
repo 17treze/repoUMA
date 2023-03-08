@@ -1,0 +1,357 @@
+<p-sidebar id="esitoLavorazione" class="sidebar-esito"
+  [(visible)]="canVisibleComponent && panelEvent.showEsitoLavorazione && lavorazioniEvent.idLavorazione"
+  (onHide)="closeEsito()" [ngClass]="{'noShowing': !lavorazioniEvent.idLavorazione || !panelEvent.showEsitoLavorazione,
+ 'onlyValida': !panelEvent.nuovaLavorazione && !panelEvent.showDettaglioLavorazione}" [(dismissible)]="dismissible"
+  [(blockScroll)]="blockScroll" position="left">
+  <h1>Esito Validazione</h1>
+  <div class="elimina-lavorazione">
+    <label class="lavorazione-id">ID {{lavorazioniEvent.idLavorazione}}</label>
+  </div>
+
+  <div>
+
+
+    <p-tabView>
+      <!-- PANEL POLIGONI DICHIARATI SENZA ATTRIBUTI -->
+      <p-tabPanel id="no_esito_const" leftIcon="fas fa-exclamation-circle button-problem-esito"
+        header={{poligoniErrorValidazione.poligoniDichiaratoSenzaEsito.length}} tooltip={{no_esito_const.tooltip}}
+        *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniDichiaratoSenzaEsito &&
+        poligoniErrorValidazione.poligoniDichiaratoSenzaEsito.length > 0">
+
+        <div class="for-poligoni" style="padding: 0px;" infiniteScroll [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50" [immediateCheck]="true" [scrollWindow]="false">
+          <label>{{no_esito_const.titolo}}</label>
+          <div class="p-field" *ngFor="let n of poligoniErrorValidazione.poligoniDichiaratoSenzaEsito ; let i = index">
+            <div for="TAG" class="label-esito"
+              [ngClass]="poligoniErrorValidazione.poligoniDichiaratoSenzaEsito[i].esito">
+              <span>{{poligoniErrorValidazione.poligoniDichiaratoSenzaEsito[i].esito | decodeEnumPipe :
+                listaEsitoLavorazione}}</span>
+            </div>
+            <div class="content-scroll" [hidden]="!n.visible"
+              [ngClass]="{'activeElement': panelEvent.showDettaglioLavorazione}">
+
+              <gis-suolo-dichiarato [suoloDichiarato]="n" [index]="i" (actionSuoloDichiarato)="null"
+                [contextAction]="'none'">
+              </gis-suolo-dichiarato>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel id="richiesta_cancellat_const" leftIcon="fas fa-exclamation-triangle button-problem-esito"
+        header={{poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata.length}}
+        tooltip={{richiesta_cancellat_const.tooltip}}
+        *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata && poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata.length>0">
+        <div class="for-poligoni" style="padding: 0px;" infiniteScroll [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50" [immediateCheck]="true" [scrollWindow]="false">
+          <label>{{richiesta_cancellat_const.titolo}}</label>
+
+          <div class="p-field"
+            *ngFor="let n of poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata ; let i = index">
+            <div for="TAG" class="label-esito"
+              [ngClass]="poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata[i].esito">
+              <span>{{poligoniErrorValidazione.poligoniDichiaratoRichiestaCancellata[i].esito | decodeEnumPipe :
+                listaEsitoLavorazione}}</span>
+            </div>
+            <div class="content-scroll" [hidden]="!n.visible"
+              [ngClass]="{'activeElement': panelEvent.showDettaglioLavorazione}">
+
+              <gis-suolo-dichiarato [suoloDichiarato]="n" [index]="i" (actionSuoloDichiarato)="null"
+                [contextAction]="'none'">
+              </gis-suolo-dichiarato>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <!-- PANEL POLIGONI WORKSPACE ATTRIBUTI MANCANTI -->
+      <p-tabPanel id="attributi_mancanti_const" leftIcon="fas fa-bell button-problem-esito"
+        header={{poligoniErrorValidazione.poligoniSuoloAttributiMancanti.length}}
+        tooltip={{attributi_mancanti_const.tooltip}}
+        *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniSuoloAttributiMancanti && poligoniErrorValidazione.poligoniSuoloAttributiMancanti.length>0">
+        <ng-template pTemplate="content">
+          <div *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniSuoloAttributiMancanti"
+            class="for-poligoni" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            [immediateCheck]="true" [scrollWindow]="false">
+            <label>{{attributi_mancanti_const.titolo}}</label>
+            <app-table-validazione-senza-attributi
+              [TableValidazioneSenzaAttributiInput]="poligoniErrorValidazione.poligoniSuoloAttributiMancanti">
+            </app-table-validazione-senza-attributi>
+          </div>
+        </ng-template>
+      </p-tabPanel>
+
+
+      <p-tabPanel id="poligoni_sovrapposizioni_const" leftIcon="fas fa-bell button-problem-esito"
+        header={{poligoniErrorValidazione.poligoniAnomaliaSovrapposizioni.length}}
+        tooltip={{poligoni_sovrapposizioni_const.tooltip}}
+        *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniAnomaliaSovrapposizioni && poligoniErrorValidazione.poligoniAnomaliaSovrapposizioni.length>0">
+        <ng-template pTemplate="content">
+          <label>{{poligoni_sovrapposizioni_const.titolo}}</label>
+
+          <p-table [value]="poligoniErrorValidazione.poligoniAnomaliaSovrapposizioni" dataKey="id" [scrollable]="true"
+            scrollHeight="800px">
+            <ng-template pTemplate="header">
+              <tr>
+                <!--<th style="width: 3em"></th>
+                  <th style="width: 85px;" pSortableColumn="id">ANOMALIA</th>-->
+                <th style="width: 15px"></th>
+                <th pSortableColumn="id">ANOMALIA</th>
+                <th pSortableColumn="area">AREA (MQ)</th>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-expanded="expanded">
+              <tr>
+                <!--<td style="width: 30px;">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                  </a>
+                </td>
+                <td>
+                  {{rowData.id}}
+                </td>-->
+                <td style="width: 30px;">
+                </td>
+                <td>
+                  <div id="button-green-card" style="padding-top: 0px;">
+                    <span (click)="centerMap(rowData)" pTooltip="{{rowData.id}}" tooltipPosition="right">
+                      <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  {{rowData.area | areaFormatPipe}}
+                </td>
+                <!--<td>
+                  <div id="button-green-card" style="padding-top: 0px;">
+                    <span (click)="centerMap(rowData)" pTooltip="Centra in mappa" tooltipPosition="right">
+                      <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </td>-->
+              </tr>
+            </ng-template>
+
+            <!--<ng-template pTemplate="rowexpansion" let-problem>
+              <tr>
+                <td colspan="4">
+                  <div class="p-p-3">
+                    <p-table [value]="problem.workspaceDto" dataKey="id">
+                      <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="id">ID
+                </th>
+                <th pSortableColumn="uso">USO
+                </th>
+                <th pSortableColumn="area">AREA (MQ)
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+              <tr>
+                <td style="padding: 0px;">{{order.id}}</td>
+                <td>{{order.codUsoSuoloWorkspaceLavSuolo.codUsoSuolo}}</td>
+                <td>{{order.area | areaFormatPipe}}</td>
+                <td>
+
+                </td>
+              </tr>
+            </ng-template>
+
+          </p-table>
+  </div>
+  </td>
+  </tr>
+  </ng-template>-->
+
+          </p-table>
+
+        </ng-template>
+      </p-tabPanel>
+
+      <!-- POLIGONI CHE DEBORDANO DALL'AREA DI LAVORO -->
+      <p-tabPanel id="poligoni_sovrapposizioni_const" leftIcon="fas fa-bell button-problem-esito"
+        header={{poligoniErrorValidazione.poligoniAnomaliaDebordanoAreaDiLavoro.length}}
+        tooltip={{poligoni_debordano_area_di_lavoro_const.tooltip}}
+        *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniAnomaliaDebordanoAreaDiLavoro && poligoniErrorValidazione.poligoniAnomaliaDebordanoAreaDiLavoro.length>0">
+        <ng-template pTemplate="content">
+          <label>{{poligoni_debordano_area_di_lavoro_const.titolo}}</label>
+
+          <p-table [value]="poligoniErrorValidazione.poligoniAnomaliaDebordanoAreaDiLavoro" dataKey="id"
+            [scrollable]="true" scrollHeight="800px">
+
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 3em"></th>
+
+                <th pSortableColumn="id">ID</th>
+                <th pSortableColumn="area">AREA (MQ)</th>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-expanded="expanded">
+              <tr>
+                <td style="width: 30px;">
+                  <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                  </a>
+                </td>
+                <td style="width: 130px;">
+                  {{rowData.id}}
+                </td>
+                <td colspan="2">
+                  {{rowData.area | areaFormatPipe}}
+                </td>
+
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-problem>
+              <tr>
+                <td colspan="4">
+                  <div class="p-p-3">
+                    <p-table [value]="problem.anomaliaDto" dataKey="id">
+                      <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="id">ANOMALIA
+                </th>
+                <th pSortableColumn="area">AREA (MQ)
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-order>
+              <tr>
+                <td style="padding: 0px 0px 0px 20px;">
+                  <div id="button-green-card" style="padding-top: 0px;">
+                    <span (click)="centerMap(order)" pTooltip={{order.id}} tooltipPosition="right">
+                      <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                </td>
+                <td>{{order.area | areaFormatPipe}}</td>
+              </tr>
+            </ng-template>
+
+          </p-table>
+  </div>
+  </td>
+  </tr>
+  </ng-template>
+
+  </p-table>
+
+  </ng-template>
+  </p-tabPanel>
+
+  <p-tabPanel id="poligoni_errori_oracle_const" leftIcon="fas fa-bell button-problem-esito"
+    header={{poligoniErrorValidazione.poligoniAnomalieOracle.length}} tooltip={{poligoni_errori_oracle_const.tooltip}}
+    *ngIf="poligoniErrorValidazione && poligoniErrorValidazione.poligoniAnomalieOracle && poligoniErrorValidazione.poligoniAnomalieOracle.length>0">
+    <ng-template pTemplate="content">
+      <label>{{poligoni_errori_oracle_const.titolo}}</label>
+
+      <p-table [value]="poligoniErrorValidazione.poligoniAnomalieOracle" dataKey="id" [scrollable]="true"
+        scrollHeight="800px">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 15px"></th>
+            <th pSortableColumn="id">ID</th>
+            <th pSortableColumn="errore">ERRORE</th>
+            <th pSortableColumn="area">AREA (MQ)</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded">
+          <tr>
+            <td style="width: 30px;">
+              <a href="#" [pRowToggler]="rowData">
+                <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+              </a>
+            </td>
+            <td>
+              <div id="button-green-card" style="padding-top: 0px;">
+                <span (click)="centerMap(rowData)" pTooltip="{{rowData.id}}" tooltipPosition="right">
+                  <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                </span>
+              </div>
+            </td>
+            <td pTooltip="{{rowData.anomaliaDescrizione | slice:5}}">
+              {{rowData.anomaliaDescrizione | slice:0:5}}
+            </td>
+            <td style="text-align: right;">{{rowData.area | areaFormatPipe}}</td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="rowexpansion" let-problem>
+          <!--
+        <tr>
+          <td colspan="4">
+            <div class="p-p-3">
+              <p-table [value]="problem.anomaliaDto" dataKey="id">
+                <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">Anomalia
+          </th>
+          <th pSortableColumn="area"  style="text-align: right;">AREA (MQ)
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr *ngIf="order.tipoAnomalia == 'ERRORI_ORACLE'">
+          <td><div id="button-green-card" style="padding-top: 0px;margin-left: 15px;">
+              <span (click)="centerMap(order)" pTooltip="{{order.id}}" tooltipPosition="right">
+                <i class="fa fa-crosshairs" aria-hidden="true"></i>
+              </span>
+            </div>
+          </td>
+          <td style="text-align: right;">{{order.area | areaFormatPipe}}</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+    </div>
+    </td>
+    </tr>
+  -->
+          <tr>
+            <td colspan="4">
+              <div class="p-p-3">
+                <p-table [value]="problem.anomaliaDto" dataKey="id">
+                  <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="id">SUGGERIMENTO
+            </th>
+            <th pSortableColumn="area" style="text-align: right;">AREA (MQ)
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr
+            *ngIf="order.tipoAnomalia == 'ERRORI_ORACLE_CORRETTI_CON_SCOSTAMENTO_AREA' || order.tipoAnomalia == 'ERRORI_ORACLE'">
+            <td>
+              <div id="button-green-card" style="padding-top: 0px;margin-left: 15px;">
+                <span (click)="centerMap(order)" pTooltip="{{order.id}}" tooltipPosition="right">
+                  <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                </span>
+              </div>
+            </td>
+            <td style="text-align: right;">{{order.area | areaFormatPipe}}</td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      </div>
+      </td>
+      </tr>
+
+    </ng-template>
+
+    </p-table>
+
+    </ng-template>
+  </p-tabPanel>
+
+
+  </p-tabView>
+  </div>
+</p-sidebar>

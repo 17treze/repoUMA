@@ -1,0 +1,84 @@
+
+  <div class="boxgrey">
+    <h3>
+          {{textTitle}}
+    </h3>
+    <div class="ui-g">
+      <div class="ui-g-3 box-padded ">
+        <strong>{{labels.cognome}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.cognome}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.sesso}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.sesso}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.nome}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.nome}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.residenza}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.residenza.indirizzo}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.codiceFiscale}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.codiceFiscale}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.residenzaComune}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.residenza.comune}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.dataNascita}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.dataNascita}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.residenzaCAP}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.residenza.CAP}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.comuneNascita}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.comuneNascita}}
+      </div>
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.residenzaProvincia}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.residenza.provincia}}
+      </div>
+      <div class="ui-g-3 box-padded">
+          <strong>{{labels.provinciaNascita}}</strong>
+        </div>
+        <div class="ui-g-3 box-padded">
+          {{richiedente.provinciaNascita}}
+      </div>      
+      <div class="ui-g-3 box-padded">
+        <strong>{{labels.carica}}</strong>
+      </div>
+      <div class="ui-g-3 box-padded">
+        {{richiedente.carica}}
+      </div>
+    </div>
+  </div>
+
+
+
+  <app-step-action (next)="conferma()"></app-step-action>

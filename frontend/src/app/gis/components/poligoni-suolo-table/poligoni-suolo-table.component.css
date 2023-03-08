@@ -1,0 +1,103 @@
+#custom-dialog-csv>div>div.ui-dialog-titlebar.ui-widget-header {
+    position: relative;
+    text-align: left;
+    font-size: 13px;
+    padding-bottom: 0;
+}
+
+.alert-custom-dialog {
+    background: #ededed;
+    font-size: 14px;
+    margin-top: 40px;
+}
+
+#custom-dialog-csv>div>div>div.ui-dialog-titlebar>span {
+    padding-left: 0px !important;
+}
+
+.alert-custom-dialog span {
+    display: flow-root;
+    padding: 8px;
+}
+
+#custom-dialog-csv>div>div.ui-dialog-content.ui-widget-content {
+    padding-top: 0;
+}
+
+.tab120 {
+    max-width: 120px;
+}
+
+.tab80 {
+    max-width: 80px;
+}
+
+.tab200 {
+    max-width: 200px;
+}
+
+.truncate-text {
+    overflow: hidden !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.btn-white-table {
+    border: 1px solid #00985b !important;
+    background: #fff !important;
+    padding: 11px 37px !important;
+    color: #00985b !important;
+    font-weight: 600;
+}
+
+.btn-white-table:hover,
+.btn-white-table:focus {
+    border: 1px solid #00985b !important;
+    background: #00985b !important;
+    color: #fff !important;
+}
+
+.content-suolo-table::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.content-suolo-table::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+
+.content-suolo-table::-webkit-scrollbar {
+    width: 7px;
+}
+
+.content-suolo-table {
+    height: 275px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thead-suolo-table {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00985b;
+    padding: 5px;
+}
+
+.tbody-suolo-table .row {
+    border-bottom: 2px solid #e8ebee;
+}
+
+#overlayCustomDialog {
+    position: fixed;
+    top: -5px;
+    left: -1000px;
+    height: 4000px;
+    width: 9000px;
+    z-index: 9998;
+    background-color: #171717b8;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}

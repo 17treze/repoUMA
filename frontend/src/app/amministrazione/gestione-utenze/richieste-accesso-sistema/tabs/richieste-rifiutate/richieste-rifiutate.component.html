@@ -1,0 +1,59 @@
+<app-motivazione-rifiuto-dialog #motivazioneRifiutoDialog [richiestaAccessoCorrente]="richiestaAccessoCorrente"
+  [istruttoriaDomandaCorrente]="istruttoriaDomandaCorrente" (displayChange)="onDialogClose($event)">
+</app-motivazione-rifiuto-dialog>
+<div class="ui-grid-fixed boxgrey">
+  <div class="layout-actionmenu  layout--gestione-utenze">
+    <h3 class="mb-3">{{ 'gestioneUtenze.RIFIUTATE' | translate }}</h3>
+    <p-table #table [columns]="cols" [value]="this.paginaDomande.risultati" [autoLayout]="true" [sortField]="proprieta"
+      [totalRecords]="this.paginaDomande.count" [paginator]="true" [first]="numeroPagina * elementiPerPagina"
+      (onLazyLoad)="getElencoRichieste($event)" [rows]="elementiPerPagina" [lazy]="true" [responsive]="true"
+      class="table--gestione-utenze">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+            <strong>{{ col.header }}</strong>
+            <p-sortIcon *ngIf="col.field" [field]="col.header"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-richieste let-i="rowIndex">
+        <tr [pSelectableRow]="richieste">
+          <td>{{ richieste.idProtocollo }}</td>
+          <td>{{ richieste.dataProtocollazione | date : 'dd/MM/yyyy'}}</td>
+          <td>{{ richieste.dataRifiuto | date : 'dd/MM/yyyy'}}</td>
+          <td>{{ richieste.datiAnagrafici.nome}}</td>
+          <td>{{ richieste.datiAnagrafici.cognome}}</td>
+          <td>{{ richieste.datiAnagrafici.codiceFiscale}}</td>
+          <td style="text-align: center">
+            <img src="assets/img/icons/phone.png" alt="phone" pTooltip="{{ richieste.datiAnagrafici.telefono }}"
+              tooltipPosition="left" tooltipStyleClass="tooltip--white" class="mr-4" />
+            <img src="assets/img/icons/mail.png" alt="phone" pTooltip="{{ richieste.datiAnagrafici.email }}"
+              tooltipStyleClass="tooltip--white" tooltipPosition="right" />
+          </td>
+          <td style="width:auto">
+            <div class="ui-g icon-action actions--gestione-utenze">
+              <div>
+                <p-button title="{{ intestazioni.dettaglioDomanda }}" (click)="viewDetail(richieste.id)">
+                  <img src="assets/img/icons/eye.png" alt="eye" />
+                </p-button>
+              </div>
+              <div>
+                <p-button title="{{ intestazioni.DETTAGLIO_RIFIUTO }}"
+                  (click)="showMotivazioneRifiutoDialog(richieste)">
+                  <img src="assets/img/icons/align-left.png" alt="align-left" />
+                </p-button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length + 2">
+            {{ intestazioni.noTableContent }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

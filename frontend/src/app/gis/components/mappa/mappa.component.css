@@ -1,0 +1,81 @@
+body {
+    overflow: hidden;
+}
+.map-container {
+    height: 93vh;
+    background: #ffffff;
+}
+
+.ol-zoom {
+  display: none;
+}
+
+.ol-scale-line {
+  left: 65px;
+  bottom: 40px;
+  position: fixed;
+  background: rgb(80 140 116)!important;
+}
+
+/**** custom ****/
+app-map {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 2em;
+    width: 100%;
+  }
+#map1 {
+  width: 80%;
+  right: 0;
+  left: auto;
+}
+
+#display1 {
+  width: 20%;
+  right: auto;
+  left: 0;
+}
+
+.ctrl {
+  position: fixed;
+  right: 0;
+  background: #fff;
+}
+.ctrl >>> .ol-bookmark div {
+  display: block!important;
+}
+
+app-mouse-position {
+  position: absolute;
+  bottom:0;
+  left: 0;
+  right: 0;
+  font-size: 1.5em;
+  text-align: center;
+  font-family: sans-serif;
+}
+app-mouse-position >>> div {
+  bottom: 0;
+  top: auto;
+  left: 0;
+}
+
+.editToolbar-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ol-attribution {
+  right: 60px;
+  bottom: 55px;
+}
+
+.ol-control button {
+  background-color: #0d5f3fb8;
+}
+
+.ol-control button:hover, .ol-control button:focus {
+  background-color: #0d5f3f;
+}
+

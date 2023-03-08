@@ -1,0 +1,174 @@
+<div id="confirm" *ngIf='datiUtente'>
+    <p-dialog #dialog [(visible)]="display" width="900" modal="true" appendTo="body" closable="true"
+               closeOnEscape="true" [focusOnShow]="false"
+               [contentStyle]="{ 'overflow': 'auto', 'max-height': '750px' }">
+  
+      <form [formGroup]="profiloUtenteFormGroup">
+        <div class="d-flex align-items-center p-3 bg-success text-white">
+          <strong class="mr-3">{{ datiUtente.nome + ' ' + datiUtente.cognome }}</strong>
+          <span class="mr-1">{{ labels.codiceFiscale.toLowerCase() }}</span>
+          <span>{{datiUtente.codiceFiscale}}</span>
+        </div>
+        <div class="popup-box">
+          <h4 class="popup-box__head">
+            <i class="pi pi-cog"></i>
+            <span>{{ labels.configurazioneProfili }}</span>
+          </h4>
+          <div class="popup-box__body">
+            <p-panel>
+              <p-header class="d-flex align-items-center">
+                <img src="assets/layout/images/misure_strutturali.png" alt="x" />
+                <span class="ui-panel-title">{{ labels.nuovoSistemaInformativoAgricoltura }}</span>
+              </p-header>
+              <div *ngFor="let pp of responsabilitaPresentationSingleProfile">
+                <div *ngFor="let profilo of pp['profili']">
+                  <div *ngIf="profilo.identificativo == 'caa'; else selezionaProfilo">
+                    <div class="checkbox--top-level profile-checkbox">
+                      <p-checkbox binary="false" [label]="profilo.descrizione"
+                        (onChange)="enableDisableProfileInput(profilo.id, $event.checked)"
+                        [formControl]="profiloUtenteFormGroup.controls[profilo.id]">
+                      </p-checkbox>
+                      <span>
+                        <p-checkbox #isSuspended binary="false" label="{{ 'sospendi' | translate }}"
+                          [formControl]="profiloUtenteFormGroup.controls['disabled-' + profilo.id]"
+                          (onChange)="disableInput(profilo, $event.checked)">
+                        </p-checkbox>
+                        <i 
+                        [className]="isSuspended.checked ? 'pi pi-lock' : 'pi pi-unlock'"></i>
+                      </span>
+                    </div>
+                    <div *ngIf="profiloUtenteFormGroup.controls[profilo.id].value && !profiloUtenteFormGroup.controls['disabled-' + profilo.id].value"
+                      style="margin-bottom: .5em">
+                      <p-tree *ngIf="entiCaaTreeNode" class="profile-checkbox"
+                        [value]="entiCaaTreeNode" selectionMode="checkbox" [(selection)]="selectedSediNodes"
+                        [style]="{width: '100%'}">
+                      </p-tree>
+                    </div>
+                  </div>
+                  <ng-template #selezionaProfilo>
+                    <div class="checkbox--top-level profile-checkbox">
+                      <p-checkbox binary="false"
+                        [formControl]="profiloUtenteFormGroup.controls[profilo.id]"
+                        (onChange)="enableDisableProfileInput(profilo.id, $event.checked)"
+                        [label]="profilo.descrizione">
+                      </p-checkbox>
+                      <span>
+                        <p-checkbox #isSuspended binary="false" label="{{ 'sospendi' | translate }}"
+                          [formControl]="profiloUtenteFormGroup.controls['disabled-' + profilo.id]"
+                          (onChange)="disableInput(profilo, $event.checked)">
+                        </p-checkbox>
+                        <i 
+                        [className]="isSuspended.checked ? 'pi pi-lock' : 'pi pi-unlock'"></i>
+                      </span>
+                    </div>
+                    <div
+                        *ngIf="profiloUtenteFormGroup.controls[profilo.id].value && profilo.identificativo == 'azienda'">
+                        <div *ngFor="let azienda of datiUtente.aziende">
+                          <span><b>{{ labels.cuaaSigla }}</b> {{ azienda.cuaa }}</span>
+                        </div>
+                    </div>
+                    <div class="pl-2"
+                      *ngIf="profiloUtenteFormGroup.controls[profilo.id].value && profilo.identificativo == 'operatore_distributore'">
+                      <strong>{{ 'gestioneUtenze.distributori' | translate }} </strong>
+                      <br>
+                      <ng-container *ngFor="let distributor of datiUtente.distributori">
+                          {{ distributor.denominazioneAzienda }} - {{ distributor.comune }}, 
+                      </ng-container>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+  
+              <p-accordion *ngFor="let pp of responsabilitaPresentationMultiProfile">
+                  <p-accordionTab [header]="labels[pp.responsabilita]" [selected]="false">
+                    <div class="multiprofile-disable-button">
+                      <span>
+                        <p-checkbox #isSuspended binary="false" label="{{ 'sospendi' | translate }}"
+                          (onChange)="disableInputList(pp['profili'], $event.checked, 'disabled-MultiProfileInput')"
+                          [formControl]="profiloUtenteFormGroup.controls['disabled-MultiProfileInput']">
+                        </p-checkbox>
+                        <i 
+                        [className]="isSuspended.checked ? 'pi pi-lock' : 'pi pi-unlock'"></i>
+                      </span>
+                    </div>
+                    <div>
+                      <div *ngFor="let profilo of pp['profili']">
+                        <span>
+                          <p-checkbox binary="false"
+                            [formControl]="profiloUtenteFormGroup.controls[profilo.id]"
+                            (onChange)="enableDisableProfileInputByControlsList(profilo.id, pp['profili'], $event.checked)"
+                            [label]="profilo.descrizione">
+                          </p-checkbox>
+                        </span>
+                      </div>
+                    </div>
+                  </p-accordionTab>
+              </p-accordion>
+  
+              <p-accordion *ngFor="let pp of responsabilitaPresentationSingleProfileNoRuoli">
+                <p-accordionTab *ngFor="let profilo of pp['profili']" [header]="pp.profili[0].descrizione"
+                  [selected]="false" [disabled]="true">
+                </p-accordionTab>
+              </p-accordion>
+            </p-panel>
+          </div>
+        </div>
+        
+        <div class="popup-box" *ngIf="isDisplayMotivation()">
+          <h4 class="popup-box__head">
+              <i class="pi pi-plus-circle"></i>
+              <span>{{ 'RICERCA_UTENTE.motivazioneAttivita' | translate }} *</span>
+          </h4>
+          <div class="popup-box__body">
+            <div class="ui-g">
+              <div class="ui-g-4">
+                  <p-radioButton name="motivazioneDisattivazioneGruppo"
+                    value="ALTRO"
+                    label="{{ 'gestioneUtenze.ALTRO' | translate }}"
+                    [formControl]="profiloUtenteFormGroup.controls['motivazioneDisattivazione']">
+                  </p-radioButton>
+                </div>
+                <div class="ui-g-4">
+                  <p-radioButton name="motivazioneDisattivazioneGruppo"
+                    value="PENSIONAMENTO"
+                    label="{{ 'gestioneUtenze.PENSIONAMENTO' | translate }}"
+                    [formControl]="profiloUtenteFormGroup.controls['motivazioneDisattivazione']">
+                  </p-radioButton>
+                </div>
+                <div class="ui-g-4">
+                  <p-radioButton name="motivazioneDisattivazioneGruppo"
+                    value="FINE_RAPPORTO"
+                    label="{{ 'gestioneUtenze.FINE_RAPPORTO' | translate }}"
+                    [formControl]="profiloUtenteFormGroup.controls['motivazioneDisattivazione']">
+                  </p-radioButton>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="popup-box">
+          <h4 class="popup-box__head">
+            <i class="pi pi-plus-circle"></i>
+            <span>{{ 'RICERCA_UTENTE.variazioniRichiesta' | translate }}</span>
+          </h4>
+          <div class="popup-box__body">
+            <textarea [rows]="3" style="width: 100%" autoResize="autoResize"
+              [formControl]="profiloUtenteFormGroup.controls['variazioniRichiesta']" required></textarea>
+          </div>
+        </div>
+  
+        <hr class="my-3">
+        <div class="row">
+          <div class="col-6">
+            <button pButton type="button" [label]="labels.ANNULLA" class="annulla  btn--text"
+              (click)="onClose()"></button>
+          </div>
+          <div class="col-6">
+            <div class="next-button">
+              <button pButton class="salva" type="button" [label]="labels.salva" (click)="onSave()"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+  

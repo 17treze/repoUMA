@@ -1,0 +1,148 @@
+<div class="ui-grid-fixed">
+  <div class="ui-g-12 boxgrey">
+    <p-toast
+      key="tst"
+      [style]="{marginTop: '70px'}">
+    </p-toast>
+    <div class="ui-g-12">
+      <div class="layout-actionmenu">
+        <div
+          class="table-responsive"
+          style="margin-top:20px; display: block">
+          <p-table
+            #table
+            [columns]="cols"
+            [value]="richiesteListTable.risultati"
+            expandableRows="true"
+            [autoLayout]="true"
+            [totalRecords]="richiesteListTable.count"
+            [paginator]="true"
+            (onLazyLoad)="changePage($event)"
+            [rows]="elementiPerPagina"
+            [responsive]="true"
+            dataKey="cuaa"
+            [lazy]="true">
+            <ng-template
+              pTemplate="header"
+              let-columns>
+              <tr>
+                <th
+                  *ngFor="let col of columns"
+                  [pSortableColumn]="col.field"
+                  [pSortableColumnDisabled]="col.field == null">
+                  <strong>{{col.header}}</strong>
+                  <p-sortIcon
+                    [field]="col.field"
+                    *ngIf="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-cert
+              let-expanded="expanded"
+              let-i="rowIndex">
+              <tr [pSelectableRow]="cert">
+                <td>
+                  <a
+                          href="#"
+                          [pRowToggler]="cert">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                  </a>
+                </td>
+                <td>{{ cert.cuaa }}</td>
+                <td>{{ cert.denominazioneAzienda }}</td>
+                <td>{{ cert.denominazioneSportelloCaa }}</td>
+                <td>{{ cert.sedeSportelloCaa }}</td>
+                <td>
+                  {{ (cert.dataSottoscrizione | date:'dd-MM-yyyy') }}
+                </td>
+                <td style="text-align: center">
+                  <div
+                    style="display: inline"
+                    class="ui-g icon-action actions--gestione-utenze">
+                    <div>
+                      <i
+                        *ngIf="richiestaRevocaSupport.isAccettata(cert.esito)"
+                        title="Accettata"
+                        style="font-size: xx-large; vertical-align: sub;"
+                        class="pi pi-check">
+                      </i>
+                      <i
+                        *ngIf="richiestaRevocaSupport.isRifiutata(cert.esito)"
+                        title="Rifiutata"
+                        style="font-size: xx-large; vertical-align: sub;"
+                        class="pi pi-ban">
+                      </i>
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align: center">
+                  <div
+                          style="display: inline">
+                    <div>
+                      <p-button (click)="downloadRichiesta(cert)" [style]="{backgroundColor: 'white'}">
+                        <i
+                                title="Download documento revoca immediata"
+                                style="font-size: xx-large; vertical-align: sub; background-color: white; color: black"
+                                class="pi pi-download">
+                        </i>
+                      </p-button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+                    pTemplate="rowexpansion"
+                    let-cert
+                    let-columns="columns"
+                    let-rowIndex="rowIndex">
+              <ng-template [ngIf]="cert">
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    <tbody>
+                      <tr>
+                        <th *ngIf="richiestaRevocaSupport.isAccettata(cert.esito)"> Dati richiesta revoca immediata accettata:</th>
+                        <th *ngIf="richiestaRevocaSupport.isRifiutata(cert.esito)"> Dati richiesta revoca immediata rifiutata:</th>
+                        <th></th>
+                      </tr>
+                      <tr>
+                        <td *ngIf="richiestaRevocaSupport.isAccettata(cert.esito)"> Motivo accettazione:</td>
+                        <td *ngIf="richiestaRevocaSupport.isRifiutata(cert.esito)"> Motivo rifiuto:</td>
+                        <td>{{
+                          cert?.causaRichiesta
+                                  ? cert.causaRichiesta
+                                  : ("ND" | translate)
+                          }}</td>
+                      </tr>
+                      <tr>
+                        <td *ngIf="richiestaRevocaSupport.isAccettata(cert.esito)"> Data accettazione:</td>
+                        <td *ngIf="richiestaRevocaSupport.isRifiutata(cert.esito)"> Data rifiuto:</td>
+                        <td>{{
+                          cert?.dataSottoscrizione
+                                  ? (cert.dataSottoscrizione | date: 'dd/MM/yyyy')
+                                  : ("ND" | translate)
+                          }}</td>
+                      </tr>
+                    </tbody>
+                  </td>
+                </tr>
+              </ng-template>
+            </ng-template>
+
+            <ng-template
+              pTemplate="emptymessage"
+              let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length">
+                  {{ intestazioni.elencoVuotoRichiestaRevocaValutate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.librofondiario.regione.taa.it/LibroFondiarioFaultType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.librofondiario.regione.taa.it/LibroFondiarioFaultType/schemas" xmlns:ex="http://www.regione.taa.it/FaultType/schemas">
+  <xs:import namespace="http://www.regione.taa.it/FaultType/schemas" schemaLocation="ParticellaPortType.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene le eccezioni specifiche dei servizi del libro fondiario</xs:documentation>
+  </xs:annotation>
+  <xs:complexType final="restriction" name="PartitaTavolareEstintaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su una partita tavolare estinta.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="NessunaProprietaAllaDataFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se ad una certa data non vi e' alcuna proprieta' valida su di un certo bene.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="SoggettoNullaTenenteFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se un soggetto non ha attualmente alcuna proprieta'.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="SoggettoAmbiguoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata non si riesce ad individuare un soggetto univocamente.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="DecretoNonEvasoFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su un decreto tavolare che non e' stato ancora evaso.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="DecretoSenzaIscrizioniFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su un decreto tavolare che non ha iscrizioni.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="DecretoSenzaDivisioniFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su un decreto tavolare che non e' relativo a divisioni materiali.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="DecretoSenzaFrazionamentiFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su un decreto tavolare che non e' relativo a frazionamenti.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="PorzioneMaterialeEstintaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni su una particella estinta.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType final="restriction" name="ParticellaEdificialeDivisaFaultType">
+    <xs:annotation>
+      <xs:documentation>Fault che viene sollevata se si richiedono informazioni di piu' situazioni sulle iscrizioni di una particella edificiale che nel periodo di interesse e' o e' stata divisa.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ex:CustomFaultType"/>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PartitaTavolareEstintaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:PartitaTavolareEstintaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NessunaProprietaAllaDataFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:NessunaProprietaAllaDataFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SoggettoNullaTenenteFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:SoggettoNullaTenenteFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SoggettoAmbiguoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:SoggettoAmbiguoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecretoNonEvasoFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:DecretoNonEvasoFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecretoSenzaIscrizioniFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:DecretoSenzaIscrizioniFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecretoSenzaDivisioniFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:DecretoSenzaDivisioniFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DecretoSenzaFrazionamentiFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:DecretoSenzaFrazionamentiFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PorzioneMaterialeEstintaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:PorzioneMaterialeEstintaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticellaEdificialeDivisaFault">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="error" type="tns:ParticellaEdificialeDivisaFaultType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,7 @@
+<div [class]="isGis ? 'cont-breadcrumb-gis' : 'cont-breadcrumb'" *ngIf="breadcrumbsPresente()">
+  <div [class]="isGis ? 'ui-grid grid-gis' : 'ui-grid-fixed'">
+    <p-breadcrumb
+      [model]="breadcrumbs"
+      [home]="home"></p-breadcrumb>
+  </div>
+</div>

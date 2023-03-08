@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">	
+
+<!--changeSet per package A4SP_VALIDITA_ORACLE-->
+	<changeSet id="ISTANZARIESAME_S36.02_fix" author="Bettina Irler">
+		<sql endDelimiter="?" splitStatements="true">
+			create or replace PACKAGE A4SP_VALIDITA_ORACLE as
+			a4s_tol number := 0.005;
+			   procedure fixWorkspace(pid number, ptolleranza number default a4s_tol);
+			   procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol);
+			   procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) ;
+			   procedure insertOracleErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol);
+			END A4SP_VALIDITA_ORACLE;
+			?
+			
+	create or replace PACKAGE BODY A4SP_VALIDITA_ORACLE is
+	     procedure fixWorkspace(pid number, ptolleranza number default a4s_tol) as
+	   begin 
+        insert into A4ST_WORKSPACE_LAV_SUOLO 
+	    select nxtnbr.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA, SDO_GEOM.SDO_AREA(shape, ptolleranza) AREA,ID_GRID,ISTATP,CAMPAGNA from (
+	    select VERSIONE, ID_LAVORAZIONE, SDO_CUSTOM.SDO_FIX(shape, ptolleranza) shape, COD_USO_SUOLO, STATO_COLT, NOTE, DATA_ULTIMA_MODIFICA,ID_GRID,ISTATP,CAMPAGNA from A4ST_WORKSPACE_LAV_SUOLO where id = pid
+	    );
+
+	    delete from A4ST_WORKSPACE_LAV_SUOLO where id = pid;
+	    commit;
+	end;
+
+    procedure insertFixedWorkspaceAnomalies (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol) as
+	   begin 
+	    INSERT ALL
+	    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+	    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID_WORKSPACE, NXTNBR.nextval)
+	    (
+	    select  0 VERSIONE, ID_LAVORAZIONE, SHAPE_NEW AS SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA, 
+	    sdo_geom.sdo_area(SHAPE_NEW, ptolleranza) AREA, ID ID_WORKSPACE
+				from
+				(  select T.*, SDO_GEOMETRY(I.SDO_GTYPE, I.SDO_SRID, I.SDO_POINT, I.SDO_ELEM_INFO, I.SDO_ORDINATES) SHAPE_NEW
+					from  A4ST_WORKSPACE_LAV_SUOLO T 
+					cross join table(SDO_UTIL.EXTRACT_ALL(sdo_custom.sdo_fix(t.shape, ptolleranza), 0)) I 
+	                 where id = pid
+				));
+	    commit;
+        insertOracleErrors(pid, 'ERRORI_ORACLE', dettaglioAnomalia, ptolleranza);
+	end;
+
+    procedure insertNotFixedWorkspaceErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol)  as
+    begin
+        INSERT ALL
+        INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA)
+        INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+        (
+        select  ID, 0 VERSIONE, ID_LAVORAZIONE, SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA , sdo_geom.sdo_area(shape, ptolleranza) area
+        from  A4ST_WORKSPACE_LAV_SUOLO T where id = pid
+                );
+        commit;
+        insertOracleErrors(pid, 'ERRORI_ORACLE', dettaglioAnomalia, ptolleranza);
+    end;
+
+    procedure insertOracleErrors (pid number, tipoAnomalia varchar2, dettaglioAnomalia varchar2, ptolleranza number default a4s_tol)  as
+
+    pGeometry SDO_GEOMETRY;
+    pIdLavorazione number; 
+    erroreValidazione varchar2(10);
+    area number(20,5) := 0;
+    i number := 0;
+    pDettaglio varchar2(4000);
+    pcontext varchar2(1000);
+    pcontextEl varchar2(1000);
+    geomElement SDO_GEOMETRY;
+    contextRestoEl varchar2(1000);
+    numElemCorrente varchar2(1000);
+
+    function mySubstring(stringInput varchar2, findStart varchar2, findEnd varchar2) return varchar2 as
+        posStart number;
+        posEnd number;
+        substring varchar2(4000) := '';
+    begin 
+        if findStart is not null then
+            posStart := instr(stringInput, findStart);
+            if(posStart &gt; 0) then 
+                if findEnd is not null then
+                    posEnd := instr(stringInput, findEnd, posStart);
+                    --dbms_output.put_line('stringInput ' || stringInput || ' ' || (posStart + length(findStart)) || ' ' || (posEnd - (posStart + length(findStart))));
+                    substring := substr(stringInput, posStart + length(findStart), posEnd - (posStart + length(findStart))); 
+                else
+                    substring := substr(stringInput, posStart + length(findStart));
+                end if;
+            end if;
+        else
+            if findEnd is not null then
+                posEnd := instr(stringInput, findEnd);
+                substring := substr(stringInput, 0, posEnd -1); 
+            else
+                substring := stringInput;
+            end if;
+
+        end if;
+        return trim(substring);
+    end;
+
+    procedure getErroriValCoordinate(geomIn sdo_geometry, numEl number, pIdPoligono  number, contextIn varchar) as 
+        coord varchar2(100);
+        ring varchar2(100);
+        pos number;
+        geomRing sdo_geometry;
+        geomCoord sdo_geometry;
+        startX  number(20, 6);
+        startY  number(20, 6);
+        vertexCount number;
+    begin
+        coord := mySubstring(contextIn, 'Coordinate &lt;', '&gt;');
+        ring := mySubstring(contextIn, 'Ring &lt;', '&gt;');
+
+         geomRing:= SDO_UTIL.EXTRACT(geomIn, numEl, ring);   
+         -- se ring esterno (ovvero ring 1) l'ordine dei vertici è corretto, altrimenti l'ordine viene invertito da EXTRACT e quindi devo prendere edge "invertito" 
+        if (ring = 1) then 
+            select x, y into startX, startY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = coord;
+        else
+            vertexCount := (SDO_UTIL.GETNUMVERTICES(geomRing));
+            select x, y into startX, startY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = (vertexCount - coord);
+        end if;
+
+        geomCoord := sdo_geometry(2001, geomIn.SDO_SRID , SDO_POINT_TYPE(startX, startY, NULL), NULL, NULL);
+
+        -- Inserisce vertice in errore
+        INSERT ALL
+        INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+            values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, null)
+        INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+            values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+        (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomCoord SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+        commit;
+    end;
+
+    function getEdge(geomIn in sdo_geometry, numEl in varchar, numRing in varchar2, numEdge in varchar2) return sdo_geometry as
+        startX  number(20, 6);
+        startY  number(20, 6);
+        endX  number(20, 6);
+        endY  number(20, 6);
+        geomRing sdo_geometry;
+        geomEdge sdo_geometry;
+        vertexCount number;
+    begin 
+        geomRing:= SDO_UTIL.EXTRACT(geomIn, numEl, numRing);
+         -- se ring esterno (ovvero ring 1) l'ordine dei vertici è corretto, altrimenti l'ordine viene invertito da EXTRACT e quindi devo prendere edge "invertito" 
+        if (numRing = 1) then 
+            select x, y into startX, startY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = numEdge;
+            select x, y into endX, endY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = numEdge + 1;
+        else
+            vertexCount := (SDO_UTIL.GETNUMVERTICES(geomRing));
+            select x, y into startX, startY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = (vertexCount - numEdge);
+            select x, y into endX, endY from TABLE(SDO_UTIL.GETVERTICES(geomRing)) where id = (vertexCount - numEdge + 1);
+        end if;
+
+        geomEdge := sdo_geometry(2002, geomIn.SDO_SRID, NULL,
+                                sdo_elem_info_array (1,2,1),
+                                sdo_ordinate_array (startX,startY,endX,endY));
+
+        return geomEdge;                        
+    end;
+
+    procedure getIntersections(geomIn1 sdo_geometry, geomIn2 sdo_geometry, pIdPoligono number, contextIn varchar) as
+        geomEdgeIntersect sdo_geometry;
+        gtype varchar2(10);
+    begin
+
+        geomEdgeIntersect := SDO_CUSTOM.SDO_INTERSECTION_LINE(geomIn1, geomIn2 , true, pTolleranza);
+
+        if(geomEdgeIntersect is not null) then              
+            select geomEdgeIntersect.Get_GType() into gtype from dual;
+
+            if(gtype =1) then 
+                gtype := 'P';
+            elsif (gtype = 2) then
+                gtype := 'L';
+            else
+                gtype := 'A';
+            end if; 
+
+            -- Inserisce intersezione degli edge in errore
+            INSERT ALL
+            INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+                values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, null)
+            INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+                values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+            (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomEdgeIntersect SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+            commit;
+        end if;
+    end;
+
+    procedure getErroriValRings(geomIn sdo_geometry, numEl number, pIdPoligono number, contextIn varchar) as
+        listaRings varchar2(500);
+        numRing  varchar2(500);
+        listaEdge varchar2(500);
+        numEdge varchar2(500);
+        geomEdge sdo_geometry := null;
+        geomEdge1 sdo_geometry := null;
+        geomEdgeIntersect sdo_geometry;
+        pDettaglio varchar2(100);
+        lenght number(10,6);
+    begin
+        -- es. pcontext = '[Rings 1, 2][Edge &lt;3&gt; in ring &lt;1&gt;][Edge &lt;7&gt; in ring &lt;2&gt;]';
+        listaRings := trim(replace(contextIn, '[Rings ', ''));   
+        listaRings := replace(trim(substr(listaRings, 0, instr(listaRings, '][')-1)), ' ', '');
+        -- es. listaRings = '1, 2';
+
+        listaEdge := trim(substr(contextIn, instr(contextIn, '[Edge ')));
+        listaEdge := trim(replace(replace(trim(replace(listaEdge, '][', '*')), '[', ''), ']', '')); 
+        listaEdge := replace(listaEdge, 'Edge', '');
+        listaEdge := replace(listaEdge, 'in ring', 'R');
+        listaEdge := replace(replace(replace(listaEdge, '&gt;', ''), '&lt;', ''), ' ', '');
+        -- es. listaEdge = '3R1*7R2';
+
+        FOR ring in (select regexp_substr(listaRings,'[^,]+', 1, level) r from dual a
+        connect by regexp_substr(listaRings, '[^,]+', 1, level) is not null) loop
+            -- es. ring.r = 1
+            FOR edgeRing in (select regexp_substr(listaEdge,'[^*]+', 1, level) r from dual a
+            connect by regexp_substr(listaEdge, '[^*]+', 1, level) is not null) loop 
+                -- es. edgeRing.r = 3R1
+                numRing := trim(substr(edgeRing.r, instr(edgeRing.r, 'R') + 1));
+                -- es. numRing = 1
+                if(numRing = ring.r) then 
+                    numEdge := trim(substr(edgeRing.r, 0, instr(edgeRing.r, 'R') - 1)); 
+                    geomEdge := getEdge(geomIn, numEl, numRing, numEdge); 
+                    lenght := sdo_geom.sdo_length(geomEdge, pTolleranza);
+
+                    /* -- Inserisce edge errati (si è deciso di non inserirli)
+                    INSERT ALL
+                    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+                        values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, null)
+                    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+                        values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+                    (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomEdge SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+                    commit;
+                    */
+
+                    if(geomEdge1 is null) then 
+                        geomEdge1 := geomEdge;
+                    else
+                        getIntersections(geomEdge, geomEdge1, pIdPoligono, contextIn);
+                    end if;
+                end if;
+            end loop;
+        end loop;
+        commit;
+    END ;
+
+    procedure getErroriValRing(geomIn sdo_geometry, numEl number, pIdPoligono number, contextIn varchar) as
+        pcontextRing varchar2(1000);
+        numRing varchar2(10);
+        numEdge varchar2(10);
+        pcontextRingResto varchar2(1000);
+        pcontextEdge  varchar2(1000);
+        geomRing sdo_geometry;
+        geomEdge sdo_geometry;
+        geomEdge1 sdo_geometry;
+    begin
+        pcontextRing := replace(contextIn, '[Ring &lt;', '*'); 
+        FOR ring in (select regexp_substr(pcontextRing,'[^*]+', 1, level) r from dual a
+        connect by regexp_substr(pcontextRing, '[^*]+', 1, level) is not null) loop
+            --dbms_output.put_line(ring.r);
+            numRing := mySubstring(ring.r, null, '&gt;');
+            pcontextRingResto := trim(mySubstring(ring.r, '&gt;]', null));
+
+            if(length(pcontextRingResto) = 0 or pcontextRingResto is null) then
+                geomRing := SDO_UTIL.EXTRACT(geomIn, numEl, numRing);
+                area := sdo_geom.sdo_area(geomRing, pTolleranza);
+
+                -- Inserisce Ring errato
+                INSERT ALL
+                INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+                    values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, sdo_geom.sdo_area(SHAPE, ptolleranza))
+                INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+                    values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+                (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomRing SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+                commit;
+
+            else
+                if(INSTR(pcontextRingResto, '[Edge &lt;') &gt; 0) then 
+                    pcontextEdge := replace(pcontextRingResto, '[Edge &lt;', '*'); 
+                    FOR edge in (select regexp_substr(pcontextEdge,'[^*]+', 1, level) r from dual a
+                    connect by regexp_substr(pcontextEdge, '[^*]+', 1, level) is not null) loop
+                        numEdge := mysubstring(edge.r, null, '&gt;'); 
+                        geomEdge := getEdge(geomIn, numEl, numRing, numEdge);       
+                        area := sdo_geom.sdo_length(geomEdge, pTolleranza);
+                        pDettaglio := pDettaglio || ' - Fine Edge ' || ' length ' || area;
+
+                        /* Inserisce edge errati (si è deciso di non inserirli)
+                        INSERT ALL
+                        INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+                            values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, null)
+                        INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+                            values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+                        (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomEdge SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+                        commit;
+                        */
+
+                        if(geomEdge1 is null) then 
+                            geomEdge1 := geomEdge;
+                        else
+                            getIntersections(geomEdge, geomEdge1, pIdPoligono, contextIn);
+                        end if;
+                    end loop;
+                -- else Non implementato, non è mai successo. Non inserisco nulla. 
+                end if;
+            end if;
+        end loop;
+    end;
+
+    BEGIN
+
+        select shape, ID_LAVORAZIONE into pGeometry, pIdLavorazione from  A4ST_WORKSPACE_LAV_SUOLO T  where id = pid;
+
+        pcontext := SDO_GEOM.VALIDATE_GEOMETRY_WITH_CONTEXT(pGeometry, pTolleranza);
+        erroreValidazione := SDO_GEOM.VALIDATE_GEOMETRY(pGeometry, pTolleranza);-- || ' ' || GETORAERRORDESCRIPTION(trim(el.r));
+
+        -- es. 13351 [Element &lt;1&gt;] [Rings 1, 2][Edge &lt;3&gt; in ring &lt;1&gt;][Edge &lt;7&gt; in ring &lt;2&gt;]
+        --dbms_output.put_line( 'ID '|| pIdPoligono || ' Validazione elemento ' || pcontext);
+
+        -- c'è sempre 
+        if(INSTR(pcontext, '[Element &lt;') &gt; 0) then
+
+            pcontextEl := trim(replace(pcontext, '[Element &lt;', '*'));
+            pcontextEl := mySubstring(pcontextEl, '*', null); 
+
+             FOR el in (select regexp_substr(pcontextEl,'[^*]+', 1, level) r from dual a
+                connect by regexp_substr(pcontextEl, '[^*]+', 1, level) is not null) loop
+                --dbms_output.put_line( i || ' Nuovo elemento - ' || el.r);
+                -- es. el.r = 1&gt;] [Rings 1, 2][Edge &lt;3&gt; in ring &lt;1&gt;][Edge &lt;7&gt; in ring &lt;2&gt;]
+
+                --dbms_output.put_line('stringa valutata ' || el.r);
+
+                numElemCorrente := mySubstring(el.r , null , '&gt;'); 
+                contextRestoEl :=  trim(mySubstring(el.r , '&gt;]', null)); 
+
+                pDettaglio := 'numElemento ' || numElemCorrente || ' stringa da analizzare '|| contextRestoEl;
+
+                -- se ho finito di leggere la stringa loggo l'oggetto element 
+                -- succederebbe se pcontext fosse solo [Element &lt;1&gt;] cosa che non è mai succcessa nei casi trovati
+                if(length(contextRestoEl) = 0 or contextRestoEl is null) then
+                    geomElement := SDO_UTIL.EXTRACT(pGeometry, numElemCorrente);
+                    area := sdo_geom.sdo_area(geomElement, pTolleranza);
+                    pDettaglio := pDettaglio || ' - Fine Elemento ' || ' area ' || area;
+
+                    -- Iserisce elemento errato
+                    INSERT ALL
+                    INTO A4ST_ANOMALIA_VALIDAZIONE (ID, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, AREA) 
+                        values (NXTNBR.nextval, VERSIONE, ID_LAVORAZIONE, SHAPE, TIPO_ANOMALIA, DETTAGLIO_ANOMALIA, sdo_geom.sdo_area(SHAPE, ptolleranza))
+                    INTO A4SR_ANOMALIA_WORKSPACE (ID, VERSIONE, ID_WORKSPACE, ID_ANOMALIA) 
+                        values (NXTNBR.nextval, VERSIONE, ID, NXTNBR.nextval)
+                    (select  pid ID, 0 VERSIONE, pIdLavorazione ID_LAVORAZIONE, geomElement SHAPE, tipoAnomalia TIPO_ANOMALIA, dettaglioAnomalia DETTAGLIO_ANOMALIA from dual);
+                    commit;
+                else -- se NON ho finito di leggere la stringa
+                    -- Gestisco i casi
+                    -- Coordinate es [Coordinate &lt;37&gt;][Ring &lt;1&gt;]
+                    -- Ring es [Ring &lt;2&gt;] o [Ring &lt;2&gt;][Edge &lt;3&gt;][Edge &lt;7&gt;]
+                    -- Rings es [Rings 1, 2][Edge &lt;3&gt; in ring &lt;1&gt;][Edge &lt;7&gt; in ring &lt;2&gt;]
+                    -- gli altri non sono gestiti e loggo Element
+
+                    if(INSTR(contextRestoEl, 'Coordinate &lt;') &gt; 0) then 
+                        getErroriValCoordinate(pGeometry, numElemCorrente, pid, contextRestoEl);
+                    elsif(INSTR(contextRestoEl, 'Coordinate &lt;') = 0 and INSTR(contextRestoEl, 'Ring &lt;') &gt; 0) then 
+                        getErroriValRing(pGeometry, numElemCorrente, pid, contextRestoEl);
+                    elsif (INSTR(contextRestoEl, '[Rings') &gt; 0) then 
+                        --dbms_output.put_line('Rings trovato elemento' || elResto);
+                        getErroriValRings(pGeometry, numElemCorrente, pid, contextRestoEl);
+                    -- else Non implementato, non è mai successo. Non inserisco nulla. 
+                    end if;    
+                end if;
+                i := i + 1;
+            end loop;
+        -- else Non implementato, non è mai successo. Non inserisco nulla. 
+        end if;
+        commit;
+    END;
+
+	END A4SP_VALIDITA_ORACLE;
+	?
+	</sql>
+	<sql endDelimiter=";" splitStatements="true">
+		GRANT EXECUTE ON A4SP_VALIDITA_ORACLE TO ${user.writer};
+	</sql>
+	</changeSet>
+	</databaseChangeLog>

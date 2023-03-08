@@ -1,0 +1,30 @@
+<div class="groupTool">
+  <div class="panel-misura" [hidden]="!isActive() || !showMisuraPanel">
+    <div class="p-grid"> 
+      <div class="p-col-12">
+        <label for="type">Tipo &nbsp;</label>
+        <select id="type" [(ngModel)]="selectType" class="form-control" (change)="onChangeTipo(selectType)">
+          <option value="LineString">Lunghezza</option>
+          <option value="Polygon">Area</option>
+        </select>
+      </div>
+
+      <div class="p-col-12">
+        <label for="unita">Unit&agrave; &nbsp;</label>
+        <select [(ngModel)]="unitLine" *ngIf="selectType === 'LineString'" class="form-control" (change)="onChangeUnit()">
+          <option value="m">m</option>
+          <option value="km">km</option>
+        </select>
+        <select [(ngModel)]="unitPolygon" *ngIf="selectType === 'Polygon'" class="form-control" (change)="onChangeUnit()">
+          <option value="mq">mq</option>
+          <option value="ha">ha</option>
+        </select>
+      </div>
+    </div>
+  </div>
+ 
+  <div id="misuraElTool" (click)="openToolMisura();" [ngClass]="{'active-tool': isActive()}" style="float: inherit;">
+    <button pTooltip="Misura" tooltipPosition="top" type="button" class='btn btn-primary'><i
+        class="fa fa-ruler-combined"></i></button>
+  </div>
+</div>

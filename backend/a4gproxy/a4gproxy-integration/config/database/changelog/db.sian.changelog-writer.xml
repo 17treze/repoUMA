@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="PROXY_WRT_5.0" author="Caccia Salvatore" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM AABAANTI_TAB FOR ${user.superuser}.AABAANTI_TAB;
+			CREATE OR REPLACE SYNONYM AABAESAN_TAB FOR ${user.superuser}.AABAESAN_TAB;
+			CREATE OR REPLACE SYNONYM AABAALL1_TAB FOR ${user.superuser}.AABAALL1_TAB;
+			CREATE OR REPLACE SYNONYM AABAALL2_TAB FOR ${user.superuser}.AABAALL2_TAB;
+			CREATE OR REPLACE SYNONYM AABAAZCO_TAB FOR ${user.superuser}.AABAAZCO_TAB;
+			CREATE OR REPLACE SYNONYM AABASGCA_TAB FOR ${user.superuser}.AABASGCA_TAB;
+			CREATE OR REPLACE SYNONYM AABAALL3_TAB FOR ${user.superuser}.AABAALL3_TAB;
+			CREATE OR REPLACE SYNONYM AABAFACO_TAB FOR ${user.superuser}.AABAFACO_TAB;			
+		</sql>
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM AABAESAN_SEQ FOR ${user.superuser}.AABAESAN_SEQ;
+        	CREATE OR REPLACE SYNONYM AABAALL1_SEQ FOR ${user.superuser}.AABAALL1_SEQ;
+        	CREATE OR REPLACE SYNONYM AABAALL2_SEQ FOR ${user.superuser}.AABAALL2_SEQ;
+        	CREATE OR REPLACE SYNONYM AABAAZCO_SEQ FOR ${user.superuser}.AABAAZCO_SEQ;
+        	CREATE OR REPLACE SYNONYM AABASGCA_SEQ FOR ${user.superuser}.AABASGCA_SEQ;
+        	CREATE OR REPLACE SYNONYM AABAALL3_SEQ FOR ${user.superuser}.AABAALL3_SEQ;
+        	CREATE OR REPLACE SYNONYM AABAFACO_SEQ FOR ${user.superuser}.AABAFACO_SEQ;
+        </sql>		
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_5.1" author="Cuel Alessandro" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM AABARAIA_TAB FOR SUAGS04.AABARAIA_TAB;		
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_5.2" author="Cuel Alessandro" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM TITOLI_PAC FOR SUAGS04.TITOLI_PAC;		
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_7.1" author="Alessio Siravo" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM INVIATE_CCOO_2016 FOR SUAGS04.INVIATE_CCOO_2016;		
+	        CREATE OR REPLACE SYNONYM ESITO_CONV_2016 FOR SUAGS04.ESITO_CONV_2016;	
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_7.2" author="Daniele Faieta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM ANOM_DU_GRAF_SETT_RIC_PRE FOR ${user.superuser}.ANOM_DU_GRAF_SETT_RIC_PRE;
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_RICEZIONE_WRT_1.0" author="Daniele Faieta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+	        CREATE OR REPLACE SYNONYM ANOM_DU_GRAF_SETT_RIC_PRE FOR ${user.superuser.ricezione}.ANOM_DU_GRAF_SETT_RIC_PRE;
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_10.0" author="Daniele Faieta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM APPO_SUPE_ACCERT FOR ${user.superuser}.APPO_SUPE_ACCERT;
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_10.4" author="Daniele Faieta" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM APPO_SUPE_ACCERT_SEQ FOR ${user.superuser}.APPO_SUPE_ACCERT_SEQ;
+        </sql>		
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_11.0" author="Daniele Faieta" dbms="oracle">
+        <sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM PAGAMENTI FOR ${user.superuser}.PAGAMENTI;
+		</sql>	
+    </changeSet>
+    
+    <changeSet id="PROXY_WRT_11.3" author="Daniele Faieta" dbms="oracle">
+    	<sql endDelimiter=";" splitStatements="true">
+        	CREATE OR REPLACE SYNONYM PAGAMENTI_SEQ FOR ${user.superuser}.PAGAMENTI_SEQ;
+        </sql>		
+    </changeSet>
+
+</databaseChangeLog>

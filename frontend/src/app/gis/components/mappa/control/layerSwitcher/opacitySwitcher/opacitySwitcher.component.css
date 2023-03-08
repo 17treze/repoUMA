@@ -1,0 +1,15 @@
+.switch-opacity-bar {
+    width: 95%;
+    position: absolute;
+    z-index: 99;
+    top: 18px;
+}
+.switch-opacity-bar span {
+    float: right;
+}
+#switcher-opacity > span > p-inputswitch > div.ui-inputswitch.ui-widget.ui-inputswitch-checked span {
+    background: #195190!important;
+}
+.hideOpacity .layerswitcher-opacity {
+display: none;
+}

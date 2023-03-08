@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	<changeSet id="ISTRUTTORIA_11.1" author="Lorenzo Martinelli">
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '024BS046'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '035LC003'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '068BG010'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '077BS003'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '077BS094'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '082BG022'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '092BG001'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '092BG021'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '092BG074'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '101BS194'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '115BS004'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '131BS027'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '148BS008'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '171PV035'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '181BS015'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '185BG015'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '188BG139'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '190BG078'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '191BS056'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '198BS079'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '202BS036'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '204BS061'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '218CO010'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '229BG010'</where></update>
+		<update tableName="A4GT_ALLEV_MONTAGNA"><column name="FLAG_MONTAGNA" valueBoolean="true"/><where>COD_ALLEV = '246BG236'</where></update>
+	</changeSet>
+</databaseChangeLog>

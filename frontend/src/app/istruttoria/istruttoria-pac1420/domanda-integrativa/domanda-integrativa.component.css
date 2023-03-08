@@ -1,0 +1,211 @@
+.table {
+    text-align: center;
+    border-width: 1px;
+}
+
+.primaCella{
+    border: 0;
+}
+
+td {
+    position: relative;
+    border: 1px solid rgb(212, 212, 212);
+    vertical-align: middle;
+    padding: 0.30em;
+}
+
+.ui-icon-info{
+    font-size: 1.1em;
+    opacity: 0.4;
+}
+
+.ui-icon-alertcustom{
+    transform: rotateX(180deg);
+    color: #FFAD00;
+    font-size:1.1em;
+    opacity: 0.8;
+}
+
+/* .ui-icon-info.top:before{
+    padding: 10px;
+} */
+
+.ui-icon-info:hover{
+    opacity: 1;
+}
+
+.sanzione{
+    font-size:1em;
+    opacity: 0.4;
+}
+
+.nonAmmissibile{
+    font-size:1em;
+    opacity:0.5;
+    color: red;
+}
+
+.nonAmmissibile:hover{
+    font-size:1em;
+    opacity:1;
+    color: red;
+}
+
+th{
+    vertical-align: middle;
+}
+
+.headerTable{
+    color: white;
+}
+
+.headerInterventi{
+    height: 10px;
+}
+
+td.idCapo{
+    vertical-align: middle;
+}
+
+td.idRazza{
+    vertical-align: middle;
+    border-right: 0px;
+}
+
+td.cellaSanzione{
+    border-left: 0px;
+}
+
+.numeroIntervento1 {
+    color: white !important;
+    background-color: #27ACC0;
+    border-radius: 10px;
+    width: 46px;
+    height: 20px;
+}
+
+.numeroIntervento2 {
+    color: white !important;
+    background-color: #2291A2;
+    border-radius: 10px;
+    width: 46px;
+    height: 20px;
+}
+
+.numeroIntervento3 {
+    color: white !important;
+    background-color: #1E6B76;
+    border-radius: 10px;
+    width: 46px;
+    height: 20px;
+}
+
+.boviniDaLatte {
+    background-color: #27ACC0;
+}
+
+.vaccheNutrici {
+    background-color: #27ACC0;
+    border-left: 1px solid #2291A2;
+}
+
+.boviniMacellati {
+    background-color: #2291A2;
+}
+
+.ovicaprini {
+    background-color: #1E6B76;
+}
+
+.selectAll{
+    padding: 2px;
+    border: 2px solid #757575;
+    width: 1.50em;
+    height: 1.50em;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+:host >>> .ui-chkbox .ui-chkbox-box{
+    padding: 2px;
+    border: 2px solid #757575;
+    border-radius: 15px;
+    width: 1.75em;
+    height: 1.75em;
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+:host >>> .ui-accordion .ui-accordion-header > a{
+    text-decoration: none;
+    vertical-align: center;
+    background-color: #FFF;
+    border-top: 3px solid green;
+    width: 1300px;
+    height: 57px;
+}
+
+:host >>> .ui-accordion .ui-accordion-content{
+    width: 1300px;
+}
+.ui-icon-alertcustom.top{
+    color: orange;
+    padding: 0;
+    opacity: 1;
+}
+
+.ui-icon-alertcustom.top:before{
+    color: orange;
+    padding: 0;
+    opacity: 1;
+}
+
+.ui-icon-info.ui-icon-alertcustom.iconaSanzioneRazza{
+    color: orange;
+    padding: 0;
+    opacity: 1;
+}
+
+.ui-icon-help.top{
+    color: grey;
+    font-size: 1.1em;
+}
+
+.ui-icon-help.top.iconaRazza{
+    opacity: 0.6;
+}
+
+.ui-icon-check.top{
+    color: green;
+}
+
+:host >>> .ui-accordion-toggle-icon{
+    display: none;
+}
+
+:host >>> .ui-accordion .ui-accordion-content{
+    border: 0;
+}
+
+.rigaSelezionatiSenzaSanzione{
+    background-color: #D3E7B0;
+}
+
+.rigaSelezionatiConSanzione{
+    background-color: #FFEECE !important;
+}
+
+.cellaSelezionatiSenzaSanzione , .cellaSelezionatiConSanzione, .cellaNonSelezionati{
+    text-align: left;
+}
+
+.tabellaTotali{
+    margin-top: 50px
+}
+
+.numeroInterventoPopUp{
+    width: auto; 
+    height: auto;
+    padding: 2px;
+    font-size: 0.7em;
+}

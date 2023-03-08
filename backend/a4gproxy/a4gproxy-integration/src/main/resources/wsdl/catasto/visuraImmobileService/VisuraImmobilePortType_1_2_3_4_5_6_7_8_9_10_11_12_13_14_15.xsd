@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.autorizzazione.regione.taa.it/AutorizzazioneType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.autorizzazione.regione.taa.it/AutorizzazioneType/schemas" xmlns:cc="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas">
+  <xs:import namespace="http://www.catasto.regione.taa.it/ComuneCatastaleType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7_8.xsd"/>
+  <xs:annotation>
+    <xs:documentation>Contiene i tipi che modellano le informazioni per l'autorizzazione degli utenti nel contesti del Catasto e del Servizio Libro Fondiario.</xs:documentation>
+  </xs:annotation>
+  <xs:complexType abstract="true" name="AutorizzazioniType">
+    <xs:annotation>
+      <xs:documentation>Modella il Richiedente che effettivamente sta "richiedendo" il servizio.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="autorizzazione" type="tns:AutorizzazioneType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AutorizzazioneType">
+    <xs:annotation>
+      <xs:documentation>Modella una possibile informazione autorizzativa.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="key" type="tns:TipoAutorizzazioneType" use="required">
+      <xs:annotation>
+        <xs:documentation>Tipologia di informazione.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="value" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Informazione autorizzativa. Di norma coincide col codice fiscale.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="AutorizzazioneComuneCatastaleType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="comuneCatastale" type="cc:ChiaveComuneCatastaleType">
+        <xs:annotation>
+          <xs:documentation>Le informazioni sul comune catastale da testare</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="esito" type="xs:boolean" use="required">
+      <xs:annotation>
+        <xs:documentation>L'esito del controllo.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="AutorizzazioniComuniCatastaliType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="comune" type="tns:AutorizzazioneComuneCatastaleType">
+        <xs:annotation>
+          <xs:documentation>Il comune di cui si e' verificata l'autorizzazione</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RuoliType">
+    <xs:annotation>
+      <xs:documentation>Modella i ruoli che un certo utente ha per un certo servizio</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ruolo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Modella i ruoli che un utente ha per un certo servizio.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="servizio" type="tns:TipoServizioType" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ServizioType">
+    <xs:annotation>
+      <xs:documentation>Modella il type che descrive un servizio (di cui si vuol conoscere le abilitazioni di un certo utente). Il concetto di servizio ha un'accezione di grana piu' grossa del singolo web service ed individua un raggruppamento logico di tali servizi</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="servizio" type="tns:TipoServizioType" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="TipoServizioType">
+    <xs:annotation>
+      <xs:documentation>Lista dei sistemi per i quali e' possibile richiedere i ruoli.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="CATASTO"/>
+      <xs:enumeration value="LIBRO_FONDIARIO"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoAutorizzazioneType">
+    <xs:annotation>
+      <xs:documentation>Dichiara le possibili informazioni autorizzative che il client mi può inviare. Vale RICHIEDENTE per le informazioni sul RICHIEDENTE; DELEGATO per quelle sul delegato</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="RICHIEDENTE"/>
+      <xs:enumeration value="DELEGATO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

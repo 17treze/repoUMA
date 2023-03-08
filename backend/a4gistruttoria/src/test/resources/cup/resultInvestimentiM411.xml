@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CUP>
+    <CUP_GENERAZIONE id_progetto="13639">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13639" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="134"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="037"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="74.865" finanziamento="36.182">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13643">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13643" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="137"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="037"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="29.850" finanziamento="11.940">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13644">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13644" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="133"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="106"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="44.000" finanziamento="16.000">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13660">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13660" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="134"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="062"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="90.213" finanziamento="33.607">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13685">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13685" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="137"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="243"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.4" classe="01.41"/>
+        <FINANZIAMENTO costo="295.000" finanziamento="147.500">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13695">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13695" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="133"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="242"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="58.674" finanziamento="23.470">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13710">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13710" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="134"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="027"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.4" classe="01.41"/>
+        <FINANZIAMENTO costo="242.620" finanziamento="83.004">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13721">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13721" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="137"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="242"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="106.892" finanziamento="53.446">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="13725">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="13725" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="133"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="022" comune="180"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.24"/>
+        <FINANZIAMENTO costo="49.600" finanziamento="11.400">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+    <CUP_GENERAZIONE id_progetto="15052">
+        <DATI_GENERALI_PROGETTO anno_decisione="2019" cumulativo="N" codifica_locale="15052" natura="07" tipologia="15" settore="06" sottosettore="13" categoria="133"/>
+        <LOCALIZZAZIONE stato="05" regione="04" provincia="021" comune="076"/>
+        <ATTIV_ECONOMICA_BENEFICIARIO_ATECO_2007 sezione="A" divisione="01" gruppo="01.2" classe="01.21"/>
+        <FINANZIAMENTO costo="80.055" finanziamento="23.625">
+            <CODICE_TIPOLOGIA_COP_FINANZ>001</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>003</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>006</CODICE_TIPOLOGIA_COP_FINANZ>
+            <CODICE_TIPOLOGIA_COP_FINANZ>007</CODICE_TIPOLOGIA_COP_FINANZ>
+        </FINANZIAMENTO>
+    </CUP_GENERAZIONE>
+</CUP>
+

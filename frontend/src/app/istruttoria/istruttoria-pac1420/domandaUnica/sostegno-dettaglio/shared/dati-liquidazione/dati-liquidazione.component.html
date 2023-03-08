@@ -1,0 +1,75 @@
+<div class="boxgrey" style="padding-top:50px; display: inline-block">
+  <div class="ui-g-12" *ngIf="istruttoriaInfo">
+    <div class="ui-grid-fixed">
+      <div style="background:#fff;" class="dettaglioaccordion">
+        <h3><span>Dati di Liquidazione</span></h3>
+        <div class="table-responsive nobrd" style="margin-top:30px">
+            <div class="timeline-item__amount  fs-5" *ngIf="istruttoriaInfo.importiIstruttoria && istruttoriaInfo.importiIstruttoria.importoCalcolato">
+              <div class="d-flex">
+                <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_CALCOLATO' | translate}}</strong>
+                <span class="ml-auto">€{{ istruttoriaInfo.importiIstruttoria.importoCalcolato | number:'.2' }}</span>
+              </div>
+              {{'DETTAGLIO_ISTRUTTORIA.AL_NETTO_PAGAMENTI' | translate }}
+            </div>            
+            <div class="timeline-item__amount  fs-5" *ngIf="istruttoriaInfo.importiIstruttoria && istruttoriaInfo.importiIstruttoria.importoAutorizzato">
+              <div class="d-flex">
+                <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_AUTORIZZATO' | translate}}</strong>
+                <span class="ml-auto">€{{ istruttoriaInfo.importiIstruttoria.importoAutorizzato | number:'.2' }}</span>
+              </div>
+              {{'DETTAGLIO_ISTRUTTORIA.AL_NETTO_FINANZIARIA' | translate }}
+            </div>    
+            <div class="timeline-item__amount  fs-5" *ngIf="istruttoriaInfo.importiIstruttoria?.debitiRecuperati?.length>0">
+              <div class="d-flex">
+                <strong>{{'DETTAGLIO_ISTRUTTORIA.DEBITI_RECUPERATI' | translate}} </strong>
+                <span class="ml-auto"> € {{ totaleDebitoRecuperato[0] | number:'.2' }}</span>
+              </div>
+              <ul>
+                <li *ngFor="let importo of istruttoriaInfo.importiIstruttoria.debitiRecuperati">
+                  <div class="d-flex">
+                    <span>{{importo.descrizione}}</span>
+                    <span class="ml-auto">€{{ importo.importo | number:'.2' }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>  
+            <div class="timeline-item__amount  timeline-item__amount-payed  d-flex  align-items-center  fs-18 border-top" *ngIf="istruttoriaInfo.importiIstruttoria && istruttoriaInfo.importiIstruttoria.importoAutorizzato">
+              <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_LIQUIDATO' | translate}}</strong>
+              <span class="total-amount  ml-auto  fs-18  fw-700">€ {{ totaleImportoLiquidato[0] | number:'.2' }}</span>
+            </div>                              
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-3 box-padded ">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.ANNO_ESERCIZIO' | translate}}</strong>
+          </div>
+          <div class="ui-g-3 box-padded">
+            {{istruttoriaInfo.importiIstruttoria.annoEsercizio}}
+          </div>
+          <div class="ui-g-3 box-padded ">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.PROGRESSIVO_CREDITO' | translate}}</strong>
+          </div>
+          <div class="ui-g-3 box-padded">
+            {{istruttoriaInfo.importiIstruttoria.progressivoCredito}}
+          </div>    
+          <div class="ui-g-3 box-padded ">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.NUMERO_AUTORIZZAZIONE' | translate}}</strong>
+          </div>
+          <div class="ui-g-3 box-padded">
+            {{istruttoriaInfo.importiIstruttoria.numeroAutorizzazione}}
+          </div>            
+          <div class="ui-g-3 box-padded ">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.DATA_AUTORIZZAZIONE' | translate}}</strong>
+          </div>
+          <div class="ui-g-3 box-padded">
+            {{istruttoriaInfo.importiIstruttoria.dataAutorizzazione | date:'dd/MM/yyyy'}}
+          </div>    
+          <div class="ui-g-3 box-padded ">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.PROGRESSIVO_PAGAMENTO' | translate}}</strong>
+          </div>
+          <div class="ui-g-3 box-padded">
+            {{istruttoriaInfo.importiIstruttoria.progressivoPagamento}}
+          </div>                       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

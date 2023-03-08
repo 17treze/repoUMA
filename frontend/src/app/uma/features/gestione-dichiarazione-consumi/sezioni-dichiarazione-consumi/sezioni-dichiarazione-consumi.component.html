@@ -1,0 +1,150 @@
+<p-toast
+  position="top-center"
+  key="tst"
+  [modal]="true"
+  [baseZIndex]="50000"
+  (onClose)="onCloseToastCancellazione()"></p-toast>
+
+<p-toast
+  key="tst-valida"
+  [style]="{ marginTop: '70px' }"></p-toast>
+
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="cancellazione-dichiarazione-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<p-confirmDialog
+  [closable]="false"
+  class="ui-dialog-visible"
+  header="Attenzione"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="rettifica-error-dialog"
+  acceptLabel="OK"
+  rejectLabel="Annulla"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25"></p-confirmDialog>
+
+<div class="ui-grid-fixed mt-5">
+  <div class="boxgrey">
+    <div class="p-col block-100">
+
+      <!-- Dichiarazione consumi header -->
+      <div class="ui-header-sezioni-uma">
+        <a class="auto-cursor">
+          <div class="p-grid p-justify-between m-0">
+            <div class="p-grid p-align-center m-0 p-2">
+              <div class="p-col p-col-align-center">
+                <strong>{{"UMA.DICHIARAZIONE_CONSUMI.DICHIARAZIONE_CONSUMI" | translate | uppercase}}</strong>
+              </div>
+            </div>
+            <div class="p-grid m-0">
+              <div
+                *ngIf="mostraScarica"
+                class="p-col">
+                <button
+                  class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+                  (click)="scaricaDichiarazioneConsumiFile()"
+                  pButton
+                  icon="pi pi-file-pdf"
+                  iconPos="right"
+                  type="button"
+                  label="SCARICA">
+                </button>
+              </div>
+              <div
+                *ngIf="isInCompilazione"
+                class="p-col">
+                <button
+                  class="w-10m ui-button-secondary ui-button-text button-accent-alt"
+                  (click)="eliminaDichiarazione()"
+                  pButton
+                  icon="pi pi-trash"
+                  iconPos="right"
+                  type="button"
+                  label="ELIMINA">
+                </button>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Dichiarazione consumi indice sezioni -->
+      <div class="p-grid cell p-nogutter">
+        <div class="p-col-6 p-0 cell-content border-bottom border-right">
+          <div class="p-grid p-align-center m-0">
+            <div
+              class="w-10m"
+              [ngClass]="{'p-col': !dichiarazioneConsumiDto?.haPrelieviOltreLimite, 'p-col-fixed': dichiarazioneConsumiDto?.haPrelieviOltreLimite }"
+              (click)="onClickBox(sezioni.PRELIEVI)">
+              <img
+                src="assets/img/icons/uma-icon/icon-prelievi.svg"
+                class="d-inline-block mr-3">
+              {{ "UMA.DICHIARAZIONE_CONSUMI.PRELIEVI" | translate }}
+            </div>
+            <div
+              *ngIf="dichiarazioneConsumiDto?.haPrelieviOltreLimite && isCaa()"
+              class="p-col text-right">
+              <p-message
+                class="light-message cursor-text"
+                severity="warn"
+                text="{{umaMessages.prelieviOltreDataScadenza}} {{dichiarazioneConsumiDto?.dataLimitePrelievi | date:'dd/MM/yyyy'}}"></p-message>
+            </div>
+          </div>
+        </div>
+        <div class="p-col-6 p-0 cell-content border-bottom">
+          <div
+            class="p-col"
+            (click)="onClickBox(sezioni.CLIENTI_CONTOTERZI)">
+            <img
+              src="assets/img/icons/uma-icon/icon-contoterzi.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.DICHIARAZIONE_CONSUMI.CLIENTI_CONTOTERZI" | translate }}
+          </div>
+        </div>
+        <div class="p-col-6 p-0 cell-content border-bottom border-right">
+          <div
+            class="p-col"
+            (click)="onClickBox(sezioni.RICEVUTI)">
+            <img
+              src="assets/img/icons/uma-icon/icon-ricevuti.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.DICHIARAZIONE_CONSUMI.RICEVUTI" | translate }}
+          </div>
+        </div>
+        <div class="p-col-6 p-0 cell-content border-bottom">
+          <div
+            class="p-col"
+            (click)="onClickBox(sezioni.CONSUMI)">
+            <img
+              src="assets/img/icons/uma-icon/icon-consumi.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.DICHIARAZIONE_CONSUMI.DICHIARAZIONE_CONSUMI" | translate }}
+          </div>
+        </div>
+        <div class="p-col-6 p-0 cell-content border-right">
+          <div
+            class="p-col"
+            (click)="onClickBox(sezioni.TRASFERIMENTI)">
+            <img
+              src="assets/img/icons/uma-icon/icon-trasferimenti.svg"
+              class="d-inline-block mr-3">
+            {{ "UMA.DICHIARAZIONE_CONSUMI.TRASFERIMENTI" | translate }}
+          </div>
+        </div>
+        <div class="p-col-6 p-0 cursor-text"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

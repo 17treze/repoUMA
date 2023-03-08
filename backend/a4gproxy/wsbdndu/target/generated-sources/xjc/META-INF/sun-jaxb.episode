@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
+
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
+Generato il: 2022.08.29 alle 04:34:19 PM CEST 
+
+  -->
+      
+    <bindings xmlns:tns="http://bdr.izs.it/webservices" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="it.izs.wsdl.wsBDNDomandaUnica"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="tns:get_Elenco_Capi_Premio">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.GetElencoCapiPremio"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsPremio_Validazione">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsPremioValidazione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:get_Elenco_Capi_PremioResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.GetElencoCapiPremioResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsPremio_ValidazioneResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsPremioValidazioneResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SOAPAutenticazione">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.SOAPAutenticazione"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:get_Elenco_Capi_Premio2">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.GetElencoCapiPremio2"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsPremio_Validazione_PP">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsPremioValidazionePP"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="tns:get_Elenco_Capi_Premio2Response">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.GetElencoCapiPremio2Response"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsResponse">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsResponse"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfClsCapo">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ArrayOfClsCapo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsCapo">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsCapo"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfClsCapoMacellato">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ArrayOfClsCapoMacellato"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsCapoMacellato">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsCapoMacellato"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfClsCapoOvicaprino">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ArrayOfClsCapoOvicaprino"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsCapoOvicaprino">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsCapoOvicaprino"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ArrayOfClsCapoVacca">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ArrayOfClsCapoVacca"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:clsCapoVacca">
+                  
+            <class ref="it.izs.wsdl.wsBDNDomandaUnica.ClsCapoVacca"/>
+                
+        </bindings>
+          
+    </bindings>
+    
+</bindings>

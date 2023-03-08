@@ -1,0 +1,17 @@
+<p-treeTable [value]="data" [rowHover]="true">
+  <ng-template pTemplate="header">
+    <tr>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+    <tr class="treetable-{{rowData.type}}">
+      <td class="node-key"> 
+        <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+        <span>{{rowData.name}}</span>
+      </td>
+      <td class="node-value">
+        {{rowData.size}}
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>

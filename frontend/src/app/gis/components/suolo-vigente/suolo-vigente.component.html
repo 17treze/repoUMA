@@ -1,0 +1,60 @@
+<div class="p-grid">
+  <div class="p-col-8">
+
+    <div class="p-col-6 contentLinkCell">
+      <span>POLIGONO</span>
+    </div>
+    <div class="p-col-6" style="padding: 0px; color: #333333; font-weight: 700 !important;">
+      <i class="fa fa-vector-square " style="font-size: 20px;vertical-align: middle;color: #333333;"></i>
+      {{suoloVigente.id}}
+    </div>
+  </div>
+  <div class="p-col-4" style="display: flex; padding-top: 10px; justify-content: flex-end;">
+
+    <div class="p-col-6" [hidden]="contextAction!=='remove'" id="button-green-card" style="padding-top: 0px;" *ngIf="!lavorazioniEvent.readOnly">
+      <span pTooltip="Rimuovi suolo da lavorazione" tooltipPosition="right">
+        <i (click)="removePoligonoSuoloFromLavorazione(suoloVigente.id,index)" class="pi pi-minus"></i>
+      </span>
+    </div>
+
+    <div class="p-col-6" id="button-green-card" style="padding-top: 0px;">
+      <span (click)="centerMap(suoloVigente.extent)" pTooltip="Centra in mappa" tooltipPosition="right">
+        <i class="fa fa-crosshairs" aria-hidden="true"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<!--COD USO SUOLO-->
+<div class="p-grid">
+  <div class="p-col-2 contentCell" style="width: 33%;">
+    <span>USO</span>
+  </div>
+  <div class="p-col centerPositionCell">
+    <span pTooltip={{suoloVigente.codUsoSuoloModel.descrizione}} tooltipPosition="top">
+      {{suoloVigente.codUsoSuoloModel.codUsoSuolo}}</span>
+  </div>
+</div>
+
+<!--DATA INIZIO VALIDITA'-->
+<div class="p-grid">
+  <div class="p-col-2 contentCell" style="width: 33%;">
+    <span>DATA INIZIO VALIDITA'</span>
+  </div>
+
+  <div class="p-col centerPositionCell">
+    <span>{{ suoloVigente.dataInizioValidita | date: 'dd/MM/yyyy' }}
+    </span>
+  </div>
+</div>
+<!--UTENTE-->
+<div class="p-grid">
+  <div class="p-col-2 contentCell" style="width: 33%;">
+    <span>UTENTE</span>
+  </div>
+  <div class="p-col centerPositionCell">
+    <span *ngIf="suoloVigente.idLavorazioneInizio">{{suoloVigente.idLavorazioneInizio.utente}}
+    </span>
+  </div>
+</div>

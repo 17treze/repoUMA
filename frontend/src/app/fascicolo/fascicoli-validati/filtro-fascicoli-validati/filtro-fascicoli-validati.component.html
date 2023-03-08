@@ -1,0 +1,61 @@
+<div class="ui-grid-fixed boxwhite">
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <em
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></em>
+    <img src="assets/img/ico-home.jpg">
+    <span class="ml-2">
+      <strong class="text-uppercase fw-700 fs-20">{{ "FascicoloAziendale.STORICO_VALIDAZIONI" | translate }}</strong>
+    </span>
+  </a>
+</div>
+<div class="boxgrey mb-0 pb-0">
+  <h1 class="h5 text-uppercase font-weight-bold my-4">
+    {{ "FascicoloAziendale.RICERCA_FASCICOLI_VALIDATI" | translate }}
+  </h1>
+  <form
+    [formGroup]="filtersFormGroup"
+    (ngSubmit)="onSubmit()"
+    (keydown.enter)="submitBtn.click()">
+    <div class="ui-grid-fixed">
+      <div class="p-grid">
+        <div class="p-col-2">
+          <input
+            style="background: white; text-align: center"
+            class="form-control"
+            formControlName="annoValidazione"
+            placeholder="{{ 'FascicoloAziendale.ANNO_VALIDAZIONE' | translate }}"
+            [maxlength]="4"
+            [minlength]="4"
+            pattern="^([0-9])+$"
+            type="text"
+            pInputText>
+        </div>
+        <div class="p-col-2">
+          <div class="searchbutton h-100">
+            <button
+              #submitBtn
+              pButton
+              type="button"
+              class="ui-button bg-primary no-shadow text-uppercase w-100 h-100"
+              type="submit"
+              [disabled]="!filtersFormGroup.valid"
+              label="{{ 'DOMANDA_UNICA_FILTRI.filter' | translate }}"></button>
+          </div>
+        </div>
+      </div>
+      <p-message
+        *ngIf="filtersFormGroup.get('annoValidazione').errors?.pattern"
+        class="font-12"
+        severity="error"
+        text="Formato non valido">
+      </p-message>
+    </div>
+    <label class="labelricerca my-3">
+      {{ resultsNumber }} {{ "FascicoloAziendale.FASCICOLI_VALIDATI" | translate }}
+    </label>
+  </form>
+</div>

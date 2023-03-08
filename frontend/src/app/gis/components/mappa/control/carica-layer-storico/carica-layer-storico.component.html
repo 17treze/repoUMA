@@ -1,0 +1,34 @@
+<!-- CARICA LAYER STORICO BTN -->
+<div class="panel-storico" [hidden]="!panelEvent.showCaricaLayerStorico">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <h6 class="label-storico">CARICA LAYER STORICO</h6>
+      <label for="type">Layer: &nbsp;</label>
+      <select p-dropdown id="type" [(ngModel)]="layerStorico" class="form-control">
+        <option *ngFor="let layer of listaLayerStorico" [ngValue]="layer">{{layer.get('title')}}</option>
+      </select>
+    </div>
+    <div class="p-col-12">
+      <label for="type">Campagna: &nbsp;</label>
+      <select p-dropdown id="type" [(ngModel)]="campagnaStorico" class="form-control">
+        <option *ngFor="let anno of listaCampagna" [ngValue]="anno.value">{{anno.label}}</option>
+      </select>
+    </div>
+    <div class="p-col-12">
+      <label for="type">Data validit&agrave;: &nbsp;</label>
+      <p-calendar [(ngModel)]="dataValidita" placeholder="dd/mm/yyyy" dateFormat="dd/mm/yy" [monthNavigator]="true"
+        [yearNavigator]="true" yearRange="2022:2030" inputId="navigators"></p-calendar>
+    </div>
+    <div style="text-align: center; margin: auto; margin-top: 5px;">
+      <button pButton type="button" label="Carica" pTooltip="Carica storico" tooltipPosition="bottom"
+        (click)="caricaLayerStorico()" class="button-salva" [disabled]="!campagnaStorico || !layerStorico"
+        style="background: #00985b !important; color: #fff !important;font-size: 14px;"></button>
+    </div>
+  </div>
+</div>
+<div id="carica-layer-storico" (click)="openCaricaLayerStorico()"
+  [ngClass]="{'active-tool': panelEvent.showCaricaLayerStorico}">
+  <button class='btn btn-primary' pTooltip="Carica layer storico" tooltipPosition="left">
+    <i class=" fa fa-history"></i>
+  </button>
+</div>

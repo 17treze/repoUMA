@@ -1,0 +1,82 @@
+<p-toast
+  key="tst-lav-fab"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<div class="p-grid ui-fluid">
+  <form
+    class="p-grid m-0 w-100"
+    novalidate
+    [formGroup]="raggruppamentoForm">
+    <div class="p-col">
+
+      <!-- Prima riga Raggruppamento : Save -->
+      <div class="p-grid">
+        <div class="p-grid p-align-center py-4 w-100">
+          <div class="p-col">
+            <div class="p-grid m-0 p-align-center color-primary">
+              <img
+                *ngIf="ctx == lavorazioniFabbricatiTipoEnum.COLTIVAZIONI_SOTTO_SERRA"
+                src="assets/img/icons/uma-icon/icon-fabbricati_black.svg">
+              <img
+                *ngIf="ctx == lavorazioniFabbricatiTipoEnum.TRASFORMAZIONE_PRODOTTI"
+                src="assets/img/icons/uma-icon/icon-farm_black.svg">
+              <span class="ml-2">
+              <strong
+                  *ngIf="ctx == lavorazioniFabbricatiTipoEnum.COLTIVAZIONI_SOTTO_SERRA"
+                  class="fs-20">{{ 'UMA.LAVORAZIONI_COLTIVAZIONI_SOTTO_SERRA' | translate }} / Raggruppamenti</strong>
+              <strong
+                  *ngIf="ctx == lavorazioniFabbricatiTipoEnum.TRASFORMAZIONE_PRODOTTI"
+                  class="fs-20">{{ 'UMA.LAVORAZIONI_TRASFORMAZIONI_PRODOTTI' | translate }} / Raggruppamenti</strong>
+            </span>
+            </div>
+          </div>
+          <div
+            class="p-col-fixed"
+            *ngIf="inCompilazione">
+            <button
+              pButton
+              class="w-10m"
+              type="button"
+              label="SALVA"
+              (click)="saveLavorazioni()"></button>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Accordion raggruppamenti -->
+        <div class="p-grid w-100">
+          <div
+            class="p-col"
+            *ngIf="raggruppamenti?.length">
+            <p-accordion
+              #accordion
+              (onOpen)="onSelectAccordion($event)">
+              <ng-container *ngFor="let raggruppamento of raggruppamenti; let selectedAccordion = index">
+                <p-accordionTab>
+                  <p-header>
+                    {{raggruppamento.indice}} {{raggruppamento.nome | uppercase}}
+                    <i
+                      class="accordion-icon pi pi-check"
+                      *ngIf="quantitaLavorata[selectedAccordion]>0"></i>
+                  </p-header>
+                  <div class="p-col-12 align-self-center w-100">
+                    <div *ngIf="tables?.length">
+                      <div *ngFor="let table of tables; let i = index">
+                        <app-a4g-multi-table
+                          [title]="table.title"
+                          [cols]="colsArray[i]"
+                          [header]="headersTable[i]"
+                          [values]="table.datasource"
+                          [readonly]="!inCompilazione"
+                          (changedValueForm)="onChangeForm($event)"></app-a4g-multi-table>
+                        <div class="mb-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                </p-accordionTab>
+              </ng-container>
+            </p-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

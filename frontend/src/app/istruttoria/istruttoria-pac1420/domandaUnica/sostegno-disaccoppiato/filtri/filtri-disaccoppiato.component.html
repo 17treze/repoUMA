@@ -1,0 +1,122 @@
+<div style="padding-right:40px;">
+  <h3>
+    {{ "DOMANDA_UNICA_FILTRI.filtraPer" | translate }}
+  </h3>
+  <div>
+    <form [formGroup]="filtersFormGroup" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <p-autoComplete formControlName="cuaaFormControl"
+          minLength="3" placeholder="CUAA"
+          name="cuaa" [suggestions]="cuaaS"
+          (completeMethod)="inputFilterCuaaUpdate($event)">
+        </p-autoComplete>
+      </div>
+      <div class="form-group">
+        <p-autoComplete formControlName="denominazioneFormControl"
+          minLength="3" placeholder="Descrizione Impresa"
+          name="denominazione" [suggestions]="denominazioneS"
+          (completeMethod)="inputFilterRagioneSocialeUpdate($event)">
+        </p-autoComplete>
+      </div>
+      <div class="form-group">
+        <input placeholder="Numero Domanda" type="number"
+          minLength="3"
+          formControlName="numeroDomandaFormControl"
+          name="numero_domanda" #denominazioneInput pInputText>
+      </div>
+      <div class="form-group">
+        <label class="labelricerca">{{ 'DOMANDA_UNICA_FILTRI.campione' | translate }}</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedCampioneFormControl" name="selectedCampione">
+        </p-dropdown>
+      </div>
+      <div class="form-group">
+        <label class="labelricerca">Giovane</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedGiovaneFormControl" name="selectedGiovane">
+        </p-dropdown>
+      </div>
+      <div class="form-group">
+        <label class="labelricerca">Pascoli</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedPascoliFormControl" name="selectedPascoli">
+        </p-dropdown>
+      </div>
+      <div class="form-group">
+        <label class="labelricerca">Riserva Nazionale</label>
+        <p-dropdown [options]="riservaLabel"
+          formControlName="selectedRiservaFormControl" name="selectedRiserva">
+        </p-dropdown>
+      </div>
+      <div class="form-group" *ngIf="isShowBloccato()">
+        <label class="labelricerca">Domande bloccate</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedBloccataBoolFormControl"
+          name="selectedBloccataBool"></p-dropdown>
+      </div>
+      <div class="form-group" *ngIf="isShowControlliCalcolo()">
+        <label class="labelricerca">Anomalie</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedAnomalieFormControl" name="selectedAnomalie">
+        </p-dropdown>
+      </div>
+      <div class="form-group" *ngIf="isShowAnomalieWarningControlli()">
+        <label class="labelricerca">Anomalie Warning</label>
+        <p-multiSelect [options]="getAnomalieWarningControlliOption()" [filter]="false"
+          formControlName="selectedAnomalieWarnFormControl"
+          name="selectedAnomalieWARN" multiple="multiple" checkbox="checkbox" optionLabel="title"
+          defaultLabel="Seleziona anomalia/e">
+        </p-multiSelect>
+      </div>
+      <div class="form-group" *ngIf="isShowControlliCalcolo()">
+        <label class="labelricerca">Anomalie Info</label>
+        <p-multiSelect [filter]="false" [options]="anomalieInfo" formControlName="selectedAnomalieInfoFormControl"
+          name="selectedAnomalieInfo" multiple="multiple" checkbox="checkbox" optionLabel="title"
+          defaultLabel="Seleziona anomalia/e">
+        </p-multiSelect>
+      </div>
+      <div class="form-group" *ngIf="isShowAnomalieErrorControlli()">
+        <label class="labelricerca">Anomalie Error</label>
+        <p-multiSelect [filter]="false"
+          [options]="getAnomalieErrorControlliOptions()"
+          formControlName="selectedAnomalieErrorFormControl"
+          name="selectedAnomalieError" multiple="multiple" checkbox="checkbox" optionLabel="title"
+          defaultLabel="Seleziona anomalia/e">
+        </p-multiSelect>
+      </div>
+      <div class="form-group" *ngIf="isShowAnomalieInterSostegno()">
+        <label class="labelricerca">Anomalie Intersostegno</label>
+        <p-multiSelect [filter]="false" [options]="anomalieInterSostegno" formControlName="selectedAnomalieInterSostegnoFormControl"
+          name="selectedAnomalieInterSostegno" multiple="multiple" checkbox="checkbox" optionLabel="title"
+          defaultLabel="Seleziona anomalia/e">
+        </p-multiSelect>
+      </div>
+      <div class="form-group" *ngIf="isShowErroriDiCalcolo()">
+        <label class="labelricerca">Errori di Calcolo</label>
+        <p-dropdown [options]="yesNo"
+          formControlName="selectedErroreCalcoloFormControl"
+          name="selectedErroreCalcolo">
+        </p-dropdown>
+      </div>
+      <div class="form-group" *ngIf="isShowIntegrazione()">
+        <label class="labelricerca">Integrazione</label>
+        <p-dropdown [options]="yesNoIntegrazione"
+          formControlName="selectedIntegrazioneFormControl"
+          name="selectedIntegrazione">
+        </p-dropdown>
+      </div>
+      <div class="form-group">
+        <label class="labelricerca">Risultati: <span class="colori-per-numeri">
+          {{ resultsNumber }}
+        </span>
+        </label>
+      </div>
+      <div>
+        <div class="searchbutton">
+          <button pButton type="button" class="ui-button-success" style="background: #0e5f3f" type="submit"
+            [disabled]="!filtersFormGroup.valid">{{ 'DOMANDA_UNICA_FILTRI.applyFilters' | translate }}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

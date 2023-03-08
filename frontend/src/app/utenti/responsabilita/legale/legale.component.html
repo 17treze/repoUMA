@@ -1,0 +1,52 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-lg-12">
+    <p-panel [toggleable]="true">
+      <p-header>
+        {{title}}
+        <button
+          pButton
+          type="button"
+          icon="ui-icon-close"
+          title="Elimina"
+          class="remove-btn"
+          (click)="removeMe()"></button>
+      </p-header>
+      <fieldset [disabled]="disabled">
+        <div class="ui-g form-group">
+          <strong>{{'DATI_FASCICOLO_AZIENDALE' | translate}}</strong>
+          <br>
+          <br>
+          <p-table [value]="elencoCariche">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <strong>{{'cuaa' | translate}}</strong>
+                </th>
+                <th>
+                  <strong>{{'gestioneUtenze.descrizioneImpresa' | translate}}</strong>
+                </th>
+                <!-- <th><strong>{{ 'RUOLO' | translate }}</strong></th> -->
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-responsabilita>
+              <tr>
+                <td>{{ responsabilita.cuaa }}</td>
+                <td>{{ responsabilita.denominazione }}</td>
+                <!-- <td>{{ 'Carica.' + responsabilita.carica | translate }}</td> -->
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td [attr.colspan]="2">
+                  {{ ('NO_RESPONSABILITA' | translate)  }}  {{cfPersona}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </fieldset>
+    </p-panel>
+  </div>
+</div>

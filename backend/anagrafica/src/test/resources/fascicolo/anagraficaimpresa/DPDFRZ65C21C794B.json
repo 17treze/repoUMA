@@ -1,0 +1,52 @@
+{
+  "codiceFiscale": "DPDFRZ65C21C794B",
+  "anagrafica": {
+    "nome": "FABRIZIO",
+    "cognome": "DE PODA",
+    "sesso": "MASCHIO",
+    "dataNascita": "1965-03-21",
+    "comuneNascita": "CLES",
+    "provinciaNascita": "TRENTO"
+  },
+  "deceduta": null,
+  "impresaIndividuale": {
+    "partitaIva": "01300210224",
+    "denominazione": "DE PODA FABRIZIO",
+    "sedeLegale": {
+      "indirizzo": {
+        "toponimo": "VIA",
+        "via": "PROVINCIALE",
+        "civico": "5",
+        "comune": "CONTA'",
+        "frazione": null,
+        "cap": "38093",
+        "codiceIstat": "022242",
+        "provincia": "TRENTO",
+        "denominazioneEstesa": "VIA PROVINCIALE 5, CONTA', 38093 TRENTO"
+      },
+      "attivitaAteco": [
+        {
+          "codice": "012",
+          "descrizione": "Coltivazioni di colture permanenti",
+          "importanza": "PRIMARIO"
+        },
+        {
+          "codice": "0141",
+          "descrizione": "Allevamento di bovini e bufale da latte, produzione di latte crudo",
+          "importanza": "SECONDARIO"
+        }
+      ],
+      "iscrizioneRegistroImprese": {
+        "numero": "150676",
+        "dataIscrizione": "1996-12-04",
+        "codiceRea": 150676,
+        "provinciaRea": "TN",
+        "cessata": false
+      },
+      "telefono": "0467800488",
+      "indirizzoPec": "fabrizio.depoda@pec.agritel.it"
+    },
+    "oggettoSociale": null,
+    "formaGiuridica": "Impresa individuale"
+  }
+}

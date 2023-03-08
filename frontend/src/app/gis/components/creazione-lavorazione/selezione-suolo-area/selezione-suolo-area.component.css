@@ -1,0 +1,43 @@
+.edit-bar-area i.fa-plus-circle {
+    color: #212529;
+}
+
+.edit-bar-area i {
+    font-size: 25px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+span.active-tool i,
+span.toolAdlAttivo i {
+    color: #027a48 !important;
+}
+
+button#calcolaPoligoniAdl:disabled {
+    cursor: not-allowed !important;
+}
+
+button#calcolaPoligoniAdl {
+    width: 270px;
+}
+
+button#calcolaPoligoniAdl.adlWarning {
+    color: #ce9319 !important;
+    border-color: #ce9319 !important;
+}
+
+button#calcolaPoligoniAdl.adlWarning:hover,
+button#calcolaPoligoniAdl.adlWarning:focus {
+    background: #ce9319 !important;
+    color: #fff !important;
+}
+
+ul.ui-tabview-nav.ui-helper-reset.ui-helper-clearfix.ui-widget-header {
+    background: transparent;
+}
+
+body .ui-tabview .ui-tabview-nav>li.ui-state-active,
+li.ui-state-default.ui-corner-top.ng-star-inserted {
+    background-color: transparent;
+    border-bottom-color: transparent;
+}

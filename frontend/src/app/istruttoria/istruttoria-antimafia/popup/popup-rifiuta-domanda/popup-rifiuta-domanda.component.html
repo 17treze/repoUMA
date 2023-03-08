@@ -1,0 +1,54 @@
+<!-- [width]="300" -->
+<p-dialog [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [closable]="false">
+    <div class="boxgrey boxpopup">
+  <p-header>
+    {{this.headerPopup}}
+  </p-header>
+  
+    <div class="">
+      <form (ngSubmit)="conferma(popupForm)" #popupForm="ngForm">
+        <div class="form-group">
+          <div class="ui-g-12">
+            
+              <label>{{ 'ANTIMAFIA.COMUNICAZIONE_NR_PROTOCOLLO' | translate }}</label>
+        
+           
+              <input required id="nrProtocollo" class="form-control" type="text" placeholder="{{ 'ANTIMAFIA.COMUNICAZIONE_NR_PROTOCOLLO' | translate }}"
+                pInputText [(ngModel)]="this.nrProtocolloComunicazione" #nrProtocollo="ngModel" name="nrProtocollo" />
+              <div [hidden]="(nrProtocollo.valid || nrProtocollo.pristine) && this.areValidFields(this.nrProtocolloComunicazione)"
+                class="alert alert-danger">
+                {{ 'ANTIMAFIA.CAMPO_OBBLIGATORIO' | translate }}
+              </div>
+           
+          </div>
+          <div class="form-group">
+            <div class="ui-g-12">
+             
+                <label>{{ 'ANTIMAFIA.NOTE_DI_CHIUSURA' | translate }}</label>
+            
+             
+                <textarea required class="form-control" pInputTextarea placeholder="{{ 'ANTIMAFIA.NOTE_DI_CHIUSURA' | translate }}"
+                  [(ngModel)]="this.noteDiChiusura" #noteChiusura="ngModel" name="noteChiusura"></textarea>
+                <div [hidden]="(noteChiusura.valid || noteChiusura.pristine) && this.areValidFields(this.noteDiChiusura)"
+                  class="alert alert-danger">
+                  {{ 'ANTIMAFIA.CAMPO_OBBLIGATORIO' | translate }}
+                </div>
+            
+            </div>
+          </div>
+          <br /><br /><br />
+        </div>
+        <p-footer>
+          <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <div class="ui-g-12">
+           
+                <button type="submit" pButton class="btn btn-darkgreen" [disabled]="!popupForm.form.valid" label="{{ 'ANTIMAFIA.PROCEDI' | translate }}"></button> 
+                <button type="button" pButton class="btn btn-dark" (click)="annulla(popupForm)" label="{{ 'ANTIMAFIA.ANNULLA' | translate }}"></button>
+          
+            </div>
+          </div>
+        </p-footer>
+      </form>
+    </div>
+  </div>
+</p-dialog>

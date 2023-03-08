@@ -1,0 +1,8 @@
+<div id="saveFeaturesTool" (click)="click()" [class.alert-tool]="isActive()" [ngClass]="{'toolDisattivato':!canUse}">
+  <button 
+  pTooltip="Salva" tooltipPosition="top"
+  type="button"
+  [disabled]="!canUse" 
+  class='btn btn-primary'
+><i class="fa fa-save"></i></button>
+</div>

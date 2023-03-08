@@ -1,0 +1,412 @@
+.small-label {
+    color: #30373D !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.lavorazione-form .p-field {
+    margin: 8px 0px 5px 0px;
+}
+
+.count-poligoni {
+    position: absolute;
+    left: 230px;
+    margin-top: 13px;
+    font-weight: 600;
+}
+
+.no-poligoni {
+    font-size: 14px;
+    font-style: italic;
+    padding: 75px 29px;
+    text-align: justify;
+    color: #737373;
+}
+
+.fixed-btn {
+    position: fixed;
+    float: right;
+    bottom: 0;
+    margin-bottom: 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.btn-alt {
+    border: 1px solid #00985b !important;
+    background: #fff !important;
+    padding: 10px 25px !important;
+    color: #00985b !important;
+    font-weight: 600;
+    right: 20px;
+}
+
+.btn-alt-no-right-padding {
+    border: 1px solid #00985b !important;
+    background: #fff !important;
+    padding: 10px 25px !important;
+    color: #00985b !important;
+    font-weight: 600;
+    padding: 15px !important;
+}
+
+.btn-alt:hover,
+.btn-alt:focus,
+.btn-alt-no-right-padding:hover,
+.btn-alt-no-right-padding:focus {
+    background: #4caf50 !important;
+    color: #fff !important;
+}
+
+.poligoni-suolo {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#poligoni-suolo .ui-widget-content {
+    background: transparent;
+    border: 0 !important;
+}
+
+#poligoni-suolo>div>p-accordiontab>div.ui-accordion-header {
+    width: 100%;
+    float: left;
+}
+
+.for-lavorazione,
+.for-creazione,
+.for-poligoni {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 520px;
+    width: 286px;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+
+.for-poligoni.fixed-height {
+    max-height: 465px;
+}
+
+.fixed-btn>button.gis-button {
+    margin-right: 5px;
+}
+
+.fixed-area {
+    height: 105px !important;
+    max-height: 105px;
+    resize: none;
+}
+
+.p-field.lavorazione-step-3>div.lavorazione-content>label {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Scrollbar */
+.for-lavorazione::-webkit-scrollbar-thumb,
+.for-creazione::-webkit-scrollbar-thumb,
+.for-poligoni::-webkit-scrollbar-thumb,
+.tablePoligoniWorkspace::-webkit-scrollbar-thumb,
+.fixed-area::-webkit-scrollbar-thumb {
+    background-color: #59565652;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.for-lavorazione::-webkit-scrollbar-track,
+.for-creazione::-webkit-scrollbar-track,
+.for-poligoni::-webkit-scrollbar-track,
+.tablePoligoniWorkspace::-webkit-scrollbar-track,
+.fixed-area::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(169 169 169 / 30%);
+}
+
+.for-lavorazione::-webkit-scrollbar,
+.for-creazione::-webkit-scrollbar,
+.for-poligoni::-webkit-scrollbar,
+.tablePoligoniWorkspace::-webkit-scrollbar,
+.fixed-area::-webkit-scrollbar {
+    width: 7px;
+}
+
+.btn-salva-frm {
+    border: 1px solid #00985b !important;
+    background: #fff !important;
+    padding: 11px 37px !important;
+    color: #00985b !important;
+    font-weight: 600;
+    height: 44px !important;
+}
+
+.btn-salva-frm:hover,
+.btn-salva-frm:focus {
+    background: #4caf50 !important;
+    color: #fff !important;
+}
+
+#custom-dialog-csv>div>div.ui-dialog-content.ui-widget-content>div.ui-dialog-footer>button>span.ui-button-text.ui-clickable {
+    margin-left: 35px;
+    margin-right: 10px;
+}
+
+body .ui-dialog .ui-dialog-footer {
+    border-top: none !important;
+}
+
+.custom-dialog-csv-icon-header {
+    font-size: 3.15rem !important;
+    display: block !important;
+    position: relative;
+    float: left;
+}
+
+span.custom-dialog-csv-title {
+    text-align: center;
+    color: #0d5f3f !important;
+}
+
+.paddingTopGrid {
+    padding-top: 5px;
+}
+
+.contentCell {
+    color: #30373D;
+    font-size: 11.5px;
+    text-align: left;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    width: 50%;
+}
+
+.centerPositionCell {
+    text-align: left;
+    width: 25%;
+    color: #30373D;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.textBold {
+    font-weight: 700 !important;
+}
+
+.contentLinkCell {
+    color: #9A9A9A;
+    font-size: 12px;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    padding: 0px;
+}
+
+.tagSuoloPoligono {
+    border-radius: 10px;
+    margin: 0 2px 0 10px;
+    float: right;
+    color: #30373d;
+    width: 40px;
+    text-align: center;
+}
+
+
+.headerStep {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-right: -0.5em;
+    margin-left: -0.5em;
+    margin-top: -0.5em;
+}
+
+
+.enableSelectionVigente {
+    color: #ffffff;
+    background-color: #377b4f;
+    border-radius: 4px !important;
+}
+
+.disableSelectionVigente {
+    color: #377b4f;
+    background: transparent;
+}
+
+span.ui-accordion-toggle-icon.pi.pi-fw.pi-caret-right,
+span.ui-accordion-toggle-icon.pi.pi-fw.pi-caret-down {
+    float: right;
+}
+
+.ui-accordion-content.ui-widget-content {
+    border: 0 !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+.fixBtn {
+    float: inherit !important;
+    left: 55%;
+}
+
+#dichiarazioniSuolo>div.ui-accordion-content-wrapper.ng-trigger-tabContent>div {
+    padding: 0;
+}
+
+.label-esito {
+    padding: 0 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #fff;
+}
+
+.label-esito.DA_LAVORARE {
+    background: #70b8d5;
+}
+
+.label-esito.APPROVATO {
+    background: #00985b;
+}
+
+.label-esito.PARZIALE {
+    background: #ed9300;
+}
+
+.label-esito.RESPINTO {
+    background: #950612;
+}
+
+#spinnerCreazione>div {
+    position: absolute;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-top: -36px;
+    margin-left: 209px;
+}
+
+#spinnerWorkspaceLavorazione>div {
+    position: absolute;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: -46px;
+    margin-left: 199px;
+}
+
+.button-header-tab {
+    position: absolute;
+    right: 40px;
+    margin-top: -40px;
+    border: none;
+}
+
+.button-header-tab>i {
+    font-size: 20px;
+}
+
+.button-header-tab2 {
+    position: absolute;
+    right: 40px;
+    margin-top: 0px;
+    border: none;
+}
+.button-header-tab2 > i {
+    font-size: 20px;
+}
+
+.p-grid.headerStep {
+    margin: 0;
+}
+
+.noMargin {
+    margin: 0;
+}
+
+#dichiarazioniSuolo>div.ui-accordion-content-wrapper.ng-trigger-tabContent {
+    max-height: 450px;
+    overflow: hidden;
+    overflow-y: scroll;
+    /*Fix firefox scrollbar*/
+    scrollbar-color: #7f7f7f7d #ffffff42;
+    scrollbar-width: thin;
+}
+
+.for-poligoni #triggerNewWin {
+    display: none;
+}
+
+.ui-dialog-titlebar-icons {
+    z-index: 99999;
+    position: relative;
+}
+
+#poligoni-interi>div,
+#poligoni-area>div {
+    padding: 0;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li>a>span {
+    background: transparent !important;
+    position: initial;
+    margin-top: initial;
+    margin-left: initial;
+    color: initial;
+    border: initial;
+    text-align: initial;
+    border-radius: initial;
+    height: initial;
+    width: initial;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li>a {
+    padding: 5px;
+    width: 140px;
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid #00985b;
+    background: #e8e9e9;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li {
+    margin: 0px !important;
+    float: left;
+}
+
+body .ui-tabview .ui-tabview-nav>li.ui-state-active {
+    background-color: #ffffff;
+    border-color: transparent !important;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li.ui-state-active>a {
+    background: #00985b;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li.ui-state-active>a {
+    background: #00985b;
+    width: 140px;
+}
+
+#creaLavorazione>div>div.card-content>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div:nth-child(2)>div>p-tabview>div>ul>li.ui-state-active>a>span {
+    color: #fff;
+}
+
+#poligoni-area>div {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#creaLavorazione>div>div.card-content.ng-tns-c206-27>gis-wizard-component>div>div>div.step2>creazione-lavorazione>div>div>p-tabview>div>ul {
+    border: 0;
+    background: transparent;
+}
+
+.ui-dialog-titlebar {
+    text-align: center;
+}
+
+.ui-confirmdialog-icon {
+    text-align: left !important;
+}

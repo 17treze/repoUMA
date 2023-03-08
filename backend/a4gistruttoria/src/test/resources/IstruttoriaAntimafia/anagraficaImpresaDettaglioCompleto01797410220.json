@@ -1,0 +1,309 @@
+{
+    "header": {
+        "esecutore": "PROVINCIA AUTONOMA DI TRENTO",
+        "servizio": "Dettaglio completo impresa",
+        "esito": "OK"
+    },
+    "dati": {
+        "listaimprese": null,
+        "datiimpresa": {
+            "estremiimpresa": {
+                "denominazione": "SOCIETA' AGRICOLA FALDA DI FERRARI ANTONELLO M. E ALBERTO SOCIETA' SEMPLICE",
+                "codicefiscale": "01797410220",
+                "partitaiva": "01797410220",
+                "formagiuridica": {
+                    "cformagiuridica": "SE",
+                    "descrizione": "SOCIETA' SEMPLICE"
+                },
+                "datiiscrizioneri": {
+                    "numerori": "TN-2002-23572",
+                    "data": "20020730",
+                    "sezioni": {
+                        "sezione": [
+                            {
+                                "csezione": "S",
+                                "descrizione": "SOCIETA SEMPLICE",
+                                "dtiscrizione": "20020730",
+                                "coltdiretto": null
+                            },
+                            {
+                                "csezione": "G",
+                                "descrizione": "IMPRESA AGRICOLA",
+                                "dtiscrizione": "20020924",
+                                "coltdiretto": null
+                            }
+                        ]
+                    }
+                },
+                "datiiscrizionerea": [
+                    {
+                        "nrea": "178293",
+                        "cciaa": "TN",
+                        "flagsede": "SI",
+                        "itrasferimentosede": null,
+                        "faggiornamento": null,
+                        "data": "20020726",
+                        "dtultaggiornamento": "20160601",
+                        "cfonte": "RI",
+                        "cessazione": null
+                    }
+                ],
+                "elemento": null
+            },
+            "oggettosociale": "OGGETTO SOCIALE:L'ESERCIZIO DI IMPRESA AGRICOLA AI SENSI DELL'ART. 2135 DEL COD. CIV. E QUINDIDI ESERCITARE LE ATTIVITA' DIRETTE ALLA COLTIVAZIONE DEI TERRENI, ALLASILVICOLTURA, ALL'ALLEVAMENTO DEL BESTIAME ED ALLE ATTIVITA' CONNESSE E DIRETTEALLA LAVORAZIONE, TRASFORMAZIONE ED ALIENAZIONE, ANCHE IN FORMA DIRETTA ALLALAVORAZIONE, TRASFORMAZIONE ED ALIENAZIONE, ANCHE IN FORMA DIRETTA, DEI PRODOTTIAGRICOLI E ZOOTECNICI E DI TUTTE LE ATTIVITA' COMUNQUE RIENTRANTI NELL'ESERCIZIONORMALE DELL'AGRICOLTURA. LA SOCIETA' POTRA' AFFITTARE E CONDURRE, ACQUISTARE EVENDERE FONDI RUSTICI ED AZIENDE AGRICOLE E ZOOTECNICHE IN GENERE. ESSA POTRA'INOLTRE COMPIERE TUTTE LE OPERAZIONI MOBILIARI, IMMOBILIARI E FINANZIARIECOMPRESA L'ASSUNZIONE DEI MUTUI IPOTECARI AVENTI PERTINENZA CON L'OGGETTOSOCIALE ED INOLTRE ASSUMERE INTERESSENZE, QUOTE, PARTECIPAZIONI ANCHE AZIONARIEIN ALTRE SOCIETA' LA SOCIETA' POTRA' INOLTRE CONCEDERE FIDEJUSSIONI, AVALLI EDALTRE GARANZIE A FAVORE DI TERZI.",
+            "dtfondazione": null,
+            "codiceformaammv": null,
+            "descformaammv": null,
+            "duratasocieta": {
+                "dtcostituzione": "20020626",
+                "dttermine": "20301231",
+                "durataillimitata": null,
+                "scadenzeesercizi": {
+                    "dtprimoesercizio": "20021231",
+                    "dtsuccessive": "31/12"
+                }
+            },
+            "capitali": null,
+            "capitaleinvestito": null,
+            "informazionisede": {
+                "insegna": null,
+                "indirizzo": {
+                    "provincia": "TRENTO",
+                    "comune": "SELLA GIUDICARIE",
+                    "ccomune": "022246",
+                    "toponimo": "LOCALITA'",
+                    "via": "CORE'",
+                    "ncivico": null,
+                    "cap": "38087",
+                    "stato": null,
+                    "frazione": null,
+                    "altreindicazioni": "BREGUZZO",
+                    "stradario": null,
+                    "telefono": null,
+                    "fax": null,
+                    "indirizzopec": "FALDA@PEC.COLDIRETTI.IT"
+                },
+                "attivita": "",
+                "infoattivita": {
+                    "dtinizioattivita": "20020803",
+                    "statoattivita": null
+                },
+                "codiciistat02": null,
+                "codiceatecoul": {
+                    "attivitaistat": [
+                        {
+                            "cattivita": "0141",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Allevamento di bovini e bufale da latte, produzione di latte crudo",
+                            "cimportanza": "P",
+                            "dtinizioattivita": "20020803"
+                        },
+                        {
+                            "cattivita": "0161",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Attivita' di supporto alla produzione vegetale",
+                            "cimportanza": "S",
+                            "dtinizioattivita": "20070901"
+                        },
+                        {
+                            "cattivita": "813",
+                            "tcodifica": "07",
+                            "cfonte": null,
+                            "descattivita": "Cura e manutenzione del paesaggio (inclusi parchi, giardini e aiuole)",
+                            "cimportanza": "S",
+                            "dtinizioattivita": "20070901"
+                        }
+                    ]
+                },
+                "ruoliloc": null,
+                "datiartigiani": null,
+                "commerciodettaglio": null,
+                "cessazione": null,
+                "procedureconcorsuali": null
+            },
+            "personesede": {
+                "persona": [
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "178293",
+                            "progressivopersona": "1",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "FERRARI",
+                            "nome": "ANTONELLO MARIO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TIONE DI TRENTO",
+                                "ccomune": "022199",
+                                "stato": null,
+                                "data": "19661206"
+                            },
+                            "codicefiscale": "FRRNNL66T06L174D",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "SELLA GIUDICARIE",
+                                "ccomune": "022246",
+                                "toponimo": "VIA",
+                                "via": "S. ANDREA",
+                                "ncivico": "80",
+                                "cap": "38087",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": "BREGUZZO",
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIO",
+                                    "ccarica": "ALTRACARICA",
+                                    "dtinizio": "20020626",
+                                    "dtfine": null
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "1"
+                    },
+                    {
+                        "identificativo": {
+                            "pressocciaa": "TN",
+                            "pressonrea": "178293",
+                            "progressivopersona": "2",
+                            "progressivoloc": "0"
+                        },
+                        "personafisica": {
+                            "cognome": "FERRARI",
+                            "nome": "ALBERTO",
+                            "sesso": "MASCHILE",
+                            "estreminascita": {
+                                "provincia": "TRENTO",
+                                "comune": "TIONE DI TRENTO",
+                                "ccomune": "022199",
+                                "stato": null,
+                                "data": "19760717"
+                            },
+                            "codicefiscale": "FRRLRT76L17L174S",
+                            "cittadinanza": null,
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "SELLA GIUDICARIE",
+                                "ccomune": "022246",
+                                "toponimo": "VIA",
+                                "via": "S. ANDREA",
+                                "ncivico": "80",
+                                "cap": "38087",
+                                "stato": null,
+                                "frazione": null,
+                                "altreindicazioni": "BREGUZZO",
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            }
+                        },
+                        "personagiuridica": null,
+                        "cariche": {
+                            "carica": [
+                                {
+                                    "descrizione": "SOCIO",
+                                    "ccarica": "COM",
+                                    "dtinizio": "20020626",
+                                    "dtfine": null
+                                },
+                                {
+                                    "descrizione": "RESPONSABILE",
+                                    "ccarica": "RE",
+                                    "dtinizio": "20020626",
+                                    "dtfine": "20020626"
+                                }
+                            ]
+                        },
+                        "fallimentopersona": null,
+                        "elettore": null,
+                        "rappresentante": null,
+                        "elemento": "2"
+                    }
+                ],
+                "totale": "2"
+            },
+            "localizzazioni": [
+                {
+                    "localizzazione": [
+                        {
+                            "numerotipo": {
+                                "cciaa": "TN",
+                                "nrea": "178293",
+                                "numero": "1",
+                                "tipo1": "AGRITURISMO",
+                                "tipo2": null,
+                                "tipo3": null,
+                                "tipo4": null,
+                                "tipo5": null
+                            },
+                            "denominazione": null,
+                            "insegna": "R.T.I. MALGA ZELEDRIA",
+                            "indirizzo": {
+                                "provincia": "TRENTO",
+                                "comune": "PINZOLO",
+                                "ccomune": "022143",
+                                "toponimo": "LOCALITA'",
+                                "via": "MALGA ZELEDRIA",
+                                "ncivico": ".",
+                                "cap": "38086",
+                                "stato": null,
+                                "frazione": "MADONNA DI CAMPIGLIO",
+                                "altreindicazioni": null,
+                                "stradario": null,
+                                "telefono": null,
+                                "fax": null,
+                                "indirizzopec": null
+                            },
+                            "dtapertura": "20110701",
+                            "attivita": "ATTIVITA' AGRITURISTICA (ALLOGGIO)",
+                            "codiciistat02": null,
+                            "codiceatecoul": {
+                                "attivitaistat": [
+                                    {
+                                        "cattivita": "552052",
+                                        "tcodifica": "07",
+                                        "cfonte": null,
+                                        "descattivita": "Attivita' di alloggio connesse alle aziende agricole",
+                                        "cimportanza": "P",
+                                        "dtinizioattivita": "20110701"
+                                    }
+                                ]
+                            },
+                            "ruoliloc": null,
+                            "datiartigiani": null,
+                            "commerciodettaglio": null,
+                            "personeloc": null,
+                            "cessazioneloc": null,
+                            "elemento": "1"
+                        }
+                    ],
+                    "elemento": "1",
+                    "provincia": "TN"
+                }
+            ]
+        },
+        "listaul": null,
+        "schedaul": null,
+        "listapersone": null,
+        "schedapersona": null,
+        "errore": null
+    }
+}

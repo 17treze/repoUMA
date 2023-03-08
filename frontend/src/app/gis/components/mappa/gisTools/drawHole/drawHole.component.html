@@ -1,0 +1,8 @@
+<div id="drawHoleElTool" (click)="enableTool()" [class.active-tool]="isActive()" [ngClass]="{'toolDisattivato':!canUseTool}">
+  <button 
+  pTooltip="Crea buco" tooltipPosition="top"
+  type="button"
+  [disabled]="!canUseTool" 
+  class='btn btn-primary'
+><i class="far fa-circle"></i></button>
+</div>

@@ -1,0 +1,898 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "A4G - Fascicolo - Territorio",
+		"description": "Modulo per l'erogazione dei servizi relativi al territorio",
+		"version": "1.0.0"
+	},
+	"servers": [{
+			"url": "http://localhost:8080/fascicolo/territorio",
+			"description": "Generated server url"
+		}
+	],
+	"tags": [{
+			"name": "SezioneCatastaleController",
+			"description": "Sezione catastale API: gestione delle sezioni catastali a cui afferisce il territorio"
+		}, {
+			"name": "PianoColturaleController",
+			"description": "Piano Colturale API: gestione piani colturali di un fascicolo"
+		}, {
+			"name": "ConduzioneTerrenoController",
+			"description": "Conduzione Terreno API: visura delle conduzioni terreni"
+		}
+	],
+	"paths": {
+		"/api/v1/conduzione-terreno/{cuaa}": {
+			"get": {
+				"tags": ["ConduzioneTerrenoController"],
+				"summary": "Restituisce i dati relativi alle conduzione terreni",
+				"description": "Restituisce i dati relativi alle conduzione terreni",
+				"operationId": "getConduzioneTerreni",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ConduzioneSianDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": ["ConduzioneTerrenoController"],
+				"summary": "Salva i dati relativi alle conduzione terreni in AGS",
+				"description": "Salva i dati relativi alle conduzione terreni in AGS",
+				"operationId": "salvaConduzioneTerreni",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"$ref": "#/components/schemas/ConduzioneSianDto"
+								}
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/v1/fascicoli/{cuaa}/controllo-completezza": {
+			"get": {
+				"tags": ["fascicoli-controller"],
+				"operationId": "getControlloCompletezzaFascicolo",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "object",
+									"additionalProperties": {
+										"$ref": "#/components/schemas/EsitoControlloDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/fascicoli/private/{cuaa}/controllo-completezza-sincrono": {
+			"get": {
+				"tags": ["fascicoli-private-controller"],
+				"operationId": "controlloCompletezzaFascicoloSincrono",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "object",
+									"additionalProperties": {
+										"$ref": "#/components/schemas/EsitoControlloDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/fascicoli/private/{cuaa}/start-controllo-completezza": {
+			"put": {
+				"tags": ["fascicoli-private-controller"],
+				"operationId": "startControlloCompletezzaFascicoloAsincrono",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/v1/fascicoli/private/{cuaa}/controllo-completezza": {
+			"get": {
+				"tags": ["fascicoli-private-controller"],
+				"operationId": "queryControlloCompletezzaFascicolo",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "object",
+									"additionalProperties": {
+										"$ref": "#/components/schemas/EsitoControlloDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["fascicoli-private-controller"],
+				"operationId": "rimozioneControlliCompletezza",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/v1/fascicoli/private/{cuaa}/conduzione-terreni": {
+			"get": {
+				"tags": ["fascicoli-private-controller"],
+				"operationId": "getReportValidazione",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ReportValidazioneTerreniAgsDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/colture/{cuaa}": {
+			"get": {
+				"tags": ["PianoColturaleController"],
+				"summary": "Restituisce gli usi del suolo previsti dal piano colturale del fascicolo dell'anno e validi alla data indicata",
+				"description": "utilizzare il formato yyyy-MM-dd'T'HH:mm ; Usare la sigla di una provincia per il campo provincia ; Sigla Provincia Campo opzionale: Valori di default TN e BZ",
+				"operationId": "getPianoColturale",
+				"parameters": [{
+						"name": "cuaa",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}, {
+						"name": "data",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "utilizzare il formato yyyy-MM-dd'T'HH:mm",
+							"format": "date-time"
+						}
+					}, {
+						"name": "province",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"description": "Opzionale - Default TN e BZ",
+							"items": {
+								"type": "string",
+								"description": "Opzionale - Default TN e BZ"
+							}
+						}
+					}, {
+						"name": "codiceAtto",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}, {
+						"name": "titolo",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"$ref": "#/components/schemas/TitoloConduzione"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ParticellaDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/sezione": {
+			"get": {
+				"tags": ["SezioneCatastaleController"],
+				"summary": "Restituisce i dati relativi alle sezioni catastali italiane",
+				"description": "Restituisce i dati relativi alle sezioni catastali italiane",
+				"operationId": "ricerca",
+				"parameters": [{
+						"name": "siglaProvincia",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "Sigla della provincia del comune amministrativo della sezione (tutto maiuscolo)",
+							"example": "TN"
+						}
+					}, {
+						"name": "istatProvincia",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "Codice istat della provincia del comune amministrativo della sezione",
+							"example": "022"
+						}
+					}, {
+						"name": "denominazioneSezione",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "Parte della denominazione della sezione (si usa per contenuto, case insensitive)",
+							"example": "Andalo"
+						}
+					}, {
+						"name": "codiceSezione",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "Codice esatto della sezione catastale (case sensitive)",
+							"example": "P630"
+						}
+					}, {
+						"name": "q",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "String generica usata per cercare sia per contenuto della denominazione della sezione che per codice",
+							"example": "P630"
+						}
+					}, {
+						"name": "tipoComune",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "string",
+							"description": "Valori accettati AMM, CAT. Se AMM recupera comuni amministativi, se CAT recupera comuni catastali",
+							"example": "CAT"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/RisultatiPaginatiSezioneCatastale"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/v1/framework/events/{idEvent}/reprocess": {
+			"get": {
+				"tags": ["event-store-controller"],
+				"operationId": "reprocessEvent",
+				"parameters": [{
+						"name": "idEvent",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"CaratteristicheZonaDto": {
+				"type": "object",
+				"properties": {
+					"casiParticolari": {
+						"type": "string"
+					},
+					"casiParticolariDescrizione": {
+						"type": "string"
+					},
+					"flagGiust": {
+						"type": "string"
+					},
+					"flagGiustDescrizione": {
+						"type": "string"
+					},
+					"codiZVN": {
+						"type": "string"
+					},
+					"codiZVNDescrizione": {
+						"type": "string"
+					}
+				}
+			},
+			"ConduzioneSianDto": {
+				"type": "object",
+				"properties": {
+					"superficieCondotta": {
+						"type": "string"
+					},
+					"codiceTipoConduzione": {
+						"type": "string"
+					},
+					"descrizioneTipoConduzione": {
+						"type": "string"
+					},
+					"dataInizioConduzione": {
+						"type": "string"
+					},
+					"dataFineConduzione": {
+						"type": "string"
+					},
+					"codiceFiscaleProprietarioList": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						}
+					},
+					"datiParticella": {
+						"$ref": "#/components/schemas/ParticellaSianDto"
+					},
+					"caratteristicheZona": {
+						"$ref": "#/components/schemas/CaratteristicheZonaDto"
+					},
+					"documentiConduzione": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/DocumentoConduzioneDto"
+						}
+					}
+				}
+			},
+			"DocumentoConduzioneDto": {
+				"type": "object",
+				"properties": {
+					"dataRilascio": {
+						"type": "string"
+					},
+					"dataScadenza": {
+						"type": "string"
+					},
+					"numeroDocumento": {
+						"type": "string"
+					},
+					"tipoDocumento": {
+						"type": "string"
+					}
+				}
+			},
+			"ParticellaSianDto": {
+				"type": "object",
+				"properties": {
+					"provincia": {
+						"type": "string"
+					},
+					"comune": {
+						"type": "string"
+					},
+					"sezione": {
+						"type": "string"
+					},
+					"foglio": {
+						"type": "string"
+					},
+					"particella": {
+						"type": "string"
+					},
+					"subalterno": {
+						"type": "string"
+					}
+				}
+			},
+			"EsitoControlloDto": {
+				"type": "object",
+				"properties": {
+					"esito": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"idControllo": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"segnalazioni": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/SegnalazioneDto"
+						}
+					}
+				}
+			},
+			"SegnalazioneDto": {
+				"type": "object",
+				"properties": {
+					"descrizione": {
+						"type": "string"
+					},
+					"tipo": {
+						"type": "string",
+						"enum": ["ERRORE", "AVVERTENZA"]
+					}
+				}
+			},
+			"ReportValidazioneFascicoloIsolaAziendaleDto": {
+				"type": "object",
+				"properties": {
+					"codiceIsola": {
+						"type": "string"
+					},
+					"superficieIsola": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"particelleCondotteList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloParticellaCatastaleDto"
+						}
+					},
+					"parcelleRiferimentoList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloParcelleRiferimentoDto"
+						}
+					},
+					"appezzamentiList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloPianoColturaleDto"
+						}
+					}
+				}
+			},
+			"ReportValidazioneFascicoloParcelleRiferimentoDto": {
+				"type": "object",
+				"properties": {
+					"codiceParcella": {
+						"type": "string"
+					},
+					"codiceSuolo": {
+						"type": "string"
+					},
+					"descrizioneSuolo": {
+						"type": "string"
+					},
+					"superficie": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			},
+			"ReportValidazioneFascicoloParticellaCatastaleDto": {
+				"type": "object",
+				"properties": {
+					"comuneAmministrativo": {
+						"type": "string"
+					},
+					"codiceCatastale": {
+						"type": "string"
+					},
+					"sezione": {
+						"type": "string"
+					},
+					"foglio": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"particella": {
+						"type": "string"
+					},
+					"subalterno": {
+						"type": "string"
+					},
+					"superficieGraficaCondotta": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"percentualeConduzione": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"protocolloDocumentoConduzione": {
+						"type": "string"
+					}
+				}
+			},
+			"ReportValidazioneFascicoloPianoColturaleDto": {
+				"type": "object",
+				"properties": {
+					"codiceAppezzamento": {
+						"type": "string"
+					},
+					"codiceDettaglioAppezzamento": {
+						"type": "string"
+					},
+					"superficieDettaglioAppezzamento": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"codiceColtura": {
+						"type": "string"
+					},
+					"descrizioneColtura": {
+						"type": "string"
+					},
+					"criterioMantenimento": {
+						"type": "string"
+					}
+				}
+			},
+			"ReportValidazioneFascicoloSchedarioFrutticoloDto": {
+				"type": "object",
+				"properties": {
+					"provincia": {
+						"type": "string"
+					},
+					"comune": {
+						"type": "string"
+					},
+					"foglio": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"particella": {
+						"type": "string"
+					},
+					"subalterno": {
+						"type": "string"
+					},
+					"tipoUnitaArborea": {
+						"type": "string"
+					},
+					"progressivoUnitaArborea": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"superficie": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"varieta": {
+						"type": "string"
+					},
+					"annoImpianto": {
+						"type": "string"
+					},
+					"sestoImpianto": {
+						"type": "string"
+					},
+					"formaAllevamento": {
+						"type": "string"
+					},
+					"numeroPiante": {
+						"type": "string"
+					},
+					"copertura": {
+						"type": "string"
+					},
+					"antibrina": {
+						"type": "string"
+					},
+					"antigrandine": {
+						"type": "string"
+					}
+				}
+			},
+			"ReportValidazioneFascicoloTitoloConduzioneDto": {
+				"type": "object",
+				"properties": {
+					"tipologia": {
+						"type": "string"
+					},
+					"descrizione": {
+						"type": "string"
+					},
+					"protocollo": {
+						"type": "string"
+					},
+					"dataSottoscrizione": {
+						"type": "string"
+					},
+					"dataScadenza": {
+						"type": "string"
+					}
+				}
+			},
+			"ReportValidazioneTerreniAgsDto": {
+				"type": "object",
+				"properties": {
+					"isoleList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloIsolaAziendaleDto"
+						}
+					},
+					"titoliConduzioneList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloTitoloConduzioneDto"
+						}
+					},
+					"schedarioFrutticoloList": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ReportValidazioneFascicoloSchedarioFrutticoloDto"
+						}
+					}
+				}
+			},
+			"TitoloConduzione": {
+				"type": "string",
+				"enum": ["PROPRIETA", "AFFITTO", "MEZZADRIA", "ALTRO"]
+			},
+			"CodificaColtura": {
+				"type": "object",
+				"properties": {
+					"codiceSuolo": {
+						"type": "string"
+					},
+					"codiceVarieta": {
+						"type": "string"
+					},
+					"codiceDestinazioneUso": {
+						"type": "string"
+					},
+					"codiceUso": {
+						"type": "string"
+					},
+					"codiceQualita": {
+						"type": "string"
+					}
+				}
+			},
+			"ColturaDto": {
+				"type": "object",
+				"properties": {
+					"superficieAccertata": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"codifica": {
+						"$ref": "#/components/schemas/CodificaColtura"
+					}
+				}
+			},
+			"ConduzioneDto": {
+				"type": "object",
+				"properties": {
+					"titolo": {
+						"type": "string",
+						"enum": ["PROPRIETA", "AFFITTO", "MEZZADRIA", "ALTRO"]
+					},
+					"codiceAtto": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"descrizioneAtto": {
+						"type": "string"
+					}
+				}
+			},
+			"CriterioMantenimento": {
+				"type": "string",
+				"enum": ["NESSUNA_PRATICA", "PRATICA_ORDINARIA", "PASCOLAMENTO_CON_ANIMALI_DI_TERZI", "PASCOLAMENTO_CON_ANIMALI_PROPRI", "PASCOLAMENTO_E_SFALCIO", "PRATICHE_COLTURALI_VOLTE_AL_MIGLIORAMENTO_DEL_PASCOLO", "SFALCIO_CON_CADENZA_BIENNALE", "SFALCIO_MANUALE", "SFALCIO_MECCANIZZATO"]
+			},
+			"ParticellaDto": {
+				"type": "object",
+				"properties": {
+					"numero": {
+						"type": "string"
+					},
+					"codiceNazionale": {
+						"type": "string"
+					},
+					"subalterno": {
+						"type": "string"
+					},
+					"foglio": {
+						"type": "string"
+					},
+					"conduzioneDto": {
+						"$ref": "#/components/schemas/ConduzioneDto"
+					},
+					"colture": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ColturaDto"
+						}
+					},
+					"criterioMantenimento": {
+						"$ref": "#/components/schemas/CriterioMantenimento"
+					}
+				}
+			},
+			"ComuneAmministrativo": {
+				"type": "object",
+				"properties": {
+					"codiceFiscale": {
+						"type": "string"
+					},
+					"codiceIstat": {
+						"type": "string"
+					},
+					"denominazione": {
+						"type": "string"
+					},
+					"provincia": {
+						"$ref": "#/components/schemas/Provincia"
+					}
+				}
+			},
+			"Provincia": {
+				"type": "object",
+				"properties": {
+					"sigla": {
+						"type": "string"
+					},
+					"denominazione": {
+						"type": "string"
+					},
+					"codiceIstat": {
+						"type": "string"
+					}
+				}
+			},
+			"RisultatiPaginatiSezioneCatastale": {
+				"type": "object",
+				"properties": {
+					"count": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"risultati": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/SezioneCatastale"
+						}
+					}
+				}
+			},
+			"SezioneCatastale": {
+				"type": "object",
+				"properties": {
+					"codice": {
+						"type": "string"
+					},
+					"denominazione": {
+						"type": "string"
+					},
+					"comune": {
+						"$ref": "#/components/schemas/ComuneAmministrativo"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+p-table {
+}
+
+.boxgrey h5 {
+    color: #0d5f3f;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.boxgrey div > h5 {
+    border-bottom: 2px solid #0d5f3f;
+}
+
+.boxgrey p-button{
+    display: inline !important;
+}

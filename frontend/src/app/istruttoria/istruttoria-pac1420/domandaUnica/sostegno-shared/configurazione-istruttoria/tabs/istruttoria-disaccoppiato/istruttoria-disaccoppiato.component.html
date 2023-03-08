@@ -1,0 +1,171 @@
+<form *ngIf="importiForm" [formGroup]="importiForm">
+  <p-toast key="tst" [style]="{marginTop: '70px'}">
+  </p-toast>
+  <p-toast position="center" key="checkSalvataggio" [modal]="true" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+        <h3>{{ message.summary }}</h3>
+        <p>{{ message.detail }}</p>
+      </div>
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="confermaSalvataggio()" label="Si" class="ui-button-success"></button>
+        </div>
+        <div class="ui-g-6">
+          <button type="button" pButton (click)="rejectSalvataggio()" label="No" class="ui-button-secondary"></button>
+        </div>
+      </div>
+    </ng-template>
+  </p-toast>
+  <div class="boxgrey" formGroupName="datiIstruttoria">
+    <div class="d-flex  align-items-center">
+        <span class="icon  icon--p  icon--dark  icon--l  mr-3">
+          <span class="icon__img">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="27" viewBox="0 0 32 27">
+              <g fill="#FFF" fill-rule="evenodd">
+                  <path d="M7.448 11C3.34 11 0 14.29 0 18.333c0 4.044 3.341 7.334 7.448 7.334s7.448-3.29 7.448-7.334c0-4.043-3.341-7.333-7.448-7.333zm0 12.833c-3.08 0-5.586-2.467-5.586-5.5 0-3.032 2.506-5.5 5.586-5.5 3.08 0 5.586 2.468 5.586 5.5 0 3.033-2.506 5.5-5.586 5.5z" transform="translate(.111 .556)"/>
+                  <path d="M7.448 15.583c-1.54 0-2.793 1.234-2.793 2.75 0 1.517 1.253 2.75 2.793 2.75 1.54 0 2.793-1.233 2.793-2.75 0-1.516-1.253-2.75-2.793-2.75zm0 3.667c-.513 0-.931-.411-.931-.917 0-.505.418-.916.93-.916.514 0 .932.411.932.916 0 .506-.418.917-.931.917z" transform="translate(.111 .556)"/>
+                  <path d="M29.916 16.071v-3.238c0-2.022-1.67-3.666-3.724-3.666H24.33V4.583c0-.505.418-.916.93-.916V1.833c-1.54 0-2.792 1.234-2.792 2.75v4.584H18.38l-2.234-7.334h1.542V0H2.793v1.833h1.862v5.851c-1.573.4-3.052 1.135-4.317 2.164l1.186 1.414C3.185 9.91 5.289 9.167 7.448 9.167c5.133 0 9.31 4.112 9.31 9.166v2.75h3.926c.445 2.598 2.745 4.584 5.508 4.584 3.08 0 5.586-2.468 5.586-5.5 0-1.626-.72-3.088-1.862-4.096zm-23.4-8.699V1.833h7.687l2.235 7.334h-2.822c-1.769-1.158-3.89-1.834-6.168-1.834-.312 0-.622.014-.931.04zM15.768 11h10.425c1.027 0 1.862.822 1.862 1.833v2.148c-.583-.203-1.21-.314-1.862-.314H17.98c-.492-1.366-1.25-2.609-2.214-3.667zm2.697 5.5h3.568c-.69.758-1.17 1.704-1.348 2.75H18.62v-.917c0-.624-.054-1.236-.156-1.833zm7.728 7.333c-2.054 0-3.724-1.644-3.724-3.666 0-2.022 1.67-3.667 3.724-3.667 2.053 0 3.724 1.645 3.724 3.667s-1.67 3.666-3.724 3.666z" transform="translate(.111 .556)"/>
+                  <path d="M27.123 20.167c0 .506-.417.916-.931.916s-.931-.41-.931-.916c0-.507.417-.917.93-.917.515 0 .932.41.932.917z" transform="translate(.111 .556)"/>
+              </g>
+            </svg>
+          </span>
+        </span>
+        <h3 class="mr-auto  mb-0  pb-0">Configurazione Disaccoppiato</h3>
+        <button *ngIf="!edit" type="button" class="btn  btn-white  w-auto  fs-16  mb-0" (click)="modifica()">MODIFICA</button>
+        <button *ngIf="edit" type="button" class="btn btn-green fs-16  mr-2" (click)="annulla()">ANNULLA</button>
+        <button *ngIf="edit" type="button" class="btn btn-green fs-16" (click)="salva()"
+          [disabled]="!importiForm.valid">SALVA</button>
+    </div>
+    <hr size="6" color="green">
+    <h4 class="fs-16  fw-700  my-3">{{ 'CONFIGURAZIONE_ISTRUTTORIA.interventiRichiesti' | translate }}</h4>
+    <div class="row">
+      <div class="col-6">
+        <div class="row  row--edit">
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75  row  align-items-center">
+              <div class="col-4">
+                <span class="icon  mr-2">
+                  <span class="icon__img">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+                      <g fill="none" fill-rule="evenodd">
+                          <rect width="43" height="43" x=".5" y=".5" fill="#F7F7F7" stroke="#D8D8D8" rx="4"/>
+                          <g fill="#30373D">
+                              <path d="M21.66 11.52C21.66 5.263 15.5.312 15.238.104c-.174-.138-.421-.138-.596 0C14.38.312 8.22 5.264 8.22 11.52c0 5.742 5.184 10.38 6.24 11.267v5.053c0 .266.215.48.48.48s.48-.214.48-.48v-5.053c1.056-.887 6.24-5.525 6.24-11.267zm-6.24 9.975v-5.432l2.708-2.253c.203-.17.231-.473.061-.677-.17-.204-.472-.231-.676-.062l-2.093 1.743v-1.632l2.708-2.254c.203-.169.231-.472.061-.676-.17-.204-.472-.231-.676-.062l-2.093 1.744V9.822l2.708-2.254c.203-.169.231-.472.061-.676-.17-.204-.472-.231-.676-.062L15.42 8.574V4.8c0-.265-.215-.48-.48-.48s-.48.215-.48.48v3.774L12.367 6.83c-.203-.17-.506-.142-.676.062-.17.204-.142.507.062.677l2.707 2.253v2.112l-2.093-1.743c-.203-.17-.506-.142-.676.062-.17.204-.142.507.062.677l2.707 2.252v1.632l-2.093-1.743c-.203-.17-.506-.142-.676.062-.17.204-.142.507.062.677l2.707 2.252v5.432c-1.632-1.531-5.28-5.456-5.28-9.975 0-5.037 4.54-9.345 5.76-10.41 1.22 1.065 5.76 5.373 5.76 10.41 0 4.52-3.648 8.444-5.28 9.975zM11.58 25.44h-.48v-3.524c.002-.637-.251-1.248-.703-1.697l-4.04-4.043c-.562-.56-1.471-.56-2.033 0l-.424.426V11.52c0-.533-.222-1.042-.613-1.405-.39-.363-.914-.548-1.446-.51-1.024.1-1.799.969-1.78 1.997v6.856c-.001.597.221 1.173.623 1.615l4.176 4.593v.774h-.48c-.265 0-.48.215-.48.48v3.36c0 .266.215.48.48.48h7.2c.265 0 .48-.214.48-.48v-3.36c0-.265-.215-.48-.48-.48zM1.395 19.426c-.241-.264-.375-.61-.375-.968v-6.856c-.013-.523.37-.971.89-1.04.278-.02.551.083.749.28.18.18.282.424.281.678v5.843c0 .382.15.749.422 1.018l2.599 2.599c.188.182.488.18.673-.006.185-.185.187-.485.006-.673l-2.204-2.203c-.09-.09-.14-.211-.14-.338 0-.126.05-.248.14-.337l.567-.566c.187-.185.488-.185.675 0l4.04 4.041c.27.27.421.636.422 1.018v3.524H5.82v-1.145l-4.425-4.869zM11.1 28.8H4.86v-2.4h6.24v2.4zM28.04 9.605c-.532-.038-1.056.147-1.446.51-.39.363-.613.872-.614 1.405v5.082l-.424-.424c-.561-.56-1.47-.56-2.032 0l-4.04 4.041c-.452.449-.705 1.06-.704 1.697v3.524h-.48c-.265 0-.48.215-.48.48v3.36c0 .266.215.48.48.48h7.2c.265 0 .48-.214.48-.48v-3.36c0-.265-.215-.48-.48-.48h-.48v-.774l4.176-4.593c.402-.442.625-1.018.624-1.615v-6.856c.018-1.028-.757-1.897-1.78-1.997zM25.02 28.8h-6.24v-2.4h6.24v2.4zm3.84-10.342c0 .358-.133.704-.374.968l-4.426 4.869v1.145h-4.32v-3.524c.001-.382.153-.748.422-1.018l4.042-4.041c.187-.185.488-.185.675 0l.567.566c.185.186.185.487 0 .672L23.24 20.3c-.124.12-.175.299-.13.466.043.168.175.3.342.343.168.044.347-.006.467-.13l2.599-2.6c.27-.269.422-.635.421-1.017V11.52c0-.254.101-.499.282-.678.198-.197.47-.299.75-.28.518.069.901.517.888 1.04v6.856zM14.6 28.94c-.088.092-.138.213-.14.34.001.033.004.065.01.096.005.03.015.06.029.087.01.03.025.06.043.086.018.025.037.05.057.072.19.186.493.186.682 0l.058-.072c.018-.027.032-.056.043-.086.014-.027.023-.056.028-.087.006-.031.01-.063.01-.096.001-.195-.116-.371-.296-.446-.18-.075-.387-.033-.525.106z" transform="translate(7 7)"/>
+                              <path d="M5.82 27.84h1.92c.265 0 .48-.214.48-.48 0-.265-.215-.48-.48-.48H5.82c-.265 0-.48.215-.48.48 0 .266.215.48.48.48zM8.998 27.802c.058.025.12.038.182.038.195.001.372-.116.446-.296.075-.18.034-.387-.105-.524-.138-.137-.344-.176-.523-.101-.059.023-.113.057-.159.1-.087.093-.137.214-.139.341-.004.196.115.373.298.442zM19.73 12.384c-.005-.03-.014-.059-.028-.086-.01-.03-.025-.06-.043-.086l-.058-.072c-.192-.178-.49-.178-.682 0-.02.022-.04.046-.057.072-.018.026-.033.055-.043.086-.014.027-.024.056-.03.086-.005.032-.008.064-.009.096.002.127.052.25.14.341.09.089.213.139.34.14.128 0 .25-.05.341-.14.09-.09.14-.213.14-.34-.002-.033-.005-.065-.01-.097z" transform="translate(7 7)"/>
+                          </g>
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+                <strong>{{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.greening' | translate }}</strong>
+              </div>
+              <div class="col-8">
+                <span>{{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.percentualeIncrementoPremio' | translate }}</span>
+              </div>
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+              <span  *ngIf="!edit">{{ dettaglioIstruttoria.percentualeIncrementoGreening }}</span>
+              <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="percentualeIncrementoGreening" />
+              <span class="ml-1">%</span>
+            </span>
+          </div>
+
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75  row  align-items-center">
+              <div class="col-4">
+                <span class="icon  mr-2">
+                  <span class="icon__img">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+                      <g fill="none" fill-rule="evenodd">
+                          <rect width="43" height="43" x=".5" y=".5" fill="#F7F7F7" stroke="#D8D8D8" rx="4"/>
+                          <g fill="#30373D" transform="translate(8 8)">
+                              <path d="M19.542 18.543l-3.732-1.651v-.739c1.589-.916 2.79-2.417 3.304-4.203.312.012.61-.077.899-.257.443-.276.743-.726.802-1.204.059-.479-.09-.96-.406-1.318-.094-.105-.2-.194-.315-.272 2.388-.521 3.601-1.261 3.601-2.204 0-1.148-1.801-1.868-4.062-2.3V1.917c0-.192-.115-.366-.293-.44-4.542-1.909-8.582-1.904-12.348.014-.16.082-.261.246-.261.426V4.31c-2.48.42-4.54 1.157-4.54 2.385 0 .995 1.337 1.76 3.97 2.281-.054.044-.107.09-.156.141-.318.33-.484.764-.468 1.222.018.512.309 1.005.776 1.321.296.2.6.299.914.291.5 1.827 1.712 3.359 3.33 4.29 0 .005-.003.009-.003.014v.637l-3.732 1.65c-1.797.795-2.958 2.574-2.958 4.531v3.931c0 .264.214.478.477.478h17.681c.264 0 .478-.214.478-.478v-3.93c0-1.958-1.16-3.737-2.958-4.531zM7.716 8.129c-.002-.224.134-.422.336-.49.054-.016.11-.03.165-.047.143-.043.289-.078.433-.117-.324.274-.638.495-.934.654zm10.925.461c-3.153 1.744-6.515-.425-7.802-1.573 2.367-.348 4.79-.256 7.037.298.458.113.774.528.767 1.01l-.002.265zM7.687 2.213c3.347-1.614 6.948-1.606 10.99.023v1.998c-1.98-.298-4.155-.406-5.734-.406-1.452 0-3.41.092-5.256.338V2.213zm-4.54 4.482c0-.649 3.458-1.912 9.796-1.912 6.339 0 9.796 1.263 9.796 1.912 0 .187-.596.819-3.162 1.336-.11-.794-.68-1.449-1.472-1.644-2.568-.634-5.354-.696-8.042-.212h-.002l-.035.008c-.39.07-.776.15-1.16.244l-.106.029c-.327.082-.655.165-.977.264-.01.003-.018.008-.028.01-.013.005-.027.008-.04.012-.583.18-.976.737-.958 1.356v.018c-2.715-.488-3.61-1.161-3.61-1.421zm4.909 4.615c-.028-.134-.111-.25-.23-.318-.073-.042-.156-.064-.238-.064-.052 0-.103.009-.153.025-.184.063-.354.072-.587-.085-.212-.143-.348-.359-.356-.562-.007-.197.064-.384.2-.525.137-.141.32-.219.517-.219.129 0 .258-.055.348-.147.06-.063.102-.123.128-.23.849-.321 1.655-.992 2.3-1.658.966.938 3.364 2.69 6.106 2.69.928 0 1.896-.203 2.86-.705.064.03.133.05.204.05.206 0 .401.088.538.242.138.156.2.358.173.568-.023.194-.158.385-.359.51-.2.126-.371.145-.588.069-.129-.046-.272-.034-.392.033-.12.066-.205.181-.234.315-.466 2.137-2.045 3.882-4.121 4.555l-.213.069c-.584.19-1.208.197-1.753.022-2.114-.68-3.704-2.456-4.15-4.635zm3.857 5.544c.362.117.739.175 1.12.175.406 0 .816-.066 1.22-.197l.213-.069c.134-.043.259-.102.389-.153v2.51c0 .921-.75 1.672-1.673 1.672-.922 0-1.672-.75-1.672-1.673v-2.423c.134.052.264.114.403.158zm1.27 4.894c1.448 0 2.627-1.18 2.627-2.629v-1.182l2.39 1.057v4.187H8.164v-4.187l2.39-1.057v1.182c0 1.45 1.179 2.629 2.628 2.629zm-8.364 1.325c0-1.58.938-3.015 2.39-3.656v7.109h-2.39v-3.453zm3.345 1.064H18.2v2.39H8.164v-2.39zm13.38 2.39h-2.389V19.415c1.452.642 2.39 2.078 2.39 3.657v3.453z"/>
+                              <circle cx="15.571" cy="10.996" r="1"/>
+                              <circle cx="10.793" cy="10.996" r="1"/>
+                              <path d="M28.967 14.806c-.013-.231-.191-.413-.418-.442.464-.802.42-1.748.418-1.796-.014-.243-.208-.437-.45-.451-.038-.002-.64-.03-1.287.19.009-.08.023-.156.023-.237 0-1.19-1.011-2.109-1.054-2.147-.182-.163-.456-.163-.638 0-.043.038-1.054.958-1.054 2.147v.003c-.659-.224-1.274-.196-1.313-.195-.243.014-.437.208-.45.451-.003.049-.048 1.02.431 1.837-.234.023-.419.21-.432.446-.002.05-.047 1.02.432 1.838-.234.022-.419.21-.432.446-.002.049-.047 1.02.432 1.837-.233.023-.418.21-.432.446-.003.059-.069 1.447.785 2.302.56.56 1.345.723 1.84.77v4.753c0 .264.214.478.478.478.263 0 .477-.214.477-.478V22.31c.48-.037 1.295-.186 1.871-.762.841-.84.776-2.206.773-2.263-.013-.232-.191-.414-.418-.443.464-.802.42-1.748.418-1.796-.013-.231-.191-.414-.418-.443.464-.801.42-1.748.418-1.796zm-.986.535c-.049.33-.17.76-.462 1.053-.294.293-.723.414-1.053.463.049-.33.169-.76.462-1.053.293-.293.723-.414 1.053-.463zm-3.16.281c.304.305.426.752.475 1.092-.34-.048-.787-.171-1.092-.475-.304-.305-.427-.752-.476-1.092.34.049.789.172 1.092.475zm0 2.284c.304.304.426.751.475 1.091-.34-.049-.788-.172-1.092-.475-.304-.305-.427-.752-.476-1.092.34.05.789.172 1.092.476zm2.697.727c-.293.293-.722.413-1.052.462.05-.33.17-.76.462-1.053.293-.293.722-.413 1.053-.462-.05.33-.17.76-.463 1.053zm0-4.477c-.293.293-.722.413-1.052.462.048-.33.169-.76.462-1.053.293-.293.723-.413 1.053-.462-.05.33-.17.76-.463 1.053zm-1.638-3.158c.2.268.418.657.418 1.072 0 .414-.219.803-.418 1.071-.199-.268-.417-.657-.417-1.071 0-.415.218-.804.417-1.072zm-1.06 2.34c.305.305.427.753.476 1.093-.34-.05-.788-.172-1.092-.476-.304-.304-.427-.752-.476-1.092.34.05.789.172 1.092.476zm-.616 7.467c-.304-.305-.427-.752-.476-1.091.34.049.789.171 1.092.475.305.305.427.752.476 1.091-.34-.048-.788-.172-1.092-.475zm3.314.066c-.293.293-.722.414-1.052.463.05-.33.17-.76.462-1.053.293-.293.722-.413 1.052-.462-.049.33-.17.76-.462 1.052zM4.82 15.057v-1.911c0-.264-.215-.478-.478-.478-.264 0-.478.214-.478.478v1.911c0 .608-.381 1.125-.916 1.333v-3.005c0-.264-.214-.478-.478-.478s-.478.214-.478.478v3.03c-.575-.186-.996-.72-.996-1.358v-1.911c0-.264-.213-.478-.477-.478s-.478.214-.478.478v1.911c0 1.168.843 2.139 1.951 2.346v9.601c0 .264.214.478.478.478s.478-.214.478-.478v-9.617c1.069-.238 1.871-1.19 1.871-2.33z"/>
+                          </g>
+                      </g>
+                    </svg>
+                  </span>
+                </span>
+                <strong>{{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.giovane' | translate }}</strong>
+              </div>
+              <div class="col-8">
+                {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.percentualeIncrementoPremio' | translate }}
+              </div>
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+                <span *ngIf="!edit">{{ dettaglioIstruttoria.percentualeIncrementoGiovane }}</span>
+                <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="percentualeIncrementoGiovane" />
+                <span class="ml-1">%</span>
+            </span>
+          </div>
+
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75  row  align-items-center">
+              <div class="col-4  bg-white  position-relative" style="top: -35px; height: 10px"></div>
+              <div class="col-8">
+                {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.limiteDirittiAiuto' | translate }}
+              </div>
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+                <span *ngIf="!edit">{{ dettaglioIstruttoria.limiteGiovane }}</span>
+                <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="limiteGiovane" />
+                <span class="ml-1">ha</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row  row--edit">
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75">
+              {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.riduzioneLineareGiovanePar2' | translate }}
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+              <span *ngIf="!edit">{{ dettaglioIstruttoria.percentualeRiduzioneLineareArt51Par2 }}</span>
+              <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01"
+                formControlName="percentualeRiduzioneLineareArt51Par2" />
+                <span class="ml-1">%</span>
+            </span>
+          </div>
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75">
+              {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.riduzioneLineareGiovanePar3' | translate }}
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+              <span *ngIf="!edit">{{ dettaglioIstruttoria.percentualeRiduzioneLineareArt51Par3 }}</span>
+              <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01"
+                formControlName="percentualeRiduzioneLineareArt51Par3" />
+                <span class="ml-1">%</span>
+            </span>
+          </div>
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75">
+              {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.riduzioneLineareMassimaleNetto' | translate }}
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+              <span *ngIf="!edit">{{ dettaglioIstruttoria.percentualeRiduzioneLineareMassimaleNetto }}</span>
+              <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01"
+                formControlName="percentualeRiduzioneLineareMassimaleNetto" />
+                <span class="ml-1">%</span>
+            </span>
+          </div>
+          <div class="col-12  d-flex  align-items-center">
+            <span class="mr-auto  w-75">
+              {{ 'CONFIGURAZIONE_ISTRUTTORIA.DISACCOPPIATO.riduzioneTitoli' | translate }}
+            </span>
+            <span class="ml-3  w-25  text-right  d-flex  align-items-center  justify-content-end">
+              <span *ngIf="!edit">{{ dettaglioIstruttoria.percentualeRiduzioneTitoli }}</span>
+              <input *ngIf="edit" type="number" pInputText min="0" max="100" step="0.01" formControlName="percentualeRiduzioneTitoli" />
+              <span class="ml-1">%</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

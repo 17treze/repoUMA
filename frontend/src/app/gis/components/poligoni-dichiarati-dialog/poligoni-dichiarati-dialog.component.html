@@ -1,0 +1,24 @@
+<p-dialog #dialDetail header="Dettaglio Poligoni Dichiarati" [(visible)]="poligoniDichiaratiEvent.showDialog"
+    [draggable]="true" [closable]="false"
+    [style]="{'width': '1300px', 'minWidth': '820px', 'baseZIndex': '1001!important'}">
+    <p-header style="position: absolute; left: calc(98% - 70px);">
+        <div class="ui-dialog-titlebar-icons">
+            <a tabindex="0" role="button" class="ui-dialog-titlebar-icon ui-dialog-titlebar-minimize ui-corner-all"
+                style="color: #757575; cursor: pointer; margin-top: 0; vertical-align: text-top; font-size: 15px;">
+                <span class="far fa-window-minimize" (click)="minimize();"
+                    style="color:#757575;cursor: pointer;margin-top: 3px;"></span>
+            </a>
+            <a tabindex="0" role="button" class="ui-dialog-titlebar-icon ui-dialog-titlebar-minimize ui-corner-all"
+                style="color: #757575; cursor: pointer; margin-top: 0; vertical-align: text-top; font-size: 15px;">
+                <span class="pi pi-window-maximize" (click)="maximize($event,dialDetail);"
+                    style="color:#757575;cursor: pointer;margin-top: 3px;"></span>
+            </a>
+            <a tabindex="0" role="button" class="ui-dialog-titlebar-icon ui-dialog-titlebar-minimize ui-corner-all"
+                style="color: #757575; cursor: pointer; margin-top: 0; vertical-align: text-top; font-size: 15px;">
+                <span class="pi pi-times" (click)="closeDialog();"
+                    style="color:#757575;cursor: pointer;margin-top: 3px;"></span>
+            </a>
+        </div>
+    </p-header>
+    <gis-poligoni-dichiarati-table-estesa [detailResults]="detailResults"></gis-poligoni-dichiarati-table-estesa>
+</p-dialog>

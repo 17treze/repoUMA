@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema" schemaLocation="WSSAnagraficaImprese.wsdl">
+
+	<jaxb:bindings node="//xs:schema">
+		<jaxb:schemaBindings>
+			<jaxb:package name="it.tndigitale.ws.wssanagraficaimprese" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+
+	<jaxb:bindings node="//xs:element[@name='N_REA']">
+		<jaxb:factoryMethod name="N_Rea" />
+	</jaxb:bindings>
+	<jaxb:bindings node="//xs:element[@name='NREA']">
+		<jaxb:factoryMethod name="NREA" />
+	</jaxb:bindings>
+
+</jaxb:bindings>

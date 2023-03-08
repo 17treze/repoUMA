@@ -1,0 +1,423 @@
+app-fascicolo-riepilogo
+  button.fs-16.ui-button-raised.ui-button {
+  font-size: 16px !important;
+  background: #00985a !important;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.tophome.riepilogo.tophome.riepilogo {
+  margin-bottom: 122px;
+}
+
+.riepilogo-dati {
+  padding: 5px 21px;
+  margin-top: 0px;
+  width: 100%;
+  margin-bottom: -13px;
+}
+
+.riepilogo-dati h4 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  padding: 15px 0px;
+  margin: 0;
+}
+
+
+.box-border-bottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+
+    width: 100%;
+
+    border-bottom: 1px dashed #ffffff;
+  }
+
+  * {
+    position: relative;
+    z-index: 1;
+
+    display: inline-block;
+    padding: 2px;
+
+    background-color: #0d5f3f;
+  }
+}
+
+.subhome {
+  background-color: #dbeddd;
+  padding: 15px 20px;
+  vertical-align: middle;
+}
+
+.subhome-gray {
+  // background-color: rgb(175, 175, 175);
+  background-color: rgb(214, 212, 212);
+  padding: 15px 20px;
+  vertical-align: middle;
+}
+
+.stile-descrizione {
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.stile-data {
+  width: 150px;
+  padding-left: 2px;
+  padding-right: 0px;
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
+
+.collegamento {
+  color: #00985a;
+  cursor: pointer;
+}
+.collegamento-grey {
+  color: #707070;
+  cursor: pointer;
+}
+
+.tophome.riepilogo.tophome.riepilogo {
+  margin-bottom: 122px;
+  background: white;
+  padding: 5px 21px;
+  color: black;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.stato-riquadro {
+  color: white;
+  border-radius: 10px;
+  border-color: white;
+}
+
+.intestazione-riquadro {
+  color: black;
+  border-radius: 10px;
+  border-color: white;
+  background: rgb(214, 212, 212);
+}
+
+.background-default {
+  background: #61a7c7;
+}
+
+.background-grey {
+  background: #999999;
+}
+
+.background-green {
+  background: #4eaf50;
+}
+
+.mt-2, .my-2 {
+  margin-top: 0rem !important;
+}
+
+.pt-2, .py-2 {
+  padding-top: 0.5em !important;
+}
+
+.pl-3, .px-3 {
+  padding-left: 0rem !important;
+}
+
+.pr-3, .px-3 {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+
+
+.stato-fascicolo {
+  color: black;
+  background: white;
+  border-radius: 10px;
+}
+
+.aprischeda {
+  color: black;
+  text-align: right;
+  width: 25px;
+  border-radius: 0px;
+  padding-right: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+  text-align:right;
+}
+.aprischeda-sfondo {
+  background: #dbeddd;
+  border-color: #dbeddd;
+  padding-bottom: 7px;
+}
+.aprischeda-sfondo-grigio {
+  background: rgb(214, 212, 212);
+  border-color: rgb(214, 212, 212);
+  padding-bottom: 6px;
+}
+
+.hr-dark {
+  border-width: 1px;
+  border-color: #3D293D;
+  margin-top: 10px;
+}
+
+.top-date {
+  margin-top: -2;
+}
+
+.border-r {
+  border-right: 1px solid #3D293D;
+}
+
+.align-right {
+  color:  #00985a;
+  text-align:right;
+  cursor: pointer;
+}
+
+.icona-collegamento {
+  font-size: 20px;
+  padding-right: 5px;
+  vertical-align: middle;
+}
+
+.desc-collegamento {
+  padding-top: 5px;
+}
+
+.tophome.riepilogo.tophome.riepilogo {
+  margin-bottom: 10px;
+  background: white;
+  padding: 5px 21px;
+  color: black;
+  margin-top: 0px;
+  width: 100%;
+}
+
+.accordion-hidden {
+  height: 0;
+  font-size: 0px;
+}
+
+.button-custom-bar-dark {
+  background-color: #0e5f3f;
+  right: 0;
+  text-transform: uppercase;
+  text-justify: auto;
+  padding-top: 2px;
+  padding-left: 8px;
+  padding-right: 10px;
+}
+.button-custom-bar-dark-grey {
+  background-color: rgb(155, 155, 155);
+  right: 0;
+  text-transform: uppercase;
+  text-justify: auto;
+  padding-top: 2px;
+  padding-left: 8px;
+  padding-right: 10px;
+}
+.p-col-fixed .button-custom-bar-dark-grey:hover {
+  background-color: rgb(175, 175, 175);
+}
+.p-col-fixed .button-custom-bar-dark-grey:focus {
+  background-color: rgb(175, 175, 175);
+}
+.p-col-fixed .button-custom-bar-dark-grey:after {
+  background-color: rgb(175, 175, 175);
+}
+
+.button-custom-bar.icon.pi {
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+.button-custom-bar {
+  background-color: #01985a;
+  right: 0;
+  text-transform: uppercase;
+  text-justify: auto;
+  padding-top: 2px;
+  padding-left: 8px;
+  padding-right: 10px;
+}
+
+.button-custom-stato {
+  background-color: #61a7c7;
+  background: #61a7c7;
+  right: 0;
+  height: 20px;
+  text-justify: auto;
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+button.stato-riquadro.button-custom-stato:hover {
+  background-color: #61a7c7;
+}
+button.stato-riquadro.button-custom-stato:focus {
+  background-color: #61a7c7;
+}
+button.stato-riquadro.button-custom-stato:after {
+  background-color: #61a7c7;
+}
+
+.button-image {
+  position: relative;
+  display: contents;
+  padding: 0px;
+}
+
+.button-icon {
+  padding-top: -2px;
+}
+
+.collegamento-icon {
+  padding-right: 8px;
+}
+
+.pi-icon {
+  left:-30px;
+  width: 30px;
+}
+
+.text-icon {
+  padding-top: 2px;
+  padding-left: 8px;
+  position: relative;
+  left: 15px;
+}
+
+.button-text {
+  padding-top: 2px;
+  padding-left: 8px;
+}
+
+.i-eye {
+  font-size: 30px;
+  left:-200px
+}
+
+.w-eye {
+  width: 200px;
+}
+
+.s-eye {
+  top: -34px;
+}
+
+.i-download {
+  font-size: 20px;
+  left:-200px;
+}
+
+.w-download {
+  width: 202px;
+}
+
+.s-download {
+  top: -29px;
+  left: 12px;
+}
+
+.p-download {
+  padding-top: 7px;
+}
+
+.i-user-edit {
+  font-size: 25px;
+  left:-200px;
+}
+
+.w-user-edit {
+  width: 105px;
+}
+
+.s-user-edit {
+  top: -31px;
+  left: 10px;
+}
+
+.p-user-edit {
+  padding-top: 5px;
+}
+
+.mt-70 {
+  margin-top: 0px;
+}
+
+.button-myappg {
+  border: none;
+  background: #00985A;
+  margin-left: 1rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.button-myappg > * {
+  font-size: 22px;
+  color: white;
+}
+
+.boxgreen{
+  background-color: #0e5f3f;
+  color: white;
+  width: 100%;
+  padding: 12px 25px 0px 25px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+}
+.boxgrey{
+  background-color: rgb(155, 155, 155);
+  color: white;
+  width: 100%;
+  padding: 12px 25px 0px 25px;
+  margin-bottom: 0px;
+  vertical-align: middle;
+}
+
+.img-button {
+  cursor: pointer;
+}
+
+.posizione {
+  position: absolute;
+}
+
+.menu-in-aggiornamento {
+  height: 36px;
+  width: 220px;
+  background-color: white;
+  position: relative;
+  left: 250px;
+  // right: -250px;
+  font-size: 15px;
+  border: 1px solid;
+  z-index: 1;
+}
+
+div.voce-menu {
+  position: relative;
+  top: 6px;
+  padding-left: 10px;
+}
+div.voce-menu:hover {
+  background-color: #eeeeee;
+  padding-left: 10px;
+  cursor: pointer;
+}

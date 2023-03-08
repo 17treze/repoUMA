@@ -1,0 +1,108 @@
+<div class="p-grid" style="margin-top: 0px;">
+    <div class="p-col-8">
+        <div class="p-grid" style="padding-left: 5px">
+            <div class="p-col-6 contentLinkCell">
+                <span>RICHIESTA</span>
+            </div>
+            <div class="p-col-6 contentLinkCell">
+                <span>POLIGONO</span>
+            </div>
+            <div *ngIf="activeOpenPanelDettaglioRichiesta" class="p-col-6"
+                style="padding: 0px; font-weight: 600!important;">
+
+                <span *ngIf="suoloDichiarato.statoRichiesta !== 'CANCELLATA'" class="action-richiesta"
+                    (click)="apriDettaglioRichiestaModificaSuolo(suoloDichiarato.idRichiesta, index);">
+                    {{suoloDichiarato.idRichiesta}}</span>
+
+                <span *ngIf="suoloDichiarato.statoRichiesta === 'CANCELLATA'"
+                    pTooltip="Attenzione! Richiesta Cancellata" tooltipPosition="right"
+                    class="action-richiesta-cancellata" style="margin-left: 2px"
+                    (click)="apriDettaglioRichiestaModificaSuolo(suoloDichiarato.idRichiesta, index);">
+                    {{suoloDichiarato.idRichiesta}}</span>
+
+            </div>
+
+            <div *ngIf="!activeOpenPanelDettaglioRichiesta" class="p-col-6"
+                style="padding: 0px; font-weight: 600!important;">
+
+                <span *ngIf="suoloDichiarato.statoRichiesta !== 'CANCELLATA'" class="action-richiesta-no-open-dettaglio">
+                {{suoloDichiarato.idRichiesta}}</span>
+
+                <span *ngIf="suoloDichiarato.statoRichiesta === 'CANCELLATA'"
+                pTooltip="Attenzione! Richiesta Cancellata" tooltipPosition="right"
+                class="action-richiesta-no-open-dettaglio-cancellata">
+                {{suoloDichiarato.idRichiesta}}</span>
+
+
+            </div>
+            <div class="p-col-6" style="padding: 0px; color: #333333; font-weight: 700 !important;">
+                <i class="fa fa-external-link-alt " (click)="openDialogDichiarati(suoloDichiarato);" style="font-size: 20px;vertical-align: middle;color: #333333;"></i>
+                {{suoloDichiarato.id}}
+            </div>
+        </div>
+    </div>
+
+    <div class="p-col-4" style="display: flex; padding-top: 10px; justify-content: flex-end;">
+
+        <div class="p-col-6" [hidden]="contextAction!=='remove'" id="button-green-card" style="padding-top: 0px;">
+            <span pTooltip="Rimuovi suolo da lavorazione" tooltipPosition="right">
+                <i (click)="removeSuoloDichiaratoFromLavorazione(suoloDichiarato.id,index)" class="pi pi-minus"></i>
+            </span>
+        </div>
+        <div class="p-col-6" [hidden]="contextAction!=='add'" id="button-green-card" style="padding-top: 0px;">
+            <span pTooltip="Aggiungi suolo alla lavorazione" tooltipPosition="right">
+                <i (click)="addSuoloDichiaratoToLavorazione(suoloDichiarato.id, index)" class="pi pi-plus"></i>
+            </span>
+        </div>
+        <div class="p-col-6" id="button-green-card" style="padding-top: 0px;">
+            <span (click)="centerMap(suoloDichiarato.extent)" pTooltip="Centra in mappa" tooltipPosition="right">
+                <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<!--AREA ORIGINALE-->
+<div class="p-grid">
+    <div class="p-col-2 contentCell">
+        <div class="box"><span>AREA ORIGINALE (MQ)</span></div>
+    </div>
+    <div class="p-col centerPositionCell">
+        <div class="box"><span>{{suoloDichiarato.areaOri| areaFormatPipe }} </span></div>
+    </div>
+</div>
+
+<!--SUOLO DICHIARATO-->
+<div class="p-grid">
+    <div class="p-col-2 contentCell">
+        <span>SUOLO DICHIARATO</span>
+    </div>
+
+    <div class="p-col centerPositionCell">
+        <span pTooltip="{{suoloDichiarato.descRilePrevalenteDich}}"
+            tooltipPosition="top">{{suoloDichiarato.codiRilePrevalenteDich || '-'}}
+        </span>
+    </div>
+    <div class="p-col centerPositionCell">
+
+        <span class="tagSuoloPoligono label-tag textBold"
+            [ngClass]="suoloDichiarato.tipoSuoloDichiarato">{{suoloDichiarato.tipoSuoloDichiarato}}</span>
+    </div>
+</div>
+<!--SUOLO RILEVATO-->
+<div class="p-grid">
+    <div class="p-col-2 contentCell">
+        <span>SUOLO RILEVATO</span>
+    </div>
+    <div class="p-col centerPositionCell">
+        <span pTooltip="{{suoloDichiarato.descRilePrevalenteRil}}"
+            tooltipPosition="top">{{suoloDichiarato.codiRilePrevalenteRil || '-'}}
+        </span>
+    </div>
+    <div class="p-col centerPositionCell">
+
+        <span class="tagSuoloPoligono label-tag textBold"
+            [ngClass]="suoloDichiarato.tipoSuoloRilevato">{{suoloDichiarato.tipoSuoloRilevato}}</span>
+    </div>
+</div>

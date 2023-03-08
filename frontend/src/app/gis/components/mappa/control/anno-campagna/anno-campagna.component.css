@@ -1,0 +1,27 @@
+.select-campagna>select {
+    background-color: #fefefe78 !important;
+    width: 100px !important;
+    height: 26px !important;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 0 5px;
+}
+
+.select-campagna label {
+    color: #0d5f3fb8 !important;
+    font-size: 16px !important;
+    font-family: 'Titillium Web', sans-serif !important;
+    color: black;
+    padding: 0 10px;
+    border: 2px solid transparent;
+    border-radius: 10px 0px 0px 10px;
+    font-weight: 300 !important;
+    float: left;
+    height: 25px;
+    font-size: 14px;
+    font-weight: bold !important;
+}
+
+select.form-control.custom-select.full:disabled {
+    cursor: not-allowed;
+}

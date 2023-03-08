@@ -1,0 +1,316 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+	<changeSet id="ISTANZARIESAME_WRT_S14.01" author="Elisabetta Freschi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM NXTNBR FOR ${user.superuser}.NXTNBR;
+			CREATE OR REPLACE SYNONYM A4GT_LOGGING FOR ${user.superuser}.A4GT_LOGGING;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S14.02" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  a4sd_stato_colt FOR ${user.superuser}.a4sd_stato_colt;
+			CREATE OR REPLACE SYNONYM  a4sd_uso FOR ${user.superuser}.a4sd_uso;
+			CREATE OR REPLACE SYNONYM  a4sd_varieta FOR ${user.superuser}.a4sd_varieta;
+			CREATE OR REPLACE SYNONYM  a4sr_uso_varieta  FOR ${user.superuser}.a4sr_uso_varieta;
+			CREATE OR REPLACE SYNONYM  a4sr_supporto_tag_tipo_suolo  FOR ${user.superuser}.a4sr_supporto_tag_tipo_suolo;
+			CREATE OR REPLACE SYNONYM  a4st_lavorazione_suolo  FOR ${user.superuser}.a4st_lavorazione_suolo;
+			CREATE OR REPLACE SYNONYM  a4st_richiesta_modifica_suolo  FOR ${user.superuser}.a4st_richiesta_modifica_suolo;
+			CREATE OR REPLACE SYNONYM  a4st_suolo_dichiarato  FOR ${user.superuser}.a4st_suolo_dichiarato;
+			CREATE OR REPLACE SYNONYM  a4st_suolo_rilevato  FOR ${user.superuser}.a4st_suolo_rilevato;
+			CREATE OR REPLACE SYNONYM  a4st_workspace_lav_suolo  FOR ${user.superuser}.a4st_workspace_lav_suolo;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S15.01" author="Marco Campisi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  a4st_messaggio_richiesta FOR ${user.superuser}.a4st_messaggio_richiesta;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S16.01" author="Marco Campisi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_DOCUMENTAZIONE_RICHIESTA FOR ${user.superuser}.A4ST_DOCUMENTAZIONE_RICHIESTA;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S17.01" author="Marco Campisi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_DICH_LAVORAZIONE FOR ${user.superuser}.A4SV_SUOLO_DICH_LAVORAZIONE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S18.01" author="Marco Campisi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_USO_SUOLO FOR ${user.superuser}.A4ST_USO_SUOLO;
+			CREATE OR REPLACE SYNONYM  A4ST_GRIGLIA_SUOLO FOR ${user.superuser}.A4ST_GRIGLIA_SUOLO;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S18.02" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_SUOLO FOR ${user.superuser}.A4ST_SUOLO;
+		</sql>
+	</changeSet>
+		<changeSet id="ISTANZARIESAME_WRT_S18.03" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SD_USO_SUOLO FOR ${user.superuser}.A4SD_USO_SUOLO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S19.01" author="Bettina Irler" dbms="oracle">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				CREATE OR REPLACE SYNONYM  a4sd_codi_rile_pcg FOR ${user.superuser}.a4sd_codi_rile_pcg;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S20.01" author="Bettina Irler" dbms="oracle">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				CREATE OR REPLACE SYNONYM  A4SV_SUOLO_DICHIARATO_LAYER FOR ${user.superuser}.A4SV_SUOLO_DICHIARATO_LAYER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S20.02" author="Bettina Irler" dbms="oracle">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				CREATE OR REPLACE SYNONYM  A4SV_SUOLO_RILEVATO_LAYER FOR ${user.superuser}.A4SV_SUOLO_RILEVATO_LAYER;
+		</sql>
+	</changeSet>
+	
+		<changeSet id="ISTANZARIESAME_WRT_S20.03" author="Bettina Irler" dbms="oracle">
+	<sql endDelimiter=";" splitStatements="true" dbms="oracle">
+				CREATE OR REPLACE SYNONYM  A4SV_SUOLO_LAYER FOR ${user.superuser}.A4SV_SUOLO_LAYER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S21.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4SV_WORKSPACE_LAV_SUOLO_LAYER FOR ${user.superuser}.A4SV_WORKSPACE_LAV_SUOLO_LAYER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S21.02" author="Marco Campisi">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_PROPRIETA_LAYER FOR ${user.superuser}.A4ST_PROPRIETA_LAYER;
+				CREATE OR REPLACE SYNONYM  A4ST_LAYER FOR ${user.superuser}.A4ST_LAYER;
+				CREATE OR REPLACE SYNONYM  A4SR_LAYER_PROFILO FOR ${user.superuser}.A4SR_LAYER_PROFILO;
+		</sql>
+	</changeSet>
+	
+		<changeSet id="ISTANZARIESAME_WRT_S21.03" author="Marco Campisi">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_PROPRIETA_LAYER FOR ${user.superuser}.A4ST_PROPRIETA_LAYER;
+				CREATE OR REPLACE SYNONYM  A4ST_LAYER FOR ${user.superuser}.A4ST_LAYER;
+				CREATE OR REPLACE SYNONYM  A4SR_LAYER_PROFILO FOR ${user.superuser}.A4SR_LAYER_PROFILO;
+		</sql>
+	</changeSet>
+	
+		<changeSet id="ISTANZARIESAME_WRT_S22.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_CATASTO FOR ${user.superuser}.A4ST_CATASTO;
+				CREATE OR REPLACE SYNONYM  A4SV_CATASTO_LAYER FOR ${user.superuser}.A4SV_CATASTO_LAYER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S23.01" author="Marco Campisi">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_CATASTO FOR ${user.superuser}.A4ST_CATASTO;
+				CREATE OR REPLACE SYNONYM  A4SV_CATASTO_LAYER FOR ${user.superuser}.A4SV_CATASTO_LAYER;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S23.02" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM AMM_CAT_TN FOR ${user.superuser}.AMM_CAT_TN;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S23.03" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4ST_ATTRIBUTI_LAYER FOR ${user.superuser}.A4ST_ATTRIBUTI_LAYER;
+		</sql>
+	</changeSet>
+	
+		<changeSet id="ISTANZARIESAME_WRT_S24.01" author="Marco Campisi">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4SR_ANOMALIA_WORKSPACE FOR ${user.superuser}.A4SR_ANOMALIA_WORKSPACE;
+				CREATE OR REPLACE SYNONYM  A4ST_ANOMALIA_VALIDAZIONE FOR ${user.superuser}.A4ST_ANOMALIA_VALIDAZIONE;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S24.02" author="Marco Campisi">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4SV_ANOMALIA_VALIDAZ_LAYER FOR ${user.superuser}.A4SV_ANOMALIA_VALIDAZ_LAYER;
+		</sql>
+	</changeSet>
+	
+	
+	<changeSet id="ISTANZARIESAME_WRT_S25.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  SDO_CUSTOM FOR ${user.superuser}.SDO_CUSTOM;
+		</sql>
+	</changeSet>
+	
+	
+	<changeSet id="ISTANZARIESAME_WRT_S25.02" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4SP_VALIDITA_ORACLE FOR ${user.superuser}.A4SP_VALIDITA_ORACLE;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S28.01" author="Marco Campisir">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4ST_AREA_DI_LAVORO FOR ${user.superuser}.A4ST_AREA_DI_LAVORO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S28.02" author="Marco Campisir">
+		<sql endDelimiter=";" splitStatements="true">				  
+				CREATE OR REPLACE SYNONYM  A4SV_AREA_DI_LAVORO FOR ${user.superuser}.A4SV_AREA_DI_LAVORO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S29.01" author="Marco Campisir">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_TMP_WORKSPACE FOR ${user.superuser}.A4ST_TMP_WORKSPACE;				 
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S29.02" author="Marco Campisir">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4SV_TMP_WORKSPACE_LAYER FOR ${user.superuser}.A4SV_TMP_WORKSPACE_LAYER;				 
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTANZARIESAME_WRT_S32.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4ST_TEMP_ISTANZE_APERTE FOR ${user.superuser}.A4ST_TEMP_ISTANZE_APERTE;
+				CREATE OR REPLACE SYNONYM  A4ST_TEMP_ISTANZE_RIES_RILEV FOR ${user.superuser}.A4ST_TEMP_ISTANZE_RIES_RILEV;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTANZARIESAME_WRT_S33.01" author="Andrea Alioto">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  a4sr_job_fme_lavorazione FOR ${user.superuser}.a4sr_job_fme_lavorazione;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S33.02" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+				CREATE OR REPLACE SYNONYM  A4SR_TIPO_SUOLO_CODI FOR ${user.superuser}.A4SR_TIPO_SUOLO_CODI;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S35.01" author="Andrea Alioto">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM a4st_sync_suolo_catasto FOR ${user.superuser}.a4st_sync_suolo_catasto;
+		</sql>
+	</changeSet>
+
+	<changeSet id="ISTANZARIESAME_WRT_S35.02" author="Andrea Alioto">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM a4st_sync_suolo_esito_part FOR ${user.superuser}.a4st_sync_suolo_esito_part;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S39.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4SI_LAYER_IMPORT FOR ${user.superuser}.A4SI_LAYER_IMPORT;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S39.02" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4SI_LAYER_IMPORT_ELAB FOR ${user.superuser}.A4SI_LAYER_IMPORT_ELAB;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S39.03" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4SI_LAYER_IMPORT_VALIDO FOR ${user.superuser}.A4SI_LAYER_IMPORT_VALIDO;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S39.04" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4SI_LAYER_ETRS89_TMP FOR ${user.superuser}.A4SI_LAYER_ETRS89_TMP;
+			CREATE OR REPLACE SYNONYM A4SI_LAYER_GB_TMP FOR ${user.superuser}.A4SI_LAYER_GB_TMP;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S39.05" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4ST_UPAS FOR ${user.superuser}.A4ST_UPAS;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S40.09" author="Alessio Siravo">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM A4ST_CLIP_PART_SUOLO_TMP FOR ${user.superuser}.A4ST_CLIP_PART_SUOLO_TMP;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S42.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM a4sd_ranking_cod_uso FOR ${user.superuser}.a4sd_ranking_cod_uso;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S44.01" author="Bettina Irler">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM TMP_PARTICELLA_LAV FOR ${user.superuser}.TMP_PARTICELLA_LAV;
+		</sql>
+	</changeSet>
+	
+	<changeSet id="ISTANZARIESAME_WRT_S44.02" author="Alessio Siravo" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_OCCUPATO_LAYER FOR ${user.superuser}.A4SV_SUOLO_OCCUPATO_LAYER;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S46.01" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_TEMP_CLIP_SU_ADL FOR ${user.superuser}.A4ST_TEMP_CLIP_SU_ADL;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S46.02" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_LAYER_2022 FOR ${user.superuser}.A4SV_SUOLO_LAYER_2022;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S46.03" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_LAYER_2023 FOR ${user.superuser}.A4SV_SUOLO_LAYER_2023;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S46.04" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_OCCUPATO_LAYER_2022 FOR ${user.superuser}.A4SV_SUOLO_OCCUPATO_LAYER_2022;
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_OCCUPATO_LAYER_2023 FOR ${user.superuser}.A4SV_SUOLO_OCCUPATO_LAYER_2023;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S46.05" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_TEMP_CLIP_SU_ADL_LAYER FOR ${user.superuser}.A4SV_TEMP_CLIP_SU_ADL_LAYER;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S48.01" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_TEMP_POLIGONI_IN_OUT_ADL FOR ${user.superuser}.A4ST_TEMP_POLIGONI_IN_OUT_ADL;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S49.01" author="Lorenzo Biondi" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4SV_SUOLO_STORICO_LAYER FOR ${user.superuser}.A4SV_SUOLO_STORICO_LAYER;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S49.02" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_IMPORT_CATASTO_DISS FOR ${user.superuser}.A4ST_IMPORT_CATASTO_DISS;
+		</sql>
+	</changeSet>
+	<changeSet id="ISTANZARIESAME_WRT_S49.03" author="Bettina Irler" dbms="oracle">
+		<sql endDelimiter=";" splitStatements="true">
+			CREATE OR REPLACE SYNONYM  A4ST_IMPORT_CATASTO_STAZIONE FOR ${user.superuser}.A4ST_IMPORT_CATASTO_STAZIONE;
+		</sql>
+	</changeSet>
+	 
+</databaseChangeLog>

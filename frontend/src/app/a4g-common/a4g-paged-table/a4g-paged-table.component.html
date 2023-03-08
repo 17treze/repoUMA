@@ -1,0 +1,37 @@
+<div>
+  <div
+    *ngIf="displaySelectAll"
+    class="selectAll">
+    <span *ngIf="!isSelectedAll">Selezionati 
+      <span class="badgesGreen">{{selectedItems.length}}</span>
+            elementi... </span>
+    <br>
+    <div *ngIf="selectedItems.length !== totalRecords && totalRecords !== 0">
+      <p-checkbox
+        [(ngModel)]="isSelectedAll"
+        binary="true"></p-checkbox>
+      <span *ngIf="!isSelectedAll">Seleziona tutti i 
+        <span class="badgesGreen">{{totalRecords}}</span> elementi
+            </span>
+      <span *ngIf="isSelectedAll">Tutti i 
+        <span class="badgesGreen">{{totalRecords}}</span> elementi
+                selezionati</span>
+    </div>
+  </div>
+  <div>
+    <p-table
+      #pTable
+      [columns]="columns"
+      [value]="value"
+      [autoLayout]="true"
+      [paginator]="true"
+      [rows]="10"
+      [lazy]="true"
+      [responsive]="true"
+      [rowsPerPageOptions]="sizeArray"
+      [(selection)]="selectedItems"
+      [totalRecords]="totalRecords"
+      (onLazyLoad)="this.onLazyLoadPage.emit($event)">
+    </p-table>
+  </div>
+</div>

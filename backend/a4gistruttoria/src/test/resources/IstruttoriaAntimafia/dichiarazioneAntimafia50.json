@@ -1,0 +1,126 @@
+{
+  "id": 8245,
+  "version": 0,
+  "datiDichiarazione": {
+    "richiedente": {
+      "nome": "ANTONELLO MARIO",
+      "cognome": "FERRARI",
+      "codiceFiscale": "FRRNNL66T06L174D",
+      "comuneNascita": "TIONE DI TRENTO",
+      "provinciaNascita": "TN",
+      "dataNascita": "06/12/1966",
+      "sesso": "M",
+      "residenza": {
+        "indirizzo": "VIA S ANDREA 80",
+        "comune": "SELLA GIUDICARIE",
+        "provincia": "TN",
+        "CAP": "38081"
+      },
+      "carica": "SOCIO",
+      "dtInizioCarica": "26/06/2002",
+      "dtFineCarica": ""
+    },
+    "dettaglioImpresa": {
+      "formaGiuridicaCodice": "SE",
+      "formaGiuridicaDescrizione": "SOCIETA' SEMPLICE",
+      "denominazione": "SOCIETA' AGRICOLA FALDA DI FERRARI ANTONELLO M. E ALBERTO SOCIETA' SEMPLICE",
+      "sedeLegale": "LOCALITA' CORE' 38087 SELLA GIUDICARIE TRENTO",
+      "estremiCCIAA": {
+        "sede": "TN",
+        "numeroIscrizione": "178293",
+        "dataIscrizione": "26/07/2002"
+      },
+      "oggettoSociale": "OGGETTO SOCIALE:L'ESERCIZIO DI IMPRESA AGRICOLA AI SENSI DELL'ART. 2135 DEL COD. CIV. E QUINDIDI ESERCITARE LE ATTIVITA' DIRETTE ALLA COLTIVAZIONE DEI TERRENI, ALLASILVICOLTURA, ALL'ALLEVAMENTO DEL BESTIAME ED ALLE ATTIVITA' CONNESSE E DIRETTEALLA LAVORAZIONE, TRASFORMAZIONE ED ALIENAZIONE, ANCHE IN FORMA DIRETTA ALLALAVORAZIONE, TRASFORMAZIONE ED ALIENAZIONE, ANCHE IN FORMA DIRETTA, DEI PRODOTTIAGRICOLI E ZOOTECNICI E DI TUTTE LE ATTIVITA' COMUNQUE RIENTRANTI NELL'ESERCIZIONORMALE DELL'AGRICOLTURA. LA SOCIETA' POTRA' AFFITTARE E CONDURRE, ACQUISTARE EVENDERE FONDI RUSTICI ED AZIENDE AGRICOLE E ZOOTECNICHE IN GENERE. ESSA POTRA'INOLTRE COMPIERE TUTTE LE OPERAZIONI MOBILIARI, IMMOBILIARI E FINANZIARIECOMPRESA L'ASSUNZIONE DEI MUTUI IPOTECARI AVENTI PERTINENZA CON L'OGGETTOSOCIALE ED INOLTRE ASSUMERE INTERESSENZE, QUOTE, PARTECIPAZIONI ANCHE AZIONARIEIN ALTRE SOCIETA' LA SOCIETA' POTRA' INOLTRE CONCEDERE FIDEJUSSIONI, AVALLI EDALTRE GARANZIE A FAVORE DI TERZI.",
+      "codiceFiscale": "01797410220",
+      "partitaIva": "01797410220",
+      "indirizzoPEC": "FALDA@PEC.COLDIRETTI.IT",
+      "dettaglioPersonaGiuridica": {
+        "formaGiuridica": "SOCIETA' SEMPLICE",
+        "estremiCostituzione": "26/06/2002",
+        "capitaleSociale": "Dato non disponibile",
+        "durata": "31/12/2030"
+      },
+      "soggettiImpresa": [
+        {
+          "nome": "ANTONELLO MARIO",
+          "cognome": "FERRARI",
+          "codiceFiscale": "FRRNNL66T06L174D",
+          "comuneNascita": "TIONE DI TRENTO",
+          "provinciaNascita": "TN",
+          "dataNascita": "06/12/1966",
+          "sesso": "M",
+          "indirizzoResidenza": "VIA S ANDREA 80",
+          "comuneResidenza": "SELLA GIUDICARIE",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38081",
+          "carica": [
+            {
+              "codice": "COM",
+              "tipologia": "SOCIO",
+              "dataInizio": "26/06/2002",
+              "dataFine": "",
+              "selezionato": true,
+              "dichiarazione": false
+            }
+          ],
+          "estremiCCIAA": "TIONE DI TRENTO"
+        },
+        {
+          "nome": "ALBERTO",
+          "cognome": "FERRARI",
+          "codiceFiscale": "FRRLRT76L17L174S",
+          "comuneNascita": "TIONE DI TRENTO",
+          "provinciaNascita": "TN",
+          "dataNascita": "17/07/1976",
+          "sesso": "M",
+          "indirizzoResidenza": "VIA S ANDREA 80",
+          "comuneResidenza": "SELLA GIUDICARIE",
+          "provinciaResidenza": "TN",
+          "capResidenza": "38081",
+          "carica": [
+            {
+              "codice": "COM",
+              "tipologia": "SOCIO",
+              "dataInizio": "26/06/2002",
+              "dataFine": "",
+              "selezionato": false,
+              "dichiarazione": false
+            },
+            {
+              "codice": "RE",
+              "tipologia": "RESPONSABILE",
+              "dataInizio": "26/06/2002",
+              "dataFine": "",
+              "selezionato": true,
+              "dichiarazione": false
+            }
+          ],
+          "estremiCCIAA": "TIONE DI TRENTO"
+        }
+      ],
+      "aziendeCollegate": []
+    }
+  },
+  "dtGenerazionePdf": null,
+  "dtInizioCompilazione": "2018-11-30",
+  "dtUltimoAggiornamento": null,
+  "dtUploadPdfFirmato": null,
+  "dtFine": null,
+  "idProtocollo": null,
+  "pdfFirmato": null,
+  "pdfGenerato": null,
+  "pdfFirmatoName": null,
+  "dtProtocollazione": null,
+  "a4gtAllegatoDicAntimafias": [],
+  "stato": {
+    "id": 11,
+    "identificativo": "BOZZA",
+    "descrizione": "Stato che identifica le dichiarazioni antimafia in compilazione."
+  },
+  "azienda": {
+    "id": 588,
+    "cuaa": "01797410220"
+  },
+  "assenzaDt": null,
+  "allegatoFamiliariConviventi": null
+}

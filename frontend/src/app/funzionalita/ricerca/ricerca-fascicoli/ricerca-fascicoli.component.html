@@ -1,0 +1,30 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-grid-fixed boxgrey">
+    <div class="layout-actionmenu">
+      <h2 class="richiesta-title">{{title}}</h2>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngIf="inputRicerca">
+        <div class="ui-g-12 ui-md-1"><label class="labelricerca">CUAA</label></div>
+        <div class="ui-g-12 ui-md-4">
+          <input type="text" [(ngModel)]="inputRicerca.cuaa" name="cuaa" #cuaaInput="ngModel"
+            [ngClass]="{'is-invalid': cuaaInput.invalid && (cuaaInput.touched|| f.submitted)}" pInputText appValidaCuaa
+            (ngModelChange)="valuechange($event)">
+        </div>
+        <div class="ui-g-12 ui-md-1"><label class="labelricerca">Impresa</label></div>
+        <div class="ui-g-12 ui-md-4">
+          <input type="text" [(ngModel)]="inputRicerca.denominazione" name="denominazione" #denominazioneInput="ngModel"
+            [ngClass]="{'is-invalid': denominazioneInput.invalid && (denominazioneInput.touched|| f.submitted)}"
+            pInputText appValidaDenominazione (ngModelChange)="valuechange($event)">
+        </div>
+        <div class="ui-g-12 ui-md-2">
+          <div class="searchbutton">
+            <button pButton type="button" class="ui-button-success" type="submit" [disabled]="!f.valid">CERCA</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br />
+<div *ngIf="resultvisible">
+  <app-sintesi-fascicolo-list [fascicoli]="this.fascicoli"></app-sintesi-fascicolo-list>
+</div>

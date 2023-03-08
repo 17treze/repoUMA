@@ -1,0 +1,202 @@
+{
+	    "infoGeneraliDomanda": {
+	        "pac": "PAC1420",
+	        "tipoDomanda": "DU",
+	        "campagna": 2018,
+	        "modulo": "PAGAMENTI DIRETTI - DOMANDA DI MODIFICA AI SENSI ART. 15 DEL REG. UE 809/2014",
+	        "codModulo": "BPS_ART_15_2018",
+	        "cuaaIntestatario": "00185820222",
+	        "ragioneSociale": "AZIENDA AGRICOLA ZOOTECNICA LA QUERCIA DI PELLEGRINI RUGGERO & C. S.S.",
+	        "numeroDomanda": 191618,
+	        "numeroDomandaRettificata": 191580,
+	        "dataPresentazione": "2018-06-28T11:25:54.000+0200",
+	        "codEnteCompilatore": "12",
+	        "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 011",
+	        "dataProtocollazione": "2018-06-28T11:26:23.000+0200",
+	        "dataPresentazOriginaria": null,
+	        "dataProtocollazOriginaria": null
+	    },
+	    "controlliPresentazione": {
+	        "aggiornamentoFascicolo": "S",
+	        "visioneAnomalie": "S",
+	        "firmaDomanda": "S",
+	        "archiviazioneDomanda": "S"
+	    },
+	    "richieste": {
+	        "sintesiRichieste": {
+	            "richiestaDisaccoppiato": true,
+	            "richiestaSuperfici": false,
+	            "richiestaZootecnia": true
+	        },
+	        "sostegniSuperficie": [
+	            {
+	                "sostegno": "BPS",
+	                "idIntervento": 18,
+	                "codIntervento": "BPS",
+	                "descIntervento": "IMPEGNO TITOLI",
+	                "particella": {
+	                    "idParticella": 1559123,
+	                    "comune": "VALDAONE - DAONE (TN)",
+	                    "codNazionale": "D248",
+	                    "foglio": 9999,
+	                    "particella": "02286",
+	                    "sub": "1"
+	                },
+	                "idParcella": 727196,
+	                "idIsola": 1451020,
+	                "codIsola": "IT25/00185820222/AAA02",
+	                "supDichiarata": 25120,
+	                "idPianoColture": 6776939,
+	                "idColtura": 245,
+	                "codColtura3": "560-065-009",
+	                "descColtura": "PASCOLO POLIFITA (TIPO ALPEGGI) - PASCOLO - PASCOLO POLIFITA (TIPO ALPEGGI) SENZA TARA",
+	                "coeffTara": 1,
+	                "codColtura5": "065-002-009-000-000",
+	                "codLivello": "1311",
+	                "supImpegnata": 25120
+	            },
+	            {
+	                "sostegno": "BPS",
+	                "idIntervento": 18,
+	                "codIntervento": "BPS",
+	                "descIntervento": "IMPEGNO TITOLI",
+	                "particella": {
+	                    "idParticella": 4096392,
+	                    "comune": "ERACLEA (VE)",
+	                    "codNazionale": "D415",
+	                    "foglio": 7,
+	                    "particella": "00027",
+	                    "sub": " "
+	                },
+	                "idParcella": 727206,
+	                "idIsola": 1781017,
+	                "codIsola": "IT25/00185820222/AAA04",
+	                "supDichiarata": 11961,
+	                "idPianoColture": 6776982,
+	                "idColtura": 22448,
+	                "codColtura3": "040-871-053",
+	                "descColtura": "Superfici seminabili - ORZO - DA FORAGGIO - ERBAIO IN PUREZZA, ANNUALE - NON PERMANENTE -",
+	                "coeffTara": 1,
+	                "codColtura5": "870-002-053-045-000",
+	                "codLivello": "111",
+	                "supImpegnata": 11961
+	            }
+	        ],
+	        "sostegniAllevamento": [
+	            {
+	                "sostegno": "ZOO",
+	                "idIntervento": 1010,
+	                "codIntervento": "BOVINI_MAC",
+	                "descIntervento": "315 Bovini macellati di eta 12 - 24 mesi allevati almeno 6 mesi  (art.21, c.7)",
+	                "idAllevamento": 18200,
+	                "codIdAllevamento": "116TN023",
+	                "codIdBdn": "800597",
+	                "descAllevamento": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "specie": "BOVINI",
+	                "comune": "MEZZOCORONA (TN)",
+	                "indirizzo": "LOC.CASETTA",
+	                "codFiscaleProprietario": "00185820222",
+	                "denominazioneProprietario": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "codFiscaleDetentore": "00185820222",
+	                "denominazioneDetentore": "AZ.AGR.ZOOT. LA QUERCIA S.S."
+	            },
+	            {
+	                "sostegno": "ZOO",
+	                "idIntervento": 1010,
+	                "codIntervento": "BOVINI_MAC",
+	                "descIntervento": "315 Bovini macellati di eta 12 - 24 mesi allevati almeno 6 mesi  (art.21, c.7)",
+	                "idAllevamento": 18201,
+	                "codIdAllevamento": "116TN084",
+	                "codIdBdn": "5606720",
+	                "descAllevamento": "AZ. AGR. ZOOTECNICA LA QUERCIA S.S.",
+	                "specie": "BOVINI",
+	                "comune": "MEZZOCORONA (TN)",
+	                "indirizzo": "LOC. CASETTA",
+	                "codFiscaleProprietario": "00185820222",
+	                "denominazioneProprietario": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "codFiscaleDetentore": "00185820222",
+	                "denominazioneDetentore": "AZ.AGR.ZOOT. LA QUERCIA S.S."
+	            },
+	            {
+	                "sostegno": "ZOO",
+	                "idIntervento": 1013,
+	                "codIntervento": "BOVINI_MAC_ETIC",
+	                "descIntervento": "318 Bovini macellati di eta 12 - 24 mesi + etichett allevati almeno 6 mesi (art.21, c.9)",
+	                "idAllevamento": 18200,
+	                "codIdAllevamento": "116TN023",
+	                "codIdBdn": "800597",
+	                "descAllevamento": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "specie": "BOVINI",
+	                "comune": "MEZZOCORONA (TN)",
+	                "indirizzo": "LOC.CASETTA",
+	                "codFiscaleProprietario": "00185820222",
+	                "denominazioneProprietario": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "codFiscaleDetentore": "00185820222",
+	                "denominazioneDetentore": "AZ.AGR.ZOOT. LA QUERCIA S.S."
+	            },
+	            {
+	                "sostegno": "ZOO",
+	                "idIntervento": 1013,
+	                "codIntervento": "BOVINI_MAC_ETIC",
+	                "descIntervento": "318 Bovini macellati di eta 12 - 24 mesi + etichett allevati almeno 6 mesi (art.21, c.9)",
+	                "idAllevamento": 18201,
+	                "codIdAllevamento": "116TN084",
+	                "codIdBdn": "5606720",
+	                "descAllevamento": "AZ. AGR. ZOOTECNICA LA QUERCIA S.S.",
+	                "specie": "BOVINI",
+	                "comune": "MEZZOCORONA (TN)",
+	                "indirizzo": "LOC. CASETTA",
+	                "codFiscaleProprietario": "00185820222",
+	                "denominazioneProprietario": "AZ.AGR.ZOOT. LA QUERCIA S.S.",
+	                "codFiscaleDetentore": "00185820222",
+	                "denominazioneDetentore": "AZ.AGR.ZOOT. LA QUERCIA S.S."
+	            }
+	        ],
+	        "datiPascolo": [
+	            {
+	                "codPascolo": "072TN065",
+	                "descPascolo": "MALGA BISSINA ",
+	                "uba": 17,
+	                "particelle": [
+	                    {
+	                        "idParticella": 1559123,
+	                        "comune": "VALDAONE - DAONE (TN)",
+	                        "codNazionale": "D248",
+	                        "foglio": 9999,
+	                        "particella": "02286",
+	                        "sub": "1"
+	                    }
+	                ]
+	            }
+	        ],
+	        "dichiarazioniDomandaUnica": [
+	            {
+	                "codDocumento": "AGGIUNTIVA",
+	                "idCampo": "TITOLI_CAPI_BDN_PRATO",
+	                "descCampo": "Pascolamento dei seguenti animali, registrati nella BDN: Bovini, Ovicaprini, Bufalini, Suini",
+	                "valCheck": true,
+	                "valDate": null,
+	                "valNumber": null,
+	                "valString": null
+	            },
+	            {
+	                "codDocumento": "AGGIUNTIVA",
+	                "idCampo": "TITOLI_CAPI_BDN_TRADIZ",
+	                "descCampo": "Pascolamento dei seguenti animali, registrati nella BDN: Bovini, Ovicaprini, Bufalini, Suini",
+	                "valCheck": true,
+	                "valDate": null,
+	                "valNumber": null,
+	                "valString": null
+	            },
+	            {
+	                "codDocumento": "AGGIUNTIVA",
+	                "idCampo": "TITOLI_MIGL_PASCOLO",
+	                "descCampo": "Altra operazione colturale volta al miglioramento del pascolo",
+	                "valCheck": true,
+	                "valDate": null,
+	                "valNumber": null,
+	                "valString": null
+	            }
+	        ]
+	    }
+}

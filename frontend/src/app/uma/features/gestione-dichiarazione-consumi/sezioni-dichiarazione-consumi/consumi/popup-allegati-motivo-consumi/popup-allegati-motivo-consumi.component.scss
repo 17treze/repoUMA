@@ -1,0 +1,65 @@
+@import "../../../../../uma.index.style.scss";
+
+:host {
+  ::ng-deep label.ui-radiobutton-label {
+    margin: 0;
+  }
+
+  .table-container {
+    height: 450px;
+    max-height: 450px;
+    overflow: auto;
+  }
+
+  .icon-button-square {
+    background-color: #4caf50 !important;
+    border-radius: unset;
+    height: 5em !important;
+    width: 5em !important;
+    opacity: 1;
+
+    &:disabled {
+      opacity: .35;
+      background-image: none;
+      cursor: auto !important;
+    }
+  }
+
+  .w-5m {
+    width: 5em;
+  }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .button-accent-alt {
+    border: 2px solid $accentColor;
+    color: $accentColor !important;
+    font-weight: bold;
+
+    & > ::ng-deep span.pi {
+      color: $accentColor !important;
+      font-size: x-large !important;
+    }
+  }
+
+  p-dropdown > ::ng-deep .ui-dropdown {
+    height: 100%;
+
+    label.ui-dropdown-label {
+      height: 100%;
+      font-weight: normal !important;
+      padding-top: .3em;
+    }
+
+    div.ui-corner-right {
+      top: .3em !important;
+      margin: 0 !important;
+    }
+  }
+
+  ::ng-deep .small-dialog {
+    width: 50vw;
+  }
+}

@@ -1,0 +1,127 @@
+<div id="poligoniDichiaratiTableExt" *ngIf="poligoniDichiaratiEvent.showDialog" infiniteScroll
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" [immediateCheck]="true"
+  [scrollWindow]="false" style="height: 235px;overflow-y: scroll!important;margin-top: 35px;">
+
+  <p-table class="table-responsive" id="tablePoligoniDichiarati" [customSort]="true" [scrollable]="true"
+    [autoLayout]="true" [value]="poligoniDichiaratiEvent.poligoni" selectionMode="single" dataKey="id"
+    (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="contentHeaderTable td-zoom"></th>
+        <th class="contentHeaderTable td-suolo-ext" style="text-align:center">Suolo D/R</th>
+        <th class="contentHeaderTable td-stato-ext" style="text-align:center">Stato</th>
+        <th class="contentHeaderTable" style="text-align:center">Utente Lavorazione</th>
+        <th class="contentHeaderTable td-icon"><i class="fa fa-map" aria-hidden="true"></i></th>
+        <th class="contentHeaderTable" style="text-align:center">Tipo intervento colturale</th>
+        <th class="contentHeaderTable" style="text-align:center">Periodo</th>
+        <th class="contentHeaderTable td-icon" style="text-align:center"><i class="fa fa-paperclip"
+            aria-hidden="true"></i></th>
+        <th class="contentHeaderTable td-icon" style="text-align:center"><i class="fa fa-envelope"
+            aria-hidden="true"></i></th>
+        <th class="contentHeaderTable td-icon" style="text-align:center">
+          <i class="fas fa-bell" styl td-zoome="color: #fff" style="text-align: center"></i>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-poligono>
+      <tr style="text-align: center;" [pSelectableRow]="poligono">
+        <td class="td-zoom">
+          <span pTooltip="{{poligono.id}}" tooltipPosition="top" (click)="centerMap(poligono.extent)">
+            <i class="fa fa-crosshairs zoom-icon-dichiarati"
+              style="font-size: 20px!important; background: transparent!important; color: #00985b!important;"
+              aria-hidden="true"></i>
+          </span>
+        </td>
+        <td class="td-suolo-ext" style="text-align: center;">
+          {{poligono.codiRilePrevalenteDich}} / {{poligono.codiRilePrevalenteRil}}
+        </td>
+        <td class="td-stato-ext" style="text-align: center; overflow: hidden;">
+          {{poligono.statoLavorazione | decodeEnumPipe : listaStatoLavorazione}}
+        </td>
+        <td style="text-align: center; overflow: hidden;">
+          {{poligono.utenteLavorazione}}
+        </td>
+        <td class="td-icon">
+          <span pTooltip="Visibile da Ortofoto" tooltipPosition="top">
+            <p-checkbox [(ngModel)]="poligono.visibileInOrtofoto" name="flOrtofoto" value="true" binary="true"
+              ngDefaultControl
+              [disabled]="profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione)"
+              (ngModelChange)="getPoligonoModificato(poligono)"></p-checkbox>
+          </span>
+        </td>
+        <td style="text-align: center; padding: 8px;">
+          <select p-dropdown class="form-control custom-select tableEstesa full" style="max-height: 33px;"
+            [disabled]="profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione)"
+            [ngClass]="{'no-click': profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione),
+            'vincoloAttivo': poligono.vincoloAttributi}" (ngModelChange)="getPoligonoModificato(poligono)"
+            [(ngModel)]="poligono.tipoInterventoColturale">
+            <option [ngValue]="NodeTypeEnum.BONIFICA_PULIZIA_O_RECUPERO_PARZIALE">Bonifica, pulizia o recupero parziale
+            </option>
+            <option [ngValue]="NodeTypeEnum.ESPIANTO_E_IMPIANTO">Espianto e impianto</option>
+            <option [ngValue]="NodeTypeEnum.IMPIANTO_EX_NOVO">Impianto ex novo</option>
+            <option [ngValue]="NodeTypeEnum.ESTIRPO">Estirpo</option>
+            <option [ngValue]="NodeTypeEnum.ALTRO_CAMBIO_COLTURALE">Altro cambio colturale</option>
+            <option [ngValue]="NodeTypeEnum.ABBANDONO">Abbandono</option>
+            <option [ngValue]="NodeTypeEnum.DESTINAZIONE_NON_AGRICOLA_PER_INTERVENTO_UMANO">Destinazione non agricola
+              per
+              intervento umano </option>
+          </select>
+        </td>
+        <td style="text-align: center;white-space: inherit;padding: 5px;">
+          <div class="double-date" id="double-date" [ngClass]="{'no-click': profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione),
+            'vincoloAttivo': poligono.vincoloAttributi}">
+            <p-calendar [maxDate]="maxDate" id="interventoInizio"
+              [disabled]="profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione)"
+              (ngModelChange)="getPoligonoModificato(poligono)" class="interv" view="month" placeholder="mm/yyyy"
+              dateFormat="mm/yy" [yearNavigator]="true" yearRange="2019:2030" [(ngModel)]="poligono.interventoInizio">
+            </p-calendar>
+            <p-calendar [maxDate]="maxDate" id="interventoFine"
+              [disabled]="profiloUtente.profilo !== 'caa' || (profiloUtente.profilo === 'caa' && poligono.statoLavorazione)"
+              (ngModelChange)="getPoligonoModificato(poligono)" class="interv" view="month" placeholder="mm/yyyy"
+              dateFormat="mm/yy" [yearNavigator]="true" yearRange="2019:2030" [(ngModel)]="poligono.interventoFine">
+            </p-calendar>
+          </div>
+        </td>
+        <td class="td-icon" style="text-align: center">{{poligono.numeroDocumenti}}</td>
+        <td class="td-icon" style="text-align: center">{{poligono.numeroMessaggi}}</td>
+        <td class="td-icon" style="text-align: center">
+          <span pTooltip="Nuova notifica" tooltipPosition="top">
+            <span
+              *ngIf="((profiloUtente.profilo === 'caa' && poligono.nuovaModificaBo) || (profiloUtente.profilo != 'caa' && poligono.nuovaModificaCaa))">
+              <i class="fas fa-exclamation-circle" style="font-size: 20px; color: #ffa600;"></i>
+            </span>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div class="p-field mgTop10" [hidden]="poligoniDichiaratiEvent.poligoniModificati.length === 0">
+  <button type="submit" class="gis-button" pButton label="Salva"
+    [disabled]="vincoloAttributiSubmit && poligoniDichiaratiEvent.statoRichiesta !== statiRichiesta.APERTA"
+    (click)="salvaDichiarati(poligoniDichiaratiEvent.poligoniModificati)"></button>
+</div>
+<div *ngIf="rowIsSelected" id="selectedData">
+  <div class="data-content p-grid">
+    <div class="p-md-3" style="float:left;">
+      <h6><strong>ID POLIGONO: {{rowIsSelected.id}}</strong></h6>
+    </div>
+    <div class="p-md-9" style="float:left;margin-top: 8px;">
+      <h6><strong>ALLEGATI:</strong></h6>
+    </div>
+    <div class="p-md-3" id="messaggi-dichiarato" style="float:left;">
+      <messaggi-gis (loadPoligoniDichiarati)="loadPoligoniDichiarati()" [utenteCollegato]="utenteLoggato"
+        [detailResults]="rowIsSelected" [showDetail]="true" [profiloUtente]="profiloUtente" [context]="context"
+        [idDichiarato]="rowIsSelected.id"></messaggi-gis>
+    </div>
+    <div class="p-md-9" id="allegati-dichiarato" style="float:left;">
+      <gis-upload-attachments [allegatiService]="allegatiService" (loadPoligoniDichiarati)="loadPoligoniDichiarati()"
+        [tipoAllegato]="tipoAllegato" [idDichiarato]="rowIsSelected.id" [initFile]="initFile"
+        [detailResults]="detailResults" [profiloUtente]="profiloUtente">
+      </gis-upload-attachments>&nbsp;
+      <allegati-gis [allegatiService]="allegatiService" (loadPoligoniDichiarati)="loadPoligoniDichiarati()"
+        [idDichiarato]="rowIsSelected.id" [detailResults]="detailResults"></allegati-gis>
+    </div>
+  </div>
+</div>
+<!-- <div id="overlayAllegati"></div> -->

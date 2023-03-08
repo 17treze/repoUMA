@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.fabbricato.catasto.regione.taa.it/VisuraImmobileType/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.fabbricato.catasto.regione.taa.it/VisuraImmobileType/schemas" xmlns:pt="http://www.catasto.regione.taa.it/ParticellaType/schemas">
+  <xs:import namespace="http://www.catasto.regione.taa.it/ParticellaType/schemas" schemaLocation="VisuraImmobilePortType_1_2_3_4_5_6_7.xsd"/>
+  <xs:complexType name="DatiVisuraImmobileType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="datiRichiesta" type="tns:DatiRichiestaType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="datiUI" type="tns:DatiUnitaImmobiliareType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="elencoTitolarita" type="tns:ElencoTitolaritaType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="visuraPDF" type="tns:VisuraPDFType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatiRichiestaType">
+    <xs:sequence>
+      <xs:element name="comuneCatastale">
+        <xs:complexType>
+          <xs:attribute name="codice" type="xs:integer" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="particellaEdificiale">
+        <xs:complexType>
+          <xs:attribute name="numero" type="pt:NumeroParticellaType" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="subalterno">
+        <xs:complexType>
+          <xs:attribute name="numero" type="xs:integer" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="formato">
+        <xs:complexType>
+          <xs:attribute name="tipo" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="convenzione">
+        <xs:complexType>
+          <xs:attribute name="identificativo" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dataRichiesta">
+        <xs:complexType>
+          <xs:attribute name="data" type="xs:date" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="costo">
+        <xs:complexType>
+          <xs:attribute name="valore" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatiUnitaImmobiliareType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="datiIdentificativi" type="tns:IdentificativoUIType"/>
+      <xs:element name="datiNotifica">
+        <xs:complexType>
+          <xs:attribute name="numero" type="xs:string" use="optional"/>
+          <xs:attribute name="anno" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="partitaCatastale">
+        <xs:complexType>
+          <xs:attribute name="numero" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="1" minOccurs="0" name="datiClassamento" type="tns:DatiClassamentoType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="indirizzi" type="tns:IndirizziType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="piani" type="tns:PianiType"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="estremiDatiUI" type="tns:estremiDatiUIType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElencoTitolaritaType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="titolarita" type="tns:TitolaritaType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdentificativoUIType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="identificativo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="PM">
+              <xs:complexType>
+                <xs:attribute name="numero" type="xs:string" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="codiceComuneCatastale" type="xs:string" use="required"/>
+          <xs:attribute name="numeratoreParticella" type="xs:string" use="required"/>
+          <xs:attribute name="denominatoreParticella" type="xs:integer" use="optional"/>
+          <xs:attribute name="subalterno" type="xs:string" use="optional"/>
+          <xs:attribute name="foglio" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatiClassamentoType">
+    <xs:sequence>
+      <xs:element name="consistenza">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="consistenzaMq">
+              <xs:complexType>
+                <xs:attribute name="valore" type="xs:integer" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="consistenzaVani">
+              <xs:complexType>
+                <xs:attribute name="valore" type="xs:decimal" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="consistenzaMc">
+              <xs:complexType>
+                <xs:attribute name="valore" type="xs:integer" use="optional"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="renditaEuro">
+        <xs:complexType>
+          <xs:attribute name="rendita" type="xs:decimal" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="valoreIMIS">
+        <xs:complexType>
+          <xs:attribute name="valoreIMIS" type="xs:decimal" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="categoria" type="xs:string" use="optional"/>
+    <xs:attribute name="classe" type="xs:string" use="optional"/>
+    <xs:attribute name="superficieCatastale" type="xs:integer" use="optional"/>
+    <xs:attribute name="zonaCensuaria" type="xs:string" use="optional"/>
+    <xs:attribute name="microZona" type="xs:integer" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="IndirizziType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="indirizzo">
+        <xs:complexType>
+          <xs:attribute name="indirizzo" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PianiType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="piano">
+        <xs:complexType>
+          <xs:attribute name="nome" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="estremiDatiUIType">
+    <xs:sequence>
+      <xs:element name="estremiDatiUI">
+        <xs:complexType>
+          <xs:attribute name="tipoDocumento" type="xs:string" use="optional"/>
+          <xs:attribute name="protocolloNumero" type="xs:string" use="required"/>
+          <xs:attribute name="protocolloProgressivo" type="xs:string" use="optional"/>
+          <xs:attribute name="protocolloAnno" type="xs:integer" use="required"/>
+          <xs:attribute name="dataAtto" type="xs:date" use="optional"/>
+          <xs:attribute name="dataRegistrazione" type="xs:date" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TitolaritaType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="intestatoPersonaFisica">
+          <xs:complexType>
+            <xs:attribute name="nome" type="xs:string" use="optional"/>
+            <xs:attribute name="cognome" type="xs:string" use="optional"/>
+            <xs:attribute name="dataNascita" type="xs:date" use="optional"/>
+            <xs:attribute name="luogoNascita" type="xs:string" use="optional"/>
+            <xs:attribute name="codiceFiscale" type="xs:string" use="optional"/>
+            <xs:attribute name="codiceFiscaleRicalcolo" type="xs:boolean" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="intestatoPersonaNonFisica">
+          <xs:complexType>
+            <xs:attribute name="denominazione" type="xs:string" use="optional"/>
+            <xs:attribute name="sede" type="xs:string" use="optional"/>
+            <xs:attribute name="codiceFiscale" type="xs:string" use="optional"/>
+            <xs:attribute name="codiceFiscaleRicalcolo" type="xs:boolean" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="intestatoProTempore">
+          <xs:complexType>
+            <xs:attribute name="descrizione" type="xs:string" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="diritto">
+        <xs:complexType>
+          <xs:attribute name="tipoDiritto" type="xs:string" use="optional"/>
+          <xs:attribute name="quota" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="beneLF">
+        <xs:complexType>
+          <xs:attribute name="comuneCatastale" type="xs:integer" use="optional"/>
+          <xs:attribute name="particella" type="xs:string" use="optional"/>
+          <xs:attribute name="tipoParticella" type="xs:string" use="optional"/>
+          <xs:attribute name="PM" type="xs:integer" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="estremiTitolarita">
+        <xs:complexType>
+          <xs:attribute name="tipo" type="xs:string" use="optional"/>
+          <xs:attribute name="numero" type="xs:integer" use="optional"/>
+          <xs:attribute name="anno" type="xs:integer" use="optional"/>
+          <xs:attribute name="data" type="xs:date" use="optional"/>
+          <xs:attribute name="dataInAtti" type="xs:date" use="optional"/>
+          <xs:attribute name="titolo" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="estremiModificaTitolarita">
+        <xs:complexType>
+          <xs:attribute name="tipo" type="xs:string" use="optional"/>
+          <xs:attribute name="numero" type="xs:integer" use="optional"/>
+          <xs:attribute name="anno" type="xs:integer" use="optional"/>
+          <xs:attribute name="data" type="xs:date" use="optional"/>
+          <xs:attribute name="dataInAtti" type="xs:date" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VisuraPDFType">
+    <xs:sequence>
+      <xs:element name="result" xmime:expectedContentTypes="application/zip">
+        <xs:simpleType>
+          <xs:restriction base="xs:base64Binary"/>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!--OPERATION GetSubalterniParticella-->
+  <xs:complexType name="ElencoSubalterniParticellaType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="datiRichiesta" type="tns:DatiRichiestaSPType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="elencoSP" type="tns:ElencoSPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatiRichiestaSPType">
+    <xs:sequence>
+      <xs:element name="comuneCatastale">
+        <xs:complexType>
+          <xs:attribute name="codice" type="xs:integer" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="particellaEdificiale">
+        <xs:complexType>
+          <xs:attribute name="numero" type="pt:NumeroParticellaType" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dataRichiesta">
+        <xs:complexType>
+          <xs:attribute name="data" type="xs:date" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ElencoSPType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="datiUI" type="tns:DatiUnitaImmobiliareSPType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatiUnitaImmobiliareSPType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="datiIdentificativi" type="tns:IdentificativoUIType"/>
+      <xs:element name="partitaCatastale">
+        <xs:complexType>
+          <xs:attribute name="numero" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

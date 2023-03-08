@@ -1,0 +1,37 @@
+<div class="messaggi-content">
+  <div class="panel-content">
+    <div>
+      <div class="panel-msg" *ngIf="detailResults">
+        <div class="msg" [ngClass]="{'fixHeight': profiloUtente.profilo !== 'caa'}" 
+          infiniteScroll
+        [infiniteScrollDistance]="3"
+        [infiniteScrollThrottle]="50"
+        (scrolledUp)="onUp()"
+        [immediateCheck]="true"
+        [scrollWindow]="false">
+          <div [ngClass]="m.profiloUtente" class="riquadroMsg" *ngFor="let m of listaMessaggi ; let i = index"> 
+            <label>{{m.utente}}</label>
+            <span>
+              {{m.testo}} <i class="dataMsg">{{m.dataInserimento | date: 'dd/MM/yy'}}</i>
+            </span>
+          </div>
+        </div>
+        <div class="insert-text" [hidden]="actived">
+          <textarea  type="text" class="form-control trigger-messaggio"
+          placeholder="Aggiungi un commento..." (click)="actived =! actived"></textarea>
+      </div>
+        <!-- textarea attiva-->
+        <div class="message-expanded" [hidden]="!actived" >
+          <textarea  type="text" class="form-control messaggio" [(ngModel)]="nuovoMessaggio" maxlength="4000" [ngClass]="{'fullView': actived }" 
+          placeholder="Aggiungi un commento..." ></textarea>
+          <!-- div bottoni-->
+          <div class="btn-content">
+            <button type="button" class="gis-button" style="padding: 5px 10px;" [disabled]="!nuovoMessaggio"
+             (click)="insertMsg(nuovoMessaggio); actived =! actived; nuovoMessaggio = null" pButton label="Salva"></button>
+            <button type="button" class="gis-button grey-btn" style="padding: 5px 10px;" pButton label="Annulla" (click)="actived =! actived; nuovoMessaggio = null"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

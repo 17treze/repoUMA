@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: a4g-sdk-client-dotazionetecnica
+Implementation-Version: 2.8.56
+Built-By: G.Ninfa
+Implementation-Vendor-Id: it.tndigitale.a4g
+Build-Jdk: 1.8.0_171
+Implementation-URL: http://maven.apache.org/client-sdk-dotazionetecnic
+ a
+Created-By: Maven Integration for Eclipse
+

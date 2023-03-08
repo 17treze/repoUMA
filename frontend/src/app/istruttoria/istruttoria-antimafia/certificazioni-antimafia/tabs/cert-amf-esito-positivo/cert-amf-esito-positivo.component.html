@@ -1,0 +1,76 @@
+<div class="ui-grid-fixed">
+  <p-toast position="top-center" key="generic" [baseZIndex]="50000"></p-toast>
+  <div class="boxgrey layout-actionmenu">
+    <h3>{{ textTitle }}</h3>
+    <div class="globalfilter">
+      <i class="material-icons">search</i>
+      <input type="text" pInputText size="50" placeholder="Ricerca..."
+        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+    <p-table #dt [columns]="cols" [value]="certificazioneAntimafia" [autoLayout]="true" [paginator]="true" [rows]="5"
+      [responsive]="true" (onLazyLoad)="loadData($event)" [lazy]="true" [totalRecords]="elementiTotali"
+      [rowsPerPageOptions]="labels.sizePerPagina">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.field == null">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th style="width: 3em">
+            {{this.labels.collegate}}
+          </th>
+          <th style="width: 3em">
+            {{this.labels.azioni}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cert let-i="rowIndex">
+        <tr [pSelectableRow]="cert">
+          <td>{{ cert.datiDichiarazione.dettaglioImpresa.codiceFiscale }}</td>
+          <td>{{ cert.datiDichiarazione.dettaglioImpresa.denominazione }}</td>
+          <td>{{ cert.dtProtocollazione | date: "dd/MM/yyyy" }}</td>
+          <td>{{ cert.idProtocollo }}</td>
+          <!-- <td>{{ cert.dtBdna | date: "dd/MM/yyyy" }}</td>
+          <td>{{ cert.protocolloBdna }}</td> -->
+          <td>
+            <div class="ui-g">
+              <div class="pallinoVerde" *ngIf="cert.esito === 'OK'" [pTooltip]="buildDescrizioneTooltip(cert)">
+              </div>
+              <div class="pallinoRosso" *ngIf="cert.esito === 'KO'" [pTooltip]="buildDescrizioneTooltip(cert)">
+              </div>
+            </div>
+          </td>
+          <td style="width:200px;">
+            <div class="ui-g icon-action">
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaSuperficie.length > 0 ? false : true"
+                  title="{{labels.DOMANDE_SUPERFICIE_EU}}" icon="fa ui-icon-tab" iconPos="center"
+                  (onClick)="visualizzaDettaglioDomanda(cert,0)"></p-button>
+              </div>
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaStrutturale.length > 0 ? false : true"
+                  title="{{labels.DOMANDE_STRUTTURALI_EU}}" icon="fa ui-icon-developer-board" iconPos="center"
+                  (onClick)="visualizzaDettaglioDomanda(cert,1)"></p-button>
+              </div>
+              <div class="">
+                <p-button [disabled]="cert.idsDomandaDu.length > 0  ? false : true" title="{{labels.DOMANDE_UNICHE}}"
+                  icon="fa ui-icon-description" iconPos="center" (onClick)="visualizzaDettaglioDomanda(cert,2)">
+                </p-button>
+              </div>
+            </div>
+          </td>
+          <td>
+            <action-menu #actionMenu [item]="menuAction" (click)="onDropdownMenuOpen(actionMenu, cert, i)">
+            </action-menu>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length + 3">
+            {{ labels.noTableContent }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>

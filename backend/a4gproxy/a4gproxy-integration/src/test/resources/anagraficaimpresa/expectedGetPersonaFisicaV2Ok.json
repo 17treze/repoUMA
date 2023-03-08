@@ -1,0 +1,66 @@
+{
+	"codiceFiscale": "TRRCST78B08C794X",
+	"iscrizioniSezione": [
+		{
+			"sezione": "SPECIALE",
+			"dataIscrizione": "2001-05-23",
+			"qualifica": "PICCOLO IMPRENDITORE",
+			"coltivatoreDiretto": "COLTIVATORE DIRETTO"
+		}
+	],
+	"anagrafica": {
+		"nome": "CRISTIAN",
+		"cognome": "TORRESANI",
+		"sesso": "MASCHIO",
+		"dataNascita": "1978-02-08",
+		"comuneNascita": "CLES",
+		"provinciaNascita": "TRENTO"
+	},
+	"domicilioFiscale": {
+		"toponimo": "VIA",
+		"via": "LANZA",
+		"civico": "25/B",
+		"comune": "RUMO",
+		"frazione": null,
+		"cap": "38020",
+		"codiceIstat": "022163",
+		"provincia": "TRENTO",
+		"denominazioneEstesa": null
+	},
+	"deceduta": null,
+	"impresaIndividuale": {
+		"partitaIva": "01696010220",
+		"denominazione": "TORRESANI CRISTIAN",
+		"sedeLegale": {
+			"indirizzo": {
+				"toponimo": "VIA",
+				"via": "LANZA",
+				"civico": "25/B",
+				"comune": "RUMO",
+				"frazione": null,
+				"cap": "38020",
+				"codiceIstat": "022163",
+				"provincia": "TRENTO",
+				"denominazioneEstesa": null
+			},
+			"attivitaAteco": [
+				{
+					"codice": "0141",
+					"descrizione": "Allevamento di bovini e bufale da latte, produzione di latte crudo",
+					"importanza": "PRIMARIO"
+				}
+			],
+			"iscrizioneRegistroImprese": {
+				"numero": "173710",
+				"dataIscrizione": "2001-05-09",
+				"codiceRea": 173710,
+				"provinciaRea": "TN",
+				"cessata": false
+			},
+			"telefono": "0461848407",
+			"indirizzoPec": "cristian.torresani@pec.agritel.it"
+		},
+		"oggettoSociale": null,
+		"formaGiuridica": "IMPRESA INDIVIDUALE"
+	}
+}

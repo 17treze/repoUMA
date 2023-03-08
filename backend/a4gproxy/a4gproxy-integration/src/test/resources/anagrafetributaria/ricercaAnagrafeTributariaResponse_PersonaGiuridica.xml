@@ -1,0 +1,73 @@
+<ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll xmlns="http://cooperazione.sian.it/schema/interscambio/" xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/">
+	<ns1:risposta>
+        <ns1:soggetto>
+            <ns1:attivita>
+                <ns1:codice>C.11.02.20</ns1:codice>
+                <ns1:descrizione>PRODUZIONE DI VINO SPUMANTE E ALTRI VINI SPECIALI</ns1:descrizione>
+                <ns1:infoDate>
+                    <ns1:dataInizio>2008-10-15T00:00:00+01:00</ns1:dataInizio>
+                </ns1:infoDate>
+            </ns1:attivita>
+            <ns1:attivita>
+                <ns1:codice>G.47.25</ns1:codice>
+                <ns1:descrizione>COMMERCIO AL DETTAGLIO DI BEVANDE IN ESERCIZI SPECIALIZZATI</ns1:descrizione>
+                <ns1:infoDate>
+                    <ns1:dataInizio>1971-07-20T00:00:00+00:00</ns1:dataInizio>
+                </ns1:infoDate>
+            </ns1:attivita>
+            <ns1:attivita>
+                <ns1:codice>A.01.21</ns1:codice>
+                <ns1:descrizione>COLTIVAZIONE DI UVA</ns1:descrizione>
+                <ns1:infoDate>
+                    <ns1:dataInizio>1971-07-20T00:00:00+00:00</ns1:dataInizio>
+                </ns1:infoDate>
+            </ns1:attivita>
+            <ns1:attivita>
+                <ns1:codice>A.01.26</ns1:codice>
+                <ns1:descrizione>COLTIVAZIONE DI FRUTTI OLEOSI</ns1:descrizione>
+                <ns1:infoDate>
+                    <ns1:dataInizio>1971-07-20T00:00:00+00:00</ns1:dataInizio>
+                </ns1:infoDate>
+            </ns1:attivita>
+            <ns1:domicilioFiscale>
+                <ns1:ubicazione>
+                    <ns1:cap>38123</ns1:cap>
+                    <ns1:comune>TRENTO</ns1:comune>
+                    <ns1:provincia>TN</ns1:provincia>
+                    <ns1:toponimo>VIA DEL PONTE 15</ns1:toponimo>
+                </ns1:ubicazione>
+            </ns1:domicilioFiscale>
+            <ns1:partitaIva>
+                <ns1:date>
+                    <ns1:dataInizio>2012-02-29T00:00:00+00:00</ns1:dataInizio>
+                </ns1:date>
+                <ns1:piva>00123890220</ns1:piva>
+            </ns1:partitaIva>
+            <ns1:rappresentante>
+                <ns1:rappresentante>
+                    <ns1:codiceFiscale>LNLMTB74A31F205S</ns1:codiceFiscale>
+                    <ns1:datiIdentificativi>LUNELLI MATTEO BRUNO</ns1:datiIdentificativi>
+                </ns1:rappresentante>
+            </ns1:rappresentante>
+            <ns1:sede>
+                <ns1:ubicazione>
+                    <ns1:cap>38123</ns1:cap>
+                    <ns1:comune>TRENTO</ns1:comune>
+                    <ns1:provincia>TN</ns1:provincia>
+                    <ns1:toponimo>VIA DEL PONTE 15</ns1:toponimo>
+                </ns1:ubicazione>
+            </ns1:sede>
+            <ns1:codiceFiscale>00123890220</ns1:codiceFiscale>
+            <ns1:denominazione>
+                <ns1:denominazione>FERRARI F.LLI LUNELLI S.P.A.</ns1:denominazione>
+                <ns1:naturaGiuridica>
+                    <ns1:descrizione xmlns:ns1="http://cooperazione.sian.it/schema/interscambio/globals">SOCIETA' PER AZIONI</ns1:descrizione>
+                </ns1:naturaGiuridica>
+            </ns1:denominazione>
+        </ns1:soggetto>
+    </ns1:risposta>
+    <ns1:esito>
+        <ns2:codice xmlns:ns2="http://cooperazione.sian.it/schema/interscambio/globals">012</ns2:codice>
+        <ns3:descrizione xmlns:ns3="http://cooperazione.sian.it/schema/interscambio/globals">Operazione correttamente eseguita (RicercaAnagrafica)</ns3:descrizione>
+    </ns1:esito>
+</ns1:risposta_RichiestaRispostaSincrona_ricercaAnagraficaAll>

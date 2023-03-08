@@ -1,0 +1,32 @@
+<SOAP-ENV:Fault>
+	<faultcode>SOAP-ENV:Server</faultcode>
+	<faultstring>This is an operation implementation generated fault</faultstring>
+	<faultactor/>
+	<detail>
+		<ns:WarningResponse xmlns:ns="http://www.firmadigitale.regione.taa.it/FirmaDigitale/definitions" xmlns:ns0="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ns1:WarningFault xmlns:ns1="http://www.firmadigitale.regione.taa.it/FirmaDigitaleType/schemas">
+				<ns1:SubjectCN>Errore globale in deSign/signedData</ns1:SubjectCN>
+				<ns1:SubjectDN>Errore globale in deSign/signedData</ns1:SubjectDN>
+				<ns1:status>KO</ns1:status>
+				<ns1:errorCode>1403</ns1:errorCode>
+				<ns1:errorMsg>Il file non contiene una busta PKCS#7</ns1:errorMsg>
+			</ns1:WarningFault>
+			<ns1:DettaglioFirmaDigitale xmlns:ns1="http://www.firmadigitale.regione.taa.it/FirmaDigitaleType/schemas" fileMarcato="false">
+				<ns1:datiGeneraliVerifica>
+					<deSign controlloCACRL="abilitato" controlloCRLPKCS7="abilitato" controlloCRLTS="abilitato" controlloFirmeAnnidiate="appiattito" controlloSHA1Agosto2010="abilitato" controlloSHA1Luglio2011="forte" controlloSigningCertificateAttr="disabilitato" controlloValidita="abilitato" downloadCRL="scarica quando e' scaduta" release="Java 3.3.20" releaseDate="21/12/2016" serverRelease="3.4.2" verificaTS101903="abilitata">
+						<!--Copyright (C) 2007 Metaware S.p.A. All rights reserved-->
+						<!--Author: Maurizio Caneve (firma.digitale@infocert.it)-->
+						<signedData filename="">
+							<errorCode>1403</errorCode>
+							<errorMessage>Il file non contiene una busta PKCS#7</errorMessage>
+							<status>KO</status>
+						</signedData>
+					</deSign>
+				</ns1:datiGeneraliVerifica>
+			</ns1:DettaglioFirmaDigitale>
+			<ns1:Documento xmlns:ns1="http://www.firmadigitale.regione.taa.it/FirmaDigitaleType/schemas">
+				<ns1:fileOriginale/>
+			</ns1:Documento>
+		</ns:WarningResponse>
+	</detail>
+</SOAP-ENV:Fault>

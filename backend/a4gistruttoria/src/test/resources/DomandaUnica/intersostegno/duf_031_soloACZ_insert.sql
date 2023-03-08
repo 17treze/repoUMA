@@ -1,0 +1,70 @@
+--- Domanda acs DLCSVR70S20B006- - 'DALCANALE SAVERIO - DOMANDA 984753 (era 184753)
+
+insert into A4GT_DATI_SETTORE (ID,VERSIONE,ANNO_RIFERIMENTO,CODICE_PAC,DESCRIZIONE_PAC,TIPO_DOMANDA,DESCRIZIONE_DOMANDA,DT_SCADENZA_DOMANDE,DT_SCADENZA_DOMANDE_RITARDO,DT_SCADENZA_DOMANDE_RITIROPARZ,DT_SCADENZA_DOMANDE_RITIRO,DT_RICEVIBILITA,PERC_INCREMENTO_GREENING,PERC_INCREMENTO_GIOVANE,LIMITE_GIOVANE,PERC_RIDUZIONE_LINEARE_1,PERC_RIDUZIONE_LINEARE_2, PERC_RIDUZIONE_LINEARE_3, PERC_RIDUZIONE_TITOLI , PERC_DISCIPLINA_FINANZIARIA, TIPO_ISTRUTTORIA ) 
+values (6, 0, '2019','PAC1421','PAC 2014 – 2020','DU1','Domanda Unica',to_date('15-06-2018','DD-MM-YYYY'),to_date('01-10-2018','DD-MM-YYYY'),to_date('15-11-2018','DD-MM-YYYY'),to_date('31-08-2018','DD-MM-YYYY'),to_date('15-07-2018','DD-MM-YYYY'), 0.4979, 0.5, 90, 0.05, 0.04, 0.8, 0.09 , 0.5, 'SALDO');
+
+Insert into A4GT_CONF_ISTRUTTORIA (ID, VERSIONE, ANNO_CAMPAGNA, DT_SCADENZA_DOMANDE_INIZIALI, PERC_PAGAMENTO, PERC_DISCIPLINA_FINANZIARIA)
+values
+(2, 0, 2019, to_date('15-06-2019','DD-MM-YYYY'), 1, 0.5);
+
+
+Insert into A4GT_DOMANDA
+   (ID, VERSIONE, NUMERO_DOMANDA, COD_MODULO_DOMANDA, DESC_MODULO_DOMANDA, 
+    ANNO_CAMPAGNA, STATO, CUAA_INTESTATARIO, DT_PROTOCOLLAZIONE, COD_ENTE_COMPILATORE,
+    DESC_ENTE_COMPILATORE, RAGIONE_SOCIALE, DT_PRESENTAZIONE)
+ Values
+   (NXTNBR.NEXTVAL, 2, 984753, 'BPS_2018', 'PAGAMENTI DIRETTI', 
+    2019, 'IN_ISTRUTTORIA',
+    'DLCSVR70S20B006-', TO_DATE('05/04/2018 16:24:17', 'MM/DD/YYYY HH24:MI:SS'), 103, 
+    'CAA CIA - BORGO VALSUGANA - 003', 'DALCANALE SAVERIO', TO_DATE('05/04/2018 16:22:05', 'MM/DD/YYYY HH24:MI:SS'));
+
+Insert into A4GT_DATI_LAVORAZIONE
+   (ID, VERSIONE, ID_DOMANDA, JSON_DATI_RICEVIBILITA, JSON_DATI_SINTESI_IMPEGNI)
+ Values
+   (NXTNBR.nextval, 0, (SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = 'DLCSVR70S20B006-'), 
+   '{"aggiornamentoFascicolo":"S","visioneAnomalie":"S","firmaDomanda":"S","archiviazioneDomanda":"S"}', '{"richiestaDisaccoppiato":false,"richiestaSuperfici":false,"richiestaZootecnia":true}');
+
+
+Insert into A4GT_ISTRUTTORIA(ID,VERSIONE,ID_DOMANDA,SOSTEGNO,ID_STATO_LAVORAZIONE, TIPOLOGIA)
+values(NXTNBR.nextval,0,(SELECT ID FROM A4GT_DOMANDA WHERE CUAA_INTESTATARIO = 'DLCSVR70S20B006-'),'ZOOTECNIA',(select id from a4gd_stato_lav_sostegno where identificativo = 'LIQUIDABILE'), 'SALDO');
+
+
+Insert into A4GT_TRANSIZIONE_ISTRUTTORIA
+   (ID, VERSIONE, ID_ISTRUTTORIA, ID_STATO_INIZIALE, 
+    ID_STATO_FINALE, DATA_ESECUZIONE)
+ Values
+   (NXTNBR.nextval, 0, 
+	NXTNBR.currval -1,
+   (select id from a4gd_stato_lav_sostegno where identificativo = 'RICHIESTO'), 
+    (select id from a4gd_stato_lav_sostegno where identificativo = 'INTEGRATO'), TO_DATE('04/30/2019 14:35:49', 'MM/DD/YYYY HH24:MI:SS'));
+    
+Insert into A4GT_TRANSIZIONE_ISTRUTTORIA
+   (ID, VERSIONE, ID_ISTRUTTORIA, ID_STATO_INIZIALE, 
+    ID_STATO_FINALE, DATA_ESECUZIONE)
+ Values
+   (NXTNBR.nextval, 1, 
+	NXTNBR.currval -2, 
+   (select id from a4gd_stato_lav_sostegno where identificativo = 'INTEGRATO'), 
+    (select id from a4gd_stato_lav_sostegno where identificativo = 'CONTROLLI_CALCOLO_OK'), TO_DATE('05/21/2019 18:40:30', 'MM/DD/YYYY HH24:MI:SS'));
+Insert into A4GT_PASSO_TRANSIZIONE
+   (ID, VERSIONE, ID_TRANSIZ_SOSTEGNO, CODICE_PASSO, ESITO, 
+    CODICE_ESITO, DATI_INPUT, DATI_OUTPUT, DATI_SINTESI_LAVORAZIONE)
+ Values
+   (NXTNBR.nextval, 0, 
+   NXTNBR.currval -1, 
+   'CALCOLO_ACZ', 'OK', 
+    'DUF_010', '{"variabiliCalcolo":[{"tipoVariabile":"ACZCAPIDUPTOT","valNumber":0},{"tipoVariabile":"ACZCAPIRICTOT","valNumber":10},{"tipoVariabile":"ACZCAPIACCTOT","valNumber":0},{"tipoVariabile":"ACZCAPIRICNETTOT","valNumber":10},{"tipoVariabile":"ACZIMPACCTOT","valNumber":959.24},{"tipoVariabile":"ACZVAL_315","valNumber":36.72},{"tipoVariabile":"AZCMPBOV","valBoolean":false},{"tipoVariabile":"ACZUBATOT","valNumber":10.00},{"tipoVariabile":"ACZVAL_311","valNumber":60.99},{"tipoVariabile":"ACZVAL_322","valNumber":89.39},{"tipoVariabile":"ACZIMPRICNETTOT","valNumber":959.24},{"tipoVariabile":"INFOAGRATT","valBoolean":true},{"tipoVariabile":"ACZCAPIACC_313","valNumber":3},{"tipoVariabile":"ACZVAL_320","valNumber":23.85},{"tipoVariabile":"ACZUBA_MAC","valNumber":0.00},{"tipoVariabile":"ACZVAL_310","valNumber":79.67},{"tipoVariabile":"ACZCONTROLLILOCO","valBoolean":false},{"tipoVariabile":"PERCRIT","valNumber":0.0000},{"tipoVariabile":"AGRATT","valBoolean":true},{"tipoVariabile":"ACZCAPIRIC_313","valNumber":3},{"tipoVariabile":"ACZCAPISANZTOT","valNumber":0},{"tipoVariabile":"ACZVAL_321","valNumber":5.39},{"tipoVariabile":"ACZCAPIRICNET_322","valNumber":7},{"tipoVariabile":"ACZUBA_LAT","valNumber":10.00},{"tipoVariabile":"ACZUBA_OVI","valNumber":0.00},{"tipoVariabile":"ACZCAPIRIC_322","valNumber":7},{"tipoVariabile":"ACZCAPIACC_322","valNumber":7},{"tipoVariabile":"ACZVAL_318","valNumber":67.52},{"tipoVariabile":"ACZVAL_313","valNumber":111.17},{"tipoVariabile":"ACZVAL_316","valNumber":67.52},{"tipoVariabile":"AZCMPOVI","valBoolean":false},{"tipoVariabile":"ACZCAPIRICNET_313","valNumber":3}],"variabiliCalcoloDaStampare":[{"tipoVariabile":"ACZCAPIDUPTOT","valNumber":0},{"tipoVariabile":"ACZCAPIRICTOT","valNumber":10},{"tipoVariabile":"ACZCAPIACCTOT","valNumber":0},{"tipoVariabile":"ACZCAPIRICNETTOT","valNumber":10},{"tipoVariabile":"ACZIMPACCTOT","valNumber":959.24},{"tipoVariabile":"ACZVAL_315","valNumber":36.72},{"tipoVariabile":"AZCMPBOV","valBoolean":false},{"tipoVariabile":"ACZUBATOT","valNumber":10.00},{"tipoVariabile":"ACZVAL_311","valNumber":60.99},{"tipoVariabile":"ACZVAL_322","valNumber":89.39},{"tipoVariabile":"ACZIMPRICNETTOT","valNumber":959.24},{"tipoVariabile":"INFOAGRATT","valBoolean":true},{"tipoVariabile":"ACZCAPIACC_313","valNumber":3},{"tipoVariabile":"ACZVAL_320","valNumber":23.85},{"tipoVariabile":"ACZUBA_MAC","valNumber":0.00},{"tipoVariabile":"ACZVAL_310","valNumber":79.67},{"tipoVariabile":"ACZCONTROLLILOCO","valBoolean":false},{"tipoVariabile":"PERCRIT","valNumber":0.0000},{"tipoVariabile":"AGRATT","valBoolean":true},{"tipoVariabile":"ACZCAPIRIC_313","valNumber":3},{"tipoVariabile":"ACZCAPISANZTOT","valNumber":0},{"tipoVariabile":"ACZVAL_321","valNumber":5.39},{"tipoVariabile":"ACZCAPIRICNET_322","valNumber":7},{"tipoVariabile":"ACZUBA_LAT","valNumber":10.00},{"tipoVariabile":"ACZUBA_OVI","valNumber":0.00},{"tipoVariabile":"ACZCAPIRIC_322","valNumber":7},{"tipoVariabile":"ACZCAPIACC_322","valNumber":7},{"tipoVariabile":"ACZVAL_318","valNumber":67.52},{"tipoVariabile":"ACZVAL_313","valNumber":111.17},{"tipoVariabile":"ACZVAL_316","valNumber":67.52},{"tipoVariabile":"AZCMPOVI","valBoolean":false},{"tipoVariabile":"ACZCAPIRICNET_313","valNumber":3}]}', '{"variabiliCalcolo":[{"tipoVariabile":"ACZIMPRID_320","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_318","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_313","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_313","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_318","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRICNET_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_310","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_322","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_310","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_311","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_321","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRIDSANZ_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPCALCTOT","valNumber":959.24},{"tipoVariabile":"ACZIMPCALCLORDOTOT","valNumber":959.24},{"tipoVariabile":"ACZIMPCALC_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRITTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_316","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_322","valNumber":625.73},{"tipoVariabile":"ACZIMPACC_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_322","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_322","valNumber":625.73},{"tipoVariabile":"ACZIMPRID_322","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_321","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_321","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRID_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_315","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_313","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_322","valNumber":625.73}],"variabiliCalcoloDaStampare":[{"tipoVariabile":"ACZIMPRID_320","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_318","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_313","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_313","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_318","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRICNET_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_310","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_322","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_310","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_311","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_321","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRIDSANZ_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPCALCTOT","valNumber":959.24},{"tipoVariabile":"ACZIMPCALCLORDOTOT","valNumber":959.24},{"tipoVariabile":"ACZIMPCALC_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRITTOT","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_316","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_322","valNumber":625.73},{"tipoVariabile":"ACZIMPACC_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_322","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_322","valNumber":625.73},{"tipoVariabile":"ACZIMPRID_322","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_321","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_311","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDRIT_321","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_316","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_320","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_313","valNumber":333.51},{"tipoVariabile":"ACZIMPRID_318","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_315","valNumber":0.00},{"tipoVariabile":"ACZIMPACC_310","valNumber":0.00},{"tipoVariabile":"ACZIMPRICNET_315","valNumber":0.00},{"tipoVariabile":"ACZIMPRID_321","valNumber":0.00},{"tipoVariabile":"ACZIMPRIDSANZ_313","valNumber":0.00},{"tipoVariabile":"ACZIMPCALC_322","valNumber":625.73}]}', '{"variabiliCalcolo":[],"esitiControlli":[{"tipoControllo":"BRIDUSDC009_infoAgricoltoreAttivo","esito":true,"livelloControllo":"SUCCESS"},{"tipoControllo":"BRIDUSDC010_agricoltoreAttivo","esito":true,"livelloControllo":"SUCCESS"},{"tipoControllo":"BRIDUSDC022_idDomandaCampione","esito":false,"livelloControllo":"NULL"},{"tipoControllo":"BRIDUACZ107_UbaAmmessi","esito":true,"livelloControllo":"INFO"},{"tipoControllo":"BRIDUACZ123_VerificaControlliInLoco"},{"tipoControllo":"BRIDUACZ126_VerificaSanzioni","esito":true,"valString":"NESSUNA_SANZIONE","livelloControllo":"INFO"},{"tipoControllo":"BRIDUACZ127_Riduzioni","esito":false,"livelloControllo":"ERROR"}],"variabiliParticellaColtura":null,"variabiliCalcoloDaStampare":[]}');    
+ 
+Insert into A4GT_TRANSIZIONE_ISTRUTTORIA
+   (ID, VERSIONE, ID_ISTRUTTORIA, ID_STATO_INIZIALE, 
+    ID_STATO_FINALE, DATA_ESECUZIONE)
+ Values
+   (NXTNBR.nextval, 0, 
+	NXTNBR.currval -4, 
+   (select id from a4gd_stato_lav_sostegno where identificativo = 'INTEGRATO'), 
+    (select id from a4gd_stato_lav_sostegno where identificativo = 'INTEGRATO'), TO_DATE('05/21/2019 17:50:01', 'MM/DD/YYYY HH24:MI:SS'));
+
+
+
+
+COMMIT;

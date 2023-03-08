@@ -1,0 +1,211 @@
+$color-white:   #ffffff;
+$color-black:   #000000;
+$color-bg-gray: #f6f6f7;
+$color-bg-black:#30373D;
+$color-border: rgb(212, 212, 212);
+
+.table.tabellaTotali {
+    thead .primaCella { background-color: $color-bg-gray; }
+
+    td:first-child [class*="ui-icon"] { font-size: 1.625em; /* 26px; */ }
+}
+
+.table-domande thead {
+    th {
+        position: relative;
+        vertical-align: middle;
+    }
+
+    tr:first-child th {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+
+        border-top: 0;
+    }
+
+    tr:nth-child(2) th {
+        position: sticky;
+        top: 50px;
+        z-index: 10;
+
+        background-color: #F2F2F2;
+        border: 1px solid $color-border;
+        box-shadow: 0px 1px 0px 0px $color-border;
+    }
+
+    .primaCella { background-color: $color-white; }
+}
+
+.dummy-checkbox {
+    opacity: 0;
+    pointer-events: none;
+    width: 1.75em;
+    height: 1.75em;
+}
+
+.cell--310 { border-right: 0; }
+
+.cell--311 {
+    position: relative;
+    border-left: 0;
+
+    &.has-checkbox:after {
+        content: '+';
+
+        position: absolute;
+        left: -5px;
+        top: 50%;
+        z-index: 1;
+        transform: translateY(-50%);
+
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    & + * {
+        border-left: 0;
+    }
+}
+
+.numeroIntervento1,
+.numeroIntervento2,
+.numeroIntervento3 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-center-h-wrapper {
+    display: flex;
+    align-items: center;
+
+    label { margin-bottom: 0; }
+}
+
+.ui-accordion-header__label { font-weight: normal !important; }
+
+:host ::ng-deep .ui-accordion-header:not(.ui-state-active) .ui-accordion-header__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+:host ::ng-deep .ui-accordion-header {
+    [class*="ui-icon"] { font-size: 1.625em; /* 26px; */ }
+
+    & > a {
+        display: flex;
+        align-items: center;
+    }
+
+    .ui-accordion-toggle-icon {
+        display: block;
+        color: $color-bg-black;
+        margin-right: 0.625em; // 10px;
+        font-size: 1.750em; // 28px;
+    }
+
+    p-header.row {
+        width: 100%;
+    }
+}
+
+.ui-icon-info--top {
+    position: absolute;
+    top: 0.125em; // 2px;
+    right: 0.125em; // 2px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1.875em; // 30px;
+
+    background-color: $color-bg-black;
+}
+
+    .actions__info {
+        margin-bottom: 0;
+        color: $color-white;
+    }
+
+    .action__buttons {
+        margin-left: 5.000em; // 80px;
+        flex: 1 0 auto;
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 130px;
+
+
+            border-radius: 0;
+        }
+    }
+
+    .action__button--salva { margin-left: 0.938em; /* 15px; */ }
+    .action__button--presenta { margin-left: 2.813em; /* 45px; */ }
+
+    .action__button--presenta {
+        width: auto;
+        flex-shrink: 0;
+    }
+
+    .action__button--salva,
+    .action__button--stampa {
+        background: transparent;
+        color: $color-white;
+        border: 1px solid $color-white;
+    }
+
+.table {
+    label { margin-bottom: 0; }
+
+    // th [class*="ui-icon"] {
+    //     font-size: 30px;
+    //     color: $color-white;
+    //     opacity: 1;
+    // }
+
+    .th-icon {
+        margin-right: 10px;
+    }
+
+    .checkbox__wrapper {
+        position: relative;
+        display: inline-flex;
+        padding: 5px 30px;
+
+        ::ng-deep .ui-chkbox {
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+    }
+        .checkbox__icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        ::ng-deep .ui-chkbox-icon.ui-chkbox-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            margin: 0;
+        }
+}
+
+:host ::ng-deep .dialog-domanda-integrativa {
+    .ui-dialog { max-width: 720px; }
+
+    .ui-dialog-titlebar { display: none; }
+
+    .ui-dialog-content { padding: 3.125em 2.188em 2.188em 2.188em; }
+}

@@ -1,0 +1,108 @@
+{
+	"id": 447,
+	"version": 41,
+	"datiDichiarazione": {
+		"richiedente": {
+			"nome": "CRISTIAN",
+			"cognome": "TORRESANI",
+			"codiceFiscale": "TRRCST78B08C794X",
+			"comuneNascita": "CLES",
+			"provinciaNascita": "TN",
+			"dataNascita": "08/02/1978",
+			"sesso": "M",
+			"residenza": {
+				"indirizzo": "FRAZIONE LANZA 25/B",
+				"comune": "RUMO",
+				"provincia": "TN",
+				"CAP": "38020"
+			},
+			"carica": "TITOLARE FIRMATARIO",
+			"dtInizioCarica": "ND",
+			"dtFineCarica": "ND"
+		},
+		"dettaglioImpresa": {
+			"formaGiuridicaCodice": "DI",
+			"formaGiuridicaDescrizione": "IMPRESA INDIVIDUALE",
+			"denominazione": "TORRESANI CRISTIAN",
+			"sedeLegale": "VIA LANZA 25/B 38020 RUMO TRENTO",
+			"estremiCCIAA": {
+				"sede": "TN",
+				"numeroIscrizione": "173710",
+				"dataIscrizione": "09/05/2001"
+			},
+			"codiceFiscale": "TRRCST78B08C794X",
+			"partitaIva": "01696010220",
+			"indirizzoPEC": "cristian.torresani@pec.agritel.it",
+			"dettaglioPersonaGiuridica": {
+				"formaGiuridica": "IMPRESA INDIVIDUALE",
+				"estremiCostituzione": "",
+				"capitaleSociale": "Dato non disponibile",
+				"durata": ""
+			},
+			"soggettiImpresa": [{
+					"nome": "CRISTIAN",
+					"cognome": "TORRESANI",
+					"codiceFiscale": "TRRCST78B08C794X",
+					"comuneNascita": "CLES",
+					"provinciaNascita": "TN",
+					"dataNascita": "08/02/1978",
+					"sesso": "M",
+					"indirizzoResidenza": "FRAZIONE LANZA 25/B",
+					"comuneResidenza": "RUMO",
+					"provinciaResidenza": "TN",
+					"capResidenza": "38020",
+					"carica": [{
+							"codice": "TIT",
+							"tipologia": "TITOLARE FIRMATARIO",
+							"dataInizio": "09/05/2001",
+							"dataFine": "",
+							"href": "/antimafia/447/allegatoFamiliariConviventi/515",
+							"selezionato": true,
+							"dichiarazione": false
+						}
+					],
+					"familiariConviventi": [{
+							"nome": "GUIDO",
+							"cognome": "MICHELON",
+							"codiceFiscale": "MCHGDU38B23E500I",
+							"comuneNascita": "LAVIS",
+							"provinciaNascita": "TN",
+							"dataNascita": "-1005264000000",
+							"sesso": "M",
+							"residenza": {
+								"indirizzo": "VIA DI SAN FLORIANO 7",
+								"comune": "GIOVO",
+								"provincia": "TN",
+								"CAP": "38030"
+							},
+							"gradoParentela": "Altro"
+						}
+					],
+					"estremiCCIAA": "CLES"
+				}
+			],
+			"aziendeCollegate": []
+		}
+	},
+	"dtGenerazionePdf": null,
+	"dtInizioCompilazione": null,
+	"dtUltimoAggiornamento": "2018-11-23",
+	"dtUploadPdfFirmato": "2018-11-20",
+	"idProtocollo": "PAT_TEST/RFS151-23/11/2018-0000731",
+	"pdfFirmato": "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9GaWx0ZXIvRmxhdGVEZWNvZGUvQWx0ZXJuYXRlL0RldmljZVJHQi9",
+	"pdfGenerato": null,
+	"pdfFirmatoName": null,
+	"dtProtocollazione": "2018-11-23T14:37:43.303+0000",
+	"a4gtAllegatoDicAntimafias": [],
+	"stato": {
+		"id": 13,
+		"identificativo": "PROTOCOLLATA",
+		"descrizione": "Stato che identifica le dichiarazioni antimafia protocollate."
+	},
+	"azienda": {
+		"id": 16,
+		"cuaa": "TRRCST78B08C794X"
+	},
+	"assenzaDt": true,
+	"allegatoFamiliariConviventi": null
+}

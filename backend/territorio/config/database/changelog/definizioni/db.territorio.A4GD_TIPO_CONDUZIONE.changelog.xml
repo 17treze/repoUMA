@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<changeSet id="TERRITORIO_DATI_TIPOLOGIA_4N.2" author="Alessandro Porcu">
+        <sql endDelimiter=";" splitStatements="true">
+		
+		-- INSERT NUOVI DATI TIPOLOGIA CONDUZIONE		
+			
+		INSERT INTO A4GD_TIPO_CONDUZIONE VALUES (nxtnbr.nextval, 0, 'PRO', 'PROPRIETÀ');
+		INSERT INTO A4GD_TIPO_CONDUZIONE VALUES (nxtnbr.nextval, 0, 'AFF', 'AFFITTO');
+		INSERT INTO A4GD_TIPO_CONDUZIONE VALUES (nxtnbr.nextval, 0, 'MEZ', 'MEZZADRIA');
+		INSERT INTO A4GD_TIPO_CONDUZIONE VALUES (nxtnbr.nextval, 0, 'ALT', 'ALTRO');
+      
+       </sql>
+		<rollback>
+		</rollback>
+    </changeSet>
+    
+</databaseChangeLog>

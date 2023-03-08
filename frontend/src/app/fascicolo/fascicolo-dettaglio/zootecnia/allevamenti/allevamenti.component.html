@@ -1,0 +1,325 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<div class="ui-grid-fixed boxgrey">
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <i
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></i>
+    <img src="assets/img/ico-zootecnia.jpg">
+    <span class="ml-2">
+    {{ "FascicoloAziendale.ZOOTECNIA" | translate }}
+  </span>
+  </a>
+  <br>
+  <h3 class="mb-3">{{ "FascicoloAziendale.ALLEVAMENTI" | translate }}</h3>
+  <div class="funzioni-grid boxgrey">
+    <button
+      class="pull-right"
+      pButton
+      icon="ui-icon-update"
+      style="background-color: green"
+      label="AGGIORNA"
+      [disabled]="!fascicoloEditable()"
+      (click)="updateAllevamenti()"
+      pButton>
+    </button>
+    <div class="accordion-wrapper dettaglioaccordionmultiple">
+      <p-accordion>
+        <p-accordionTab
+          header="ALLEVAMENTI"
+          [selected]="true">
+          <p-table
+            #tableUnita
+            [columns]="cols"
+            [value]="allevamenti"
+            [autoLayout]="true"
+            [paginator]="false"
+            [responsive]="true"
+            dataKey="identificativo">
+            <ng-template
+              pTemplate="header"
+              let-columns>
+              <tr>
+                <th style="width: 3em"></th>
+                <th
+                  *ngFor="let col of columns"
+                  [pSortableColumn]="col.field"
+                  [pSortableColumnDisabled]="col.field == null">
+                  <strong>{{col.header}}</strong>
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="body"
+              let-allevamento
+              let-expanded="expanded"
+              let-columns="columns"
+              let-rowIndex="rowIndex">
+              <tr>
+                <td>
+                  <a
+                    href="#"
+                    [pRowToggler]="allevamento">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                  </a>
+                </td>
+                <!-- <td>{{allevamento.identificativoFiscale}}</td> -->
+                <td>{{allevamento.specie ? 
+                    ("FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim() | translate) !== "FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim()  ?  ("FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim() | translate) : "(" + allevamento.specie.trim() + ")"
+                    : "-" }}
+                </td>
+                <td>
+                  {{allevamento.strutturaAllevamentoDto.identificativo}}
+                </td>
+                <td>
+                  {{allevamento.strutturaAllevamentoDto.comune}}
+                </td>
+                <td>{{allevamento.cfProprietario}}</td>
+                <td>{{allevamento.cfDetentore}}</td>
+                <td>{{allevamento.tipologiaAllevamento ? "(" + allevamento.tipologiaAllevamento +")" : "-" }}</td>
+                <td>{{allevamento.tipoProduzione ? 
+                  ("FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim() | translate) !== "FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim()  ?  ("FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim() | translate) : "(" + allevamento.tipoProduzione.trim() + ")"
+                  : "-" }}
+                </td>
+                <td>{{allevamento.orientamentoProduttivo ? 
+                  ("FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim() | translate) !== "FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim()  ?  ("FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim() | translate) : "(" + allevamento.orientamentoProduttivo.trim() + ")"
+                  : "-" }}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="rowexpansion"
+              let-allevamento
+              let-columns="columns">
+              <tr>
+                <td [attr.colspan]="columns.length + 1">
+                  <tbody>
+                    <tr></tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.IDENTIFICATIVO_FISCALE" | translate }}:
+                      </td>
+                      <td>{{allevamento.identificativoFiscale}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.TIPOLOGIA_ALLEVAMENTO" | translate }}:
+                      </td>
+                      <td>{{allevamento.tipologiaAllevamento ? "(" + allevamento.tipologiaAllevamento +")" : "-" }}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.CF_PROPRIETARIO" | translate }}:
+                      </td>
+                      <td>{{allevamento.cfProprietario}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DENOMINAZIONE_PROPRIETARIO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.denominazioneProprietario}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.CF_DETENTORE" | translate }}:
+                      </td>
+                      <td>{{allevamento.cfDetentore}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DENOMINAZIONE_DETENTORE" | translate }}:
+                      </td>
+                      <td>{{allevamento.denominazioneDetentore}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DT_INIZIO_DETENZIONE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.dtInizioDetenzione | date : 'dd/MM/yyyy'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DT_FINE_DETENZIONE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.dtFineDetenzione | date : 'dd/MM/yyyy'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.SOCCIDA" | translate }}:
+                      </td>
+                      <td>{{allevamento.soccida}}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.SPECIE" | translate }}:
+                      </td>
+                      <td>{{allevamento.specie ? 
+                        ("FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim() | translate) !== "FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim()  ?  ("FascicoloAziendale.SPE_CODICE." + allevamento.specie.trim() | translate) : "(" + allevamento.specie.trim() + ")"
+                        : "-" }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.TIPOLOGIA_PRODUZIONE" | translate }}:
+                      </td>
+                      <td>{{allevamento.tipoProduzione ? 
+                        ("FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim() | translate) !== "FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim()  ?  ("FascicoloAziendale.TIPO_PRODUZIONE." + allevamento.tipoProduzione.trim() | translate) : "(" + allevamento.tipoProduzione.trim() + ")"
+                        : "-" }}
+                      </td>
+                          </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.ORIENTAMENTO_PRODUTTIVO" | translate }}:
+                      </td>
+                      <td>{{allevamento.orientamentoProduttivo ? 
+                        ("FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim() | translate) !== "FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim()  ?  ("FascicoloAziendale.ORIENTAMENTO_PRODUTTIVO." + allevamento.orientamentoProduttivo.trim() | translate) : "(" + allevamento.orientamentoProduttivo.trim() + ")"
+                        : "-" }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DT_APERTURA_ALLEVAMENTO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.dtAperturaAllevamento | date : 'dd/MM/yyyy'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DT_CHIUSURA_ALLEVAMENTO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.dtChiusuraAllevamento | date : 'dd/MM/yyyy'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.AUTORIZZAZIONE_SANITARIA" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.autorizzazioneSanitariaLatte}}
+                      </td>
+                    </tr>
+                    <br>
+                    <tr>
+                      <th>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.DATI_STRUTTURA" | translate }}
+                      </th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.IDENTIFICATIVO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.identificativo}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.INDIRIZZO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.indirizzo}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.CAP" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.cap}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.LOCALITA" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.localita}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.COMUNE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.comune}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.LATITUDINE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.latitudine}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.LONGITUDINE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.longitudine}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.FOGLIO" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.foglioCatastale}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.SEZIONE" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.sezione}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.PARTICELLA" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.particella}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{ "FascicoloAziendale.ALLEVAMENTO.STRUTTURA.SUB" | translate }}:
+                      </td>
+                      <td>
+                        {{allevamento.strutturaAllevamentoDto.subalterno}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template
+              pTemplate="emptymessage"
+              let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length + 1">Nessun contenuto disponibile</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</div>

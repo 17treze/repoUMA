@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-java-binding-schema xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+  xmlns:ci="http://jaxb.dev.java.net/plugin/listener-injector">
+
+  <options package="it.tndigitale.a4gistruttoria.cup.dto" />
+  <xjc:serializable/>
+  
+</xml-java-binding-schema>
+
+

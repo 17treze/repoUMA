@@ -1,0 +1,241 @@
+[
+  {
+    "id": 20077,
+    "version": 4,
+    "datiDichiarazione": {
+      "richiedente": {
+        "nome": "DAVIDE",
+        "cognome": "MARZADRO",
+        "codiceFiscale": "MRZDVD81D12H612F",
+        "comuneNascita": "ROVERETO",
+        "provinciaNascita": "TN",
+        "dataNascita": "12/04/1981",
+        "sesso": "M",
+        "residenza": {
+          "indirizzo": "MASO FIORINI 1",
+          "comune": "ISERA",
+          "provincia": "TN",
+          "CAP": "38060"
+        },
+        "carica": "SOCIO",
+        "dtInizioCarica": "22/03/2016",
+        "dtFineCarica": "ND"
+      },
+      "dettaglioImpresa": {
+        "formaGiuridicaCodice": "SE",
+        "formaGiuridicaDescrizione": "SOCIETA' SEMPLICE",
+        "denominazione": "MADONNA DELLE VITTORIE SOCIETA' SEMPLICE - SOCIETA' AGRICOLA",
+        "sedeLegale": "VIA LINFANO 81 38062 ARCO TRENTO",
+        "sede": {
+          "provincia": "TRENTO",
+          "comune": "ARCO",
+          "ccomune": "022006",
+          "toponimo": "VIA",
+          "via": "LINFANO",
+          "ncivico": "81",
+          "cap": "38062",
+          "telefono": "0464505542"
+        },
+        "estremiCCIAA": {
+          "sede": "TN",
+          "numeroIscrizione": "178536",
+          "dataIscrizione": "30/08/2002"
+        },
+        "oggettoSociale": "OGGETTO SOCIALE:LA SOCIETA', AVENTE NATURA CIVILE E NON COMMERCIALE, HA PER OGGETTO L'ATTIVITA'DI CUI ALL'ARTICOLO 2135 C.C.",
+        "codiceFiscale": "01801280221",
+        "partitaIva": "01801280221",
+        "indirizzoPEC": "MADONNADELLEVITTORIE@LEGALMAIL.IT",
+        "dettaglioPersonaGiuridica": {
+          "formaGiuridica": "SOCIETA' SEMPLICE",
+          "estremiCostituzione": "23/08/2002",
+          "capitaleSociale": "Dato non disponibile",
+          "durata": "31/12/2050"
+        },
+        "soggettiImpresa": [
+          {
+            "nome": "DAVIDE",
+            "cognome": "MARZADRO",
+            "codiceFiscale": "MRZDVD81D12H612F",
+            "comuneNascita": "ROVERETO",
+            "provinciaNascita": "TN",
+            "dataNascita": "12/04/1981",
+            "sesso": "M",
+            "indirizzoResidenza": "MASO FIORINI 1",
+            "comuneResidenza": "ISERA",
+            "provinciaResidenza": "TN",
+            "capResidenza": "38060",
+            "carica": [
+              {
+                "codice": "COM",
+                "tipologia": "SOCIO",
+                "dataInizio": "22/03/2016",
+                "dataFine": "",
+                "href": "/antimafia/20077/allegatoFamiliariConviventi/20079",
+                "selezionato": true,
+                "dichiarazione": true
+              }
+            ],
+            "estremiCCIAA": "ROVERETO"
+          }
+        ],
+        "aziendeCollegate": [
+          {
+            "denominazione": "MDV SRL",
+            "codiceFiscale": "01791180936",
+            "comuneSede": "ARCO",
+            "indirizzoSede": "VIA LINFANO",
+            "nCivico": "",
+            "provinciaSede": "TRENTO",
+            "capSede": "38062",
+            "carica": [
+              {
+                "codice": "COM",
+                "tipologia": "SOCIO",
+                "dataInizio": "22/03/2016",
+                "dataFine": "",
+                "selezionato": false,
+                "dichiarazione": false
+              }
+            ],
+            "selezionato": false,
+            "dettaglioImpresa": {
+              "formaGiuridicaCodice": "SR",
+              "formaGiuridicaDescrizione": "SOCIETA' A RESPONSABILITA' LIMITATA",
+              "denominazione": "MDV S.R.L.",
+              "sedeLegale": "VIA LINFANO 81 38062 ARCO TRENTO",
+              "sede": {
+                "provincia": "TRENTO",
+                "comune": "ARCO",
+                "ccomune": "022006",
+                "toponimo": "VIA",
+                "via": "LINFANO",
+                "ncivico": "81",
+                "cap": "38062"
+              },
+              "estremiCCIAA": {
+                "sede": "TN",
+                "numeroIscrizione": "222994",
+                "dataIscrizione": "16/03/2016"
+              },
+              "oggettoSociale": "LA SOCIETA' HA PER OGGETTO L'ESERCIZIO DIRETTO, O ATTRAVERSO SOCIETA' O ENTI DIPARTECIPAZIONE, DI ATTIVITA' AGRICOLE, INDUSTRIALI, COMMERCIALI E TERZIARIE NELCAMPO AGRO ALIMENTARE E IN QUELLO DEI SUOI DERIVATI.PER IL CONSEGUIMENTO E NELL'AMBITO DI TALI FINALITA' LA SOCIETA' POTRA':- OPERARE NEI SETTORI DELLE COLTIVAZIONI AGRICOLE, DELLA TRASFORMAZIONE ECONSERVAZIONE ALIMENTARE, DELLA PRODUZIONE E COMMERCIALIZZAZIONE DI ALIMENTI EBEVANDE; DEL TURISMO ENOGASTRONOMICO; DELLA REALIZZAZIONE, VENDITA E DELLASOMMINISTRAZIONE AL PUBBLICO DI ALIMENTI E BEVANDE O PRODOTTI SIMILI, DERIVATIO ASSIMILATI, DI OGGETTISTICA E COMPLEMENTI D'ARREDO, IL TUTTO NEL RISPETTODELLA NORMATIVA VIGENTE IN MATERIA; DELL'ATTIVITA' DI RICEZIONE ED OSPITALITA';- ACQUISIRE, NELL'INTERESSE PROPRIO E DELLE SOCIETA' ED ENTI DI PARTECIPAZIONE,TITOLARITA' ED USO DI DIRITTI SU BENI IMMATE-RIALI (QUALI, A TITOLOESEMPLIFICATIVO, BREVETTI, MARCHI, KNOW-HOW, ECC.), DISPONENDONE L'UTILIZZONELL'AMBITO DELLE MEDESIME SOCIETA' O ENTI DI PARTECIPAZIONE;- ASSUMERE PARTECIPAZIONI ED INTERESSENZE IN SOCIETA' O IMPRESE AVENTI SCOPOANALOGO, AFFINE O CONNESSO AL PROPRIO, PURCHE' NON NEI CONFRONTI DEL PUBBLICO,NONCHE' COSTITUIRE O PARTECIPARE ALLA COSTITUZIONE DI ASSOCIAZIONI TEMPORANEED'IMPRESA;- PROVVEDERE AL FINANZIAMENTO DELLE SOCIETA' ED ENTI DI PARTE-CIPAZIONE ED ALCOORDINAMENTO TECNICO, COMMERCIALE, FINANZIARIO ED AMMINISTRATIVO DELLE LOROATTIVITA';- COMPIERE, NELL'INTERESSE PROPRIO E DELLE SOCIETA' ED ENTI DI PARTECIPAZIONE,QUALSIASI OPERAZIONE AGRICOLA, INDUSTRIALE, COMMERCIALE, MOBILIARE,IMMOBILIARE, FINANZIARIA, ASSOCIATIVA, COMUNQUE CONNESSA CON LA REALIZZAZIONEDELLO SCOPO SOCIALE, COMPRESA L'ASSUNZIONE DI MUTUI E FINANZIAMENTI E LAPRESTAZIONE, ANCHE A FAVORE DI TERZI DI AVALLI, FIDEIUSSIONI E ALTRE GARANZIE,REALI COMPRESE, ESPRESSAMENTE ESCLUSO L'ESERCIZIO DEL CREDITO E LA RACCOLTA DELRISPARMIO BANCARIO MOBILIARE ED IMMOBILIARE E PURCHE' LE ATTIVITA' NON VENGANOSVOLTE NEI CONFRONTI DEL PUBBLICO.",
+              "codiceFiscale": "01791180936",
+              "partitaIva": "01791180936",
+              "indirizzoPEC": "MDV.SRL@PEC.IT",
+              "dettaglioPersonaGiuridica": {
+                "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+                "estremiCostituzione": "03/11/2015",
+                "capitaleSociale": "Dato non disponibile",
+                "durata": "31/12/2060"
+              },
+              "soggettiImpresa": [
+                {
+                  "nome": "STEFANO",
+                  "cognome": "MARZADRO",
+                  "codiceFiscale": "MRZSFN55A04L957C",
+                  "comuneNascita": "VILLA LAGARINA",
+                  "provinciaNascita": "TN",
+                  "dataNascita": "04/01/1955",
+                  "sesso": "M",
+                  "indirizzoResidenza": "PIAZZA FONTANA 4",
+                  "comuneResidenza": "NOGAREDO",
+                  "provinciaResidenza": "TN",
+                  "capResidenza": "38060",
+                  "carica": [
+                    {
+                      "codice": "CON",
+                      "tipologia": "CONSIGLIERE",
+                      "dataInizio": "15/03/2016",
+                      "dataFine": "",
+                      "selezionato": false,
+                      "dichiarazione": false
+                    },
+                    {
+                      "codice": "PCA",
+                      "tipologia": "PRESIDENTE CONSIGLIO AMMINISTRAZIONE",
+                      "dataInizio": "15/03/2016",
+                      "dataFine": "",
+                      "selezionato": false,
+                      "dichiarazione": false
+                    }
+                  ],
+                  "estremiCCIAA": "VILLA LAGARINA"
+                },
+                {
+                  "nome": "ANDREA",
+                  "cognome": "MARZADRO",
+                  "codiceFiscale": "MRZNDR58R13H612E",
+                  "comuneNascita": "ROVERETO",
+                  "provinciaNascita": "TN",
+                  "dataNascita": "13/10/1958",
+                  "sesso": "M",
+                  "indirizzoResidenza": "VIA G DONIZETTI 35",
+                  "comuneResidenza": "VILLA LAGARINA",
+                  "provinciaResidenza": "TN",
+                  "capResidenza": "38060",
+                  "carica": [
+                    {
+                      "codice": "CON",
+                      "tipologia": "CONSIGLIERE",
+                      "dataInizio": "15/03/2016",
+                      "dataFine": "",
+                      "selezionato": false,
+                      "dichiarazione": false
+                    }
+                  ],
+                  "estremiCCIAA": "ROVERETO"
+                },
+                {
+                  "nome": "ANNA",
+                  "cognome": "MARZADRO",
+                  "codiceFiscale": "MRZNNA64M63H612N",
+                  "comuneNascita": "ROVERETO",
+                  "provinciaNascita": "TN",
+                  "dataNascita": "23/08/1964",
+                  "sesso": "F",
+                  "indirizzoResidenza": "VIA G PRATI 23",
+                  "comuneResidenza": "VILLA LAGARINA",
+                  "provinciaResidenza": "TN",
+                  "capResidenza": "38060",
+                  "carica": [
+                    {
+                      "codice": "CON",
+                      "tipologia": "CONSIGLIERE",
+                      "dataInizio": "15/03/2016",
+                      "dataFine": "",
+                      "selezionato": false,
+                      "dichiarazione": false
+                    }
+                  ],
+                  "estremiCCIAA": "ROVERETO"
+                }
+              ],
+              "aziendeCollegate": []
+            }
+          }
+        ]
+      }
+    },
+    "dtGenerazionePdf": null,
+    "dtInizioCompilazione": "2019-05-28T09:29:30.000+0000",
+    "dtUltimoAggiornamento": "2019-05-28T09:31:45.000+0000",
+    "dtUploadPdfFirmato": "2019-05-28T09:30:57.000+0000",
+    "dtFine": null,
+    "idProtocollo": "PAT_TEST/RFS151-28/05/2019-0001298",
+    "pdfFirmato": null,
+    "pdfGenerato": null,
+    "pdfFirmatoName": null,
+    "dtProtocollazione": "2019-05-28T09:31:45.000+0000",
+    "a4gtAllegatoDicAntimafias": [],
+    "stato": {
+      "id": 8435,
+      "identificativo": "CONTROLLATA",
+      "descrizione": "Stato che identifica che il processo di controllo domanda antimafia andato a buon fine"
+    },
+    "azienda": {
+      "id": 20075,
+      "cuaa": "01801280221"
+    },
+    "assenzaDt": null,
+    "allegatoFamiliariConviventi": null
+  }
+]

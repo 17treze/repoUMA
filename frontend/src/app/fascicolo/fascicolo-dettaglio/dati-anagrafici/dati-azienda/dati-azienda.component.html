@@ -1,0 +1,55 @@
+<div class="ui-grid-fixed boxwhite">
+  <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+  <a
+    [routerLink]
+    (click)="handleClick()"
+    class="d-flex align-items-center text-decoration-none color-primary">
+    <em
+      class="pi pi-chevron-left"
+      style="font-size: 2rem; color: black"></em>
+    <img src="assets/img/ico-anagraf.jpg">
+    <span class="ml-2">
+      {{ "FascicoloAziendale.DATI_ANAGRAFICI_E_FISCALI" | translate }}
+    </span>
+  </a>
+  <br>
+  <h3 class="mb-3">{{ "FascicoloAziendale.DATI_AZIENDA" | translate }}</h3>
+  <button class="pull-right"
+    pButton
+    icon="ui-icon-update"
+    style="background-color: green"
+    label="AGGIORNA"
+    [disabled]="!fascicoloEditable()"
+    (click)="update()"
+    pButton>
+  </button>
+  <p-message *ngIf="updateError" severity="error" [text]="updateError"></p-message>
+  <p-tabMenu
+    [model]="tabs"
+    [activeItem]="tabs[0]"
+    class="d-block mb-4"></p-tabMenu>
+  <div class="funzioni-grid boxgrey">
+    <div
+      class="accordion p-4"
+      *ngIf="!tabPersoneConCarica && !tabUnitaTecnicoEconomiche">
+      <p-accordion [multiple]="true">
+        <app-a4g-accordion-tab [accordionModels]="templates"></app-a4g-accordion-tab>
+      </p-accordion>
+    </div>
+    <div
+      class="accordion p-4"
+      *ngIf="tabPersoneConCarica">
+      <app-persone-con-carica [updated$]="updated" (updateError)="onUpdateError($event)"></app-persone-con-carica>
+    </div>
+    <div
+      class="accordion p-4"
+      *ngIf="tabUnitaTecnicoEconomiche">
+      <app-unita-tecnico-economiche></app-unita-tecnico-economiche>
+    </div>
+    <!-- <div
+      class="accordion p-4"
+      *ngIf="tabRegistroImpresa">
+      <app-unita-tecnico-economiche></app-unita-tecnico-economiche>
+    </div> -->
+  </div>
+</div>
