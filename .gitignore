@@ -1,0 +1,30 @@
+target/
+*.log
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+.tern-project
+.recommenders/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Netbeans
+nbactions.xml
+nb-configuration.xml
+/build/
+
+# Node
+frontend/node_modules/
+frontend/A4G.zip
+
+# Visual Studio Code
+.vscode/
