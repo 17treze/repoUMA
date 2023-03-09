@@ -36,7 +36,7 @@
         "changeOrigin": true
     },
     "/anagrafica/api": {
-        "target": "http://itts55.intra.infotn.it:18080",
+        "target": "http://localhost:8888",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

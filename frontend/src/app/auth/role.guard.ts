@@ -58,6 +58,7 @@ export class RoleGuard implements CanActivate {
         }
       } else {
         console.log("promiseNoRuoliAgs");
+        /*
 	      this.homeService.ricercaUtenzeAgsPerUtente().subscribe(next => {
 	        console.log("promiseNoRuoliAgs trovati");
 	        console.log(next);
@@ -73,6 +74,8 @@ export class RoleGuard implements CanActivate {
 	        resolve(true);
 	        throw err;
 	      });
+        */
+        resolve(true);
       }
     });
 
@@ -86,6 +89,7 @@ export class RoleGuard implements CanActivate {
         }
       } else {
         console.log("promiseNoRuoliSrt");
+        /*
         if (utente && utente.codiceFiscale && validaInput.validaCf(utente.codiceFiscale, false)) {
           this.homeService.ricercaSrtRuoliPerUtente(utente.codiceFiscale).subscribe(next => {
             console.log("promiseNoRuoliSrt trovati");
@@ -106,6 +110,8 @@ export class RoleGuard implements CanActivate {
           console.log("No cf srt");
           resolve(true);
         }
+        */
+        resolve(true);
       }
     });
     const promises = [
