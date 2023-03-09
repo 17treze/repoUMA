@@ -6,7 +6,7 @@
         "changeOrigin": true
     },
     "/a4gutente/api": {
-        "target": "http://tdtsx30.intra.infotn.it:18080",
+        "target": "http://localhost:8080",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

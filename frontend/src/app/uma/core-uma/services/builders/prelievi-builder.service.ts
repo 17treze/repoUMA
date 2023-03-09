@@ -6,7 +6,7 @@ import { PrelievoViewModel } from '../../models/viewModels/PrelievoViewModel';
 import * as moment from 'moment';
 import { PrelievoCarburanteVM } from '../../models/viewModels/PrelievoCarburanteViewModel';
 import { CarburanteDto } from '../../models/dto/CarburanteDto';
-import { TipoCarburante } from '../../../../../../../cruscotto/src/app/modules/domande-uma/models/tipo-carburante';
+// import { TipoCarburante } from '../../../../../../../cruscotto/src/app/modules/domande-uma/models/tipo-carburante';
 import { SelectItem } from 'primeng-lts';
 
 @Injectable({
@@ -56,9 +56,9 @@ export class PrelieviBuilderService {
 
   carburantePrelevabileArrayVmToCarburanteDto(carburantePrelevabileVm: Array<CarburantePrelevabileVM>): CarburanteDto {
     const carburanteDto = {} as CarburanteDto;
-    carburanteDto.benzina = this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase() == TipoCarburante.BENZINA.toLowerCase())[0].prelevato);
-    carburanteDto.gasolio = this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase() == TipoCarburante.GASOLIO.toLowerCase())[0].prelevato);
-    carburanteDto.gasolioSerre = this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase().split(' ').join('') == TipoCarburante.GASOLIO_SERRE.toLowerCase())[0].prelevato);
+    carburanteDto.benzina = null; // this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase() == TipoCarburante.BENZINA.toLowerCase())[0].prelevato);
+    carburanteDto.gasolio = null; // this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase() == TipoCarburante.GASOLIO.toLowerCase())[0].prelevato);
+    carburanteDto.gasolioSerre = null; // this.formatConverterService.toNumber(carburantePrelevabileVm.filter((carBen: CarburantePrelevabileVM) => carBen.carburante.toLowerCase().split(' ').join('') == TipoCarburante.GASOLIO_SERRE.toLowerCase())[0].prelevato);
     return carburanteDto;
   }
 

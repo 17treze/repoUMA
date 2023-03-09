@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { LoaderService } from '../../app/loader.service';
 import { LoaderState } from './loader.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { PanelEvent } from '../gis/shared/PanelEvent';
+// import { PanelEvent } from '../gis/shared/PanelEvent';
 @Component({
   selector: 'a4g-loader',
   templateUrl: './loader.component.html',
@@ -13,7 +13,8 @@ export class LoaderComponent implements OnInit {
   public show = false;
   private subscription: Subscription;
 
-  constructor(private loaderService: LoaderService, public panelEvent: PanelEvent) { }
+  // constructor(private loaderService: LoaderService, public panelEvent: PanelEvent) { }
+  constructor(private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.subscription = this.loaderService.loaderState.subscribe((state: LoaderState) => {

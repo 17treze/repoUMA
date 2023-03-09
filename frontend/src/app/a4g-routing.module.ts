@@ -74,10 +74,10 @@ const routes: Routes = [
           { path: 'scadenze', component: ScadenzeComponent }
         ]
       },
-      {
-        path: '',
-        loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
-      },
+      // {
+      //   path: '',
+      //   loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // },
       {
         path: "consultazioneUMA",
         component: ConsultazioneUMAComponent,
@@ -208,10 +208,10 @@ const routes: Routes = [
           mybreadcrumb: Labels.PAC_14_20
         },
       },
-      {
-        path: '',
-        loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
-      },
+      // {
+        // path: '',
+        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // },
       {
         path: 'consultazioneUMA',
         component: ConsultazioneUMAComponent,
@@ -385,10 +385,10 @@ const routes: Routes = [
           mybreadcrumb: Labels.PAC_14_20
         },
       },
-      {
-        path: '',
-        loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
-      },
+      // {
+        // path: '',
+        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // },
       {
         path: 'consultazioneUMA',
         component: ConsultazioneUMAComponent,
@@ -442,11 +442,10 @@ const routes: Routes = [
           mybreadcrumb: Labels.RICERCA_DU
         }
       },
-      {
-        path: '',
-        loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
-      },
-
+      // {
+        // path: '',
+        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // },
       { path: 'ricercaFascicolo', component: RicercaFascicoliComponent, data: { mybreadcrumb: Labels.ricercaFascicolo } },
       {
         path: 'ricerca-fascicolo-new',
@@ -553,11 +552,11 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [CrmGuard]
   },
-  {
-    path: '',
-    loadChildren: () => import('./gis/gis.module').then(m => m.GisModule),
-    canLoad: [CrmGuard]
-  },
+  // {
+    // path: '',
+    // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule),
+    // canLoad: [CrmGuard]
+  // },
   {
     path: 'fascicolo',
     loadChildren: () => import('./fascicolo/fascicolo.module').then(m => m.FascicoloModule), // percorso del  fascicolo.module

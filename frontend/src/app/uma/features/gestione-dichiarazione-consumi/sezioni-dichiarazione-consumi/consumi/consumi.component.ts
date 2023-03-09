@@ -1,5 +1,5 @@
 import { NavigatorService } from './../../../../../a4g-common/services/navigator.service';
-import { TipoCarburante } from './../../../../../../../../cruscotto/src/app/modules/domande-uma/models/tipo-carburante';
+// import { TipoCarburante } from './../../../../../../../../cruscotto/src/app/modules/domande-uma/models/tipo-carburante';
 import { ConfirmationService } from 'primeng/api';
 import { Calendar } from 'primeng/calendar';
 import { MotivazioneConsuntivoTipo } from './../../../../core-uma/models/enums/MotivazioneConsuntivoTipo.enum';
@@ -919,7 +919,8 @@ export class ConsumiComponent implements OnInit, OnDestroy {
     return disponibile;
   }
 
-  private calcolaAccisaByCarburante(tipoCarburante: keyof typeof TipoCarburante): number {
+  private calcolaAccisaByCarburante(tipoCarburante: string): number {
+  // private calcolaAccisaByCarburante(tipoCarburante: keyof typeof TipoCarburante): number {
     // SE(consumato > ammissibile) ALLORA
     // 	accisa = disponibile - ammissibile - rimanenza - recupero
     // ALTRIMENTI
@@ -971,8 +972,9 @@ export class ConsumiComponent implements OnInit, OnDestroy {
     return 0;
   }
 
-  private setAccisaByCarburante(tipoCarburante: keyof typeof TipoCarburante, accisa: number) {
-    if (accisa == null) {
+  private setAccisaByCarburante(tipoCarburante: string, accisa: number) {
+  // private setAccisaByCarburante(tipoCarburante: keyof typeof TipoCarburante, accisa: number) {
+      if (accisa == null) {
       return;
     }
     setTimeout(() => {

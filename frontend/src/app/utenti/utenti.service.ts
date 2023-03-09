@@ -350,6 +350,7 @@ export class UtentiService {
   }
 
   public getProfiliSrt(datiAnagrafici: DatiAnagrafici): Observable<Array<ProfiliSrt>> {
+    /*
     let paramshttp = new HttpParams();
     if (datiAnagrafici.nome) {
       paramshttp = paramshttp.set('nome', datiAnagrafici.nome);
@@ -364,9 +365,12 @@ export class UtentiService {
       this._configuration.UrlGetProfiliSrt,
       { params: paramshttp }
     );
+    */
+    return null;
   }
 
   public getProfiliAgs(datiAnagrafici: DatiAnagrafici): Observable<Array<ProfiliAgs>> {
+    /*
     let paramshttp = new HttpParams();
     if (datiAnagrafici.nome) {
       paramshttp = paramshttp.set('nome', datiAnagrafici.nome);
@@ -381,6 +385,8 @@ export class UtentiService {
       this._configuration.UrlGetProfiliAgs,
       { params: paramshttp }
     );
+    */
+    return null;
   }
 
   public getProfiliA4g(datiDomanda: DatiAnagrafici): Observable<Array<DatiUtente>> {

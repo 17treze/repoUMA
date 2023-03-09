@@ -20,12 +20,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
-		<oracle.version>12.1.0</oracle.version>
+		<oracle.version>12.2.0.1</oracle.version>
 		<swagger2.version>2.8.0</swagger2.version>
 		<liquibase-maven-plugin.version>3.6.2</liquibase-maven-plugin.version>
 		<show-confirm-schema>true</show-confirm-schema>
 		<a4g.framework.version>2.4.8</a4g.framework.version>
-		<a4g.client.version>2.8.28</a4g.client.version>
+		<a4g.client.version>2.8.57</a4g.client.version>
 		<!-- Configurazione Zipkin
 		<spring-cloud.version>Finchley.RELEASE</spring-cloud.version> -->
 	</properties>
@@ -59,9 +59,19 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc7</artifactId>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
 			<version>${oracle.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.database.ha</groupId>
+					<artifactId>simplefan</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.database.ha</groupId>
+					<artifactId>ons</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -297,7 +307,7 @@
 									<promptOnNonLocalDatabase>${show-confirm-schema}</promptOnNonLocalDatabase>
 									<propertyFile>config/database/liquibase-test.properties</propertyFile>
 									<expressionVariables>
-										<user.writer>UA4GWRT02</user.writer>
+										<user.writer>SUA4G02</user.writer>
 									</expressionVariables>
 									<labels>TEST</labels>
 								</configuration>

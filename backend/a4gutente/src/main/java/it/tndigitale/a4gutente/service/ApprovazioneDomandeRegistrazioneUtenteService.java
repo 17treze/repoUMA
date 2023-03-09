@@ -35,10 +35,11 @@ import it.tndigitale.a4gutente.utility.EmailSupport;
 import it.tndigitale.a4gutente.utility.ListSupport;
 
 @Service
-public class ApprovazioneDomandeRegistrazioneUtenteService implements IApprovazioneDomandaRegistrazioneUtenteScheduledService {
-
+public class ApprovazioneDomandeRegistrazioneUtenteService implements
+		IApprovazioneDomandaRegistrazioneUtenteScheduledService {
+	
 	private static final Logger logger = LoggerFactory.getLogger(ApprovazioneDomandeRegistrazioneUtenteService.class);
-
+	
 	@Value("${automazioneApprovazione.utenzatecnica.username}")
 	private String utenzaTecnica;
 	@Autowired
@@ -53,11 +54,9 @@ public class ApprovazioneDomandeRegistrazioneUtenteService implements IApprovazi
 	private DetenzioneAutonomaClient detenzioneAutonomaClient;
 	@PersistenceContext
 	protected EntityManager entityManager;
-
-	public ApprovazioneDomandeRegistrazioneUtenteService setComponents(
-														   IstruttoriaService istruttoriaService,
-														   EntityManager entityManager,
-														   DomandaRegistrazioneUtenteService domandaRegService) {
+	
+	public ApprovazioneDomandeRegistrazioneUtenteService setComponents(IstruttoriaService istruttoriaService,
+			EntityManager entityManager, DomandaRegistrazioneUtenteService domandaRegService) {
 		this.istruttoriaService = istruttoriaService;
 		this.entityManager = entityManager;
 		this.domandaRegService = domandaRegService;
@@ -73,66 +72,64 @@ public class ApprovazioneDomandeRegistrazioneUtenteService implements IApprovazi
 			logger.debug("Non è presente nessuna domanda in stato PROTOCOLLATA");
 			return;
 		}
-		for (DatiDomandaRegistrazioneUtenteSintesi domanda: domandeProtocollate.getRisultati()) {
+		for (DatiDomandaRegistrazioneUtenteSintesi domanda : domandeProtocollate.getRisultati()) {
 			try {
 				DatiDomandaRegistrazioneUtente datiDomanda = domandaRegService.getDomanda(domanda.getId());
-				if(verificaCondizioniAutomazioneApprovazione(datiDomanda)) {
+				if (verificaCondizioniAutomazioneApprovazione(datiDomanda)) {
 					String noteEMotivazione = getNoteEMotivazione(datiDomanda.getTipoDomandaRegistrazione());
 					domandaRegService.presaInCarico(datiDomanda.getId());
 					creaIstruttoria(datiDomanda.getId(), noteEMotivazione);
 					DomandaRegistrazioneUtente domandaIn = domandaUtenteRep.getOne(datiDomanda.getId());
 					entityManager.detach(domandaIn);
 					approvaDomanda(datiDomanda.getId(), datiDomanda.getDatiAnagrafici(), noteEMotivazione);
-					if(datiDomanda.getTipoDomandaRegistrazione().equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA_ANAGRAFICO)) {
-						detenzioneAutonomaClient.apri(datiDomanda.getResponsabilitaRichieste().getResponsabilitaLegaleRappresentante().get(0).getCuaa());
-					}
+					//					if(datiDomanda.getTipoDomandaRegistrazione().equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA_ANAGRAFICO)) {
+					//						detenzioneAutonomaClient.apri(datiDomanda.getResponsabilitaRichieste().getResponsabilitaLegaleRappresentante().get(0).getCuaa());
+					//					}
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				logger.error("Errore durante l'elaborazione della domanda {}", domanda.getId(), e);
 				throw e;
 			}
 		}
 	}
 	
-	protected RisultatiPaginati<DatiDomandaRegistrazioneUtenteSintesi> getDomandeProtocollate () throws Exception {
+	protected RisultatiPaginati<DatiDomandaRegistrazioneUtenteSintesi> getDomandeProtocollate() throws Exception {
 		DomandaRegistrazioneUtenteFilter filter = new DomandaRegistrazioneUtenteFilter();
 		filter.setStato(StatoDomandaRegistrazioneUtente.PROTOCOLLATA);
 		return domandaRegService.ricercaDomande(filter, Paginazione.PAGINAZIONE_DEFAULT, Ordinamento.DEFAULT_ORDER_BY);
 	}
 	
-	protected boolean verificaCondizioniAutomazioneApprovazione(DatiDomandaRegistrazioneUtente datiDomanda) throws Exception {
-		return checkIfServiziContainsOnlyA4G(datiDomanda.getServizi()) && datiDomanda.getResponsabilitaRichieste() != null &&
-				ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaAltriEnti()) &&
-				ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaCaa()) &&
-				ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaConsulente()) &&
-				ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaPat()) &&
-				(ListSupport.isNotEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaLegaleRappresentante()) ||
-				ListSupport.isNotEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaTitolare()));
- 	}
+	protected boolean verificaCondizioniAutomazioneApprovazione(DatiDomandaRegistrazioneUtente datiDomanda)
+			throws Exception {
+		return checkIfServiziContainsOnlyA4G(datiDomanda.getServizi())
+				&& datiDomanda.getResponsabilitaRichieste() != null
+				&& ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaAltriEnti())
+				&& ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaCaa())
+				&& ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaConsulente())
+				&& ListSupport.isNullOrEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaPat())
+				&& (ListSupport
+						.isNotEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaLegaleRappresentante())
+						|| ListSupport
+								.isNotEmpty(datiDomanda.getResponsabilitaRichieste().getResponsabilitaTitolare()));
+	}
 	
 	protected void creaIstruttoria(Long id, String motivazione) throws Exception {
-		Istruttoria istruttoria = new Istruttoria()
-				.setIdDomanda(id)
-				.setProfili(getIdProfiloAzienda())
+		Istruttoria istruttoria = new Istruttoria().setIdDomanda(id).setProfili(getIdProfiloAzienda())
 				.setVariazioneRichiesta(motivazione);
 		istruttoriaService.crea(istruttoria);
 		entityManager.flush();
 	}
 	
 	protected void approvaDomanda(Long id, DatiAnagrafici datiAnagrafici, String note) throws Exception {
-		RichiestaDomandaApprovazione richiesta = new RichiestaDomandaApprovazione()
-				.setIdDomanda(id)
-				.setNote(note)
+		RichiestaDomandaApprovazione richiesta = new RichiestaDomandaApprovazione().setIdDomanda(id).setNote(note)
 				.setTestoMail(EmailSupport.getTestoMail(datiAnagrafici));
 		domandaRegService.approva(richiesta);
 	}
 	
 	protected List<Long> getIdProfiloAzienda() throws Exception {
 		List<Profilo> profili = profiloService.ricercaProfiliUtente();
-		return profili
-				.stream()
-				.filter(x -> x.getIdentificativo().equals("azienda"))
-				.map(x -> x.getId())
+		return profili.stream().filter(x -> x.getIdentificativo().equals("azienda")).map(x -> x.getId())
 				.collect(Collectors.toList());
 	}
 	
@@ -144,10 +141,11 @@ public class ApprovazioneDomandeRegistrazioneUtenteService implements IApprovazi
 		if (tipoDomandaRegistrazione.equals(TipoDomandaRegistrazione.COMPLETA)) {
 			return "approvazione gestita in automatico dal sistema per richiesta da a4g";
 		}
-		if (tipoDomandaRegistrazione.equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA) || tipoDomandaRegistrazione.equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA_ANAGRAFICO)) {
+		if (tipoDomandaRegistrazione.equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA)
+				|| tipoDomandaRegistrazione.equals(TipoDomandaRegistrazione.RIDOTTA_AZIENDA_ANAGRAFICO)) {
 			return "approvazione gestita in automatico dal sistema per richiesta da myappag";
 		}
 		return "";
 	}
-
+	
 }

@@ -506,11 +506,12 @@
 			CREATE INDEX IDX_PROCEDIMENTO_ID_DICH ON A4GT_PROCEDIMENTO_AMF (ID_DICHIARAZIONE) TABLESPACE ${tablespace.index};
 		</sql>
 	</changeSet>
-	
+	<!-- 
 	<changeSet id="FASCICOLO_34.1" author="Lorenzo Martinelli">
 		<sql endDelimiter=";" splitStatements="true">
 			GRANT SELECT ON A4GT_EVENTSTORED TO NETEYE;
 		</sql>
 	</changeSet>
+	 -->
 
 </databaseChangeLog>

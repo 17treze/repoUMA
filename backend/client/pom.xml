@@ -30,7 +30,7 @@
 		In fase di developing è possibile sovrascriverle con 
 		mvn -Da4g.client.version=1.1.0-SNAPSHOT
 		-->
-		<a4g.framework.version>1.1.0</a4g.framework.version>
+		<a4g.framework.version>2.4.8</a4g.framework.version>
 		
         <module.fascicolo.exclude>true</module.fascicolo.exclude>
         <module.mediator.exclude>true</module.mediator.exclude>

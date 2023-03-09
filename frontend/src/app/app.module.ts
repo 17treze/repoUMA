@@ -56,9 +56,9 @@ import { RicercaFascicoliNewComponent } from './fascicolo/ricerca-fascicoli-new/
 import { FiltroRicercaFascicoliNewComponent } from './fascicolo/ricerca-fascicoli-new/filtro-ricerca-fascicoli-new/filtro-ricerca-fascicoli-new.component';
 import { FascicoloModule } from './fascicolo/fascicolo.module';
 import { AppBreadcrumbService } from './a4g-common/app-breadcrumb/app.breadcrumb.service';
-import { GisModule } from './gis/gis.module';
-import { HeaderComponent } from './gis/components/header/header.component';
-import { FooterComponent } from './gis/components/footer/footer.component';
+// import { GisModule } from './gis/gis.module';
+// import { HeaderComponent } from './gis/components/header/header.component';
+// import { FooterComponent } from './gis/components/footer/footer.component';
 import { ConsultazioneUMAComponent } from './funzionalita/consultazione-UMA/consultazione-UMA.component';
 import { ListaDomandeComponent } from './funzionalita/consultazione-UMA/app-lista-domande/app-lista-domande.component';
 import { RicercaAziendeComponent } from './uma/features/gestione-distributore/ricerca-aziende/ricerca-aziende.component';
@@ -88,7 +88,7 @@ export function HttpLoaderFactory(
     A4gCommonModule,
     BrowserAnimationsModule,
     FormsModule,
-    GisModule,
+    // GisModule,
     A4gRoutingModule,
     HttpClientModule,
     A4gCommonModule.forRoot(),
@@ -132,8 +132,8 @@ export function HttpLoaderFactory(
     ConsultazioneUMAComponent,
     GestioneRettificaDomandaUMAComponent,
     GestioneAziendeComponent,
-    HeaderComponent,
-    FooterComponent,
+    // HeaderComponent,
+    // FooterComponent,
     ListaDomandeComponent,
     ListaDomandeCaaComponent,
     ListaRettificheDomandeComponent,
