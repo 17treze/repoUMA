@@ -25,6 +25,8 @@ nb-configuration.xml
 # Node
 frontend/node_modules/
 frontend/A4G.zip
+frontend/dist/
+frontend/build/
 
 # Visual Studio Code
 .vscode/

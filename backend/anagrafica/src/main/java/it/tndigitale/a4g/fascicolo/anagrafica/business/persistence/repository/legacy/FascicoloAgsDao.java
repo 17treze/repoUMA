@@ -29,6 +29,8 @@ import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.FascicoloAgsDtoPaged;
 import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.FascicoloAgsFilter;
 import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.ModoPagamentoAgsDto;
 import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.MovimentoValidazioneFascicoloAgsDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.StatoFascicoloLegacy;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.legacy.TipoDetenzioneAgs;
 import it.tndigitale.a4g.framework.config.DataSourceConfig;
 import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
 import it.tndigitale.a4g.framework.pagination.model.Ordinamento.Ordine;
@@ -227,6 +229,7 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 	}
 	
 	private FascicoloAgsDto getFascicolo(Long id, String cuaa, LocalDateTime data) {
+		/*
 		String filter = "";
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		if (id != null) {
@@ -264,7 +267,37 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 							.setTipoDetenzione(detenzione.getTipoDetenzione())));
 					return fascicoloAgsDto;
 				}).collect(CustomCollectors.toSingleton());
-		
+
+		*
+	private Long idAgs;
+	private String cuaa;
+	private String denominazione;
+	private LocalDateTime dataMorteTitolare; // presente solo per le persone fisiche
+	private StatoFascicoloLegacy stato;
+	private String organismoPagatore;
+	private LocalDateTime dataCostituzione;
+	private LocalDateTime dataAggiornamento;
+	private LocalDateTime dataValidazione;
+	private boolean iscrittoSezioneSpecialeAgricola;
+	private boolean nonIscrittoSezioneSpecialeAgricola;
+	private String pec;
+	private List<DetenzioneAgsDto> detenzioni;
+		*/
+		FascicoloAgsDto fascicoloAgsDto = new FascicoloAgsDto();
+		fascicoloAgsDto.setCuaa("FLGKTA79S41L378T");
+		fascicoloAgsDto.setStato(StatoFascicoloLegacy.IN_LAVORAZIONE);
+		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");	
+		fascicoloAgsDto.setPec("K.FALAGIARDA@GMAIL.COM");
+		fascicoloAgsDto.setOrganismoPagatore("APPAG");
+		DetenzioneAgsDto detenzioneAgsDto = new DetenzioneAgsDto();
+		detenzioneAgsDto.setCaa("CAA COOPTRENTO SRL");
+		detenzioneAgsDto.setTipoDetenzione(TipoDetenzioneAgs.MANDATO);
+		detenzioneAgsDto.setSportello("TEST");
+		detenzioneAgsDto.setIdentificativoSportello(1024L);
+		detenzioneAgsDto.setDataInizio(LocalDateTime.now());
+		fascicoloAgsDto.addDetenzione(detenzioneAgsDto);
+		return fascicoloAgsDto;
+
 	}
 	
 	private interface NativeQueryString {
