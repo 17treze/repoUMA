@@ -111,8 +111,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getRuoliSrTrento() {
     if (this.utente && this.utente.codiceFiscale && validaInput.validaCf(this.utente.codiceFiscale, false)) {
-      this.srTrentoRuoli = this.homeService.getSrtRuoliPerUtente();
       console.log('home getRuoliSrTrento');
+      /*
+      this.srTrentoRuoli = this.homeService.getSrtRuoliPerUtente();
       if (!this.srTrentoRuoli) {
         this.homeService.ricercaSrtRuoliPerUtente(this.utente.codiceFiscale)
           .subscribe((next) => {
@@ -123,6 +124,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       } else {
         this.caricaRuoliSrTrento();
       }
+      */
     }
   }
 
@@ -155,8 +157,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getUtenzeAgs() {
-    this.agsUtenze = this.homeService.getUtenzeAgsPerUtente();
     console.log('home getUtenzeAgs');
+    /*
+    this.agsUtenze = this.homeService.getUtenzeAgsPerUtente();
     if (!this.agsUtenze) {
       this.homeService.ricercaUtenzeAgsPerUtente()
         .subscribe((next) => {
@@ -167,6 +170,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else {
       this.caricaUtenzeAgs();
     }
+    */
   }
 
   caricaUtenzeAgs() {
