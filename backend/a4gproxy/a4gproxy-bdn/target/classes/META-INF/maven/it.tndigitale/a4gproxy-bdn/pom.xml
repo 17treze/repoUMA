@@ -19,7 +19,7 @@
 	<properties>
 		<show-confirm-schema>true</show-confirm-schema>
 		<a4g.client.version>2.7.15</a4g.client.version>
-		<a4g.framework.version>2.4.2</a4g.framework.version>
+		<a4g.framework.version>2.4.8</a4g.framework.version>
 	</properties>
 
 	<dependencies>

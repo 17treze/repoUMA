@@ -27,7 +27,7 @@
 		<liquibase-maven-plugin.version>3.6.2</liquibase-maven-plugin.version>
 		<swagger2.version>2.9.2</swagger2.version>
 		<show-confirm-schema>true</show-confirm-schema>
-		<a4g.framework.version>2.4.2</a4g.framework.version>
+		<a4g.framework.version>2.4.8</a4g.framework.version>
 		<a4g.client.version>2.7.13</a4g.client.version>
 	</properties>
 

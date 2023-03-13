@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
+Built-By: giustino
+Build-Jdk: 17.0.6
 Implementation-Title: a4gproxy-bdn
 Implementation-Version: 1.0.0
-Built-By: G.Ninfa
 Implementation-Vendor-Id: it.tndigitale
-Build-Jdk: 1.8.0_171
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/a4gproxy/a4gproxy-bdn
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/a4gproxy/a4gproxy-bdn
 Created-By: Maven Integration for Eclipse
 

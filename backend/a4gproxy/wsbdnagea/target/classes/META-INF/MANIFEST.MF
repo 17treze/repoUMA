@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
+Built-By: giustino
+Build-Jdk: 17.0.6
 Implementation-Title: wsbdnagea
 Implementation-Version: 1.0.0
-Built-By: G.Ninfa
 Implementation-Vendor-Id: it.infotn.ags.bdn
-Build-Jdk: 1.8.0_171
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/a4gproxy/wsbdnagea
-Created-By: Maven Integration for Eclipse
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/a4gproxy/wsbdnagea
 Main-Class: it.infotn.bdn.wsclient.Application
+Created-By: Maven Integration for Eclipse
 

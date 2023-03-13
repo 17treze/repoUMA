@@ -24,10 +24,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
-		<a4g.framework.ext.validazione.version>2.5.10</a4g.framework.ext.validazione.version>
-		<a4g.client.version>2.8.55</a4g.client.version>
+		<a4g.framework.ext.validazione.version>2.5.13</a4g.framework.ext.validazione.version>
+		<a4g.client.version>2.8.57</a4g.client.version>
 		<a4g.openapi.version>1.4.8</a4g.openapi.version>
-		<oracle.version>12.1.0</oracle.version>
+		<oracle.version>12.2.0.1</oracle.version>
 		<liquibase-maven-plugin.version>3.6.2</liquibase-maven-plugin.version>
 		<show-confirm-schema>true</show-confirm-schema>
 	</properties>
@@ -121,8 +121,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc7</artifactId>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
 			<version>${oracle.version}</version>
 		</dependency>
 	</dependencies>

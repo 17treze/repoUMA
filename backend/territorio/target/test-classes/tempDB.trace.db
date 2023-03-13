@@ -1,3 +1,0 @@
-2022-08-24 09:06:20 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column """PARTICELLA"" VARCHAR2(10) NOT NULL": "'Particella troppo lunga' (23)"; SQL statement:
-insert into a4gt_particelle_fondiarie (versione, comune, conduzione_id, conduzione_id_validazione, foglio, particella, sezione, sub, superficie_condotta, id, id_validazione) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [22001-199]
