@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Built-By: giustino
-Build-Jdk: 17.0.6
-Implementation-Title: a4g-sdk-client-territorio
-Implementation-Version: 2.8.57
-Implementation-Vendor-Id: it.tndigitale.a4g
-Implementation-URL: http://maven.apache.org/client-sdk-territorio
-Created-By: Maven Integration for Eclipse
-

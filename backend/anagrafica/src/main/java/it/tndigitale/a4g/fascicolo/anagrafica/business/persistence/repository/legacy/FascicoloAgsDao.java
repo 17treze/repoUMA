@@ -284,6 +284,7 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 	private List<DetenzioneAgsDto> detenzioni;
 		*/
 		FascicoloAgsDto fascicoloAgsDto = new FascicoloAgsDto();
+		fascicoloAgsDto.setIdAgs(1L);
 		fascicoloAgsDto.setCuaa("FLGKTA79S41L378T");
 		fascicoloAgsDto.setStato(StatoFascicoloLegacy.IN_LAVORAZIONE);
 		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");	
@@ -297,7 +298,6 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		detenzioneAgsDto.setDataInizio(LocalDateTime.now());
 		fascicoloAgsDto.addDetenzione(detenzioneAgsDto);
 		return fascicoloAgsDto;
-
 	}
 	
 	private interface NativeQueryString {
@@ -395,10 +395,10 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 					+ " AND sco_ruolo IN (" + createScoRuoloFilter(mappaCariche) + ")" + " AND c.cuaa = :cuaa ";
 			*/
 			return "SELECT pf.COGNOME AS cognome, pf.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , "
-					+ "nvl(c.descrizione, 'TITOLARE') AS ruolo, p.codice_fiscale AS cuaa "
+					+ "nvl(c.descrizione, '000001') AS ruolo, p.codice_fiscale AS cuaa "
 					+ "FROM a4gt_persona p join a4gt_persona_fisica pf on p.id = pf.id "
 					+ "left outer join a4gt_carica c on c.id_persona_fisica_con_carica = p.id "
-					+ "WHERE p.CODICE_FISCALE = :cuaa  ";
+					+ "WHERE p.CODICE_FISCALE = :cuaa ";
 			}
 		
 		private static String createScoRuoloFilter(Map<String, Carica> map) {

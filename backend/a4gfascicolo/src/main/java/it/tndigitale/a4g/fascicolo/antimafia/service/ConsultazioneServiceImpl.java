@@ -88,7 +88,14 @@ public class ConsultazioneServiceImpl implements ConsultazioneService {
 	//@PostAuthorize("hasRole('a4gfascicolo.fascicolo.ricerca.tutti') or (hasRole('a4gfascicolo.fascicolo.ricerca.utente') and hasPermission(returnObject, 'TITOLARE')) or (hasRole('a4gfascicolo.fascicolo.ricerca.ente') and hasPermission(returnObject, 'ENTE'))")
 	public Fascicolo getFascicolo(Long idFascicolo) throws Exception {
 		logger.debug("getFascicolo({})", idFascicolo);
-		return agsClient.getFascicolo(idFascicolo);
+		// return agsClient.getFascicolo(idFascicolo);
+		Fascicolo fascicolo = new Fascicolo("FLGKTA79S41L378T", "KATIA FALAGIARDA");
+		fascicolo.setIdFascicolo(idFascicolo);
+		fascicolo.setCaa("CAA COOPTRENTO SRL");
+		fascicolo.setCaacodice("00110240");
+		fascicolo.setTipoDetenzione("MAN");
+		fascicolo.setIdSoggetto(idFascicolo);
+		return fascicolo;
 	}
 
 	@Transactional(readOnly = true)

@@ -36,30 +36,30 @@ public class MacchinaAgsDao extends NamedParameterJdbcDaoSupport {
 		StringBuilder sb = new StringBuilder("");
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		// filtro per cuaa
-		if (filter.getCuaa() != null) {
-			params.put("cuaa", filter.getCuaa().toUpperCase());
-			sb.append("AND csv.CUAA = :cuaa ");
-		}
-		// filtro per carburanti
-		if (!CollectionUtils.isEmpty(filter.getTipiCarburante())) {
-			List<String> codiciCarburante = filter.getTipiCarburante().stream().map(carburante -> {
-				switch (carburante) {
-				case BENZINA:
-					return "000002";
-				case GASOLIO:
-					return "000001";
-				default:
-					return "000999";
-				}
-			}).collect(Collectors.toList());
-			params.put("codicicarburante", codiciCarburante);
-			sb.append("AND m.COD_ALIMENTAZIONE = 'ALIMAC' ");
-			sb.append("AND m.SCO_ALIMENTAZIONE IN (:codicicarburante) ");
-		}
-
-		// Data di riferimento alla quale le macchine ritornate sono valide nel fascicolo
-		params.put("data", LocalDateConverter.to(filter.getData()));
+//		// filtro per cuaa
+//		if (filter.getCuaa() != null) {
+//			params.put("cuaa", filter.getCuaa().toUpperCase());
+//			sb.append("AND csv.CUAA = :cuaa ");
+//		}
+//		// filtro per carburanti
+//		if (!CollectionUtils.isEmpty(filter.getTipiCarburante())) {
+//			List<String> codiciCarburante = filter.getTipiCarburante().stream().map(carburante -> {
+//				switch (carburante) {
+//				case BENZINA:
+//					return "000002";
+//				case GASOLIO:
+//					return "000001";
+//				default:
+//					return "000999";
+//				}
+//			}).collect(Collectors.toList());
+//			params.put("codicicarburante", codiciCarburante);
+//			sb.append("AND m.COD_ALIMENTAZIONE = 'ALIMAC' ");
+//			sb.append("AND m.SCO_ALIMENTAZIONE IN (:codicicarburante) ");
+//		}
+//
+//		// Data di riferimento alla quale le macchine ritornate sono valide nel fascicolo
+//		params.put("data", LocalDateConverter.to(filter.getData()));
 
 		// comunque reperisce le macchine che vanno a GASOLIO o BENZINA
 		// else {
@@ -78,14 +78,23 @@ public class MacchinaAgsDao extends NamedParameterJdbcDaoSupport {
 	}
 
 	private String getMacchineValideFascicoloSql() {
-		return "SELECT m.ID_MACCHINA, m.DE_MACCHINA AS descrizione, m.TARGA AS targa, " + "m.SCO_CLASSE AS codiceclasse, " + "m.SCO_SOTTO_CLASSE AS codicesottoclasse, "
-				+ decodifica("m.COD_CLASSE", "m.SCO_CLASSE") + "AS classe, " + decodifica("m.COD_SOTTO_CLASSE", "m.SCO_SOTTO_CLASSE") + "AS sottoclasse, " + decodifica("m.COD_MARCA", "m.SCO_MARCA")
-				+ "AS marca, " + decodifica("m.COD_ALIMENTAZIONE", "m.SCO_ALIMENTAZIONE") + "AS alimentazione, " + decodifica("m.COD_POSSESSO", "m.SCO_POSSESSO") + "AS possesso, "
-				+ "m.MATRICOLA AS MATRICOLA, " + "m.TELAIO AS TELAIO, " + "m.DE_MARCA_MOTORE AS MARCA_MOTORE, " + "m.DE_TIPO_MOTORE AS TIPO_MOTORE, " + "m.POTENZA_KW AS POTENZA_KW,"
-				+ "m.ID_TIPO_MACCHINA," + "m.ID_MACCHINA "
-				// + "ROUND(m.POTENZA_KW) AS POTENZA_KW "
-				+ "FROM TMACCHINA m " + "INNER JOIN cons_sogg_viw csv on csv.pk_cuaa = m.id_soggetto " + "INNER JOIN TFASCICOLO f ON f.ID_SOGGETTO = csv.PK_CUAA AND  f.ID_SOGGETTO = m.ID_SOGGETTO "
-				+ "WHERE :data between csv.data_inizio_val and csv.data_fine_val " + "AND :data between m.dt_inizio and m.dt_fine " + "AND :data BETWEEN m.DT_INSERT AND m.DT_DELETE ";
+//		return "SELECT m.ID_MACCHINA, m.DE_MACCHINA AS descrizione, m.TARGA AS targa, " + "m.SCO_CLASSE AS codiceclasse, " + "m.SCO_SOTTO_CLASSE AS codicesottoclasse, "
+//				+ decodifica("m.COD_CLASSE", "m.SCO_CLASSE") + "AS classe, " + decodifica("m.COD_SOTTO_CLASSE", "m.SCO_SOTTO_CLASSE") + "AS sottoclasse, " + decodifica("m.COD_MARCA", "m.SCO_MARCA")
+//				+ "AS marca, " + decodifica("m.COD_ALIMENTAZIONE", "m.SCO_ALIMENTAZIONE") + "AS alimentazione, " + decodifica("m.COD_POSSESSO", "m.SCO_POSSESSO") + "AS possesso, "
+//				+ "m.MATRICOLA AS MATRICOLA, " + "m.TELAIO AS TELAIO, " + "m.DE_MARCA_MOTORE AS MARCA_MOTORE, " + "m.DE_TIPO_MOTORE AS TIPO_MOTORE, " + "m.POTENZA_KW AS POTENZA_KW,"
+//				+ "m.ID_TIPO_MACCHINA," + "m.ID_MACCHINA "
+//				// + "ROUND(m.POTENZA_KW) AS POTENZA_KW "
+//				+ "FROM TMACCHINA m " + "INNER JOIN cons_sogg_viw csv on csv.pk_cuaa = m.id_soggetto " + "INNER JOIN TFASCICOLO f ON f.ID_SOGGETTO = csv.PK_CUAA AND  f.ID_SOGGETTO = m.ID_SOGGETTO "
+//				+ "WHERE :data between csv.data_inizio_val and csv.data_fine_val " + "AND :data between m.dt_inizio and m.dt_fine " + "AND :data BETWEEN m.DT_INSERT AND m.DT_DELETE ";
+		return "SELECT m.id as ID_MACCHINA,m.denominazione AS descrizione, m.TARGA AS targa, tm.descrizione AS codiceclasse, \r\n"
+				+ "    sm.descrizione AS codicesottoclasse, null AS classe, sm.descrizione AS sottoclasse, m.MARCA AS marca, \r\n"
+				+ "    null AS alimentazione, m.tipo_POSSESSO AS possesso, m.numero_MATRICOLA AS MATRICOLA, m.numero_TELAIO AS TELAIO, \r\n"
+				+ "    null AS MARCA_MOTORE, null AS TIPO_MOTORE, null AS POTENZA_KW, tm.id as ID_TIPO_MACCHINA, m.id as ID_MACCHINA     \r\n"
+				+ "FROM A4GT_MACCHINA m \r\n"
+				+ "    INNER JOIN A4GT_FASCICOLO f ON f.ID = M.ID_FASCICOLO AND f.id_validazione = m.id_validazione_fascicolo\r\n"
+				+ "    left outer join a4gd_sottotipo sm on sm.id = m.id_sottotipo\r\n"
+				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia\r\n"
+				+ "";
 	}
 
 	private String decodifica(String codice, String sottoCodice) {

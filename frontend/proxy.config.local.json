@@ -66,7 +66,7 @@
         "changeOrigin": true
     },
     "/fascicolo/dotazione-tecnica/api": {
-        "target": "http://itts55.intra.infotn.it:18080",
+        "target": "http://localhost:9090",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true

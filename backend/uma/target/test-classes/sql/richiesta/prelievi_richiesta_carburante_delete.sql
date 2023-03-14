@@ -1,4 +1,0 @@
-delete from A4GT_PRELIEVI;
-delete from A4GT_DICHIARAZIONE_CONSUMI;
-delete from A4GT_RICHIESTA_CARBURANTE;
-commit;
