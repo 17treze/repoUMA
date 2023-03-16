@@ -1,6 +1,6 @@
 {
     "/a4gfascicolo/api": {
-        "target": "http://localhost:9090",
+        "target": "http://localhost:9001",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
@@ -24,7 +24,7 @@
         "changeOrigin": true
     },
     "/ags/api": {
-        "target": "http://itts55.intra.infotn.it:18080",
+        "target": "http://localhost:9003",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
@@ -66,7 +66,7 @@
         "changeOrigin": true
     },
     "/fascicolo/dotazione-tecnica/api": {
-        "target": "http://localhost:9090",
+        "target": "http://localhost:9010",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
