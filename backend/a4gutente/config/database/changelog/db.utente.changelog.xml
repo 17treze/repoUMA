@@ -188,7 +188,6 @@
         	GRANT SELECT,INSERT,UPDATE,DELETE ON A4GT_ALLEGATO_RESPONSABILITA TO ${user.writer};
         </sql>
     </changeSet>
-
     <changeSet id="UTENTE_1.4" author="Lorenzo Martinelli">
     	<sql endDelimiter=";" splitStatements="true">
     		INSERT INTO A4GT_PROFILO (ID, IDENTIFICATIVO, DESCRIZIONE) values (NXTNBR.NEXTVAL,'amministratore','Amministratore Sistema');
@@ -219,6 +218,7 @@
 				VALUES (NXTNBR.NEXTVAL, (SELECT ID FROM A4GT_PROFILO WHERE IDENTIFICATIVO = 'azienda'), (SELECT ID FROM A4GT_FUNZIONE WHERE IDENTIFICATIVO = 'RICERCAFASCICOLOFILTROUTENTE'));
     	</sql>
     </changeSet>
+
     <!-- Sprint con demo 19.11.2018 -->
     <changeSet id="UTENTE_1.5" author="Elisabetta Freschi">
         <createTable tableName="A4GT_PERSONA">

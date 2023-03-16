@@ -37,17 +37,17 @@ public class FabbricatiAgsDao extends NamedParameterJdbcDaoSupport {
 		MapSqlParameterSource params = new MapSqlParameterSource("cuaa", cuaa)
 				.addValue("data", LocalDateConverter.to(data));
 
-		// Filtro Province
-		if (!CollectionUtils.isEmpty(province)) {
-			sql = sql.concat("AND comu.SIGLA_PROV IN ( " + createfilterProvince(province)+ " ) ");
-		} else {
-			sql = sql.concat("AND comu.SIGLA_PROV IN ( 'TN','BZ' ) ");
-		}
-
-		// Filtro Titoli Conduzione
-		if (!CollectionUtils.isEmpty(titoloConduzioneAgs)) {
-			sql = sql.concat("AND t.SCO_TIPO_POSSESSO IN ( " + createfilterTitoliConduzione(titoloConduzioneAgs) + " )");
-		}
+//		// Filtro Province
+//		if (!CollectionUtils.isEmpty(province)) {
+//			sql = sql.concat("AND comu.SIGLA_PROV IN ( " + createfilterProvince(province)+ " ) ");
+//		} else {
+//			sql = sql.concat("AND comu.SIGLA_PROV IN ( 'TN','BZ' ) ");
+//		}
+//
+//		// Filtro Titoli Conduzione
+//		if (!CollectionUtils.isEmpty(titoloConduzioneAgs)) {
+//			sql = sql.concat("AND t.SCO_TIPO_POSSESSO IN ( " + createfilterTitoliConduzione(titoloConduzioneAgs) + " )");
+//		}
 
 		logger.debug("[FabbricatiAgsDao] - get fabbricati Ags: ".concat(sql));
 
@@ -99,32 +99,25 @@ public class FabbricatiAgsDao extends NamedParameterJdbcDaoSupport {
 	}
 
 	private String getFabbricatiSql() {
-		return "SELECT t.ID_FABBRICATO, " + 
-				"t.VOLUME, " +
-			    "t.SUPERFICIE, " +
-			    "NVL(TO_CHAR(cattn.COD_CC), t.COD_NAZIONALE) as COMUNE_CATASTALE, " +
-			    "comu.sezione_censuaria as SEZIONE, " +
-			    "t.FOGLIO, " +
-			    "t.NOTE as DESCRIZIONE, " +
-				"t.SCO_TIPO_POSSESSO AS CODICE_TITOLO_CONDUZIONE," +
-				"t.SCO_TIPO_FABBRICATO AS CODICE_FABBRICATO, " + 
-				"t.PARTICELLA, " + 
-				"t.SUB AS SUBALTERNO," +
-				"comu.NOME AS COMUNE, " + 
-				"comu.SIGLA_PROV AS SIGLA_PROVINCIA, " + 
-				"comu.DENO_PROV AS PROVINCIA, " + 
-				"(SELECT DS_DECODIFICA FROM TDECODIFICA WHERE CODICE = t.COD_TIPO_FABBRICATO AND SOTTO_CODICE = t.SCO_TIPO_FABBRICATO) AS TIPO_FABBRICATO, " + 
-				"(SELECT DS_DECODIFICA FROM TDECODIFICA WHERE CODICE = t.COD_TIPO_POSSESSO AND SOTTO_CODICE = t.SCO_TIPO_POSSESSO) AS TITOLO_CONDUZIONE, " + 
-				"t.NOTE " +
-				"FROM TFABBRICATO t " + 
-				"INNER JOIN SITI.CONS_SOGG_VIW csv ON t.ID_SOGGETTO = csv.PK_CUAA " + 
-				"INNER JOIN SITI.SITICOMU comu ON t.COD_NAZIONALE = comu.COD_NAZIONALE " + 
-				"INNER JOIN CATA_SEZIONI catasez ON t.COD_NAZIONALE = catasez.COD_SEZIONE " + 
-				"LEFT JOIN SITI.AMM_CAT_TN cattn ON t.cod_nazionale = cattn.cod_nazionale " + 
-				"WHERE :data between csv.data_inizio_val and csv.data_fine_val " + 
-				"AND :data BETWEEN t.DT_INIZIO AND t.DT_FINE " + 
-				"AND :data BETWEEN t.DT_INSERT AND t.DT_DELETE " + 
-				"AND :data BETWEEN catasez.INIZIO AND catasez.FINE " + 
-				"AND csv.CUAA = :cuaa ";
+		return "SELECT t.ID as id_fabbricato, \r\n"
+				+ "    t.VOLUME, \r\n"
+				+ "    t.SUPERFICIE, \r\n"
+				+ "    null as COMUNE_CATASTALE,\r\n"
+				+ "    NULL as SEZIONE, \r\n"
+				+ "    9999 as FOGLIO, \r\n"
+				+ "    t.DESCRIZIONE, \r\n"
+				+ "    null AS CODICE_TITOLO_CONDUZIONE, \r\n"
+				+ "    null AS CODICE_FABBRICATO, \r\n"
+				+ "    null as PARTICELLA, \r\n"
+				+ "    null AS SUBALTERNO, \r\n"
+				+ "    t.COMUNE, \r\n"
+				+ "    null AS SIGLA_PROVINCIA, \r\n"
+				+ "    null AS PROVINCIA, \r\n"
+				+ "    null AS TIPO_FABBRICATO, \r\n"
+				+ "    null AS TITOLO_CONDUZIONE, \r\n"
+				+ "    t.denominazione as NOTE \r\n"
+				+ "FROM a4gt_FABBRICATO t \r\n"
+				+ "    INNER JOIN a4gt_fascicolo f ON t.ID_fascicolo = f.id and t.id_validazione_fascicolo = f.id_validazione \r\n"
+				+ "    WHERE f.CUAA = :cuaa ";
 	}
 }

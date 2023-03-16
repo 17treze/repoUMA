@@ -10,12 +10,11 @@ import it.tndigitale.a4g.fascicolo.dotazionetecnica.business.persistence.entity.
 @Repository
 public interface MappingAgsDao extends JpaRepository<MappingAgsModel, Long> {
 	public List<MappingAgsModel> findByCodiceAgsAndSottoCodiceAgs(String codiceAgs, String sottoCodiceAgs);
-
-	public List<MappingAgsModel> findByCodiceAgsAndSottoCodiceAgsIsNull(String codiceAgs);
 	
+	public List<MappingAgsModel> findByCodiceAgsAndSottoCodiceAgsIsNull(String codiceAgs);
 	
 	public List<MappingAgsModel> findByIdMacchina(Long idMacchina);
 	
 	public List<MappingAgsModel> findByIdTipoMacchina(Long idTipoMacchina);
-
+	
 }

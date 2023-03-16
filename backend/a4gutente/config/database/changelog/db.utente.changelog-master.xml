@@ -8,9 +8,9 @@
 	<property name="tablespace.index" value="A4GX09" dbms="oracle" labels="SVIL"/>
     <property name="tablespace.lob" value="A4GB09" dbms="oracle" labels="SVIL"/>
 	
-	<property name="tablespace.data" value="A4GD10" dbms="oracle" labels="TEST"/>
-	<property name="tablespace.index" value="A4GX10" dbms="oracle" labels="TEST"/>
-    <property name="tablespace.lob" value="A4GB10" dbms="oracle" labels="TEST"/>
+	<property name="tablespace.data" value="USERS" dbms="oracle" labels="TEST"/>
+	<property name="tablespace.index" value="USERS" dbms="oracle" labels="TEST"/>
+    <property name="tablespace.lob" value="USERS" dbms="oracle" labels="TEST"/>
 	
 	<property name="tablespace.data" value="A4GD05" dbms="oracle" labels="QUAL,PROD"/>
 	<property name="tablespace.index" value="A4GX05" dbms="oracle" labels="QUAL,PROD"/>
