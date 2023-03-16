@@ -45,9 +45,9 @@ import it.tndigitale.a4g.uma.dto.richiesta.builder.PrelievoBuilder;
 
 @Service
 public class RichiestaCarburanteService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(RichiestaCarburanteService.class);
-	
+
 	@Autowired
 	private RichiestaCarburanteValidator richiestaCarburanteValidator;
 	@Autowired
@@ -68,62 +68,66 @@ public class RichiestaCarburanteService {
 	private RecuperaLavorazioniFabbricati recuperaLavorazioniFabbricati;
 	@Autowired
 	private PrelieviDao prelieviDao;
-	
+
 	@Transactional
 	public Long presenta(PresentaRichiestaDto presentaRichiestaDto) {
 		richiestaCarburanteValidator.validaPresentazioneRichiesta(presentaRichiestaDto.getCuaa());
-		
+
 		FascicoloAgsDto fascicoloAgs = anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
 		
 		// Reperisco la detenzione del fascicolo ags
 		var det = fascicoloAgs.getDetenzioni().stream()
-				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO)).findFirst()
+				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO))
+				.findFirst()
 				.orElseGet(() -> fascicoloAgs.getDetenzioni().stream()
-						.filter(detenzione -> fascicoloAgs.getDetenzioni().size() == 1
-								&& detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
+						.filter(detenzione -> fascicoloAgs.getDetenzioni().size() == 1 && detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
 						.findFirst()
 						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
-		
-		var richiestaDaSalvare = new RichiestaCarburanteModel().setCuaa(presentaRichiestaDto.getCuaa())
-				.setCfRichiedente(presentaRichiestaDto.getCodiceFiscaleRichiedente()).setDataPresentazione(clock.now())
-				.setCampagna(Long.valueOf(clock.now().getYear())).setStato(StatoRichiestaCarburante.IN_COMPILAZIONE)
+
+		var richiestaDaSalvare = new RichiestaCarburanteModel()
+				.setCuaa(presentaRichiestaDto.getCuaa())
+				.setCfRichiedente(presentaRichiestaDto.getCodiceFiscaleRichiedente())
+				.setDataPresentazione(clock.now())
+				.setCampagna(Long.valueOf(clock.now().getYear()))
+				.setStato(StatoRichiestaCarburante.IN_COMPILAZIONE)
 				.setDenominazione(fascicoloAgs.getDenominazione()) // reperisco la denominazione del fascicolo da anagrafica legacy
 				.setEntePresentatore(det.getSportello());
-		
+				
 		RichiestaCarburanteModel richiestaSalvata = richiestaCarburanteDao.save(richiestaDaSalvare);
-		
+
 		// importazione macchine dal fascicolo 
 		macchineDao.saveAll(getMacchineFromAgs(presentaRichiestaDto.getCuaa(), richiestaSalvata));
 		// importazione fabbricati dal fascicolo
 		fabbricatiDao.saveAll(getFabbricatiFromAgs(presentaRichiestaDto.getCuaa(), richiestaSalvata));
-		
-		logger.info("[UMA] - Creazione richiesta carburante - ID {} - CUAA: {} RICHIEDENTE: {}",
-				richiestaSalvata.getId(), richiestaSalvata.getCuaa(), richiestaSalvata.getCfRichiedente());
+
+		logger.info("[UMA] - Creazione richiesta carburante - ID {} - CUAA: {} RICHIEDENTE: {}", richiestaSalvata.getId(), richiestaSalvata.getCuaa(), richiestaSalvata.getCfRichiedente());
 		return richiestaSalvata.getId();
 	}
-	
+
 	public Long aggiorna(Long id, CarburanteRichiestoDto carburanteRichiestoDto) {
-		
+
 		// Reperisco la domanda UMA
 		RichiestaCarburanteModel richiesta = getRichiestaOrThrowException(id);
 		// Set dei dati del fabbisogno
 		CarburanteCompletoDto carburante = carburanteRichiestoDto.getCarburanteRichiesto();
-		
-		richiesta.setBenzina(carburante.getBenzina()).setGasolio(carburante.getGasolio())
-				.setGasolioSerre(carburante.getGasolioSerre()).setGasolioTerzi(carburante.getGasolioTerzi())
-				.setNote(carburanteRichiestoDto.getNote() != null ? carburanteRichiestoDto.getNote().trim() : null);
-		
+
+		richiesta
+		.setBenzina(carburante.getBenzina())
+		.setGasolio(carburante.getGasolio())
+		.setGasolioSerre(carburante.getGasolioSerre())
+		.setGasolioTerzi(carburante.getGasolioTerzi())
+		.setNote(carburanteRichiestoDto.getNote() != null ? carburanteRichiestoDto.getNote().trim() : null);
+
 		// Aggiornamento della richiesta
 		richiestaCarburanteDao.save(richiesta);
 		logger.info("[UMA] - Aggioramento richiesta carburante: carburante richiesto - ID Richiesta UMA: {}", id);
 		return richiesta.getId();
 	}
-	
+
 	@Transactional
 	public void cancellaRichiesta(Long id) {
 		Optional<RichiestaCarburanteModel> richiestaOpt = richiestaCarburanteDao.findById(id);
-		if (richiestaOpt.isPresent()
-				&& StatoRichiestaCarburante.IN_COMPILAZIONE.equals(richiestaOpt.get().getStato())) {
+		if (richiestaOpt.isPresent() && StatoRichiestaCarburante.IN_COMPILAZIONE.equals(richiestaOpt.get().getStato())) {
 			RichiestaCarburanteModel richiesta = richiestaOpt.get();
 			// cancella macchine
 			macchineDao.deleteByRichiestaCarburante(richiesta);
@@ -133,96 +137,104 @@ public class RichiestaCarburanteService {
 			fabbricatiDao.deleteByRichiestaCarburante(richiesta);
 			// cancella domanda 
 			richiestaCarburanteDao.deleteById(richiesta.getId());
-			logger.info("[UMA] - Cancellazione Richiesta Carburante CUAA {} , anno {} ", richiesta.getCuaa(),
-					richiesta.getCampagna());
+			logger.info("[UMA] - Cancellazione Richiesta Carburante CUAA {} , anno {} " ,richiesta.getCuaa(), richiesta.getCampagna());
 		}
 	}
-	
+
 	public void valida(Long id) {
 		RichiestaCarburanteModel richiesta = getRichiestaOrThrowException(id);
 		richiestaCarburanteValidator.validaProtocollazione(richiesta);
 	}
-	
+
 	public CarburanteDto calcolaCarburanteAmmissibile(Long id) {
 		RichiestaCarburanteModel richiesta = getRichiestaOrThrowException(id);
 		return new CarburanteConverter(richiesta.getCampagna()).calcola(richiesta.getFabbisogni()).round().build();
 	}
-	
+
 	public CarburanteTotale<PrelievoDto> getPrelievi(String cuaa, Long campagna, LocalDateTime dataPresentazione) {
-		List<PrelievoModel> prelievi = prelieviDao.findByRichiestaCarburante_cuaaAndRichiestaCarburante_campagna(cuaa,
-				campagna);
+		List<PrelievoModel> prelievi = prelieviDao.findByRichiestaCarburante_cuaaAndRichiestaCarburante_campagna(cuaa, campagna);
 		
 		// Se presente la data di Presentazione, restituisco i soli prelievi fino a quella data relativi alla campagna in corso
 		if (dataPresentazione != null && !CollectionUtils.isEmpty(prelievi)) {
-			List<PrelievoModel> prelieviFinoAllaDataDiPresentazione = prelievi.stream()
-					.filter(prelievo -> prelievo.getData().getYear() == campagna
-							&& (prelievo.getData().isBefore(dataPresentazione)
-									|| prelievo.getData().isEqual(dataPresentazione)))
-					.collect(Collectors.toList());
-			if (CollectionUtils.isEmpty(prelieviFinoAllaDataDiPresentazione)) {
-				return new CarburanteTotale<>();
-			}
-			else {
+			List<PrelievoModel> prelieviFinoAllaDataDiPresentazione = prelievi
+			.stream()
+			.filter(prelievo -> prelievo.getData().getYear() == campagna 
+					&& (prelievo.getData().isBefore(dataPresentazione) || prelievo.getData().isEqual(dataPresentazione)))
+			.collect(Collectors.toList());
+			if (CollectionUtils.isEmpty(prelieviFinoAllaDataDiPresentazione)) { 
+				return new CarburanteTotale<>(); 
+			} else {
 				prelievi.clear();
 				prelievi.addAll(prelieviFinoAllaDataDiPresentazione);
 			}
 		}
-		
-		if (CollectionUtils.isEmpty(prelievi)) {
-			return new CarburanteTotale<>();
-		}
-		
-		List<PrelievoDto> prelieviDto = prelievi.stream()
-				.map(p -> new PrelievoBuilder().newDto().withDistributore(p.getDistributore()).withPrelievo(p).build())
-				.collect(Collectors.toList());
-		
+
+		if (CollectionUtils.isEmpty(prelievi)) { return new CarburanteTotale<>(); }
+
+		List<PrelievoDto> prelieviDto = prelievi.stream().map(p -> new PrelievoBuilder()
+				.newDto()
+				.withDistributore(p.getDistributore())
+				.withPrelievo(p)
+				.build()).collect(Collectors.toList());
+
 		CarburanteDto totale = new CarburanteDtoBuilder()
-				.from(prelieviDto.stream().map(PrelievoDto::getCarburante).collect(Collectors.toList())).build();
+				.from(prelieviDto.stream().map(PrelievoDto::getCarburante).collect(Collectors.toList()))
+				.build();
 		
-		return new CarburanteTotale<PrelievoDto>().setDati(prelieviDto).setTotale(totale);
+		return new CarburanteTotale<PrelievoDto>()
+				.setDati(prelieviDto)
+				.setTotale(totale);
 	}
-	
+
 	private RichiestaCarburanteModel getRichiestaOrThrowException(Long idRichiesta) {
-		return richiestaCarburanteDao.findById(idRichiesta).orElseThrow(() -> new EntityNotFoundException(
-				"Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat(" non trovata")));
+		return richiestaCarburanteDao
+				.findById(idRichiesta)
+				.orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat(" non trovata")));
 	}
-	
+
 	// al momento di creazione della richiesta di carburante importa i fabbricati significativi per cui si portrebbe richiedere carburante
 	private List<FabbricatoModel> getFabbricatiFromAgs(String cuaa, RichiestaCarburanteModel richiesta) {
-		
+
 		List<FabbricatoAgsDto> fabbricatiAgs = dotazioneTecnicaClient.getFabbricati(cuaa, clock.now());
 		List<FabbricatoModel> fabbricatiToSave = new ArrayList<>();
-		
+
 		if (CollectionUtils.isEmpty(fabbricatiAgs)) {
 			return new ArrayList<>();
 		}
-		
-		fabbricatiAgs.stream().collect(Collectors.groupingBy(recuperaLavorazioniFabbricati.tipoToFabbricatoGruppoModel))
-				.forEach((tipoFabbricato, fabbricati) -> {
-					if (tipoFabbricato.isPresent()) {
-						fabbricati.forEach(
-								f -> fabbricatiToSave.add(new FabbricatoModel().setTipoFabbricato(tipoFabbricato.get())
-										.setRichiestaCarburante(richiesta).setComune(f.getComune())
-										.setIdentificativoAgs(f.getIdAgs()).setParticella(f.getParticella())
-										.setVolume(f.getVolume()).setSubalterno(f.getSubalterno())
-										.setProvincia(f.getProvincia()).setSiglaProvincia(f.getSiglaProvincia())));
-					}
-				});
+
+		fabbricatiAgs.stream()
+		.collect(Collectors.groupingBy(recuperaLavorazioniFabbricati.tipoToFabbricatoGruppoModel))
+		.forEach((tipoFabbricato, fabbricati) -> {
+			if (tipoFabbricato.isPresent()) {
+				fabbricati.forEach(f ->
+				fabbricatiToSave.add(new FabbricatoModel()
+						.setTipoFabbricato(tipoFabbricato.get())
+						.setRichiestaCarburante(richiesta)
+						.setComune(f.getComune())
+						.setIdentificativoAgs(f.getIdAgs())
+						.setParticella(f.getParticella())
+						.setVolume(f.getVolume())
+						.setSubalterno(f.getSubalterno())
+						.setProvincia(f.getProvincia())
+						.setSiglaProvincia(f.getSiglaProvincia())));
+			}
+		});
 		return fabbricatiToSave;
 	}
-	
 	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
 	private List<UtilizzoMacchinariModel> getMacchineFromAgs(String cuaa, RichiestaCarburanteModel richiesta) {
 		List<MacchinaAgsDto> macchineAgs = dotazioneTecnicaClient.getMacchine(cuaa, clock.now());
-		return macchineAgs.stream()
-				.map(macchinaAgs -> new UtilizzoMacchinariModel().setFlagUtilizzo(false)
-						.setRichiestaCarburante(richiesta)
-						//				.setAlimentazione(TipoCarburante.valueOf(macchinaAgs.getAlimentazione().name()))
-						.setAlimentazione(TipoCarburante.BENZINA).setClasse(macchinaAgs.getClasse())
-						.setDescrizione(macchinaAgs.getDescrizione()).setIdentificativoAgs(macchinaAgs.getIdAgs())
-						.setMarca(macchinaAgs.getMarca()).setPossesso(macchinaAgs.getPossesso())
-						.setTarga(macchinaAgs.getTarga()))
+		return macchineAgs.stream().map(macchinaAgs -> new UtilizzoMacchinariModel()
+				.setFlagUtilizzo(false)
+				.setRichiestaCarburante(richiesta)
+				.setAlimentazione(TipoCarburante.valueOf(macchinaAgs.getAlimentazione().name()))
+				.setClasse(macchinaAgs.getClasse())
+				.setDescrizione(macchinaAgs.getDescrizione())
+				.setIdentificativoAgs(macchinaAgs.getIdAgs())
+				.setMarca(macchinaAgs.getMarca())
+				.setPossesso(macchinaAgs.getPossesso())
+				.setTarga(macchinaAgs.getTarga()))
 				.collect(Collectors.toList());
 	}
-	
+
 }

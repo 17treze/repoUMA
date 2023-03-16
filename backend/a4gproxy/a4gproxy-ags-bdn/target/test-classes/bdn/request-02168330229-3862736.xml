@@ -1,6 +1,0 @@
-<ns2:Get_Capi_Allevamento_Periodo xmlns:ns2="http://bdr.izs.it/webservices">
-<ns2:p_allev_id>3862736</ns2:p_allev_id>
-<ns2:p_cod_capo/>
-<ns2:p_data_dal>15/09/2020</ns2:p_data_dal>
-<ns2:p_data_al>15/09/2020</ns2:p_data_al>
-</ns2:Get_Capi_Allevamento_Periodo>

@@ -1,6 +1,5 @@
 package it.tndigitale.a4g.fascicolo.anagrafica.business.persistence.repository.legacy;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.persistence.NoResultException;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -229,7 +229,6 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 	}
 	
 	private FascicoloAgsDto getFascicolo(Long id, String cuaa, LocalDateTime data) {
-<<<<<<< Updated upstream
 		/*
 		 * String filter = ""; MapSqlParameterSource parameters = new MapSqlParameterSource(); if (id != null) { filter
 		 * = filter.concat("AND f.ID_FASCICOLO = :id "); parameters.addValue("id", id); } if (data != null) {
@@ -253,69 +252,11 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		 * .setDataFine(detenzione.getDataFineDetenzione()) .setTipoDetenzione(detenzione.getTipoDetenzione()))); return
 		 * fascicoloAgsDto; }).collect(CustomCollectors.toSingleton());
 		 */
-=======
-		String filter = "";
-		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		if (id != null) {
-			filter = filter.concat("AND f.ID_FASCICOLO = :id ");
-			parameters.addValue("id", id);
-		}
-		if (data != null) {
-			parameters.addValue("data", LocalDateConverter.to(data));
-		}
-		if (cuaa != null) {
-			filter = filter.concat("AND csv.CUAA = :cuaa ");
-			parameters.addValue("cuaa", cuaa);
-		}
-		String sql = NativeQueryString.SQL_GET_FASCICOLO_CON_DELEGHE.concat(filter);
-		List<FascicoloAgsRowMapper.FascicoloAgsRow> rowResults = namedParameterJdbcTemplate.<FascicoloAgsRowMapper.FascicoloAgsRow> query(
-				sql, parameters, new FascicoloAgsRowMapper());
-		
-		return rowResults.stream().collect(Collectors.groupingBy(FascicoloAgsRowMapper.FascicoloAgsRow::getCuaa))
-				.entrySet().stream().map(entry -> {
-					FascicoloAgsRow f = entry.getValue().stream().findFirst().get();
-					FascicoloAgsDto fascicoloAgsDto = new FascicoloAgsDto().setIdAgs(f.getIdAgs()).setCuaa(f.getCuaa())
-							.setDenominazione(f.getDenominazione()).setDataMorteTitolare(f.getDataMorte())
-							.setStato(f.getStato()).setOrganismoPagatore(f.getOrganismoPagatore())
-							.setDataCostituzione(f.getDataCostituzione()).setDataAggiornamento(f.getDataAggiornamento())
-							.setDataValidazione(f.getDataValidazione())
-							.setIscrittoSezioneSpecialeAgricola(f.isIscrittoSezioneSpecialeAgricola())
-							.setNonIscrittoSezioneSpecialeAgricola(f.isNonIscrittoSezioneSpecialeAgricola())
-							.setPec(f.getPec());
-					
-					entry.getValue().stream().forEach(detenzione -> fascicoloAgsDto.addDetenzione(new DetenzioneAgsDto()
-							.setCaa(detenzione.getCaa())
-							.setIdentificativoSportello(detenzione.getIdentificativoSportello())
-							.setSportello(detenzione.getSportello()).setDataInizio(detenzione.getDataInizioDetenzione())
-							.setDataFine(detenzione.getDataFineDetenzione())
-							.setTipoDetenzione(detenzione.getTipoDetenzione())));
-					return fascicoloAgsDto;
-				}).collect(CustomCollectors.toSingleton());
-<<<<<<< Updated upstream
-		
-=======
-
-		*
-	private Long idAgs;
-	private String cuaa;
-	private String denominazione;
-	private LocalDateTime dataMorteTitolare; // presente solo per le persone fisiche
-	private StatoFascicoloLegacy stato;
-	private String organismoPagatore;
-	private LocalDateTime dataCostituzione;
-	private LocalDateTime dataAggiornamento;
-	private LocalDateTime dataValidazione;
-	private boolean iscrittoSezioneSpecialeAgricola;
-	private boolean nonIscrittoSezioneSpecialeAgricola;
-	private String pec;
-	private List<DetenzioneAgsDto> detenzioni;
-		*/
->>>>>>> Stashed changes
 		FascicoloAgsDto fascicoloAgsDto = new FascicoloAgsDto();
 		fascicoloAgsDto.setIdAgs(1L);
 		fascicoloAgsDto.setCuaa("FLGKTA79S41L378T");
 		fascicoloAgsDto.setStato(StatoFascicoloLegacy.IN_LAVORAZIONE);
-		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");	
+		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");
 		fascicoloAgsDto.setPec("K.FALAGIARDA@GMAIL.COM");
 		fascicoloAgsDto.setOrganismoPagatore("APPAG");
 		DetenzioneAgsDto detenzioneAgsDto = new DetenzioneAgsDto();
@@ -326,10 +267,6 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		detenzioneAgsDto.setDataInizio(LocalDateTime.now());
 		fascicoloAgsDto.addDetenzione(detenzioneAgsDto);
 		return fascicoloAgsDto;
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 	}
 	
 	private interface NativeQueryString {
@@ -419,8 +356,6 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		
 		static String getSoggetti(Map<String, Carica> mappaCariche) {
 			/*
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 			 * return
 			 * "SELECT p.COGNOME AS cognome, p.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , p.SCO_RUOLO AS ruolo, c.CUAA AS cuaa "
 			 * + "FROM fascicolo.tpersona p" + " JOIN fascicolo.cons_sogg_viw c" + " ON p.id_soggetto = c.pk_cuaa " +
@@ -428,34 +363,12 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 			 * " AND SYSDATE BETWEEN c.data_inizio_val AND c.data_fine_val" + " AND cod_ruolo = 'RUOPER'" +
 			 * " AND sco_ruolo IN (" + createScoRuoloFilter(mappaCariche) + ")" + " AND c.cuaa = :cuaa ";
 			 */
-=======
-=======
->>>>>>> Stashed changes
-			return "SELECT p.COGNOME AS cognome, p.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , p.SCO_RUOLO AS ruolo, c.CUAA AS cuaa "
-					+ "FROM fascicolo.tpersona p" + " JOIN fascicolo.cons_sogg_viw c" + " ON p.id_soggetto = c.pk_cuaa "
-					+ "WHERE SYSDATE BETWEEN p.dt_insert AND p.dt_delete"
-					+ " AND SYSDATE BETWEEN p.dt_inizio AND p.dt_fine"
-					+ " AND SYSDATE BETWEEN c.data_inizio_val AND c.data_fine_val" + " AND cod_ruolo = 'RUOPER'"
-					+ " AND sco_ruolo IN (" + createScoRuoloFilter(mappaCariche) + ")" + " AND c.cuaa = :cuaa ";
-			*/
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 			return "SELECT pf.COGNOME AS cognome, pf.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , "
 					+ "nvl(c.descrizione, '000001') AS ruolo, p.codice_fiscale AS cuaa "
 					+ "FROM a4gt_persona p join a4gt_persona_fisica pf on p.id = pf.id "
 					+ "left outer join a4gt_carica c on c.id_persona_fisica_con_carica = p.id "
 					+ "WHERE p.CODICE_FISCALE = :cuaa ";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 		}
-=======
-			}
->>>>>>> Stashed changes
-=======
-			}
->>>>>>> Stashed changes
 		
 		private static String createScoRuoloFilter(Map<String, Carica> map) {
 			return map.keySet().stream().collect(Collectors.joining(","));

@@ -47,9 +47,9 @@ import it.tndigitale.a4g.uma.dto.richiesta.builder.RichiestaCarburanteDtoBuilder
 
 @Service
 public class RicercaRichiestaCarburanteService {
-
+	
 	private static final int QUERY_LIMIT = 999;
-
+	
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
@@ -58,161 +58,171 @@ public class RicercaRichiestaCarburanteService {
 	private UmaTerritorioClient territorioClient;
 	@Autowired
 	private RichiestaCarburanteDtoBuilder builder;
-	@Autowired 
+	@Autowired
 	private UtenteComponent utenteComponent;
 	@Autowired
 	private UmaUtenteClient utenteClient;
-	@Autowired 
+	@Autowired
 	private UmaAnagraficaClient anagraficaClient;
 	@Autowired
 	private Clock clock;
-
+	
 	// servizio performante pensato esclusivamente per la *ricerca* da parte dei CAA
 	public List<DomandaUmaDto> getRichieste(Long campagna) {
 		List<DomandaUmaDto> response = new ArrayList<>();
-
+		
 		// interrogo tutte le richieste a prescindere dalle abilitazioni al fine di valutare per ciascuna domanda se si tratta di una richiesta o di una rettifica.
 		List<DomandaUmaDto> richiesteAll = richiestaCarburanteDao.findStrictByCampagna(campagna);
-
+		
 		// recupera sia deleghe che mandati
 		List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
-		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream).collect(Collectors.toList());
-
+		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
+				.collect(Collectors.toList());
+		
 		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
 		subLists.stream().forEach(list -> {
 			List<DomandaUmaDto> documenti = richiestaCarburanteDao.findByAbilitazioniAndCampagna(list, campagna)
 					.stream()
-					.map(documento -> isRichiestaRettificante(richiesteAll, documento).booleanValue() ? documento.setTipo(TipoDocumentoUma.RETTIFICA): documento.setTipo(TipoDocumentoUma.RICHIESTA))
+					.map(documento -> isRichiestaRettificante(richiesteAll, documento).booleanValue()
+							? documento.setTipo(TipoDocumentoUma.RETTIFICA)
+							: documento.setTipo(TipoDocumentoUma.RICHIESTA))
 					.collect(Collectors.toList());
 			response.addAll(documenti);
 		});
 		return response;
 	}
-
+	
 	// Servizio non paginato utilizzato per la *logica* dell'applicativo da parte dei CAA , Aziende e Istruttori e Distributori
 	public List<RichiestaCarburanteDto> getRichieste(RichiestaCarburanteFilter richiestaCarburanteFilter) {
-
+		
 		List<RichiestaCarburanteDto> response = new ArrayList<>();
 		List<String> cuaaList = new ArrayList<>();
 		if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_ENTE)) {
 			// recupera sia deleghe che mandati
 			List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
-			cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream).collect(Collectors.toList());
-		} else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_UTENTE)) {
+			cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
+					.collect(Collectors.toList());
+		}
+		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_UTENTE)) {
 			cuaaList = utenteClient.getAziende();
-		} else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)) {
-			response.addAll(richiestaCarburanteDao.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter))
-					.stream()
+		}
+		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)) {
+			response.addAll(richiestaCarburanteDao
+					.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter)).stream()
 					.map(richiestaMapper).collect(Collectors.toList()));
 			return response;
 		}
 		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
-
+		
 		if (CollectionUtils.isEmpty(subLists)) {
 			return response;
 		}
-
-		subLists.stream().forEach(subList -> response.addAll(richiestaCarburanteDao.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter, subList))
-				.stream()
-				.map(richiestaMapper).collect(Collectors.toList())));
+		
+		subLists.stream()
+				.forEach(subList -> response.addAll(richiestaCarburanteDao
+						.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter, subList))
+						.stream().map(richiestaMapper).collect(Collectors.toList())));
 		return response;
 	}
-
+	
 	// Servizio paginato utilizzato per la *ricerca* dell'applicativo da parte degli istruttori e distributori
-	public RisultatiPaginati<RichiestaCarburanteDto> getRichiestePaged(RichiestaCarburanteFilter richiestaCarburanteFilter) throws Exception {
-		List<RichiestaCarburanteDto> richieste = new ArrayList<>(); 
-
+	public RisultatiPaginati<RichiestaCarburanteDto> getRichiestePaged(
+			RichiestaCarburanteFilter richiestaCarburanteFilter) throws Exception {
+		List<RichiestaCarburanteDto> richieste = new ArrayList<>();
+		
 		Pageable pageable = PageableBuilder.build().from(Paginazione.PAGINAZIONE_DEFAULT, Ordinamento.DEFAULT_ORDER_BY);
 		if (richiestaCarburanteFilter instanceof RichiestaCarburantePagedFilter) {
 			RichiestaCarburantePagedFilter pagFilter = (RichiestaCarburantePagedFilter) richiestaCarburanteFilter;
-			pageable = PageableBuilder.build().from(Paginazione.getOrDefault(new Paginazione(pagFilter.getNumeroElementiPagina(), pagFilter.getPagina())),
-					Optional.ofNullable(Ordinamento.getOrDefault(new Ordinamento(pagFilter.getProprieta(),pagFilter.getOrdine())))
-					.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
+			pageable = PageableBuilder.build().from(
+					Paginazione
+							.getOrDefault(new Paginazione(pagFilter.getNumeroElementiPagina(), pagFilter.getPagina())),
+					Optional.ofNullable(
+							Ordinamento.getOrDefault(new Ordinamento(pagFilter.getProprieta(), pagFilter.getOrdine())))
+							.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
 		}
-
-		Page<RichiestaCarburanteModel> richiesteModelPage = richiestaCarburanteDao.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter), pageable);
-
+		
+		Page<RichiestaCarburanteModel> richiesteModelPage = richiestaCarburanteDao
+				.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter), pageable);
+		
 		if (!richiesteModelPage.isEmpty()) {
 			richieste = richiesteModelPage.stream().map(richiestaMapper).collect(Collectors.toList());
 		}
 		return RisultatiPaginati.of(richieste, richiesteModelPage.getTotalElements());
 	}
-
-
+	
 	public RichiestaCarburanteDto getRichiesta(Long id) {
-		RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(id)).concat("non trovata")));
-
+		RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException(
+						"Richiesta con id: ".concat(String.valueOf(id)).concat("non trovata")));
+		
 		// Controllo se la richiesta ha associati dei fabbricati - Già importati in fase di creazione della richiesta
 		List<FabbricatoModel> fabbricati = fabbricatiDao.findByRichiestaCarburante_id(id);
 		// reperisco informazioni sulle colture da ags
-//		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(), richiesta.getDataPresentazione());
-		List<ParticellaDto> particelle = new ArrayList<ParticellaDto>();
-
-		var idRettificataOpt = getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(), richiesta.getDataPresentazione());
-
-		return builder
-				.newDto()
-				.from(richiesta)
-				.withCarburante(new CarburanteCompletoDto()
-						.setBenzina(richiesta.getBenzina())
-						.setGasolio(richiesta.getGasolio())
-						.setGasolioSerre(richiesta.getGasolioSerre())
+		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(),
+				richiesta.getDataPresentazione());
+		
+		var idRettificataOpt = getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(),
+				richiesta.getDataPresentazione());
+		
+		return builder.newDto().from(richiesta)
+				.withCarburante(new CarburanteCompletoDto().setBenzina(richiesta.getBenzina())
+						.setGasolio(richiesta.getGasolio()).setGasolioSerre(richiesta.getGasolioSerre())
 						.setGasolioTerzi(richiesta.getGasolioTerzi()))
 				.withFlagMacchineDichiarate(richiesta.getMacchine())
 				.withFlagDichiarazioniPresenti(richiesta.getFabbisogni())
-				.withFlagSuperficiPresenti(particelle, richiesta)
-				.withFlagFabbricatiPresenti(fabbricati)
+				.withFlagSuperficiPresenti(particelle, richiesta).withFlagFabbricatiPresenti(fabbricati)
 				.withFlagSerrePresenti(fabbricati)
-				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null)
-				.build();
+				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null).build();
 	}
-
+	
 	// Reperisce la richiesta di carburante più recente in stato Autorizzata dato un CUAA 
 	public Optional<RichiestaCarburanteModel> getRichiestaAutorizzataPiuRecente(String cuaa) {
-		RichiestaCarburanteFilter filter = new RichiestaCarburanteFilter()
-				.setCuaa(cuaa)
+		RichiestaCarburanteFilter filter = new RichiestaCarburanteFilter().setCuaa(cuaa)
 				.setStati(Collections.singleton(StatoRichiestaCarburante.AUTORIZZATA));
-
-		List<RichiestaCarburanteModel> richieste = richiestaCarburanteDao.findAll(RichiestaCarburanteSpecification.getFilter(filter));
+		
+		List<RichiestaCarburanteModel> richieste = richiestaCarburanteDao
+				.findAll(RichiestaCarburanteSpecification.getFilter(filter));
 		return richieste.stream()
-				.filter(richiesta -> richiesta.getCampagna().equals(Long.valueOf(clock.now().getYear())) || richiesta.getCampagna().equals(Long.valueOf(clock.now().getYear()) - 1))
+				.filter(richiesta -> richiesta.getCampagna().equals(Long.valueOf(clock.now().getYear()))
+						|| richiesta.getCampagna().equals(Long.valueOf(clock.now().getYear()) - 1))
 				.max(Comparator.comparing(RichiestaCarburanteModel::getCampagna));
 	}
-
+	
 	// Trova l'id della domanda rettificata, se esiste
 	public Optional<Long> getIdRettificata(String cuaa, Long campagna, LocalDateTime dataPresentazione) {
-
+		
 		List<RichiestaCarburanteModel> richieste = richiestaCarburanteDao.findByCuaaAndCampagna(cuaa, campagna);
 		Optional<RichiestaCarburanteModel> richiestaRettificataOpt = richieste.stream()
 				.filter(r -> r.getDataPresentazione().isBefore(dataPresentazione))
 				.max(Comparator.comparing(RichiestaCarburanteModel::getDataPresentazione));
-
-		return richiestaRettificataOpt.isPresent() ? Optional.of(richiestaRettificataOpt.get().getId()) : Optional.empty();
-
+		
+		return richiestaRettificataOpt.isPresent() ? Optional.of(richiestaRettificataOpt.get().getId())
+				: Optional.empty();
+		
 	}
-
+	
 	/**
-	 * Valuta se nella lista di richieste fornita , la richiesta è di rettifica o meno per quell'anno di campagna.
-	 * Il metodo valuta se ci sono richieste di carburante per quel cuaa e anno prima della data di presenzione della richiesta oggetto di valutazione. 
-	 * Se non ve ne sono, la richiesta oggetto di valutazione è necessariamente una richiesta semplice, altrimenti è di rettifica.
+	 * Valuta se nella lista di richieste fornita , la richiesta è di rettifica o meno per quell'anno di campagna. Il
+	 * metodo valuta se ci sono richieste di carburante per quel cuaa e anno prima della data di presenzione della
+	 * richiesta oggetto di valutazione. Se non ve ne sono, la richiesta oggetto di valutazione è necessariamente una
+	 * richiesta semplice, altrimenti è di rettifica.
+	 * 
 	 * @param richieste
 	 * @param richiesta
 	 * @return
 	 */
-	public Boolean isRichiestaRettificante(List<DomandaUmaDto> richieste , DomandaUmaDto richiesta) {
-		return !richieste.stream()
-				.filter(r -> richiesta.getCuaa().equals(r.getCuaa()))
+	public Boolean isRichiestaRettificante(List<DomandaUmaDto> richieste, DomandaUmaDto richiesta) {
+		return !richieste.stream().filter(r -> richiesta.getCuaa().equals(r.getCuaa()))
 				.filter(r -> richiesta.getCampagna().equals(r.getCampagna()))
 				.filter(r -> richiesta.getDataPresentazione().compareTo(r.getDataPresentazione()) > 0)
 				.collect(Collectors.toList()).isEmpty();
-
+		
 	}
-
+	
 	private Function<RichiestaCarburanteModel, RichiestaCarburanteDto> richiestaMapper = richiestaModel -> {
-		var idRettificataOpt = getIdRettificata(richiestaModel.getCuaa(), richiestaModel.getCampagna(), richiestaModel.getDataPresentazione());
-		return builder.newDto()
-				.from(richiestaModel)
-				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null)
-				.build();
+		var idRettificataOpt = getIdRettificata(richiestaModel.getCuaa(), richiestaModel.getCampagna(),
+				richiestaModel.getDataPresentazione());
+		return builder.newDto().from(richiestaModel)
+				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null).build();
 	};
 }
