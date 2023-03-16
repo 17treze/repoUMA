@@ -256,7 +256,7 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		fascicoloAgsDto.setIdAgs(1L);
 		fascicoloAgsDto.setCuaa("FLGKTA79S41L378T");
 		fascicoloAgsDto.setStato(StatoFascicoloLegacy.IN_LAVORAZIONE);
-		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");
+		fascicoloAgsDto.setDenominazione("KATIA FALAGIARDA");	
 		fascicoloAgsDto.setPec("K.FALAGIARDA@GMAIL.COM");
 		fascicoloAgsDto.setOrganismoPagatore("APPAG");
 		DetenzioneAgsDto detenzioneAgsDto = new DetenzioneAgsDto();
@@ -356,6 +356,7 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		
 		static String getSoggetti(Map<String, Carica> mappaCariche) {
 			/*
+<<<<<<< Updated upstream
 			 * return
 			 * "SELECT p.COGNOME AS cognome, p.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , p.SCO_RUOLO AS ruolo, c.CUAA AS cuaa "
 			 * + "FROM fascicolo.tpersona p" + " JOIN fascicolo.cons_sogg_viw c" + " ON p.id_soggetto = c.pk_cuaa " +
@@ -363,12 +364,25 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 			 * " AND SYSDATE BETWEEN c.data_inizio_val AND c.data_fine_val" + " AND cod_ruolo = 'RUOPER'" +
 			 * " AND sco_ruolo IN (" + createScoRuoloFilter(mappaCariche) + ")" + " AND c.cuaa = :cuaa ";
 			 */
+=======
+			return "SELECT p.COGNOME AS cognome, p.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , p.SCO_RUOLO AS ruolo, c.CUAA AS cuaa "
+					+ "FROM fascicolo.tpersona p" + " JOIN fascicolo.cons_sogg_viw c" + " ON p.id_soggetto = c.pk_cuaa "
+					+ "WHERE SYSDATE BETWEEN p.dt_insert AND p.dt_delete"
+					+ " AND SYSDATE BETWEEN p.dt_inizio AND p.dt_fine"
+					+ " AND SYSDATE BETWEEN c.data_inizio_val AND c.data_fine_val" + " AND cod_ruolo = 'RUOPER'"
+					+ " AND sco_ruolo IN (" + createScoRuoloFilter(mappaCariche) + ")" + " AND c.cuaa = :cuaa ";
+			*/
+>>>>>>> Stashed changes
 			return "SELECT pf.COGNOME AS cognome, pf.NOME AS nome, p.CODICE_FISCALE AS codice_fiscale , "
 					+ "nvl(c.descrizione, '000001') AS ruolo, p.codice_fiscale AS cuaa "
 					+ "FROM a4gt_persona p join a4gt_persona_fisica pf on p.id = pf.id "
 					+ "left outer join a4gt_carica c on c.id_persona_fisica_con_carica = p.id "
 					+ "WHERE p.CODICE_FISCALE = :cuaa ";
+<<<<<<< Updated upstream
 		}
+=======
+			}
+>>>>>>> Stashed changes
 		
 		private static String createScoRuoloFilter(Map<String, Carica> map) {
 			return map.keySet().stream().collect(Collectors.joining(","));
