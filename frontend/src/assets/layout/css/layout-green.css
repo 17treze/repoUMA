@@ -150,7 +150,7 @@
 }
   .loginbox .ui-card-title {
       font-size: 30px !important;
-      color: #0d5f3f !important;
+      color: #093956 !important;
       margin-bottom: 0px !important;
   
   }
@@ -1141,7 +1141,7 @@
           .landing-body #pricing > div .pricing-box .pricing-content ul li {
             padding: 8px 0; }
             .landing-body #pricing > div .pricing-box .pricing-content ul li i {
-              color: #4caf50;
+              color: #093956;
               vertical-align: middle;
               margin-right: 6px; }
         .landing-body #pricing > div .pricing-box .pricing-content button {
@@ -1636,7 +1636,7 @@ body .md-inputfield > label{
     }
 
   .layout-wrapper .layout-main .tophead {
-    background: #0d5f3f;
+    background: #093956;
     padding: 0px;
     color: #fff;
     min-height: 55px;
@@ -1767,10 +1767,10 @@ width: 100%;
 
 
   .top-sub-green {
-    background:#0e5f3f; width:100%;
+    background:#093956; width:100%;
   }
   .top-sub-green ul{
-    background:#0e5f3f !important;
+    background:#093956 !important;
   }
   .top-sub-green .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem a {
     color: #fff !important;
@@ -1778,10 +1778,10 @@ width: 100%;
     padding: 12px 0px !important;
     text-transform: uppercase;
     font-weight: 300 !important;
-    background:#0e5f3f !important;
+    background:#093956 !important;
 }
 .top-sub-green .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem.ui-state-active {
-  background-color: #0e5f3f;
+  background-color: #093956;
   border-color: #fff !important;
   border-style: solid;
   
@@ -1824,7 +1824,7 @@ body .ui-table .ui-sortable-column .ui-sortable-column-icon {
 }
 .disaccoppiato .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem.ui-state-active {
  
-  border-bottom: 3px solid #0e5f3f !important;
+  border-bottom: 3px solid #093956 !important;
 }
 .disaccoppiato .tabsmall .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem {
   margin-right: 15.5px !important;
@@ -1909,7 +1909,7 @@ body .ui-table .ui-sortable-column .ui-sortable-column-icon {
 }
 
 .subhome{
-    background-color:#0d5f3f;
+    background-color:#093956;
     padding: 15px 20px;
     vertical-align: middle;
 }
@@ -1996,16 +1996,16 @@ body .ui-steps {
       body .ui-steps .ui-steps-item .ui-menuitem-link .ui-steps-title {
         display: block !important;
         margin-left: 0 !important;
-        color: #0d5f3f !important;
+        color: #093956 !important;
       opacity:.6 !important;
     font-weight: 700;
   font-size: 18px !important }
     body .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-number {
-      background-color: #00985a !important;
+      background-color: #05263e !important;
       color: #ffffff; }
     body .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-title {
       font-weight: 700;
-      color: #0d5f3f !important;
+      color: #093956 !important;
       opacity:1 !important; }
     body .ui-steps .ui-steps-item:last-child .ui-menuitem-link {
       display: block; }
@@ -2023,7 +2023,7 @@ body .ui-steps {
 
  /* Inizio tab antimafia */
  body .funzioni-grid.tab-new .ui-tabview .ui-tabview-nav > li.ui-state-default a{
-  color:#00985a !important;
+  color:#05263e !important;
   font-size: 18px !important;
   font-weight:700 !important;
 
@@ -2038,13 +2038,13 @@ body .ui-tabview .ui-tabview-nav > li{
 }
 
 body .funzioni-grid.tab-new .ui-tabview .ui-tabview-nav > li.ui-state-active a{
-  color:#0d5f3f !important;
+  color:#093956 !important;
   font-size: 18px;
   font-weight:700;
 }
 
 body .funzioni-grid.tab-new .ui-tabview .ui-tabview-nav > li.ui-state-active{
-  border-color:#0d5f3f !important;
+  border-color:#093956 !important;
 
 }
 body .funzioni-grid.tab-new .ui-tabview .ui-tabview-panel {
@@ -2056,7 +2056,7 @@ body .ui-tabview{
   border:none !important;
 }
 body .funzioni-grid.tab-new .ui-tabview .ui-tabview-nav > li .ui-tabview-title span {
-background: #00985a;
+background: #05263e;
 line-height: 0px;
 color: #fff;
 font-size: 13px;
@@ -2087,7 +2087,7 @@ font-size: 22px;
   margin: 30px 0 20px 0;
 }
 .h2title span{
-  color: #0d5f3f;
+  color: #093956;
   border-bottom: solid;
   font-size: 24px;
   font-weight: 700;
@@ -2172,8 +2172,8 @@ margin-top: 20px;
 }
 .card-domande p-button button {
   color: #fff !important;
-    background-color: #00985a !important;
-    border-color: #00985a !important;
+    background-color: #05263e !important;
+    border-color: #05263e !important;
     border-radius: 0px !important;
     text-transform: uppercase !important;
     font-weight: 600 !important;
@@ -2185,9 +2185,9 @@ margin-top: 20px;
     width: 80%;
 }
 .btn-white.btn-white {
-    color: #00985a !important;
+    color: #05263e !important;
     background-color: #fff !important;
-    border: 1px solid #00985a !important;
+    border: 1px solid #05263e !important;
     border-radius: 0px !important;
     text-transform: uppercase !important;
     font-weight: 700 !important;
@@ -2204,7 +2204,7 @@ margin-top: 20px;
 }
 .popup-istruttoria h1 {
   font-size: 32px;
-  color: #00985a;
+  color: #05263e;
   text-transform: lowercase;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -2257,19 +2257,19 @@ padding: 0px 17px;
 
   }
   body .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem.ui-state-active {
-    border-color:#0d5f3f !important;
+    border-color:#093956 !important;
   }
   body .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem {
     margin-right:30px !important;
   }
 
   body  .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem a {
-    color: #00985a !important;
+    color: #05263e !important;
     font-size: 18px;
     padding: 15px 0px !important;
   }
   body  .ui-tabmenu .ui-tabmenu-nav > .ui-tabmenuitem.ui-state-active a {
-    color: #0d5f3f !important;
+    color: #093956 !important;
   }
 
   .boxgrey{
@@ -2297,12 +2297,12 @@ padding: 0px 17px;
   .ui-fluid .ui-inputtext:focus{
     background-color:white;
    
-    border:1px solid #00985a;
+    border:1px solid #05263e;
     padding: 10px;
   }
   body .ui-button.ui-state-default.ui-button-success, body .ui-buttonset.ui-button-success > .ui-button.ui-state-default{
     
-    background:#0d5f3f;
+    background:#093956;
     border-radius:0px;
     box-shadow: none;
     padding: 8px;
@@ -2311,7 +2311,7 @@ padding: 0px 17px;
   }
   body .ui-button.ui-state-default.ui-button-success.small  {
     color: #ffffff;
-    background-color: #4CAF50;
+    background-color: #093956;
     max-width: 100px;
   }
 
@@ -2341,11 +2341,11 @@ body .ui-paginator .ui-paginator-pages a {
   color: #555555 !important;
 }
 body .ui-paginator .ui-paginator-pages a.ui-state-active {
-  background-color: #7CB342;
+  background-color: #05263e;
   color: #ffffff !important;
 }
 h3.title-section {
-  color: #0d5f3f;
+  color: #093956;
   font-weight: 700;
   font-size: 24px;
   border-bottom:1px solid #ccc;
@@ -2354,12 +2354,12 @@ h3.title-section {
 
 }
 h3.title-section span{
-  border-bottom:3px solid #0d5f3f;
+  border-bottom:3px solid #093956;
   padding-bottom: 5px;
   
 }
 .boxgrey h3 {
-  color: #0d5f3f;
+  color: #093956;
   font-weight: 700;
   font-size: 20px;
   text-transform: uppercase;
@@ -2396,8 +2396,8 @@ font-size: 15px !important;
 
   .btn-green {
     color: #fff !important;
-    background-color: #00985a !important;
-    border-color: #00985a !important;
+    background-color: #05263e !important;
+    border-color: #05263e !important;
     border-radius: 0px !important;
     
     text-transform: uppercase !important;
@@ -2413,8 +2413,8 @@ font-size: 15px !important;
 
   .btn-darkgreen {
     color: #fff !important;
-    background-color: #0d5f3f !important;
-    border-color: #0d5f3f !important;
+    background-color: #093956 !important;
+    border-color: #093956 !important;
     border-radius: 0px !important;
     margin-top: 20px !important;
     text-transform: uppercase !important;
@@ -2436,8 +2436,8 @@ font-size: 15px !important;
 }
 .boxpopup .btn-darkgreen {
   color: #fff !important;
-  background-color: #0d5f3f !important;
-  border-color: #0d5f3f !important;
+  background-color: #093956 !important;
+  border-color: #093956 !important;
   border-radius: 0px !important;
   margin-top: 20px !important;
   text-transform: uppercase !important;
@@ -2474,7 +2474,7 @@ app-popup-rifiuta-domanda .ui-dialog .ui-dialog-titlebar, app-popup-rifiuta-doma
 .boxpopup p-header {
 
   background:none !important;
-  color: #0d5f3f !important;
+  color: #093956 !important;
   padding: .625em 5px 0 !important;
   
   font-weight: 700 !important;
@@ -2510,7 +2510,7 @@ app-popup-rifiuta-domanda .ui-dialog .ui-dialog-titlebar, app-popup-rifiuta-doma
 
 .richiesta-title{
   padding: 30px 0;
-  color:#0d5f3f;
+  color:#093956;
   font-weight: 600;
   text-transform: lowercase;
   font-size: 36px;
@@ -2604,7 +2604,7 @@ body .back-button.sm .ui-button.blue-grey-btn, .ui-button.deep-orange-btn, body 
   }
 
   body .accordion-wrapper .ui-accordion .ui-accordion-header > a .ui-accordion-header-text{
-  color:#0d5f3f;
+  color:#093956;
   border-bottom: solid;
   font-size: 24px;
   font-weight: 700;
@@ -2613,7 +2613,7 @@ body .back-button.sm .ui-button.blue-grey-btn, .ui-button.deep-orange-btn, body 
   }
 
   body .accordion-wrapper .ui-accordion .ui-accordion-header > a .ui-accordion-toggle-icon{
-    color:#0d5f3f;
+    color:#093956;
     float:right;
   }
 
@@ -2656,7 +2656,7 @@ body .ui-dropdown{
   } 
 
   body .ui-table .ui-table-thead {
-    border-top: solid 2px #0d5f3f !important;
+    border-top: solid 2px #093956 !important;
   }
 
   body .ui-table .ui-table-thead > tr > th, body .ui-table .ui-table-tfoot > tr > td{
@@ -2694,7 +2694,7 @@ body .ui-dropdown{
  }
   .ui-g-12.boxlanding .card h4{
     font-size: 28px;
-    color:#0d5f3f;
+    color:#093956;
     margin: 0px;
     margin-top:20px;
     font-weight: 600;
@@ -2736,7 +2736,7 @@ body .ui-dropdown{
 
   body .ui-panelmenu .ui-panelmenu-header a, body .ui-panelmenu .ui-panelmenu-header .pi{
     background-color:white;
-    color:#0d5f3f !important;
+    color:#093956 !important;
     font-size: 20px;
     font-weight: 600;
   }
@@ -2759,7 +2759,7 @@ body .ui-dropdown{
     box-sizing: border-box;
     z-index: 999997;}
     .layout-wrapper .layout-main .layout-topbar a h1{
-    color:#00985a;
+    color:#05263e;
     font-size: 40px;
     margin: 0px;
     line-height: 45px;
@@ -2768,7 +2768,7 @@ body .ui-dropdown{
     }
     .layout-wrapper .layout-main .layout-topbar a span {
       font-size: 18px;
-      color: #0d5f3f;
+      color: #093956;
     }
    
    
@@ -3742,7 +3742,7 @@ body .ui-dropdown{
 
 .layout-wrapper .layout-actionmenu .layout-sidebar .layout-menu > li > a{
   color: #ffffff;
-  background-color: #00985a;
+  background-color: #05263e;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
@@ -3765,7 +3765,7 @@ body .ui-dropdown{
 
 
   body .ui-button.ui-button-icon-only {
-    background: #0d5f3f !important;
+    background: #093956 !important;
     
     width: 30px !important;
     height: 30px !important;
@@ -3803,7 +3803,7 @@ body .ui-breadcrumb .pi {
   
   min-height: 38px;
   box-shadow:none;
-  background: #4CAF50 !important;
+  background: #093956 !important;
 }
 
  
@@ -3851,7 +3851,7 @@ body .ui-breadcrumb .pi {
   }
   .box-familiare .ui-panel-titlebar-toggler:hover {
     background: none !important;
-    color: #0d5f3f;
+    color: #093956;
   }
   .box-familiare .ui-panel-titlebar-toggler .pi.pi-plus:before {
     content: "DETTAGLI";
@@ -3885,7 +3885,7 @@ body .ui-breadcrumb .pi {
     text-align: right;
     font-weight: 700;
     font-size: 15px;
-    color: #0d5f3f;
+    color: #093956;
   }
   .addfamiliari .ui-icon-add {
     font-size:18px !important;
@@ -3908,7 +3908,7 @@ body .ui-breadcrumb .pi {
   .icon-action .ui-button.ui-button-icon-only {
     overflow: hidden;
     background-color: #fff !important;
-    color: #00985a !important;
+    color: #05263e !important;
     font-size: 1em !important;
     height: auto !important;
     padding: 5px 10px 0px !important;
@@ -3920,12 +3920,12 @@ body .ui-breadcrumb .pi {
     margin-right: 3px !important;
   }
   .icon-action button:hover {
-    background-color: #00985a !important;
+    background-color: #05263e !important;
     color: #fff !important;
   }
   .icon-action button.ui-state-disabled:hover {
     background-color: #fff !important;
-    color: #00985a !important;
+    color: #05263e !important;
   }
   
   .icon-action button .ui-button-text {
@@ -3936,7 +3936,7 @@ body .ui-breadcrumb .pi {
   .white-btn {
     background: #fff !important;
     border: 1px solid #ccc !important;
-    color: #0d5f3f !important;
+    color: #093956 !important;
     text-transform: uppercase;
     font-weight: 700;
     box-shadow: none !important;
@@ -3951,7 +3951,7 @@ body .ui-breadcrumb .pi {
 
     
     border: 0 none;
-    color: #0d5f3f !important;
+    color: #093956 !important;
     background-color: #ffe399 !important;
   }
   body .ui-toast .ui-toast-message.ui-toast-message-error {
@@ -3965,7 +3965,7 @@ body .ui-breadcrumb .pi {
 
     
     border: 0 none;
-    color: #0d5f3f !important;
+    color: #093956 !important;
     background-color: #b7d8b7 !important;
   }
   
@@ -4088,7 +4088,7 @@ body .ui-breadcrumb .pi {
 }
 
 .colori-per-numeri {
-  background: #00985a;
+  background: #05263e;
   line-height: 0px;
   color: #fff;
   font-size: 13px;
@@ -4098,7 +4098,7 @@ body .ui-breadcrumb .pi {
 }
 
 .boxgrey_bottom h5 {
-  color: #0d5f3f;
+  color: #093956;
   font-weight: 700;
   font-size: 18px;
   text-transform: uppercase;
@@ -4107,7 +4107,7 @@ body .ui-breadcrumb .pi {
 }
 
 .boxgrey_bottom > h5 {
-  border-bottom: 2px solid #0d5f3f;
+  border-bottom: 2px solid #093956;
 }
 
 .messaggiprocesso {

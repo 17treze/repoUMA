@@ -313,7 +313,7 @@ body {
         }
 
         &.green-btn {
-            background-color: #4CAF50;
+            background-color: #093956;
 
            &:enabled:not(:focus):hover {
                 background-color: #2E7D32;
@@ -321,7 +321,7 @@ body {
 
             &:focus {
                 outline: 0 none;
-                background-color: lighten(#4CAF50,10%);
+                background-color: lighten(#093956,10%);
             }
         }
 
@@ -459,7 +459,7 @@ body {
 
     .ui-button.ui-state-default.ui-button-success, .ui-buttonset.ui-button-success > .ui-button.ui-state-default  {
         color: #ffffff;
-        background-color: #4CAF50;
+        background-color: #093956;
 
         &:enabled:hover {
             background-color: #2E7D32;
@@ -467,7 +467,7 @@ body {
 
         &:enabled:focus {
             outline: 0 none;
-            background-color: lighten(#4CAF50,10%);
+            background-color: lighten(#093956,10%);
         }
     }
 

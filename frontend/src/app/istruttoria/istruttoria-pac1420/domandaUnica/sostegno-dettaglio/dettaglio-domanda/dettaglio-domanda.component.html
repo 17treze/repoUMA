@@ -35,7 +35,7 @@
                             <li #idDomanda *ngIf="istruttoriaDUCorrente.domanda.id"
                                 [ngClass]="{'active-topmenuitem':app.activeTopbarItem === idDomanda}"
                                 (click)="app.onTopbarRootItemClick($event, idDomanda)">
-                                <a href="#" style="color:#0e5f3f" (click)="showDialog()">
+                                <a href="#" style="color:#093956" (click)="showDialog()">
                                     <h4>{{istruttoriaDUCorrente.domanda.numeroDomanda}} - {{istruttoriaDUCorrente.domanda.cuaaIntestatario}} -
                                         {{istruttoriaDUCorrente.domanda.ragioneSociale | slice:0:60}}</h4>
                                     <span class="topbar-item-name">{{istruttoriaDUCorrente.domanda.id}}</span>

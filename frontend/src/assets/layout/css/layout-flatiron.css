@@ -785,7 +785,7 @@
         .login-body .login-panel .login-panel-content .ui-g-12:last-child, .login-body .login-panel .login-panel-content .ui-g-6:last-child {
           text-align: center; }
           .login-body .login-panel .login-panel-content .ui-g-12:last-child a, .login-body .login-panel .login-panel-content .ui-g-6:last-child a {
-            color: #4CAF50; }
+            color: #093956; }
       .login-body .login-panel .login-panel-content .password-reset {
         text-align: right; }
         .login-body .login-panel .login-panel-content .password-reset a {
@@ -1085,7 +1085,7 @@
           .landing-body #pricing > div .pricing-box .pricing-content ul li {
             padding: 8px 0; }
             .landing-body #pricing > div .pricing-box .pricing-content ul li i {
-              color: #4caf50;
+              color: #093956;
               vertical-align: middle;
               margin-right: 6px; }
         .landing-body #pricing > div .pricing-box .pricing-content button {
@@ -1282,7 +1282,7 @@ body {
   background-color: #F5F5F5; }
   body .ajax-loader {
     font-size: 32px;
-    color: #4CAF50; }
+    color: #093956; }
 
 a {
   text-decoration: none; }
@@ -1456,7 +1456,7 @@ a {
         color: #81C784; }
     .layout-wrapper .layout-sidebar .layout-menu > li.active-menuitem > a {
       color: #ffffff;
-      background-color: #4CAF50;
+      background-color: #093956;
       -moz-border-radius: 6px;
       -webkit-border-radius: 6px;
       border-radius: 6px;
@@ -1486,7 +1486,7 @@ a {
       height: 16px;
       margin-right: 6px;
       text-align: center;
-      background-color: #4CAF50;
+      background-color: #093956;
       color: #ffffff;
       font-size: 12px;
       font-weight: 700;
@@ -1523,7 +1523,7 @@ a {
       .layout-wrapper .layout-sidebar.layout-sidebar-dark .layout-menu li.active-menuitem > a i {
         color: #81C784; }
     .layout-wrapper .layout-sidebar.layout-sidebar-dark .layout-menu > li.active-menuitem > a {
-      background-color: #4CAF50;
+      background-color: #093956;
       color: #212121; }
       .layout-wrapper .layout-sidebar.layout-sidebar-dark .layout-menu > li.active-menuitem > a i {
         color: #212121; }
@@ -1589,7 +1589,7 @@ a {
         width: 16px;
         height: 16px;
         text-align: center;
-        background-color: #4CAF50;
+        background-color: #093956;
         color: #ffffff;
         font-size: 12px;
         font-weight: 700;
@@ -1650,7 +1650,7 @@ a {
               vertical-align: middle;
               margin-top: -4px; }
             .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu > li.profile-item > a:hover .profile-image-wrapper {
-              border-color: #4CAF50; }
+              border-color: #093956; }
           .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu > li.profile-item > ul {
             right: auto;
             left: 5px; }
@@ -1718,7 +1718,7 @@ a {
               vertical-align: middle;
               display: inline-block; }
             .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu > li > ul a .topbar-submenuitem-badge {
-              background-color: #4CAF50;
+              background-color: #093956;
               padding: 2px 4px;
               display: block;
               font-size: 12px;

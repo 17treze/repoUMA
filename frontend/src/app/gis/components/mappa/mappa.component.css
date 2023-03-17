@@ -72,10 +72,10 @@ app-mouse-position >>> div {
 }
 
 .ol-control button {
-  background-color: #0d5f3fb8;
+  background-color: #093956b8;
 }
 
 .ol-control button:hover, .ol-control button:focus {
-  background-color: #0d5f3f;
+  background-color: #093956;
 }
 

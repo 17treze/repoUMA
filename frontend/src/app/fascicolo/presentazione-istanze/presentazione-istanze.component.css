@@ -70,13 +70,13 @@
   }
 
   .title {
-    color: #0D5F3F;
+    color: #093956;
     font-size: 18px;
   }
   
   .button-myappg {
     border: none;
-    background: #00985A;
+    background: #05263e;
     margin-left: 1rem;
     padding: 0.25rem 0.5rem 0.25rem 0.5rem;
     display: flex;

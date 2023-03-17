@@ -14,27 +14,27 @@
 
 .border-selection-dropdown {
     margin-left: 5px ;
-    border-top: 2px solid #0d5f3f;;
+    border-top: 2px solid #093956;;
     margin-right: 5px ;
     padding-bottom: 12px;
 }
 
 .title-dropdown-options label {
-    color: #0d5f3f;page-break-inside: var();
+    color: #093956;page-break-inside: var();
     padding-left: 20px;
     padding-right: 20px;
 }
 
 .settings-header-dropdown {
    font-size: 140%;
-    color: #0d5f3f;
+    color: #093956;
     font-weight: bold;
     padding-left:5px;
 }
 
 .settings-header-dropdown-subsection {
     font-size: 120%;
-     color: #0d5f3f;
+     color: #093956;
      font-weight: bold;
      padding-left:5px;
  }
@@ -58,7 +58,7 @@
 }
 
 .label-misura-option{
-    color: #0d5f3f !important;
+    color: #093956 !important;
 }
 
 

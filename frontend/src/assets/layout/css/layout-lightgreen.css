@@ -715,7 +715,7 @@
             float: right;
             margin-top: 12px; }
             .dashboard .user-card .user-card-content .user-detail ul li .project-progressbar .project-progressbar-value {
-              background-color: #7CB342;
+              background-color: #05263e;
               height: 4px; }
 .dashboard .map .ui-panel {
   border: 0 none;
@@ -767,7 +767,7 @@
     -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14);
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 6px 10px 0 rgba(0, 0, 0, 0.14); }
     .login-body .login-panel .login-panel-header {
-      background-color: #7CB342;
+      background-color: #05263e;
       text-align: center;
       padding: 8px 14px; }
       .login-body .login-panel .login-panel-header img {
@@ -1085,7 +1085,7 @@
           .landing-body #pricing > div .pricing-box .pricing-content ul li {
             padding: 8px 0; }
             .landing-body #pricing > div .pricing-box .pricing-content ul li i {
-              color: #4caf50;
+              color: #093956;
               vertical-align: middle;
               margin-right: 6px; }
         .landing-body #pricing > div .pricing-box .pricing-content button {
@@ -1340,7 +1340,7 @@ a {
       width: 18px;
       height: 18px;
       border: 2px solid #ffffff;
-      background-color: #7CB342;
+      background-color: #05263e;
       vertical-align: middle;
       float: right;
       margin-right: 8px;
@@ -1368,9 +1368,9 @@ a {
       -moz-box-sizing: border-box;
       box-sizing: border-box; }
       .layout-wrapper .layout-sidebar .layout-menu li.active-menuitem > a {
-        color: #7CB342; }
+        color: #05263e; }
         .layout-wrapper .layout-sidebar .layout-menu li.active-menuitem > a i {
-          color: #7CB342; }
+          color: #05263e; }
         .layout-wrapper .layout-sidebar .layout-menu li.active-menuitem > a i.layout-submenu-toggler {
           -webkit-transform: rotate(-180deg);
           -moz-transform: rotate(-180deg);
@@ -1450,10 +1450,10 @@ a {
       -webkit-border-radius: 6px;
       border-radius: 6px; }
       .layout-wrapper .layout-sidebar .layout-menu > li > a.active-menuitem-routerlink {
-        color: #7CB342; }
+        color: #05263e; }
     .layout-wrapper .layout-sidebar .layout-menu > li.active-menuitem > a {
       color: #ffffff;
-      background-color: #7CB342;
+      background-color: #05263e;
       -moz-border-radius: 6px;
       -webkit-border-radius: 6px;
       border-radius: 6px;
@@ -1536,7 +1536,7 @@ a {
   box-sizing: border-box; }
   .layout-wrapper .layout-main .layout-topbar {
     height: 64px;
-    background-color: #7CB342;
+    background-color: #05263e;
     padding: 16px 42px 16px 24px;
     position: fixed;
     width: calc(100% - 40px);
@@ -1695,7 +1695,7 @@ a {
           list-style-type: none;
           margin: 0;
           padding: 8px 0;
-          border-top: 4px solid #7CB342;
+          border-top: 4px solid #05263e;
           -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
           -moz-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
@@ -1736,7 +1736,7 @@ a {
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-bottom: 15px solid #7CB342;
+            border-bottom: 15px solid #05263e;
             content: " ";
             position: absolute;
             top: -15px;
@@ -1768,7 +1768,7 @@ a {
         .layout-wrapper .layout-main .layout-breadcrumb ul li:nth-child(even) {
           font-size: 20px; }
         .layout-wrapper .layout-main .layout-breadcrumb ul li:first-child(even) {
-          color: #7CB342; }
+          color: #05263e; }
         .layout-wrapper .layout-main .layout-breadcrumb ul li a {
           color: #757575; }
     .layout-wrapper .layout-main .layout-breadcrumb .layout-breadcrumb-options {
@@ -1871,7 +1871,7 @@ a {
           height: 0;
           border-left: 8px solid transparent;
           border-right: 8px solid transparent;
-          border-bottom: 15px solid #7CB342;
+          border-bottom: 15px solid #05263e;
           content: " ";
           position: absolute;
           top: -15px;
@@ -1884,7 +1884,7 @@ a {
           display: block;
           padding: 8px 0;
           background-color: #ffffff;
-          border-top: 4px solid #7CB342; }
+          border-top: 4px solid #05263e; }
           .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu.topbar-menu-active > li {
             float: none;
             display: block;
@@ -1932,7 +1932,7 @@ a {
           .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li a i {
             font-size: 24px; }
         .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item input {
-          background-image: linear-gradient(to bottom, #7CB342, #7CB342), linear-gradient(to bottom, #bbc9ac, #bbc9ac); }
+          background-image: linear-gradient(to bottom, #05263e, #05263e), linear-gradient(to bottom, #bbc9ac, #bbc9ac); }
         .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item {
           padding: 8px 14px; }
           .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item input {
@@ -1946,9 +1946,9 @@ a {
               border-width: 0;
               width: 85%; }
               .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item input:focus ~ i {
-                color: #7CB342; }
+                color: #05263e; }
               .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item input:focus ~ label {
-                color: #7CB342;
+                color: #05263e;
                 top: -15px; }
           .layout-wrapper .layout-main .layout-topbar .layout-topbar-menu-wrapper .topbar-menu li.search-item i {
             color: #757575;

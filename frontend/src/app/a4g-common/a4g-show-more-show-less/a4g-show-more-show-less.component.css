@@ -1,6 +1,6 @@
 :host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
 span.pi.pi-caret-down.ui-button-icon-left.ui-clickable {
-  color: #4CAF50;
+  color: #093956;
 }
 
 :host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
@@ -10,7 +10,7 @@ span.pi.pi-caret-down.ui-button-icon-left.ui-clickable :hover {
 
 :host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
 span.pi.pi-caret-up.ui-button-icon-left.ui-clickable {
-  color: #4CAF50;
+  color: #093956;
 }
 
 :host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left > 
@@ -20,7 +20,7 @@ span.pi.pi-caret-up.ui-button-icon-left.ui-clickable :hover {
 
 :host >>> button.ui-button.ui-widget.ui-corner-all.ui-button-text-icon-left {
     background: transparent;
-    color: #4CAF50;
+    color: #093956;
     font-size: smaller;
     box-shadow: unset;
     font-weight: bold;

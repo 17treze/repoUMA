@@ -1,5 +1,5 @@
 .boxgrey h5 {
-    color: #0d5f3f;
+    color: #093956;
     font-weight: 700;
     font-size: 18px;
     text-transform: uppercase;
@@ -8,7 +8,7 @@
 }
 
 .boxgrey div > h5 {
-    border-bottom: 2px solid #0d5f3f;
+    border-bottom: 2px solid #093956;
 }
 
 .boxgrey p-button{
@@ -16,7 +16,7 @@
 }
 
 .badgesGreen {
-    background: #00985a;
+    background: #05263e;
     line-height: 0px;
     color: #fff;
     font-size: 13px;

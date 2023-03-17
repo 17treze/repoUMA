@@ -54,7 +54,7 @@
 .btn-alt:focus,
 .btn-alt-no-right-padding:hover,
 .btn-alt-no-right-padding:focus {
-    background: #4caf50 !important;
+    background: #093956 !important;
     color: #fff !important;
 }
 
@@ -144,7 +144,7 @@
 
 .btn-salva-frm:hover,
 .btn-salva-frm:focus {
-    background: #4caf50 !important;
+    background: #093956 !important;
     color: #fff !important;
 }
 
@@ -166,7 +166,7 @@ body .ui-dialog .ui-dialog-footer {
 
 span.custom-dialog-csv-title {
     text-align: center;
-    color: #0d5f3f !important;
+    color: #093956 !important;
 }
 
 .paddingTopGrid {

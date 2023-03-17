@@ -88,8 +88,8 @@
 
   ::ng-deep .ui-tabview .ui-tabview-nav > li {
     &.ui-state-active {
-      background-color: white; // #7cb342;
-      border-color: white; //#7CB342;
+      background-color: white; // #05263e;
+      border-color: white; //#05263e;
       .ui-tabview-title {
         color: white;
       }
@@ -143,12 +143,12 @@
   }
 
   ::ng-deep .ui-accordion .ui-accordion-header > a .ui-accordion-toggle-icon {
-    color: #0d5f3f;
+    color: #093956;
     float: right;
   }
 
   ::ng-deep .ui-accordion .ui-accordion-header > a .ui-accordion-header-text {
-    color: #0d5f3f;
+    color: #093956;
     border-bottom: solid;
     font-size: 24px;
     font-weight: 700;
