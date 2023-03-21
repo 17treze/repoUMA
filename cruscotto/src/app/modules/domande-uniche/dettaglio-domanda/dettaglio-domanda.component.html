@@ -1,0 +1,144 @@
+<article *ngIf="domandaUnica">
+
+  <section class="pt-3  mb-2">
+    <h2 class="h6 text-uppercase text-primary font-weight-bold  mb-3">{{ 'domandaUnica.statoDomanda' | translate}}</h2>
+    <div class="alert  alert-info  mb-0" *ngIf="domandaUnica.infoGeneraliDomanda"
+      [innerHTML]="'domandaUnica.stati.' + domandaUnica.infoGeneraliDomanda.stato + '.description' | translate">
+    </div>
+  </section>
+
+  <section>
+    <div class="row  row-no-gutter">
+      <div class="col-6">
+        <p-card *ngIf="importoCalcolato>=0" styleClass="ui-card-shadow dark  text-center  mr-1px">
+          <img src="assets/icons/CalcolatoLordo.jpg" /><br>
+          € {{importoCalcolato | number:'.2'}}
+        </p-card>
+      </div>
+      <div class="col-6">
+        <p-card *ngIf="importoLiquidato>=0" styleClass="ui-card-shadow primary  text-center">
+          <img src="assets/icons/LiquidatoNetto.jpg" /><br>
+          € {{importoLiquidato | number:'.2'}}
+        </p-card>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="mt-4 mb-2">
+
+    <h2 class="h6 text-uppercase text-primary font-weight-bold">{{ 'domandaUnica.sostegniRichiesti' | translate}}</h2>
+
+    <ng-container *ngIf="domandaUnica.richieste && domandaUnica.richieste.sintesiRichieste">
+      <!-- DISACCOPPIATO -->
+      <section *ngIf="domandaUnica.richieste.sintesiRichieste.richiestaDisaccoppiato &&
+                  domandaUnica.sostegnoDisaccoppiato" class="background-white bottom-rounded">
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2"><img class="icon__img" src="assets/icons/svg/icon-tractor.svg"
+              alt="tractor" /></span>
+          <span class="fw-700">{{ 'domandaUnica.sostegni.disaccoppiato.value' | translate }}</span>
+        </div>
+        <div class="mt-3  px-2">
+          <div class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+            <span>{{ 'domandaUnica.interventi.superficieLordaRichiesta' | translate}}</span>&nbsp;
+            <span>{{ domandaUnica.sostegnoDisaccoppiato.superficieImpegnataLorda / 10000 | number:'.4' }}
+              {{ 'common.ettaro' | translate}}
+            </span>
+          </div>
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span>{{ 'domandaUnica.interventi.superficieNettaRichiesta' | translate}}</span>&nbsp;
+            <span>{{ domandaUnica.sostegnoDisaccoppiato.superficieImpegnataNetta / 10000 | number:'.4' }}
+              {{ 'common.ettaro' | translate }}
+            </span>
+          </div>
+        </div>
+
+        <strong
+          class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaUnica.interventiRichiesti' | translate }}</strong>
+
+        <ul class="list-unstyled pl-2">
+          <li *ngIf="domandaUnica.sostegnoDisaccoppiato.bpsRichiesto"
+            class="d-flex  align-items-center  py-1  border-bottom">
+            <span class="icon  mr-2"><img class="icon__img" src="assets/icons/svg/icon-base.svg" alt="base" /></span>
+            <span>{{ 'domandaUnica.interventi.premio_base.value' | translate }}</span>
+          </li>
+          <li *ngIf="domandaUnica.sostegnoDisaccoppiato.greeningRichiesto"
+            class="d-flex  align-items-center  py-1  border-bottom">
+            <span class="icon  mr-2"><img class="icon__img" src="assets/icons/svg/icon-greening.svg"
+                alt="base" /></span>
+            <span>{{ 'domandaUnica.interventi.greening.value' | translate }}</span>
+          </li>
+          <li *ngIf="domandaUnica.sostegnoDisaccoppiato.giovaneRichiesto" class="d-flex  align-items-center  py-1  ">
+            <span class="icon  mr-2"><img class="icon__img" src="assets/icons/svg/icon-giovane.svg" alt="base" /></span>
+            <span>{{ 'domandaUnica.interventi.giovane.value' | translate }}</span>
+          </li>
+        </ul>
+      </section>
+      <!-- /DISACCOPPIATO -->
+
+      <!-- ACCOPPIATO ZOOTECNIA -->
+      <section *ngIf="domandaUnica?.richieste.sintesiRichieste.richiestaZootecnia"
+        class="background-white bottom-rounded">
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2"><img class="icon__img" src="assets/icons/svg/icon-w.svg"
+              alt="tractor" /></span>
+          <span class="fw-700">{{ 'domandaUnica.sostegni.accoppiato_zootecnia.value' | translate }}</span>
+        </div>
+        <div class="mt-3 px-2">
+          <strong
+            class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaUnica.interventiRichiesti' | translate }}</strong>
+          <ul class="list-unstyled pl-2">
+            <ng-container *ngFor="let allevamenti of domandaUnica.richieste.sostegniAllevamento">
+              <li class="d-flex  align-items-center  py-1 border-bottom">
+                <span class="icon  mr-2">
+                  <img class="icon__img" [src]=recuperaIconZootecnia(allevamenti.codIntervento)
+                    alt="allevamenti.codIntervento" />
+                </span>
+                <span>{{ interventoDescrizione[allevamenti.codIntervento] | translate }}</span>
+                <span class="ml-auto">{{ allevamenti.codIdAllevamento }}</span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </section>
+      <!-- /ACCOPPIATO ZOOTECNIA -->
+
+      <!-- ACCOPPIATO SUPERFICIE -->
+      <section *ngIf="domandaUnica.richieste.sintesiRichieste.richiestaSuperfici" class="background-white">
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2">
+            <img class="icon__img" src="assets/icons/svg/icon-land.svg" alt="land" />
+          </span>
+          <span class="fw-700">{{ 'domandaUnica.sostegni.accoppiato_superficie.value' | translate }}</span>
+        </div>
+
+        <div class="mt-3 px-2">
+          <div *ngFor="let elementSostegno of elementiSostegno">
+            <div *ngIf="elementSostegno.label === 'totale'" class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+              <span>{{ "domandaUnica.sostegni.accoppiato_superficie.superficiRichieste." + elementSostegno.label| translate}}</span>&nbsp;
+              <span>{{ elementSostegno.value / 10000 | number:'.4' }}
+                {{ 'common.ettaro' | translate}}
+              </span>
+            </div>
+          </div>
+          <strong
+            class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaUnica.interventiRichiesti' | translate }}</strong>
+          <ul class="list-unstyled pl-2">
+            <ng-container *ngFor="let elementSostegno of elementiSostegno">
+              <li *ngIf="elementSostegno.label != 'totale'" class="d-flex  align-items-center  py-1 border-bottom">
+                <span class="icon  mr-2">
+                  <img class="icon__img" [src]=recuperaIconSuperficie(elementSostegno.label) alt="olivoQualita" />
+                </span>
+                <span>{{ "domandaUnica.sostegni.accoppiato_superficie.interventi." + elementSostegno.label | translate }}</span>
+                <span class="ml-auto">{{ elementSostegno.value / 10000 | number:'.4' }}
+                  {{ 'common.ettaro' | translate }}</span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </section>
+      <!-- /ACCOPPIATO SUPERFICIE -->
+
+    </ng-container>
+  </section>
+</article>

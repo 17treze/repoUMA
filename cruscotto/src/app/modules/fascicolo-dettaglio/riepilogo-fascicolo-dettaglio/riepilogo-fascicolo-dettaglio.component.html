@@ -1,0 +1,284 @@
+<div class="container pt-3">
+  <p class="h6 text-uppercase font-weight-bold">{{ 'FascicoloAziendale.FASCICOLO_AZIENDALE' | translate }}</p>
+</div>
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}"></p-toast>
+<p-toast
+  position="center"
+  key="checkAggiornamento"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <em
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></em>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirmAggiornamento()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="rejectAggiornamento()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<div class="container my-3">
+  <div class="p-grid">
+    <div
+      class="p-col-12 align-right"
+      (click)="interruttore()">
+      <span class="py-2 px-3 mt-2 d-inline-block stato-fascicolo">
+        <h6 style="padding-right: 10px;">{{activeState ? 'nascondi dettagli' : 'mostra dettagli'}}</h6>
+      </span>
+      <span [class]="activeState ? 'p-py-3  aprischeda aprischeda-sfondo-aperto' : 'p-py-3  aprischeda aprischeda-sfondo-chiuso'">
+        <i [class]="activeState ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></i>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="activeState">
+    <div class="carousel-card mb-2 clickable">
+      <h6 class="mb-0">
+        <span>Denominazione Fascicolo:<br><strong> {{ fascicoloCorrente.denominazione }}</strong></span>
+      </h6>
+      <h6 class="mb-0">
+        <span>Cuaa:<br><strong> {{ fascicoloCorrente.cuaa }}</strong></span>
+      </h6><br>
+      <h6 class="mb-0 mr-2">Stato:
+        <span
+          *ngIf="fascicoloCorrente.stato"
+          class="border border-light py-1 px-2 mt-2 d-inline-block">
+          {{
+          "FAS_ANA.STATO_FASCICOLO." + fascicoloCorrente.stato
+          | translate
+          }}
+        </span>
+      </h6><br>
+      <ng-template #mandato_content>
+        <div>
+          <h6 class="mb-0">Centro Assistenza Agricola:<br>
+            <span class="fw-700">
+              {{ fascicoloCorrente?.detenzioneDto?.denominazione }}
+            </span>
+          </h6>
+        </div>
+        <div>
+          <h6 class="mb-0">Sportello:
+            <span class="fw-700 d-block">
+              {{ fascicoloCorrente?.detenzioneDto?.sportello?.denominazione }}
+            </span>
+          </h6>
+        </div>
+      </ng-template>
+      <ng-template #other_content>
+        <div>
+          <h6 class="mb-0">
+            <span class="fw-700 d-block">
+              Fascicolo in proprio
+            </span>
+          </h6>
+        </div>
+      </ng-template>
+      <div
+        class="carousel-card__header"
+        *ngIf="fascicoloCorrente?.detenzioneDto?.denominazione;then mandato_content else other_content">
+      </div>
+      <div class="carousel-card__dates">
+        <h6 class="mb-0">Organismo pagatore:</h6>
+        <span class="fw-700">
+          {{ "FAS_ANA.APPAG" | translate }}
+        </span>
+      </div>
+      <h6 class="mb-0">
+        <div class="p-grid">
+          <div class="p-col-6" style="margin-top: 6px;" *ngIf="fascicoloCorrente.detenzioneDto">
+            {{'FAS_ANA.DATA_COSTITUZIONE' | translate}}:
+          </div>
+          <div class="p-col-6">
+            <time class="fw-700">
+              {{ fascicoloCorrente.dataApertura | date: "dd/MM/yyyy" }}
+            </time>
+          </div>
+        </div>
+        <div
+          class="p-grid" style="margin-top: 0px;"
+          *ngIf="fascicoloCorrente.dataModifica"><div class="p-col-6">
+            {{'FAS_ANA.DATA_AGGIORNAMENTO' | translate}}:
+          </div><div class="p-col-6"><time class="fw-700">
+              {{ fascicoloCorrente.dataModifica | date:"dd/MM/yyyy" }}
+            </time>
+          </div>
+        </div>
+        <div
+          class="p-grid" style="margin-top: 0px;"
+          *ngIf="fascicoloCorrente.dataValidazione"><div class="p-col-6">
+            {{'FAS_ANA.DATA_VALIDAZIONE' | translate}}:
+          </div><div class="p-col-6"><time class="fw-700">
+              {{ fascicoloCorrente.dataValidazione | date:"dd/MM/yyyy" }}
+            </time>
+          </div>
+        </div>
+
+        <div class="p-grid" *ngIf="firmatario">
+          <div class="p-col-6" style="margin-top: 12px;">Firmatario:</div>
+          <div class="p-col-6" style="margin-top: 0px;">
+              <span class="fw-700" style="padding-top: 35px;">{{ firmatario.nome }} {{ firmatario.cognome }}</span>
+            <p-button label="" icon="{{getIcon()}}" iconPos="left" (onClick)="openPopupSelezioneFirmatarioOpen()"></p-button>
+          </div>
+        </div>
+
+        <!-- <span>firmatario {{firmatario | json }}</span>
+      <span>isUtenteFirmatarioAzienda() {{ isUtenteFirmatarioAzienda() }}</span> -->
+      </h6>
+    </div>
+  </div>
+  <div style="height:10px" *ngIf="!activeState">&nbsp;</div>
+  <div class="p-grid p-align-center" *ngIf="fascicoloCorrente.detenzioneDto">
+    <div class="p-col-12 p-md-3" *ngIf="isDetenzioneInProprio()">
+      <button
+          pButton
+          class="button-custom"
+          label="{{ 'FAS_ANA.VERIFICA_COMPLETEZZA' | translate }}"
+          icon="pi pi-question"
+          iconPos="right"
+          (click)="openPopupControlloCompletezza()"
+          [disabled]="!isFascicoloAttuale()">
+        </button>
+    </div>
+    <div class="p-col-12 p-md-3">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        label="{{ 'SCHEDA_VALIDAZIONE_DLG.SCARICA_SCHEDA' | translate }}"
+        class="button-custom"
+        icon="pi pi-file"
+        iconPos="right"
+        (click)="getSchedaValidazioneBozza()"
+        [disabled]="!isFascicoloAttuale() || isMandato()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.RIVEDI' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="moveInAggiornamento()"
+        [disabled]="!isUtenteFirmatarioAzienda() || !canMoveInAggiornamentoOrInValidato()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3" *ngIf="isDetenzioneInProprio()">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.AGGIORNA' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="update()"
+        [disabled]="!isUtenteFirmatarioAzienda() || !fascicoloEditable()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3" *ngIf="isMandato()">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.ALLA_FIRMA_AZIENDA' | translate }}"
+        icon="pi pi-refresh"
+        iconPos="right"
+        (click)="moveAllaFirma()"
+        [disabled]="!isUtenteFirmatarioAzienda() || !isFascicoloInAggiornamento()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3" *ngIf="isMandato()">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.VALIDA' | translate }}"
+        icon="pi pi-check"
+        iconPos="right"
+        (click)="openPopupSchedaValidazione()"
+        [disabled]="!isUtenteFirmatarioAzienda() || !canMoveInAggiornamentoOrInValidato()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3" *ngIf="isDetenzioneInProprio()">
+      <button
+        style="width: -webkit-fill-available;"
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.VALIDA_IN_PROPRIO' | translate }}"
+        icon="pi pi-check"
+        iconPos="right"
+        (click)="openPopupSchedaValidazioneInProprio()"
+        [disabled]="!isUtenteFirmatarioAzienda() || !canMoveInAllaFirmaAziendaOrValidato()">
+      </button>
+    </div>
+    <div class="p-col-12 p-md-3" *ngIf="isDetenzioneInProprio()">
+      <button
+        pButton
+        class="button-custom"
+        label="{{ 'FAS_ANA.VALIDAZIONI' | translate }}"
+        icon="pi pi-clock"
+        iconPos="right"
+        (click)="goToFascicoliValidati()"
+        [disabled]="fascicoloCorrente.stato === statoFascicoloEnum.IN_ATTESA_TRASFERIMENTO">
+      </button>
+    </div>
+  </div>
+  <p-toast
+    [style]="{marginTop: '80px'}"
+    position="top-center"
+    key="defaultToast"></p-toast>
+</div>
+<app-popup-scheda-validazione
+  *ngIf="popupSchedaValidazioneOpen"
+  [popupSchedaValidazioneOpen]="popupSchedaValidazioneOpen"
+  [statoFascicolo]="fascicoloCorrente.stato"
+  (chiudiPopup)="closePopupSchedaValidazione()"
+  (getSchedaValidazione)="getSchedaValidazione()"
+  (putSchedaValidazione)="putSchedaValidazione($event)"
+  (schedaValidazioneChange)="schedaValidazioneChange($event)">
+</app-popup-scheda-validazione>
+<app-popup-scheda-validazione-in-proprio
+  *ngIf="popupSchedaValidazioneInProprioOpen"
+  [popupSchedaValidazioneInProprioOpen]="popupSchedaValidazioneInProprioOpen"
+  [statoFascicolo]="fascicoloCorrente.stato"
+  (chiudiPopup)="closePopupSchedaValidazioneInProprio()"
+  (getSchedaValidazioneDetenzioneAutonoma)="getSchedaValidazioneDetenzioneAutonoma()"
+  (putSchedaValidazioneDetenzioneAutonoma)="putSchedaValidazione($event)"
+  (schedaValidazioneInProprioChange)="schedaValidazioneInProprioChange($event)">
+</app-popup-scheda-validazione-in-proprio>
+<app-popup-selezione-firmatario
+  [fascicoloCorrente]="fascicoloCorrente"
+  [popupSelezioneFirmatarioOpen]="popupSelezioneFirmatarioOpen"
+  [currentFirmatario]="firmatario"
+  [idValidazione]="idValidazione"
+  (chiudiPopup)="closePopupSelezioneFirmatarioOpen($event)"
+  *ngIf="popupSelezioneFirmatarioOpen">
+</app-popup-selezione-firmatario>
+<app-popup-controllo-completezza
+    *ngIf="fascicoloCorrente && isPopupControlloCompletezzaOpen"
+    [isPopupVisible]="isPopupControlloCompletezzaOpen"
+    [cuaa]="fascicoloCorrente.cuaa"
+    (chiudiPopup)="closePopupControlloCompletezza($event)">
+</app-popup-controllo-completezza>

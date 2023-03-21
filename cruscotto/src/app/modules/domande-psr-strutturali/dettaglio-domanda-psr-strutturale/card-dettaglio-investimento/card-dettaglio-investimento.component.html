@@ -1,0 +1,40 @@
+<p-card class="card--slim card--green-top" styleClass="mb-3">
+  <h6 class="text-uppercase text-primary fw-700 mb-2">{{'PSR-Strutturali.INVESTIMENTO' | translate}}</h6>
+  <div *ngIf="titolo">
+    <strong class="mt-2 d-block">{{ titolo }}</strong>
+  </div>
+  <hr />
+  <div *ngIf="!titolo">
+    {{ 'common.ND' | translate }}
+  </div>
+  <strong>{{'PSR-Strutturali.DETTAGLIO' | translate}}</strong>
+  <div *ngIf="descrizione" class="pa-3 d-flex justify-content-between pt-2 pb-2">
+    <span>{{ descrizione }}</span>&nbsp;
+  </div>
+  <p-accordion>
+    <p-accordionTab class="h6 text-primary font-weight-bold ui-accordion-inline" header="Descrizione">
+      <div *ngIf="subDescrizione" class="boxgrey-down text-dark" style="font-weight: normal">
+        {{ subDescrizione }}
+      </div>
+      <div *ngIf="!subDescrizione" class="boxgrey-down text-dark" style="font-weight: normal">
+        {{ 'common.ND' | translate }}
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+  <hr />
+  <div *ngIf="!descrizioneDettaglioInvestimenti" class="border-bottom pa-3 d-flex justify-content-between pt-2">
+    <span>{{ 'common.ND' | translate }}</span>&nbsp;
+  </div>
+  <strong>{{'PSR-Strutturali.SETTORE_PRODUTTIVO' | translate}}</strong>
+  <div *ngIf="descrizioneSettoriProduttivi" class="d-flex justify-content-between  pt-2">
+    <span>{{ descrizioneSettoriProduttivi }}</span>&nbsp;
+  </div>
+  <hr />
+  <div *ngIf="!descrizioneSettoriProduttivi" class="d-flex justify-content-between  pt-2">
+    <span>{{ 'common.ND' | translate }}</span>&nbsp;
+  </div>
+  <strong>{{'PSR-Strutturali.INVESTIMENTI_E_CONTRIBUTI' | translate}}</strong>
+  <div class="mt-1">
+    <ng-content></ng-content>
+  </div>
+</p-card>

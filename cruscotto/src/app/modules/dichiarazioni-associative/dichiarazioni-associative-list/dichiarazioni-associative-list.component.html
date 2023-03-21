@@ -1,0 +1,83 @@
+<p-toast
+  key="tst"
+  [style]="{marginTop: '70px'}">
+</p-toast>
+
+<div class="container px-0">
+  <p-table
+    [columns]="cols"
+    [value]="dichiarazioni"
+    selectionMode="single"
+    [(selection)]="selectedDichiarazione"
+    (onRowSelect)="onRowSelect($event)"
+    [responsive]="true">
+    <ng-template pTemplate="caption">
+      {{ 'DICHIARAZIONE_ASSOCIATIVA.LIST' | translate }}
+    </ng-template>
+    <ng-template
+      pTemplate="header"
+      let-columns>
+      <tr>
+        <th
+          *ngFor="let col of columns"
+          [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-rowData
+      let-columns="columns">
+      <tr [pSelectableRow]="rowData">
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.subfield; else elseBlock">
+            <span class="ui-column-title">{{col.header}}</span>
+            {{rowData[col.field][col.subfield]}}
+          </ng-container>
+          <ng-template #elseBlock>
+            <ng-container *ngIf="col.type; else elseBlock2">
+              <span class="ui-column-title">{{col.header}}</span>
+              {{rowData[col.field] | date: "dd/MM/yyyy"}}
+            </ng-container>
+          </ng-template>
+          <ng-template #elseBlock2>
+            <span class="ui-column-title">{{col.header}}</span>
+            {{ (rowData[col.field] ? 'DICHIARAZIONE_ASSOCIATIVA.NON_ISCRITTO' : 'DICHIARAZIONE_ASSOCIATIVA.ISCRITTO') | translate }}
+          </ng-template>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="2">
+          {{ 'DICHIARAZIONE_ASSOCIATIVA.EMPTY_LIST' | translate }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="summary"
+      let-rowData>
+      <div style="text-align:left">
+        <button
+          class="ui-button-success"
+          type="button"
+          pButton
+          icon="pi pi-plus"
+          (click)="showDialogToAdd()"
+          label="Aggiungi"></button>
+      </div>
+    </ng-template>
+  </p-table>
+
+  <app-dichiarazioni-associative-dialog
+    *ngIf="displayDialog"
+    [displayDialog]="displayDialog"
+    [dichiarazione]="dichiarazione"
+    [isNewDichiarazione]="isNewDichiarazione"
+    [organizzazioniList]="organizzazioni"
+    (saveDichiarazione)="save($event)"
+    (closeDialog)="closeDialog($event)">
+  </app-dichiarazioni-associative-dialog>
+</div>

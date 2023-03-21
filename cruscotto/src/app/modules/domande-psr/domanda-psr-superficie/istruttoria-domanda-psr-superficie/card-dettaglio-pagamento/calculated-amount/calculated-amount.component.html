@@ -1,0 +1,13 @@
+<div class="d-flex">
+  <div class="cost-aligment">
+    <span
+      *ngIf="statoDomandaPsr.stato.toLowerCase() === 'liquidata'">{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_AUTORIZZATO' | translate}}</span>
+    <span class="cost-aligment"
+          *ngIf="statoDomandaPsr.stato.toLowerCase() === 'liquidabile'">{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_CALCOLATO' | translate}}</span>
+  </div>
+  <span *ngIf="showAmount(); else showDash"
+        class="ml-auto text-nowrap">€ {{ importoCalcolato | number:'.2' }}</span>
+  <ng-template #showDash>
+    <span class="ml-auto text-nowrap"> -- </span>
+  </ng-template>
+</div>

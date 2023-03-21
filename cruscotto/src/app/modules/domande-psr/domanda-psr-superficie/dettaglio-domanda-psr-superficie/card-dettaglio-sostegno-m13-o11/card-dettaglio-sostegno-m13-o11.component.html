@@ -1,0 +1,22 @@
+<div class="border-bottom psr-card-header-small-text">
+  <h6 class="font-weight-bold">Interventi</h6>
+  <p> {{'domandaPsr.SUPRIC' | translate}}</p>
+</div>
+<div *ngFor="let impegno of impegniRichiestiPsr">
+  <div class="border-bottom pa-3 py-3">
+    <div class="d-flex justify-content-between">
+      <span>{{ impegno.codDestinazione |  codDestinazioneToDescription }}</span>&nbsp;
+      <span>{{ impegno.supImpegnoNetta | squareMetersToHectars }} ha</span>
+    </div>
+    <div>
+      <ul *ngIf="impegno.codDestinazione === codDestinazioneSistemiZootecnici">
+        <div *ngIf="impegno.ubaAlpeggiatePsr;else no_ube_alpeggiate">
+          <li class="font-weight-bold"> {{impegno.ubaAlpeggiatePsr.ubaAlpeggiate}} UBA alpeggiate</li>
+        </div>
+        <ng-template #no_ube_alpeggiate>
+          <li class="font-weight-bold"> Non ci sono UBA alpeggiate</li>
+        </ng-template>
+      </ul>
+    </div>
+  </div>
+</div>

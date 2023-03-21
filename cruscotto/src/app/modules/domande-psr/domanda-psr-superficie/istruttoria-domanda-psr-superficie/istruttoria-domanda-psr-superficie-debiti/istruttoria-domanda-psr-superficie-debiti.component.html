@@ -1,0 +1,12 @@
+<div class="timeline-item__amount mt-1">
+  <div class="d-flex">
+    Debiti recuperati
+    <span class="ml-auto text-nowrap">€ {{ getTotaleDebiti() | number:'.2' }}</span>
+  </div>
+  <ul>
+    <li class="d-flex p-align-center mt-2" *ngFor="let debito of debiti">
+      {{debito.descrizioneCapitolo}}
+      <span class="ml-auto text-nowrap">€ {{ debito.importo | number:'.2' }}</span>
+    </li>
+  </ul>
+</div>

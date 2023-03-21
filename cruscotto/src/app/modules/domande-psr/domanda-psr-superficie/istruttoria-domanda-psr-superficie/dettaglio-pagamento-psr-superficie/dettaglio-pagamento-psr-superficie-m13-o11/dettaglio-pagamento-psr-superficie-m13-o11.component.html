@@ -1,0 +1,52 @@
+<div id="indice" class="container d-flex flex-column mb-5 mt-3">
+  <button appScrollToElement="0" icon="pi pi-arrow-down" iconPos="right" label="Dati aziendali" pButton
+          type="button"></button>
+  <button *ngFor="let sistemaAgricolo of dettaglioPagamentoPsr?.sistemiAgricoli; let i = index;" pButton
+          [appScrollToElement]="i+1"
+          type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          [label]="sistemaAgricolo.tableName"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.sistemiAgricoli.length+1" label="Gestione pluriennale delle sanzioni
+"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.sistemiAgricoli.length+2"
+          label="Calcolo della degressività del premio
+"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.sistemiAgricoli.length+3"
+          label="Esito finale"></button>
+
+  <button *ngIf="dettaglioPagamentoPsr?.riduzioniControlloInLoco"
+    icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.sistemiAgricoli.length+4"
+          label="Riduzioni Controllo In loco"></button>
+</div>
+
+<app-dati-aziendali-m13-o11 [datiAziendali]="dettaglioPagamentoPsr.datiAziendali" id="item-0">
+</app-dati-aziendali-m13-o11>
+
+<app-sistema-agricolo-m13-o11 *ngFor="let sistemaAgricolo of dettaglioPagamentoPsr.sistemiAgricoli; let i = index;"
+                              id="item-{{i+1}}" [sistemaAgricolo]="sistemaAgricolo">
+</app-sistema-agricolo-m13-o11>
+
+<app-gestione-pluriennale-sanzione-m13-o11 *ngIf="dettaglioPagamentoPsr?.gestionePluriennaleSanzioni"
+  [gestionePluriennaleSanzioni]="dettaglioPagamentoPsr.gestionePluriennaleSanzioni"
+  id="item-{{dettaglioPagamentoPsr.sistemiAgricoli.length+1}}">
+</app-gestione-pluriennale-sanzione-m13-o11>
+
+<app-riduzioni-controllo-in-loco-m13-o11 *ngIf="dettaglioPagamentoPsr?.riduzioniControlloInLoco"
+                                         id="item-{{dettaglioPagamentoPsr.sistemiAgricoli.length+4}}"
+                                         [data]="dettaglioPagamentoPsr.riduzioniControlloInLoco">
+</app-riduzioni-controllo-in-loco-m13-o11>
+
+<app-calcolo-premio-m13-o11 [calcoloPremio]="dettaglioPagamentoPsr.calcoloDegressivitaPremio"
+                            id="item-{{dettaglioPagamentoPsr.sistemiAgricoli.length+2}}">
+</app-calcolo-premio-m13-o11>
+
+
+<app-esito-finale-m13-o11 *ngIf="dettaglioPagamentoPsr?.esitoFinale"
+                          id="item-{{dettaglioPagamentoPsr.sistemiAgricoli.length+3}}"
+                          [dettaglioEsitoFinale]="dettaglioPagamentoPsr.esitoFinale">
+</app-esito-finale-m13-o11>
+

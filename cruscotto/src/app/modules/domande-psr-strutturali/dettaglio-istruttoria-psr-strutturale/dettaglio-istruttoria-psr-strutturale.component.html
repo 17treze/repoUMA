@@ -1,0 +1,328 @@
+<article>
+  <section class="pt-5 mb-2">
+    <div *ngIf="dettaglioCard && dettaglioCard.length > 0">
+      <div
+        class="timeline-item"
+        [ngClass]="{'has--date' : !!dettaglioCard, 'timeline-item-variante': item.tipologia === 'idVariante'}"
+        *ngFor="let item of dettaglioCard">
+        <span
+          class="timeline-item__date">
+          {{item.data ? (item.data | date: "d MMMM y") : 'common.ND' | translate }}
+        </span>
+        <div class="timeline-item__container" *ngIf="item.tipologia != 'idVariante' else varianteBlock">
+          <div class="timeline-item__icon">
+            <span class="icon  icon--xs  icon--dark  icon--p">
+              <span
+                class="icon__img"
+                [inlineSVG]="getTimelineIcon(item)"></span>
+            </span>
+          </div>
+          <div class="timeline-item__content">
+            <div class="timeline-item__header">
+              <h6 class="timeline-item__title">
+                {{ item.tipologia.toUpperCase() }}</h6>
+              <button
+                *ngIf="goToEsitiIstruttoriaVisible(statoProgetto, item.tipologia)"
+                class="timeline-item__btn-detail"
+                (click)="goToEsitiIstruttoria(statoProgetto, item.tipologia, item.idDomandaPagamento)"
+                [inlineSVG]="'assets/icons/svg/icon-arrow-right.svg'"></button>
+            </div>
+            <!-- start Saldo -->
+            <div *ngIf="item.tipologia==='saldo'">
+              <div class="timeline-item__amount">
+                  <app-sanzione-domande [sanzioni]="item.sanzioni"></app-sanzione-domande>
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.COSTO_INVESTIMENTO_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.costoInvestimentoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.costoInvestimentoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.costoInvestimentoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.contributoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div
+                class="timeline-item__amount"
+                *ngIf="showRow(item.contributoLiquidabile)">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_LIQUIDABILE' | translate}}
+                  <span class="ml-auto text-nowrap">€ {{ item.contributoLiquidabile | number:'.2' }}</span>
+                </div>
+              </div>
+              <div
+                class="timeline-item__amount"
+                *ngIf="showRow(item.totaleRecuperato)">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.TOTALE_RECUPERATO' | translate}}
+                  <span class="ml-auto text-nowrap">€ {{ item.totaleRecuperato | number:'.2' }}</span>
+                </div>
+                <ul *ngIf="item.debiti?.length || 0 > 0" class="timeline-item__amount--details">
+                  <li *ngFor="let debito of item.debiti">
+                    <div  class="d-flex">
+                      {{ debito.descrizioneCapitolo }} <span class="ml-auto text-nowrap">€ {{ debito.importo | number:'.2' }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="timeline-item__amount total">
+                <div class="d-flex">
+                  <strong>{{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_LIQUIDATO' | translate}}</strong>
+                  <span
+                    *ngIf="getIncassatoNetto('Saldo',item) >= 0"
+                    class="ml-auto text-nowrap">€ {{ getIncassatoNetto('Saldo',item) | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!(getIncassatoNetto('Saldo',item) >= 0)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+            </div>
+            <!-- end Saldo -->
+            <!-- start Acconti -->
+            <div *ngIf="item.tipologia==='acconto'">
+              <div class="timeline-item__amount">
+                <app-sanzione-domande [sanzioni]="item.sanzioni"></app-sanzione-domande>
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.COSTO_INVESTIMENTO_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.costoInvestimentoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.costoInvestimentoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.costoInvestimentoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.contributoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_LIQUIDABILE' | translate}}
+                  <span
+                    *ngIf="showValue(item.contributoLiquidabile)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoLiquidabile | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoLiquidabile)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div
+                class="timeline-item__amount"
+                *ngIf="showRow(item.totaleRecuperato)">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.TOTALE_RECUPERATO' | translate}}
+                  <span class="ml-auto text-nowrap">€ {{ item.totaleRecuperato | number:'.2' }}</span>
+                </div>
+                <ul *ngIf="item.debiti?.length || 0 > 0" class="timeline-item__amount--details">
+                  <li *ngFor="let debito of item.debiti">
+                    <div  class="d-flex">
+                      {{ debito.descrizioneCapitolo }} <span class="ml-auto text-nowrap">€ {{ debito.importo | number:'.2' }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="timeline-item__amount total">
+                <div class="d-flex">
+                  <strong>{{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_LIQUIDATO' | translate}}</strong>
+                  <span
+                    *ngIf="getIncassatoNetto('Acconto',item) >= 0"
+                    class="ml-auto text-nowrap">€ {{ getIncassatoNetto('Acconto',item) | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!(getIncassatoNetto('Acconto',item) >= 0)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+            </div>
+            <!-- end Acconti -->
+            <!-- start Anticipo -->
+            <div *ngIf="item.tipologia==='anticipo'">
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.COSTO_TOT_AMMESSO' | translate}}
+                  <span
+                    *ngIf="showValue(item.costoAmmesso)"
+                    class="ml-auto text-nowrap">€ {{ item.costoAmmesso | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.costoAmmesso)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_TOT_AMMESSO' | translate}}
+                  <span
+                    *ngIf="showValue(item.contributoAmmesso)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoAmmesso | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoAmmesso)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.ANTICIPO_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.anticipoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.anticipoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.anticipoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.ANTICIPO_LIQUIDABILE' | translate}}
+                  <span
+                    *ngIf="showValue(item.anticipoLiquidabile)"
+                    class="ml-auto text-nowrap">€ {{ item.anticipoLiquidabile | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.anticipoLiquidabile)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div
+                class="timeline-item__amount"
+                *ngIf="showRow(item.totaleRecuperato)">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.TOTALE_RECUPERATO' | translate}}
+                  <span class="ml-auto text-nowrap">€ {{ item.totaleRecuperato | number:'.2' }}</span>
+                </div>
+                <ul *ngIf="item.debiti?.length || 0 > 0" class="timeline-item__amount--details">
+                  <li *ngFor="let debito of item.debiti">
+                    <div  class="d-flex">
+                      {{ debito.descrizioneCapitolo }} <span class="ml-auto text-nowrap">€ {{ debito.importo | number:'.2' }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="timeline-item__amount total">
+                <div class="d-flex">
+                  <strong>{{'DETTAGLIO_ISTRUTTORIA.ANTICIPO_LIQUIDATO' | translate}}</strong>
+                  <span
+                    *ngIf="getIncassatoNetto('Anticipo',item) >= 0"
+                    class="ml-auto text-nowrap">€ {{ getIncassatoNetto('Anticipo',item) | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!(getIncassatoNetto('Anticipo',item) >= 0)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+            </div>
+            <!-- end Anticipo -->
+            <!-- start Finanziabilita -->
+            <div *ngIf="item.tipologia==='finanziabilita'">
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.COSTO_TOT_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.costoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.costoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.costoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount">
+                <div class="d-flex">
+                  {{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_TOT_RICHIESTO' | translate}}
+                  <span
+                    *ngIf="showValue(item.contributoRichiesto)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoRichiesto | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoRichiesto)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+              <div class="timeline-item__amount total">
+                <div class="d-flex">
+                  <strong>{{'DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_TOT_AMMESSO' | translate}}</strong>
+                  <span
+                    *ngIf="showValue(item.contributoAmmesso)"
+                    class="ml-auto text-nowrap">€ {{ item.contributoAmmesso | number:'.2' }}</span>
+                </div>
+                <div
+                  *ngIf="!showValue(item.contributoAmmesso)"
+                  class="alert  {{severityClass[1]}}  my-2"
+                  role="alert">
+                  {{'common.datiNonDeterminati' | translate}}
+                </div>
+              </div>
+            </div>
+            <!-- end Finanziabilita -->
+          </div>
+        </div>
+        <span class="timeline-item__arrow" *ngIf="item.tipologia != 'idVariante'"></span>
+        <ng-template #varianteBlock>
+          <div class="timeline-item__container">
+            <div class="timeline-item__footer">{{'DETTAGLIO_ISTRUTTORIA.VARIANTE' | translate}}</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="timeline-item has--date footer">
+      <span class="timeline-item__date">{{dataProtocollazione | date: "d MMMM y"}}</span>
+      <div class="timeline-item__footer">{{'DETTAGLIO_ISTRUTTORIA.PRESENTAZIONE_DOMANDA' | translate}}</div>
+    </div>
+
+  </section>
+</article>

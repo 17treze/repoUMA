@@ -1,0 +1,17 @@
+body {
+  &,
+  .ui-widget,
+  .ui-widget .ui-widget { font-family: var(--font-default); }
+}
+
+$font-weights: ( 300, 400, 500, 600, 700, 900 );
+
+@each $fw in $font-weights {
+  .fw-#{$fw} { font-weight: #{$fw} !important; }
+}
+
+@for $i from 10 through 30 {
+  .fs-#{$i} {
+      font-size: #{$i/16}rem !important;
+  }
+}

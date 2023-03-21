@@ -1,0 +1,12 @@
+<div class="container--search">
+    <p-dropdown *ngIf="!isFromAppag" [options]="listaCuaa" [(ngModel)]="selectedCuaa" optionLabel="cuaa"
+        (onChange)="onChange($event)">
+        <ng-template let-item pTemplate="selectedItem">
+            <span class="label-text">{{ "common.seleziona_cuaa" | translate }}</span>
+        </ng-template>
+        <ng-template let-cuaa pTemplate="item">
+          <p class="mb-0 fw-600 label-text">{{ "common.cuaa" | translate }}: {{cuaa.label}}</p>
+          <p class="mb-0 label-text">{{cuaa.value.denominazione}}</p>
+        </ng-template>
+    </p-dropdown>
+</div>

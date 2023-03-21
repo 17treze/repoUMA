@@ -1,0 +1,20 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<a *ngIf="label" [routerLink]="" (click)="this.goToPrevPage()"
+   class="d-inline-flex align-items-center  text-dark  fw-700">
+  <ng-container *ngIf="!details; else showDetails">
+    <span class="ui-icon-arrow-back mr-2"></span>
+    <span>{{label | translate}}</span>
+  </ng-container>
+  <ng-template #showDetails>
+    <span class="ui-icon-arrow-back mr-2"></span>
+    <span class="d-flex align-items-center">
+      <span class="icon  icon--xs  icon--dark  icon--p">
+        <span class="icon__img" [inlineSVG]="details.icon"></span>
+      </span>
+      <span class="d-flex flex-column fw-400 pl-2">
+        <strong class="text-uppercase lh-1">{{ details.title }}</strong>
+        <span class="fs-14 lh-1 text-muted mt-1">{{ details.subtitle }}</span>
+      </span>
+    </span>
+  </ng-template>
+</a>

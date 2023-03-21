@@ -74,26 +74,26 @@ public class FascicoloDao extends NamedParameterJdbcDaoSupport {
 		Map<String, Object> params = new HashMap<String, Object>();
 		
 		if (fascicolo.getCuaa() != null && !fascicolo.getCuaa().isEmpty()) {
-			filter = filter.concat(" and UPPER(csv.cuaa) like :cuaa");
+			filter = filter.concat(" and UPPER(f.cuaa) like :cuaa");
 			params.put("cuaa", "%".concat(fascicolo.getCuaa().toUpperCase()).concat("%"));
 		}
 		
 		if (fascicolo.getDenominazione() != null && !fascicolo.getDenominazione().isEmpty()) {
-			filter = filter.concat(" and UPPER(csv.ragi_soci) like :denominazione");
+			filter = filter.concat(" and UPPER(f.denominazione) like :denominazione");
 			params.put("denominazione", "%".concat(fascicolo.getDenominazione().toUpperCase()).concat("%"));
 		}
 		
-		if (fascicolo.getCaacodici() != null && !fascicolo.getCaacodici().isEmpty()) {
-			StringBuilder sb = new StringBuilder(" and exists (");
-			sb.append("select 1 from siti.cons_cuaa_ente enti_abilitati");
-			sb.append(" where enti_abilitati.pk_cuaa = csv.pk_cuaa ");
-			sb.append("and sysdate between enti_abilitati.data_inizio and enti_abilitati.data_fine ");
-			sb.append("and enti_abilitati.tipo_associazione in ('MAN', 'DEL') ");
-			sb.append("and enti_abilitati.cod_ente in (:caacodici)");
-			sb.append(")");
-			params.put("caacodici", fascicolo.getCaacodici());
-			filter = filter.concat(sb.toString());
-		}
+//		if (fascicolo.getCaacodici() != null && !fascicolo.getCaacodici().isEmpty()) {
+//			StringBuilder sb = new StringBuilder(" and exists (");
+//			sb.append("select 1 from siti.cons_cuaa_ente enti_abilitati");
+//			sb.append(" where enti_abilitati.pk_cuaa = csv.pk_cuaa ");
+//			sb.append("and sysdate between enti_abilitati.data_inizio and enti_abilitati.data_fine ");
+//			sb.append("and enti_abilitati.tipo_associazione in ('MAN', 'DEL') ");
+//			sb.append("and enti_abilitati.cod_ente in (:caacodici)");
+//			sb.append(")");
+//			params.put("caacodici", fascicolo.getCaacodici());
+//			filter = filter.concat(sb.toString());
+//		}
 		
 		if (filter.length() == 0)
 			return Collections.emptyList();

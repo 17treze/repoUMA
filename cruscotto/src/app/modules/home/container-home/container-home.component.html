@@ -1,0 +1,42 @@
+<div class="d-flex  bg-primary  text-white  py-3">
+  <div class="container">
+    <div class="d-flex align-items-center py-1 border-bottom justify-content-between mb-4">
+      <p class="carousel-card__header mb-0 fs-16 text-uppercase fw-700">Domande</p>
+      <p
+        class="carousel-card__header mb-0 fs-16 text-uppercase fw-700"
+        *ngIf="!disableLinkFascicolo">
+        <img
+          src="assets/icons/fascicolo.jpg"
+          (click)="getLinkToFascicolo()">
+      </p>
+      <app-lista-cuaa></app-lista-cuaa>
+    </div>
+    <h1
+      *ngIf="domandaUnica"
+      class="carousel-card__title label-text">{{ domandaUnica.denominazione }}</h1>
+    <h6
+      *ngIf="domandaUnica"
+      class="carousel-card__header label-text">{{ "common.cuaa" | translate }}: {{ domandaUnica.cuaa }}</h6>
+  </div>
+</div>
+<div class="container py-3">
+  <div class="row">
+    <ng-container *ngFor="let card of cards">
+      <div
+        class="col-12 col-xs-6  col-sm-3  mb-3"
+        *ngIf="card.visible">
+        <p-card styleClass="ui-card-shadow primary  text-center  w-100  card--list">
+          <h2 class="fw-700  mb-1">{{card.label | translate}}</h2>
+          <div class="carousel-card__header"></div>
+          <button
+            pButton
+            type="button"
+            class="px-5  ui-button--br"
+            (click)="card.command($event)"
+            label="{{ 'common.VISUALIZZA' | translate }}"
+            [disabled]="card.disabled"></button>
+        </p-card>
+      </div>
+    </ng-container>
+  </div>
+</div>

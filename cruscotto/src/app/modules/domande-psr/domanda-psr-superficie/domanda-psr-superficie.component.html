@@ -1,0 +1,47 @@
+<p-toast [style]="{ marginTop: '70px' }" key="tst"></p-toast>
+<ng-container *ngIf="domandaPsr">
+  <header *ngIf="domandaPsr" class="pt-3 bg-white position-relative">
+    <section class="container">
+      <p class="h6 mb-0 text-uppercase font-weight-bold">
+        PSR SUPERFICIE {{getDomandaYear()}}
+      </p>
+
+      <h1 class="text-primary font-weight-bold" *ngIf="domandaUnica">{{domandaUnica.denominazione}}</h1>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.cuaa' | translate }}:</label>&nbsp;
+        <span>{{domandaPsr.cuaa}}
+      </span>
+      </div>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.protocolloAbbreviato' | translate }}</label>&nbsp;
+        <span *ngIf="domandaPsr"> N° {{idDomanda}} del {{domandaPsr.dataPresentazione | date:'dd/MM/yyyy'}}</span>
+      </div>
+    </section>
+  </header>
+
+  <main *ngIf="tabs && sezioneSelezionata != null">
+    <div class="bg-white card--list">
+      <div class="container">
+        <p-tabMenu
+          [activeItem]="tabs[sezioneSelezionata - 1]"
+          [model]="tabs"
+        >
+        </p-tabMenu>
+      </div>
+    </div>
+    <div class="container">
+      <app-dettaglio-domanda-psr-superficie
+        *ngIf="sezioneSelezionata == 1 && domandaPsr"
+        [domandaPsr]="domandaPsr"
+      >
+      </app-dettaglio-domanda-psr-superficie>
+
+      <app-istruttoria-domanda-psr-superficie
+        *ngIf="sezioneSelezionata == 2 && domandaPsr"
+        [domandaPsr]="domandaPsr"
+      >
+      </app-istruttoria-domanda-psr-superficie>
+    </div>
+  </main>
+</ng-container>
+

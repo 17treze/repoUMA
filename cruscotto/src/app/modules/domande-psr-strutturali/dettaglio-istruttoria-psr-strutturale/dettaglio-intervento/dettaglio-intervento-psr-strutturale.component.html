@@ -1,0 +1,10 @@
+<ng-container *ngIf="domandaPsrStrutturale">
+  <app-header-domanda-psr-strutturale [domandaPsrStrutturale]="domandaPsrStrutturale"></app-header-domanda-psr-strutturale>
+
+  <div class="container my-4">
+    <h1 class="h6 fw-700 mb-0 text-primary text-uppercase">{{ 'common.dettaglioFatture' | translate }}</h1>
+  </div>
+  <app-storico-fattura *ngFor="let fattura of fatture"
+                       [fattura]="fattura"
+  ></app-storico-fattura>
+</ng-container>

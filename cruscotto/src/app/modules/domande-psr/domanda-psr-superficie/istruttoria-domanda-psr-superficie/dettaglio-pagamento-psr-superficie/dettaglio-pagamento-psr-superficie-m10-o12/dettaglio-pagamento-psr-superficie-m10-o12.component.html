@@ -1,0 +1,18 @@
+<div id="indice" class="container d-flex flex-column mb-5 mt-3">
+  <button *ngFor="let dettaglioMalga of dettaglioPagamentoPsr.dettaglioMalghe; let i = index;" pButton type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          [appScrollToElement]="i" [label]="dettaglioMalga.codiceAlpeggio"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.dettaglioMalghe.length"
+          label="Esito finale"></button>
+</div>
+
+<div class="container">
+  <app-dettaglio-malga-domanda-psr
+    *ngFor="let dettaglioMalga of dettaglioPagamentoPsr?.dettaglioMalghe; let i = index;" id="item-{{i}}"
+    [dettaglioMalga]="dettaglioMalga"></app-dettaglio-malga-domanda-psr>
+</div>
+  <app-app-dettaglo-esito-finale-domanda-psr-m10-o12
+    [dettaglioEsitoFinale]="dettaglioPagamentoPsr.esitoFinale">
+  </app-app-dettaglo-esito-finale-domanda-psr-m10-o12>
+

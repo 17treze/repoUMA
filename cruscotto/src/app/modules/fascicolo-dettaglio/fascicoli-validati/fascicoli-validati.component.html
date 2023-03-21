@@ -1,0 +1,77 @@
+<div class="accordion-custom-wrap">
+  <app-fascicoli-validati-filter
+    [resultsNumber]="elementiTotali"
+    (search)="onSearch($event)">
+  </app-fascicoli-validati-filter>
+  <div class="boxgrey pt-0">
+    <div class="layout-actionmenu">
+      <div
+        class="table-responsive"
+        margin-top="30px">
+        <app-a4g-paged-table
+          #dt
+          [value]="validazioniFascicoloList"
+          [totalRecords]="elementiTotali"
+          (onLazyLoadPage)="lazyLoadData($event)"
+          [lazy]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th
+                scope="col"
+                pSortableColumnWrapper="dataValidazione">
+                {{ 'FascicoloAziendale.DATA_VALIDAZIONE' | translate }}
+                <!-- <p-sortIcon-wrapper field="dataValidazione"></p-sortIcon-wrapper> -->
+              </th>
+              <th
+                scope="col"
+                pSortableColumnWrapper="dataModifica">
+                {{ 'FascicoloAziendale.DATA_MODIFICA' | translate }}
+                <!-- <p-sortIcon-wrapper field="dataModifica"></p-sortIcon-wrapper> -->
+              </th>
+              <th
+                id="nominativo_validatore"
+                pSortableColumnWrapper="utenteValidazione">
+                {{ 'FascicoloAziendale.UTENTE_VALIDAZIONE' | translate }}
+                <!-- <p-sortIcon-wrapper field="utenteValidazione"></p-sortIcon-wrapper> -->
+              </th>
+              <th scope="col">{{ 'FascicoloAziendale.SEDE_SPORTELLO_CAA' | translate }}</th>
+              <th scope="col">{{ 'FascicoloAziendale.VEDI' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-rowData>
+            <tr>
+              <td>
+                {{rowData.dataValidazione | date : 'dd/MM/yyyy'}}
+              </td>
+              <td>
+                {{rowData.dataModifica | date : 'dd/MM/yyyy'}}
+              </td>
+              <td>
+                {{rowData.utenteValidazione}}
+              </td>
+              <td>{{rowData.denominazioneSportello}}</td>
+              <td>
+                <button
+                  pButton
+                  title="{{ 'VEDI' | translate }}"
+                  class="command-button no-border-radius p-button-lg py-1 px-4 d-block bg-primary"
+                  icon="pi pi-arrow-right"
+                  iconPos="left"
+                  (click)="goToValidazione(rowData.cuaa, rowData.idValidazione)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td [attr.colspan]="5">
+                {{ "FascicoloAziendale.LISTA_NO_ELEMENTI" | translate }}
+              </td>
+            </tr>
+          </ng-template>
+        </app-a4g-paged-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.ui-message.ui-message {
+  padding-top: .45rem;
+  padding-bottom: .45rem;
+}
+
+.ui-message.ui-message.ui-message-warn {
+  background-color: #f9f5d1;
+  border-color: #f9f5d1;
+  color: #7C7351;
+
+  .pi {
+    color: #FBB03A;
+  }
+}
+
+p-message.w-100 {
+  display: block;
+
+  .ui-message {
+    display: block;
+  }
+}

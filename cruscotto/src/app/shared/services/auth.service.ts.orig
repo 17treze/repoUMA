@@ -1,0 +1,69 @@
+import { HttpClient } from "@angular/common/http";
+import { EventEmitter, Output } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/internal/Observable";
+import { UTENTE_SERVER } from "src/app/app.constants";
+import { Utente } from "src/app/modules/register/utente.model";
+
+@Injectable()
+export class AuthService {
+    private urlGetSSO = `${UTENTE_SERVER}/utenti/utente`;
+    @Output() onUserChange = new EventEmitter<Utente>();
+
+    constructor(
+        private http: HttpClient) {}
+
+    public getUser(force: boolean = false): Utente {
+        if (!sessionStorage.getItem("user")) {
+            if (force) {
+              this.callAsyncUser();
+              return JSON.parse(sessionStorage.getItem("user"));
+            }
+        } else {
+            return JSON.parse(sessionStorage.getItem("user"));
+        }
+    }
+
+    public isUserInRole(requiredRole: string, user: Utente = null): boolean {
+        if (!user) {
+            user = this.getUser(false);
+        }
+        if (!user || !user.profili) {
+            return false;
+        }
+        for (const profilo of user.profili) {
+            if (profilo && profilo.identificativo === requiredRole) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public getUserFromSSO(): Observable<Utente> {
+        return this.http.get<Utente>(this.urlGetSSO);
+    }
+
+    public setUser(user: Utente) {
+        if (sessionStorage.getItem("user")) {
+          let utenteLoggato: Utente = JSON.parse(sessionStorage.getItem("user"));
+          if (utenteLoggato.identificativo != user.identificativo) {
+              sessionStorage.clear();
+          }
+        } else {
+          sessionStorage.clear();
+        }
+        sessionStorage.setItem("user", JSON.stringify(user));
+        this.onUserChange.emit(user);
+    }
+    private async callAsyncUser() {
+        let time = Date.now().toString();
+        let user = null;
+        try {
+            user = await this.getUserFromSSO().toPromise();
+        } catch {
+            console.log("Errore in recupero utente " + time);
+        }
+        this.setUser(user);
+        console.log(`Salvato utente ${time} ${JSON.parse(sessionStorage.getItem("user"))}`);
+    }
+}

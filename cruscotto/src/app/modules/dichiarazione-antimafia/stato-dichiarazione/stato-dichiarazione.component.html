@@ -1,0 +1,67 @@
+<div class="carousel-card mt-3 pt-0 d-flex flex-column align-items-center">
+  <span class="carousel-card__icon-large">
+    <i style="font-size: 4em"
+      ><img
+        src="{{
+          'assets/icons/svg/svg-antimafia/status-' +
+            dichiarazione.stato.identificativo.toLowerCase() +
+            '.svg'
+        }}"
+    /></i>
+  </span>
+
+  <p class="carousel-card__title my-0">
+    {{
+      "antimafia.status." + dichiarazione.stato.identificativo
+        | translate
+        | uppercase
+    }}
+  </p>
+  <div *ngIf="dichiarazione.stato.identificativo === 'RIFIUTATA'">
+    <p class="status-info">
+      {{ "antimafia.rejectionReasonTitle" | translate }}
+    </p>
+    <p-message
+      severity="warn"
+      innerHTML="<b>{{ 'antimafia.rejectionReason' | translate }}</b>: {{ note }}"
+      class="full-width-text-center"
+    >
+    </p-message>
+  </div>
+
+  <div *ngIf="dichiarazione?.stato.identificativo === 'VERIFICA_PERIODICA'">
+    <p class="status-info">
+      {{ "antimafia.expiredCertificateTitle" | translate }}
+    </p>
+    <div class="alert alert-warning my-2 d-flex pl-2" role="alert">
+      <span class="pi pi-exclamation-triangle text-warning mt-1 fs-20"> </span>
+      <div class="d-flex flex-column ml-2">
+        <span class="font-weight-bold"
+          >{{ "antimafia.warning" | translate }}:</span
+        >
+        <span>{{ "antimafia.expiredCertificate" | translate }}</span>
+        <span class="fs-12">
+          {{ "antimafia.certificateAmountInfo" | translate }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="
+      dichiarazione.dataScadenza &&
+      dichiarazione?.stato.identificativo !== 'VERIFICA_PERIODICA' &&
+      dichiarazione.stato.identificativo !== 'RIFIUTATA'
+    "
+    class="d-flex mt-3 mx-3 pt-3 align-items-end w-100 justify-content-center top-divider"
+  >
+    <span class="mr-2">
+      <img src="assets/icons/svg/icon-calendar.svg" />
+    </span>
+    <span class="font-weight-bold mr-1">
+      {{ "antimafia.expire" | translate | uppercase }}:</span
+    >
+    <span class="font-weight-bold">
+      {{ dichiarazione.dataScadenza | date: "dd/MM/yyyy" }}</span
+    >
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<p-toast key="toast"></p-toast>
+<div *ngIf="domande">
+  <header class="position-relative">
+    <section class="container pt-3">
+      <p class="h6 text-uppercase font-weight-bold">
+        {{ "domandeUma.title" | translate | uppercase }}
+      </p>
+      <h1 class="fs-24 text-primary font-weight-bold">
+        {{ companyName }}
+      </h1>
+      <div class="d-flex flex-column">
+        <div>
+          <strong>{{ "common.cuaa" | translate | uppercase }}:</strong>
+          {{ cuaa }}
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <div class="container mt-4">
+    <div
+      *ngFor="let domanda of domande"
+      class="carousel-card mt-2 pt-1 pb-5 d-flex flex-column align-items-center"
+      ngSwipe (swipeMove)="onSwipeMove($event)" (swipeEnd)="onSwipeEnd($event)"
+      (click)="gotoDetails(domanda)" (touchend)="gotoDetails(domanda)"
+    >
+      <div class="d-flex mt-3 align-self-start">
+        <div class="h1 font-weight-bold pr-2">
+          {{ domanda.campagna }}
+        </div>
+        <div class="d-flex flex-column left-divider pl-2">
+          <span class="fs-14">
+            <span class="mr-1" style="opacity: 0.7">ID.</span
+            ><b>{{ domanda.id }}</b></span
+          >
+          <span class="fs-14">
+            <span class="mr-1" style="opacity: 0.7">del</span
+            ><b>{{ domanda.dataPresentazione | date: "dd/MM/yyyy" }}</b></span
+          >
+        </div>
+      </div>
+      <span class="text-center mt-4 mb-2"
+        ><img src="{{ 'assets/icons/png/png-uma/status-autorizzata.png' }}" />
+      </span>
+      <p class="carousel-card__title my-0 mb-0 fs-32">
+        {{ "domandeUma.status." + domanda.stato | translate | uppercase }}
+      </p>
+    </div>
+  </div>
+</div>

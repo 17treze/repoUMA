@@ -1,0 +1,29 @@
+.ui-tabmenu {
+  .ui-tabmenuitem {
+    border-bottom: 0 !important;
+    font-weight: 700;
+    opacity: .6;
+  }
+
+  .ui-tabmenuitem.ui-state-active {
+    opacity: 1;
+
+    &:after {
+      content: '';
+
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      height: 4px;
+      width: 60px;
+
+      background-color: var(--color-primary-green);
+    }
+
+    a.ui-menuitem-link.ui-menuitem-link {
+      color: var(--color-black);
+    }
+  }
+}

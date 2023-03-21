@@ -1,0 +1,226 @@
+$icon-width: 40px;
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+
+  & + & { margin-top: 16px; }
+
+  &.has--date { padding-top: 24px; }
+
+  &__date {
+    @extend .fs-14;
+    @extend .fw-700;
+
+    color: #45576B;
+    position: absolute;
+    top: 3px;
+    left: 0;
+
+    line-height: 1;
+  }
+
+  &__container {
+    position: relative;
+    padding-left: $icon-width;
+  }
+
+  &__icon,
+  &__content {
+    background-color: $color-white;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    width: $icon-width;
+    padding: 8px 6px;
+    padding-right: 0;
+
+    box-shadow: -4px 0 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &__content {
+    padding: 5px 5px;
+    box-shadow: $card-box-shadow;
+
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  &__header {
+    @extend .py-2;
+    margin-top: 2px;
+    position: relative;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+
+  &__title {
+    @extend .fs-18;
+    @extend .fw-700;
+    margin-bottom: 0;
+  }
+
+  &__description {
+    @extend .fs-12;
+    margin-bottom: 0;
+  }
+
+  &__btn-detail {
+    @extend %btn-clear;
+
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 16px;
+    display: inline-flex;
+    align-items: center;
+
+    color: $color-primary;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+
+    left: 21px;
+    top: 58px;
+    bottom: 0;
+
+    color: #979797;
+    border-left: 1px dashed currentColor;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+    }
+
+    &:before {
+      top: -7px;
+      left: -5.5px;
+      width: 0px;
+      height: 0px;
+      border: 5px solid currentColor;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-left-color: transparent;
+      border-bottom-width: 11px;
+    }
+
+    &:after {
+      bottom: 0;
+      left: -5px;
+
+      width: 9px;
+      height: 1px;
+
+      background-color: currentColor;
+    }
+  }
+
+  &.has--date &__arrow { top: 80px; }
+
+  &__amount {
+    margin-top: 8px;
+    padding-top: 4px;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    border-top: 1px solid $color-borders;
+
+    &:first-child {
+      border-top: 0;
+    }
+
+    & span {
+      text-align: right;
+    }
+
+    &--details {
+      @extend .fs-14;
+      @extend .py-1;
+      margin-bottom: 0;
+      padding-inline-start: 20px;
+
+      & li {
+        @extend .py-1;
+        & span {
+          white-space: nowrap;
+          padding-left: 12px;
+        }
+      }
+    }
+
+    &.divider{
+      border-top: 1px solid $color-borders;
+    }
+
+    &.total {
+      @extend .fs-18;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 1rem;
+
+      & strong {
+        margin-top: -1px;
+        padding: 0.5rem 0;
+      }
+      & span {
+        margin-top: -1px;
+        @extend .fw-700;
+        background-color: $color-primary;
+        color: $color-white;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__amount-payed {
+    position: relative;
+    margin-bottom: 16px;
+    padding-top: 0;
+
+    .total-amount {
+      padding: 8px 4px;
+      min-width: 125px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      text-align: right;
+
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &.footer {
+    margin-top: 16px;
+  }
+
+  &__footer {
+    @extend .fw-700;
+
+    background-color: $color-primary;
+    padding: 1rem 0.5rem;
+    color: $color-white;
+    border-radius: 5px;
+    text-align: center;
+  }
+}

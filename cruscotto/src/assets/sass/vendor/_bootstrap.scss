@@ -1,0 +1,71 @@
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+
+$theme-colors: (
+    "black": $color-black,
+    "primary": $color-primary,
+    "secondary": rgba(darken($color-primary, 10%), 0.8)
+);
+
+$font-family-base: "Titillium Web", "Helvetica Neue", Arial, sans-serif;
+
+$card-spacer-y: .25rem;
+$card-spacer-x: .5rem;
+
+$btn-font-size: 1rem;
+$btn-font-weight: 300;
+$btn-padding-y-lg: 0.375rem;
+$btn-padding-x-lg: 0.75rem;
+$btn-disabled-opacity: 0.3;
+
+$grid-gutter-width: 14px;
+
+$body-bg: #f7f7f7;
+
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3),
+    6: ($spacer * 5),
+    7: ($spacer * 8),
+    8: ($spacer * 12)
+);
+
+$container-padding-x: 14px;
+
+@import "~bootstrap/scss/variables";
+$colors: map-remove($colors, "blue", "indigo", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan" );
+
+// Optional
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/spinners";
+// @import "~bootstrap/scss/nav";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/close";
+
+@import "~bootstrap/scss/utilities/background";
+@import "~bootstrap/scss/utilities/clearfix";
+@import "~bootstrap/scss/utilities/display";
+@import "~bootstrap/scss/utilities/flex";
+@import "~bootstrap/scss/utilities/screenreaders";
+@import "~bootstrap/scss/utilities/sizing";
+@import "~bootstrap/scss/utilities/spacing";
+@import "~bootstrap/scss/utilities/text";
+@import "~bootstrap/scss/utilities/position";
+@import "~bootstrap/scss/utilities/borders";

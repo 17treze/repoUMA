@@ -1,0 +1,54 @@
+<div class="p-grid pt-3">
+  <div class="p-col-10 p-md-10 p-lg-10">
+    <h3>{{dettaglioRazza.nome}}</h3>
+  </div>
+  <div class="p-col-1">
+    <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" appScrollToTop></button>
+  </div>
+  <div class="p-col-12 p-md-12 p-lg-12">
+    <p-table [value]="[dettaglioRazza]">
+
+      <ng-template pTemplate="caption">
+        Dettagli del calcolo
+      </ng-template>
+      <ng-template pTemplate="body" let-dettaglioRazza>
+        <tr *ngIf="dettaglioRazza.caricoBestiame">
+          <td>Carico bestiame</td>
+          <td class="row-value">{{dettaglioRazza.caricoBestiame | number:'.2-2'}} UBA</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.caricoBestiameAccertatoControlloInLoco">
+          <td>Carico di bestiame accertato nel controllo in loco</td>
+          <td class="row-value">{{dettaglioRazza.caricoBestiameAccertatoControlloInLoco | number:'.2-2'}} UBA</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.animaliRichiesti">
+          <td>Animali richiesti</td>
+          <td class="row-value">{{dettaglioRazza.animaliRichiesti | number:'.2'}} UBA</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.animaliAmmissibili">
+          <td>Animali ammissibili</td>
+          <td class="row-value">{{dettaglioRazza.animaliAmmissibili | number:'.2'}} UBA</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.percentualeScostamento">
+          <td>Percentuale di scostamento</td>
+          <td class="row-value">{{dettaglioRazza.percentualeScostamento | number:'.2-2'}} %</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.aliquotaSostegno">
+          <td>Aliquota di sostegno</td>
+          <td class="row-value">{{dettaglioRazza.aliquotaSostegno | number:'.2-2'}} €/UBA</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.importoAmmissibile">
+          <td>Importo ammissibile</td>
+          <td class="row-value">{{dettaglioRazza.importoAmmissibile | number:'.2-2'}} €</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.importoSanzioneSovradichiarazione">
+          <td>Importo sanzione sovradichiarazione</td>
+          <td class="row-value">{{dettaglioRazza.importoSanzioneSovradichiarazione | number:'.2-2'}} €</td>
+        </tr>
+        <tr *ngIf="dettaglioRazza.importoCalcolatoIntervento">
+          <td>Importo calcolato intervento</td>
+          <td class="row-value">{{dettaglioRazza.importoCalcolatoIntervento | number:'.2-2'}} €</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

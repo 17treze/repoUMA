@@ -1,0 +1,16 @@
+ul {
+  padding-left: 10px;
+  li {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+
+      em.control-ok {
+          color: green;
+      }
+
+      em.control-fail {
+          color: red;
+      }
+  }
+}

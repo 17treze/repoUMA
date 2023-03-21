@@ -1,0 +1,52 @@
+<p-toast key="tst" [style]="{ marginTop: '70px' }"></p-toast>
+<ng-container *ngIf="domandaPsrStrutturale">
+  <header *ngIf="domandaPsrStrutturale" class="pt-3 bg-white position-relative">
+    <section class="container">
+      <p class="h6 mb-0 text-uppercase font-weight-bold">
+        {{ "DOMANDE PSR STRUTTURALI" }}
+      </p>
+
+      <h1 class="text-primary font-weight-bold">{{domandaPsrStrutturale[0].ragioneSociale}}</h1>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.cuaa' | translate }}:</label>&nbsp;
+        <span>{{domandaPsrStrutturale[0].cuaa}}
+      </span>
+      </div>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.protocolloAbbreviato' | translate }}</label>&nbsp;
+        <span *ngIf="datiProtocollo">{{ 'common.protocollo' | translate: datiProtocollo }}</span>
+      </div>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.numero' | translate }}:</label>&nbsp;
+        <span *ngIf="idDomanda">{{ idDomanda }}</span>
+      </div>
+    </section>
+  </header>
+
+  <main *ngIf="tabs && sezioneSelezionata != null">
+    <div class="bg-white card--list">
+      <div class="container">
+        <p-tabMenu
+          [model]="tabs"
+          [activeItem]="tabs[sezioneSelezionata - 1]"
+          id="dettaglio-domanda-psr-menu"
+        >
+        </p-tabMenu>
+      </div>
+    </div>
+    <div class="container">
+      <app-dettaglio-domanda-psr-strutt
+        *ngIf="sezioneSelezionata == 1 && domandaPsrStrutturale"
+        [domandaPsrStrutturale]="domandaPsrStrutturale"
+      >
+      </app-dettaglio-domanda-psr-strutt>
+
+      <app-dettaglio-istruttoria-psr-strutt
+        *ngIf="sezioneSelezionata == 2 && domandaPsrStrutturale"
+        [domandaPsrStrutturale]="domandaPsrStrutturale"
+        [dataProtocollazione]="dataProtocollazione"
+      >
+      </app-dettaglio-istruttoria-psr-strutt>
+    </div>
+  </main>
+</ng-container>

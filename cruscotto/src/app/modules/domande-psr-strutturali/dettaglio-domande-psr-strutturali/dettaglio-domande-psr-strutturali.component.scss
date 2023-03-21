@@ -1,0 +1,50 @@
+dettaglio-domande-psr-strutturali {
+  .dark {
+    .ui-card-body {
+      background-color: #30373d;
+      border-radius: 6px 0 0 6px;
+    }
+  }
+
+  .primary {
+    .ui-card-body {
+      background-color: #01985a;
+      border-radius: 0 6px 6px 0;
+    }
+  }
+
+  .ui-card-body {
+    color: white;
+    font-size: 30px;
+    padding: 0;
+  }
+
+
+  .ui-card {
+    min-width: 180px;
+  }
+
+  div.list-header {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+
+    background-color: #01985a;
+    border-radius: 4px 4px 0 0;
+    color:#fff;
+  }
+
+
+  .border-bottom {
+    border-bottom: 1px solid #d8d8d8
+  }
+
+
+  .background-white {
+    background-color: #fff;
+  }
+
+  .bottom-rounded{
+    border-radius: 0 0 4px 4px;
+  }
+}

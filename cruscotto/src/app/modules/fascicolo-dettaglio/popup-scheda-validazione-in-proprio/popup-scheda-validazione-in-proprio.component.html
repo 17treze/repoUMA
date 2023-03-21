@@ -1,0 +1,115 @@
+<p-toast
+  key="tstSchedaValidazione"
+  [style]="{ marginTop: '70px' }"
+  [baseZIndex]="50000">
+</p-toast>
+<p-toast
+  position="center"
+  key="checkSchedaValidazione"
+  [modal]="true"
+  [baseZIndex]="5000">
+  <ng-template
+    let-message
+    pTemplate="message">
+    <div style="text-align: center">
+      <i
+        class="pi pi-exclamation-triangle"
+        style="font-size: 3em"></i>
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="confirm()"
+          label="Si"
+          class="ui-button-success"></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          type="button"
+          pButton
+          (click)="reject()"
+          label="Annulla"
+          class="ui-button-secondary"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+<p-dialog
+  header="{{ 'FAS_ANA.SCHEDA_VALIDAZIONE' | translate }}"
+  class="dialog-scheda-validazione"
+  [(visible)]="popupSchedaValidazioneInProprioOpen"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  (onHide)="closePopup()">
+  <div class="popup-approvazione  popup--custom">
+    <div style="text-align:center; display: contents;">
+      <div>
+        <img
+          class="box__icon"
+          src="assets/icons/icon-download.png">
+        <div>
+          <br>
+          <h4><b><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.DESC_SCARICA_SCHEDA' | translate"></p></b></h4>
+        </div>
+        <br>
+        <div>
+          <button
+            pButton
+            label="{{ 'SCHEDA_VALIDAZIONE_DLG.SCARICA_SCHEDA' | translate }}"
+            class="btn-green"
+            (click)="downloadSchedaValidazione()"></button>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <img
+          class="box__icon"
+          src="assets/icons/icon-signature.svg">
+        <div>
+          <br>
+          <h4><b><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.FIRMA' | translate"></p></b></h4>
+        </div>
+        <br>
+        <div>
+          <h6>{{ 'SCHEDA_VALIDAZIONE_DLG.DESC_FIRMA' | translate }}</h6>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <img
+          class="box__icon"
+          src="assets/icons/icon-upload.png">
+        <div>
+          <br>
+          <h4><b><p [innerHtml]="'SCHEDA_VALIDAZIONE_DLG.DESC_CARICA_SCHEDA' | translate"></p></b></h4>
+        </div>
+        <br>
+        <div>
+          <button
+            pButton
+            label="{{ 'SCHEDA_VALIDAZIONE_DLG.CARICA_SCHEDA' | translate }}"
+            class="btn-green"
+            (click)="uploadModulo()"
+            [disabled]="statoFascicolo != statoFascicoloAllaFirmaAzienda">
+          </button>
+          <input
+            type="file"
+            #schedaValidazioneFile
+            id="schedaValidazioneFile"
+            name="schedaValidazioneFile"
+            onclick="this.value = null"
+            (change)="onFileChange($event)"
+            accept="{{ fileExt }}"
+            class="inputUploadFile"
+            style="display: none">
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

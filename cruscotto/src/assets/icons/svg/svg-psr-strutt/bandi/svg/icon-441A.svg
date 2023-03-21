@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-441A</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icone-bandi-PSR" transform="translate(-234.000000, -728.000000)">
+            <g id="icon-441A" transform="translate(234.000000, 728.000000)">
+                <g id="Rectangle" fill="#F7F7F7" stroke="#D8D8D8">
+                    <rect x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
+                </g>
+                <g id="Group-4" transform="translate(5.000000, 4.000000)">
+                    <g id="Group-2" transform="translate(18.000000, 21.000000) rotate(45.000000) translate(-18.000000, -21.000000) translate(4.000000, 10.000000)" fill="#01985A">
+                        <path d="M23,0 L28,10 L25,10 L25,22 L0,22 L0,18 L21,18 L21,10 L18,10 L23,0 Z" id="Combined-Shape"></path>
+                    </g>
+                    <polygon id="Fill-1" fill="#30373D" points="17.5 0 12.4930516 5.031 13.548639 6.0915 16.7534742 2.87175 16.7534742 5.25 11 11.03025 12.0555875 12.0915 16.7534742 7.371 16.7534742 10.5 11 16.28025 12.0555875 17.34075 16.7534742 12.621 16.7534742 18 18.2472723 18 18.2472723 12.621 22.9451591 17.34075 24 16.28025 18.2472723 10.5 18.2472723 7.371 22.9451591 12.0915 24 11.03025 18.2472723 5.25 18.2472723 2.87175 21.4521075 6.0915 22.507695 5.031"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

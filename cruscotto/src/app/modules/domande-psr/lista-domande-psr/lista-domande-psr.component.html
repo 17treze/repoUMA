@@ -1,0 +1,34 @@
+<div class="container px-0">
+  <p-carousel #carousel [value]="listaDomandaPsr" [numVisible]="numVisible"  [responsiveOptions]="responsiveOptions"
+  class="carousel--custom mx-n1" ngSwipe (swipeMove)="onSwipeMove($event)" (swipeEnd)="onSwipeEnd($event)">
+    <ng-template let-domanda pTemplate="item">
+      <div class="carousel-card mx-1" (click)="openDomandaPsrSuperficie(domanda)" (touchend)="openDomandaPsrSuperficie(domanda)">
+        <div class="carousel-card__header">
+          <div class="carousel-card__year">{{domanda.campagna}}</div>
+          <div class="carousel-card__dates">
+            <span>{{'common.protocolloAbbreviato' | translate}} <strong> {{domanda.numeroDomanda}} </strong></span>
+            <span>{{'common.del' | translate}} <strong> {{domanda.dataPresentazione | date:'dd/MM/yyyy'}}
+              </strong></span>
+          </div>
+        </div>
+
+        <span class="carousel-card__icon-large">
+          <i><img src="{{'assets/icons/svg/status-' + domanda.sottoStato.toLowerCase( ) + '.svg'}}"/></i>
+        </span>
+
+        <h3 class="carousel-card__title">{{'domandaPsr.stati.' + domanda.stato + '.value' | translate}}</h3>
+        <p class="carousel-card__text" [innerHTML]="'domandaPsr.stati.' + domanda.sottoStato + '.description' | translate">
+        </p>
+
+        <div class="p-grid">
+          <div *ngFor="let op of domanda.operazioni">
+            <div *ngIf="op.codiceMisureIntervento">
+              <img src="{{'assets/icons/svg/svg-psr/ico-' + op.codiceMisureIntervento + '-false.svg'}}" style="margin-top: 7px"/>&nbsp;&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <p-toast [style]="{marginTop: '80px'}" position="top-center" key="defaultToast"></p-toast>
+</div>

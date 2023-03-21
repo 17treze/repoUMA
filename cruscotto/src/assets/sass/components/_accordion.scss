@@ -1,0 +1,38 @@
+
+.ui-accordion p-accordionTab.ui-accordion-inline {
+
+  & .ui-accordion-header {
+    &.ui-state-active {
+      background: transparent;
+      color: var(--color-primary-green);
+
+      & a .ui-accordion-toggle-icon:before{
+        content: "arrow_drop_down";
+      }
+    }
+
+    & a {
+      padding-left: 0;
+      padding-right: 0;
+      font-weight: normal;
+
+      &:focus {
+        outline: none;
+      }
+
+      & .ui-accordion-toggle-icon {
+        margin-left: -5px;
+        color: var(--color-primary-green);
+
+        &:before {
+          content: "arrow_right";
+        }
+      }
+    }
+  }
+
+  & .ui-accordion-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

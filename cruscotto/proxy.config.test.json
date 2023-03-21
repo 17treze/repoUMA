@@ -1,0 +1,62 @@
+{
+  "/a4gfascicolo/api": {
+    "target": "http://itts55.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/a4gutente/api": {
+    "target": "http://tdtsx30.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/a4gistruttoria/api": {
+    "target": "http://itts55.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/a4gproxy/api": {
+    "target": "http://tdtsx30.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/ags/api": {
+    "target": "http://itts55.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/srt/api": {
+    "target": "http://tdtsx30.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/soc": {
+    "target": "http://tdtsx30.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/anagrafica/api": {
+    "target": "http://itts55.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/istruttoriapsr/api": {
+    "target": "http://tdtsx30.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/uma/api": {
+    "target": "http://itts55.intra.infotn.it:18080",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

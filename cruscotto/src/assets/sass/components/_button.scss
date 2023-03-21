@@ -1,0 +1,26 @@
+.ui-button.ui-button {
+  height: auto;
+  padding: 0.2rem 1.4rem;
+
+  box-shadow: none;
+  border-radius: .1rem;
+
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-default);
+  text-transform: uppercase;
+
+  background-color: var(--color-primary-green);
+}
+
+.ui-button--br.ui-button--br {
+  border-radius: 0.25rem;
+}
+
+%btn-clear {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  appearance: none;
+  outline: none;
+}

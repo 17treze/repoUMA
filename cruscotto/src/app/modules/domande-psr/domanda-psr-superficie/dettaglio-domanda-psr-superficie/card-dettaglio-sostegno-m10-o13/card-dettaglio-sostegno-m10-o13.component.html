@@ -1,0 +1,13 @@
+<div class="border-bottom psr-card-header-small-text">
+  <h6 class="font-weight-bold">Interventi</h6>
+  <p>Numero di capi per ogni intervento</p>
+</div>
+
+<div *ngFor="let pascolo of zooPascoliPsr">
+  <div class="border-bottom pa-3 py-3">
+    <div class="d-flex justify-content-between">
+      <div>{{ pascolo.deAzione }}</div>&nbsp;
+      <div class="flex-shrink-0">{{ pascolo.quantitaImp }} capi</div>
+    </div>
+  </div>
+</div>

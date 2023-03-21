@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="p-grid pt-3">
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="[dettaglioPagamentoPsr]">
+
+        <ng-template pTemplate="caption">
+          ESITO FINALE
+        </ng-template>
+        <ng-template pTemplate="body" let-dettaglioPagamentoPsr>
+          <tr>
+            <td>Superficie Richiesta</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.superficieRichiesta | number:'.4-4'}} ha</td>
+          </tr>
+          <tr>
+            <td>Superficie Ammissibile</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.superficieAmmissibile | number:'.4-4'}} ha</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.percentualeDiScostamento > 0">
+            <td>Percentuale di Scostamento</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.percentualeDiScostamento | number:'.2-2'}} %</td>
+          </tr>
+          <tr>
+            <td>Aliquota di sostegno</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.aliquotaSostegno | number:'.2-2'}} €/ha</td>
+          </tr>
+          <tr>
+            <td>Importo Ammissibile</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoAmmissibile | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.importoSanzione > 0">
+            <td>Importo della Sanzione</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoSanzione | number:'.2-2'}} €</td>
+          </tr>
+          
+          <tr *ngIf="dettaglioPagamentoPsr.percentualeRiduzioneMancatoRispettoImpegniSpecifici > 0">
+            <td>Percentuale di riduzione per mancato rispetto degli impegni specifici</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.percentualeRiduzioneMancatoRispettoImpegniSpecifici | number:'.2-2'}} %</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.percentualeRiduzioneMancatoRispettoImpegniBaseline > 0">
+            <td>Percentuale di riduzione per mancato rispetto degli impegni baseline</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.percentualeRiduzioneMancatoRispettoImpegniBaseline | number:'.2-2'}} %</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.importoRiduzioneMancatoRispettoImpegni > 0">
+            <td>Importo della riduzione per mancato rispetto degli impegni</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoRiduzioneMancatoRispettoImpegni | number:'.2-2'}} €</td>
+          </tr>
+
+          <tr *ngIf="dettaglioPagamentoPsr.importoRiduzionePerRitardataPresentazione > 0">
+            <td>Importo della riduzione per ritardata presentazione</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoRiduzionePerRitardataPresentazione | number:'.2-2'}} €
+            </td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.coefficienteDiRiduzionePerSuperamentoBudget > 0">
+            <td>Coefficiente di riduzione lineare per superamento budget</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.coefficienteDiRiduzionePerSuperamentoBudget | number:'.2-2'}} %
+            </td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.importoCalcolato">
+            <td>Importo Calcolato</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoCalcolato| number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.importoLiquidatoPrecedentemente">
+            <td>Importo già liquidato pagamenti precedenti</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoLiquidatoPrecedentemente| number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="dettaglioPagamentoPsr.importoCalcolatoLiquidato">
+            <td>Importo Calcolato Liquidato</td>
+            <td class="row-value">{{dettaglioPagamentoPsr.importoCalcolatoLiquidato| number:'.2-2'}} €</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

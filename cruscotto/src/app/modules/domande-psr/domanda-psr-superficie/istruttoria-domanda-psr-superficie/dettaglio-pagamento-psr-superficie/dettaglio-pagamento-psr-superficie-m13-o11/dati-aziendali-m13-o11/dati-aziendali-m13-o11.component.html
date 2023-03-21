@@ -1,0 +1,73 @@
+<div class="container pt-3">
+  <div class="p-grid">
+    <div class="p-col-10 p-md-10 p-lg-10">
+      <h3>Dati Aziendali</h3>
+    </div>
+    <div class="p-col-1">
+      <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" appScrollToTop></button>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="[datiAziendali]">
+        <ng-template pTemplate="caption">
+          Dettagli dati aziendali
+        </ng-template>
+        <ng-template pTemplate="body" let-datiAziendali>
+          <tr>
+            <td>Carico di bestiame</td>
+            <td
+              class="row-value">{{datiAziendali.caricoDiBestiame | number: '.2-2'}}
+              UBA/ha
+            </td>
+          </tr>
+          <tr *ngIf="datiAziendali.caricoBestiameAccertatoControllo">
+            <td>Carico di bestiame accertato nel controllo in loco</td>
+            <td
+              class="row-value">{{datiAziendali.caricoBestiameAccertatoControllo | number:'.2-2'}}
+              UBA/ha
+            </td>
+          </tr>
+          <tr>
+            <td>Superficie foraggera</td>
+            <td
+              class="row-value">{{datiAziendali.superficieForaggera | number:'.4-4'}}
+              ha
+            </td>
+          </tr>
+          <tr *ngIf="datiAziendali.superficieForaggeraAccertataControllo">
+            <td>Superficie foraggera accertata nel controllo in loco</td>
+            <td
+              class="row-value">{{datiAziendali.superficieForaggeraAccertataControllo | number:'.4-4'}}
+              ha
+            </td>
+          </tr>
+          <tr>
+            <td>Animali in alpeggio</td>
+            <td
+              class="row-value">{{datiAziendali.animaliInAlpeggio | number:'.2-2'}}
+              UBA
+            </td>
+          </tr>
+          <tr>
+            <td>Azienda transumante</td>
+            <td
+              class="row-value">{{ 'domandaPsr.' + datiAziendali.aziendaTransumante | translate }}
+            </td>
+          </tr>
+          <tr>
+            <td>Coefficiente Pendenza/Altitudine</td>
+            <td
+              class="row-value">{{datiAziendali.coefficientePendenzaAltitudine | number:'.2-2'}}
+            </td>
+          </tr>
+          <tr>
+            <td>Presenza di Sanzioni applicate negli anni precedenti</td>
+            <td
+              class="row-value">{{datiAziendali.presenzaSanzioniAnniPrecendenti | booleanIntegerToItalianAssertion}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,22 @@
+<div *ngIf="!accordionModels">
+  {{ 'DETTAGLIO_FASCICOLO.NO_DATA' | translate }}
+</div>
+<div *ngFor="let accordion of accordionModels" class="accordion-custom-wrap">
+  <section class="box-fasc-data clearfix">
+    <p-accordionTab [selected]="true">
+      <p-header class="box-fasc-data__header h3 text-uppercase">
+        {{ accordion.headerTitle | translate }}
+      </p-header>
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6" *ngFor="let field of accordion.fields">
+          <div class="p-col-12">
+            <strong>{{ field.mkey | translate }}</strong>
+          </div>
+          <div class="p-col-12">
+            {{ field.mvalue ? field.mvalue : ("ND" | translate) }}
+          </div>
+        </div>
+      </div>
+    </p-accordionTab>
+  </section>
+</div>

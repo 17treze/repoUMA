@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-751B</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icone-bandi-PSR" transform="translate(-352.000000, -1097.000000)">
+            <g id="icon-751B" transform="translate(352.000000, 1097.000000)">
+                <g id="Rectangle" fill="#F7F7F7" stroke="#D8D8D8">
+                    <rect x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
+                </g>
+                <g id="Group-12" transform="translate(8.000000, 3.000000)">
+                    <g id="success" fill="#30373D" fill-rule="nonzero">
+                        <path d="M20.23083,12.24 L16.3737,6.84 L20.23083,1.44 L6.09417,1.44 L6.09417,0 L2.04417,0 L2.04417,18.99 L0.01917,18.99 L0.01917,23.04 L8.11917,23.04 L8.11917,18.99 L6.09417,18.99 L6.09417,12.24 L20.23083,12.24 Z M17.607555,2.79 L14.714685,6.84 L17.607555,10.89 L6.09417,10.89 L6.09417,2.79 L17.607555,2.79 Z M6.76917,20.34 L6.76917,21.69 L1.36917,21.69 L1.36917,20.34 L6.76917,20.34 Z M4.74417,18.99 L3.39417,18.99 L3.39417,1.35 L4.74417,1.35 L4.74417,18.99 Z" id="Shape"></path>
+                    </g>
+                    <path d="M24.75,8 L30.75,17.2307692 L27.15,17.23 L27.15,23 L22.35,23 L22.349,17.23 L18.75,17.2307692 L24.75,8 Z" id="Combined-Shape" fill="#01985A"></path>
+                </g>
+                <g id="number" transform="translate(6.000000, 27.000000)">
+                    <rect id="Rectangle" fill="#01985A" x="0" y="0" width="32" height="14" rx="7"></rect>
+                    <text id="7.5.1" font-family="TitilliumWeb-Bold, Titillium Web" font-size="9" font-weight="bold" fill="#FFFFFF">
+                        <tspan x="6.636" y="10">7.5.1</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

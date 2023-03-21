@@ -1,0 +1,120 @@
+<div class="d-flex flex-column mt-4">
+  <div *ngIf="!domandePsrSuperficie.length && !domandeUniche.length">
+    <p-message
+      severity="warn"
+      text="{{ 'antimafia.noRelatedApplications' | translate }}"
+      class="full-width-text-center m-0 text-center"
+    >
+    </p-message>
+  </div>
+  <div
+    *ngIf="domandePsrSuperficie.length || domandeUniche.length"
+    id="anchors"
+    class="d-flex flex-column mb-5"
+  >
+    <button
+      pButton
+      type="button"
+      style="margin-bottom: 5px"
+      icon="pi pi-arrow-down"
+      iconPos="right"
+      (click)="scroll('PSR_SUPERFICIE_EU')"
+      label="{{ 'antimafia.PSR_SUPERFICIE_EU' | translate }}"
+    ></button>
+    <button
+      pButton
+      type="button"
+      style="margin-bottom: 5px"
+      icon="pi pi-arrow-down"
+      iconPos="right"
+      (click)="scroll('DOMANDA_UNICA')"
+      label="{{ 'antimafia.DOMANDA_UNICA' | translate }}"
+    ></button>
+  </div>
+  <div
+    *ngIf="domandePsrSuperficie.length || domandeUniche.length"
+    class="p-grid"
+  >
+    <div *ngFor="let domande of domandeWrapper" class="w-100">
+      <div id="{{ domande.type }}" class="d-flex p-col-12 p-md-12 p-lg-12">
+        <h3 class="font-weight-bold">
+          {{ "antimafia." + domande.type | translate }}
+        </h3>
+        <button
+          pButton
+          type="button"
+          class="ml-auto"
+          (click)="scroll('anchors')"
+          icon="pi pi-arrow-up"
+          iconPos="center"
+        ></button>
+      </div>
+      <p-message
+        *ngIf="!domande.list || domande.list.length === 0"
+        severity="warn"
+        text="{{
+          (domande.type === 'DOMANDA_UNICA'
+            ? 'antimafia.noRelatedUniqueApplications'
+            : 'antimafia.noRelatedSurfacePsrApplications'
+          ) | translate
+        }}"
+        class="full-width-text-center m-0 text-center"
+      >
+      </p-message>
+      <div
+        *ngFor="let domanda of domande.list"
+        class="p-col-12 p-md-12 p-lg-12"
+      >
+        <p-table *ngIf="domanda" [value]="[{}]">
+          <ng-template pTemplate="caption"
+            >{{ "antimafia.applicationNumber" | translate }}:
+            <strong>{{ domanda.idDomanda }}</strong></ng-template
+          >
+          <ng-template pTemplate="body">
+            <tr>
+              <td>{{ "antimafia.state" | translate }}</td>
+              <td class="text-right">
+                {{ formatStatus(domanda.statoBdna) }}
+              </td>
+            </tr>
+            <tr>
+              <td>{{ "antimafia.campaign" | translate }}</td>
+              <td class="text-right">{{ domanda.campagna }}</td>
+            </tr>
+            <tr>
+              <td>{{ "antimafia.presentationDate" | translate }}</td>
+              <td class="text-right">
+                {{ domanda.dtDomanda | date: "dd/MM/yyyy" }}
+              </td>
+            </tr>
+            <tr>
+              <td>{{ "antimafia.requestedAmount" | translate }}</td>
+              <td class="text-right">
+                {{ domanda.importoRichiesto | number: ".2-2" }} €
+              </td>
+            </tr>
+            <tr
+              *ngIf="
+                domanda.statoBdna === 'IN_ISTRUTTORIA' ||
+                domanda.statoBdna === 'CHIUSA_CON_ESITO_NEGATIVO'
+              "
+            >
+              <td>{{ "antimafia.optOut" | translate }}</td>
+              <td class="fs-14 text-right">
+                {{ domanda.dtInizioSilenzioAssenso | date: "dd/MM/yyyy" }} -
+                {{ domanda.dtFineSilenzioAssenso | date: "dd/MM/yyyy" }}
+              </td>
+            </tr>
+            <tr *ngIf="domanda.statoBdna === 'CHIUSA_CON_ESITO_NEGATIVO'">
+              <td>{{ "antimafia.negativeResult" | translate }}</td>
+              <td class="fs-14 text-right">
+                {{ domanda.dtInizioEsitoNegativo | date: "dd/MM/yyyy" }} -
+                {{ domanda.dtFineEsitoNegativo | date: "dd/MM/yyyy" }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

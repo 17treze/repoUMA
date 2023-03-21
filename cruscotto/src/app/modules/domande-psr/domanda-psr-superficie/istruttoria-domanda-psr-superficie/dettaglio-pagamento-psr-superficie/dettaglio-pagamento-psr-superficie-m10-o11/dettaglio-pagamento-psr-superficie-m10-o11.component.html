@@ -1,0 +1,20 @@
+<div id="indice" class="container d-flex flex-column mb-5 mt-3">
+  <button *ngIf="dettaglioPagamentoPsr.interventoBase.title" pButton type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          appScrollToElement="0" [label]="dettaglioPagamentoPsr.interventoBase.title"></button>
+  <button *ngIf="dettaglioPagamentoPsr.interventoMagg.title" pButton type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          appScrollToElement="1" [label]="dettaglioPagamentoPsr.interventoMagg.title"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          appScrollToElement="2" label="Esito finale"></button>
+</div>
+
+<div class="container">
+  <app-intervento-m10-o11 id="item-0" [intervento]="dettaglioPagamentoPsr.interventoBase"></app-intervento-m10-o11>
+  <app-intervento-m10-o11 id="item-1" [intervento]="dettaglioPagamentoPsr.interventoMagg"></app-intervento-m10-o11>
+</div>
+
+<app-dettaglo-esito-finale-domanda-psr-m10-o11 *ngIf="dettaglioPagamentoPsr?.esitoFinale"
+                                               id="item-2"
+                                               [dettaglioEsitoFinale]="dettaglioPagamentoPsr.esitoFinale">
+</app-dettaglo-esito-finale-domanda-psr-m10-o11>

@@ -1,0 +1,57 @@
+<p-toast key="toast"></p-toast>
+<header *ngIf="dichiarazione" class="bg-white position-relative">
+  <section class="container pt-3">
+    <p class="h6 text-uppercase font-weight-bold">
+      {{ "antimafia.title" | translate | uppercase }}
+    </p>
+    <h1 class="fs-24 text-primary font-weight-bold">
+      {{ dichiarazione.denominazioneImpresa }}
+    </h1>
+    <div class="d-flex flex-column">
+      <div>
+        <strong>{{ "common.cuaa" | translate | uppercase }}:</strong>
+        {{ cuaa }}
+      </div>
+      <div>
+        <strong>{{
+          "common.protocolloAbbreviato" | translate | uppercase
+        }}</strong>
+        n° {{ dichiarazione.idProtocollo }}
+      </div>
+      <div>
+        <strong>{{ "common.numero" | translate | uppercase }}:</strong>
+        {{ dichiarazione.id }}
+      </div>
+      <div>
+        <strong
+          >{{ "antimafia.presentationDate" | translate | uppercase }}:</strong
+        >
+        {{ dichiarazione.dtProtocollazione | date: "dd/MM/yyyy" }}
+      </div>
+    </div>
+  </section>
+</header>
+
+<main *ngIf="dichiarazione && tabs && selectedTab != null">
+  <div class="pt-2 bg-white card--list">
+    <div class="container">
+      <p-tabMenu
+        [model]="tabs"
+        [activeItem]="tabs[selectedTab - 1]"
+        id="dettaglio-dichiarazione-menu"
+      >
+      </p-tabMenu>
+    </div>
+  </div>
+  <div class="container">
+    <app-stato-dichiarazione
+      *ngIf="selectedTab === 1"
+      [dichiarazione]="dichiarazione"
+      [note]="note"
+    ></app-stato-dichiarazione>
+    <app-domande-collegate
+      *ngIf="selectedTab === 2"
+      [dichiarazione]="dichiarazione"
+    ></app-domande-collegate>
+  </div>
+</main>

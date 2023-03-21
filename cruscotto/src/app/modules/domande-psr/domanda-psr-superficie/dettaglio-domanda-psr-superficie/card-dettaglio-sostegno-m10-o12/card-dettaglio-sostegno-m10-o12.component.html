@@ -1,0 +1,32 @@
+<div class="border-bottom psr-card-header-small-text">
+  <h6 class="font-weight-bold">Interventi</h6>
+  <p> {{'domandaPsr.SUPRIC' | translate}}</p>
+</div>
+
+<div *ngFor="let impegno of impegniRichiestiPsr">
+  <div class="border-bottom pa-3 d-flex justify-content-between py-3">
+    <span>{{ impegno.codDestinazione | codDestinazioneToDescription }}</span>&nbsp;
+    <span>{{ impegno.supImpegnoNetta | squareMetersToHectars }} ha</span>
+  </div>
+
+  <div *ngIf="impegno.pascoliPsr && impegno.pascoliPsr.length>0">
+
+    <div class="border-bottom pt-3 psr-card-header-small-text">
+      <h6 class="font-weight-bold">Pascoli alpeggiati</h6>
+      <p>Numero di unità di bestiame adulto</p>
+    </div>
+
+    <div *ngFor="let pascolo of impegno.pascoliPsr">
+      <div class="border-bottom pa-3 py-3">
+        <h6 class="font-weight-bold">Cod. {{ pascolo.codPascolo }}</h6>
+        <div class="d-flex justify-content-between">
+          <div>{{ pascolo.denominazione }}</div>&nbsp;
+          <div class="flex-shrink-0" *ngIf="pascolo.uba > 0">{{ pascolo.uba }} UBA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

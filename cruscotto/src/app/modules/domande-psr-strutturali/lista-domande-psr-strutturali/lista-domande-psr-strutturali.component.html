@@ -1,0 +1,42 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div class="container my-3">
+    <div *ngFor="let domanda of listaDomandaPsrStrutturale" ngSwipe (swipeMove)="onSwipeMove($event)" (swipeEnd)="onSwipeEnd($event)">
+      <div class="carousel-card mb-2 clickable" (click)="vaiAllaDomanda(domanda)" (touchend)="vaiAllaDomanda(domanda)">
+        <div class="carousel-card__header">
+          <div class="carousel-card__year d-flex align-items-center">
+            <img class="mr-2" src="assets/icons/svg/svg-psr-strutt/bandi/svg/icon-{{domanda.codiceOperazione.split('.').join('')}}Aneg.svg" />
+            <span class="fs-20">{{domanda.codiceOperazione}}</span>
+          </div>
+          <div class="carousel-card__dates">
+            <span>{{'common.numero' | translate}} <strong> {{domanda.idProgetto}} </strong></span>
+            <span>{{'common.protocolloEsteso' | translate}} <strong> {{domanda.protocolloProgetto}} </strong></span>
+            <span>{{'common.del' | translate}} <strong> {{domanda.dataProgetto | date:'dd/MM/yyyy'}}
+              </strong></span>
+          </div>
+        </div>
+
+        <strong class="mb-5">
+          {{domanda.descrizioneBando}}
+        </strong>
+
+        <div class="text-center">
+            <span class="carousel-card__icon-large">
+              <i><img src="assets/icons/svg/svg-psr-strutt/{{'PSR-Strutturali.Icona.' + domanda.codiceStatoProgetto  | translate}}"/></i>
+            </span>
+
+            <h3 class="carousel-card__title">{{'PSR-Strutturali.' + domanda.codiceStatoProgetto  | translate}}</h3>
+            <div class="carousel-card__status-desc" *ngIf="domanda.codiceStatoProgetto"
+                [innerHTML]="'PSR-Strutturali.Stati.' + domanda.codiceStatoProgetto | translate">
+            </div>
+
+            <div class="warning-container" *ngIf="domanda.dataTermineRendicontazione && mostraDataTermine(domanda.codiceStatoProgetto)">
+              <span class="ui-message-icon pi pi-exclamation-triangle mr-1"></span>
+              <b class="mr-1">Termine rendicontazione: </b>
+              <div>{{domanda.dataTermineRendicontazione | date:'dd/MM/yyyy'}}</div>
+            </div>
+
+          </div>
+      </div>
+      <p-toast [style]="{marginTop: '80px'}" position="top-center" key="defaultToast"></p-toast>
+  </div>
+</div>

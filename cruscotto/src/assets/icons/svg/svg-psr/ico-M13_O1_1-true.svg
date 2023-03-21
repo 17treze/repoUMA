@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-1311B</title>
+    <g id="Cruscotto-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icone-PSR" transform="translate(-141.000000, -119.000000)">
+            <g id="icon-1311B" transform="translate(141.000000, 119.000000)">
+                <g id="base-intervento" fill="#F7F7F7" stroke="#D8D8D8">
+                    <rect id="Rectangle" x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
+                </g>
+                <polyline id="Path-3" stroke="#30373D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="4 22 12 12 16 17 23 8 29 17 33 12 40 23"></polyline>
+                <g id="Group-3" transform="translate(6.000000, 27.000000)">
+                    <rect id="Rectangle" fill="#01985A" x="0" y="0" width="32" height="14" rx="7"></rect>
+                    <text id="13.1.1" font-family="TitilliumWeb-Bold, Titillium Web" font-size="9" font-weight="bold" fill="#FFFFFF">
+                        <tspan x="4.116" y="10">13.1.1</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

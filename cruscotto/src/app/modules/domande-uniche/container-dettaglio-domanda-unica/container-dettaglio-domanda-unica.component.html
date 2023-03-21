@@ -1,0 +1,37 @@
+<ng-container *ngIf="domandaUnica">
+  <header *ngIf="domandaUnica.infoGeneraliDomanda" class="pt-3 bg-white position-relative">
+    <section class="container">
+      <p class="h6 text-uppercase font-weight-bold">{{ 'domandaUnica.domandaUnica' | translate }} {{ domandaUnica.infoGeneraliDomanda.campagna }}</p>
+      <h1 class="text-primary font-weight-bold">{{domandaUnica.infoGeneraliDomanda.ragioneSociale}}</h1>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.cuaa' | translate }}:</label>&nbsp;
+        <span>{{domandaUnica.infoGeneraliDomanda.cuaaIntestatario}}
+      </span>
+      </div>
+      <div>
+        <label class="h6 text-uppercase font-weight-bold">{{ 'common.protocolloAbbreviato' | translate }}</label>&nbsp;
+        <span *ngIf="datiProtocollo">{{ 'common.protocollo' | translate: datiProtocollo }}</span>
+      </div>
+    </section>
+  </header>
+
+  <main *ngIf="tabs && sezioneSelezionata != null">
+
+    <div class="bg-white  card--list">
+      <div class="container">
+        <p-tabMenu [model]="tabs" [activeItem]="tabs[sezioneSelezionata - 1]" id="dettaglio-domanda-menu">
+        </p-tabMenu>
+      </div>
+    </div>
+    <div class="container">
+      <app-dettaglio-domanda *ngIf="sezioneSelezionata == 1 && domandaUnica"
+                             [domandaUnica]= "domandaUnica">
+      </app-dettaglio-domanda>
+
+      <app-dettaglio-istruttoria *ngIf="sezioneSelezionata == 2" [dataProtocollazione]="dataProtocollazione">
+      </app-dettaglio-istruttoria>
+    </div>
+
+  </main>
+
+</ng-container>
