@@ -87,14 +87,15 @@ public class MacchinaAgsDao extends NamedParameterJdbcDaoSupport {
 //				+ "FROM TMACCHINA m " + "INNER JOIN cons_sogg_viw csv on csv.pk_cuaa = m.id_soggetto " + "INNER JOIN TFASCICOLO f ON f.ID_SOGGETTO = csv.PK_CUAA AND  f.ID_SOGGETTO = m.ID_SOGGETTO "
 //				+ "WHERE :data between csv.data_inizio_val and csv.data_fine_val " + "AND :data between m.dt_inizio and m.dt_fine " + "AND :data BETWEEN m.DT_INSERT AND m.DT_DELETE ";
 		return "SELECT m.id as ID_MACCHINA,m.denominazione AS descrizione, m.TARGA AS targa, tm.descrizione AS codiceclasse, \r\n"
-				+ "    sm.descrizione AS codicesottoclasse, null AS classe, sm.descrizione AS sottoclasse, m.MARCA AS marca, \r\n"
-				+ "    null AS alimentazione, m.tipo_POSSESSO AS possesso, m.numero_MATRICOLA AS MATRICOLA, m.numero_TELAIO AS TELAIO, \r\n"
-				+ "    null AS MARCA_MOTORE, null AS TIPO_MOTORE, null AS POTENZA_KW, tm.id as ID_TIPO_MACCHINA, m.id as ID_MACCHINA     \r\n"
+				+ "    sm.descrizione AS codicesottoclasse, cf.descrizione AS classe, sm.descrizione AS sottoclasse, m.MARCA AS marca, \r\n"
+				+ "    mm.alimentazione, m.tipo_POSSESSO AS possesso, m.numero_MATRICOLA AS MATRICOLA, m.numero_TELAIO AS TELAIO, \r\n"
+				+ "    mm.MARCA_MOTORE, mm.TIPO_MOTORE, mm.potenza AS POTENZA_KW, tm.id as ID_TIPO_MACCHINA, m.id as ID_MACCHINA     \r\n"
 				+ "FROM A4GT_MACCHINA m \r\n"
 				+ "    INNER JOIN A4GT_FASCICOLO f ON f.ID = M.ID_FASCICOLO AND f.id_validazione = m.id_validazione_fascicolo\r\n"
+				+ "    LEFT OUTER JOIN a4gt_macchina_motorizzata mm on mm.id = m.id and mm.id_validazione = m.id_validazione\r\n"
 				+ "    left outer join a4gd_sottotipo sm on sm.id = m.id_sottotipo\r\n"
-				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia\r\n"
-				+ "";
+				+ "    left outer join a4gd_classe_funzionale cf on cf.id = sm.id_classe_funzionale\r\n"
+				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia";
 	}
 
 	private String decodifica(String codice, String sottoCodice) {

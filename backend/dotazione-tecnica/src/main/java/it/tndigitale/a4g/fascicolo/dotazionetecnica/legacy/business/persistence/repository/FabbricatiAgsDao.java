@@ -99,25 +99,14 @@ public class FabbricatiAgsDao extends NamedParameterJdbcDaoSupport {
 	}
 
 	private String getFabbricatiSql() {
-		return "SELECT t.ID as id_fabbricato, \r\n"
-				+ "    t.VOLUME, \r\n"
-				+ "    t.SUPERFICIE, \r\n"
-				+ "    null as COMUNE_CATASTALE,\r\n"
-				+ "    NULL as SEZIONE, \r\n"
-				+ "    9999 as FOGLIO, \r\n"
-				+ "    t.DESCRIZIONE, \r\n"
-				+ "    null AS CODICE_TITOLO_CONDUZIONE, \r\n"
-				+ "    null AS CODICE_FABBRICATO, \r\n"
-				+ "    null as PARTICELLA, \r\n"
-				+ "    null AS SUBALTERNO, \r\n"
-				+ "    t.COMUNE, \r\n"
-				+ "    null AS SIGLA_PROVINCIA, \r\n"
-				+ "    null AS PROVINCIA, \r\n"
-				+ "    null AS TIPO_FABBRICATO, \r\n"
-				+ "    null AS TITOLO_CONDUZIONE, \r\n"
-				+ "    t.denominazione as NOTE \r\n"
-				+ "FROM a4gt_FABBRICATO t \r\n"
-				+ "    INNER JOIN a4gt_fascicolo f ON t.ID_fascicolo = f.id and t.id_validazione_fascicolo = f.id_validazione \r\n"
+		return "SELECT t.ID as id_fabbricato, t.VOLUME, t.SUPERFICIE, null as COMUNE_CATASTALE, NULL as SEZIONE, 9999 as FOGLIO,\r\n"
+				+ "    t.DESCRIZIONE, t.TIPO_CONDUZIONE AS CODICE_TITOLO_CONDUZIONE, null AS CODICE_FABBRICATO, null as PARTICELLA, null AS SUBALTERNO,\r\n"
+				+ "    t.COMUNE, null AS SIGLA_PROVINCIA, null AS PROVINCIA, tm.descrizione AS TIPO_FABBRICATO, null AS TITOLO_CONDUZIONE, \r\n"
+				+ "    t.denominazione as NOTE\r\n"
+				+ "FROM a4gt_FABBRICATO t\r\n"
+				+ "    INNER JOIN a4gt_fascicolo f ON t.ID_fascicolo = f.id and t.id_validazione_fascicolo = f.id_validazione\r\n"
+				+ "    left outer join a4gd_sottotipo sm on sm.id = t.id_sottotipo\r\n"
+				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia\r\n"
 				+ "    WHERE f.CUAA = :cuaa ";
 	}
 }
