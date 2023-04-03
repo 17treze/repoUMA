@@ -99,14 +99,16 @@ public class FabbricatiAgsDao extends NamedParameterJdbcDaoSupport {
 	}
 
 	private String getFabbricatiSql() {
-		return "SELECT t.ID as id_fabbricato, t.VOLUME, t.SUPERFICIE, null as COMUNE_CATASTALE, NULL as SEZIONE, 9999 as FOGLIO,\r\n"
-				+ "    t.DESCRIZIONE, t.TIPO_CONDUZIONE AS CODICE_TITOLO_CONDUZIONE, null AS CODICE_FABBRICATO, null as PARTICELLA, null AS SUBALTERNO,\r\n"
-				+ "    t.COMUNE, null AS SIGLA_PROVINCIA, null AS PROVINCIA, tm.descrizione AS TIPO_FABBRICATO, null AS TITOLO_CONDUZIONE, \r\n"
+		return "SELECT t.ID as id_fabbricato, t.VOLUME, t.SUPERFICIE, dc.comune as COMUNE_CATASTALE, dc.sezione as SEZIONE, dc.foglio as FOGLIO,\r\n"
+				+ "    t.DESCRIZIONE, t.TIPO_CONDUZIONE AS CODICE_TITOLO_CONDUZIONE, mf.codice_ags AS CODICE_FABBRICATO, dc.particella as PARTICELLA, dc.sub AS SUBALTERNO,\r\n"
+				+ "    t.COMUNE, 'TN' AS SIGLA_PROVINCIA, 'TRENTO' AS PROVINCIA, tm.descrizione AS TIPO_FABBRICATO, null AS TITOLO_CONDUZIONE, \r\n"
 				+ "    t.denominazione as NOTE\r\n"
 				+ "FROM a4gt_FABBRICATO t\r\n"
 				+ "    INNER JOIN a4gt_fascicolo f ON t.ID_fascicolo = f.id and t.id_validazione_fascicolo = f.id_validazione\r\n"
+				+ "    left outer join a4gt_dati_catastali dc on dc.fabbricato_id = t.id and dc.fabbricato_id_validazione = t.id_validazione\r\n"
 				+ "    left outer join a4gd_sottotipo sm on sm.id = t.id_sottotipo\r\n"
 				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia\r\n"
+				+ "    left outer join a4gd_mapping_fabbricati_ags mf on mf.id_sottotipo = t.id_sottotipo\r\n"
 				+ "    WHERE f.CUAA = :cuaa ";
 	}
 }

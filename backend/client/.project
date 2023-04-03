@@ -3,6 +3,20 @@
 	<name>client-sdk</name>
 	<comment></comment>
 	<projects>
+		<project>client-sdk-ags</project>
+		<project>client-sdk-bdn</project>
+		<project>client-sdk-dotazionetecnica</project>
+		<project>client-sdk-fascicolo</project>
+		<project>client-sdk-fascicolo-anagrafica</project>
+		<project>client-sdk-istruttoria</project>
+		<project>client-sdk-mediator</project>
+		<project>client-sdk-proxy</project>
+		<project>client-sdk-richiestamodificasuolo</project>
+		<project>client-sdk-soc</project>
+		<project>client-sdk-territorio</project>
+		<project>client-sdk-uma</project>
+		<project>client-sdk-utente</project>
+		<project>client-sdk-zootecnia</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
