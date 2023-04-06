@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.persistence.NoResultException;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -69,21 +69,21 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 			Ordinamento ordinamento) {
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		StringBuilder sb = new StringBuilder().append(NativeQueryString.SQL_GET_FASCICOLO).append(" AND (")
-				.append(" UPPER(csv.CUAA) = :cuaa ").append("OR").append(" UPPER(csv.RAGI_SOCI) LIKE :denominazione ")
-				.append(") ");
+				.append(" UPPER(f.CUAA) = :cuaa ").append("OR")
+				.append(" UPPER(p.nome || p.cognome) LIKE :denominazione ").append(") ");
 		
 		String proprieta = ordinamento.getProprieta();
 		if (proprieta != null) {
 			sb.append(" ORDER BY ");
 			switch (proprieta.toUpperCase()) {
 				case "CUAA":
-					sb.append(" csv.CUAA ");
+					sb.append(" f.CUAA ");
 					break;
 				case "DENOMINAZIONE":
-					sb.append(" csv.RAGI_SOCI ");
+					sb.append(" p.COGNOME ");
 					break;
 				default:
-					sb.append(" csv.CUAA ");
+					sb.append(" f.CUAA ");
 					break;
 			}
 			sb = Ordine.ASC.equals(ordinamento.getOrdine()) ? sb.append("ASC") : sb.append("DESC");
@@ -301,25 +301,14 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 		final String SQL_DATA_VALIDAZIONE_ANNO = SQL_DATA_VALIDAZIONE
 				+ "AND EXTRACT (YEAR FROM mov.dt_movimento) = :campagna ";
 		
-		String SQL_GET_FASCICOLO = "select " + "COUNT(*) OVER () as TOTALE, " + "f.ID_FASCICOLO AS ID, "
-				+ "csv.cuaa as CUAA, " + "csv.RAGI_SOCI AS DENOMINAZIONE , " + "f.SCO_STATO AS STATO, "
-				+ "t.DS_DECODIFICA AS ORGANISMO_PAGATORE, "
-				+ "(SELECT e.DES_ENTE FROM siti.sitiente e WHERE e.cod_ente = ente.COD_ENTE_SUP and SYSDATE between e.data_inizio and e.data_fine) AS CAA, "
-				+ "ente.DES_ENTE AS SPORTELLO, " + "ente.COD_ENTE AS IDENTIFICATIVO_SPORTELLO, "
-				+ "f.DT_INIZIO AS DATA_COSTITUZIONE, " + "f.DT_AGGIORNAMENTO AS DATA_AGGIORNAMENTO, " + "( "
-				+ SQL_DATA_VALIDAZIONE + ") "
-				//questa è l'ultima data di validazione del fascicolo che non ha anomalie bloccanti
-				+ "AS DATA_VALIDAZIONE, " + "inf.fg_sezione as SEZIONE, " + "inf.fg_uma_no_sezione as UMA_NO_SEZIONE, "
-				+ "inf.EMAIL_PEC AS PEC " + "from tfascicolo f "
-				+ "INNER JOIN TDECODIFICA t ON t.CODICE = f.COD_OP AND t.SOTTO_CODICE = f.SCO_OP "
-				+ "INNER JOIN tinfo_parix inf on inf.ID_SOGGETTO = f.id_soggetto "
-				+ "INNER JOIN cons_sogg_viw csv on csv.pk_cuaa = f.id_soggetto "
-				+ "INNER JOIN tdecodifica_language deco on f.cod_stato = deco.codice and f.sco_stato = deco.sotto_codice "
-				+ "LEFT OUTER JOIN siti.cons_cuaa_ente cuaa_ente on cuaa_ente.pk_cuaa = csv.pk_cuaa and cuaa_ente.tipo_associazione = 'MAN' and :data between cuaa_ente.data_inizio and cuaa_ente.data_fine "
-				+ "LEFT OUTER JOIN siti.sitiente ente on ente.cod_ente = cuaa_ente.cod_ente and :data between ente.data_inizio and ente.data_fine "
-				+ "where :data between f.dt_inizio and f.dt_fine and :data between csv.data_inizio_val and csv.data_fine_val "
-				+ "and :data BETWEEN inf.dt_insert AND inf.dt_delete " + "and csv.pk_cuaa = inf.id_soggetto ";
-				
+		String SQL_GET_FASCICOLO = "select COUNT(*) OVER () as TOTALE, f.ID, \r\n"
+				+ "    f.cuaa, p.nome || ' ' || p.cognome AS DENOMINAZIONE , \r\n" + "    f.STATO AS STATO, \r\n"
+				+ "    f.ORGANISMO_PAGATORE, \r\n" + "    NULL AS CAA, \r\n" + "    NULL AS SPORTELLO, \r\n"
+				+ "    1024 AS IDENTIFICATIVO_SPORTELLO, \r\n" + "    f.data_apertura AS DATA_COSTITUZIONE, \r\n"
+				+ "    f.data_apertura AS DATA_AGGIORNAMENTO, \r\n" + "    f.data_apertura AS DATA_VALIDAZIONE, \r\n"
+				+ "    NULL as SEZIONE, \r\n" + "    NULL as UMA_NO_SEZIONE, \r\n" + "    p.PEC \r\n"
+				+ "from a4gt_fascicolo f \r\n" + "INNER JOIN a4gt_persona_fisica p on p.id = f.id_persona ";
+		
 		String SQL_GET_FASCICOLO_CON_DELEGHE = "select " + "COUNT(*) OVER () as TOTALE, " + "f.ID_FASCICOLO AS ID, "
 				+ "csv.cuaa as CUAA, " + "csv.RAGI_SOCI AS DENOMINAZIONE, " + "csv.D_MORTE as DATA_MORTE, "
 				+ "f.SCO_STATO AS STATO, " + "t.DS_DECODIFICA AS ORGANISMO_PAGATORE, "
