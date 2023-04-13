@@ -1,0 +1,30 @@
+<div class="container px-0">
+  <p-carousel #carousel [value]="listaDomandaUnica" [numVisible]="numVisible"  [responsiveOptions]="responsiveOptions"
+  class="carousel--custom mx-n1" ngSwipe (swipeMove)="onSwipeMove($event)" (swipeEnd)="onSwipeEnd($event)">
+    <ng-template let-domanda pTemplate="item">
+        <div class="carousel-card mx-1" (click)="vaiAllaDomanda(domanda)" (touchend)="vaiAllaDomanda(domanda)">
+            <div class="carousel-card__header">
+              <div class="carousel-card__year">{{domanda.infoGeneraliDomanda.campagna}}</div>
+              <div class="carousel-card__dates">
+                <span>{{'common.protocolloAbbreviato' | translate}} <strong> {{domanda.infoGeneraliDomanda.numeroDomanda}} </strong></span>
+                <span>{{'common.del' | translate}} <strong> {{domanda.infoGeneraliDomanda.dataPresentazione | date:'dd/MM/yyyy'}} </strong></span>
+              </div>
+            </div>
+
+            <span class="carousel-card__icon-large">
+              <i style="font-size: 4em"><img src="{{'assets/icons/svg/status-' + domanda.infoGeneraliDomanda.stato.toLowerCase( ) + '.svg'}}"/></i>
+            </span>
+
+            <h3 class="carousel-card__title">{{'domandaUnica.stati.' + domanda.infoGeneraliDomanda.stato + '.value' | translate}}</h3>
+            <p class="carousel-card__text" [innerHTML]="'domandaUnica.stati.' + domanda.infoGeneraliDomanda.stato + '.description' | translate"></p>
+
+            <div class="carousel-card__icons">
+              <img *ngIf="domanda.richieste.sintesiRichieste.richiestaDisaccoppiato" src="{{'assets/icons/ico-rd-' + domanda.richieste.sintesiRichieste.richiestaDisaccoppiato + '.jpg'}}"/>
+              <img *ngIf="domanda.richieste.sintesiRichieste.richiestaZootecnia" src="{{'assets/icons/ico-rz-' + domanda.richieste.sintesiRichieste.richiestaZootecnia + '.jpg'}}"/>
+              <img *ngIf="domanda.richieste.sintesiRichieste.richiestaSuperfici" src="{{'assets/icons/ico-rs-' + domanda.richieste.sintesiRichieste.richiestaSuperfici + '.jpg'}}"/>
+            </div>
+          </div>
+      </ng-template>
+  </p-carousel>
+  <p-toast [style]="{marginTop: '80px'}" position="top-center" key="defaultToast"></p-toast>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-441Bneg</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icone-bandi-PSR" transform="translate(-401.000000, -728.000000)">
+            <g id="icon-441Bneg" transform="translate(401.000000, 728.000000)">
+                <rect id="Rectangle" fill="#30373D" x="0" y="0" width="44" height="44" rx="4"></rect>
+                <g id="Group-4" transform="translate(8.000000, 3.000000)">
+                    <polygon id="Fill-1" fill="#FFFFFF" points="12.5 1 7.49305157 6.031 8.54863903 7.0915 11.7534742 3.87175 11.7534742 6.25 6 12.03025 7.05558746 13.0915 11.7534742 8.371 11.7534742 11.5 6 17.28025 7.05558746 18.34075 11.7534742 13.621 11.7534742 19 13.2472723 19 13.2472723 13.621 17.9451591 18.34075 19 17.28025 13.2472723 11.5 13.2472723 8.371 17.9451591 13.0915 19 12.03025 13.2472723 6.25 13.2472723 3.87175 16.4521075 7.0915 17.507695 6.031"></polygon>
+                    <g id="Group-2" transform="translate(14.000000, 14.500000) rotate(45.000000) translate(-14.000000, -14.500000) translate(3.000000, 6.000000)" fill="#01985A">
+                        <path d="M17.3253788,0.0753787975 L21.0753788,7.5753788 L18.8253788,7.5753788 L18.8253788,16.5753788 L0.0753787975,16.5753788 L0.0753787975,13.5753788 L15.8253788,13.5753788 L15.8253788,7.5753788 L13.5753788,7.5753788 L17.3253788,0.0753787975 Z" id="Combined-Shape"></path>
+                    </g>
+                </g>
+                <g id="number" transform="translate(6.000000, 27.000000)">
+                    <rect id="Rectangle" fill="#01985A" x="0" y="0" width="32" height="14" rx="7"></rect>
+                    <text id="4.4.1" font-family="TitilliumWeb-Bold, Titillium Web" font-size="9" font-weight="bold" fill="#FFFFFF">
+                        <tspan x="6.636" y="10">4.4.1</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

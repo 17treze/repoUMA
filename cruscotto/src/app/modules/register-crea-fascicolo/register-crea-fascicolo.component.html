@@ -1,0 +1,17 @@
+<p-toast
+  key="tst-crea-utente-fascicolo"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<app-register
+  (datiAnagraficiUtenteOutput)="setDatiAnagraficiUtente($event)"
+  (privacyFirmataOutput)="setPrivacyFirmata($event)">
+</app-register>
+<app-crea-fascicolo (datiFascicoloOutput)="setDatiFascicoloOutput($event)"></app-crea-fascicolo>
+<div class="d-flex justify-content-center my-5">
+  <button
+    pButton
+    (click)="creaUtenteEFascicolo()"
+    type="button"
+    label="{{ 'CreazioneProfilo.Registrati' | translate }}"
+    class="px-5"
+    [disabled]="verificaCompletezzaDatiAnagrafici()"></button>
+</div>

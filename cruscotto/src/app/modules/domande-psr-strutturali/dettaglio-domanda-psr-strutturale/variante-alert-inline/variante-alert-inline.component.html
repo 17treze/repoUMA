@@ -1,0 +1,16 @@
+<div *ngIf="varianti">
+  <div *ngFor="let variante of varianti">
+    <section class="alert pt-3 alert-warning my-2" role="alert" *ngIf="variante.approvata == null">
+      <h6>Attenzione: Domanda di variante presentata in
+        data {{variante.dataModifica| date: 'dd/MM/yyyy' }} in corso di istruttoria</h6>
+    </section>
+    <section class="alert pt-3 alert-danger my-2" role="alert" *ngIf="variante.approvata == false">
+      <h6>Attenzione: Domanda di variante presentata in
+        data {{variante.dataModifica | date: 'dd/MM/yyyy' }} non approvata</h6>
+    </section>
+    <section class="alert pt-3 alert-success  my-2" role="alert" *ngIf="variante.approvata == true">
+      <h6>Attenzione: Domanda di variante presentata in
+        data {{variante.dataModifica | date: 'dd/MM/yyyy' }} approvata</h6>
+    </section>
+  </div>
+</div>

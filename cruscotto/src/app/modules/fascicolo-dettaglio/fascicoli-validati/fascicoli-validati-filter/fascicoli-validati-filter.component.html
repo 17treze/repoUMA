@@ -1,0 +1,39 @@
+<div class="boxgrey mb-0 pb-0">
+  <h1 class="h5 text-uppercase font-weight-bold my-4">
+    {{ "FascicoloAziendale.RICERCA_FASCICOLI_VALIDATI" | translate }}
+  </h1>
+  <form
+    [formGroup]="filtersFormGroup"
+    (ngSubmit)="onSubmit()"
+    (keydown.enter)="submitBtn.click()">
+    <div class="ui-grid-fixed">
+      <div class="p-grid">
+        <div class="p-col-3">
+          <p-calendar
+            class="form-control"
+            formControlName="dataValidazione"
+            [locale]="language"
+            dateFormat="dd/mm/yy"
+            showButtonBar="true"
+            placeholder="{{ 'FascicoloAziendale.DATA_VALIDAZIONE' | translate }}">
+          </p-calendar>
+        </div>
+        <div class="p-col-2">
+          <div class="searchbutton h-100">
+            <button
+              #submitBtn
+              pButton
+              type="button"
+              class="ui-button bg-primary no-shadow text-uppercase w-100 h-100"
+              type="submit"
+              [disabled]="!filtersFormGroup.valid"
+              label="{{ 'DOMANDA_UNICA_FILTRI.filter' | translate }}"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <label class="labelricerca my-3">
+      {{ resultsNumber }} {{ "FascicoloAziendale.FASCICOLI_VALIDATI" | translate }}
+    </label>
+  </form>
+</div>

@@ -1,0 +1,63 @@
+<p-toast key="toast-dettaglio-domande-uma"></p-toast>
+<div *ngIf="domanda">
+  <header class="bg-white position-relative card--list mb-3">
+    <section class="container py-3">
+      <p class="h6 text-uppercase font-weight-bold">
+        {{ "domandeUma.title" | translate | uppercase }}
+      </p>
+      <h1 class="fs-24 text-primary font-weight-bold">
+        {{ domanda.denominazione }}
+      </h1>
+      <div class="d-flex flex-column">
+        <div>
+          <strong>{{ "common.cuaa" | translate | uppercase }}:</strong>
+          {{ domanda.cuaa }}
+        </div>
+        <div>
+          <strong>ID:</strong>
+          {{ domanda.id }}
+        </div>
+        <div>
+          <strong>{{
+              "domandeUma.presentationDate" | translate | uppercase
+            }}:</strong>
+          {{ domanda.dataPresentazione | date: "dd/MM/yyyy" }}
+        </div>
+        <div>
+          <strong>{{ "domandeUma.state" | translate | uppercase }}:</strong>
+          {{ domanda.stato }}
+        </div>
+      </div>
+    </section>
+  </header>
+  <div class="container">
+    <h6 class="text-uppercase text-primary fw-700 mb-2">
+      {{ "domandeUma.availableFuel" | translate | uppercase }}
+    </h6>
+    <p-card
+      class="card--slim card--green-top"
+      styleClass="mb-3">
+      <div *ngFor="let carburante of carburanti">
+        <app-dettaglio-carburante
+          *ngIf="carburante.assegnato > 0"
+          [carburante]="carburante"></app-dettaglio-carburante>
+      </div>
+    </p-card>
+  </div>
+  <div
+    *ngIf="rettifiche?.length"
+    class="container">
+    <h6 class="text-uppercase text-primary fw-700 mb-2">
+    {{ "domandeUma.rettifiche" | translate | uppercase }}
+  </h6>
+    <p-card
+      class="card--slim card--green-top"
+      styleClass="mb-3">
+      <div
+        class="d-flex justify-content-between pr-1"
+        *ngFor="let rettifica of rettifiche">
+        <span>ID {{ rettifica.id }} del {{rettifica.dataPresentazione | date: "dd/MM/yyyy"}}</span>
+      </div>
+    </p-card>
+  </div>
+</div>

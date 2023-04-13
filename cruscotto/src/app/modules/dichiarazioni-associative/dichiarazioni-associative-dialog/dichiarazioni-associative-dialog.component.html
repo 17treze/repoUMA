@@ -1,0 +1,91 @@
+<p-dialog
+  header="{{getHeaderDialog()}}"
+  [(visible)]="displayDialog"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{width: '700px'}"
+  (onHide)="closeDialogEvent()">
+  <form
+    class="ui-g ui-fluid"
+    [formGroup]="dichiarazioneFormGroup"
+    *ngIf="dichiarazione">
+    <div class="ui-g-12">
+      <div class="ui-g-5">
+        <label for="cols[0].field">
+          {{ 'DICHIARAZIONE_ASSOCIATIVA.PROPERTY.ORGANIZZAZIONE' | translate }}
+        </label>
+      </div>
+      <div
+        *ngIf="isNewDichiarazione"
+        class="ui-g-7">
+        <p-dropdown
+          [options]="organizzazioniList"
+          placeholder="Seleziona..."
+          optionLabel="denominazione"
+          [showClear]="true"
+          required
+          formControlName="organizzazione">
+        </p-dropdown>
+      </div>
+      <div
+        *ngIf="!isNewDichiarazione"
+        class="ui-g-7">
+        <div class="ui-g-7">
+          {{dichiarazione.organizzazione.denominazione}}
+        </div>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-5">
+        <label for="cols[1].field">
+          {{ 'DICHIARAZIONE_ASSOCIATIVA.PROPERTY.DT_INIZIO' | translate }}
+        </label>
+      </div>
+      <div
+        *ngIf="isNewDichiarazione"
+        class="ui-g-7">
+        <p-calendar
+          appendTo="body"
+          class="ui-g-7"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          formControlName="dataInizioAssociazione">
+        </p-calendar>
+      </div>
+      <div
+        *ngIf="!isNewDichiarazione"
+        class="ui-g-7">
+        {{dichiarazione.dataInizioAssociazione | date: "dd/MM/yyyy" }}
+      </div>
+    </div>
+    <div
+      *ngIf="!isNewDichiarazione"
+      class="ui-g-12">
+      <div class="ui-g-5">
+        <label for="cols[2].field">
+          {{ 'DICHIARAZIONE_ASSOCIATIVA.PROPERTY.DT_FINE' | translate }}
+        </label>
+      </div>
+      <div class="ui-g-7">
+        <p-calendar
+          appendTo="body"
+          class="ui-g-7"
+          dateFormat="dd/mm/yy"
+          [showIcon]="true"
+          formControlName="dataFineAssociazione">
+        </p-calendar>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="save()"
+        label="{{getLabelButton()}}"></button>
+    </div>
+  </p-footer>
+</p-dialog>

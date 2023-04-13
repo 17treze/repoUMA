@@ -1,0 +1,18 @@
+<div id="indice" class="container d-flex flex-column mb-5 mt-3">
+  <button *ngFor="let dettaglioRazza of dettaglioPagamentoPsr?.dettaglioRazze; let i = index;" pButton type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          [appScrollToElement]="i" [label]="dettaglioRazza.nome"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.dettaglioRazze.length"
+          label="Esito finale"></button>
+</div>
+
+<div class="container">
+  <app-razza-di-bestiame-domanda-psr
+    *ngFor="let dettaglioRazza of dettaglioPagamentoPsr?.dettaglioRazze; let i = index;" id="item-{{i}}"
+    [dettaglioRazza]="dettaglioRazza"></app-razza-di-bestiame-domanda-psr>
+</div>
+<app-dettaglo-esito-finale-domanda-psr-m10-o13 *ngIf="dettaglioPagamentoPsr?.esitoFinaleDettaglioPagamentoPsr"
+                                               id="item-{{dettaglioPagamentoPsr?.dettaglioRazze.length}}"
+                                               [dettaglioEsitoFinale]="dettaglioPagamentoPsr.esitoFinaleDettaglioPagamentoPsr">
+</app-dettaglo-esito-finale-domanda-psr-m10-o13>

@@ -1,0 +1,128 @@
+
+<article *ngIf="domandaPsrStrutturale">
+
+  <section class="pt-3  mb-2">
+    <!--<h2 class="h6 text-uppercase text-primary font-weight-bold  mb-3">{{ 'PSR-Strutturali.' + domandaPsrStrutturale.statoProgetto | translate}}</h2>
+    <div class="alert  alert-info  mb-0"
+      [innerHTML]="'PSR-Strutturali.Stati.' + domandaPsrStrutturale.statoProgetto | translate">
+    </div>
+  </section>
+
+  <section>
+    <div class="row  row-no-gutter">
+      <div class="col-6">
+        <p-card *ngIf="importoCalcolato>=0" styleClass="ui-card-shadow dark  text-center  mr-1px">
+          <img src="assets/icons/CalcolatoLordo.jpg" /><br>
+          € {{importoCalcolato | number:'.2'}}
+        </p-card>
+      </div>
+      <div class="col-6">
+        <p-card *ngIf="importoLiquidato>=0" styleClass="ui-card-shadow primary  text-center">
+          <img src="assets/icons/LiquidatoNetto.jpg" /><br>
+          € {{importoLiquidato | number:'.2'}}
+        </p-card>
+      </div>
+    </div>-->
+  </section>
+
+
+  <section class="mt-4 mb-2">
+
+    <h2 class="h6 text-uppercase text-primary font-weight-bold">{{ 'domandaPsrStrutturale.sostegniRichiesti' | translate}}</h2>
+
+    <ng-container> <!--*ngIf="domandaPsrStrutturale.richieste && domandaPsrStrutturale.richieste.sintesiRichieste">-->
+      <!-- DISACCOPPIATO -->
+      <section> <!--*ngIf="domandaPsrStrutturale.richieste.sintesiRichieste.richiestaDisaccoppiato &&
+                  domandaPsrStrutturale.sostegnoDisaccoppiato" class="background-white bottom-rounded">-->
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2"><img class="icon__img" src="assets/icons/svg/icon-tractor.svg"
+              alt="tractor" /></span>
+          <span class="fw-700">{{ 'domandaPsrStrutturale.sostegni.disaccoppiato.value' | translate }}</span>
+        </div>
+        <div class="mt-3  px-2">
+          <div class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+            <span>{{ 'domandaPsrStrutturale.interventi.superficieLordaRichiesta' | translate}}</span>&nbsp;
+            <span><!--{{ domandaPsrStrutturale.sostegnoDisaccoppiato.superficieImpegnataLorda / 10000 | number:'.4' }}
+              {{ 'common.ettaro' | translate}}-->
+            </span>
+          </div>
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span>{{ 'domandaPsrStrutturale.interventi.superficieNettaRichiesta' | translate}}</span>&nbsp;
+            <span><!--{{ domandaPsrStrutturale.sostegnoDisaccoppiato.superficieImpegnataNetta / 10000 | number:'.4' }}
+              {{ 'common.ettaro' | translate }}-->
+            </span>
+          </div>
+        </div>
+
+        <strong
+          class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaPsrStrutturale.interventiRichiesti' | translate }}</strong>
+
+      </section>
+      <!-- /DISACCOPPIATO -->
+
+      <!-- ACCOPPIATO ZOOTECNIA
+      <section *ngIf="domandaPsrStrutturale?.richieste.sintesiRichieste.richiestaZootecnia"
+        class="background-white bottom-rounded">
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2"><img class="icon__img" src="assets/icons/svg/icon-w.svg"
+              alt="tractor" /></span>
+          <span class="fw-700">{{ 'domandaPsrStrutturale.sostegni.accoppiato_zootecnia.value' | translate }}</span>
+        </div>
+        <div class="mt-3 px-2">
+          <strong
+            class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaPsrStrutturale.interventiRichiesti' | translate }}</strong>
+          <ul class="list-unstyled pl-2">
+            <ng-container *ngFor="let allevamenti of domandaPsrStrutturale.richieste.sostegniAllevamento">
+              <li class="d-flex  align-items-center  py-1 border-bottom">
+                <span class="icon  mr-2">
+                  <img class="icon__img" [src]=recuperaIconZootecnia(allevamenti.codIntervento)
+                    alt="allevamenti.codIntervento" />
+                </span>
+                <span>{{ interventoDescrizione[allevamenti.codIntervento] | translate }}</span>
+                <span class="ml-auto">{{ allevamenti.codIdAllevamento }}</span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </section>
+       /ACCOPPIATO ZOOTECNIA -->
+
+      <!-- ACCOPPIATO SUPERFICIE 
+      <section *ngIf="domandaPsrStrutturale.richieste.sintesiRichieste.richiestaSuperfici" class="background-white">
+        <div class="list-header text-uppercase">
+          <span class="icon  icon--l  icon--dark  mr-2">
+            <img class="icon__img" src="assets/icons/svg/icon-land.svg" alt="land" />
+          </span>
+          <span class="fw-700">{{ 'domandaPsrStrutturale.sostegni.accoppiato_superficie.value' | translate }}</span>
+        </div>
+
+        <div class="mt-3 px-2">
+          <div *ngFor="let elementSostegno of elementiSostegno">
+            <div *ngIf="elementSostegno.label === 'totale'" class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+              <span>{{ "domandaPsrStrutturale.sostegni.accoppiato_superficie.superficiRichieste." + elementSostegno.label| translate}}</span>&nbsp;
+              <span>{{ elementSostegno.value / 10000 | number:'.4' }}
+                {{ 'common.ettaro' | translate}}
+              </span>
+            </div>
+          </div>
+          <strong
+            class="mt-4 d-block pl-2 pb-2 border-bottom">{{ 'domandaPsrStrutturale.interventiRichiesti' | translate }}</strong>
+          <ul class="list-unstyled pl-2">
+            <ng-container *ngFor="let elementSostegno of elementiSostegno">
+              <li *ngIf="elementSostegno.label != 'totale'" class="d-flex  align-items-center  py-1 border-bottom">
+                <span class="icon  mr-2">
+                  <img class="icon__img" [src]=recuperaIconSuperficie(elementSostegno.label) alt="olivoQualita" />
+                </span>
+                <span>{{ "domandaPsrStrutturale.sostegni.accoppiato_superficie.interventi." + elementSostegno.label | translate }}</span>
+                <span class="ml-auto">{{ elementSostegno.value / 10000 | number:'.4' }}
+                  {{ 'common.ettaro' | translate }}</span>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </section>
+       /ACCOPPIATO SUPERFICIE -->
+
+    </ng-container>
+  </section>
+</article>

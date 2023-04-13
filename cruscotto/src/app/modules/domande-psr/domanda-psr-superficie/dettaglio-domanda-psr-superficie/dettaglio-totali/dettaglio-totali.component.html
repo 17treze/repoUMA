@@ -1,0 +1,25 @@
+<section>
+  <div class="grid-psr mb-4" *ngIf="importiDomandaPsr">
+    <div class="grid-psr__left d-flex flex-column">
+      <strong class="fs-18">IMPORTO RICHIESTO</strong>
+      <div class="fs-24 fs-300 my-2 text-nowrap" *ngIf="importiDomandaPsr.importoRichiesto !== null; else importoRichiestoMissing">
+        € {{importiDomandaPsr.importoRichiesto | number:'.2'}}</div>
+    </div>
+    <ng-template #importoRichiestoMissing>
+      -
+    </ng-template>
+    <div class="grid-psr__right d-flex flex-column">
+            <strong class="fs-18">IMPORTO CALCOLATO</strong>
+            <div>
+              <div class="fs-24 fs-300 my-2 text-nowrap">€ {{totaleImportoCalcolato | number:'.2'}}</div>
+            </div>
+    </div>
+    <div class="grid-psr__bottom text-center">
+      <div class="d-flex align-items-end justify-content-between">
+        <strong class="h5 fs-18 mb-0 font-weight-bold">IMPORTO LIQUIDATO</strong>
+        <span class="fs-30 lh-1 text-nowrap">€ {{ importoTotaleLiquidato | number:'.2'}}</span>
+      </div>
+    </div>
+  </div>
+</section>
+

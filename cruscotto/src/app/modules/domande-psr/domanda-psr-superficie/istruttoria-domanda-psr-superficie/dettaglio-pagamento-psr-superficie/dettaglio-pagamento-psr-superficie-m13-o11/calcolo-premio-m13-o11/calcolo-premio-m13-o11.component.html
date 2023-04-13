@@ -1,0 +1,43 @@
+<div class="container pt-3">
+  <div class="p-grid">
+    <div class="p-col-10 p-md-10 p-lg-10">
+      <h3>Calcolo della degressività del premio
+      </h3>
+    </div>
+    <div class="p-col-1">
+      <button pButton appScrollToTop type="button" icon="pi pi-arrow-up" iconPos="center"></button>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="[calcoloPremio]">
+        <ng-template pTemplate="caption">
+          Dettagli del calcolo della degressività del premio
+        </ng-template>
+        <ng-template pTemplate="body" let-calcoloPremio>
+          <tr *ngIf="calcoloPremio.importoCalcolatoAziendale > 0">
+            <td>Importo calcolato aziendale</td>
+            <td
+              class="row-value">{{calcoloPremio.importoCalcolatoAziendale |  number:'.2-2'}}
+              €
+            </td>
+          </tr>
+          <tr *ngIf="calcoloPremio.superficieAziendaleOggettoDiContributo > 0">
+            <td>Superficie aziendale oggetto di contributo
+            </td>
+            <td
+              class="row-value">{{calcoloPremio.superficieAziendaleOggettoDiContributo | number:'.4-4'}}
+              ha
+            </td>
+          </tr>
+          <tr *ngIf="calcoloPremio.importoCalcolatoAziendaleDopoDegressivita > 0">
+            <td>Importo calcolato aziendale dopo l'applicazione della degressività</td>
+            <td
+              class="row-value">{{calcoloPremio.importoCalcolatoAziendaleDopoDegressivita | number:'.2-2'}}
+              €
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+

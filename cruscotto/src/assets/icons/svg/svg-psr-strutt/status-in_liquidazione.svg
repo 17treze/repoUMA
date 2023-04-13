@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="50px" viewBox="0 0 38 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>status-istruttoria</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="stati-e-icone" transform="translate(-166.000000, -545.000000)" fill="#FFFFFF">
+            <g id="status-istruttoria" transform="translate(166.000000, 545.000000)">
+                <g id="Group" fill-rule="nonzero">
+                    <g id="file">
+                        <path d="M36.9927,12.924225 L24.525,0.456525 C24.2328375,0.1643625 23.837175,0 23.423175,0 L3.163275,0 C1.44495,0 0.04635,1.3986 0.04635,3.116925 L0.04635,46.75365 C0.04635,48.4718625 1.44495,49.870575 3.163275,49.870575 L34.3324125,49.870575 C36.050625,49.870575 37.4493375,48.471975 37.4493375,46.75365 L37.4493375,14.02605 C37.4493375,13.6121625 37.2848625,13.2163875 36.9927,12.924225 Z M24.9816375,5.3206875 L32.12865,12.4677 L24.9816375,12.4677 L24.9816375,5.3206875 Z M34.3324125,46.7537625 L3.163275,46.7537625 L3.163275,3.1170375 L21.8647125,3.1170375 L21.8647125,12.4678125 C21.8647125,14.186025 23.2633125,15.5847375 24.9816375,15.5847375 L34.3324125,15.5847375 L34.3324125,46.7537625 L34.3324125,46.7537625 Z" id="Shape"></path>
+                    </g>
+                </g>
+                <g id="Group-3" transform="translate(7.000000, 26.000000)">
+                    <circle id="Oval" cx="3" cy="3" r="3"></circle>
+                    <circle id="Oval" cx="12" cy="3" r="3"></circle>
+                    <circle id="Oval" cx="21" cy="3" r="3"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

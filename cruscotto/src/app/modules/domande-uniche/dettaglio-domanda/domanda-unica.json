@@ -1,0 +1,60 @@
+{
+  "infoGeneraliDomanda": {
+    "pac": "PAC1420",
+    "tipoDomanda": "DU",
+    "campagna": 2019,
+    "modulo": "PAGAMENTI DIRETTI",
+    "codModulo": "BPS_2019",
+    "cuaaIntestatario": "MSTFBA79L10H612L",
+    "ragioneSociale": "MAESTRANZI FABIO",
+    "numeroDomanda": 210210,
+    "numeroDomandaRettificata": null,
+    "dataPresentazione": "2019-05-07T12:51:32.000+0200",
+    "codEnteCompilatore": "7",
+    "enteCompilatore": "CAA COLDIRETTI DEL TRENTINO - 006",
+    "dataProtocollazione": "2019-05-07T12:52:06.000+0200",
+    "dataPresentazOriginaria": null,
+    "dataProtocollazOriginaria": null,
+    "stato": "IN_ISTRUTTORIA",
+    "dataPassaggioStato": "2019-09-23T17:21:15.000+0200"
+  },
+  "controlliPresentazione": {
+    "aggiornamentoFascicolo": "S",
+    "visioneAnomalie": "S",
+    "firmaDomanda": "S",
+    "archiviazioneDomanda": "S"
+  },
+  "richieste": {
+    "sintesiRichieste": {
+      "richiestaDisaccoppiato": true,
+      "richiestaSuperfici": true,
+      "richiestaZootecnia": true
+    }
+  },
+  "sostegnoDisaccoppiato": {
+    "bpsRichiesto": true,
+    "greeningRichiesto": true,
+    "giovaneRichiesto": false,
+    "superficieImpegnataLorda": 720947,
+    "superficieImpegnataNetta": 629845.44
+  },
+  "sostegnoSuperfici": {
+    "superficieRichiestaSoia": 0,
+    "superficieRichiestaFrumentoDuro": 0,
+    "superficieRichiestaFrumentoProteaginose": 0,
+    "superficieRichiestaFrumentoLeguminose": 0,
+    "superficieRichiestaPomodoro": 0,
+    "superficieRichiestaOlivoNazionale": 0,
+    "superficieRichiestaOlivo75": 0,
+    "superficieRichiestaOlivoQualita": 19521,
+    "superficieTotaleRichiesta": 19521,
+    "sostegnoSoiaRichiesto": false,
+    "sostegnoFrumentoDuroRichiesto": false,
+    "sostegnoFrumentoProteaginoseRichiesto": false,
+    "sostegnoFrumentoLeguminoseRichiesto": false,
+    "sostegnoPomorodoRichiesto": false,
+    "sostegnoOlivoNazionareRichiesto": false,
+    "sostegnoOlivo75Richiesto": false,
+    "sostegnoOlivoQualitaRichiesto": true
+  }
+}

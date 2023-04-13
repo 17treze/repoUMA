@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>finanziabile</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" fill="#333333" x="1" y="1" width="34" height="34" rx="4"></rect>
+            <path d="M26.3775875,11.5858024 C25.5478458,10.8047325 24.2022958,10.8047325 23.3724125,11.5858024 L16.3750708,18.1716965 L13.6275875,15.5858191 C12.7978458,14.8047492 11.4522958,14.8047492 10.6224125,15.5858191 C9.79252917,16.366889 9.79252917,17.633161 10.6224125,18.4142309 L14.8724125,22.4142476 C15.7021542,23.1951841 17.0477042,23.1953175 17.8775875,22.4142476 L26.3775875,14.4142142 C27.2074708,13.6332776 27.2074708,12.3668724 26.3775875,11.5858024 Z" id="Path" fill="#01985A" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

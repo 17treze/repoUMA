@@ -1,0 +1,18 @@
+<div class="timeline-item__amount">
+  <div class="d-flex">
+    {{ titolo}}
+    <span
+      *ngIf="amount"
+      class="ml-auto text-nowrap">€ {{amount | number:'.2' }}</span>
+  </div>
+  <ul *ngFor="let subPrezzo of subPrezzi | keyvalue">
+    <li>
+      <div class="d-flex">
+        {{ subPrezzo.key}}
+        <span
+          *ngIf="amount"
+          class="ml-auto text-nowrap">€ {{subPrezzo.value | number:'.2' }}</span>
+      </div>
+    </li>
+  </ul>
+</div>

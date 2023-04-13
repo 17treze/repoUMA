@@ -1,0 +1,21 @@
+<p-dialog
+  [(visible)]="isPopupVisible"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [closable]="true"
+  [closeOnEscape]="true"
+  (onHide)="close()"
+  (onShow)="open()">
+  <p-header>
+    {{ 'FAS_ANA.VERIFICA_COMPLETEZZA' | translate }}
+  </p-header>
+  <div class="p-grid" *ngIf="checkList">
+    <ul>
+      <li *ngFor="let k of keys">
+        <em class="pi" [ngClass]="{'pi-times-circle control-fail': checkList[k].esito === -3, 'pi-check-circle control-ok': checkList[k].esito !== -3}"></em>
+        {{'FAS_ANA.CONTROLLI_COMPLETEZZA_OK.' + k | translate}}
+      </li>
+    </ul>
+  </div>
+</p-dialog>

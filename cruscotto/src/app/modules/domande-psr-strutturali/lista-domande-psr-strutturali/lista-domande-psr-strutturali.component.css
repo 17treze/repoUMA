@@ -1,0 +1,16 @@
+.warning-container {
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    background: #f9f5d1;
+    color: #7C7351;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.warning-container span {
+    color: #FBB03A;
+    font-size: 1.5rem;
+}

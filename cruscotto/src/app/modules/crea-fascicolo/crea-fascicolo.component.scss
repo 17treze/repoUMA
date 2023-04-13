@@ -1,0 +1,32 @@
+.box-fasc-data {
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    background-color: #f6f6f7;
+
+    h5 {
+        color: #0d5f3f;
+    }
+
+    &__header {
+        padding: 12px;
+        color: #ffffff;
+        background-color: #0d5f3f;
+
+        h3 {
+            margin-bottom: 0;
+
+            color: inherit;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+}
+
+::ng-deep label {
+    padding-right: 20px;
+}
+
+::ng-deep input {
+    margin-right: 20px;
+}

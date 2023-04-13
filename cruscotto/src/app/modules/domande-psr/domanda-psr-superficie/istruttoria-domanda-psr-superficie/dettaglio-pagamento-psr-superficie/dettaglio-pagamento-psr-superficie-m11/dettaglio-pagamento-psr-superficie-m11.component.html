@@ -1,0 +1,19 @@
+<div id="indice" class="container d-flex flex-column mb-5 mt-3">
+  <button *ngFor="let dettaglioRazza of dettaglioPagamentoPsr?.sostegniMantenimentoPsr; let i = index;" pButton
+          type="button"
+          icon="pi pi-arrow-down" iconPos="right"
+          [appScrollToElement]="i" [label]="dettaglioRazza.nomeSostegno"></button>
+  <button icon="pi pi-arrow-down" iconPos="right" pButton type="button"
+          [appScrollToElement]="dettaglioPagamentoPsr?.sostegniMantenimentoPsr.length"
+          label="Esito finale"></button>
+</div>
+
+<div class="container">
+  <app-sostegno-mantenimento-psr-m11
+    *ngFor="let sostegnoMantenimento of dettaglioPagamentoPsr?.sostegniMantenimentoPsr; let i = index;" id="item-{{i}}"
+    [sostegnoMantenimento]="sostegnoMantenimento"></app-sostegno-mantenimento-psr-m11>
+</div>
+<app-esito-finale-psr-m11 *ngIf="dettaglioPagamentoPsr?.esitoFinaleDettaglioPagamentoPsr"
+                          id="item-{{dettaglioPagamentoPsr?.sostegniMantenimentoPsr.length}}"
+                          [dettaglioEsitoFinale]="dettaglioPagamentoPsr.esitoFinaleDettaglioPagamentoPsr">
+</app-esito-finale-psr-m11>

@@ -1,0 +1,35 @@
+.grid-psr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: "left right"
+                       "bottom bottom";
+  grid-gap: 1px;
+
+  border-radius: .3rem;
+  overflow: hidden;
+
+  color: #ffffff;
+
+  text-align: center;
+
+&__left,
+&__right {
+   padding: 1rem;
+   background-color: #272D32;
+ }
+
+&__left {
+   grid-area: left;
+ }
+
+&__right {
+   grid-area: right;
+ }
+
+&__bottom {
+   grid-area: bottom;
+   padding: 0.75rem 1rem;
+   background-color: #01985A;
+ }
+}

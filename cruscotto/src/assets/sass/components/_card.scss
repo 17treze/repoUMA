@@ -1,0 +1,42 @@
+p-card {
+  .ui-widget-content {
+    border: 0;
+    border-radius: 0.35rem;
+  }
+
+  .ui-card-body {
+    padding: 2rem;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card--slim {
+  .ui-card-body {
+    padding: 1rem;
+  }
+}
+
+.card--green-top {
+  .ui-card-body {
+    border-top: 0.75rem solid $color-primary;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+  }
+}
+
+.card--list {
+  height: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+  .ui-card-body,
+  .ui-card-content {
+    height: 100%;
+  }
+
+  .ui-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

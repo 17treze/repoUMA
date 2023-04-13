@@ -170,23 +170,25 @@ export class DettaglioClientiContoterziComponent implements OnInit, OnDestroy {
     let limiteSuperato = false;
     let lavorazioniIrregolari: Array<LavorazioneViewModel> = [];
     dichiarazioniConteTerzista.forEach((dichiarazioneContoTerzista: DichiarazioneDto) => {
-      this.fabbisogniRichiestaCliente.forEach((dichiarazioneCliente: DichiarazioneDto) => {
-        let totaleDichiaratoDalContoTerzista: number = 0;
-        let totaleDichiaratoDalCliente: number = 0;
-        if (dichiarazioneContoTerzista.lavorazioneId === dichiarazioneCliente.lavorazioneId) {
-          totaleDichiaratoDalContoTerzista = dichiarazioneContoTerzista.fabbisogni.reduce((totale: number, currentValue: FabbisognoDto) => totale + this.formatConverterService.toNumber(currentValue.quantita), 0);
-          totaleDichiaratoDalCliente = dichiarazioneCliente.fabbisogni.reduce((totale: number, currentValue: FabbisognoDto) => totale + this.formatConverterService.toNumber(currentValue.quantita), 0);
-          console.log('totaleDichiaratoDalContoTerzista', totaleDichiaratoDalContoTerzista);
-          console.log('totaleDichiaratoDalCliente', totaleDichiaratoDalCliente);
-          console.log('superficieMassima', raggruppamentoSelezionato.superficieMassima);
-          // Il controllo vale solo per le lavorazioni in cui il contoterzista ha inserito un fabbisogno (totaleDichiaratoDalContoTerzista > 0)
-          // e tale fabbisogno, sommato a quello inserito dal cliente nella sua richiesta di carburante per la stessa lavorazione non deve superare la superficie massima
-          if (totaleDichiaratoDalContoTerzista > 0 && totaleDichiaratoDalContoTerzista + totaleDichiaratoDalCliente > raggruppamentoSelezionato.superficieMassima) {
-            limiteSuperato = true;
-            lavorazioniIrregolari.push(...raggruppamentoSelezionato.lavorazioni.filter((lav: LavorazioneViewModel) => lav.id === dichiarazioneContoTerzista.lavorazioneId));
+      if (this.fabbisogniRichiestaCliente != null) {
+        this.fabbisogniRichiestaCliente.forEach((dichiarazioneCliente: DichiarazioneDto) => {
+          let totaleDichiaratoDalContoTerzista: number = 0;
+          let totaleDichiaratoDalCliente: number = 0;
+          if (dichiarazioneContoTerzista.lavorazioneId === dichiarazioneCliente.lavorazioneId) {
+            totaleDichiaratoDalContoTerzista = dichiarazioneContoTerzista.fabbisogni.reduce((totale: number, currentValue: FabbisognoDto) => totale + this.formatConverterService.toNumber(currentValue.quantita), 0);
+            totaleDichiaratoDalCliente = dichiarazioneCliente.fabbisogni.reduce((totale: number, currentValue: FabbisognoDto) => totale + this.formatConverterService.toNumber(currentValue.quantita), 0);
+            console.log('totaleDichiaratoDalContoTerzista', totaleDichiaratoDalContoTerzista);
+            console.log('totaleDichiaratoDalCliente', totaleDichiaratoDalCliente);
+            console.log('superficieMassima', raggruppamentoSelezionato.superficieMassima);
+            // Il controllo vale solo per le lavorazioni in cui il contoterzista ha inserito un fabbisogno (totaleDichiaratoDalContoTerzista > 0)
+            // e tale fabbisogno, sommato a quello inserito dal cliente nella sua richiesta di carburante per la stessa lavorazione non deve superare la superficie massima
+            if (totaleDichiaratoDalContoTerzista > 0 && totaleDichiaratoDalContoTerzista + totaleDichiaratoDalCliente > raggruppamentoSelezionato.superficieMassima) {
+              limiteSuperato = true;
+              lavorazioniIrregolari.push(...raggruppamentoSelezionato.lavorazioni.filter((lav: LavorazioneViewModel) => lav.id === dichiarazioneContoTerzista.lavorazioneId));
+            }
           }
-        }
-      });
+        });
+      }
     });
     if (limiteSuperato) {
       this.showDialogSuperficieMax(dichiarazioniConteTerzista, lavorazioniIrregolari);

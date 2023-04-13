@@ -1,0 +1,10 @@
+@import '../vars';
+
+:root {
+  --color-black: #{$color-black};
+  --color-white: #{$color-white};
+  --color-primary-green: #{$color-primary};
+  --color-bg-gray: #{$color-bg-gray};
+
+  --font-default: #{$font-default};
+}

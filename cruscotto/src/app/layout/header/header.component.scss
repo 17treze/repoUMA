@@ -1,0 +1,20 @@
+.navbar--header {
+  .nav-item, .nav-item a, .material-icons {
+	display: block;
+  }
+
+  .nav-item + .nav-item {
+	margin-left: .5rem;
+  }
+
+  .material-icons {
+    font-size: 2rem;
+  }
+}
+
+.navbar__site-title {
+  color: var(--primary-green);
+
+  font-size: 1.15rem;
+  font-weight: 700;
+}

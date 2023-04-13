@@ -70,26 +70,73 @@ public class PianoColtureAgsDao extends NamedParameterJdbcDaoSupport {
 		//			return new ArrayList<>();
 		//		}
 		List<PianoColturaleAgsDto> pianoColturale = new ArrayList<PianoColturaleAgsDto>();
-		for (long i = 0; i < 5; i++) {
-			PianoColturaleAgsDto pianoColturaleAgsDto = new PianoColturaleAgsDto();
-			pianoColturaleAgsDto.setIdColtura(i);
-			pianoColturaleAgsDto.setSuperficieAccertata((int) i * 100);
-			pianoColturaleAgsDto.setFoglio("9999");
-			pianoColturaleAgsDto.setParticella("0000" + i);
-			pianoColturaleAgsDto.setSubalterno(null);
-			pianoColturaleAgsDto.setIdParticella(i);
-			pianoColturaleAgsDto.setCodiceProdotto("650");
-			pianoColturaleAgsDto.setCodiceDestinazioneUso("001");
-			pianoColturaleAgsDto.setCodiceUso("000");
-			pianoColturaleAgsDto.setCodiceQualita("000");
-			pianoColturaleAgsDto.setCodiceVarieta("000");
-			pianoColturaleAgsDto.setCodiceNazionale("G482");
-			pianoColturaleAgsDto.setTitoloConduzione(TitoloConduzione.ALTRO);
-			pianoColturaleAgsDto.setTipoAtto(1);
-			pianoColturaleAgsDto.setDescrizioneAtto("COMODATO");
-			pianoColturaleAgsDto.setCriterioMantenimento(CriterioMantenimento.PRATICA_ORDINARIA);
-			pianoColturaleAgsDto.setSuperficieDichiarata((int) i * 100);
-			pianoColturale.add(pianoColturaleAgsDto);
+		logger.warn("[PianoColtureAgsDao] - CUAA: " + filter.getCuaa());
+		if (filter.getCuaa().equals("FLGKTA79S41L378T")) {
+			for (long i = 0; i < 5; i++) {
+				PianoColturaleAgsDto pianoColturaleAgsDto = new PianoColturaleAgsDto();
+				pianoColturaleAgsDto.setIdColtura(i);
+				pianoColturaleAgsDto.setSuperficieAccertata((int) i * 100);
+				pianoColturaleAgsDto.setFoglio("9999");
+				pianoColturaleAgsDto.setParticella("0000" + i);
+				pianoColturaleAgsDto.setSubalterno(null);
+				pianoColturaleAgsDto.setIdParticella(i);
+				pianoColturaleAgsDto.setCodiceProdotto("044");
+				pianoColturaleAgsDto.setCodiceDestinazioneUso("005");
+				pianoColturaleAgsDto.setCodiceUso("000");
+				pianoColturaleAgsDto.setCodiceQualita("000");
+				pianoColturaleAgsDto.setCodiceVarieta("059");
+				pianoColturaleAgsDto.setCodiceNazionale("L378");
+				pianoColturaleAgsDto.setTitoloConduzione(TitoloConduzione.PROPRIETA);
+				pianoColturaleAgsDto.setTipoAtto(1);
+				pianoColturaleAgsDto.setDescrizioneAtto("VISURA");
+				pianoColturaleAgsDto.setCriterioMantenimento(CriterioMantenimento.PRATICA_ORDINARIA);
+				pianoColturaleAgsDto.setSuperficieDichiarata((int) i * 120);
+				pianoColturale.add(pianoColturaleAgsDto);
+			}
+			for (long i = 10; i < 15; i++) {
+				PianoColturaleAgsDto pianoColturaleAgsDto = new PianoColturaleAgsDto();
+				pianoColturaleAgsDto.setIdColtura(i);
+				pianoColturaleAgsDto.setSuperficieAccertata((int) i * 100);
+				pianoColturaleAgsDto.setFoglio("9999");
+				pianoColturaleAgsDto.setParticella("0000" + i);
+				pianoColturaleAgsDto.setSubalterno(null);
+				pianoColturaleAgsDto.setIdParticella(i);
+				pianoColturaleAgsDto.setCodiceProdotto("410");
+				pianoColturaleAgsDto.setCodiceDestinazioneUso("009");
+				pianoColturaleAgsDto.setCodiceUso("037");
+				pianoColturaleAgsDto.setCodiceQualita("000");
+				pianoColturaleAgsDto.setCodiceVarieta("455");
+				pianoColturaleAgsDto.setCodiceNazionale("L378");
+				pianoColturaleAgsDto.setTitoloConduzione(TitoloConduzione.PROPRIETA);
+				pianoColturaleAgsDto.setTipoAtto(1);
+				pianoColturaleAgsDto.setDescrizioneAtto("VISURA");
+				pianoColturaleAgsDto.setCriterioMantenimento(CriterioMantenimento.PRATICA_ORDINARIA);
+				pianoColturaleAgsDto.setSuperficieDichiarata((int) i * 120);
+				pianoColturale.add(pianoColturaleAgsDto);
+			}
+		}
+		else {
+			for (long i = 0; i < 5; i++) {
+				PianoColturaleAgsDto pianoColturaleAgsDto = new PianoColturaleAgsDto();
+				pianoColturaleAgsDto.setIdColtura(i);
+				pianoColturaleAgsDto.setSuperficieAccertata((int) i * 100);
+				pianoColturaleAgsDto.setFoglio("9999");
+				pianoColturaleAgsDto.setParticella("0000" + i);
+				pianoColturaleAgsDto.setSubalterno(null);
+				pianoColturaleAgsDto.setIdParticella(i);
+				pianoColturaleAgsDto.setCodiceProdotto("019");
+				pianoColturaleAgsDto.setCodiceDestinazioneUso("008");
+				pianoColturaleAgsDto.setCodiceUso("000");
+				pianoColturaleAgsDto.setCodiceQualita("003");
+				pianoColturaleAgsDto.setCodiceVarieta("048");
+				pianoColturaleAgsDto.setCodiceNazionale("L378");
+				pianoColturaleAgsDto.setTitoloConduzione(TitoloConduzione.PROPRIETA);
+				pianoColturaleAgsDto.setTipoAtto(1);
+				pianoColturaleAgsDto.setDescrizioneAtto("VISURA");
+				pianoColturaleAgsDto.setCriterioMantenimento(CriterioMantenimento.PRATICA_ORDINARIA);
+				pianoColturaleAgsDto.setSuperficieDichiarata((int) i * 90);
+				pianoColturale.add(pianoColturaleAgsDto);
+			}
 		}
 		return pianoColturale;
 	}

@@ -1,0 +1,432 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div *ngIf="istruttoria" class="mb-4">
+  <div class="boxgrey-top">
+    <div class="container d-flex align-items-center">
+      <div class="mr-3">
+        <strong class="mr-1">CUAA:</strong>
+        <span>{{ istruttoria.domanda.cuaaIntestatario }}</span>
+      </div>
+      <div>
+          <strong class="mr-1">PROT:</strong>
+          <span>{{ istruttoria.domanda.dtProtocollazione | date: "dd/MM/yyyy" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white card--list">
+    <div class="container d-flex align-items-center py-3 position-relative">
+      <img src="assets/icons/ico-rd-true.jpg" class="mr-2" />
+      <div class="d-flex flex-column">
+        <strong>{{ istruttoria.tipo }}</strong>
+        <span class="fs-12">{{ istruttoria.sostegno }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #esiti class="container d-flex flex-column mb-5">
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(ammissibilita)" label="{{ 'ESITI_ISTRUTTORIA.AMMISSIBILITA' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(riduzioni)" label="{{ 'ESITI_ISTRUTTORIA.RIDUZIONE' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(sanzioni)" label="{{ 'ESITI_ISTRUTTORIA.SANZIONI' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(greening)" label="{{ 'ESITI_ISTRUTTORIA.GREENING' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(giovane)" label="{{ 'ESITI_ISTRUTTORIA.GIOVANE' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(riepilogoSanzioni)" label="{{ 'ESITI_ISTRUTTORIA.RIEPILOGO_SANZIONI' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(controlliFinali)" label="{{ 'ESITI_ISTRUTTORIA.ESITO_FINALE' | translate }}"></button>
+  <button pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+      (click)="scroll(disciplinaFinanziaria)"
+      label="{{ 'ESITI_ISTRUTTORIA.DISCIPLINA_FINANZIARIA' | translate }}"></button>
+</div>
+
+<div class="container">
+    <div #ammissibilita class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.AMMISSIBILITA' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[0].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[0].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #riduzioni class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.RIDUZIONE' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[1].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[1].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #sanzioni class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.SANZIONI' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[2].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[2].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #greening class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.GREENING' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[3].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[3].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #giovane class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.GIOVANE' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[4].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[4].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #riepilogoSanzioni class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.RIEPILOGO_SANZIONI' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[5].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[5].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #controlliFinali class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.ESITO_FINALE' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[6].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[6].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #disciplinaFinanziaria class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.DISCIPLINA_FINANZIARIA' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[7].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[7].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr>
+                        <td>{{esito.descrizione}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<header *ngIf="domandaPsrStrutturale" class="position-relative">
+  <div class="box  box--gray  px-0" style="margin-top: .07rem;">
+    <div class="container fs-14 text-center">
+      <strong class="text-uppercase">{{ 'common.protocolloAbbreviato' | translate }} </strong>
+      <span>{{ 'common.protocollo' | translate: datiProtocollo }}</span>
+      <strong class="text-uppercase ml-2">{{ 'common.domanda' | translate }} </strong>
+      <span>{{ domandaPsrStrutturale.idProgetto }}</span>
+    </div>
+  </div>
+</header>

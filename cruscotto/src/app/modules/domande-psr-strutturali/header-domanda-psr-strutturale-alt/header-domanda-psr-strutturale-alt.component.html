@@ -1,0 +1,18 @@
+<header *ngIf="domandaPsrStrutturale" class="position-relative">
+  <section class="container bg-white">
+    <h1 class="text-primary fw-700 h4">{{domandaPsrStrutturale.ragioneSociale}}</h1>
+    <div>
+      <label class="h6 text-uppercase font-weight-bold">{{ 'common.cuaa' | translate }}:</label>&nbsp;
+      <span>{{domandaPsrStrutturale.cuaa}}
+      </span>
+    </div>
+    <div>
+      <label class="h6 text-uppercase font-weight-bold">{{ 'common.protocolloAbbreviato' | translate }}</label>&nbsp;
+      <span *ngIf="datiProtocollo">{{ 'common.protocollo' | translate: datiProtocollo }}</span>
+    </div>
+    <div>
+      <label class="h6 text-uppercase font-weight-bold">{{ 'common.numero' | translate }}:</label>&nbsp;
+      <span *ngIf="domandaPsrStrutturale.idProgetto">{{ domandaPsrStrutturale.idProgetto }}</span>
+    </div>
+  </section>
+</header>

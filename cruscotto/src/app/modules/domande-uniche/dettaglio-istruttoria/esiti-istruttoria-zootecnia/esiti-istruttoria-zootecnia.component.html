@@ -1,0 +1,533 @@
+<p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+<div *ngIf="istruttoria" class="mb-4">
+  <div class="boxgrey-top">
+    <div class="container d-flex align-items-center">
+      <div class="mr-3">
+        <strong class="mr-1">CUAA:</strong>
+        <span>{{ istruttoria.domanda.cuaaIntestatario }}</span>
+      </div>
+      <div>
+          <strong class="mr-1">PROT:</strong>
+          <span>{{ istruttoria.domanda.dtProtocollazione | date: "dd/MM/yyyy" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white card--list">
+    <div class="container d-flex align-items-center py-3 position-relative">
+      <img src="assets/icons/ico-rd-true.jpg" class="mr-2" />
+      <div class="d-flex flex-column">
+        <strong>{{ istruttoria.tipo }}</strong>
+        <span class="fs-12">{{ istruttoria.sostegno }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #esiti class="container d-flex flex-column mb-5">
+    <button *ngIf="(datiView[0].datiInput.length > 0) && (datiView[0].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int310)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int310' | translate }}"></button>
+    <button *ngIf="(datiView[1].datiInput.length > 0) && (datiView[1].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int311)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int311' | translate }}"></button>
+    <button *ngIf="(datiView[2].datiInput.length > 0) && (datiView[2].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int313)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int313' | translate }}"></button>
+    <button *ngIf="(datiView[3].datiInput.length > 0) && (datiView[3].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int322)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int322' | translate }}"></button>
+    <button *ngIf="(datiView[4].datiInput.length > 0) && (datiView[4].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int315)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int315' | translate }}"></button>
+    <button *ngIf="(datiView[5].datiInput.length > 0) && (datiView[5].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int316)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int316' | translate }}"></button>
+    <button *ngIf="(datiView[6].datiInput.length > 0) && (datiView[6].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int318)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int318' | translate }}"></button>
+    <button *ngIf="(datiView[7].datiInput.length > 0) && (datiView[7].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int320)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int320' | translate }}"></button>
+    <button *ngIf="(datiView[8].datiInput.length > 0) && (datiView[8].datiOutput.length > 0)" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(int321)" label="{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int321' | translate }}"></button>
+    <button *ngIf="istruttoria?.stato === 'PAGAMENTO_AUTORIZZATO'" pButton type="button" style="margin-bottom: 5px;" icon="pi pi-arrow-down" iconPos="right"
+        (click)="scroll(disciplinaFinanziaria)" label="{{ 'ESITI_ISTRUTTORIA.DISCIPLINA_FINANZIARIA' | translate }}"></button>
+</div>
+
+<div class="container">
+    <div #int310 [hidden]="isHidden(datiView[0])" class="p-grid">
+        <div  class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int310' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[0].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[0].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int311 [hidden]="isHidden(datiView[1])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int311' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[1].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[1].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr  *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int313 [hidden]="isHidden(datiView[2])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int313' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[2].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate}}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[2].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int322 [hidden]="isHidden(datiView[3])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int322' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[3].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[3].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int315 [hidden]="isHidden(datiView[4])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int315' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[4].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[4].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div #int316 [hidden]="isHidden(datiView[5])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int316' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[5].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[5].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int318 [hidden]="isHidden(datiView[6])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int318' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[6].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[6].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int320 [hidden]="isHidden(datiView[7])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int320' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[7].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[7].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+</div>
+    <div #int321 [hidden]="isHidden(datiView[8])" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'domandaUnica.sostegni.accoppiato_zootecnia.interventiACZ.int321' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiView[8].datiInput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiView[8].datiOutput">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-esito>
+                    <tr *ngIf="esito.valore">
+                        <td>{{setHeader(esito.descrizione) | translate}}</td>
+                        <td style="text-align-last: right;">{{esito.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div #disciplinaFinanziaria [hidden]="!(istruttoria?.stato === 'PAGAMENTO_AUTORIZZATO')" class="p-grid">
+        <div class="p-col-10 p-md-10 p-lg-10">
+            <h3>{{ 'ESITI_ISTRUTTORIA.DISCIPLINA_FINANZIARIA' | translate }}</h3>
+        </div>
+        <div class="p-col-1">
+            <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" (click)="scroll(esiti)"></button>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12">
+            <p-table [value]="datiDisciplina.input">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_INPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-input>
+                    <tr *ngIf="input.valore">
+                        <td>{{setHeader(input.codice) | translate}}</td>
+                        <td style="text-align-last: right;">{{input.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="p-col-12 p-md-12 p-lg-12" style="margin-bottom: 30px;">
+            <p-table [value]="datiDisciplina.output">
+                <ng-template pTemplate="caption">
+                    {{ 'ESITI_ISTRUTTORIA.DATI_OUTPUT' | translate }}
+                </ng-template>
+                <ng-template pTemplate="body" let-output>
+                    <tr *ngIf="output.valore">
+                        <td>{{setHeader(output.codice) | translate}}</td>
+                        <td style="text-align-last: right;">{{output.valore}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td [attr.colspan]="2">
+                            {{ 'ESITI_ISTRUTTORIA.NO_ESITO' | translate }}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

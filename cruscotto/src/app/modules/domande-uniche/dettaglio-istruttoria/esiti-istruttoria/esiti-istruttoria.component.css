@@ -1,0 +1,32 @@
+.boxgrey-top{
+    background-color: #CCCCCC;
+    padding: 10px;
+    width: 100%;
+    height: min-content;
+  }
+
+  .boxgrey-down{
+    background-color: #f6f6f7;
+    padding: 25px;
+    width: 100%;
+    font-weight: normal;
+    color: black;
+  }
+
+  .boxgrey-down h3 {
+    color: #0d5f3f;
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+
+  .boxgrey-down h5 {
+    color: black;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }

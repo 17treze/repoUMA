@@ -1,0 +1,96 @@
+<article>
+  <section class="container  pt-3  mb-2">
+    <h2 class="h6 text-uppercase text-primary fw-700  mt-2  mb-4">{{'common.avanzamento_istruttoria' | translate}}
+    </h2>
+
+    <div class="timeline-item" [ngClass]="{'has--date' : !!item.dtUltimoCalcolo}" *ngFor="let item of istruttorie; let numeroIstruttoria = index">
+      <span *ngIf="item.dtUltimoCalcolo"
+        class="timeline-item__date">
+        {{item.dtUltimoCalcolo ? (item.dtUltimoCalcolo | date: "dd/MM/yyyy") : 'common.ND' | translate }}
+      </span>
+      <div class="timeline-item__container">
+        <div class="timeline-item__icon">
+          <span class="icon  icon--xs  icon--dark  icon--p">
+            <span class="icon__img" [inlineSVG]="getTimelineIcon(item)"></span>
+          </span>
+        </div>
+        <div class="timeline-item__content">
+          <div class="timeline-item__header">
+            <h6 class="timeline-item__title">{{item.tipoIstruttoria || 'DETTAGLIO_ISTRUTTORIA.DISCIPLINA_FINANZIARIA' | translate}}</h6>
+            <p *ngIf="item.sostegno" class="timeline-item__description">{{ 'common.' + item.sostegno | translate }}</p>
+
+            <button
+              *ngIf="goToEsitiIstruttoriaVisible(item)"
+              class="timeline-item__btn-detail"
+              (click)="goToEsitiIstruttoria(item)"
+              [inlineSVG]="'assets/icons/svg/icon-arrow-right.svg'"></button>
+          </div>
+
+          <div class="timeline-item__status d-flex  align-items-center  my-2">
+            <span
+              *ngIf="item.ruleResult?.length > 0"
+              class="d-inline-flex  mr-2  warning-icon"
+              [ngClass]="severityColorClass[item.ruleResult[0].rulePolicy.severity]"
+              [inlineSVG]="'assets/icons/svg/icon-exclamation.svg'">
+            </span>
+            <span *ngIf="item.statoLavorazioneSostegno" >{{'STATO_SOSTEGNO.' + item.statoLavorazioneSostegno | translate}}</span>
+          </div>
+
+          <div *ngFor="let anomalia of item.ruleResult">
+            <div *ngIf="anomalia.isValid" class="alert  {{severityClass[anomalia.rulePolicy.severity]}}  mb-2" role="alert">
+              <strong>{{'common.attenzione' | translate}}</strong> {{anomalia.rulePolicy.message}}
+            </div>
+          </div>
+          <div class="timeline-item__amount  fs-14" *ngIf="item.importiIstruttoria && item.importiIstruttoria.importoCalcolato">
+            <div class="d-flex">
+              <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_CALCOLATO' | translate}}</strong>
+              <span class="ml-auto">€{{ item.importiIstruttoria.importoCalcolato | number:'.2' }}</span>
+            </div>
+            {{'DETTAGLIO_ISTRUTTORIA.AL_NETTO_PAGAMENTI' | translate }}
+          </div>
+          <div class="timeline-item__amount  fs-14" *ngIf="item.importiIstruttoria && item.importiIstruttoria.importoAutorizzato">
+            <div class="d-flex">
+              <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_AUTORIZZATO' | translate}}</strong>
+              <span class="ml-auto">€{{ item.importiIstruttoria.importoAutorizzato | number:'.2' }}</span>
+            </div>
+            {{'DETTAGLIO_ISTRUTTORIA.AL_NETTO_FINANZIARIA' | translate }}
+          </div>
+          <div class="timeline-item__amount  fs-14" *ngIf="item.importiIstruttoria?.debitiRecuperati?.length>0">
+            <div class="d-flex">
+              <strong>{{'DETTAGLIO_ISTRUTTORIA.DEBITI_RECUPERATI' | translate}} </strong>
+              <span class="ml-auto"> € {{ totaleDebitoRecuperato[numeroIstruttoria] | number:'.2' }}</span>
+            </div>
+            <ul>
+              <li *ngFor="let importo of item.importiIstruttoria.debitiRecuperati">
+                <div class="d-flex">
+                  <span>{{importo.descrizione}}</span>
+                  <span class="ml-auto">€{{ importo.importo | number:'.2' }}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="timeline-item__amount  timeline-item__amount-payed  d-flex  align-items-center  fs-18" *ngIf="item.importiIstruttoria && item.importiIstruttoria.importoAutorizzato">
+              <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_LIQUIDATO' | translate}}</strong>
+              <span class="total-amount  ml-auto  fs-18  fw-700">€ {{ totaleImportoLiquidato[numeroIstruttoria] | number:'.2' }}</span>
+          </div>
+          <div class="timeline-item__amount  timeline-item__amount-payed  d-flex  align-items-center  fs-18"
+          *ngIf="item.importiIstruttoria?.importoDisciplina">
+            <strong>{{'DETTAGLIO_ISTRUTTORIA.IMPORTO_DISCIPLINA' | translate}}</strong>
+            <span class="total-amount  ml-auto  fs-18  fw-700">€ {{ item.importiIstruttoria.importoDisciplina | number:'.2' }}</span>
+        </div>
+        </div><!-- .timeline-item__content -->
+      </div><!-- .timeline-item__container -->
+      <span class="timeline-item__arrow"></span>
+    </div>
+  </section>
+</article>
+<div class="timeline-item__header">
+  <span  class="timeline-item__date">{{dataProtocollazione | date: "dd/MM/yyyy"}}</span><br>
+  
+  <div class="d-flex  bg-primary  text-white  py-1">
+    <div class="container">
+      <h6 class="text-center"><b>{{'DETTAGLIO_ISTRUTTORIA.PRESENTAZIONE_DOMANDA_UNICA' | translate}}</b></h6>
+    </div>
+  </div>
+  
+</div>

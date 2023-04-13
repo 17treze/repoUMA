@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-751A</title>
+    <g id="PSR" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icone-bandi-PSR" transform="translate(-234.000000, -1097.000000)">
+            <g id="icon-751A" transform="translate(234.000000, 1097.000000)">
+                <g id="Rectangle" fill="#F7F7F7" stroke="#D8D8D8">
+                    <rect x="0.5" y="0.5" width="43" height="43" rx="4"></rect>
+                </g>
+                <g id="Group-12" transform="translate(9.000000, 6.000000)">
+                    <g id="success" fill="#30373D" fill-rule="nonzero">
+                        <path d="M26.97444,16.32 L21.8316,9.12 L26.97444,1.92 L8.12556,1.92 L8.12556,0 L2.72556,0 L2.72556,25.32 L0.02556,25.32 L0.02556,30.72 L10.82556,30.72 L10.82556,25.32 L8.12556,25.32 L8.12556,16.32 L26.97444,16.32 Z M23.47674,3.72 L19.61958,9.12 L23.47674,14.52 L8.12556,14.52 L8.12556,3.72 L23.47674,3.72 Z M9.02556,27.12 L9.02556,28.92 L1.82556,28.92 L1.82556,27.12 L9.02556,27.12 Z M6.32556,25.32 L4.52556,25.32 L4.52556,1.8 L6.32556,1.8 L6.32556,25.32 Z" id="Shape"></path>
+                    </g>
+                    <path d="M23,20 L29,29.2307692 L25.4,29.23 L25.4,35 L20.6,35 L20.599,29.23 L17,29.2307692 L23,20 Z" id="Combined-Shape" fill="#01985A"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

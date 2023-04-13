@@ -1,0 +1,33 @@
+<div class="mb-5">
+  <div *ngIf="carburante.tipo">
+    <strong class="mt-2"
+      >{{ "domandeUma." + carburante.tipo | translate | uppercase }}:</strong
+    >
+  </div>
+  <hr class="my-2" />
+  <div *ngIf="!carburante.tipo">
+    {{ "common.ND" | translate }}
+  </div>
+  <div class="d-flex justify-content-between pr-1">
+    <span>{{ "domandeUma.assigned" | translate }}</span>
+    <span *ngIf="true">{{ carburante.assegnato | number:'.2' }} Lt</span>
+    <span *ngIf="false">{{ "common.ND" | translate }}</span>
+  </div>
+  <hr class="my-2" />
+  <div class="d-flex justify-content-between pr-1">
+    <span>{{ "domandeUma.withdrawn" | translate }}</span>
+    <span *ngIf="true">{{ carburante.prelevato | number:'.2' }} Lt</span>
+    <span *ngIf="false">{{ "common.ND" | translate }}</span>
+  </div>
+  <hr class="my-2" />
+  <div class="d-flex justify-content-between pr-1">
+    <span>{{ "domandeUma.received" | translate }}</span>
+    <span *ngIf="true">{{ carburante.ricevuto | number:'.2' }} Lt</span>
+    <span *ngIf="false">{{ "common.ND" | translate }}</span>
+  </div>
+  <hr class="mt-2 mb-0" />
+  <div class="d-flex justify-content-between">
+    <strong class="align-self-center fs-18">{{ "domandeUma.available" | translate }}</strong>
+    <div class="py-2 total-badge pr-2 pl-5" *ngIf="true">{{ disponibile | number:'.2' }} Lt</div>
+  </div>
+</div>

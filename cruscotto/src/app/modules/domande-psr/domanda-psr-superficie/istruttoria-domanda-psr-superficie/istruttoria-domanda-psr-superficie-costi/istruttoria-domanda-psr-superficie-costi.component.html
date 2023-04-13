@@ -1,0 +1,17 @@
+<div
+  *ngIf="importoLiquidato; else space"
+  class="timeline-item__amount total"
+  [ngClass]="{ divider: showDivider }"
+>
+  <div class="d-flex">
+    <strong>{{
+      "DETTAGLIO_ISTRUTTORIA.CONTRIBUTO_LIQUIDATO" | translate
+    }}</strong>
+    <span *ngIf="importoLiquidato >= 0" class="ml-auto text-nowrap"
+      >€ {{ importoLiquidato | number: ".2" }}</span
+    >
+  </div>
+</div>
+<ng-template #space>
+  <div class="mt-3"></div>
+</ng-template>

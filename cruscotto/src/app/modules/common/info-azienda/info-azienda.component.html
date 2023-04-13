@@ -1,0 +1,8 @@
+<div *ngIf="domandaUnica | async as du" class="container pt-3">
+    <p class="h6 text-uppercase font-weight-bold">{{title}}</p>
+    <h1 class="fs-24 text-primary font-weight-bold">{{ du.denominazione }}</h1>
+    <div lass="carousel-card__header">
+      <strong>CUAA:</strong>
+      {{ du.cuaa }}
+    </div>
+</div>

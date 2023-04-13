@@ -1,0 +1,132 @@
+<article *ngIf="domandaPsrStrutturale">
+
+  <section class="pt-3  mb-2">
+    <h2 class="h6 text-uppercase text-primary font-weight-bold  my-3">{{'PSR-Strutturali.STATO_DELLA_TUA_DOMANDA' | translate}}</h2>
+    <div class="alert  alert-info  mb-0" *ngIf="domandaPsrStrutturale"
+         [innerHTML]="'PSR-Strutturali.Stati.' + domandaPsrStrutturale[0].codiceStatoProgetto | translate">
+    </div>
+  </section>
+  <app-variante-alert-inline [varianti]="varianti"></app-variante-alert-inline>
+
+  <section>
+    <div class="grid-psr mb-4">
+      <div class="grid-psr__left d-flex flex-column">
+        <strong class="fs-18">CONTRIBUTI RICHIESTI</strong>
+        <div class="fs-24 fs-300 my-2 text-nowrap">€ {{totaleContributiRichiesto | number:'.2'}}</div>
+        <div class="fs-12 fs-300 text-nowrap" *ngIf="!(domandaPsrStrutturale[0].codiceOperazione === '6.1.1')">SPESA € {{totaleCostiInvestimento | number:'.2'}}</div>
+      </div>
+      <div class="grid-psr__right d-flex flex-column">
+        <strong class="fs-18">CONTRIBUTI AMMESSI</strong>
+        <div *ngIf="contributoTotaleAmmesso >= 0">
+          <div class="fs-24 fs-300 my-2 text-nowrap">€ {{contributoTotaleAmmesso | number:'.2'}}</div>
+          <div class="fs-12 fs-300 text-nowrap" *ngIf="!(domandaPsrStrutturale[0].codiceOperazione === '6.1.1')">SPESA € {{costoTotaleAmmesso | number:'.2'}}</div>
+        </div>
+        <strong *ngIf="contributoTotaleAmmesso < 0" class="my-2">-.-</strong>
+      </div>
+      <div class="grid-psr__bottom text-center">
+        <div class="d-flex align-items-end justify-content-between">
+          <strong class="h5 fs-18 mb-0 font-weight-bold">TOTALE LIQUIDATO:</strong>
+          <span *ngIf="totaleLiquidato >= 0" class="fs-30 lh-1 text-nowrap">€ {{totaleLiquidato | number:'.2'}}</span>
+          <span *ngIf="totaleLiquidato < 0" class="fs-30 lh-1">---</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p-card styleClass="card--slim">
+    <div class="bg-primary d-flex align-items-center text-white p-2 rounded-top mt-n3 mr-n3 ml-n3">
+      <img src="assets/icons/svg/svg-psr-strutt/bandi/svg/icon-{{domandaPsrStrutturale[0].codiceOperazione.split('.').join('')}}Aneg.svg" class="mr-3" />
+      <span class="fs-18 fw-700">
+        {{'PSR-Strutturali.OPERAZIONE' | translate}} {{domandaPsrStrutturale[0].codiceOperazione}}
+      </span>
+    </div>
+    <div class="mt-3">
+      <strong>{{domandaPsrStrutturale[0].descrizioneNormativa}}</strong>
+    </div>
+  </p-card>
+
+  <div *ngIf="!showInvestimentiVarianti; else investimentiVariante">
+
+    <h6 class="text-uppercase text-primary fw-700 mt-5 mb-3" [ngPlural]="dettaglioPSRStrutturale.length">
+      <ng-template ngPluralCase="=1">1 INVESTIMENTO</ng-template>
+      <ng-template ngPluralCase="other">{{dettaglioPSRStrutturale.length}} INVESTIMENTI</ng-template>
+    </h6>
+
+    <div *ngFor="let dettaglio of dettaglioPSRStrutturale">
+      <app-card-dettaglio-investimento
+        [titolo]="dettaglio.descrizioneCodificaInvestimento"
+        [descrizione]="dettaglio.descrizioneDettaglioInvestimenti"
+        [subDescrizione]="dettaglio.descrizionePianoInvestimenti"
+        [descrizioneDettaglioInvestimenti]="dettaglio.descrizioneDettaglioInvestimenti"
+        [descrizioneSettoriProduttivi]="dettaglio.descrizioneSettoriProduttivi"
+      >
+        <div class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+          <span>{{'PSR-Strutturali.Costo_investimenti' | translate}}</span>&nbsp;
+          <span>{{ dettaglio.costoInvestimento | number:'.2' }} €</span>
+        </div>
+        <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+          <span>{{'PSR-Strutturali.Spese_tecniche' | translate}}</span>&nbsp;
+          <span>{{ dettaglio.speseTecniche | number:'.2' }} €</span>
+        </div>
+        <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+          <span>{{'PSR-Strutturali.Costo_totale' | translate}}</span>&nbsp;
+          <span>{{ (dettaglio.costoInvestimento + dettaglio.speseTecniche) | number:'.2' }} €</span>
+        </div>
+        <div *ngIf="domandaPsrStrutturale[0].codiceOperazione !== '6.1.1'">
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span>{{'PSR-Strutturali.Percentuale_contributo' | translate}}</span>&nbsp;
+            <span>{{ dettaglio.percentualeRichiesto }}%</span>
+          </div>
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span><strong>{{'PSR-Strutturali.CONTRIBUTO_RICHIESTO' | translate}}</strong></span>&nbsp;
+            <span><strong>{{ dettaglio.contributoRichiesto | number:'.2' }} €</strong></span>
+          </div>
+        </div>
+      </app-card-dettaglio-investimento>
+    </div>
+  </div>
+  <ng-template #investimentiVariante>
+
+    <div *ngIf="showInvestimentiVarianti">
+
+      <h6 class="text-uppercase text-primary fw-700 mt-5 mb-3" [ngPlural]="investimenti.length">
+        <ng-template ngPluralCase="=1">1 INVESTIMENTO</ng-template>
+        <ng-template ngPluralCase="other">{{investimenti.length}} INVESTIMENTI</ng-template>
+      </h6>
+
+      <div *ngFor="let dettaglio of investimenti">
+        <app-card-dettaglio-investimento
+          [titolo]="dettaglio.descrizioneCodificaInvestimento"
+          [descrizione]="dettaglio.descrizioneDettaglioInvestimenti"
+          [subDescrizione]="dettaglio.descrizione"
+          [descrizioneDettaglioInvestimenti]="dettaglio.descrizioneDettaglioInvestimenti"
+          [descrizioneSettoriProduttivi]="dettaglio.descrizioneSettoriProduttivi"
+        >
+          <div class="border-bottom pa-3 d-flex justify-content-between pt-2 pb-2">
+            <span>{{'PSR-Strutturali.Costo_investimenti' | translate}}</span>&nbsp;
+            <span>{{ dettaglio.costoInvestimento | number:'.2' }} €</span>
+          </div>
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span>Spese generali</span>&nbsp;
+            <span>{{ dettaglio.speseGenerali | number:'.2' }} €</span>
+          </div>
+          <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+            <span>{{'PSR-Strutturali.Costo_totale' | translate}}</span>&nbsp;
+            <span>{{ (dettaglio.costoInvestimento + dettaglio.speseGenerali) | number:'.2' }} €</span>
+          </div>
+          <div *ngIf="domandaPsrStrutturale[0].codiceOperazione !== '6.1.1'">
+            <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+              <span>{{'PSR-Strutturali.Percentuale_contributo' | translate}}</span>&nbsp;
+              <span>{{ dettaglio.quotaContributoRichiesto }}%</span>
+            </div>
+            <div class="border-bottom d-flex justify-content-between  pt-2 pb-2">
+              <span><strong>{{'PSR-Strutturali.CONTRIBUTO_RICHIESTO' | translate}}</strong></span>&nbsp;
+              <span><strong>{{ dettaglio.contributoRichiesto | number:'.2' }} €</strong></span>
+            </div>
+          </div>
+        </app-card-dettaglio-investimento>
+      </div>
+    </div>
+
+  </ng-template>
+</article>

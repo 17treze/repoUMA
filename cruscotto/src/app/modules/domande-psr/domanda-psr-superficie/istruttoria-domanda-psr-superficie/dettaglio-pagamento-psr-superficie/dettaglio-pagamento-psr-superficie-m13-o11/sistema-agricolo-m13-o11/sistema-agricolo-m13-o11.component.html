@@ -1,0 +1,65 @@
+<div class="container pt-3">
+  <div class="p-grid">
+    <div class="p-col-10 p-md-10 p-lg-10">
+      <h3>{{sistemaAgricolo.tableName}}</h3>
+    </div>
+    <div class="p-col-1">
+      <button pButton appScrollToTop type="button" icon="pi pi-arrow-up" iconPos="center"></button>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="[sistemaAgricolo]">
+        <ng-template pTemplate="caption">
+          Dettaglio del sistema agricolo
+        </ng-template>
+        <ng-template pTemplate="body" let-sistemaAgricolo>
+          <tr>
+            <td>Superficie Richiesta</td>
+            <td
+              class="row-value">{{sistemaAgricolo.superficieRichiesta | number:'.4-4'}}
+              ha
+            </td>
+          </tr>
+          <tr>
+            <td>Superficie Ammissibile</td>
+            <td
+              class="row-value">{{sistemaAgricolo.superficieAmmissibile | number:'.4-4'}}
+              ha
+            </td>
+          </tr>
+          <tr *ngIf="sistemaAgricolo.percentualeScostamento > 0">
+            <td>Percentuale di Scostamento</td>
+            <td
+              class="row-value">{{sistemaAgricolo.percentualeScostamento | number:'.2-2'}}
+              %
+            </td>
+          </tr>
+          <tr>
+            <td>Aliquota di sostegno</td>
+            <td
+              class="row-value">{{sistemaAgricolo.aliquotaSostegno | number:'.2-2'}} €/ha
+            </td>
+          </tr>
+          <tr>
+            <td>Importo Ammissibile</td>
+            <td
+              class="row-value">{{sistemaAgricolo.importoAmmissibile | number:'.2-2'}} €
+            </td>
+          </tr>
+          <tr *ngIf="round(sistemaAgricolo.importoSanzioneSovradichiarazione, '.2-2') > 0">
+            <td>Importo della Sanzione per sovradichiarazione</td>
+            <td
+              class="row-value">{{sistemaAgricolo.importoSanzioneSovradichiarazione | number:'.2-2'}} €
+            </td>
+          </tr>
+          <tr>
+            <td>Importo calcolato intervento</td>
+            <td
+              class="row-value">{{sistemaAgricolo.importoCalcolatoIntervento | number:'.2-2'}} €
+            </td>
+          </tr>
+
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

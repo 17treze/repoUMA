@@ -1,0 +1,47 @@
+<nav class="navbar navbar--header navbar-expand">
+  <div class="container px-2">
+    <a
+      *ngIf="logoVisible"
+      class="navbar-brand topbar-logo d-flex align-items-center"
+      href="#"
+    >
+      <img
+        src="assets/layout/images/logo_appag.png"
+        width="40"
+        height="40"
+        alt="Logo APPAG"
+        class="navbar__site-logo mr-2"
+      />
+      <span class="navbar__site-title">APPAG Trento</span>
+    </a>
+    <app-back (visible)="onVisible($event)"></app-back>
+    <div class="navbar-collapse collapse">
+      <ul class="navbar-nav ml-auto" *ngIf="!hideHeaderIcons"> <!-- *ngIf here -->
+        <li class="nav-item mr-2" *ngIf="!isFromAppag || !isHomePage">
+          <a
+            href="#"
+            class="text-dark"
+            [inlineSVG]="'assets/icons/svg/icon-home.svg'"
+          ></a>
+        </li>
+        <li class="nav-item mr-2" *ngIf="isFromAppag && isHomePage">
+          <a
+            style="cursor: pointer"
+            (click)="goAppag()"
+            [inlineSVG]="'assets/icons/svg/appag.svg'"
+          ></a>
+        </li>
+        <li class="nav-item mr-2">
+          <a
+            href="#"
+            class="text-dark"
+            [inlineSVG]="'assets/icons/svg/icon-question.svg'"
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a href="./register" class="text-dark" [inlineSVG]="'assets/icons/svg/icon-user.svg'"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

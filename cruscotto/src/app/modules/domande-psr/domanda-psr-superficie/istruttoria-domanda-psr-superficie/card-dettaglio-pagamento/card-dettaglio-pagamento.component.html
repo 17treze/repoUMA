@@ -1,0 +1,40 @@
+<div
+  class="timeline-item"
+  [ngClass]="{'has--date' : !!statoDomandaPsr.dataUltimoMovimento}">
+        <span
+          class="timeline-item__date">
+          {{statoDomandaPsr.dataUltimoMovimento ? (statoDomandaPsr.dataUltimoMovimento | date: "d MMMM y") : 'common.ND' | translate }}
+        </span>
+  <div class="timeline-item__container">
+    <div class="timeline-item__icon">
+            <span class="icon  icon--xs  icon--dark  icon--p">
+              <span
+                class="icon__img"
+                [inlineSVG]="getCurrentSvg()"></span>
+            </span>
+    </div>
+    <div class="timeline-item__content">
+      <div class="timeline-item__header">
+        <div class="card-title">
+          <h6 class="timeline-item__title">{{ statoDomandaPsr.tipoPagamento.toUpperCase() }}</h6>
+          <button
+            *ngIf="isNavigationArrowVisible"
+            class="timeline-item__btn-detail"
+            (click)="goToDettaglioPagamento()"
+            [inlineSVG]="'assets/icons/svg/icon-arrow-right.svg'">
+          </button>
+        </div>
+        <div class="psr-card-header-small-text">
+          <p
+            class="mb-1">{{statoDomandaPsr.codOperazione}} {{(statoDomandaPsr.codOperazione) | descrizioneByCodice}}</p>
+          <h6>{{statoDomandaPsr.stato}}</h6>
+        </div>
+      </div>
+      <app-calculated-amount class="calculated-amounts-alignment" *ngIf="canShowCalculatedAmount()"
+                             [statoDomandaPsr]="statoDomandaPsr"
+                             [importoCalcolato]="importoCalcolato"></app-calculated-amount>
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <span class="timeline-item__arrow"></span>
+</div>

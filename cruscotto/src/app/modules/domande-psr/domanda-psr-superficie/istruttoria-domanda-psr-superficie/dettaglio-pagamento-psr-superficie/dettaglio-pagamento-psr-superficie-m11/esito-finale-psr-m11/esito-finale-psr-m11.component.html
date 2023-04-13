@@ -1,0 +1,88 @@
+<div class="container pt-3">
+  <div class="p-grid">
+    <div class="p-col-10 p-md-10 p-lg-10">
+      <h3>Esito finale</h3>
+    </div>
+    <div class="p-col-1">
+      <button pButton type="button" icon="pi pi-arrow-up" iconPos="center" appScrollToTop></button>
+    </div>
+    <div class="p-col-12 p-md-12 p-lg-12">
+      <p-table [value]="[dettaglioEsitoFinale]">
+        <ng-template pTemplate="caption">
+          Dettagli esito finale
+        </ng-template>
+        <ng-template pTemplate="body" let-esitoFinale>
+          <tr *ngIf="esitoFinale.percentualeRiduzioneMancatoRispettoImpegniBaseline > 0">
+            <td>Percentuale di riduzione per mancato rispetto degli impegni baseline</td>
+            <td
+              class="row-value">{{esitoFinale.percentualeRiduzioneMancatoRispettoImpegniBaseline | number:'.2-2'}}
+              %
+            </td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoRiduzioneMancatoRispettoImpegniBaselineIntroduzione > 0">
+            <td>Importo della riduzione mancato rispetto degli impegni baseline Introduzione</td>
+            <td
+              class="row-value">{{esitoFinale.importoRiduzioneMancatoRispettoImpegniBaselineIntroduzione | number:'.2-2'}}
+              €
+            </td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoRiduzioneMancatoRispettoImpegniBaselineMantenimento > 0">
+            <td>Importo della riduzione mancato rispetto degli impegni baseline mantenimento</td>
+            <td
+              class="row-value">{{esitoFinale.importoRiduzioneMancatoRispettoImpegniBaselineMantenimento | number:'.2-2'}}
+              €
+            </td>
+          </tr>
+
+          <tr *ngIf="esitoFinale.importoRiduzioneRitardataPresentazione > 0">
+            <td>Importo della riduzione per ritardata presentazione</td>
+            <td
+              class="row-value">{{esitoFinale.importoRiduzioneRitardataPresentazione | number:'.2-2'}}
+              €
+            </td>
+          </tr>
+          <tr *ngIf="esitoFinale.coefficienteRiduzioneLineareSuperamentoBudget > 0">
+            <td>Coefficiente di riduzione lineare per superamento budget</td>
+            <td
+              class="row-value">{{esitoFinale.coefficienteRiduzioneLineareSuperamentoBudget | number:'.2-2'}}
+              %
+            </td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoCalcolatoIntroduzione">
+            <td>Importo Calcolato Introduzione</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoIntroduzione | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoCalcolatoMantenimento">
+            <td>Importo Calcolato Mantenimento</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoMantenimento | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoCalcolatoTotale">
+            <td>Importo Calcolato Totale</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoTotale | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoLiquidatoPagamentiPrecedentiIntroduzione">
+            <td>Importo già liquidato pagamenti precedenti Introduzione</td>
+            <td class="row-value">{{esitoFinale.importoLiquidatoPagamentiPrecedentiIntroduzione | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoLiquidatoPagamentiPrecedentiMantenimento">
+            <td>Importo già liquidato pagamenti precedenti mantenimento</td>
+            <td class="row-value">{{esitoFinale.importoLiquidatoPagamentiPrecedentiMantenimento | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoCalcolatoLiquidatoIntroduzione > 0">
+            <td>Importo Calcolato Liquidato Introduzione</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoLiquidatoIntroduzione | number:'.2-2'}} €</td>
+          </tr>
+          <tr *ngIf="esitoFinale.importoCalcolatoLiquidatoMantenimento > 0">
+            <td>Importo Calcolato Liquidato Mantenimento</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoLiquidatoMantenimento | number:'.2-2'}} €</td>
+          </tr>
+          <tr>
+            <td>Importo Calcolato Liquidato Totale</td>
+            <td class="row-value">{{esitoFinale.importoCalcolatoLiquidatoTotale | number:'.2-2'}} €</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,53 @@
+<section class="pt-3  mb-2">
+  <h2 class="h6 text-uppercase text-primary font-weight-bold  my-3">
+    {{'domandaPsr.stato_della_tua_domanda' | translate}}
+  </h2>
+  <div class="alert  alert-warning  mb-2" *ngIf="domandaPsr"
+       [innerHTML]="'domandaPsr.stati.' + domandaPsr.sottoStato + '.description' | translate">
+  </div>
+  <app-dettaglio-totali [domandaPsr]="domandaPsr"></app-dettaglio-totali>
+  <h2 class="h6 text-uppercase text-primary font-weight-bold  my-3">
+    {{'domandaPsr.sostegni_richiesti' | translate}}
+  </h2>
+</section>
+<div *ngFor="let operazione of domandaPsr.operazioni">
+  <app-card-dettaglio-sostegno
+    [codiceIntervento]="operazione.codiceMisureIntervento"
+  >
+    <ng-container [ngSwitch]="operazione.codiceMisureIntervento">
+
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M10_O1_1)">
+        <app-card-dettaglio-sostegno-m10-o11 *ngSwitchCase="M10_O1_1"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M10_O1_1)">
+        </app-card-dettaglio-sostegno-m10-o11>
+      </div>
+
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M10_O1_4)">
+        <app-card-dettaglio-sostegno-m10-o14 *ngSwitchCase="M10_O1_4"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M10_O1_4)"></app-card-dettaglio-sostegno-m10-o14>
+      </div>
+
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M11_O1_1)">
+        <app-card-dettaglio-sostegno-m11-o11 *ngSwitchCase="M11_O1_1"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M11_O1_1)"></app-card-dettaglio-sostegno-m11-o11>
+      </div>
+
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M11_O2_1)">
+        <app-card-dettaglio-sostegno-m11-o11 *ngSwitchCase="M11_O2_1"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M11_O2_1)"></app-card-dettaglio-sostegno-m11-o11>
+
+      </div>
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M13_O1_1)">
+        <app-card-dettaglio-sostegno-m13-o11 *ngSwitchCase="M13_O1_1"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M13_O1_1)"></app-card-dettaglio-sostegno-m13-o11>
+      </div>
+
+      <div *ngIf="cardsContainingValidSupImpegnoNetta.get(M10_O1_2)">
+        <app-card-dettaglio-sostegno-m10-o12 *ngSwitchCase="M10_O1_2"
+                                             [impegniRichiestiPsr]="interventiPsr.get(M10_O1_2)"></app-card-dettaglio-sostegno-m10-o12>
+      </div>
+        <app-card-dettaglio-sostegno-m10-o13 *ngSwitchCase="M10_O1_3"
+                                             [idDomanda]="domandaPsr.numeroDomanda"></app-card-dettaglio-sostegno-m10-o13>
+    </ng-container>
+  </app-card-dettaglio-sostegno>
+</div>

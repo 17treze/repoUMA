@@ -1,0 +1,8 @@
+<ng-container *ngFor="let sanzione of sanzioni">
+  <div
+    class="alert alert-warning my-2"
+    role="alert">
+    <b>Attenzione</b> alla domanda è stata applicata la seguente sanzione:<br>
+      {{sanzione.descrizioneSanzione}} per un valore di € {{sanzione.ammontareSanzione|number:'.2'}}
+  </div>
+</ng-container>
