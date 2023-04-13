@@ -22,7 +22,7 @@ export class MenuCaaComponent implements OnInit {
     this.funzioni = new Array<MenuItem>(
       { routerLink: 'fascicoloAziendale', label: 'Fascicolo Aziendale' },
       { routerLink: 'gestioneAzienda', label: 'Domande' },
-      { routerLink: 'scadenze', label: 'Scadenze' }
+      // { routerLink: 'scadenze', label: 'Scadenze' }
     );
   }
 }

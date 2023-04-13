@@ -15,7 +15,7 @@
       <p-accordion
         [multiple]="true"
         class="accordion-custom">
-        <!-- Dati anagrafici e fiscali -->
+        <!-- Dati anagrafici e fiscali
         <p-accordionTab [selected]="true">
           <p-header style="color: black">
             <img
@@ -64,7 +64,8 @@
           </table>
         </p-accordionTab>
         <br>
-        <!-- Zootecnia -->
+      -->
+        <!-- Zootecnia
         <p-accordionTab [selected]="true">
           <p-header style="color: black">
             <img
@@ -107,7 +108,8 @@
           </table>
         </p-accordionTab>
         <br>
-        <!-- Dotazione tecnica -->
+      -->
+        <!-- Dotazione tecnica 
         <p-accordionTab [selected]="true">
           <p-header style="color: black">
             <img
@@ -141,8 +143,8 @@
           </table>
         </p-accordionTab>
         <br>
-
-        <!-- Territorio -->
+      -->
+        <!-- Territorio
         <p-accordionTab [selected]="true">
           <p-header style="color: black">
             <img
@@ -219,18 +221,19 @@
           </table>
         </p-accordionTab>
         <br>
-
+      -->
       <!-- Domande -->
       <p-accordionTab [selected]="true">
         <p-header style="color: black">
           <img
             src="assets/img/ico-domande.jpg"
             class="d-inline-block mr-3">
-          <strong>{{ "FascicoloAziendale.DOMANDE" | translate }}</strong>
+          <strong>{{ "UMA.CARBURANTE_AGRICOLO" | translate }}</strong>
         </p-header>
         <table>
           <tbody>
             <tr>
+              <!--
               <td>
                 <a
                   [routerLink]
@@ -239,6 +242,7 @@
                   <i class="pi pi-arrow-right"></i>
                 </a>
               </td>
+              -->
               <td>
                 <a
                   [routerLink]
@@ -247,8 +251,6 @@
                   <i class="pi pi-arrow-right"></i>
                 </a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <a
                   [routerLink]
@@ -257,6 +259,8 @@
                   <i class="pi pi-arrow-right"></i>
                 </a>
               </td>
+            </tr>
+            <tr>
               <td>
                 <a
                   [routerLink]
@@ -264,6 +268,9 @@
                   {{ "FascicoloAziendale.GESTIONE_CARBURANTE_ESUBERO" | translate }}
                   <i class="pi pi-arrow-right"></i>
                 </a>
+              </td>
+              <td>
+                &nbsp;
               </td>
             </tr>
           </tbody>
