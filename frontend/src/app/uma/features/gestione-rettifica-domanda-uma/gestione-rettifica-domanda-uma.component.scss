@@ -1,6 +1,6 @@
 /** replica variabili dichiarate in theme-green.1.scss per evitare warning sul Budget */
 $primaryColor: #093956;
-$primaryDarkColor: #388e3c;
+$primaryDarkColor: #093956;
 $primaryLightColor: #81c784;
 $primaryLightestColor: #e8f5e9;
 $primaryTextColor: #ffffff;
@@ -48,12 +48,12 @@ $accentTextColor: #ffffff;
   }
 
   .button-accent-alt {
-    border: 2px solid #01985a;
-    color: #01985a !important;
+    border: 2px solid #05263e;
+    color: #05263e !important;
     font-weight: bold;
 
     & > ::ng-deep span.ui-button-icon-right.ui-clickable {
-      color: #01985a;
+      color: #05263e;
       font-size: x-large;
     }
   }

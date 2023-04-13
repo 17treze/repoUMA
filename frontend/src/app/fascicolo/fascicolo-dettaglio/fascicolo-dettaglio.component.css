@@ -89,7 +89,7 @@
 }
 
 :host >>> .accordion-custom td a:hover .pi {
-  color: #01985a;
+  color: #05263e;
 }
 
 :host >>> .accordion-custom td .pi {
@@ -99,5 +99,5 @@
 
 :host >>> .section-question__header {
     padding: 16px;
-    background-color: #01985a;
+    background-color: #05263e;
 }

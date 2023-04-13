@@ -1,5 +1,6 @@
 package it.tndigitale.a4g.fascicolo.dotazionetecnica.api;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -95,11 +96,19 @@ public class FabbricatiController {
 			@RequestParam(required = false) Integer subalterno
 			) {
 		try {
-			return fabbricatiService.getInfoFabbricati(numeroParticella, denominatore, tipologia, codiceComuneCatastale, subalterno);
+//			return fabbricatiService.getInfoFabbricati(numeroParticella, denominatore, tipologia, codiceComuneCatastale, subalterno);
+			DatiCatastaliDto part = new DatiCatastaliDto();
+			part.setTipologia(TipologiaParticellaCatastale.EDIFICIALE);
+			part.setComune("Trento");
+			part.setFoglio(9999);
+			part.setSezione("A");
+			part.setSub("1");
+			part.setParticella("00234");
+			return part;
 		} catch (NoSuchElementException | EntityNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT);
-		} catch (CatastoParticellaEstintaException | CatastoEdificialeClasseCatastaleNonAmmessaException e) {
-			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
+//		} catch (CatastoParticellaEstintaException | CatastoEdificialeClasseCatastaleNonAmmessaException e) {
+//			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, e.getMessage());
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
@@ -110,7 +119,12 @@ public class FabbricatiController {
 	public List<String> getFromCatastoParticella(@RequestParam String numeroParticella,
 												 @RequestParam Integer codiceComuneCatastale) {
 		try {
-			return fabbricatiService.getElencoSubalterniParticella(numeroParticella, codiceComuneCatastale);
+//			return fabbricatiService.getElencoSubalterniParticella(numeroParticella, codiceComuneCatastale);
+			List<String> sub = new ArrayList();
+			sub.add("1");
+			sub.add("2");
+			sub.add("3");
+			return sub;
 		} catch (NoSuchElementException | EntityNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {

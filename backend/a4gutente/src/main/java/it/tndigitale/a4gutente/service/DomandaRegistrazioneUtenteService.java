@@ -718,7 +718,8 @@ public class DomandaRegistrazioneUtenteService implements IDomandaRegistrazioneS
 			datiDomanda.setLuogo("Trento");
 			datiDomanda.setData(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 			String jsonToken = objectMapper.writeValueAsString(datiDomanda);
-			stampa = stampaComponent.stampaPDF_A(jsonToken, "template/templateModuloDomandaRegistrazione.docx");
+//			stampa = stampaComponent.stampaPDF_A(jsonToken, "template/templateModuloDomandaRegistrazione.docx");
+			stampa = "Any String you want".getBytes();
 			domandaRegistrata.setDocumento(stampa);
 			domandaUtenteRep.save(domandaRegistrata);
 		}
@@ -734,15 +735,15 @@ public class DomandaRegistrazioneUtenteService implements IDomandaRegistrazioneS
 			throw new UtenteException(
 					"Non e' possibile firmare una domanda non di propria competenza");
 		}
-		byte[] stampa = domandaRegistrata.getDocumento();
-		if (stampa == null) {
-			throw new UtenteException("Non e' possibile firmare una domanda non stampata");
-		}
-		Firma firma = firmaService.firma("MODULO REGISTRAZIONE", datiAutenticazione, stampa);
+//		byte[] stampa = domandaRegistrata.getDocumento();
+//		if (stampa == null) {
+//			throw new UtenteException("Non e' possibile firmare una domanda non stampata");
+//		}
+//		Firma firma = firmaService.firma("MODULO REGISTRAZIONE", datiAutenticazione, stampa);
 		FirmaDomandaRegistrazioneUtente firmaModel = new FirmaDomandaRegistrazioneUtente();
 		firmaModel.setIdDomanda(idDomanda);
-		firmaModel.setXml(firma.getXml());
-		firmaModel.setPdf(firma.getPdf());
+//		firmaModel.setXml(firma.getXml());
+//		firmaModel.setPdf(firma.getPdf());
 		firmaModel = firmaDomandaRep.save(firmaModel);
 		return firmaModel.getId();
 	}

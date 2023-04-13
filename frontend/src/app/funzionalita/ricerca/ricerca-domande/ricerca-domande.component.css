@@ -57,7 +57,7 @@
 }
 
 .search-button {
-  background-color: #01985A;
+  background-color: #05263e;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -123,7 +123,7 @@ td {
 }
 
 .related-detail-arrow {
-  color: #01985A
+  color: #05263e
 }
 
 .related-detail-arrow:hover {

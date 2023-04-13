@@ -31,12 +31,12 @@
     }
   
     .button-accent-alt {
-      border: 2px solid #01985a;
-      color: #01985a !important;
+      border: 2px solid #05263e;
+      color: #05263e !important;
       font-weight: bold;
   
       & > ::ng-deep span.ui-button-icon-right.ui-clickable.pi.pi-trash {
-        color: #01985a;
+        color: #05263e;
         font-size: x-large;
       }
     }
