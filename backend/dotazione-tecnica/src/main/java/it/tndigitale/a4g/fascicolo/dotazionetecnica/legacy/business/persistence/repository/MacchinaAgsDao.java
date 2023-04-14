@@ -33,11 +33,11 @@ public class MacchinaAgsDao extends NamedParameterJdbcDaoSupport {
 		StringBuilder sb = new StringBuilder("");
 		Map<String, Object> params = new HashMap<String, Object>();
 		
-		//		// filtro per cuaa
-		//		if (filter.getCuaa() != null) {
-		//			params.put("cuaa", filter.getCuaa().toUpperCase());
-		//			sb.append("AND csv.CUAA = :cuaa ");
-		//		}
+		// filtro per cuaa
+		if (filter.getCuaa() != null) {
+			params.put("cuaa", filter.getCuaa().toUpperCase());
+			sb.append("AND f.CUAA = :cuaa ");
+		}
 		//		// filtro per carburanti
 		//		if (!CollectionUtils.isEmpty(filter.getTipiCarburante())) {
 		//			List<String> codiciCarburante = filter.getTipiCarburante().stream().map(carburante -> {
@@ -93,7 +93,7 @@ public class MacchinaAgsDao extends NamedParameterJdbcDaoSupport {
 				+ "    LEFT OUTER JOIN a4gt_macchina_motorizzata mm on mm.id = m.id and mm.id_validazione = m.id_validazione\r\n"
 				+ "    left outer join a4gd_sottotipo sm on sm.id = m.id_sottotipo\r\n"
 				+ "    left outer join a4gd_classe_funzionale cf on cf.id = sm.id_classe_funzionale\r\n"
-				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia";
+				+ "    left outer join a4gd_tipologia tm on tm.id = sm.id_tipologia\r\n" + "WHERE 1 = 1 ";
 	}
 	
 	private String decodifica(String codice, String sottoCodice) {
