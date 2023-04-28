@@ -3,3 +3,4 @@
 ### STS ###
 /RemoteSystemsTempFiles
 .recommenders
+/bin/
