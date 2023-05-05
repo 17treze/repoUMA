@@ -20,7 +20,7 @@ export class FascicoloService {
     private _configuration: Configuration,
   ) { }
 
-  anagrafica_server_fascicolo = `${this._configuration.antimafia_server}`;
+  anagrafica_server_fascicolo = `${this._configuration.anagrafica_server}`;
   anagrafica_server = `${this._configuration.anagrafica_server}`;
   urlGetFascicoli = `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/?params=`;
   urlGetFascicoliMiei = `${this.anagrafica_server_fascicolo}/consultazione/mieifascicoli`;
