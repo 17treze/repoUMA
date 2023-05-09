@@ -23,6 +23,7 @@ export class MenuCaaComponent implements OnInit {
       { routerLink: 'fascicoloAziendale', label: 'Fascicolo Aziendale' },
       { routerLink: 'gestioneAzienda', label: 'Domande' },
       // { routerLink: 'scadenze', label: 'Scadenze' }
+      { routerLink: 'configurazione', label: 'Configurazione' }
     );
   }
 }

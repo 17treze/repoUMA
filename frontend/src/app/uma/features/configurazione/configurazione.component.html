@@ -1,0 +1,79 @@
+
+<div class="ui-g ui-fluid">
+  <div class="p-grid ui-grid-fixed">
+    <div class="p-col">
+
+      <!-- SEPARATORE
+      <hr
+        *ngIf="displayCardCercaFascicolo"
+        align="center"
+        size="1"
+        width="100%"
+        color="black"
+        noshade>
+       -->
+
+      <!-- SEZIONE CARBURANTE AGRICOLO -->
+      <div
+        class="p-grid p-align-center"
+        *ngIf="displayCardConfigurazioneUma">
+        <div class="p-col-4">
+          <H5>
+            <img
+              src="assets/img/icons/svg/icon-domanda-uma.svg"
+              class="d-inline-block mr-3">
+            <b>{{ 'UMA.CARBURANTE_AGRICOLO' | translate }}</b>
+          </H5>
+        </div>
+        <div class="p-col-8">
+          <table>
+            <tbody class="ui-table-tbody display-table">
+              <tr>
+                <td class="p-col-12">
+                  <a routerLink="../lavorazioni">
+                    {{ 'UMA.LAVORAZIONI' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a routerLink="../gruppiLavorazione">
+                    {{ 'UMA.GRUPPI_LAVORAZIONE' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a routerLink="../coefficienti">
+                    {{ 'UMA.COEFFICIENTI' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a routerLink="../gruppiColture">
+                    {{ 'UMA.GRUPPI_COLTURE' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td class="p-col-12">
+                  <a routerLink="../gruppiFabbricati">
+                    {{ 'UMA.GRUPPI_FABBRICATI' | translate }}
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+
+    </div>
+  </div>
+</div>

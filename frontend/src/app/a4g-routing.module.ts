@@ -17,6 +17,7 @@ import { AmministrazioneComponent } from "./funzionalita/amministrazione/amminis
 import { MenuCaaComponent } from "./home-caa/menu-caa/menu-caa.component";
 import { DettaglioDomandeScadenzaComponent } from "./home-caa/scadenze/dettaglio-domande-scadenza/dettaglio-domande-scadenza/dettaglio-domande-scadenza.component";
 import { ScadenzeComponent } from "./home-caa/scadenze/scadenze.component";
+import { ConfigurazioneUmaComponent } from "./uma/features/configurazione/configurazione.component";
 import { IbanErratiDuComponent } from "./funzionalita/iban-errati-du/iban-errati-du.component";
 import { ScadenzeAppagComponent } from "./funzionalita/scadenze-appag/scadenze-appag.component";
 import { GestioneAziendeComponent } from './fascicolo/gestione-aziende/gestione-aziende.component';
@@ -71,7 +72,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'fascicoloAziendale', pathMatch: 'full' },
           { path: 'fascicoloAziendale', component: FascicoloAziendaleComponent },
           { path: 'gestioneAzienda', component: GestioneAziendeComponent },
-          { path: 'scadenze', component: ScadenzeComponent }
+          { path: 'scadenze', component: ScadenzeComponent },
+          { path: 'configurazione', component: ConfigurazioneUmaComponent }
         ]
       },
       // {

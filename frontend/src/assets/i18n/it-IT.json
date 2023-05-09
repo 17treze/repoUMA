@@ -1042,6 +1042,11 @@
         "ELENCO_DOMANDE": "Elenco domande",
         "SCARICA_ELENCHI": "Download dati",
         "CARBURANTE_AGRICOLO": "Carburante agricolo",
+        "LAVORAZIONI": "Lavorazioni",
+        "GRUPPI_LAVORAZIONE": "Gruppi lavorazioni",
+        "GRUPPI_COLTURE": "Gruppi colturali",
+        "GRUPPI_FABBRICATI": "Tipologie fabbricati",
+        "COEFFICIENTI": "Coefficienti",
         "INTESTAZIONE": {
             "CUAA": "Cuaa",
             "DENOMINAZIONE": "Denominazione",
