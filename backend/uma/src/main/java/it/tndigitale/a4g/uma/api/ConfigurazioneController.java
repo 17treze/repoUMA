@@ -1,7 +1,7 @@
 package it.tndigitale.a4g.uma.api;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +17,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
+import it.tndigitale.a4g.framework.pagination.model.Paginazione;
+import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.uma.business.service.configurazione.ConfigurazioneService;
 import it.tndigitale.a4g.uma.dto.ColturaGruppiDto;
 
@@ -49,7 +52,8 @@ public class ConfigurazioneController {
 	@Operation(summary = "Restituisce i gruppi colturali", description = "")
 	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
 	@GetMapping(ApiUrls.GRUPPI_COLTURE)
-	public List<ColturaGruppiDto> getGruppiColturali() {
-		return configurazioneService.getGruppiColturali();
+	public RisultatiPaginati<ColturaGruppiDto> getGruppiColturali(Paginazione paginazione, Ordinamento ordinamento) {
+		return configurazioneService.getGruppiColturali(paginazione, Optional.ofNullable(ordinamento)
+				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
 	}
 }

@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
+import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
+import it.tndigitale.a4g.framework.pagination.model.Paginazione;
+import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.ColturaGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.ConfigurazioneModel;
@@ -60,13 +65,13 @@ public class ConfigurazioneService {
 		return configurazioneDao.save(toSave).getId();
 	}
 	
-	public List<ColturaGruppiDto> getGruppiColturali() {
+	public RisultatiPaginati<ColturaGruppiDto> getGruppiColturali(Paginazione paginazione, Ordinamento ordinamento) {
 		List<ColturaGruppiDto> listColturaGruppiDto = new ArrayList<ColturaGruppiDto>();
-		List<ColturaGruppiModel> listColturaGruppiModel = colturaGruppiDao.findAllValid();
-		for (ColturaGruppiModel colturaGruppiModel : listColturaGruppiModel) {
+		Page<ColturaGruppiModel> pageColturaGruppiModel = colturaGruppiDao
+				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
+		for (ColturaGruppiModel colturaGruppiModel : pageColturaGruppiModel) {
 			ColturaGruppiDto colturaGruppiDto = new ColturaGruppiDto();
-			colturaGruppiDto.setAnnoFine(colturaGruppiModel.getAnnoFine())
-					.setAnnoInizio(colturaGruppiModel.getAnnoInizio())
+			colturaGruppiDto.setAnnoInizio(colturaGruppiModel.getAnnoInizio())
 					.setCodiceDestUso(colturaGruppiModel.getCodiceDestUso())
 					.setCodiceQualita(colturaGruppiModel.getCodiceQualita())
 					.setCodiceSuolo(colturaGruppiModel.getCodiceSuolo()).setCodiceUso(colturaGruppiModel.getCodiceUso())
@@ -74,7 +79,7 @@ public class ConfigurazioneService {
 					.setGruppoLavorazione(colturaGruppiModel.getGruppoLavorazione().getId());
 			listColturaGruppiDto.add(colturaGruppiDto);
 		}
-		return listColturaGruppiDto;
+		return RisultatiPaginati.of(listColturaGruppiDto, pageColturaGruppiModel.getTotalElements());
 	}
 	
 }

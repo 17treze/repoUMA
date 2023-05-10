@@ -1,11 +1,10 @@
 export interface GruppoColtureDto {
-    id: number;
-    idGruppoLavorazione: number;
+    gruppoLavorazione: number;
     codiceSuolo: string;
     codiceDestUso: string;
     codiceUso: string;
     codiceQualita: string;
     codiceVarieta: string;
-    annoInizio: string;
-    annoFine: string;
+    annoInizio: number;
+    annoFine: number;
 }

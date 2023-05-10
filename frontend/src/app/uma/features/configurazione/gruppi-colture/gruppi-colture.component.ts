@@ -1,22 +1,35 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Subscription } from 'rxjs';
+import { EMPTY, of, Subscription } from 'rxjs';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
 import { MessageService } from 'primeng/api';
 import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/GruppoColtureDto';
 import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
+import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/paginator.model';
+import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
+import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-gruppi-colture',
   templateUrl: './gruppi-colture.component.html',
   styleUrls: ['./gruppi-colture.component.scss']
 })
-export class GruppiColtureComponent implements OnInit {
+export class GruppiColtureComponent implements OnInit, OnDestroy {
 
-  listaGruppi: Array<GruppoColtureDto>;
+  listaGruppi: PaginatorA4G<Array<GruppoColtureDto>>;
+  display: boolean;
+  testoRicerca: string;
+  numeroPagina: number;
+  elementiPerPagina: number;
+  totalElements: number;
+  first: number;
+  paginazione: Paginazione;
+  defaultPropertySort: string;
+  rowgroup: boolean;
 
   // Subscriptions
-  getGruppiSubscription: Subscription;
+  getPagedGruppiSubscription: Subscription;
 
   constructor(
     private errorService: ErrorService,
@@ -26,22 +39,71 @@ export class GruppiColtureComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.listaGruppi = [];
-    this.getGruppi();
+    this.display = true;
+    this.rowgroup = true;
+    this.listaGruppi = {} as PaginatorA4G<Array<GruppoColtureDto>>;
+    this.listaGruppi.count = 0;
+    this.listaGruppi.risultati = [];
+    this.initPaginator();
+    this.getGruppi(this.buildPaginatorEvent());
   }
 
-  private getGruppi() {
-    this.getGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture()
-      .subscribe((gruppi: Array<GruppoColtureDto>) => {
-        if (gruppi && gruppi.length) {
-          this.listaGruppi = [];
-          gruppi.forEach(gruppoColt => {
-            this.listaGruppi.push(gruppoColt);
-          })
-        } else {
-          this.listaGruppi = [];
+  ngOnDestroy() {
+    if (this.getPagedGruppiSubscription) {
+      this.getPagedGruppiSubscription.unsubscribe();
+    }
+  }
+
+  onCloseToastGetGruppi() {
+  }
+
+  private getGruppi(event: PaginatorEvent) {
+    this.numeroPagina = Math.floor(event.first / this.elementiPerPagina);
+    if (this.numeroPagina == null) {
+      this.numeroPagina = 0;
+    }
+    this.paginazione = Paginazione.of(this.numeroPagina, this.elementiPerPagina, event.sortField, Paginazione.getOrdine(event.sortOrder));
+    this.paginazione.numeroElementiPagina = this.elementiPerPagina;
+
+    this.getPagedGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture(this.paginazione)
+      .pipe(switchMap((res: PaginatorA4G<Array<GruppoColtureDto>>) => {
+        return of(res);
+      }),
+        catchError((err: ErrorDTO) => {
+          this.errorService.showError(err, 'tst-gruppi-colture');
+          return EMPTY;
+        })
+      )
+      .subscribe((result: PaginatorA4G<Array<GruppoColtureDto>>) => {
+        this.listaGruppi = result;
+        if (this.listaGruppi != null) {
+          this.totalElements = this.listaGruppi.count;
         }
-      }, error => this.errorService.showError(error, 'tst-macchine'));
+      }, error => this.errorService.showError(error, 'tst-gruppi-colture'));
+  }
+
+  private initPaginator() {
+    this.first = 0;
+    this.totalElements = 0;
+    this.numeroPagina = 0;
+    this.elementiPerPagina = 10;
+    this.defaultPropertySort = 'id_gruppo_lavorazione';
+  }
+
+  private buildPaginatorEvent(): PaginatorEvent {
+    return {
+      filters: {},
+      first: 0,
+      globalFilter: null,
+      multiSortMeta: undefined,
+      rows: this.elementiPerPagina,
+      sortField: undefined || this.defaultPropertySort,
+      sortOrder: 1 // SortDirection.ASC;
+    };
+  }
+
+  public changePage(event: PaginatorEvent) {
+    this.getGruppi(event);
   }
 
 }

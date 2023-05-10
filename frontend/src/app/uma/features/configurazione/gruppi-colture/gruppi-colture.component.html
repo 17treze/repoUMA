@@ -1,7 +1,37 @@
-<p-table [value]="listaGruppi" rowGroupMode="rowspan" groupRowsBy="IdGruppoLavorazione" sortField="IdGruppoLavorazione" sortMode="single"  [tableStyle]="{'min-width': '75rem'}">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Id Gruppo</th>
+<p-toast
+    key="tst-dialog"
+    [style]="{marginTop: '70px'}"></p-toast>
+<p-toast
+    key="tst-gruppi-colture"
+    [style]="{marginTop: '70px'}"
+    (onClose)="onCloseToastGetGruppi()"></p-toast>
+<div
+    class="ui-g-12 ui-md-12 w-100 boxgrey table-container"
+    *ngIf="listaGruppi?.risultati?.length">
+    <p-table
+        #table
+        rowGroupMode="rowspan" 
+        groupRowsBy="gruppoLavorazione" 
+        sortField="id_gruppo_lavorazione" 
+        sortMode="single"
+        [autoLayout]="true"
+        [value]="listaGruppi?.risultati"
+        [paginator]="true"
+        [rows]="elementiPerPagina"
+        [scrollable]="true"
+        [resetPageOnSort]="true"
+        [first]="first"
+        [totalRecords]="totalElements"
+        [lazy]="true"
+        (onLazyLoad)="changePage($event)">
+        <ng-template
+          pTemplate="header"
+          let-columns>
+          <tr>
+            <th pSortableColumn="id_gruppo_lavorazione">
+                Gruppo Lavorazione
+                <p-sortIcon field="gruppoLavorazione"></p-sortIcon>
+            </th>
             <th>Codice Suolo</th>
             <th>Codice Destinazione d'Uso</th>
             <th>Codice Uso</th>
@@ -9,12 +39,14 @@
             <th>Codice Varietà</th>
             <th>Anno Inizio</th>
             <th>Anno Fine</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-gruppoColt let-rowIndex="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
-        <tr>
-            <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
-                <span class="font-bold ml-2">{{gruppoColt.idGruppoLavorazione}}</span>
+          </tr>
+        </ng-template>
+        <ng-template
+          pTemplate="body"
+          let-gruppoColt let-rowIndex="rowIndex" let-rowgroup="rowgroup" let-rowspan="rowspan">
+          <tr>
+            <td> <!-- *ngIf="rowgroup" [attr.rowspan]="rowspan" -->
+                <span class="font-bold ml-2">{{gruppoColt.gruppoLavorazione}}</span>
             </td>
             <td>
                 {{gruppoColt.codiceSuolo}}
@@ -37,6 +69,15 @@
             <td>
                 {{gruppoColt.annoFine}}
             </td>
-        </tr>
-    </ng-template>
-</p-table>
+          </tr>
+        </ng-template>
+        <!-- template no Results -->
+        <ng-template
+          pTemplate="emptymessage"
+          let-columns>
+          <tr>
+            <td [attr.colspan]="4">Nessun risultato trovato.</td>
+          </tr>
+        </ng-template>
+    </p-table>
+</div>
