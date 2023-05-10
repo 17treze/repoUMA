@@ -1,10 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GruppoColtureDto } from '../../core-uma/models/dto/GruppoColtureDto';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
 import { PaginatorA4G } from 'src/app/a4g-common/interfaces/paginator.model';
 import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
+import { GruppoColtureDto } from '../models/dto/ConfigurazioneDto';
 
 @Injectable({
   providedIn: 'root'

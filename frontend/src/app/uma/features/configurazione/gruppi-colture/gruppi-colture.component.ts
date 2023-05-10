@@ -2,19 +2,19 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, of, Subscription } from 'rxjs';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
-import { MessageService } from 'primeng/api';
-import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/GruppoColtureDto';
 import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
 import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/paginator.model';
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
 import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
 import { catchError, switchMap } from 'rxjs/operators';
+import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
 
 @Component({
   selector: 'app-gruppi-colture',
   templateUrl: './gruppi-colture.component.html',
   styleUrls: ['./gruppi-colture.component.scss']
 })
+
 export class GruppiColtureComponent implements OnInit, OnDestroy {
 
   listaGruppi: PaginatorA4G<Array<GruppoColtureDto>>;
@@ -30,12 +30,11 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
 
   // Subscriptions
   getPagedGruppiSubscription: Subscription;
+  cols: any;
 
   constructor(
     private errorService: ErrorService,
-    private httpClientConfigurazioneUmaService: HttpClientConfigurazioneUmaService,
-    private messageService: MessageService,
-    private route: ActivatedRoute
+    private httpClientConfigurazioneUmaService: HttpClientConfigurazioneUmaService
   ) { }
 
   ngOnInit() {
@@ -88,6 +87,19 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
     this.numeroPagina = 0;
     this.elementiPerPagina = 10;
     this.defaultPropertySort = 'id_gruppo_lavorazione';
+  }
+
+  private setCols() {
+    this.cols = [
+      { field: 'codiceSuolo', header: 'Suolo' },
+      { field: 'codiceDestUso', header: 'Destinazione uso' },
+      { field: 'codiceUso', header: 'Uso' },
+      { field: 'codiceQualita', header: 'Qualità' },
+      { field: 'codiceVarieta', header: 'Varietà' },
+      { field: 'gruppoLavorazione', header: 'Gruppo lavorazione' },
+      { field: 'annoInizio', header: 'Anno inizio' },
+      { field: 'annoFine', header: 'Anno fine' }
+    ];
   }
 
   private buildPaginatorEvent(): PaginatorEvent {

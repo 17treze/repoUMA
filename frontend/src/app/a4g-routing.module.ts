@@ -32,6 +32,10 @@ import { RicercaDomandeComponent } from './funzionalita/ricerca/ricerca-domande/
 import { RicercaAziendeComponentIstruttoreUMA } from "./funzionalita/ricerca-aziende-istruttore-uma/ricerca-aziende-istruttore-uma.component";
 import { GestioneConsegneComponentIstruttoreUMA } from "./funzionalita/gestione-consegne-istruttore-uma/gestione-consegne-istruttore-uma.component";
 import { environment } from 'src/environments/environment';
+import { CoefficientiComponent } from './uma/features/configurazione/coefficienti/coefficienti.component';
+import { GruppiLavorazioneComponent } from './uma/features/configurazione/gruppi-lavorazione/gruppi-lavorazione.component';
+import { LavorazioniComponent } from './uma/features/configurazione/lavorazioni/lavorazioni.component';
+import { GruppiFabbricatoComponent } from './uma/features/configurazione/gruppi-fabbricato/gruppi-fabbricato.component';
 
 const routes: Routes = [
   {
@@ -74,11 +78,6 @@ const routes: Routes = [
           { path: 'gestioneAzienda', component: GestioneAziendeComponent },
           { path: 'scadenze', component: ScadenzeComponent },
           { path: 'configurazione', component: ConfigurazioneUmaComponent },
-          {
-            path: "gruppiColture",
-            component: GruppiColtureComponent,
-            data: { mybreadcrumb: Labels.GRUPPI_COLTURE }
-          }
         ]
       },
       // {
@@ -177,6 +176,31 @@ const routes: Routes = [
         loadChildren: () => import('./fascicolo/revoca-immediata-acquisizione-mandato/revoca-immediata-acquisizione-mandato.module').then(m => m.RevocaImmediataAcquisizioneMandatoModule),
         canLoad: [CrmGuard],
         data: { mybreadcrumb: Labels.ricercaFascicoloPerAcquisizioneMandato }
+      },
+      {
+        path: "coefficienti",
+        component: CoefficientiComponent,
+        data: { mybreadcrumb: Labels.CONFIG_COEFFICIENTI }
+      },
+      {
+        path: "lavorazioni",
+        component: LavorazioniComponent,
+        data: { mybreadcrumb: Labels.CONFIG_LAVORAZIONI }
+      },
+      {
+        path: "gruppiLavorazione",
+        component: GruppiLavorazioneComponent,
+        data: { mybreadcrumb: Labels.CONFIG_GRUPPI_LAVORAZIONE }
+      },
+      {
+        path: "gruppiColture",
+        component: GruppiColtureComponent,
+        data: { mybreadcrumb: Labels.GRUPPI_COLTURE }
+      },
+      {
+        path: "gruppiFabbricato",
+        component: GruppiFabbricatoComponent,
+        data: { mybreadcrumb: Labels.GRUPPI_FABBRICATO }
       }
     ]
   },
@@ -216,8 +240,8 @@ const routes: Routes = [
         },
       },
       // {
-        // path: '',
-        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // path: '',
+      // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
       // },
       {
         path: 'consultazioneUMA',
@@ -393,8 +417,8 @@ const routes: Routes = [
         },
       },
       // {
-        // path: '',
-        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // path: '',
+      // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
       // },
       {
         path: 'consultazioneUMA',
@@ -450,8 +474,8 @@ const routes: Routes = [
         }
       },
       // {
-        // path: '',
-        // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
+      // path: '',
+      // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
       // },
       { path: 'ricercaFascicolo', component: RicercaFascicoliComponent, data: { mybreadcrumb: Labels.ricercaFascicolo } },
       {
@@ -560,9 +584,9 @@ const routes: Routes = [
     canActivate: [CrmGuard]
   },
   // {
-    // path: '',
-    // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule),
-    // canLoad: [CrmGuard]
+  // path: '',
+  // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule),
+  // canLoad: [CrmGuard]
   // },
   {
     path: 'fascicolo',
@@ -591,19 +615,19 @@ const routes: Routes = [
     data: { mybreadcrumb: '' },
     canLoad: [CrmGuard]
   },
-  { 
+  {
     path: 'funzioniPat/ricercaAziende',
     loadChildren: () => import('./uma/uma.module').then(m => m.UmaModule),
     data: { mybreadcrumb: '' },
     canLoad: [CrmGuard]
   },
-  { 
+  {
     path: 'funzioniPat/gestioneConsegne',
     loadChildren: () => import('./uma/uma.module').then(m => m.UmaModule),
     data: { mybreadcrumb: '' },
     canLoad: [CrmGuard]
   },
-  { 
+  {
     path: 'funzioniPat/consultazioneUMA',
     loadChildren: () => import('./uma/uma.module').then(m => m.UmaModule),
     data: { mybreadcrumb: '' },

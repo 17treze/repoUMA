@@ -51,6 +51,7 @@ export const UMA_MESSAGES =
     protocollaInformativaPrivacyError: 'Errore nella protocollazione del documento Informativa Privacy',
 
     // Messaggi di controlli di obbligatorietà 
+    mandatoryAll: 'Tutti i campi sono obbligatori',
     mandatory: 'Campo obbligatorio',
     datiNonValidi: `E' necessario correggere il dato inserito per effettuare il salvataggio`,
     noteRettificaObbligatorio: `Attenzione! E’ necessario compilare il campo Note indicando le motivazioni che hanno portato alla creazione della Rettifica di carburante.`,
