@@ -22,7 +22,7 @@ export interface GruppoLavorazioneDto {
     versione: number;
     indice: number;
     nome: string;
-    ambito: string;
+    ambitoLavorazione: string;
     annoInizio: number;
     annoFine: number;
 }

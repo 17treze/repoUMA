@@ -5,14 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
+import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
+import it.tndigitale.a4g.framework.pagination.model.Paginazione;
+import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.ColturaGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.ConfigurazioneModel;
+import it.tndigitale.a4g.uma.business.persistence.entity.GruppoLavorazioneModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.ConfigurazioneDao;
+import it.tndigitale.a4g.uma.business.persistence.repository.GruppiLavorazioneDao;
 import it.tndigitale.a4g.uma.dto.ColturaGruppiDto;
+import it.tndigitale.a4g.uma.dto.GruppoLavorazioneDto;
 
 @Service
 public class ConfigurazioneService {
@@ -23,6 +31,8 @@ public class ConfigurazioneService {
 	private ConfigurazioneDao configurazioneDao;
 	@Autowired
 	private ColturaGruppiDao colturaGruppiDao;
+	@Autowired
+	private GruppiLavorazioneDao gruppiLavorazioneDao;
 	
 	public LocalDateTime getDataLimitePrelievi(int annoCampagna) {
 		var conf = configurazioneDao.findByCampagna(annoCampagna);
@@ -60,13 +70,13 @@ public class ConfigurazioneService {
 		return configurazioneDao.save(toSave).getId();
 	}
 	
-	public List<ColturaGruppiDto> getGruppiColturali() {
+	public RisultatiPaginati<ColturaGruppiDto> getGruppiColturali(Paginazione paginazione, Ordinamento ordinamento) {
 		List<ColturaGruppiDto> listColturaGruppiDto = new ArrayList<ColturaGruppiDto>();
-		List<ColturaGruppiModel> listColturaGruppiModel = colturaGruppiDao.findAllValid();
-		for (ColturaGruppiModel colturaGruppiModel : listColturaGruppiModel) {
+		Page<ColturaGruppiModel> pageColturaGruppiModel = colturaGruppiDao
+				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
+		for (ColturaGruppiModel colturaGruppiModel : pageColturaGruppiModel) {
 			ColturaGruppiDto colturaGruppiDto = new ColturaGruppiDto();
-			colturaGruppiDto.setAnnoFine(colturaGruppiModel.getAnnoFine())
-					.setAnnoInizio(colturaGruppiModel.getAnnoInizio())
+			colturaGruppiDto.setAnnoInizio(colturaGruppiModel.getAnnoInizio())
 					.setCodiceDestUso(colturaGruppiModel.getCodiceDestUso())
 					.setCodiceQualita(colturaGruppiModel.getCodiceQualita())
 					.setCodiceSuolo(colturaGruppiModel.getCodiceSuolo()).setCodiceUso(colturaGruppiModel.getCodiceUso())
@@ -74,7 +84,22 @@ public class ConfigurazioneService {
 					.setGruppoLavorazione(colturaGruppiModel.getGruppoLavorazione().getId());
 			listColturaGruppiDto.add(colturaGruppiDto);
 		}
-		return listColturaGruppiDto;
+		return RisultatiPaginati.of(listColturaGruppiDto, pageColturaGruppiModel.getTotalElements());
+	}
+	
+	public RisultatiPaginati<GruppoLavorazioneDto> getGruppiLavorazione(Paginazione paginazione,
+			Ordinamento ordinamento) {
+		List<GruppoLavorazioneDto> listGruppoLavorazioneDto = new ArrayList<GruppoLavorazioneDto>();
+		Page<GruppoLavorazioneModel> pageGruppoLavorazioneModel = gruppiLavorazioneDao
+				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
+		for (GruppoLavorazioneModel gruppoLavorazioneModel : pageGruppoLavorazioneModel) {
+			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
+			gruppoLavorazioneDto.setAnnoInizio(gruppoLavorazioneModel.getAnnoInizio())
+					.setNome(gruppoLavorazioneModel.getNome()).setIndice(gruppoLavorazioneModel.getIndice())
+					.setAmbitoLavorazione(gruppoLavorazioneModel.getAmbitoLavorazione());
+			listGruppoLavorazioneDto.add(gruppoLavorazioneDto);
+		}
+		return RisultatiPaginati.of(listGruppoLavorazioneDto, pageGruppoLavorazioneModel.getTotalElements());
 	}
 	
 }

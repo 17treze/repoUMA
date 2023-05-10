@@ -43,4 +43,6 @@ public class ApiUrls {
 	public static final String ELENCHI = "/elenchi";
 	
 	public static final String GRUPPI_COLTURE = "/gruppi-colture";
+	
+	public static final String GRUPPI_LAVORAZIONI = "/gruppi-lavorazioni";
 }
