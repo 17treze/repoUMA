@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
 import { PaginatorA4G } from 'src/app/a4g-common/interfaces/paginator.model';
 import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
-import { GruppoColtureDto } from '../models/dto/ConfigurazioneDto';
+import { GruppoColtureDto, GruppoLavorazioneDto, LavorazioneDto } from '../models/dto/ConfigurazioneDto';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,11 @@ export class HttpClientConfigurazioneUmaService {
   public getGruppiColture(paginazione: Paginazione): Observable<PaginatorA4G<Array<GruppoColtureDto>>> {
     const data: any = { ...paginazione };
     return this.http.get<PaginatorA4G<Array<GruppoColtureDto>>>(`${this.urlBase()}/gruppi-colture`, { params: data });
+  }
+
+  public getGruppiLavorazioni(paginazione: Paginazione): Observable<PaginatorA4G<Array<GruppoLavorazioneDto>>> {
+    const data: any = { ...paginazione };
+    return this.http.get<PaginatorA4G<Array<GruppoLavorazioneDto>>>(`${this.urlBase()}/gruppi-lavorazioni`, { params: data });
   }
 
   urlBase() {

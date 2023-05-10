@@ -30,6 +30,7 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
 
   // Subscriptions
   getPagedGruppiSubscription: Subscription;
+
   cols: any;
 
   constructor(

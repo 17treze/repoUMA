@@ -11,10 +11,10 @@
         class="table-responsive"
         margin-top="30px">
         <label class="labelricerca my-3">
-          {{ gruppiLavorazione.length }} elementi trovati
+          {{ gruppiLavorazione?.risultati?.length }} elementi trovati
         </label>
         <p-table
-          [value]="gruppiLavorazione"
+          [value]="gruppiLavorazione?.risultati"
           dataKey="id"
           editMode="row"
           [columns]="cols"

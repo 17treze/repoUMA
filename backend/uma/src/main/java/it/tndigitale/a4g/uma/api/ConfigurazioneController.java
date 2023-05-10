@@ -22,6 +22,7 @@ import it.tndigitale.a4g.framework.pagination.model.Paginazione;
 import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.uma.business.service.configurazione.ConfigurazioneService;
 import it.tndigitale.a4g.uma.dto.ColturaGruppiDto;
+import it.tndigitale.a4g.uma.dto.GruppoLavorazioneDto;
 
 @RestController
 @RequestMapping(ApiUrls.CONFIGURAZIONI)
@@ -54,6 +55,15 @@ public class ConfigurazioneController {
 	@GetMapping(ApiUrls.GRUPPI_COLTURE)
 	public RisultatiPaginati<ColturaGruppiDto> getGruppiColturali(Paginazione paginazione, Ordinamento ordinamento) {
 		return configurazioneService.getGruppiColturali(paginazione, Optional.ofNullable(ordinamento)
+				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
+	}
+	
+	@Operation(summary = "Restituisce i gruppi lavorazione", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@GetMapping(ApiUrls.GRUPPI_LAVORAZIONI)
+	public RisultatiPaginati<GruppoLavorazioneDto> getGruppiLavorazione(Paginazione paginazione,
+			Ordinamento ordinamento) {
+		return configurazioneService.getGruppiLavorazione(paginazione, Optional.ofNullable(ordinamento)
 				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
 	}
 }
