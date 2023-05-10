@@ -35,8 +35,14 @@ import { GestioneTrasferimentiComponent } from './features/gestione-esubero-carb
 import { PopupInserisciEditaTrasferimentoComponent } from './features/gestione-esubero-carburante/popup-inserisci-edita-trasferimento/popup-inserisci-edita-trasferimento.component';
 import { PopupRicercaRichiestaCarburanteComponent } from './features/gestione-esubero-carburante/popup-ricerca-richiesta-carburante/popup-ricerca-richiesta-carburante.component';
 import { MacchineComponent } from './features/gestione-domanda-uma/indice-domanda-uma/macchine/macchine.component';
+import { CoefficientiComponent } from './features/configurazione/coefficienti/coefficienti.component';
+import { LavorazioniComponent } from './features/configurazione/lavorazioni/lavorazioni.component';
+import { GruppiLavorazioneComponent } from './features/configurazione/gruppi-lavorazione/gruppi-lavorazione.component';
+import { GruppiFabbricatoComponent } from './features/configurazione/gruppi-fabbricato/gruppi-fabbricato.component';
+import { ConfigurazioneUmaComponent } from './features/configurazione/configurazione.component';
+import { GruppiColtureComponent } from './features/configurazione/gruppi-colture/gruppi-colture.component';
 
-const MODULES: Array<Type<any>>  = [
+const MODULES: Array<Type<any>> = [
   CommonModule,
   A4gCommonModule,
   UmaRoutingModule,
@@ -73,7 +79,13 @@ const COMPONENTS: Array<Type<any>> = [
   ProtocollazioneComponent,
   PopupProtocollazioneDichiarazioneComponent,
   GestioneEsuberoCarburanteComponent,
-  MacchineComponent
+  MacchineComponent,
+  CoefficientiComponent,
+  LavorazioniComponent,
+  GruppiLavorazioneComponent,
+  GruppiFabbricatoComponent,
+  ConfigurazioneUmaComponent,
+  GruppiColtureComponent,
 ];
 
 const ENTRY_COMPONENTS: Array<Type<any>> = [];

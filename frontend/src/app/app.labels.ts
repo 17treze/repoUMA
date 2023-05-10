@@ -81,7 +81,6 @@ export class Labels {
   static mandato = 'Mandato';
   static filter = 'Filtra';
   static fascicoli = 'fascicoli';
-  static GRUPPI_COLTURE = 'Gruppi colturali';
 
   // invio certificazione AM
   static dato = 'Dato';
@@ -155,6 +154,12 @@ export class Labels {
   static tipoDetenzione = 'Tipo detenzione';
   static acquisizioneMandato = 'Acquisizione mandato';
   static ricercaFascicoloPerAcquisizioneMandato = 'Fascicolo Revocato: ricerca per CUAA';
+  static CONFIG_COEFFICIENTI = 'Configurazione coefficienti';
+  static CONFIG_LAVORAZIONI = 'Configurazione lavorazioni';
+  static CONFIG_GRUPPI_LAVORAZIONE = 'Configurazione gruppi lavorazione';
+  static GRUPPI_COLTURE = 'Gruppi colturali';
+  static GRUPPI_FABBRICATO = 'Gruppi fabbricato';
+
   // ---------------------------
 
   // generici

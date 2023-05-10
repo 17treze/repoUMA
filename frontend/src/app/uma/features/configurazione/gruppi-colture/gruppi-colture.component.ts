@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
-import { MessageService } from 'primeng/api';
-import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/GruppoColtureDto';
 import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
+import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
 
 @Component({
   selector: 'app-gruppi-colture',
@@ -13,25 +10,35 @@ import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/service
 })
 export class GruppiColtureComponent implements OnInit {
 
-  listaGruppi: Array<GruppoColtureDto>;
+  listaGruppi: GruppoColtureDto[] = [];
 
-  // Subscriptions
-  getGruppiSubscription: Subscription;
+  cols: any;
 
   constructor(
     private errorService: ErrorService,
-    private httpClientConfigurazioneUmaService: HttpClientConfigurazioneUmaService,
-    private messageService: MessageService,
-    private route: ActivatedRoute
+    private httpClientConfigurazioneUmaService: HttpClientConfigurazioneUmaService
   ) { }
 
   ngOnInit() {
-    this.listaGruppi = [];
+    this.setCols();
     this.getGruppi();
   }
 
+  private setCols() {
+    this.cols = [
+      { field: 'codiceSuolo', header: 'Suolo' },
+      { field: 'codiceDestUso', header: 'Destinazione uso' },
+      { field: 'codiceUso', header: 'Uso' },
+      { field: 'codiceQualita', header: 'Qualità' },
+      { field: 'codiceVarieta', header: 'Varietà' },
+      { field: 'gruppoLavorazione', header: 'Gruppo lavorazione' },
+      { field: 'annoInizio', header: 'Anno inizio' },
+      { field: 'annoFine', header: 'Anno fine' }
+    ];
+  }
+
   private getGruppi() {
-    this.getGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture()
+    this.httpClientConfigurazioneUmaService.getGruppiColture()
       .subscribe((gruppi: Array<GruppoColtureDto>) => {
         if (gruppi && gruppi.length) {
           this.listaGruppi = [];

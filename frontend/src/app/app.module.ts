@@ -41,8 +41,6 @@ import { DateFormatPipe } from './a4g-common/DateFormatPipe';
 import { AmministrazioneComponent } from './funzionalita/amministrazione/amministrazione.component';
 import { DettaglioDomandeScadenzaComponent } from './home-caa/scadenze/dettaglio-domande-scadenza/dettaglio-domande-scadenza/dettaglio-domande-scadenza.component';
 import { ScadenzeComponent } from './home-caa/scadenze/scadenze.component';
-import { ConfigurazioneUmaComponent } from './uma/features/configurazione/configurazione.component';
-import { GruppiColtureComponent } from './uma/features/configurazione/gruppi-colture/gruppi-colture.component';
 import { ElencoDomandeService } from './istruttoria/istruttoria-pac1420/domandaUnica/services/elenco-domande.service';
 import { IstruttoriaCorrente } from './istruttoria/istruttoria-pac1420/domandaUnica/istruttoriaCorrente';
 import { IbanErratiDuComponent } from './funzionalita/iban-errati-du/iban-errati-du.component';
@@ -130,8 +128,6 @@ export function HttpLoaderFactory(
     DateFormatPipe,
     DettaglioDomandeScadenzaComponent,
     ScadenzeComponent,
-    ConfigurazioneUmaComponent,
-    GruppiColtureComponent,
     IbanErratiDuComponent,
     ConsultazioneUMAComponent,
     GestioneRettificaDomandaUMAComponent,
