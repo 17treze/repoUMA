@@ -24,101 +24,106 @@ import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
 
 @Component
 public class RichiestaCarburanteDtoBuilder {
-
+	
 	@Autowired
 	private ColturaGruppiDao colturaGruppiDao;
-
+	
 	private RichiestaCarburanteDto richiestaCarburanteDto;
-
+	
 	public RichiestaCarburanteDtoBuilder() {
 		richiestaCarburanteDto = new RichiestaCarburanteDto();
 	}
-
+	
 	public RichiestaCarburanteDtoBuilder newDto() {
 		richiestaCarburanteDto = new RichiestaCarburanteDto();
 		return this;
 	}
-
+	
 	public RichiestaCarburanteDtoBuilder from(RichiestaCarburanteModel richiestaCarburanteModel) {
 		if (richiestaCarburanteModel != null) {
-			richiestaCarburanteDto
-			.setCampagna(richiestaCarburanteModel.getCampagna())
-			.setCfRichiedente(richiestaCarburanteModel.getCfRichiedente())
-			.setCuaa(richiestaCarburanteModel.getCuaa())
-			.setDataPresentazione(richiestaCarburanteModel.getDataPresentazione())
-			.setProtocollo(richiestaCarburanteModel.getProtocollo())
-			.setDataProtocollazione(richiestaCarburanteModel.getDataProtocollazione())
-			.setId(richiestaCarburanteModel.getId())
-			.setStato(richiestaCarburanteModel.getStato())
-			.setDenominazione(richiestaCarburanteModel.getDenominazione())
-			.setNote(richiestaCarburanteModel.getNote());
+			richiestaCarburanteDto.setCampagna(richiestaCarburanteModel.getCampagna())
+					.setCfRichiedente(richiestaCarburanteModel.getCfRichiedente())
+					.setCuaa(richiestaCarburanteModel.getCuaa())
+					.setDataPresentazione(richiestaCarburanteModel.getDataPresentazione())
+					.setProtocollo(richiestaCarburanteModel.getProtocollo())
+					.setDataProtocollazione(richiestaCarburanteModel.getDataProtocollazione())
+					.setId(richiestaCarburanteModel.getId()).setStato(richiestaCarburanteModel.getStato())
+					.setDenominazione(richiestaCarburanteModel.getDenominazione())
+					.setNote(richiestaCarburanteModel.getNote());
 		}
 		return this;
 	}
-
+	
 	public RichiestaCarburanteDtoBuilder withCarburante(CarburanteCompletoDto carburante) {
-		if (carburante != null && carburante.getBenzina() == null && carburante.getGasolio() == null && carburante.getGasolioSerre() == null && carburante.getGasolioTerzi() == null) {
+		if (carburante != null && carburante.getBenzina() == null && carburante.getGasolio() == null
+				&& carburante.getGasolioSerre() == null && carburante.getGasolioTerzi() == null) {
 			richiestaCarburanteDto.setCarburanteRichiesto(null);
-		} else {
+		}
+		else {
 			richiestaCarburanteDto.setCarburanteRichiesto(carburante);
 		}
 		return this;
 	}
-
+	
 	// verifica se esistono della macchine utilizzate (flag true) per ogni tipo di carburante
 	public RichiestaCarburanteDtoBuilder withFlagMacchineDichiarate(List<UtilizzoMacchinariModel> macchineModel) {
 		if (!CollectionUtils.isEmpty(macchineModel)) {
 			List<UtilizzoMacchinariModel> utilizzate = macchineModel.stream()
-					.filter(macchina -> Boolean.TRUE.equals(macchina.getFlagUtilizzo()))
-					.collect(Collectors.toList());
-			richiestaCarburanteDto.setHaMacchineGasolio(utilizzate.stream().anyMatch(macchina -> TipoCarburante.GASOLIO.equals(macchina.getAlimentazione())));
-			richiestaCarburanteDto.setHaMacchineBenzina(utilizzate.stream().anyMatch(macchina -> TipoCarburante.BENZINA.equals(macchina.getAlimentazione())));
+					.filter(macchina -> Boolean.TRUE.equals(macchina.getFlagUtilizzo())).collect(Collectors.toList());
+			richiestaCarburanteDto.setHaMacchineGasolio(utilizzate.stream()
+					.anyMatch(macchina -> TipoCarburante.GASOLIO.equals(macchina.getAlimentazione())));
+			richiestaCarburanteDto.setHaMacchineBenzina(utilizzate.stream()
+					.anyMatch(macchina -> TipoCarburante.BENZINA.equals(macchina.getAlimentazione())));
 		}
 		return this;
 	}
-
+	
 	// verifica se esiste almeno un gruppo di lavorazione per i fabbricati - ad esclusione di quelli di tipo Serre
 	public RichiestaCarburanteDtoBuilder withFlagFabbricatiPresenti(List<FabbricatoModel> fabbricati) {
 		if (CollectionUtils.isEmpty(fabbricati)) {
 			richiestaCarburanteDto.setHaFabbricati(false);
 			return this;
 		}
-		Boolean nonHaFabbricati = fabbricati.stream().filter(fabbricato -> AmbitoLavorazione.FABBRICATI.equals(fabbricato.getTipoFabbricato().getGruppoLavorazione().getAmbitoLavorazione()))
+		Boolean nonHaFabbricati = fabbricati.stream()
+				.filter(fabbricato -> AmbitoLavorazione.FABBRICATI
+						.equals(fabbricato.getTipoFabbricato().getGruppoLavorazione().getAmbitoLavorazione()))
 				.collect(Collectors.toList()).isEmpty();
 		richiestaCarburanteDto.setHaFabbricati(!nonHaFabbricati);
 		return this;
 	}
-
+	
 	// verifica se esiste almeno un gruppo di lavorazione per le serre
 	public RichiestaCarburanteDtoBuilder withFlagSerrePresenti(List<FabbricatoModel> fabbricati) {
 		if (CollectionUtils.isEmpty(fabbricati)) {
 			richiestaCarburanteDto.setHaSerre(false);
 			return this;
 		}
-		Boolean nonHaSerre = fabbricati.stream().filter(fabbricato -> AmbitoLavorazione.SERRE.equals(fabbricato.getTipoFabbricato().getGruppoLavorazione().getAmbitoLavorazione()))
+		Boolean nonHaSerre = fabbricati.stream()
+				.filter(fabbricato -> AmbitoLavorazione.SERRE
+						.equals(fabbricato.getTipoFabbricato().getGruppoLavorazione().getAmbitoLavorazione()))
 				.collect(Collectors.toList()).isEmpty();
 		richiestaCarburanteDto.setHaSerre(!nonHaSerre);
 		return this;
 	}
-
+	
 	// verifica se esiste almeno un gruppo di lavorazione per le colture per l'anno campagna della domanda 
-	public RichiestaCarburanteDtoBuilder withFlagSuperficiPresenti(List<ParticellaDto> particelle, RichiestaCarburanteModel domanda) {
+	public RichiestaCarburanteDtoBuilder withFlagSuperficiPresenti(List<ParticellaDto> particelle,
+			RichiestaCarburanteModel domanda) {
 		if (CollectionUtils.isEmpty(particelle)) {
 			richiestaCarburanteDto.setHaSuperfici(false);
 			return this;
 		}
-		Optional<CodificaColtura> gruppoColtura = particelle.stream()
-				.map(ParticellaDto::getColture)
-				.flatMap(List::stream)
-				.map(ColturaDto::getCodifica)
-				.filter(c -> {
-					ColturaGruppiModel coltura = colturaGruppiDao.findByCodificaAndAnno(c.getCodiceSuolo(), c.getCodiceDestinazioneUso(), c.getCodiceUso(), c.getCodiceQualita(), c.getCodiceVarieta(), domanda.getCampagna().intValue());
+		Optional<CodificaColtura> gruppoColtura = particelle.stream().map(ParticellaDto::getColture)
+				.flatMap(List::stream).map(ColturaDto::getCodifica).filter(c -> {
+					ColturaGruppiModel coltura = colturaGruppiDao.findByCodificaAndAnno(c.getCodiceSuolo(),
+							c.getCodiceDestinazioneUso(), c.getCodiceUso(), c.getCodiceQualita(), c.getCodiceVarieta(),
+							domanda.getCampagna().intValue());
 					return coltura != null ? Boolean.TRUE : Boolean.FALSE;
 				}).findFirst();
 		richiestaCarburanteDto.setHaSuperfici(gruppoColtura.isPresent());
 		return this;
 	}
-
+	
 	// verifica se esiste almeno una dichiarazione effettuata per qualsiasi ambito di lavorazione
 	public RichiestaCarburanteDtoBuilder withFlagDichiarazioniPresenti(List<FabbisognoModel> fabbisogni) {
 		richiestaCarburanteDto.setHaDichiarazioni(!CollectionUtils.isEmpty(fabbisogni));
@@ -130,7 +135,7 @@ public class RichiestaCarburanteDtoBuilder {
 		richiestaCarburanteDto.setIdRettificata(idRettificata);
 		return this;
 	}
-
+	
 	public RichiestaCarburanteDto build() {
 		return richiestaCarburanteDto;
 	}

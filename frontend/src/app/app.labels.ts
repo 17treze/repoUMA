@@ -81,6 +81,7 @@ export class Labels {
   static mandato = 'Mandato';
   static filter = 'Filtra';
   static fascicoli = 'fascicoli';
+  static GRUPPI_COLTURE = 'Gruppi colturali';
 
   // invio certificazione AM
   static dato = 'Dato';

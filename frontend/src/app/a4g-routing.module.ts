@@ -18,6 +18,7 @@ import { MenuCaaComponent } from "./home-caa/menu-caa/menu-caa.component";
 import { DettaglioDomandeScadenzaComponent } from "./home-caa/scadenze/dettaglio-domande-scadenza/dettaglio-domande-scadenza/dettaglio-domande-scadenza.component";
 import { ScadenzeComponent } from "./home-caa/scadenze/scadenze.component";
 import { ConfigurazioneUmaComponent } from "./uma/features/configurazione/configurazione.component";
+import { GruppiColtureComponent } from "./uma/features/configurazione/gruppi-colture/gruppi-colture.component";
 import { IbanErratiDuComponent } from "./funzionalita/iban-errati-du/iban-errati-du.component";
 import { ScadenzeAppagComponent } from "./funzionalita/scadenze-appag/scadenze-appag.component";
 import { GestioneAziendeComponent } from './fascicolo/gestione-aziende/gestione-aziende.component';
@@ -55,7 +56,6 @@ const routes: Routes = [
     component: LoginComponent,
     canDeactivate: [CrmGuard]
   },
-
   {
     path: 'funzioniCaa',
     component: HomeCAAComponent,
@@ -73,7 +73,12 @@ const routes: Routes = [
           { path: 'fascicoloAziendale', component: FascicoloAziendaleComponent },
           { path: 'gestioneAzienda', component: GestioneAziendeComponent },
           { path: 'scadenze', component: ScadenzeComponent },
-          { path: 'configurazione', component: ConfigurazioneUmaComponent }
+          { path: 'configurazione', component: ConfigurazioneUmaComponent },
+          {
+            path: "gruppiColture",
+            component: GruppiColtureComponent,
+            data: { mybreadcrumb: Labels.GRUPPI_COLTURE }
+          }
         ]
       },
       // {
