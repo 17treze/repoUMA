@@ -2,7 +2,7 @@ export interface CoefficienteDto {
     id: number;
     versione: number;
     coefficiente: number;
-    lavorazione: LavorazioneDto
+    lavorazione: number; //LavorazioneDto
     annoInizio: number;
     annoFine: number;
 }
@@ -14,7 +14,7 @@ export interface LavorazioneDto {
     nome: string;
     tipologia: string;
     unitaMisura: string;
-    gruppoLavorazione: GruppoLavorazioneDto;
+    gruppoLavorazione: number; //GruppoLavorazioneDto;
 }
 
 export interface GruppoLavorazioneDto {
@@ -30,7 +30,7 @@ export interface GruppoLavorazioneDto {
 export interface GruppoColtureDto {
     id: number;
     versione: number;
-    gruppoLavorazione: GruppoLavorazioneDto;
+    gruppoLavorazione: number; //GruppoLavorazioneDto;
     codiceSuolo: string;
     codiceDestUso: string;
     codiceUso: string;
@@ -45,5 +45,5 @@ export interface GruppoFabbricatoDto {
     versione: number;
     codiceFabbricato: string;
     tipoFabbricato: string;
-    gruppoLavorazione: GruppoLavorazioneDto;
+    gruppoLavorazione: number; //GruppoLavorazioneDto;
 }

@@ -30,23 +30,7 @@ export class CoefficientiComponent implements OnInit {
         id: 1,
         versione: 0,
         coefficiente: 1,
-        lavorazione: {
-          id: 1,
-          versione: 0,
-          indice: 1,
-          nome: 'lav1',
-          tipologia: 'tipo1',
-          unitaMisura: '1',
-          gruppoLavorazione: {
-            id: 1,
-            versione: 0,
-            indice: 1,
-            nome: 'lav1',
-            ambito: 'tipo1',
-            annoInizio: 2022,
-            annoFine: 2023
-          }
-        },
+        lavorazione: 1,
         annoInizio: 2020,
         annoFine: 2022
       },
@@ -54,23 +38,7 @@ export class CoefficientiComponent implements OnInit {
         id: 2,
         versione: 0,
         coefficiente: 2,
-        lavorazione: {
-          id: 2,
-          versione: 0,
-          indice: 2,
-          nome: 'lav2',
-          tipologia: 'tipo2',
-          unitaMisura: '2',
-          gruppoLavorazione: {
-            id: 2,
-            versione: 0,
-            indice: 2,
-            nome: 'lav2',
-            ambito: 'tipo2',
-            annoInizio: 2020,
-            annoFine: 2022
-          }
-        },
+        lavorazione: 2,
         annoInizio: 2018,
         annoFine: 2023
       }

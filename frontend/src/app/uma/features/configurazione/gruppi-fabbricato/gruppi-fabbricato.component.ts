@@ -29,15 +29,7 @@ export class GruppiFabbricatoComponent implements OnInit {
         versione: 0,
         codiceFabbricato: 'fabbricato1',
         tipoFabbricato: 'tipo1',
-        gruppoLavorazione: {
-          id: 1,
-          versione: 0,
-          indice: 1,
-          nome: 'lav1',
-          ambito: 'tipo1',
-          annoInizio: 2022,
-          annoFine: 2023
-        },
+        gruppoLavorazione: 1,
       }
     ];
 

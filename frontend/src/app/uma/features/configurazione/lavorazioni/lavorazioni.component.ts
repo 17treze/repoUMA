@@ -33,15 +33,7 @@ export class LavorazioniComponent implements OnInit {
         nome: 'lav1',
         tipologia: 'tipo1',
         unitaMisura: '1',
-        gruppoLavorazione: {
-          id: 1,
-          versione: 0,
-          indice: 1,
-          nome: 'lav1',
-          ambito: 'tipo1',
-          annoInizio: 2022,
-          annoFine: 2023
-        }
+        gruppoLavorazione: 1
       }
     ];
 
