@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, MessageService } from 'primeng-lts';
+import { MessageService } from 'primeng-lts';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
-import { GruppoLavorazioneDto, LavorazioneDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
+import { GruppoLavorazioneDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
 import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
 
 @Component({
@@ -12,10 +12,11 @@ import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
 export class GruppiLavorazioneComponent implements OnInit {
 
   gruppiLavorazione: GruppoLavorazioneDto[];
-
-  clonedGruppiLavorazione: { [s: string]: GruppoLavorazioneDto; } = {};
-
+  gruppoLavorazione: GruppoLavorazioneDto;
   cols: any;
+  displayDialog: boolean;
+  newGruppoLavorazione: boolean;
+  selectedGruppoLavorazione: GruppoLavorazioneDto;
 
   constructor(private messageService: MessageService) { }
 
@@ -46,28 +47,44 @@ export class GruppiLavorazioneComponent implements OnInit {
     ];
   }
 
-  onRowEditInit(gruppoLavorazione: GruppoLavorazioneDto) {
-    this.clonedGruppiLavorazione[gruppoLavorazione.id] = { ...gruppoLavorazione };
-  }
-
-  onRowEditSave(gruppoLavorazione: GruppoLavorazioneDto) {
-    if (this.canSave(gruppoLavorazione)) {
-      // TODO: aggiungere chiamata per salvataggio
-      delete this.clonedGruppiLavorazione[gruppoLavorazione.id];
-      this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
-    }
-    else {
-      this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.warn, UMA_MESSAGES.mandatoryAll));
-    }
-  }
-
-  onRowEditCancel(gruppoLavorazione: GruppoLavorazioneDto, index: number) {
-    this.gruppiLavorazione[index] = this.clonedGruppiLavorazione[gruppoLavorazione.id];
-    delete this.clonedGruppiLavorazione[gruppoLavorazione.id];
-  }
-
   canSave(lavorazione: GruppoLavorazioneDto) {
     return lavorazione.ambito && lavorazione.annoFine && lavorazione.annoInizio && lavorazione.indice && lavorazione.nome;
+  }
+
+  showDialogToAdd() {
+    this.newGruppoLavorazione = true;
+    this.gruppoLavorazione = {} as GruppoLavorazioneDto;
+    this.displayDialog = true;
+  }
+
+  save() {
+    // TODO: aggiungere chiamata per salvataggio nuovo record o aggiornmento record esistente
+    if (this.canSave(this.gruppoLavorazione)) {
+      let coefficienti = [...this.gruppiLavorazione];
+      if (this.newGruppoLavorazione)
+        coefficienti.push(this.gruppoLavorazione);
+      else
+        coefficienti[this.gruppiLavorazione.indexOf(this.selectedGruppoLavorazione)] = this.gruppoLavorazione;
+      this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
+      this.gruppiLavorazione = coefficienti;
+      this.gruppoLavorazione = null;
+      this.displayDialog = false;
+    } else
+      this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.warn, UMA_MESSAGES.mandatoryAll));
+  }
+
+  onRowSelect(event) {
+    this.newGruppoLavorazione = false;
+    this.gruppoLavorazione = this.cloneCoefficiente(event.data);
+    this.displayDialog = true;
+  }
+
+  cloneCoefficiente(c: GruppoLavorazioneDto): GruppoLavorazioneDto {
+    var coefficiente = {} as GruppoLavorazioneDto;
+    for (let prop in c) {
+      coefficiente[prop] = c[prop];
+    }
+    return coefficiente;
   }
 
 }

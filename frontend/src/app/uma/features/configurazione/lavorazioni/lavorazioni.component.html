@@ -15,11 +15,24 @@
         </label>
         <p-table
           [value]="lavorazioni"
-          dataKey="id"
-          editMode="row"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10">
+          [rows]="10"
+          selectionMode="single"
+          [(selection)]="selectedLavorazione"
+          (onRowSelect)="onRowSelect($event)">
+          <ng-template
+            pTemplate="caption"
+            let-rowData>
+            <div style="text-align:right">
+              <button
+                type="button"
+                pButton
+                icon="pi pi-plus"
+                (click)="showDialogToAdd()"
+                label="Add"></button>
+            </div>
+          </ng-template>
           <ng-template
             pTemplate="header"
             let-columns>
@@ -30,106 +43,22 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width:8em"></th>
             </tr>
           </ng-template>
           <ng-template
             pTemplate="body"
-            let-rowData
-            let-editing="editing"
-            let-ri="rowIndex">
-            <tr [pEditableRow]="rowData">
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.indice"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.indice}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.nome"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.nome}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.tipologia"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.tipologia}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.unitaMisura"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.unitaMisura}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <p-dropdown
-                      [options]="gruppiLavorazione"
-                      [(ngModel)]="rowData.gruppoLavorazione"
-                      [style]="{'width':'100%'}"></p-dropdown>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.gruppoLavorazione}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td style="text-align:center">
-                <button
-                  *ngIf="!editing"
-                  pButton
-                  type="button"
-                  pInitEditableRow
-                  icon="pi pi-pencil"
-                  class="ui-button-info"
-                  (click)="onRowEditInit(rowData)"></button>
-                <button
-                  *ngIf="editing"
-                  pButton
-                  type="button"
-                  pSaveEditableRow
-                  icon="pi pi-check"
-                  class="ui-button-success"
-                  style="margin-right: .5em"
-                  (click)="onRowEditSave(rowData)"></button>
-                <button
-                  *ngIf="editing"
-                  pButton
-                  type="button"
-                  pCancelEditableRow
-                  icon="pi pi-times"
-                  class="ui-button-danger"
-                  (click)="onRowEditCancel(rowData, ri)"></button>
-              </td>
+            let-rowData>
+            <tr [pSelectableRow]="rowData">
+              <td>{{rowData.indice}}</td>
+              <td>{{rowData.nome}}</td>
+              <td>{{rowData.tipologia}}</td>
+              <td>{{rowData.unitaMisura}}</td>
+              <td>{{rowData.gruppoLavorazione}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td [attr.colspan]="cols.length + 1">Nessun risultato trovato</td>
+              <td [attr.colspan]="cols.length">Nessun risultato trovato</td>
             </tr>
           </ng-template>
         </p-table>
@@ -137,3 +66,83 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Dettaglio lavorazione"
+  [(visible)]="displayDialog"
+  [focusOnShow]="false"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{width: '50%'}">
+  <div
+    class="p-grid ui-fluid"
+    *ngIf="lavorazione">
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="indice">* Indice</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="indice"
+        [(ngModel)]="lavorazione.indice"
+        autofocus>
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="nome">* Nome</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="nome"
+        [(ngModel)]="lavorazione.nome">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="tipologia">* Tipologia</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="tipologia"
+        [(ngModel)]="lavorazione.tipologia">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="unitaMisura">* Unità di misura</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="unitaMisura"
+        [(ngModel)]="lavorazione.unitaMisura">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="gruppoLavorazione">* Gruppo lavorazione</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="gruppoLavorazione"
+        [(ngModel)]="lavorazione.gruppoLavorazione">
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="save()"
+        label="Salva"></button>
+    </div>
+  </p-footer>
+</p-dialog>

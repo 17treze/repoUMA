@@ -10,11 +10,7 @@ import { GruppoFabbricatoDto } from 'src/app/uma/core-uma/models/dto/Configurazi
 export class GruppiFabbricatoComponent implements OnInit {
 
   gruppiFabbricato: GruppoFabbricatoDto[];
-
-  clonedGruppiLavorazione: { [s: string]: GruppoFabbricatoDto; } = {};
-
   cols: any;
-
   gruppiLavorazione: SelectItem[];
 
   constructor(private messageService: MessageService) { }

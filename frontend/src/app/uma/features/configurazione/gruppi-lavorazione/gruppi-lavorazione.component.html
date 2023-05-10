@@ -15,11 +15,24 @@
         </label>
         <p-table
           [value]="gruppiLavorazione"
-          dataKey="id"
-          editMode="row"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10">
+          [rows]="10"
+          selectionMode="single"
+          [(selection)]="selectedGruppoLavorazione"
+          (onRowSelect)="onRowSelect($event)">
+          <ng-template
+            pTemplate="caption"
+            let-rowData>
+            <div style="text-align:right">
+              <button
+                type="button"
+                pButton
+                icon="pi pi-plus"
+                (click)="showDialogToAdd()"
+                label="Add"></button>
+            </div>
+          </ng-template>
           <ng-template
             pTemplate="header"
             let-columns>
@@ -30,107 +43,22 @@
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th style="width:8em"></th>
             </tr>
           </ng-template>
           <ng-template
             pTemplate="body"
-            let-rowData
-            let-editing="editing"
-            let-ri="rowIndex">
-            <tr [pEditableRow]="rowData">
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.indice"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.indice}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.nome"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.nome}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.ambito"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.ambito}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.annoInizio"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.annoInizio}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.annoFine"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.annoFine}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td style="text-align:center">
-                <button
-                  *ngIf="!editing"
-                  pButton
-                  type="button"
-                  pInitEditableRow
-                  icon="pi pi-pencil"
-                  class="ui-button-info"
-                  (click)="onRowEditInit(rowData)"></button>
-                <button
-                  *ngIf="editing"
-                  pButton
-                  type="button"
-                  pSaveEditableRow
-                  icon="pi pi-check"
-                  class="ui-button-success"
-                  style="margin-right: .5em"
-                  (click)="onRowEditSave(rowData)"></button>
-                <button
-                  *ngIf="editing"
-                  pButton
-                  type="button"
-                  pCancelEditableRow
-                  icon="pi pi-times"
-                  class="ui-button-danger"
-                  (click)="onRowEditCancel(rowData, ri)"></button>
-              </td>
+            let-rowData>
+            <tr [pSelectableRow]="rowData">
+              <td>{{rowData.indice}}</td>
+              <td>{{rowData.nome}}</td>
+              <td>{{rowData.ambito}}</td>
+              <td>{{rowData.annoInizio}}</td>
+              <td>{{rowData.annoFine}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td [attr.colspan]="cols.length + 1">Nessun risultato trovato</td>
+              <td [attr.colspan]="cols.length">Nessun risultato trovato</td>
             </tr>
           </ng-template>
         </p-table>
@@ -138,3 +66,83 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Dettaglio gruppo lavorazione"
+  [(visible)]="displayDialog"
+  [focusOnShow]="false"
+  [responsive]="true"
+  showEffect="fade"
+  [modal]="true"
+  [style]="{width: '40%'}">
+  <div
+    class="p-grid ui-fluid"
+    *ngIf="gruppoLavorazione">
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="indice">* Indice</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="indice"
+        [(ngModel)]="gruppoLavorazione.indice"
+        autofocus>
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="nome">* Nome</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="nome"
+        [(ngModel)]="gruppoLavorazione.nome">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="ambito">* Ambito</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="ambito"
+        [(ngModel)]="gruppoLavorazione.ambito">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="annoInizio">* Anno inizio</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="annoInizio"
+        [(ngModel)]="gruppoLavorazione.annoInizio">
+    </div>
+    <div
+      class="p-col-4"
+      style="align-self: center;">
+      <label for="annoFine">* Anno fine</label>
+    </div>
+    <div class="p-col-8">
+      <input
+        pInputText
+        id="annoFine"
+        [(ngModel)]="gruppoLavorazione.annoFine">
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="save()"
+        label="Salva"></button>
+    </div>
+  </p-footer>
+</p-dialog>

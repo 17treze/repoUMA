@@ -15,8 +15,6 @@
         </label>
         <p-table
           [value]="gruppiFabbricato"
-          dataKey="id"
-          editMode="row"
           [columns]="cols"
           [paginator]="true"
           [rows]="10">
@@ -34,45 +32,11 @@
           </ng-template>
           <ng-template
             pTemplate="body"
-            let-rowData
-            let-editing="editing"
-            let-ri="rowIndex">
-            <tr [pEditableRow]="rowData">
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceFabbricato"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceFabbricato}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.tipoFabbricato"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.tipoFabbricato}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <p-dropdown
-                      [options]="gruppiLavorazione"
-                      [(ngModel)]="rowData.gruppoLavorazione"
-                      [style]="{'width':'100%'}"></p-dropdown>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.gruppoLavorazione}}</ng-template>
-                </p-cellEditor>
-              </td>
+            let-rowData>
+            <tr [pSelectableRow]="rowData">
+              <td>{{rowData.codiceFabbricato}}</td>
+              <td>{{rowData.tipoFabbricato}}</td>
+              <td>{{rowData.gruppoLavorazione}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">

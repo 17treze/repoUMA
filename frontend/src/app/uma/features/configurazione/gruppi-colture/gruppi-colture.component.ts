@@ -11,7 +11,6 @@ import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/Configurazione
 export class GruppiColtureComponent implements OnInit {
 
   listaGruppi: GruppoColtureDto[] = [];
-
   cols: any;
 
   constructor(

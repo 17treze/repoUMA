@@ -12,12 +12,12 @@ import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
 export class LavorazioniComponent implements OnInit {
 
   lavorazioni: LavorazioneDto[];
-
+  lavorazione: LavorazioneDto;
   gruppiLavorazione: SelectItem[];
-
-  clonedLavorazioni: { [s: string]: LavorazioneDto; } = {};
-
   cols: any;
+  displayDialog: boolean;
+  newLavorazione: boolean;
+  selectedLavorazione: LavorazioneDto;
 
   constructor(private messageService: MessageService) { }
 
@@ -55,28 +55,44 @@ export class LavorazioniComponent implements OnInit {
     ];
   }
 
-  onRowEditInit(lavorazione: LavorazioneDto) {
-    this.clonedLavorazioni[lavorazione.id] = { ...lavorazione };
-  }
-
-  onRowEditSave(lavorazione: LavorazioneDto) {
-    if (this.canSave(lavorazione)) {
-      // TODO: aggiungere chiamata per salvataggio
-      delete this.clonedLavorazioni[lavorazione.id];
-      this.messageService.add(A4gMessages.getToast('tst-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
-    }
-    else {
-      this.messageService.add(A4gMessages.getToast('tst-lav', A4gSeverityMessage.warn, UMA_MESSAGES.mandatoryAll));
-    }
-  }
-
-  onRowEditCancel(lavorazione: LavorazioneDto, index: number) {
-    this.lavorazioni[index] = this.clonedLavorazioni[lavorazione.id];
-    delete this.clonedLavorazioni[lavorazione.id];
-  }
-
   canSave(lavorazione: LavorazioneDto) {
     return lavorazione.gruppoLavorazione && lavorazione.indice && lavorazione.nome && lavorazione.tipologia && lavorazione.unitaMisura;
+  }
+
+  showDialogToAdd() {
+    this.newLavorazione = true;
+    this.lavorazione = {} as LavorazioneDto;
+    this.displayDialog = true;
+  }
+
+  save() {
+    // TODO: aggiungere chiamata per salvataggio nuovo record o aggiornmento record esistente
+    if (this.canSave(this.lavorazione)) {
+      let lavorazioni = [...this.lavorazioni];
+      if (this.newLavorazione)
+        lavorazioni.push(this.lavorazione);
+      else
+        lavorazioni[this.lavorazioni.indexOf(this.selectedLavorazione)] = this.lavorazione;
+      this.messageService.add(A4gMessages.getToast('tst-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
+      this.lavorazioni = lavorazioni;
+      this.lavorazione = null;
+      this.displayDialog = false;
+    } else
+      this.messageService.add(A4gMessages.getToast('tst-lav', A4gSeverityMessage.warn, UMA_MESSAGES.mandatoryAll));
+  }
+
+  onRowSelect(event) {
+    this.newLavorazione = false;
+    this.lavorazione = this.cloneLavorazione(event.data);
+    this.displayDialog = true;
+  }
+
+  cloneLavorazione(c: LavorazioneDto): LavorazioneDto {
+    var lavorazione = {} as LavorazioneDto;
+    for (let prop in c) {
+      lavorazione[prop] = c[prop];
+    }
+    return lavorazione;
   }
 
 }

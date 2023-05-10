@@ -1,6 +1,6 @@
 <div class="ui-grid-fixed">
   <p-toast
-    key="tst-gruppi-lav"
+    key="tst-gruppi-colt"
     [style]="{ marginTop: '70px' }"></p-toast>
   <h1 class="h5 text-uppercase font-weight-bold my-4">
         Gruppi colture
@@ -15,8 +15,6 @@
         </label>
         <p-table
           [value]="listaGruppi"
-          dataKey="id"
-          editMode="row"
           [columns]="cols"
           [paginator]="true"
           [rows]="10">
@@ -34,106 +32,16 @@
           </ng-template>
           <ng-template
             pTemplate="body"
-            let-rowData
-            let-editing="editing"
-            let-ri="rowIndex">
-            <tr [pEditableRow]="rowData">
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceSuolo"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceSuolo}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceDestUso"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceDestUso}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceUso"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceUso}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceQualita"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceQualita}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.codiceVarieta"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.codiceVarieta}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.gruppoLavorazione"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.gruppoLavorazione}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.annoInizio"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.annoInizio}}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="text"
-                      [(ngModel)]="rowData.annoFine"
-                      required>
-                  </ng-template>
-                  <ng-template pTemplate="output">{{rowData.annoFine}}</ng-template>
-                </p-cellEditor>
-              </td>
+            let-rowData>
+            <tr [pSelectableRow]="rowData">
+              <td>{{rowData.codiceSuolo}}</td>
+              <td>{{rowData.codiceDestUso}}</td>
+              <td>{{rowData.codiceUso}}</td>
+              <td>{{rowData.codiceQualita}}</td>
+              <td>{{rowData.codiceVarieta}}</td>
+              <td>{{rowData.gruppoLavorazione}}</td>
+              <td>{{rowData.annoInizio}}</td>
+              <td>{{rowData.annoFine}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
