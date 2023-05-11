@@ -3,12 +3,12 @@ import { MessageService } from 'primeng-lts';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
 import { GruppoLavorazioneDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
 import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
-import { EMPTY, of, Subscription } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
 import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
 import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/paginator.model';
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
-import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
+import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazione';
 import { catchError, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -21,22 +21,14 @@ export class GruppiLavorazioneComponent implements OnInit {
   gruppiLavorazione: PaginatorA4G<Array<GruppoLavorazioneDto>>;
   gruppoLavorazione: GruppoLavorazioneDto;
   display: boolean;
-  testoRicerca: string;
-  numeroPagina: number;
-  elementiPerPagina: number;
   totalElements: number;
-  first: number;
-  paginazione: Paginazione;
-  defaultPropertySort: string;
-  rowgroup: boolean;
-
-  // Subscriptions
-  getPagedGruppiSubscription: Subscription;
-
   cols: any;
   displayDialog: boolean;
   newGruppoLavorazione: boolean;
   selectedGruppoLavorazione: GruppoLavorazioneDto;
+  elementiPagina = 10;
+  sortBy: string = 'nome';
+  sortDirection: SortDirection;
 
   constructor(private messageService: MessageService,
     private errorService: ErrorService,
@@ -49,17 +41,15 @@ export class GruppiLavorazioneComponent implements OnInit {
     this.gruppiLavorazione = {} as PaginatorA4G<Array<GruppoLavorazioneDto>>;
     this.gruppiLavorazione.count = 0;
     this.gruppiLavorazione.risultati = [];
-    this.initPaginator();
-    this.getGruppiLavorazioni(this.buildPaginatorEvent());
   }
 
   private setCols() {
     this.cols = [
       { field: 'indice', header: 'Indice' },
       { field: 'nome', header: 'Nome' },
-      { field: 'ambitoLavorazione', header: 'Ambito' },
-      { field: 'annoInizio', header: 'Anno inizio' },
-      { field: 'annoFine', header: 'Anno fine' }
+      { field: 'ambito', header: 'Ambito' },
+      { field: 'anno_inizio', header: 'Anno inizio' },
+      { field: 'anno_fine', header: 'Anno fine' }
     ];
   }
 
@@ -103,15 +93,16 @@ export class GruppiLavorazioneComponent implements OnInit {
     return coefficiente;
   }
 
-  private getGruppiLavorazioni(event: PaginatorEvent) {
-    this.numeroPagina = Math.floor(event.first / this.elementiPerPagina);
-    if (this.numeroPagina == null) {
-      this.numeroPagina = 0;
+  changePage(event: PaginatorEvent) {
+    if (event != null) {
+      this.sortDirection = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
+      this.sortBy = event.sortField || this.sortBy;
     }
-    this.paginazione = Paginazione.of(this.numeroPagina, this.elementiPerPagina, event.sortField, Paginazione.getOrdine(event.sortOrder));
-    this.paginazione.numeroElementiPagina = this.elementiPerPagina;
+    let paginazione: Paginazione = Paginazione.of(
+      event.first / this.elementiPagina, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+    );
 
-    this.getPagedGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiLavorazioni(this.paginazione)
+    this.httpClientConfigurazioneUmaService.getGruppiLavorazioni(paginazione)
       .pipe(switchMap((res: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
         return of(res);
       }),
@@ -128,27 +119,4 @@ export class GruppiLavorazioneComponent implements OnInit {
       }, error => this.errorService.showError(error, 'tst-gruppi-lav'));
   }
 
-  private initPaginator() {
-    this.first = 0;
-    this.totalElements = 0;
-    this.numeroPagina = 0;
-    this.elementiPerPagina = 10;
-    this.defaultPropertySort = 'ambito';
-  }
-
-  private buildPaginatorEvent(): PaginatorEvent {
-    return {
-      filters: {},
-      first: 0,
-      globalFilter: null,
-      multiSortMeta: undefined,
-      rows: this.elementiPerPagina,
-      sortField: undefined || this.defaultPropertySort,
-      sortOrder: 1 // SortDirection.ASC;
-    };
-  }
-
-  public changePage(event: PaginatorEvent) {
-    this.getGruppiLavorazioni(event);
-  }
 }

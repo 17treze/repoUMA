@@ -4,7 +4,7 @@ import { ErrorService } from 'src/app/a4g-common/services/error.service';
 import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
 import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/paginator.model';
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
-import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
+import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazione';
 import { catchError, switchMap } from 'rxjs/operators';
 import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
 
@@ -17,20 +17,17 @@ import { GruppoColtureDto } from 'src/app/uma/core-uma/models/dto/Configurazione
 export class GruppiColtureComponent implements OnInit, OnDestroy {
 
   listaGruppi: PaginatorA4G<Array<GruppoColtureDto>>;
-  display: boolean;
-  testoRicerca: string;
-  numeroPagina: number;
-  elementiPerPagina: number;
   totalElements: number;
-  first: number;
-  paginazione: Paginazione;
-  defaultPropertySort: string;
-  rowgroup: boolean;
+  cols: any;
+  displayDialog: boolean;
+  newGruppoLavorazione: boolean;
+  selectedGruppoLavorazione: GruppoColtureDto;
+  elementiPagina = 10;
+  sortBy: string = 'id_gruppo_lavorazione';
+  sortDirection: SortDirection;
 
   // Subscriptions
   getPagedGruppiSubscription: Subscription;
-
-  cols: any;
 
   constructor(
     private errorService: ErrorService,
@@ -38,13 +35,23 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.display = true;
-    this.rowgroup = true;
+    this.setCols();
     this.listaGruppi = {} as PaginatorA4G<Array<GruppoColtureDto>>;
     this.listaGruppi.count = 0;
     this.listaGruppi.risultati = [];
-    this.initPaginator();
-    this.getGruppi(this.buildPaginatorEvent());
+  }
+
+  private setCols() {
+    this.cols = [
+      { field: 'id_gruppo_lavorazione', header: 'Gruppo lavorazione' },
+      { field: 'codice_suolo', header: 'Suolo' },
+      { field: 'codice_dest_uso', header: 'Destinazione uso' },
+      { field: 'codice_uso', header: 'Uso' },
+      { field: 'codice_qualita', header: 'Qualità' },
+      { field: 'codice_varieta', header: 'Varietà' },
+      { field: 'anno_inizio', header: 'Anno inizio' },
+      { field: 'anno_fine', header: 'Anno fine' }
+    ];
   }
 
   ngOnDestroy() {
@@ -53,18 +60,16 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCloseToastGetGruppi() {
-  }
-
-  private getGruppi(event: PaginatorEvent) {
-    this.numeroPagina = Math.floor(event.first / this.elementiPerPagina);
-    if (this.numeroPagina == null) {
-      this.numeroPagina = 0;
+  changePage(event: PaginatorEvent) {
+    if (event != null) {
+      this.sortDirection = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
+      this.sortBy = event.sortField || this.sortBy;
     }
-    this.paginazione = Paginazione.of(this.numeroPagina, this.elementiPerPagina, event.sortField, Paginazione.getOrdine(event.sortOrder));
-    this.paginazione.numeroElementiPagina = this.elementiPerPagina;
+    let paginazione: Paginazione = Paginazione.of(
+      event.first / this.elementiPagina, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+    );
 
-    this.getPagedGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture(this.paginazione)
+    this.getPagedGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture(paginazione)
       .pipe(switchMap((res: PaginatorA4G<Array<GruppoColtureDto>>) => {
         return of(res);
       }),
@@ -79,43 +84,6 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
           this.totalElements = this.listaGruppi.count;
         }
       }, error => this.errorService.showError(error, 'tst-gruppi-colture'));
-  }
-
-  private initPaginator() {
-    this.first = 0;
-    this.totalElements = 0;
-    this.numeroPagina = 0;
-    this.elementiPerPagina = 10;
-    this.defaultPropertySort = 'id_gruppo_lavorazione';
-  }
-
-  private setCols() {
-    this.cols = [
-      { field: 'codiceSuolo', header: 'Suolo' },
-      { field: 'codiceDestUso', header: 'Destinazione uso' },
-      { field: 'codiceUso', header: 'Uso' },
-      { field: 'codiceQualita', header: 'Qualità' },
-      { field: 'codiceVarieta', header: 'Varietà' },
-      { field: 'gruppoLavorazione', header: 'Gruppo lavorazione' },
-      { field: 'annoInizio', header: 'Anno inizio' },
-      { field: 'annoFine', header: 'Anno fine' }
-    ];
-  }
-
-  private buildPaginatorEvent(): PaginatorEvent {
-    return {
-      filters: {},
-      first: 0,
-      globalFilter: null,
-      multiSortMeta: undefined,
-      rows: this.elementiPerPagina,
-      sortField: undefined || this.defaultPropertySort,
-      sortOrder: 1 // SortDirection.ASC;
-    };
-  }
-
-  public changePage(event: PaginatorEvent) {
-    this.getGruppi(event);
   }
 
 }

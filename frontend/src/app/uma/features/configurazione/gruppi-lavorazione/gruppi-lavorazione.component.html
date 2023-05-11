@@ -11,16 +11,20 @@
         class="table-responsive"
         margin-top="30px">
         <label class="labelricerca my-3">
-          {{ gruppiLavorazione?.risultati?.length }} elementi trovati
+          {{ gruppiLavorazione.count }} elementi trovati
         </label>
         <p-table
-          [value]="gruppiLavorazione?.risultati"
+          [value]="gruppiLavorazione.risultati"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10"
+          [rows]="elementiPagina"
           selectionMode="single"
           [(selection)]="selectedGruppoLavorazione"
-          (onRowSelect)="onRowSelect($event)">
+          (onRowSelect)="onRowSelect($event)"
+          [resetPageOnSort]="true"
+          [totalRecords]="gruppiLavorazione.count"
+          [lazy]="true"
+          (onLazyLoad)="changePage($event)">
           <ng-template
             pTemplate="caption"
             let-rowData>
@@ -30,7 +34,7 @@
                 pButton
                 icon="pi pi-plus"
                 (click)="showDialogToAdd()"
-                label="Add"></button>
+                label="Aggiungi"></button>
             </div>
           </ng-template>
           <ng-template
