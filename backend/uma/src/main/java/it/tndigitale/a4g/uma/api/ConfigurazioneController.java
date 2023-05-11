@@ -66,4 +66,12 @@ public class ConfigurazioneController {
 		return configurazioneService.getGruppiLavorazione(paginazione, Optional.ofNullable(ordinamento)
 				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
 	}
+	
+	@Operation(summary = "Inserisce o aggiorna un gruppo lavoraizoni", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@PostMapping(ApiUrls.GRUPPI_LAVORAZIONI)
+	public Long salvaGruppoLavorazione(@RequestBody
+	GruppoLavorazioneDto gruppoLavorazioneDto) {
+		return configurazioneService.saveGruppoLavorazione(gruppoLavorazioneDto);
+	}
 }

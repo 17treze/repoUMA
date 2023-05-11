@@ -9,6 +9,16 @@ public class GruppoLavorazioneDto {
 	private Integer indice;
 	private String nome;
 	private AmbitoLavorazione ambitoLavorazione;
+	private Long id;
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public GruppoLavorazioneDto setId(Long id) {
+		this.id = id;
+		return this;
+	}
 	
 	public Integer getAnnoFine() {
 		return this.annoFine;
