@@ -21,8 +21,11 @@ import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
 import it.tndigitale.a4g.framework.pagination.model.Paginazione;
 import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.uma.business.service.configurazione.ConfigurazioneService;
+import it.tndigitale.a4g.uma.dto.CoefficienteDto;
 import it.tndigitale.a4g.uma.dto.ColturaGruppiDto;
+import it.tndigitale.a4g.uma.dto.FabbricatoGruppiDto;
 import it.tndigitale.a4g.uma.dto.GruppoLavorazioneDto;
+import it.tndigitale.a4g.uma.dto.LavorazioneDto;
 
 @RestController
 @RequestMapping(ApiUrls.CONFIGURAZIONI)
@@ -67,11 +70,53 @@ public class ConfigurazioneController {
 				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
 	}
 	
-	@Operation(summary = "Inserisce o aggiorna un gruppo lavoraizoni", description = "")
+	@Operation(summary = "Inserisce o aggiorna un gruppo lavorazioni", description = "")
 	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
 	@PostMapping(ApiUrls.GRUPPI_LAVORAZIONI)
 	public Long salvaGruppoLavorazione(@RequestBody
 	GruppoLavorazioneDto gruppoLavorazioneDto) {
 		return configurazioneService.saveGruppoLavorazione(gruppoLavorazioneDto);
 	}
+	
+	@Operation(summary = "Restituisce i gruppi di fabbricati", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@GetMapping(ApiUrls.GRUPPI_FABBRICATI)
+	public RisultatiPaginati<FabbricatoGruppiDto> getGruppiFabbricato(Paginazione paginazione,
+			Ordinamento ordinamento) {
+		return configurazioneService.getGruppiFabbricato(paginazione, Optional.ofNullable(ordinamento)
+				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
+	}
+	
+	@Operation(summary = "Restituisce i coefficienti", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@GetMapping(ApiUrls.COEFFICIENTI)
+	public RisultatiPaginati<CoefficienteDto> getCoefficienti(Paginazione paginazione, Ordinamento ordinamento) {
+		return configurazioneService.getCoefficienti(paginazione, Optional.ofNullable(ordinamento)
+				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
+	}
+	
+	@Operation(summary = "Inserisce o aggiorna un coefficiente", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@PostMapping(ApiUrls.COEFFICIENTI)
+	public Long salvaCoefficiente(@RequestBody
+	CoefficienteDto coefficienteDto) {
+		return configurazioneService.saveCoefficiente(coefficienteDto);
+	}
+	
+	@Operation(summary = "Restituisce le lavorazioni", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@GetMapping(ApiUrls.LAVORAZIONI)
+	public RisultatiPaginati<LavorazioneDto> getLavorazioni(Paginazione paginazione, Ordinamento ordinamento) {
+		return configurazioneService.getLavorazioni(paginazione, Optional.ofNullable(ordinamento)
+				.filter(o -> o.getProprieta() != null).orElse(Ordinamento.DEFAULT_ORDER_BY));
+	}
+	
+	@Operation(summary = "Inserisce o aggiorna una lavorazione", description = "")
+	// @PreAuthorize("@abilitazioniComponent.checkIstruttoreUma()")
+	@PostMapping(ApiUrls.LAVORAZIONI)
+	public Long salvaLavorazione(@RequestBody
+	LavorazioneDto lavorazioneDto) {
+		return configurazioneService.saveLavorazione(lavorazioneDto);
+	}
+	
 }

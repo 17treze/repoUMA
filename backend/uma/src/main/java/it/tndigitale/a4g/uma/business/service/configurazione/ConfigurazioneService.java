@@ -14,14 +14,23 @@ import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
 import it.tndigitale.a4g.framework.pagination.model.Paginazione;
 import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.framework.time.Clock;
+import it.tndigitale.a4g.uma.business.persistence.entity.CoefficienteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.ColturaGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.ConfigurazioneModel;
+import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.GruppoLavorazioneModel;
+import it.tndigitale.a4g.uma.business.persistence.entity.LavorazioneModel;
+import it.tndigitale.a4g.uma.business.persistence.repository.CoefficienteDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.ConfigurazioneDao;
+import it.tndigitale.a4g.uma.business.persistence.repository.FabbricatoGruppiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.GruppiLavorazioneDao;
+import it.tndigitale.a4g.uma.business.persistence.repository.LavorazioneDao;
+import it.tndigitale.a4g.uma.dto.CoefficienteDto;
 import it.tndigitale.a4g.uma.dto.ColturaGruppiDto;
+import it.tndigitale.a4g.uma.dto.FabbricatoGruppiDto;
 import it.tndigitale.a4g.uma.dto.GruppoLavorazioneDto;
+import it.tndigitale.a4g.uma.dto.LavorazioneDto;
 
 @Service
 public class ConfigurazioneService {
@@ -34,6 +43,12 @@ public class ConfigurazioneService {
 	private ColturaGruppiDao colturaGruppiDao;
 	@Autowired
 	private GruppiLavorazioneDao gruppiLavorazioneDao;
+	@Autowired
+	private FabbricatoGruppiDao fabbricatoGruppiDao;
+	@Autowired
+	private CoefficienteDao coefficienteDao;
+	@Autowired
+	private LavorazioneDao lavorazioneDao;
 	
 	public LocalDateTime getDataLimitePrelievi(int annoCampagna) {
 		var conf = configurazioneDao.findByCampagna(annoCampagna);
@@ -123,4 +138,96 @@ public class ConfigurazioneService {
 		return gruppiLavorazioneDao.save(gruppoLavorazioneModel).getId();
 	}
 	
+	public RisultatiPaginati<FabbricatoGruppiDto> getGruppiFabbricato(Paginazione paginazione,
+			Ordinamento ordinamento) {
+		List<FabbricatoGruppiDto> listFabbricatoGruppiDto = new ArrayList<FabbricatoGruppiDto>();
+		Page<FabbricatoGruppiModel> pageFabbricatoGruppiModel = fabbricatoGruppiDao
+				.findAll(PageableBuilder.build().from(paginazione, ordinamento));
+		for (FabbricatoGruppiModel fabbricatoGruppiModel : pageFabbricatoGruppiModel) {
+			FabbricatoGruppiDto fabbricatoGruppiDto = new FabbricatoGruppiDto();
+			fabbricatoGruppiDto.setId(fabbricatoGruppiModel.getId())
+					.setCodiceFabbricato(fabbricatoGruppiModel.getCodiceFabbricato())
+					.setTipoFabbricato(fabbricatoGruppiModel.getTipoFabbricato())
+					.setGruppoLavorazione(fabbricatoGruppiModel.getGruppoLavorazione().getId());
+			listFabbricatoGruppiDto.add(fabbricatoGruppiDto);
+		}
+		return RisultatiPaginati.of(listFabbricatoGruppiDto, pageFabbricatoGruppiModel.getTotalElements());
+	}
+	
+	public RisultatiPaginati<CoefficienteDto> getCoefficienti(Paginazione paginazione, Ordinamento ordinamento) {
+		List<CoefficienteDto> listCoefficienteDto = new ArrayList<CoefficienteDto>();
+		Page<CoefficienteModel> pageCoefficienteModel = coefficienteDao
+				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
+		for (CoefficienteModel coefficienteModel : pageCoefficienteModel) {
+			CoefficienteDto coefficienteDto = new CoefficienteDto();
+			coefficienteDto.setId(coefficienteModel.getId()).setAnnoInizio(coefficienteModel.getAnnoInizio())
+					.setCoefficiente(coefficienteModel.getCoefficiente())
+					.setIdLavorazione(coefficienteModel.getLavorazioneModel().getId());
+			listCoefficienteDto.add(coefficienteDto);
+		}
+		return RisultatiPaginati.of(listCoefficienteDto, pageCoefficienteModel.getTotalElements());
+	}
+	
+	public Long saveCoefficiente(CoefficienteDto coefficienteDto) {
+		
+		CoefficienteModel coefficienteModel = new CoefficienteModel();
+		Optional<CoefficienteModel> coefficienteModelOpt = coefficienteDao.findById(coefficienteDto.getId());
+		if (coefficienteModelOpt.isPresent()) {
+			coefficienteModel = coefficienteModelOpt.get();
+		}
+		else {
+			coefficienteModel.setId(coefficienteDto.getId());
+		}
+		coefficienteModel.setCoefficiente(coefficienteDto.getCoefficiente());
+		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao.findById(coefficienteDto.getIdLavorazione());
+		if (lavorazioneModelOpt.isPresent()) {
+			coefficienteModel.setLavorazioneModel(lavorazioneModelOpt.get());
+		}
+		else {
+			throw new IllegalArgumentException("Identificativo lavorazione mancante o non esistente");
+		}
+		coefficienteModel.setAnnoInizio(coefficienteDto.getAnnoInizio());
+		coefficienteModel.setAnnoFine(coefficienteDto.getAnnoInizio());
+		return coefficienteDao.save(coefficienteModel).getId();
+	}
+	
+	public RisultatiPaginati<LavorazioneDto> getLavorazioni(Paginazione paginazione, Ordinamento ordinamento) {
+		List<LavorazioneDto> listLavorazioneDto = new ArrayList<LavorazioneDto>();
+		Page<LavorazioneModel> pageLavorazioneModel = lavorazioneDao
+				.findAll(PageableBuilder.build().from(paginazione, ordinamento));
+		for (LavorazioneModel lavorazioneModel : pageLavorazioneModel) {
+			LavorazioneDto lavorazioneDto = new LavorazioneDto();
+			lavorazioneDto.setId(lavorazioneModel.getId()).setIndice(lavorazioneModel.getIndice())
+					.setNome(lavorazioneModel.getNome()).setTipologia(lavorazioneModel.getTipologia())
+					.setUnitaDiMisura(lavorazioneModel.getUnitaDiMisura())
+					.setIdGruppoLavorazione(lavorazioneModel.getGruppoLavorazione().getId());
+			listLavorazioneDto.add(lavorazioneDto);
+		}
+		return RisultatiPaginati.of(listLavorazioneDto, pageLavorazioneModel.getTotalElements());
+	}
+	
+	public Long saveLavorazione(LavorazioneDto lavorazioneDto) {
+		
+		LavorazioneModel lavorazioneModel = new LavorazioneModel();
+		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao.findById(lavorazioneDto.getId());
+		if (lavorazioneModelOpt.isPresent()) {
+			lavorazioneModel = lavorazioneModelOpt.get();
+		}
+		else {
+			lavorazioneModel.setId(lavorazioneDto.getId());
+		}
+		Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
+				.findById(lavorazioneDto.getIdGruppoLavorazione());
+		if (lavorazioneModelOpt.isPresent()) {
+			lavorazioneModel.setGruppoLavorazione(gruppoLavorazioneModelOpt.get());
+		}
+		else {
+			throw new IllegalArgumentException("Identificativo gruppo di lavorazione mancante o non esistente");
+		}
+		lavorazioneModel.setIndice(lavorazioneDto.getIndice());
+		lavorazioneModel.setNome(lavorazioneDto.getNome());
+		lavorazioneModel.setTipologia(lavorazioneDto.getTipologia());
+		lavorazioneModel.setUnitaDiMisura(lavorazioneDto.getUnitaDiMisura());
+		return lavorazioneDao.save(lavorazioneModel).getId();
+	}
 }
