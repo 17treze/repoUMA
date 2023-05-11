@@ -10,6 +10,16 @@ public class ColturaGruppiDto {
 	private String codiceUso;
 	private String codiceVarieta;
 	private Long gruppoLavorazione;
+	private Long id;
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public ColturaGruppiDto setId(Long id) {
+		this.id = id;
+		return this;
+	}
 	
 	public Integer getAnnoFine() {
 		return this.annoFine;

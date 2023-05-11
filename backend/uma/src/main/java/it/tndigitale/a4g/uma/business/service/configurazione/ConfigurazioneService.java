@@ -3,6 +3,7 @@ package it.tndigitale.a4g.uma.business.service.configurazione;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -76,7 +77,7 @@ public class ConfigurazioneService {
 				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
 		for (ColturaGruppiModel colturaGruppiModel : pageColturaGruppiModel) {
 			ColturaGruppiDto colturaGruppiDto = new ColturaGruppiDto();
-			colturaGruppiDto.setAnnoInizio(colturaGruppiModel.getAnnoInizio())
+			colturaGruppiDto.setId(colturaGruppiModel.getId()).setAnnoInizio(colturaGruppiModel.getAnnoInizio())
 					.setCodiceDestUso(colturaGruppiModel.getCodiceDestUso())
 					.setCodiceQualita(colturaGruppiModel.getCodiceQualita())
 					.setCodiceSuolo(colturaGruppiModel.getCodiceSuolo()).setCodiceUso(colturaGruppiModel.getCodiceUso())
@@ -94,12 +95,32 @@ public class ConfigurazioneService {
 				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
 		for (GruppoLavorazioneModel gruppoLavorazioneModel : pageGruppoLavorazioneModel) {
 			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
-			gruppoLavorazioneDto.setAnnoInizio(gruppoLavorazioneModel.getAnnoInizio())
-					.setNome(gruppoLavorazioneModel.getNome()).setIndice(gruppoLavorazioneModel.getIndice())
+			gruppoLavorazioneDto.setId(gruppoLavorazioneModel.getId())
+					.setAnnoInizio(gruppoLavorazioneModel.getAnnoInizio()).setNome(gruppoLavorazioneModel.getNome())
+					.setIndice(gruppoLavorazioneModel.getIndice())
 					.setAmbitoLavorazione(gruppoLavorazioneModel.getAmbitoLavorazione());
 			listGruppoLavorazioneDto.add(gruppoLavorazioneDto);
 		}
 		return RisultatiPaginati.of(listGruppoLavorazioneDto, pageGruppoLavorazioneModel.getTotalElements());
+	}
+	
+	public Long saveGruppoLavorazione(GruppoLavorazioneDto gruppoLavorazioneDto) {
+		
+		GruppoLavorazioneModel gruppoLavorazioneModel = new GruppoLavorazioneModel();
+		Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
+				.findById(gruppoLavorazioneDto.getId());
+		if (gruppoLavorazioneModelOpt.isPresent()) {
+			gruppoLavorazioneModel = gruppoLavorazioneModelOpt.get();
+		}
+		else {
+			gruppoLavorazioneModel.setId(gruppoLavorazioneDto.getId());
+		}
+		gruppoLavorazioneModel.setNome(gruppoLavorazioneDto.getNome());
+		gruppoLavorazioneModel.setIndice(gruppoLavorazioneDto.getIndice());
+		gruppoLavorazioneModel.setAmbitoLavorazione(gruppoLavorazioneDto.getAmbitoLavorazione());
+		gruppoLavorazioneModel.setAnnoInizio(gruppoLavorazioneDto.getAnnoInizio());
+		gruppoLavorazioneModel.setAnnoFine(gruppoLavorazioneDto.getAnnoInizio());
+		return gruppiLavorazioneDao.save(gruppoLavorazioneModel).getId();
 	}
 	
 }
