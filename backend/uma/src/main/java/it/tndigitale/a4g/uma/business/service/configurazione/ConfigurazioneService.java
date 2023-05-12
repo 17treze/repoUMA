@@ -139,7 +139,7 @@ public class ConfigurazioneService {
 		gruppoLavorazioneModel.setIndice(gruppoLavorazioneDto.getIndice());
 		gruppoLavorazioneModel.setAmbitoLavorazione(gruppoLavorazioneDto.getAmbitoLavorazione());
 		gruppoLavorazioneModel.setAnnoInizio(gruppoLavorazioneDto.getAnnoInizio());
-		gruppoLavorazioneModel.setAnnoFine(gruppoLavorazioneDto.getAnnoInizio());
+		gruppoLavorazioneModel.setAnnoFine(gruppoLavorazioneDto.getAnnoFine());
 		gruppiLavorazioneDao.save(gruppoLavorazioneModel);
 		return gruppoLavorazioneModel.getId();
 	}
@@ -211,7 +211,7 @@ public class ConfigurazioneService {
 			throw new IllegalArgumentException("Identificativo lavorazione mancante o non esistente");
 		}
 		coefficienteModel.setAnnoInizio(coefficienteDto.getAnnoInizio());
-		coefficienteModel.setAnnoFine(coefficienteDto.getAnnoInizio());
+		coefficienteModel.setAnnoFine(coefficienteDto.getAnnoFine());
 		coefficienteDao.save(coefficienteModel);
 		return coefficienteModel.getId();
 	}
