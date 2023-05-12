@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService, SelectItem } from 'primeng-lts';
+import { EMPTY, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
+import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/paginator.model';
+import { ErrorService } from 'src/app/a4g-common/services/error.service';
+import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazione';
 import { GruppoFabbricatoDto } from 'src/app/uma/core-uma/models/dto/ConfigurazioneDto';
+import { HttpClientConfigurazioneUmaService } from 'src/app/uma/core-uma/services/http-client-configurazione-uma.service';
 
 @Component({
   selector: 'app-gruppi-fabbricato',
@@ -9,32 +15,22 @@ import { GruppoFabbricatoDto } from 'src/app/uma/core-uma/models/dto/Configurazi
 })
 export class GruppiFabbricatoComponent implements OnInit {
 
-  gruppiFabbricato: GruppoFabbricatoDto[];
+  gruppiFabbricato: PaginatorA4G<Array<GruppoFabbricatoDto>>;
   cols: any;
-  gruppiLavorazione: SelectItem[];
+  elementiPagina = 10;
+  sortBy: string = 'codiceFabbricato';
+  sortDirection: SortDirection;
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private httpClientConfigurazioneUmaService: HttpClientConfigurazioneUmaService,
+    private errorService: ErrorService
+  ) { }
 
   ngOnInit() {
     this.setCols();
-
-    // TODO: sostituire con la chiamata in GET per popolare la lista this.gruppiFabbricato
-    this.gruppiFabbricato = [
-      {
-        id: 1,
-        versione: 0,
-        codiceFabbricato: 'fabbricato1',
-        tipoFabbricato: 'tipo1',
-        gruppoLavorazione: 1,
-      }
-    ];
-
-    // TODO: sostituire con la chiamata in GET per popolare la lista this.gruppiLavorazione
-    this.gruppiLavorazione = [
-      { label: 'Gruppo lavorazione 1', value: '1' },
-      { label: 'Gruppo lavorazione 2', value: '2' },
-      { label: 'Gruppo lavorazione 3', value: '3' }
-    ];
+    this.gruppiFabbricato = {} as PaginatorA4G<Array<GruppoFabbricatoDto>>;
+    this.gruppiFabbricato.count = 0;
+    this.gruppiFabbricato.risultati = [];
   }
 
   private setCols() {
@@ -44,5 +40,29 @@ export class GruppiFabbricatoComponent implements OnInit {
       { field: 'gruppoLavorazione', header: 'Gruppo lavorazione' }
     ];
   }
+
+  changePage(event: PaginatorEvent) {
+    if (event != null) {
+      this.sortDirection = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
+      this.sortBy = event.sortField || this.sortBy;
+    }
+    let paginazione: Paginazione = Paginazione.of(
+      0, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+    );
+
+    this.httpClientConfigurazioneUmaService.getGruppiFabbricato(paginazione)
+      .pipe(switchMap((res: PaginatorA4G<Array<GruppoFabbricatoDto>>) => {
+        return of(res);
+      }),
+        catchError((err: ErrorDTO) => {
+          this.errorService.showError(err, 'tst-gruppi-lav');
+          return EMPTY;
+        })
+      )
+      .subscribe((result: PaginatorA4G<Array<GruppoFabbricatoDto>>) => {
+        this.gruppiFabbricato = result;
+      }, error => this.errorService.showError(error, 'tst-gruppi-lav'));
+  }
+
 
 }

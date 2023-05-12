@@ -11,13 +11,17 @@
         class="table-responsive"
         margin-top="30px">
         <label class="labelricerca my-3">
-          {{ gruppiFabbricato.length }} elementi trovati
+          {{ gruppiFabbricato.count }} elementi trovati
         </label>
         <p-table
-          [value]="gruppiFabbricato"
+          [value]="gruppiFabbricato.risultati"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10">
+          [rows]="elementiPagina"
+          [resetPageOnSort]="true"
+          [totalRecords]="gruppiFabbricato.count"
+          [lazy]="true"
+          (onLazyLoad)="changePage($event)">
           <ng-template
             pTemplate="header"
             let-columns>
@@ -36,7 +40,7 @@
             <tr [pSelectableRow]="rowData">
               <td>{{rowData.codiceFabbricato}}</td>
               <td>{{rowData.tipoFabbricato}}</td>
-              <td>{{rowData.gruppoLavorazione}}</td>
+              <td>{{rowData.gruppoLavorazione.nome}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">

@@ -34,7 +34,7 @@ export interface GruppoLavorazioneDto {
 export interface GruppoColtureDto {
     id: number;
     versione: number;
-    gruppoLavorazione: number; //GruppoLavorazioneDto;
+    gruppoLavorazione: GruppoLavorazioneDto;
     codiceSuolo: string;
     codiceDestUso: string;
     codiceUso: string;
@@ -49,5 +49,5 @@ export interface GruppoFabbricatoDto {
     versione: number;
     codiceFabbricato: string;
     tipoFabbricato: string;
-    gruppoLavorazione: number; //GruppoLavorazioneDto;
+    gruppoLavorazione: GruppoLavorazioneDto;
 }
