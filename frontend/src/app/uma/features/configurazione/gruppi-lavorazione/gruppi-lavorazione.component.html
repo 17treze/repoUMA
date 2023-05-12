@@ -111,10 +111,12 @@
       <label for="ambitoLavorazione">* Ambito</label>
     </div>
     <div class="p-col-8">
-      <input
-        pInputText
-        id="ambitoLavorazione"
-        [(ngModel)]="gruppoLavorazione.ambitoLavorazione">
+      <p-dropdown
+        [options]="ambitoEnum"
+        [(ngModel)]="selectedAmbito"
+        placeholder="Seleziona ambito"
+        optionLabel="label">
+      </p-dropdown>
     </div>
     <div
       class="p-col-4"
@@ -130,7 +132,7 @@
     <div
       class="p-col-4"
       style="align-self: center;">
-      <label for="annoFine">* Anno fine</label>
+      <label for="annoFine">Anno fine</label>
     </div>
     <div class="p-col-8">
       <input

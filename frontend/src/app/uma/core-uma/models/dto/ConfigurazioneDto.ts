@@ -1,3 +1,4 @@
+import { AmbitoGruppoLavorazione } from "../enums/AmbitoGruppoLavorazione.enum";
 import { TipologiaLavorazioneEnum } from "../enums/TipologiaLavorazione.enum";
 import { UnitaMisura } from "../enums/UnitaMisura.enum";
 
@@ -5,7 +6,7 @@ export interface CoefficienteDto {
     id: number;
     versione: number;
     coefficiente: number;
-    lavorazione: number; //LavorazioneDto
+    lavorazione: LavorazioneDto;
     annoInizio: number;
     annoFine: number;
 }
@@ -25,7 +26,7 @@ export interface GruppoLavorazioneDto {
     versione: number;
     indice: number;
     nome: string;
-    ambitoLavorazione: string;
+    ambitoLavorazione: AmbitoGruppoLavorazione;
     annoInizio: number;
     annoFine: number;
 }

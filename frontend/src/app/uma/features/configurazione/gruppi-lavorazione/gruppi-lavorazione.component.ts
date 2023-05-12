@@ -10,6 +10,7 @@ import { PaginatorA4G, PaginatorEvent } from 'src/app/a4g-common/interfaces/pagi
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
 import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazione';
 import { catchError, switchMap } from 'rxjs/operators';
+import { AmbitoGruppoLavorazione } from 'src/app/uma/core-uma/models/enums/AmbitoGruppoLavorazione.enum';
 
 @Component({
   selector: 'app-gruppi-lavorazione',
@@ -28,6 +29,8 @@ export class GruppiLavorazioneComponent implements OnInit {
   elementiPagina = 10;
   sortBy: string = 'nome';
   sortDirection: SortDirection;
+  ambitoEnum = Object.keys(AmbitoGruppoLavorazione).map(key => ({ label: AmbitoGruppoLavorazione[key], value: key }));
+  selectedAmbito: any;
 
   constructor(private messageService: MessageService,
     private errorService: ErrorService,
@@ -53,27 +56,30 @@ export class GruppiLavorazioneComponent implements OnInit {
   }
 
   canSave(lavorazione: GruppoLavorazioneDto) {
-    return lavorazione.ambitoLavorazione && lavorazione.annoFine && lavorazione.annoInizio && lavorazione.indice && lavorazione.nome;
+    return lavorazione.ambitoLavorazione && lavorazione.annoInizio && lavorazione.indice && lavorazione.nome;
   }
 
   showDialogToAdd() {
+    this.selectedAmbito = null;
     this.newGruppoLavorazione = true;
     this.gruppoLavorazione = {} as GruppoLavorazioneDto;
+    this.gruppoLavorazione.id = null;
     this.displayDialog = true;
   }
 
   save() {
-    // TODO: aggiungere chiamata per salvataggio nuovo record o aggiornmento record esistente
+    this.gruppoLavorazione.ambitoLavorazione = (this.selectedAmbito && this.selectedAmbito.value) ? this.selectedAmbito.value : null;
     if (this.canSave(this.gruppoLavorazione)) {
-      let coefficienti = [...this.gruppiLavorazione.risultati];
-      if (this.newGruppoLavorazione)
-        coefficienti.push(this.gruppoLavorazione);
-      else
-        coefficienti[this.gruppiLavorazione.risultati.indexOf(this.selectedGruppoLavorazione)] = this.gruppoLavorazione;
-      this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
-      this.gruppiLavorazione.risultati = coefficienti;
-      this.gruppoLavorazione = null;
-      this.displayDialog = false;
+      this.httpClientConfigurazioneUmaService.postGruppoLavorazione(this.gruppoLavorazione)
+        .subscribe({
+          next: resp => {
+            this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.success, UMA_MESSAGES.salvataggioOK));
+            this.changePage(null);
+            this.gruppoLavorazione = null;
+            this.displayDialog = false;
+          },
+          error: e => this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.error, e))
+        })
     } else
       this.messageService.add(A4gMessages.getToast('tst-gruppi-lav', A4gSeverityMessage.warn, UMA_MESSAGES.mandatoryAll));
   }
@@ -89,6 +95,7 @@ export class GruppiLavorazioneComponent implements OnInit {
     for (let prop in c) {
       coefficiente[prop] = c[prop];
     }
+    this.selectedAmbito = this.ambitoEnum.find(x => x.value === coefficiente.ambitoLavorazione);
     return coefficiente;
   }
 
@@ -98,7 +105,7 @@ export class GruppiLavorazioneComponent implements OnInit {
       this.sortBy = event.sortField || this.sortBy;
     }
     let paginazione: Paginazione = Paginazione.of(
-      event.first / this.elementiPagina, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+      0, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
     );
 
     this.httpClientConfigurazioneUmaService.getGruppiLavorazioni(paginazione)
