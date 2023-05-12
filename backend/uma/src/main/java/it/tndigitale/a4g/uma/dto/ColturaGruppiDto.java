@@ -9,7 +9,7 @@ public class ColturaGruppiDto {
 	private String codiceSuolo;
 	private String codiceUso;
 	private String codiceVarieta;
-	private Long gruppoLavorazione;
+	private GruppoLavorazioneDto gruppoLavorazione;
 	private Long id;
 	
 	public Long getId() {
@@ -84,11 +84,11 @@ public class ColturaGruppiDto {
 		return this;
 	}
 	
-	public Long getGruppoLavorazione() {
+	public GruppoLavorazioneDto getGruppoLavorazione() {
 		return gruppoLavorazione;
 	}
 	
-	public ColturaGruppiDto setGruppoLavorazione(Long gruppoLavorazione) {
+	public ColturaGruppiDto setGruppoLavorazione(GruppoLavorazioneDto gruppoLavorazione) {
 		this.gruppoLavorazione = gruppoLavorazione;
 		return this;
 	}

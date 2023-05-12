@@ -4,7 +4,7 @@ public class FabbricatoGruppiDto {
 	
 	private String codiceFabbricato;
 	private String tipoFabbricato;
-	private Long gruppoLavorazione;
+	private GruppoLavorazioneDto gruppoLavorazione;
 	private Long id;
 	
 	public Long getId() {
@@ -34,12 +34,13 @@ public class FabbricatoGruppiDto {
 		return this;
 	}
 	
-	public Long getGruppoLavorazione() {
+	public GruppoLavorazioneDto getGruppoLavorazione() {
 		return gruppoLavorazione;
 	}
 	
-	public FabbricatoGruppiDto setGruppoLavorazione(Long gruppoLavorazione) {
+	public FabbricatoGruppiDto setGruppoLavorazione(GruppoLavorazioneDto gruppoLavorazione) {
 		this.gruppoLavorazione = gruppoLavorazione;
 		return this;
 	}
+	
 }

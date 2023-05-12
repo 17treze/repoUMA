@@ -92,12 +92,18 @@ public class ConfigurazioneService {
 				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
 		for (ColturaGruppiModel colturaGruppiModel : pageColturaGruppiModel) {
 			ColturaGruppiDto colturaGruppiDto = new ColturaGruppiDto();
+			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
+			gruppoLavorazioneDto.setId(colturaGruppiModel.getGruppoLavorazione().getId())
+					.setAnnoInizio(colturaGruppiModel.getGruppoLavorazione().getAnnoInizio())
+					.setNome(colturaGruppiModel.getGruppoLavorazione().getNome())
+					.setIndice(colturaGruppiModel.getGruppoLavorazione().getIndice())
+					.setAmbitoLavorazione(colturaGruppiModel.getGruppoLavorazione().getAmbitoLavorazione());
+			
 			colturaGruppiDto.setId(colturaGruppiModel.getId()).setAnnoInizio(colturaGruppiModel.getAnnoInizio())
 					.setCodiceDestUso(colturaGruppiModel.getCodiceDestUso())
 					.setCodiceQualita(colturaGruppiModel.getCodiceQualita())
 					.setCodiceSuolo(colturaGruppiModel.getCodiceSuolo()).setCodiceUso(colturaGruppiModel.getCodiceUso())
-					.setCodiceVarieta(colturaGruppiModel.getCodiceVarieta())
-					.setGruppoLavorazione(colturaGruppiModel.getGruppoLavorazione().getId());
+					.setCodiceVarieta(colturaGruppiModel.getCodiceVarieta()).setGruppoLavorazione(gruppoLavorazioneDto);
 			listColturaGruppiDto.add(colturaGruppiDto);
 		}
 		return RisultatiPaginati.of(listColturaGruppiDto, pageColturaGruppiModel.getTotalElements());
@@ -135,7 +141,8 @@ public class ConfigurazioneService {
 		gruppoLavorazioneModel.setAmbitoLavorazione(gruppoLavorazioneDto.getAmbitoLavorazione());
 		gruppoLavorazioneModel.setAnnoInizio(gruppoLavorazioneDto.getAnnoInizio());
 		gruppoLavorazioneModel.setAnnoFine(gruppoLavorazioneDto.getAnnoInizio());
-		return gruppiLavorazioneDao.save(gruppoLavorazioneModel).getId();
+		gruppiLavorazioneDao.save(gruppoLavorazioneModel);
+		return gruppoLavorazioneModel.getId();
 	}
 	
 	public RisultatiPaginati<FabbricatoGruppiDto> getGruppiFabbricato(Paginazione paginazione,
@@ -145,10 +152,17 @@ public class ConfigurazioneService {
 				.findAll(PageableBuilder.build().from(paginazione, ordinamento));
 		for (FabbricatoGruppiModel fabbricatoGruppiModel : pageFabbricatoGruppiModel) {
 			FabbricatoGruppiDto fabbricatoGruppiDto = new FabbricatoGruppiDto();
+			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
+			gruppoLavorazioneDto.setId(fabbricatoGruppiModel.getGruppoLavorazione().getId())
+					.setAnnoInizio(fabbricatoGruppiModel.getGruppoLavorazione().getAnnoInizio())
+					.setNome(fabbricatoGruppiModel.getGruppoLavorazione().getNome())
+					.setIndice(fabbricatoGruppiModel.getGruppoLavorazione().getIndice())
+					.setAmbitoLavorazione(fabbricatoGruppiModel.getGruppoLavorazione().getAmbitoLavorazione());
+			
 			fabbricatoGruppiDto.setId(fabbricatoGruppiModel.getId())
 					.setCodiceFabbricato(fabbricatoGruppiModel.getCodiceFabbricato())
 					.setTipoFabbricato(fabbricatoGruppiModel.getTipoFabbricato())
-					.setGruppoLavorazione(fabbricatoGruppiModel.getGruppoLavorazione().getId());
+					.setGruppoLavorazione(gruppoLavorazioneDto);
 			listFabbricatoGruppiDto.add(fabbricatoGruppiDto);
 		}
 		return RisultatiPaginati.of(listFabbricatoGruppiDto, pageFabbricatoGruppiModel.getTotalElements());
@@ -160,9 +174,20 @@ public class ConfigurazioneService {
 				.findAllValid(PageableBuilder.build().from(paginazione, ordinamento));
 		for (CoefficienteModel coefficienteModel : pageCoefficienteModel) {
 			CoefficienteDto coefficienteDto = new CoefficienteDto();
+			LavorazioneDto lavorazioneDto = new LavorazioneDto();
+			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
+			LavorazioneModel lavorazioneModel = coefficienteModel.getLavorazioneModel();
+			gruppoLavorazioneDto.setId(lavorazioneModel.getGruppoLavorazione().getId())
+					.setAnnoInizio(lavorazioneModel.getGruppoLavorazione().getAnnoInizio())
+					.setNome(lavorazioneModel.getGruppoLavorazione().getNome())
+					.setIndice(lavorazioneModel.getGruppoLavorazione().getIndice())
+					.setAmbitoLavorazione(lavorazioneModel.getGruppoLavorazione().getAmbitoLavorazione());
+			lavorazioneDto.setId(lavorazioneModel.getId()).setIndice(lavorazioneModel.getIndice())
+					.setNome(lavorazioneModel.getNome()).setTipologia(lavorazioneModel.getTipologia())
+					.setUnitaDiMisura(lavorazioneModel.getUnitaDiMisura()).setGruppoLavorazione(gruppoLavorazioneDto);
+			
 			coefficienteDto.setId(coefficienteModel.getId()).setAnnoInizio(coefficienteModel.getAnnoInizio())
-					.setCoefficiente(coefficienteModel.getCoefficiente())
-					.setIdLavorazione(coefficienteModel.getLavorazioneModel().getId());
+					.setCoefficiente(coefficienteModel.getCoefficiente()).setLavorazione(lavorazioneDto);
 			listCoefficienteDto.add(coefficienteDto);
 		}
 		return RisultatiPaginati.of(listCoefficienteDto, pageCoefficienteModel.getTotalElements());
@@ -179,7 +204,8 @@ public class ConfigurazioneService {
 			coefficienteModel.setId(coefficienteDto.getId());
 		}
 		coefficienteModel.setCoefficiente(coefficienteDto.getCoefficiente());
-		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao.findById(coefficienteDto.getIdLavorazione());
+		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao
+				.findById(coefficienteDto.getLavorazione().getId());
 		if (lavorazioneModelOpt.isPresent()) {
 			coefficienteModel.setLavorazioneModel(lavorazioneModelOpt.get());
 		}
@@ -188,7 +214,8 @@ public class ConfigurazioneService {
 		}
 		coefficienteModel.setAnnoInizio(coefficienteDto.getAnnoInizio());
 		coefficienteModel.setAnnoFine(coefficienteDto.getAnnoInizio());
-		return coefficienteDao.save(coefficienteModel).getId();
+		coefficienteDao.save(coefficienteModel);
+		return coefficienteModel.getId();
 	}
 	
 	public RisultatiPaginati<LavorazioneDto> getLavorazioni(Paginazione paginazione, Ordinamento ordinamento) {
@@ -233,6 +260,7 @@ public class ConfigurazioneService {
 		lavorazioneModel.setNome(lavorazioneDto.getNome());
 		lavorazioneModel.setTipologia(lavorazioneDto.getTipologia());
 		lavorazioneModel.setUnitaDiMisura(lavorazioneDto.getUnitaDiMisura());
-		return lavorazioneDao.save(lavorazioneModel).getId();
+		lavorazioneDao.save(lavorazioneModel);
+		return lavorazioneModel.getId();
 	}
 }

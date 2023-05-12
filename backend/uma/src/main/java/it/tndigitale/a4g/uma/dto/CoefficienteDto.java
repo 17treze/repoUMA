@@ -8,7 +8,7 @@ public class CoefficienteDto {
 	private BigDecimal coefficiente;
 	private Integer annoInizio;
 	private Integer annoFine;
-	private Long idLavorazione;
+	private LavorazioneDto lavorazione;
 	
 	public Long getId() {
 		return this.id;
@@ -28,12 +28,12 @@ public class CoefficienteDto {
 		return this;
 	}
 	
-	public Long getIdLavorazione() {
-		return idLavorazione;
+	public LavorazioneDto getLavorazione() {
+		return lavorazione;
 	}
 	
-	public CoefficienteDto setIdLavorazione(Long idLavorazione) {
-		this.idLavorazione = idLavorazione;
+	public CoefficienteDto setLavorazione(LavorazioneDto lavorazione) {
+		this.lavorazione = lavorazione;
 		return this;
 	}
 	
