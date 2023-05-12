@@ -11,16 +11,20 @@
         class="table-responsive"
         margin-top="30px">
         <label class="labelricerca my-3">
-          {{ coefficienti.length }} elementi trovati
+          {{ coefficienti.count }} elementi trovati
         </label>
         <p-table
-          [value]="coefficienti"
+          [value]="coefficienti.risultati"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10"
+          [rows]="elementiPagina"
           selectionMode="single"
           [(selection)]="selectedCoefficiente"
-          (onRowSelect)="onRowSelect($event)">
+          (onRowSelect)="onRowSelect($event)"
+          [resetPageOnSort]="true"
+          [totalRecords]="coefficienti.count"
+          [lazy]="true"
+          (onLazyLoad)="changePage($event)">
           <ng-template
             pTemplate="caption"
             let-rowData>
@@ -50,7 +54,7 @@
             let-rowData>
             <tr [pSelectableRow]="rowData">
               <td>{{rowData.coefficiente}}</td>
-              <td>{{rowData.lavorazione}}</td>
+              <td>{{rowData.lavorazione.nome}}</td>
               <td>{{rowData.annoInizio}}</td>
               <td>{{rowData.annoFine}}</td>
             </tr>
@@ -73,7 +77,7 @@
   [responsive]="true"
   showEffect="fade"
   [modal]="true"
-  [style]="{width: '40%'}">
+  [style]="{width: '50%'}">
   <div
     class="p-grid ui-fluid"
     *ngIf="coefficiente">
@@ -95,10 +99,12 @@
       <label for="lavorazione">* Lavorazione</label>
     </div>
     <div class="p-col-8">
-      <input
-        pInputText
-        id="lavorazione"
-        [(ngModel)]="coefficiente.lavorazione">
+        <p-dropdown
+        [options]="lavorazioni"
+        [(ngModel)]="coefficiente.lavorazione"
+        placeholder="Seleziona lavorazione"
+        optionLabel="nome">
+      </p-dropdown>
     </div>
     <div
       class="p-col-4"
@@ -114,7 +120,7 @@
     <div
       class="p-col-4"
       style="align-self: center;">
-      <label for="annoFine">* Anno fine</label>
+      <label for="annoFine">Anno fine</label>
     </div>
     <div class="p-col-8">
       <input

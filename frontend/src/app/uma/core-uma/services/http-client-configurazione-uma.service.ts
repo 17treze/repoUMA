@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
 import { PaginatorA4G } from 'src/app/a4g-common/interfaces/paginator.model';
 import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
-import { GruppoColtureDto, GruppoLavorazioneDto, LavorazioneDto } from '../models/dto/ConfigurazioneDto';
+import { CoefficienteDto, GruppoColtureDto, GruppoLavorazioneDto, LavorazioneDto } from '../models/dto/ConfigurazioneDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,15 @@ export class HttpClientConfigurazioneUmaService {
 
   public postLavorazione(lavorazione: LavorazioneDto): Observable<number> {
     return this.http.post<number>(`${this.urlBase()}/lavorazioni`, lavorazione);
+  }
+
+  public getCoefficienti(paginazione: Paginazione): Observable<PaginatorA4G<Array<CoefficienteDto>>> {
+    const data: any = { ...paginazione };
+    return this.http.get<PaginatorA4G<Array<CoefficienteDto>>>(`${this.urlBase()}/coefficienti`, { params: data });
+  }
+
+  public postCoefficiente(coefficiente: CoefficienteDto): Observable<number> {
+    return this.http.post<number>(`${this.urlBase()}/coefficienti`, coefficiente);
   }
 
   urlBase() {

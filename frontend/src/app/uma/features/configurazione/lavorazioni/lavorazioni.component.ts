@@ -21,7 +21,7 @@ import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
 })
 export class LavorazioniComponent implements OnInit {
 
-  lavorazioni: PaginatorA4G<Array<LavorazioneDto>>;;
+  lavorazioni: PaginatorA4G<Array<LavorazioneDto>>;
   lavorazione: LavorazioneDto;
   gruppiLavorazione: GruppoLavorazioneDto[];
   cols: any;
