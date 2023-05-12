@@ -66,7 +66,7 @@ export class GruppiColtureComponent implements OnInit, OnDestroy {
       this.sortBy = event.sortField || this.sortBy;
     }
     let paginazione: Paginazione = Paginazione.of(
-      event.first / this.elementiPagina, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+      Math.floor(event.first / this.elementiPagina), this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
     );
 
     this.getPagedGruppiSubscription = this.httpClientConfigurazioneUmaService.getGruppiColture(paginazione)

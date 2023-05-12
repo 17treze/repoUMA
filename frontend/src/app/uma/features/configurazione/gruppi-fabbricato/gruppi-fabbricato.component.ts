@@ -47,7 +47,7 @@ export class GruppiFabbricatoComponent implements OnInit {
       this.sortBy = event.sortField || this.sortBy;
     }
     let paginazione: Paginazione = Paginazione.of(
-      0, this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+      Math.floor(event.first / this.elementiPagina), this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
     );
 
     this.httpClientConfigurazioneUmaService.getGruppiFabbricato(paginazione)
