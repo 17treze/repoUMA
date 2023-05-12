@@ -197,10 +197,15 @@ public class ConfigurazioneService {
 				.findAll(PageableBuilder.build().from(paginazione, ordinamento));
 		for (LavorazioneModel lavorazioneModel : pageLavorazioneModel) {
 			LavorazioneDto lavorazioneDto = new LavorazioneDto();
+			GruppoLavorazioneDto gruppoLavorazioneDto = new GruppoLavorazioneDto();
+			gruppoLavorazioneDto.setId(lavorazioneModel.getGruppoLavorazione().getId())
+					.setAnnoInizio(lavorazioneModel.getGruppoLavorazione().getAnnoInizio())
+					.setNome(lavorazioneModel.getGruppoLavorazione().getNome())
+					.setIndice(lavorazioneModel.getGruppoLavorazione().getIndice())
+					.setAmbitoLavorazione(lavorazioneModel.getGruppoLavorazione().getAmbitoLavorazione());
 			lavorazioneDto.setId(lavorazioneModel.getId()).setIndice(lavorazioneModel.getIndice())
 					.setNome(lavorazioneModel.getNome()).setTipologia(lavorazioneModel.getTipologia())
-					.setUnitaDiMisura(lavorazioneModel.getUnitaDiMisura())
-					.setIdGruppoLavorazione(lavorazioneModel.getGruppoLavorazione().getId());
+					.setUnitaDiMisura(lavorazioneModel.getUnitaDiMisura()).setGruppoLavorazione(gruppoLavorazioneDto);
 			listLavorazioneDto.add(lavorazioneDto);
 		}
 		return RisultatiPaginati.of(listLavorazioneDto, pageLavorazioneModel.getTotalElements());
@@ -217,8 +222,8 @@ public class ConfigurazioneService {
 			lavorazioneModel.setId(lavorazioneDto.getId());
 		}
 		Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
-				.findById(lavorazioneDto.getIdGruppoLavorazione());
-		if (lavorazioneModelOpt.isPresent()) {
+				.findById(lavorazioneDto.getGruppoLavorazione().getId());
+		if (gruppoLavorazioneModelOpt.isPresent()) {
 			lavorazioneModel.setGruppoLavorazione(gruppoLavorazioneModelOpt.get());
 		}
 		else {

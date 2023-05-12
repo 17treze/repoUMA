@@ -10,7 +10,7 @@ public class LavorazioneDto {
 	private String nome;
 	private TipologiaLavorazione tipologia;
 	private UnitaDiMisura unitaDiMisura;
-	private Long idGruppoLavorazione;
+	private GruppoLavorazioneDto gruppoLavorazione;
 	
 	public Long getId() {
 		return this.id;
@@ -57,12 +57,12 @@ public class LavorazioneDto {
 		return this;
 	}
 	
-	public Long getIdGruppoLavorazione() {
-		return idGruppoLavorazione;
+	public GruppoLavorazioneDto getGruppoLavorazione() {
+		return gruppoLavorazione;
 	}
 	
-	public LavorazioneDto setIdGruppoLavorazione(Long idGruppoLavorazione) {
-		this.idGruppoLavorazione = idGruppoLavorazione;
+	public LavorazioneDto setGruppoLavorazione(GruppoLavorazioneDto gruppoLavorazione) {
+		this.gruppoLavorazione = gruppoLavorazione;
 		return this;
 	}
 	
