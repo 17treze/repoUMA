@@ -128,13 +128,12 @@ public class ConfigurazioneService {
 	public Long saveGruppoLavorazione(GruppoLavorazioneDto gruppoLavorazioneDto) {
 		
 		GruppoLavorazioneModel gruppoLavorazioneModel = new GruppoLavorazioneModel();
-		Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
-				.findById(gruppoLavorazioneDto.getId());
-		if (gruppoLavorazioneModelOpt.isPresent()) {
-			gruppoLavorazioneModel = gruppoLavorazioneModelOpt.get();
-		}
-		else {
-			gruppoLavorazioneModel.setId(gruppoLavorazioneDto.getId());
+		if (gruppoLavorazioneDto.getId() != null) {
+			Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
+					.findById(gruppoLavorazioneDto.getId());
+			if (gruppoLavorazioneModelOpt.isPresent()) {
+				gruppoLavorazioneModel = gruppoLavorazioneModelOpt.get();
+			}
 		}
 		gruppoLavorazioneModel.setNome(gruppoLavorazioneDto.getNome());
 		gruppoLavorazioneModel.setIndice(gruppoLavorazioneDto.getIndice());
@@ -196,12 +195,11 @@ public class ConfigurazioneService {
 	public Long saveCoefficiente(CoefficienteDto coefficienteDto) {
 		
 		CoefficienteModel coefficienteModel = new CoefficienteModel();
-		Optional<CoefficienteModel> coefficienteModelOpt = coefficienteDao.findById(coefficienteDto.getId());
-		if (coefficienteModelOpt.isPresent()) {
-			coefficienteModel = coefficienteModelOpt.get();
-		}
-		else {
-			coefficienteModel.setId(coefficienteDto.getId());
+		if (coefficienteDto.getId() != null) {
+			Optional<CoefficienteModel> coefficienteModelOpt = coefficienteDao.findById(coefficienteDto.getId());
+			if (coefficienteModelOpt.isPresent()) {
+				coefficienteModel = coefficienteModelOpt.get();
+			}
 		}
 		coefficienteModel.setCoefficiente(coefficienteDto.getCoefficiente());
 		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao
