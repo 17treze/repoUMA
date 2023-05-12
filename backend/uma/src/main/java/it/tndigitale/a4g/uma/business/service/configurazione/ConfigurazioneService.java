@@ -241,12 +241,11 @@ public class ConfigurazioneService {
 	public Long saveLavorazione(LavorazioneDto lavorazioneDto) {
 		
 		LavorazioneModel lavorazioneModel = new LavorazioneModel();
-		Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao.findById(lavorazioneDto.getId());
-		if (lavorazioneModelOpt.isPresent()) {
-			lavorazioneModel = lavorazioneModelOpt.get();
-		}
-		else {
-			lavorazioneModel.setId(lavorazioneDto.getId());
+		if (lavorazioneDto.getId() != null) {
+			Optional<LavorazioneModel> lavorazioneModelOpt = lavorazioneDao.findById(lavorazioneDto.getId());
+			if (lavorazioneModelOpt.isPresent()) {
+				lavorazioneModel = lavorazioneModelOpt.get();
+			}
 		}
 		Optional<GruppoLavorazioneModel> gruppoLavorazioneModelOpt = gruppiLavorazioneDao
 				.findById(lavorazioneDto.getGruppoLavorazione().getId());
