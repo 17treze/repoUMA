@@ -11,16 +11,20 @@
         class="table-responsive"
         margin-top="30px">
         <label class="labelricerca my-3">
-          {{ lavorazioni.length }} elementi trovati
+          {{ lavorazioni.count }} elementi trovati
         </label>
         <p-table
-          [value]="lavorazioni"
+          [value]="lavorazioni.risultati"
           [columns]="cols"
           [paginator]="true"
-          [rows]="10"
+          [rows]="elementiPagina"
           selectionMode="single"
           [(selection)]="selectedLavorazione"
-          (onRowSelect)="onRowSelect($event)">
+          (onRowSelect)="onRowSelect($event)"
+          [resetPageOnSort]="true"
+          [totalRecords]="lavorazioni.count"
+          [lazy]="true"
+          (onLazyLoad)="changePage($event)">
           <ng-template
             pTemplate="caption"
             let-rowData>
@@ -52,8 +56,8 @@
               <td>{{rowData.indice}}</td>
               <td>{{rowData.nome}}</td>
               <td>{{rowData.tipologia}}</td>
-              <td>{{rowData.unitaMisura}}</td>
-              <td>{{rowData.gruppoLavorazione}}</td>
+              <td>{{rowData.unitaDiMisura}}</td>
+              <td>{{rowData.gruppoLavorazione.nome}}</td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
@@ -107,21 +111,27 @@
       <label for="tipologia">* Tipologia</label>
     </div>
     <div class="p-col-8">
-      <input
-        pInputText
-        id="tipologia"
-        [(ngModel)]="lavorazione.tipologia">
+      <p-dropdown
+        [options]="tipologiaLavorazioneEnum"
+        [(ngModel)]="selectedTipologiaLavorazione"
+        placeholder="Seleziona tipologia lavorazione"
+        optionLabel="label"
+        [showClear]="true">
+      </p-dropdown>
     </div>
     <div
       class="p-col-4"
       style="align-self: center;">
-      <label for="unitaMisura">* Unità di misura</label>
+      <label for="unitaDiMisura">* Unità di misura</label>
     </div>
     <div class="p-col-8">
-      <input
-        pInputText
-        id="unitaMisura"
-        [(ngModel)]="lavorazione.unitaMisura">
+      <p-dropdown
+        [options]="unitaMisuraEnum"
+        [(ngModel)]="selectedUnitaMisura"
+        placeholder="Seleziona unità di misura"
+        optionLabel="label"
+        [showClear]="true">
+      </p-dropdown>
     </div>
     <div
       class="p-col-4"
@@ -129,10 +139,13 @@
       <label for="gruppoLavorazione">* Gruppo lavorazione</label>
     </div>
     <div class="p-col-8">
-      <input
-        pInputText
-        id="gruppoLavorazione"
-        [(ngModel)]="lavorazione.gruppoLavorazione">
+      <p-dropdown
+        [options]="gruppiLavorazione"
+        [(ngModel)]="lavorazione.gruppoLavorazione"
+        placeholder="Seleziona gruppo lavorazione"
+        optionLabel="nome"
+        [showClear]="true">
+      </p-dropdown>
     </div>
   </div>
   <p-footer>

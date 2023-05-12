@@ -21,7 +21,6 @@ export class GruppiLavorazioneComponent implements OnInit {
   gruppiLavorazione: PaginatorA4G<Array<GruppoLavorazioneDto>>;
   gruppoLavorazione: GruppoLavorazioneDto;
   display: boolean;
-  totalElements: number;
   cols: any;
   displayDialog: boolean;
   newGruppoLavorazione: boolean;
@@ -113,9 +112,6 @@ export class GruppiLavorazioneComponent implements OnInit {
       )
       .subscribe((result: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
         this.gruppiLavorazione = result;
-        if (this.gruppiLavorazione != null) {
-          this.totalElements = this.gruppiLavorazione.count;
-        }
       }, error => this.errorService.showError(error, 'tst-gruppi-lav'));
   }
 

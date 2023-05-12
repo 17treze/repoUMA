@@ -1,3 +1,6 @@
+import { TipologiaLavorazioneEnum } from "../enums/TipologiaLavorazione.enum";
+import { UnitaMisura } from "../enums/UnitaMisura.enum";
+
 export interface CoefficienteDto {
     id: number;
     versione: number;
@@ -12,9 +15,9 @@ export interface LavorazioneDto {
     versione: number;
     indice: number;
     nome: string;
-    tipologia: string;
-    unitaMisura: string;
-    gruppoLavorazione: number; //GruppoLavorazioneDto;
+    tipologia: TipologiaLavorazioneEnum;
+    unitaDiMisura: UnitaMisura;
+    gruppoLavorazione: GruppoLavorazioneDto;
 }
 
 export interface GruppoLavorazioneDto {

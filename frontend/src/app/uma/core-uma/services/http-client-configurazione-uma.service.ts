@@ -28,6 +28,15 @@ export class HttpClientConfigurazioneUmaService {
     return this.http.get<PaginatorA4G<Array<GruppoLavorazioneDto>>>(`${this.urlBase()}/gruppi-lavorazioni`, { params: data });
   }
 
+  public getLavorazioni(paginazione: Paginazione): Observable<PaginatorA4G<Array<LavorazioneDto>>> {
+    const data: any = { ...paginazione };
+    return this.http.get<PaginatorA4G<Array<LavorazioneDto>>>(`${this.urlBase()}/lavorazioni`, { params: data });
+  }
+
+  public postLavorazione(lavorazione: LavorazioneDto): Observable<number> {
+    return this.http.post<number>(`${this.urlBase()}/lavorazioni`, lavorazione);
+  }
+
   urlBase() {
     return this.httpClientCore.HOST + this.httpClientCore.BASE_PATH + this.httpClientCore.API_V1 + this.CTX_PATH;
   }
