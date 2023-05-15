@@ -5,9 +5,40 @@ import { HttpClient } from "@angular/common/http";
 import { EMPTY, Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 @Directive()
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class AuthService {
+
+  public authenticationEventObservable: Subject<boolean> =
+    new Subject<boolean>();
+
+  authConfig: AuthConfig = {
+    issuer: environment.discoveryDocumentEndpoint,
+    redirectUri: environment.redirectUri,
+    logoutUrl: environment.logoutUrl,
+    responseType: environment.responseType,
+    scope: environment.scope,
+    clientId: environment.clientId,
+    dummyClientSecret: environment.dummyClientSecret,
+    showDebugInformation: environment.showDebugInformation,
+    requireHttps: environment.requireHttps,
+    strictDiscoveryDocumentValidation:
+      environment.strictDiscoveryDocumentValidation,
+    skipIssuerCheck: environment.skipIssuerCheck,
+    // gestione delle sessioni
+    sessionChecksEnabled: environment.sessionChecksEnabled,
+    useHttpBasicAuth: environment.useHttpBasicAuth
+  };
+
   public static roleCaa = "caa";
   public static rolePrivate = "azienda";
   public static roleAppag = "appag";
@@ -27,16 +58,83 @@ export class AuthService {
 
   @Output() onUserChange = new EventEmitter<Utente>();
 
+  /**
+   *
+   * @param router
+   * @param oauthService
+   */
   constructor(
+    // to be removed
     private http: HttpClient,
-    private _configuration: Configuration
-  ) { }
+    private _configuration: Configuration,
+
+    private router: Router,
+    private oauthService: OAuthService,
+    private messageService: MessageService
+  ) {
+    this.oauthService.configure(this.authConfig);
+  }
+
+  public logout() {
+    this.oauthService.logOut();
+  }
+
+  public isAuthenticated(): boolean {
+    if (
+      this.oauthService.hasValidAccessToken() &&
+      this.oauthService.hasValidIdToken()
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public login() {
+    console.log("login");
+  //  this.oauthService.silentRefresh();
+    this.oauthService.useSilentRefresh = true;
+    this.oauthService
+      .loadDiscoveryDocumentAndLogin({
+        disableOAuth2StateCheck: true
+      })
+      .then((result: boolean) => {
+        if (!result) {
+          // this.toastr.showErrorMessage('Utente non autorizzato');
+          console.log('Utente non autorizzato');
+        }
+        this.authenticationEventObservable.next(result);
+      })
+      .catch((error) => {
+        // this.toastr.showErrorMessage('Utente non autorizzato');
+        // this.logout();
+        console.log(error);
+        console.log('Utente non autorizzato');
+      });
+  }
+
+  public revokeTokenAndLogout() {
+    this.oauthService.revokeTokenAndLogout();
+  }
+
+  public refreshToken() {
+    this.oauthService.refreshToken();
+  }
+
+  public getAccessToken() {
+       return this.oauthService.getAccessToken();
+  }
+
+  public getIdToken(): string {
+    return this.oauthService.getIdToken();
+  }
+
+  public getIdentityClaims(): any {
+    return this.oauthService.getIdentityClaims();
+  }
 
   isLoggedIn(): boolean {
-    if (this.getUser()) {
-      return true;
-    }
-    return false;
+    return this.isAuthenticated();
   }
 
   setUser(user: Utente) {
