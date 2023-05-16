@@ -3,6 +3,25 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  // WSO2
+  discoveryDocumentEndpoint: 'https://10.206.193.173:9443/oauth2/oidcdiscovery',
+  redirectUri: 'http://localhost:4200/homepage',
+  logoutUrl: 'http://localhost:4200',
+  clientId: 'fJO0a2U007kMEQCWV7iuregCDVMa',
+  dummyClientSecret: 'hNGtXaR1QWEaO9Wo8HccEhayokwa',
+  scope: 'openid',
+  responseType: 'code',
+  sessionChecksEnabled: false,
+  // begin: richiesto perche' il documento non e' completamente conforme
+  strictDiscoveryDocumentValidation: false,
+  skipIssuerCheck: true,
+  // end: richiesto perche' il documento non e' completamente conforme
+  requireHttps: false,
+  showDebugInformation: true,
+  disablePKCE: false,
+  useHttpBasicAuth: true,
+
+  // legacy
   production: false,
   backendUrl: 'https://a4g-test.infotn.it/',
   frontendUrl: 'http://localhost:4200/',

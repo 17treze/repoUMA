@@ -2,14 +2,13 @@ import { Injectable, Output, EventEmitter, Directive } from "@angular/core";
 import { Utente } from "./user";
 import { Configuration } from "../app.constants";
 import { HttpClient } from "@angular/common/http";
-import { EMPTY, Observable, of } from "rxjs";
+import { Subject, EMPTY, Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
-import { Subject } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Directive()
 @Injectable({
@@ -32,7 +31,7 @@ export class AuthService {
     showDebugInformation: environment.showDebugInformation,
     requireHttps: environment.requireHttps,
     strictDiscoveryDocumentValidation:
-      environment.strictDiscoveryDocumentValidation,
+    environment.strictDiscoveryDocumentValidation,
     skipIssuerCheck: environment.skipIssuerCheck,
     // gestione delle sessioni
     sessionChecksEnabled: environment.sessionChecksEnabled,
