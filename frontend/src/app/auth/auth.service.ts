@@ -74,6 +74,7 @@ export class AuthService {
     this.oauthService.configure(this.authConfig);
   }
 
+  // WSO2
   public logout() {
     this.oauthService.logOut();
   }
@@ -132,6 +133,7 @@ export class AuthService {
     return this.oauthService.getIdentityClaims();
   }
 
+  // legacy
   isLoggedIn(): boolean {
     return this.isAuthenticated();
   }

@@ -75,6 +75,7 @@ import { RisultatoRicercaDisponibilitaIstruttoreUMAComponent } from './funzional
 import { PopupIstruttoreUmaConfigurazioneComponent } from './funzionalita/presentazione-istanze-istruttoria/popup-istruttore-uma-configurazione/popup-istruttore-uma-configurazione.component';
 import { ListaDomandeCaaComponent } from './funzionalita/consultazione-UMA/app-lista-domande-caa/app-lista-domande-caa.component';
 import { PopupGeneraFileXmlCup } from './funzionalita/presentazione-istanze-istruttoria/popup-genera-file-xml-cup/popup-genera-file-xml-cup.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(
@@ -105,6 +106,7 @@ export function HttpLoaderFactory(
         deps: [HttpClient, Configuration]
       }
     }),
+    OAuthModule.forRoot()
   ],
   declarations: [
     AppComponent,
