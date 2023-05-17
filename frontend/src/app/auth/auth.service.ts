@@ -154,6 +154,8 @@ export class AuthService {
 
   public getUserNew(force: boolean = false): Observable<Utente> {
     if (force || !sessionStorage.getItem("user")) {
+      this.login();
+      /*
       return this.http.get<Utente>(this._configuration.urlGetSSO).pipe(
         catchError(err => {
           console.error("Errore in recupero utente: " + err);
@@ -161,6 +163,8 @@ export class AuthService {
         }),
         tap(res => this.setUser(res))
       );
+      */
+      return null;
     } else {
       return of(JSON.parse(sessionStorage.getItem("user")));
     }
@@ -171,10 +175,13 @@ export class AuthService {
     */
   getUser(force: boolean = false): Utente {
     if (!sessionStorage.getItem("user")) {
+      this.login();
+      /*
       if (force) {
         this.callAsyncUser();
         return JSON.parse(sessionStorage.getItem("user"));
       }
+      */
       return null;
     } else {
       return JSON.parse(sessionStorage.getItem("user"));
