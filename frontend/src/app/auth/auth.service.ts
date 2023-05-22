@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter, Directive } from "@angular/core";
 import { Utente } from "./user";
 import { Configuration } from "../app.constants";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, EMPTY, Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 
@@ -103,6 +103,7 @@ export class AuthService {
           // this.toastr.showErrorMessage('Utente non autorizzato');
           console.log('Utente non autorizzato');
         }
+        console.log('Result: ' + result);
         this.authenticationEventObservable.next(result);
       })
       .catch((error) => {
@@ -147,66 +148,50 @@ export class AuthService {
     } else {
       sessionStorage.clear();
     }
-
     sessionStorage.setItem("user", JSON.stringify(user));
     this.onUserChange.emit(user);
   }
 
-  public getUserNew(force: boolean = false): Observable<Utente> {
-    if (force || !sessionStorage.getItem("user")) {
-      this.login();
-      /*
-      return this.http.get<Utente>(this._configuration.urlGetSSO).pipe(
-        catchError(err => {
-          console.error("Errore in recupero utente: " + err);
-          return EMPTY;
-        }),
-        tap(res => this.setUser(res))
-      );
-      */
-      return null;
-    } else {
-      return of(JSON.parse(sessionStorage.getItem("user")));
-    }
-  }
-
-  /**
-    * @deprecated uso improprio dell'asincronia
-    */
-  getUser(force: boolean = false): Utente {
-    if (!sessionStorage.getItem("user")) {
-      this.login();
-      /*
-      if (force) {
-        this.callAsyncUser();
-        return JSON.parse(sessionStorage.getItem("user"));
+  public getUserFromSession(): Observable<Utente> {
+    if (this.isAuthenticated()) {
+      if (!sessionStorage.getItem('user')) {
+        let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+        return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers }).pipe(
+          catchError(err => {
+            console.error("Errore in recupero utente: " + err);
+            return EMPTY;
+          }),
+          tap(user => this.setUser(user))
+        );
       }
-      */
-      return null;
-    } else {
-      return JSON.parse(sessionStorage.getItem("user"));
+      else {
+        return JSON.parse(sessionStorage.getItem("user"));
+      }  
+    }
+    else {
+      console.log("Non autenticato");
+      this.authenticationEventObservable.subscribe({
+        next: (res) => {
+          let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+          return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers }).pipe(
+            catchError(err => {
+              console.error("Errore in recupero utente: " + err);
+              return EMPTY;
+            }),
+            tap(user => this.setUser(user))
+          );
+        },
+      })
+      this.login();
     }
   }
 
-  /**
-    * @deprecated uso improprio dell'asincronia
-    */
-  async callAsyncUser() {
-    let time = Date.now().toString();
-    let user = null;
-    try {
-      user = await this.getUserFromSSO().toPromise();
-    } catch {
-      console.error("Errore in recupero utente " + time);
-    }
-    this.setUser(user);
-  }
-
-  /**
-    * @deprecated usare getUserNew()
-    */
-  getUserFromSSO(): Observable<Utente> {
-    return this.http.get<Utente>(this._configuration.urlGetSSO);
+  getUser(force: boolean = false): Utente {
+    let u = new Utente();
+    this.getUserFromSession().subscribe((user) => {
+      u = user;
+    });
+    return u;
   }
 
   isUserPrivate() {
@@ -218,7 +203,11 @@ export class AuthService {
     */
   isUserInRole(requiredRole: string, user: Utente = null): boolean {
     // return true;
-    if (!user) user = this.getUser();
+    if (!user) {
+      this.getUserFromSession().subscribe((u) => {
+        user = u;
+      });
+    }
 
     if (!user || !user.profili) {
       return false;

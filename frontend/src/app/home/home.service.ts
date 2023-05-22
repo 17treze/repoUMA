@@ -8,6 +8,7 @@ import { InputFascicolo } from '../a4g-common/classi/InputFascicolo';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
 import { UtenteAgs } from '../a4g-common/classi/utenteAgs';
 import { FascicoloService } from '../fascicolo/fascicolo.service';
+import { AuthService } from '../auth/auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,11 +23,13 @@ export class HomeService {
   constructor(
     private http: HttpClient,
     private _configuration: Configuration,
-    private fascicoloService: FascicoloService
+    private fascicoloService: FascicoloService,
+    private authService: AuthService
   ) { }
 
   public verificaUtente(): Observable<Boolean> {
-    return this.http.get<Boolean>(this._configuration.urlIsUtenteRegistrabile);
+    let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
+    return this.http.get<Boolean>(this._configuration.urlIsUtenteRegistrabile, { headers: headers });
   }
 
   // Fascicoli utente

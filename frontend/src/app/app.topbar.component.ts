@@ -5,6 +5,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Configuration } from './app.constants';
 import { MenuItem } from 'primeng-lts/api/menuitem';
 import { environment } from 'src/environments/environment';
+import { Utente } from './auth/user';
 
 @Component({
     selector: 'app-topbar',
@@ -13,6 +14,7 @@ import { environment } from 'src/environments/environment';
 
 export class AppTopBarComponent implements OnInit {
     userId: string;
+    user: Utente;
     public menuVisibile: boolean = false;
     items: MenuItem[];
     isGis: boolean;
@@ -37,9 +39,12 @@ export class AppTopBarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.getUserNew(false).subscribe((user) => {
+        let user = this.authService.getUser(false);
+        if (user) {
+            console.log(JSON.stringify(user));
             this.userId = user.identificativo;
-        });
+        }
+
         this.items = [
             {
                 label:'Richiedi modifica profilo', command: () => {

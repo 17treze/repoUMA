@@ -10,11 +10,13 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
     return new Promise((resolve) => {
-      this.authService.getUserNew(false).subscribe((user) => {
+      let u = this.authService.getUser(false);
+      if (u) {
         resolve(true);
-      }, err => {
+      }
+      else {
         resolve(false);
-      });
+      }
     })
   }
 }
