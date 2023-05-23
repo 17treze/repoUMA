@@ -153,45 +153,25 @@ export class AuthService {
   }
 
   public getUserFromSession(): Observable<Utente> {
-    if (this.isAuthenticated()) {
-      if (!sessionStorage.getItem('user')) {
-        let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-        return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers }).pipe(
-          catchError(err => {
-            console.error("Errore in recupero utente: " + err);
-            return EMPTY;
-          }),
-          tap(user => this.setUser(user))
-        );
+    if (!sessionStorage.getItem('user')) {
+      console.log('Autenticato: ' + this.isAuthenticated());
+      if (this.isAuthenticated()) {
+        return this.getUserService();
       }
       else {
-        return JSON.parse(sessionStorage.getItem("user"));
-      }  
+        this.login();
+        return EMPTY;
+      }
     }
     else {
-      console.log("Non autenticato");
-      this.authenticationEventObservable.subscribe({
-        next: (res) => {
-          let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-          return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers }).pipe(
-            catchError(err => {
-              console.error("Errore in recupero utente: " + err);
-              return EMPTY;
-            }),
-            tap(user => this.setUser(user))
-          );
-        },
-      })
-      this.login();
-    }
+      return of(JSON.parse(sessionStorage.getItem("user")));
+    }  
   }
 
-  getUser(force: boolean = false): Utente {
-    let u = new Utente();
-    this.getUserFromSession().subscribe((user) => {
-      u = user;
-    });
-    return u;
+  getUserService(): Observable<Utente> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    console.log('Access token: ' + this.getAccessToken());
+    return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers });  
   }
 
   isUserPrivate() {
@@ -202,21 +182,28 @@ export class AuthService {
     * @deprecated uso improprio dell'asincronia
     */
   isUserInRole(requiredRole: string, user: Utente = null): boolean {
-    // return true;
-    if (!user) {
+    if (user) {
+      if (!user.profili) {
+        return false;
+      }
+      for (const profilo of user.profili) {
+        if (profilo && profilo.identificativo == requiredRole) {
+          return true;
+        }
+      }
+    }
+    else {
       this.getUserFromSession().subscribe((u) => {
         user = u;
+        if (!user.profili) {
+          return false;
+        }
+        for (const profilo of user.profili) {
+          if (profilo && profilo.identificativo == requiredRole) {
+            return true;
+          }
+        }
       });
-    }
-
-    if (!user || !user.profili) {
-      return false;
-    }
-
-    for (const profilo of user.profili) {
-      if (profilo && profilo.identificativo == requiredRole) {
-        return true;
-      }
     }
     return false;
   }

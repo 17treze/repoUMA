@@ -29,12 +29,11 @@ export class PopupConfermaInAggiornamentoComponent {
   }
 
   public isFascicoloAggiornabile(): boolean {
-    const utente: Utente = this.authService.getUser(false);
     return this.fascicoloCorrente &&
-      (this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_CAA
-        || this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_AZIENDA
-        || this.fascicoloCorrente.stato === StatoFascicoloEnum.FIRMATO_CAA)
-        && utente.profili.some(e => e.identificativo === 'caa');
+    (this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_CAA
+      || this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_AZIENDA
+      || this.fascicoloCorrente.stato === StatoFascicoloEnum.FIRMATO_CAA)
+      && this.authService.isUserInRole(AuthService.roleCaa);
   }
 
 }

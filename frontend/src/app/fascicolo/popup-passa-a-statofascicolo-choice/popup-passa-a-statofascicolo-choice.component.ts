@@ -38,11 +38,10 @@ export class PopupPassaAStatofascicoloChoiceComponent {
   }
 
   public isUtenteCaaAndFascicoloInAggiornamento(): boolean {
-    let utente: Utente = this.authService.getUser(false);
     return this.fascicoloCorrente &&
       (this.fascicoloCorrente.stato === StatoFascicoloEnum.IN_AGGIORNAMENTO
         || this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_CAA)
-        && utente.profili.some(e => e.identificativo === 'caa');
+        && this.authService.isUserInRole(AuthService.roleCaa);
   }
 
   public isFascicoloAllaFirmaAziendaOrAllaFirmaCaa(): boolean {

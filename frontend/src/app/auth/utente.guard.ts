@@ -18,12 +18,17 @@ export class UtenteGuard implements CanActivate {
         private authService: AuthService,
         private confirmationService: ConfirmationService) { }
 
-
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean | any {
             
-        const utente = this.authService.getUser();
+        let utente = null;
+        this.authService.getUserFromSession().subscribe( 
+            user => {  
+                utente = user;
+            },
+            error => { console.log(error); }
+        );
         const obDomandaInLavorazione = Observable.create((observer: Observer<boolean>) => {
             this.confirmationService.confirm({
                 message: A4gMessages.erroreRichiestaPresente,
@@ -66,12 +71,16 @@ export class UtenteGuard implements CanActivate {
 
     public vaiAHome() {
         let urlReindirizzamento: string = "/"
-        const utente = this.authService.getUser();
-        if ((utente.profili == null) || (utente.profili.length == 0)) {
-            urlReindirizzamento = environment.indexPage;
-        } else {
-            urlReindirizzamento = environment.frontendUrl;
-        }
-        window.location.href = urlReindirizzamento;
+        this.authService.getUserFromSession().subscribe( 
+            user => {  
+                if ((user.profili == null) || (user.profili.length == 0)) {
+                    urlReindirizzamento = environment.indexPage;
+                } else {
+                    urlReindirizzamento = environment.frontendUrl;
+                }
+                window.location.href = urlReindirizzamento;
+            },
+            error => { console.error(error); }
+        );
     }
 }

@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   caricaUtente() {
-    this.utente = this.authService.getUser();
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
     this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
     this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
@@ -110,9 +109,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getRuoliSrTrento() {
+    console.log('home getRuoliSrTrento');
+    /*
     if (this.utente && this.utente.codiceFiscale && validaInput.validaCf(this.utente.codiceFiscale, false)) {
-      console.log('home getRuoliSrTrento');
-      /*
       this.srTrentoRuoli = this.homeService.getSrtRuoliPerUtente();
       if (!this.srTrentoRuoli) {
         this.homeService.ricercaSrtRuoliPerUtente(this.utente.codiceFiscale)
@@ -124,8 +123,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       } else {
         this.caricaRuoliSrTrento();
       }
-      */
     }
+    */
   }
 
   caricaRuoliSrTrento() {

@@ -39,11 +39,13 @@ export class AppTopBarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        let user = this.authService.getUser(false);
-        if (user) {
-            console.log(JSON.stringify(user));
-            this.userId = user.identificativo;
-        }
+        this.authService.getUserFromSession().subscribe(
+            user => {  
+                console.log(JSON.stringify(user));
+                this.userId = user.identificativo;
+            },
+            error => { console.error(error); }
+        );
 
         this.items = [
             {

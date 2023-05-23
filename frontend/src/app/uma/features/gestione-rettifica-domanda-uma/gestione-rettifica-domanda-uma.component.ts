@@ -176,7 +176,7 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
 
     const cuaa = this.fascicoloCorrente.fascicolo.cuaa;
     const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
-    const loggedUser$: Observable<Utente> = this.authService.getUserNew(false);
+    const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
 
     this.richiestaCarburanteSubscription = this.anagraficaFascicoloService.getDatiSportelloCAA()
       .pipe(

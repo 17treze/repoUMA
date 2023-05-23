@@ -5,7 +5,7 @@
 export const environment = {
   // WSO2
   discoveryDocumentEndpoint: 'https://10.206.193.173:9443/oauth2/oidcdiscovery',
-  redirectUri: 'http://localhost:4200/homepage',
+  redirectUri: 'http://localhost:4200',
   logoutUrl: 'http://localhost:4200',
   clientId: 'fJO0a2U007kMEQCWV7iuregCDVMa',
   dummyClientSecret: 'hNGtXaR1QWEaO9Wo8HccEhayokwa',
@@ -23,21 +23,21 @@ export const environment = {
 
   // legacy
   production: false,
-  backendUrl: 'https://a4g-test.infotn.it/',
-  frontendUrl: 'http://localhost:4200/',
-  srTrentoUrl: 'https://srt-test.infotn.it/private/welcome.aspx',
-  mobileUrl: 'https://myappag-test.tndigit.it/cittadino/cruscotto/',
-  agsUrl: 'http://siap-test.infotn.it',
-  tipoLogin: 'cittadino',
-  indexPage: 'https://a4g-test.infotn.it/',
-  annoInizioCampagnaUma: 2021,
+  backendUrl: 'http://localhost:8080',
+  frontendUrl: 'http://localhost:4200',
+  TIMEOUT_SPINNER: 120000,
+  indexPage: 'http://localhost:4200',
+  annoInizioCampagnaUma: 2020,
   dtAperturaRevocaImmediata: new Date(new Date().getFullYear(), 0, 1),
   dtChiusuraRevocaImmediata: new Date(new Date().getFullYear(), 11, 31, 23, 59, 59),
-  TIMEOUT_SPINNER: 120000,
   anniGis: [2022, 2023],
-  annoCorrenteGis: 2022,
+  annoCorrenteGis: 2023,
   verificaFirmaFascicolo: false,
-};
+
+  agsUrl: 'http://siap-svil.infotn.it',
+  srTrentoUrl: 'https://srt-test.infotn.it/private/welcome.aspx',
+  tipoLogin: 'cittadino',
+  mobileUrl: 'http://localhost:4200/',
 
 /*
  * In development mode, to ignore zone related error stack frames such as

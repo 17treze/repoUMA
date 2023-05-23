@@ -42,7 +42,12 @@ export class RicercaFascicoliComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     let user: Utente;
     if (this.isLoggedIn) {
-      user = this.authService.getUser();
+      this.authService.getUserFromSession().subscribe( 
+        u => {  
+          user = u;
+        },
+        error => { console.error(error); }
+      );
     }
 
     if (this.authService.isUserInRole(AuthService.roleCaa) ||
