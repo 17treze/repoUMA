@@ -1,7 +1,7 @@
 export const environment = {
   // WSO2
   discoveryDocumentEndpoint: 'https://10.206.193.173:9443/oauth2/oidcdiscovery',
-  redirectUri: 'http://localhost:4200',
+  redirectUri: 'http://localhost:4200/home',
   logoutUrl: 'http://localhost:4200',
   clientId: 'IMmZukAFkU1q57oTlO4402Sy0Loa',
   dummyClientSecret: 'nSBQ41ZYYbikBX428ejUL0_cYf0a',

@@ -5,7 +5,7 @@
 export const environment = {
   // WSO2
   discoveryDocumentEndpoint: 'https://10.206.193.173:9443/oauth2/oidcdiscovery',
-  redirectUri: 'http://localhost:4200',
+  redirectUri: 'http://localhost:4200/home',
   logoutUrl: 'http://localhost:4200',
   clientId: 'fJO0a2U007kMEQCWV7iuregCDVMa',
   dummyClientSecret: 'hNGtXaR1QWEaO9Wo8HccEhayokwa',
@@ -46,3 +46,4 @@ export const environment = {
  * because it will have performance impact when throw error
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+}

@@ -3,7 +3,7 @@ import { Utente } from "./user";
 import { Configuration } from "../app.constants";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, EMPTY, Observable, of } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, switchMap, tap } from "rxjs/operators";
 
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -156,12 +156,24 @@ export class AuthService {
     if (!sessionStorage.getItem('user')) {
       console.log('Autenticato: ' + this.isAuthenticated());
       if (this.isAuthenticated()) {
-        return this.getUserService();
+        return this.getUserService().pipe(
+          tap (u => this.setUser(u))
+        );
       }
       else {
         this.login();
-        return EMPTY;
+        this.authenticationEventObservable.subscribe(
+          result => {
+            if (result) {
+              return this.getUserService().pipe(
+                tap (u => this.setUser(u))
+              );
+            }
+          },
+          error => { console.error(error); }
+        )
       }
+      return EMPTY;
     }
     else {
       return of(JSON.parse(sessionStorage.getItem("user")));
