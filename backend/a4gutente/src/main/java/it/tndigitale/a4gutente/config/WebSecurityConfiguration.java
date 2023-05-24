@@ -113,6 +113,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			//			}
 			
 			protected boolean isTokenPresent(HttpServletRequest request) {
+				log.info("Verifica token: " + verificaToken);
 				if (verificaToken && this.verificaAccessToken(request)) {
 					//			ResponseEntity<RestOutput> responseEntity = exceptionController
 					//					.handleNotAuthorizedException(new NotAuthorizedException(

@@ -23,7 +23,7 @@ export const environment = {
 
   // legacy
   production: false,
-  backendUrl: 'http://localhost:8080',
+  backendUrl: 'http://localhost:8080/',
   frontendUrl: 'http://localhost:4200',
   TIMEOUT_SPINNER: 120000,
   indexPage: 'http://localhost:4200',

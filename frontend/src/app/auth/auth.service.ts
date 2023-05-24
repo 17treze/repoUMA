@@ -3,7 +3,7 @@ import { Utente } from "./user";
 import { Configuration } from "../app.constants";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, EMPTY, Observable, of } from "rxjs";
-import { catchError, switchMap, tap } from "rxjs/operators";
+import { catchError, switchMap, tap, map } from "rxjs/operators";
 
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -152,37 +152,60 @@ export class AuthService {
     this.onUserChange.emit(user);
   }
 
-  public getUserFromSession(): Observable<Utente> {
+  public getUserFromSession(): Utente {
+    let user = new Utente();
     if (!sessionStorage.getItem('user')) {
       console.log('Autenticato: ' + this.isAuthenticated());
-      if (this.isAuthenticated()) {
-        return this.getUserService().pipe(
-          tap (u => this.setUser(u))
-        );
-      }
-      else {
+      if (!this.isAuthenticated()) {
         this.login();
         this.authenticationEventObservable.subscribe(
           result => {
             if (result) {
-              return this.getUserService().pipe(
-                tap (u => this.setUser(u))
+              this.getUserService().subscribe(
+                x => {
+                  console.log('Observer got a next value: ' + x);
+                  user = x;
+                  this.setUser(user);
+                  return user;
+                },
+                err => { 
+                  console.error('Observer got an error: ' + err);
+                  return null;
+                }
               );
             }
           },
-          error => { console.error(error); }
+          error => { 
+            console.error(error); 
+            return null;
+          }
         )
       }
-      return EMPTY;
+      else {
+        this.getUserService().subscribe(
+          x => {
+            console.log('Observer got a next value: ' + x);
+            user = x;
+            this.setUser(user);
+            return user;
+          },
+          err => { 
+            console.error('Observer got an error: ' + err);
+            return null;
+          }
+        );
+      }
     }
     else {
-      return of(JSON.parse(sessionStorage.getItem("user")));
+      user = JSON.parse(sessionStorage.getItem("user"));
+      return user;
     }  
   }
 
   getUserService(): Observable<Utente> {
-    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     console.log('Access token: ' + this.getAccessToken());
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    console.log('URL: ' + this._configuration.urlGetSSO);
     return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers });  
   }
 
@@ -194,10 +217,7 @@ export class AuthService {
     * @deprecated uso improprio dell'asincronia
     */
   isUserInRole(requiredRole: string, user: Utente = null): boolean {
-    if (user) {
-      if (!user.profili) {
-        return false;
-      }
+    if (user && user.profili) {
       for (const profilo of user.profili) {
         if (profilo && profilo.identificativo == requiredRole) {
           return true;
@@ -205,17 +225,14 @@ export class AuthService {
       }
     }
     else {
-      this.getUserFromSession().subscribe((u) => {
-        user = u;
-        if (!user.profili) {
-          return false;
-        }
+      user = this.getUserFromSession();
+      if (user && user.profili) {
         for (const profilo of user.profili) {
           if (profilo && profilo.identificativo == requiredRole) {
             return true;
           }
         }
-      });
+      }
     }
     return false;
   }

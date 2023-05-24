@@ -29,14 +29,7 @@ export class HomeGuard implements CanActivate {
     console.log(route);
 
     console.log("canActivate HomeGuard");
-    /*
-    this.authService.getUserFromSession().subscribe(
-      user => {  
-        this.utente = user;
-      },
-      error => { console.log(error); }
-    );
-    */
+
     return this.authGuard.canActivate(route, state).then((auth) => {
       if (!auth) {
         this.confirmationService.confirm({
@@ -50,9 +43,10 @@ export class HomeGuard implements CanActivate {
       } 
       else {
         console.log("CaricaUtente " + " HomeGuard ");
-  
-        if ( // this.utente.profili &&
-          // this.utente.profili.length > 0 &&
+        this.utente = this.authService.getUserFromSession();
+
+        if ( this.utente.profili &&
+          this.utente.profili.length > 0 &&
           this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
           this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
           this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
@@ -71,13 +65,16 @@ export class HomeGuard implements CanActivate {
           console.log("SUCCESS (profili)");
           return Promise.resolve(true);
         }
-
+        let codiceFiscale = '';
+        if (this.utente) {
+          codiceFiscale = this.utente.codiceFiscale;
+        }
         return this.roleGuard.canActivate(route, state).then((auth) => {
           if (!auth) {
             this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
               if (isRegistrabile) {
                 this.confirmationService.confirm({
-                  message: A4gMessages.NESSUN_PROFILO(this.utente.codiceFiscale),
+                  message: A4gMessages.NESSUN_PROFILO(codiceFiscale),
                   accept: () => {
                     this.router.navigate([this.configuration.UrlRedirectUtenti]);
                   },
@@ -86,7 +83,7 @@ export class HomeGuard implements CanActivate {
               }
               else {
                 this.confirmationService.confirm({
-                  message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
+                  message: A4gMessages.DOMANDA_PROTOCOLLATA(codiceFiscale),
                   accept: () => {
                     window.location.href = this.configuration.IndexPage;
                   },

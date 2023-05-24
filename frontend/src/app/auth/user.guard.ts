@@ -30,64 +30,59 @@ export class UserGuard implements CanActivate {
       if (!auth) {
         return Promise.resolve(false);
       } else {
-        this.authService.getUserFromSession().subscribe( 
-          user => {  
-              console.log(JSON.stringify(user));
-              this.utente = user;
-              if (this.utente.profili &&
-                this.utente.profili.length > 0 && (
-                this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
-                this.authService.isUserInRole(AuthService.roleDistributore, this.utente)
-              )) {
-                console.log("Fail esistono profili");
+        this.utente = this.authService.getUserFromSession();
+        console.log(this.utente);
+        if (this.utente.profili &&
+          this.utente.profili.length > 0 &&
+          this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleDistributore, this.utente)
+        ) {
+          console.log("Fail esistono profili");
+          this.confirmationService.confirm({
+            message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
+            accept: () => {
+              this.router.navigate(["home"]);
+            },
+            reject: () => { }
+          });
+          return Promise.resolve(false);
+        }
+        return this.roleGuard.canActivate(route, state).then((auth) => {
+          if (!auth) {
+            console.log("Ok nessun profilo");
+            // controlla se protocollata
+            return this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
+              if (isRegistrabile) {
+                return Promise.resolve(true);
+              } else {
                 this.confirmationService.confirm({
-                  message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
+                  message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
                   accept: () => {
-                    this.router.navigate(["home"]);
+                    window.location.href = this.configuration.IndexPage;;
                   },
                   reject: () => { }
                 });
-                return Promise.resolve(false);
               }
-              return this.roleGuard.canActivate(route, state).then((auth) => {
-                if (!auth) {
-                  console.log("Ok nessun profilo");
-                  // controlla se protocollata
-                  return this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
-                    if (isRegistrabile) {
-                      return Promise.resolve(true);
-                    } else {
-                      this.confirmationService.confirm({
-                        message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
-                        accept: () => {
-                          window.location.href = this.configuration.IndexPage;;
-                        },
-                        reject: () => { }
-                      });
-                    }
-                  });
-                } else {
-                  this.confirmationService.confirm({
-                    message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
-                    accept: () => {
-                      this.router.navigate(["home"]);
-                    },
-                    reject: () => { }
-                  });
-                  return Promise.resolve(false);
-                }
-              });
-          },
-          error => { console.error(error); }
-        );
+            });
+          } else {
+            this.confirmationService.confirm({
+              message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
+              accept: () => {
+                this.router.navigate(["home"]);
+              },
+              reject: () => { }
+            });
+            return Promise.resolve(false);
+          }
+        });
       }
     });
   }

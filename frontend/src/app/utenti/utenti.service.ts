@@ -21,6 +21,7 @@ import { Utente } from '../auth/user';
 import { DatiAnagrafici } from './classi/datiAnagrafici';
 import { DatiDomanda, TipoDomandaRegistrazione } from './classi/DatiDomanda';
 import { DomandaUtente } from './classi/DomandaUtente';
+import { AuthService } from '../auth/auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,6 +33,7 @@ const httpOptions = {
 export class UtentiService {
   constructor(
     private http: HttpClient,
+    private authService: AuthService,
     private _configuration: Configuration
   ) { }
 
@@ -56,8 +58,9 @@ export class UtentiService {
   @Cached()
   public getDatiAnagraficiUtente(): Observable<DatiAnagrafici> {
     console.log('getDatiAnagraficiUtente');
+    let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
     return this.http.get<DatiAnagrafici>(
-      this._configuration.urlGetDatiAnagraficiUtente
+      this._configuration.urlGetDatiAnagraficiUtente, { headers: headers }
     );
   }
 
@@ -235,8 +238,9 @@ export class UtentiService {
 
   public ricercaPersone(parametriRicerca: any): Observable<Array<Persona>> {
     const json = JSON.stringify(parametriRicerca);
+    let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
     return this.http.get<Array<Persona>>(
-      this._configuration.UrlPersonaPrivacy + encodeURIComponent(json)
+      this._configuration.UrlPersonaPrivacy + encodeURIComponent(json), { headers: headers }
     );
   }
 
@@ -428,7 +432,8 @@ export class UtentiService {
   }
 
   public getProfiliUtenteConnesso(): Observable<Array<Profilo>> {
-    return this.http.get<Array<Profilo>>(this._configuration.urlGetProfiliUtenteConnesso);
+    let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
+    return this.http.get<Array<Profilo>>(this._configuration.urlGetProfiliUtenteConnesso, { headers: headers });
   }
 
   public getUltimaDomandaUtenteCorrente(statoDomanda: string, tipoDomanda: TipoDomandaRegistrazione): Observable<DatiDomanda> {
@@ -439,7 +444,9 @@ export class UtentiService {
     if (tipoDomanda) {
       paramshttp = paramshttp.set('tipoDomanda', tipoDomanda);
     }
-    return this.http.get<DatiDomanda>(this._configuration.UrlGetUltimaDomandaUtenteCorrente, { params: paramshttp });
+    let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
+    return this.http.get<DatiDomanda>(this._configuration.UrlGetUltimaDomandaUtenteCorrente, 
+        { params: paramshttp, headers: headers });
   }
 
   //download csv utenti

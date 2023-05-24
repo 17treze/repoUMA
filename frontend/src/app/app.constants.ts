@@ -10,7 +10,7 @@ public ags_server = environment.backendUrl + 'ags/api/v1';
 public fascicolo_territorio_server = `${environment.backendUrl}fascicolo/territorio/api/v1`;
 public antimafia_server = environment.backendUrl + 'a4gfascicolo/api/v1';
 public a4gfascicolo_server = environment.backendUrl + 'a4gfascicolo/api/v1';
-public a4gutente_server = environment.backendUrl + 'a4gutente/api/v1/';
+public a4gutente_server = environment.backendUrl + '/a4gutente/api/v1/';
 
 public a4gistruttoria_server = environment.backendUrl + 'a4gistruttoria/api/v1/';
 public a4gproxy_server = environment.backendUrl + 'a4gproxy/api/v1/';

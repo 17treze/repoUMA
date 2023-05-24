@@ -106,14 +106,10 @@ export class SearchGisComponent implements OnInit, OnChanges {
         }
 
         this.utenteConnesso = this.utentiLavorazione.filter(utente => {
-            this.authService.getUserFromSession().subscribe( 
-                user => {  
-                    if (utente.value === user.identificativo) {
-                        return { name: utente.nome + ' ' + utente.cognome, value: utente.value };
-                    }
-                },
-                error => { console.error(error); }
-            );
+            let user = this.authService.getUserFromSession(); 
+            if (user != null && utente.value === user.identificativo) {
+                return { name: utente.nome + ' ' + utente.cognome, value: utente.value };
+            }
         })[0];
 
         // Form Ricerca Richieste di modifica suolo
