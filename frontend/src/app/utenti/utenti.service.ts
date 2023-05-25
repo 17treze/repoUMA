@@ -428,6 +428,10 @@ export class UtentiService {
   }
 
   public getListaCariche(codiceFiscale: string): Observable<CaricaDto[]> {
+    if (!codiceFiscale) {
+      let user = this.authService.getUserFromSession();
+      codiceFiscale = user.codiceFiscale;
+    }
     return this.http.get<CaricaDto[]>(`${this._configuration.anagrafica_server}/legacy/persona/${codiceFiscale}/carica`);
   }
 

@@ -13,8 +13,8 @@ export class RoleGuard implements CanActivate {
     private fascicoloService: FascicoloService) { }
 
   public canActivate(
-      route: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot): Promise<boolean> {
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Promise<boolean> {
     const promiseNoFascicoliAziendaUtente = new Promise((resolve) => {
       if (!this.authService.isUserInRole(AuthService.rolePrivate)) {
         resolve(true);
@@ -121,8 +121,7 @@ export class RoleGuard implements CanActivate {
     return Promise
       .all(promises)
       .then(function(value)  {
-        console.log("value");
-        console.log(value);
+        console.log("value: " + value);
         //SUCCESS
         if ((value[0] && value[1] && value[2]) == true) {
           console.log("fail");

@@ -100,6 +100,7 @@ public class UtenteController {
 		//		log.debug("Chiamato sec da {}", principalName);
 		
 		String headerProperty = AccessoController.getHeaderProperty(headers, TOKEN_KEY_PORTALE);
+		log.info("headerProperty: {}", headerProperty);
 		String userName = abilitazioniComponent.getWso2Username(headerProperty);
 		log.info("Chiamato sec da {}", userName);
 		

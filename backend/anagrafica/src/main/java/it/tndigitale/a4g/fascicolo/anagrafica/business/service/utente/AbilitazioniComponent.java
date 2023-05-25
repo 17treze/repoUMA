@@ -1,15 +1,23 @@
 package it.tndigitale.a4g.fascicolo.anagrafica.business.service.utente;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.tndigitale.a4g.fascicolo.anagrafica.Ruoli;
 import it.tndigitale.a4g.fascicolo.anagrafica.business.persistence.entity.DetenzioneModel;
@@ -52,6 +60,9 @@ public class AbilitazioniComponent {
 	private FascicoloAgsService fascicoloAgsService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(AbilitazioniComponent.class);
+	
+	@Value("${wso2Host}")
+	private String wso2Host;
 	
 	enum EnteOperationType {
 		RICERCA, APERTURA_MODIFICA
@@ -374,4 +385,50 @@ public class AbilitazioniComponent {
 		return false;
 	}
 	
+	/**
+	 * <p>
+	 * Verifica se l'access-token ricevuto da wso2 risulta valido
+	 * </p>
+	 *
+	 * @param request
+	 */
+	public String getWso2Username(String accessToken) {
+		
+		try {
+			StringBuilder command = new StringBuilder(
+					"curl -k -u admin:admin -H 'Content-Type: application/x-www-form-urlencoded' -X POST --data token=");
+			command.append(URLEncoder.encode(accessToken, StandardCharsets.UTF_8.toString()));
+			command.append(" https://");
+			command.append(wso2Host);
+			command.append(":9443/oauth2/introspect");
+			
+			Process process = Runtime.getRuntime().exec(command.toString());
+			
+			InputStream input = process.getInputStream();
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			
+			int nRead;
+			byte[] data = new byte[4];
+			while ((nRead = input.readNBytes(data, 0, data.length)) != 0) {
+				output.write(data, 0, nRead);
+			}
+			output.flush();
+			String strResponse = new String(output.toByteArray());
+			logger.info("oauth2Response: " + strResponse);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String, Object> oauth2Response = mapper.readValue(strResponse, Map.class);
+			
+			Boolean active = (Boolean) oauth2Response.get("active");
+			
+			if (active) {
+				return (String) oauth2Response.get("username");
+			}
+			return null;
+		}
+		catch (Exception e) {
+			logger.error("Exception:", e);
+			return null;
+		}
+	}
 }

@@ -43,61 +43,69 @@ export class HomeGuard implements CanActivate {
       } 
       else {
         console.log("CaricaUtente " + " HomeGuard ");
-        this.utente = this.authService.getUserFromSession();
-
-        if ( this.utente.profili &&
-          this.utente.profili.length > 0 &&
-          this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleIstruttoreUMA, this.utente) || 
-          this.authService.isUserInRole(AuthService.roleDistributore, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleDogane, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat, this.utente)
-        ) {
-          console.log("SUCCESS (profili)");
-          return Promise.resolve(true);
-        }
-        let codiceFiscale = '';
-        if (this.utente) {
-          codiceFiscale = this.utente.codiceFiscale;
-        }
-        return this.roleGuard.canActivate(route, state).then((auth) => {
-          if (!auth) {
-            this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
-              if (isRegistrabile) {
-                this.confirmationService.confirm({
-                  message: A4gMessages.NESSUN_PROFILO(codiceFiscale),
-                  accept: () => {
-                    this.router.navigate([this.configuration.UrlRedirectUtenti]);
-                  },
-                  reject: () => { }
-                });
+        this.authService.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.utente = x;
+            this.authService.setUser(x);
+            if (this.utente?.profili?.length > 0 &&
+              this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleIstruttoreUMA, this.utente) || 
+              this.authService.isUserInRole(AuthService.roleDistributore, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleDogane, this.utente) ||
+              this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat, this.utente)
+            ) {
+              console.log("SUCCESS (profili)");
+              return Promise.resolve(true);
+            }
+            let codiceFiscale = '';
+            if (this.utente) {
+              codiceFiscale = this.utente.codiceFiscale;
+            }    
+            return this.roleGuard.canActivate(route, state).then((auth) => {
+              if (!auth) {
+                this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
+                  if (isRegistrabile) {
+                    this.confirmationService.confirm({
+                      message: A4gMessages.NESSUN_PROFILO(codiceFiscale),
+                      accept: () => {
+                        this.router.navigate([this.configuration.UrlRedirectUtenti]);
+                      },
+                      reject: () => { }
+                    });
+                  }
+                  else {
+                    this.confirmationService.confirm({
+                      message: A4gMessages.DOMANDA_PROTOCOLLATA(codiceFiscale),
+                      accept: () => {
+                        window.location.href = this.configuration.IndexPage;
+                      },
+                      reject: () => { }
+                    });
+                  }
+                })
+                return Promise.resolve(false);
               }
               else {
-                this.confirmationService.confirm({
-                  message: A4gMessages.DOMANDA_PROTOCOLLATA(codiceFiscale),
-                  accept: () => {
-                    window.location.href = this.configuration.IndexPage;
-                  },
-                  reject: () => { }
-                });
+                return Promise.resolve(true);
               }
             })
-            return Promise.resolve(false);
+          },
+          err => { 
+            console.error('Observer error: ' + err);
           }
-          else {
-            return Promise.resolve(true);
-          }
-        })
+        );
       }
+      return Promise.resolve(false);
     })
   }
 }

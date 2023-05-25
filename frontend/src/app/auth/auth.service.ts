@@ -140,70 +140,22 @@ export class AuthService {
   }
 
   setUser(user: Utente) {
-    if (sessionStorage.getItem("user")) {
-      let utenteLoggato: Utente = JSON.parse(sessionStorage.getItem("user"));
-      if (utenteLoggato.identificativo != user.identificativo)
-        console.log("Ricarico profili");
-      sessionStorage.clear();
-    } else {
-      sessionStorage.clear();
-    }
     sessionStorage.setItem("user", JSON.stringify(user));
     this.onUserChange.emit(user);
   }
 
-  public getUserFromSession(): Utente {
-    let user = new Utente();
-    if (!sessionStorage.getItem('user')) {
-      console.log('Autenticato: ' + this.isAuthenticated());
-      if (!this.isAuthenticated()) {
-        this.login();
-        this.authenticationEventObservable.subscribe(
-          result => {
-            if (result) {
-              this.getUserService().subscribe(
-                x => {
-                  console.log('Observer got a next value: ' + x);
-                  user = x;
-                  this.setUser(user);
-                  return user;
-                },
-                err => { 
-                  console.error('Observer got an error: ' + err);
-                  return null;
-                }
-              );
-            }
-          },
-          error => { 
-            console.error(error); 
-            return null;
-          }
-        )
-      }
-      else {
-        this.getUserService().subscribe(
-          x => {
-            console.log('Observer got a next value: ' + x);
-            user = x;
-            this.setUser(user);
-            return user;
-          },
-          err => { 
-            console.error('Observer got an error: ' + err);
-            return null;
-          }
-        );
-      }
+  public getUserFromSession(): Observable<Utente> {
+    if (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'undefined') {
+      console.log('User in session: ' + sessionStorage.getItem('user'));
+      return of(JSON.parse(sessionStorage.getItem("user")));
     }
     else {
-      user = JSON.parse(sessionStorage.getItem("user"));
-      return user;
-    }  
+      return this.getUserService();
+    }
   }
 
   getUserService(): Observable<Utente> {
-    console.log('Access token: ' + this.getAccessToken());
+    // console.log('Access token: ' + this.getAccessToken());
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     console.log('URL: ' + this._configuration.urlGetSSO);
     return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers });  
@@ -214,12 +166,13 @@ export class AuthService {
   }
 
   /**
-    * @deprecated uso improprio dell'asincronia
+    * nessuna asincronia
     */
   isUserInRole(requiredRole: string, user: Utente = null): boolean {
     if (user && user.profili) {
       for (const profilo of user.profili) {
         if (profilo && profilo.identificativo == requiredRole) {
+          console.log("Role: " + requiredRole + " -> true");
           return true;
         }
       }
@@ -229,11 +182,13 @@ export class AuthService {
       if (user && user.profili) {
         for (const profilo of user.profili) {
           if (profilo && profilo.identificativo == requiredRole) {
+            console.log("Role: " + requiredRole + " -> true");
             return true;
           }
         }
       }
     }
+    // console.log("Role: " + requiredRole + " -> false");
     return false;
   }
 
