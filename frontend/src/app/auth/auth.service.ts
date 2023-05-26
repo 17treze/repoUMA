@@ -178,15 +178,23 @@ export class AuthService {
       }
     }
     else {
-      user = this.getUserFromSession();
-      if (user && user.profili) {
-        for (const profilo of user.profili) {
-          if (profilo && profilo.identificativo == requiredRole) {
-            console.log("Role: " + requiredRole + " -> true");
-            return true;
+      this.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.setUser(x);
+            if (x.profili) {
+              for (const profilo of x.profili) {
+                if (profilo && profilo.identificativo == requiredRole) {
+                  console.log("Role: " + requiredRole + " -> true");
+                  return true;
+                }
+              }
+            }
+          },
+          err => { 
+            console.error('Observer error: ' + err);
           }
-        }
-      }
+      );
     }
     // console.log("Role: " + requiredRole + " -> false");
     return false;

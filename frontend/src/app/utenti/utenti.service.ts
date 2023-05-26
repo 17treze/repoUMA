@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import * as FileSaver from 'file-saver';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, EMPTY, Subject } from 'rxjs';
 import { Cached } from 'src/assets/decorators/cached';
 import { A4gMessages } from '../a4g-common/a4g-messages';
 import { DipartimentoPat } from '../a4g-common/classi/dipartimento-paa';
@@ -429,10 +429,19 @@ export class UtentiService {
 
   public getListaCariche(codiceFiscale: string): Observable<CaricaDto[]> {
     if (!codiceFiscale) {
-      let user = this.authService.getUserFromSession();
-      codiceFiscale = user.codiceFiscale;
+      this.authService.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.authService.setUser(x);
+            codiceFiscale = x.codiceFiscale;
+            return this.http.get<CaricaDto[]>(`${this._configuration.anagrafica_server}/legacy/persona/${codiceFiscale}/carica`);
+          },
+          err => { 
+            console.error('Observer error: ' + err);
+          }
+      );
     }
-    return this.http.get<CaricaDto[]>(`${this._configuration.anagrafica_server}/legacy/persona/${codiceFiscale}/carica`);
+    return EMPTY;
   }
 
   public getProfiliUtenteConnesso(): Observable<Array<Profilo>> {

@@ -22,9 +22,13 @@ export class UtenteGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean | any {
             
-        let utente = this.authService.getUserFromSession();
-        const obDomandaInLavorazione = Observable.create((observer: Observer<boolean>) => {
-            this.confirmationService.confirm({
+        this.authService.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.authService.setUser(x);
+            // ...
+            const obDomandaInLavorazione = Observable.create((observer: Observer<boolean>) => {
+              this.confirmationService.confirm({
                 message: A4gMessages.erroreRichiestaPresente,
                 accept: () => {
                     observer.next(false);
@@ -36,11 +40,11 @@ export class UtenteGuard implements CanActivate {
                     observer.complete();
                     this.vaiAHome();
                 }
+              });
             });
-        });
-        const obDomandaProtocollata = Observable.create((observer: Observer<boolean>) => {
-            this.confirmationService.confirm({
-                message: A4gMessages.PROFILO_ASSOCIATO(utente.codiceFiscale),
+            const obDomandaProtocollata = Observable.create((observer: Observer<boolean>) => {
+              this.confirmationService.confirm({
+                message: A4gMessages.PROFILO_ASSOCIATO(x.codiceFiscale),
                 accept: () => {
                     observer.next(true);
                     observer.complete();
@@ -49,28 +53,41 @@ export class UtenteGuard implements CanActivate {
                     observer.next(false);
                     observer.complete();
                 }
+              });
             });
-        });
-        //Se ho una domanda protocollata e un profilo valido nel caso in cui tenti di modificare il profilo mi deve comparire il messaggio di cortesia
-        return this.homeService.verificaUtente().pipe(
-            switchMap((isRegistrabile) => {
+            //Se ho una domanda protocollata e un profilo valido nel caso in cui tenti di modificare il profilo mi deve comparire il messaggio di cortesia
+            return this.homeService.verificaUtente().pipe(
+              switchMap((isRegistrabile) => {
                 if (!isRegistrabile) {
                     return obDomandaInLavorazione;
                 } else {
                     return obDomandaProtocollata;
                 }
             }));
+          },
+          err => { 
+            console.error('Observer error: ' + err);
+          }
+        );
     }
-
 
     public vaiAHome() {
         let urlReindirizzamento: string = "/"
-        let user = this.authService.getUserFromSession();  
-        if ((user.profili == null) || (user.profili.length == 0)) {
-            urlReindirizzamento = environment.indexPage;
-        } else {
-            urlReindirizzamento = environment.frontendUrl;
-        }
-        window.location.href = urlReindirizzamento;
+        this.authService.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.authService.setUser(x);
+            // ...
+            if ((x.profili == null) || (x.profili.length == 0)) {
+                urlReindirizzamento = environment.indexPage;
+            } else {
+                urlReindirizzamento = environment.frontendUrl;
+            }
+            window.location.href = urlReindirizzamento;
+          },
+          err => { 
+            console.error('Observer error: ' + err);
+          }
+        );
     }
 }

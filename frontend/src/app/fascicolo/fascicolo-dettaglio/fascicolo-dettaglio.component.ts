@@ -331,7 +331,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
     }
     const cuaa = this.fascicoloCorrente.cuaa;
     const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
-    const loggedUser$: Observable<Utente> = of(this.authService.getUserFromSession());
+    const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
     const richieste$: Observable<Array<RichiestaCarburanteDto>> = this.httpClientDomandaUmaService.getDomande(this.dtoBuilderService.buildDomandaUmaFilterWithAllStates(cuaa));
 
     this.richiestaCarburanteSubscription = this.anagraficaFascicoloService.getDatiSportelloCAA()
@@ -397,7 +397,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
     }
     const cuaa = this.fascicoloCorrente.cuaa;
     const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
-    const loggedUser$: Observable<Utente> = of(this.authService.getUserFromSession());
+    const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
     // Cerco la dichiarazione consumi per cuaa
     let stati = new Array<StatoDichiarazioneConsumiEnum>();
     stati.push(StatoDichiarazioneConsumiEnum.IN_COMPILAZIONE);

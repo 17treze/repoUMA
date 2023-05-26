@@ -30,7 +30,12 @@ export class UserGuard implements CanActivate {
       if (!auth) {
         return Promise.resolve(false);
       } else {
-        this.utente = this.authService.getUserFromSession();
+        this.authService.getUserFromSession().subscribe(
+          x => {
+            console.log('Observer next value: ' + x.codiceFiscale);
+            this.utente = x;
+            this.authService.setUser(x);
+        // inserted here
         console.log(this.utente);
         if (this.utente.profili &&
           this.utente.profili.length > 0 &&
@@ -83,6 +88,11 @@ export class UserGuard implements CanActivate {
             return Promise.resolve(false);
           }
         });
+           },
+          err => { 
+            console.error('Observer error: ' + err);
+          }
+        );
       }
     });
   }

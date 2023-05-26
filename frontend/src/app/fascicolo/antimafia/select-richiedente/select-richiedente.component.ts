@@ -145,13 +145,19 @@ export class SelectRichiedenteComponent implements OnInit, OnDestroy {
     console.log("ngOnInit cuaaImpresa " + this.cuaaImpresa);
     if (!this.cuaaImpresa || this.cuaaImpresa.length == 0) return;
     this.loader.setTimeout(480000); //otto minuti
-    let user = this.authService.getUserFromSession();
-    if (user != null) {
-      //TODO prendere il CF del profilo selezionato
-      // get utente connesso. salvalo in var di classe. dentro a carica rapp legale se esiste , mettilo di deault, altrimenti leva mano urlGetSSO
-      this.utenteConnesso = user.codiceFiscale;
-      this.caricaRappresentantiLegali();
-    }
+    this.authService.getUserFromSession().subscribe(
+        x => {
+          console.log('Observer next value: ' + x.codiceFiscale);
+          this.authService.setUser(x);
+          //TODO prendere il CF del profilo selezionato
+          // get utente connesso. salvalo in var di classe. dentro a carica rapp legale se esiste , mettilo di deault, altrimenti leva mano urlGetSSO
+          this.utenteConnesso = x.codiceFiscale;
+          this.caricaRappresentantiLegali();
+        },
+        err => { 
+          console.error('Observer error: ' + err);
+        }
+    );
   }
 
   ngOnDestroy(): void {
