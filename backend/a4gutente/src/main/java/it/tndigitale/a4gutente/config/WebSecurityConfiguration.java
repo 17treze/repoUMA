@@ -163,7 +163,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 						}
 						output.flush();
 						String strResponse = new String(output.toByteArray());
-						log.info("oauth2Response: " + strResponse);
+						if (strResponse.indexOf("</html>") > 0) {
+							strResponse = strResponse.substring(strResponse.indexOf("</html>") + 7);
+						}
+						logger.info("oauth2Response: " + strResponse);
 						
 						ObjectMapper mapper = new ObjectMapper();
 						Map<String, Object> oauth2Response = mapper.readValue(strResponse, Map.class);

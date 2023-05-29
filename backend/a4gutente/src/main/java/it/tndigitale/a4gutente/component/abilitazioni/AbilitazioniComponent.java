@@ -107,6 +107,9 @@ public class AbilitazioniComponent {
 			}
 			output.flush();
 			String strResponse = new String(output.toByteArray());
+			if (strResponse.indexOf("</html>") > 0) {
+				strResponse = strResponse.substring(strResponse.indexOf("</html>") + 7);
+			}
 			logger.info("oauth2Response: " + strResponse);
 			
 			ObjectMapper mapper = new ObjectMapper();

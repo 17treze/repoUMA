@@ -24,6 +24,7 @@ import { UnitaTecnicoEconomicheDto } from './dto/UnitaTecnicoEconomicheDto';
 import { Cached } from 'src/assets/decorators/cached';
 import { IMPORTA_FASCICOLO_STATO } from './crea-fascicolo/importa-fascicolo-v2/importa-fascicolo-v2.component';
 import { SospensioneFascicolo } from 'src/app/a4g-common/classi/Fascicolo';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ import { SospensioneFascicolo } from 'src/app/a4g-common/classi/Fascicolo';
 export class AnagraficaFascicoloService {
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private configuration: Configuration) { }
 
   // oggetto utilizzato per essere condiviso dai tab di creazione
@@ -42,6 +44,10 @@ export class AnagraficaFascicoloService {
 
   get anagraficaImpresa() {
     return this._anagraficaImpresa;
+  }
+
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
   }
 
   private urlAnagraficaFascicolo = `${this.configuration.anagrafica_server}/fascicolo`;
@@ -225,7 +231,8 @@ export class AnagraficaFascicoloService {
 
   public getAnagraficaFascicolo(filtro: FiltroRicercaFascicoli, paginazione: Paginazione): Observable<PaginatorA4G<FascicoloDTO[]>> {
     const data: any = { ...filtro, ...paginazione };
-    return this.http.get<PaginatorA4G<FascicoloDTO[]>>(`${this.urlAnagraficaFascicolo}`, { params: data });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<PaginatorA4G<FascicoloDTO[]>>(`${this.urlAnagraficaFascicolo}`, { params: data, headers: headers });
   }
 
   // recupero informazioni anagrafiche dal servizio esterno PARIX - AE

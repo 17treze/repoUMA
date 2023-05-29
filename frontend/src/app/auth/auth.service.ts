@@ -155,7 +155,6 @@ export class AuthService {
   }
 
   getUserService(): Observable<Utente> {
-    // console.log('Access token: ' + this.getAccessToken());
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     console.log('URL: ' + this._configuration.urlGetSSO);
     return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers });  
@@ -169,6 +168,9 @@ export class AuthService {
     * nessuna asincronia
     */
   isUserInRole(requiredRole: string, user: Utente = null): boolean {
+    if (!user) {
+      user = JSON.parse(sessionStorage.getItem("user"));
+    }
     if (user && user.profili) {
       for (const profilo of user.profili) {
         if (profilo && profilo.identificativo == requiredRole) {
@@ -176,25 +178,6 @@ export class AuthService {
           return true;
         }
       }
-    }
-    else {
-      this.getUserFromSession().subscribe(
-          x => {
-            console.log('Observer next value: ' + x.codiceFiscale);
-            this.setUser(x);
-            if (x.profili) {
-              for (const profilo of x.profili) {
-                if (profilo && profilo.identificativo == requiredRole) {
-                  console.log("Role: " + requiredRole + " -> true");
-                  return true;
-                }
-              }
-            }
-          },
-          err => { 
-            console.error('Observer error: ' + err);
-          }
-      );
     }
     // console.log("Role: " + requiredRole + " -> false");
     return false;

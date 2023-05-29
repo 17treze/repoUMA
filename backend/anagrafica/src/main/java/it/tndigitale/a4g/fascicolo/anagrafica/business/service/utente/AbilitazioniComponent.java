@@ -251,7 +251,7 @@ public class AbilitazioniComponent {
 				&& checkAperturaFascicolo(cuaa);
 	}
 	
-	public boolean checkListaRichiesteRevovaImmediataMandato(final Boolean isValutata) {
+	public boolean checkListaRichiesteRevocaImmediataMandato(final Boolean isValutata) {
 		return utenteComponent.haUnRuolo(Ruoli.CRUSCOTTO_REVOCA_IMMEDIATA_MANDATO_RICHIESTE_ENTE)
 				|| utenteComponent.haUnRuolo(Ruoli.CRUSCOTTO_REVOCA_IMMEDIATA_MANDATO_RICHIESTE_VALUTATE_TUTTI);
 	}

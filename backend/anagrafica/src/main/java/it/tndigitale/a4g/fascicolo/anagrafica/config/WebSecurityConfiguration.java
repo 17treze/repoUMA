@@ -84,8 +84,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
 				// Se non è presente il codice fiscale uso quello di ADD
 				if (!isTokenPresent(request)) {
-					String tokenADD = request.getHeader(ClientServiceBuilder.HEADER_UPN);
-					return tokenADD;
+					return request.getHeader(ClientServiceBuilder.HEADER_UPN);
 				}
 				return super.getPreAuthenticatedPrincipal(request);
 			}
@@ -97,6 +96,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			//			}
 			
 			protected boolean isTokenPresent(HttpServletRequest request) {
+				log.info("Verifica token: " + verificaToken);
 				if (verificaToken && this.verificaAccessToken(request)) {
 					return true;
 				}
@@ -115,6 +115,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				
 				try {
 					String accessToken = request.getHeader(TOKEN_KEY_PORTALE);
+					log.info("Access token: " + accessToken);
 					if (accessToken != null) {
 						accessToken = accessToken.replace("Bearer ", "");
 						
@@ -137,7 +138,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 						}
 						output.flush();
 						String strResponse = new String(output.toByteArray());
-						log.info("oauth2Response: " + strResponse);
+						if (strResponse.indexOf("</html>") > 0) {
+							strResponse = strResponse.substring(strResponse.indexOf("</html>") + 7);
+						}
+						logger.info("oauth2Response: " + strResponse);
 						
 						ObjectMapper mapper = new ObjectMapper();
 						Map<String, Object> oauth2Response = mapper.readValue(strResponse, Map.class);
@@ -155,7 +159,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			}
 		};
 		filter.setAuthenticationManager(authenticationManager);
-		filter.setPrincipalRequestHeader(ClientServiceBuilder.HEADER_CF);
+		filter.setPrincipalRequestHeader(TOKEN_KEY_PORTALE);
 		filter.setExceptionIfHeaderMissing(false);
 		return filter;
 	}

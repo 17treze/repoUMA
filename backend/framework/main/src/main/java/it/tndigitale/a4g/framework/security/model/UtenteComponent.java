@@ -74,10 +74,19 @@ public class UtenteComponent {
 	public boolean haRuolo(String ruolo) {
 		ruolo = DEFAULT_ROLE_PREFIX + ruolo;
 		Authentication auth = autenticazione();
+		logger.info("Authentication: " + auth);
 		
-		if ((auth == null) || (auth.getPrincipal() == null)) {
+		String utente = username();
+		logger.info("Utente: " + utente);
+		if (utente == null) {
 			return false;
 		}
+		
+		//		Authentication auth = autenticazione();
+		//		
+		//		if ((auth == null) || (auth.getPrincipal() == null)) {
+		//			return false;
+		//		}
 		
 		return true;
 		//        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
@@ -135,6 +144,9 @@ public class UtenteComponent {
 			}
 			output.flush();
 			String strResponse = new String(output.toByteArray());
+			if (strResponse.indexOf("</html>") > 0) {
+				strResponse = strResponse.substring(strResponse.indexOf("</html>") + 7);
+			}
 			logger.info("oauth2Response: " + strResponse);
 			
 			ObjectMapper mapper = new ObjectMapper();

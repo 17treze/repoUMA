@@ -30,12 +30,7 @@ export class UserGuard implements CanActivate {
       if (!auth) {
         return Promise.resolve(false);
       } else {
-        this.authService.getUserFromSession().subscribe(
-          x => {
-            console.log('Observer next value: ' + x.codiceFiscale);
-            this.utente = x;
-            this.authService.setUser(x);
-        // inserted here
+        this.utente = JSON.parse(sessionStorage.getItem("user"));
         console.log(this.utente);
         if (this.utente.profili &&
           this.utente.profili.length > 0 &&
@@ -50,6 +45,37 @@ export class UserGuard implements CanActivate {
           this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
           this.authService.isUserInRole(AuthService.roleDistributore, this.utente)
         ) {
+          return this.roleGuard.canActivate(route, state).then((auth) => {
+            if (!auth) {
+              console.log("Ok nessun profilo");
+              // controlla se protocollata
+              return this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
+                if (isRegistrabile) {
+                  return Promise.resolve(true);
+                } else {
+                  this.confirmationService.confirm({
+                    message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
+                    accept: () => {
+                      window.location.href = this.configuration.IndexPage;;
+                    },
+                    reject: () => { }
+                  });
+                }
+              });
+            } else {
+              console.log("Trovato un profilo");
+              this.confirmationService.confirm({
+                message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
+                accept: () => {
+                  this.router.navigate(["home"]);
+                },
+                reject: () => { }
+              });
+              return Promise.resolve(false);
+            }
+          });
+        }
+        else {
           console.log("Fail esistono profili");
           this.confirmationService.confirm({
             message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
@@ -60,39 +86,6 @@ export class UserGuard implements CanActivate {
           });
           return Promise.resolve(false);
         }
-        return this.roleGuard.canActivate(route, state).then((auth) => {
-          if (!auth) {
-            console.log("Ok nessun profilo");
-            // controlla se protocollata
-            return this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
-              if (isRegistrabile) {
-                return Promise.resolve(true);
-              } else {
-                this.confirmationService.confirm({
-                  message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
-                  accept: () => {
-                    window.location.href = this.configuration.IndexPage;;
-                  },
-                  reject: () => { }
-                });
-              }
-            });
-          } else {
-            this.confirmationService.confirm({
-              message: A4gMessages.PROFILO_ASSOCIATO(this.utente.codiceFiscale),
-              accept: () => {
-                this.router.navigate(["home"]);
-              },
-              reject: () => { }
-            });
-            return Promise.resolve(false);
-          }
-        });
-           },
-          err => { 
-            console.error('Observer error: ' + err);
-          }
-        );
       }
     });
   }

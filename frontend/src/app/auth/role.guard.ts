@@ -15,6 +15,7 @@ export class RoleGuard implements CanActivate {
   public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<boolean> {
+  
     const promiseNoFascicoliAziendaUtente = new Promise((resolve) => {
       if (!this.authService.isUserInRole(AuthService.rolePrivate)) {
         resolve(true);

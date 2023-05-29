@@ -11,12 +11,14 @@ import { RisultatiRicercaClientiDto } from '../uma/core-uma/models/dto/Risultati
 import { FascicoliValidatiFilterDto } from './fascicoli-validati/filtro-fascicoli-validati/filtro-fascicoli-validati.component';
 import { CambioSportelloPatch, DatiSospensioneFascicolo, ValidazioneFascicoloDto } from './shared/fascicolo.model';
 import { PersonaAgsDto } from '../uma/core-uma/models/dto/PersonaAgsDto';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable()
 export class FascicoloService {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private _configuration: Configuration,
   ) { }
 
@@ -25,8 +27,13 @@ export class FascicoloService {
   urlGetFascicoli = `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/?params=`;
   urlGetFascicoliMiei = `${this.anagrafica_server_fascicolo}/consultazione/mieifascicoli`;
 
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
+
   public ricercaFascicoliAziendaUtente(): Observable<Array<Fascicolo>> {
-    return this.http.get<Array<Fascicolo>>(this.urlGetFascicoliMiei);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<Fascicolo>>(this.urlGetFascicoliMiei, { headers: headers });
   }
 
   public getUrlCambioSportello(cuaa: string, idSportello: number) {

@@ -17,9 +17,7 @@ export class AuthGuard implements CanActivate {
         this.authService.login();
         this.authService.authenticationEventObservable.subscribe(
           result => {
-            if (result) {
-              resolve(true);
-            }
+            resolve(result);
           },
           error => { 
             console.error(error); 

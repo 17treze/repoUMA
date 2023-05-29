@@ -1,22 +1,10 @@
 package it.tndigitale.a4g.fascicolo.anagrafica.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import it.tndigitale.a4g.fascicolo.anagrafica.business.service.fascicolo.FascicoloValidazioneEnum;
-import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.MandatoService;
-import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.MandatoVerificaException;
-import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.RevocaImmediataMandatoNotification;
-import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.RevocaImmediataMandatoService;
-import it.tndigitale.a4g.fascicolo.anagrafica.dto.*;
-import it.tndigitale.a4g.fascicolo.anagrafica.dto.BusinessResponsesDto.Esiti;
-import it.tndigitale.a4g.fascicolo.anagrafica.dto.caa.SportelloCAADto;
-import it.tndigitale.a4g.fascicolo.anagrafica.dto.persona.DatiAperturaFascicoloDto;
-import it.tndigitale.a4g.framework.ext.validazione.fascicolo.EntitaDominioFascicoloId;
-import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
-import it.tndigitale.a4g.framework.pagination.model.Paginazione;
-import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +16,43 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import it.tndigitale.a4g.fascicolo.anagrafica.business.service.fascicolo.FascicoloValidazioneEnum;
+import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.MandatoService;
+import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.MandatoVerificaException;
+import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.RevocaImmediataMandatoNotification;
+import it.tndigitale.a4g.fascicolo.anagrafica.business.service.mandato.RevocaImmediataMandatoService;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.ApriFascicoloDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.BusinessResponsesDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.BusinessResponsesDto.Esiti;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.CambioSportelloPatch;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.DescrizioneRichiestaRevocaImmediataMandatoDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.FascicoloCreationResultDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.MandatoDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.RichiestaRevocaImmediataDto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.caa.SportelloCAADto;
+import it.tndigitale.a4g.fascicolo.anagrafica.dto.persona.DatiAperturaFascicoloDto;
+import it.tndigitale.a4g.framework.ext.validazione.fascicolo.EntitaDominioFascicoloId;
+import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
+import it.tndigitale.a4g.framework.pagination.model.Paginazione;
+import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 
 @RestController
 @RequestMapping(ApiUrls.MANDATO)
@@ -42,7 +60,7 @@ import java.util.List;
 public class MandatoController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MandatoController.class);
-
+	
 	@Autowired
 	private MandatoService mandatoService;
 	@Autowired
@@ -50,47 +68,51 @@ public class MandatoController {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	
 	@ApiOperation("Dato un cuaa reperisce i mandati relativi ad un fascicolo")
 	@GetMapping("/{cuaa}")
 	@PreAuthorize("@abilitazioniComponent.checkLetturaFascicolo(#cuaa)")
-	public List<MandatoDto> getMandatiByCuaaConAbilitazione(
-			@ApiParam(value = "CUAA", required = true) @PathVariable(value = "cuaa") String cuaa,
-			@RequestParam(required = false) Integer idValidazione) {
+	public List<MandatoDto> getMandatiByCuaaConAbilitazione(@ApiParam(value = "CUAA", required = true)
+	@PathVariable(value = "cuaa")
+	String cuaa, @RequestParam(required = false)
+	Integer idValidazione) {
 		try {
 			return mandatoService.getMandati(cuaa, idValidazione == null ? 0 : idValidazione);
-		} catch (EntityNotFoundException e) {
+		}
+		catch (EntityNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
 	@ApiOperation("Dato un cuaa verifica se sia possibile revocare un mandato per quel codice")
 	@GetMapping("/{cuaa}/verifica/revoca-mandato")
 	public DatiAperturaFascicoloDto verificaRevocaOrdinaria(
 			@ApiParam(value = "CUAA per cui si vuole verificare se vi sono le condizioni per revocare in modo ordinario il mandato", required = true)
-			@PathVariable(value = "cuaa") String cuaa) throws Exception {
+			@PathVariable(value = "cuaa")
+			String cuaa) throws Exception {
 		return mandatoService.verificaRevocaOrdinaria(cuaa);
 	}
 	
 	@ApiOperation("Dato un cuaa restituisce i dati del fascicolo per visualizzare mandato")
 	@GetMapping("/{cuaa}/dati-fascicolo")
 	@PreAuthorize("@abilitazioniComponent.checkLetturaFascicolo(#cuaa)")
-	public DatiAperturaFascicoloDto fascicoloPerMandato(
-			@ApiParam(value = "CUAA fascicolo", required = true)
-			@PathVariable(value = "cuaa") String cuaa,
-			@RequestParam(required = false) Integer idValidazione) throws Exception {
+	public DatiAperturaFascicoloDto fascicoloPerMandato(@ApiParam(value = "CUAA fascicolo", required = true)
+	@PathVariable(value = "cuaa")
+	String cuaa, @RequestParam(required = false)
+	Integer idValidazione) throws Exception {
 		return mandatoService.getFascicoloPerMandato(cuaa, idValidazione == null ? 0 : idValidazione);
 	}
-
+	
 	@ApiOperation("Revoca ordinaria del fascicolo indicato")
 	@PostMapping("/{cuaa}/revoca-mandato")
 	@PreAuthorize("@abilitazioniComponent.checkRevocaOrdinariaMandato(#cuaa)")
-	public Long revocaOrdinariaMandato(@ApiParam(value = "Cuaa del fascicolo a cui si vuole fare la revoca ordinaria del mandato")
-	@PathVariable(required = true, value = "cuaa") String cuaa,
-	@RequestParam String codiceFiscaleRappresentante,
-	@RequestParam(required = true) Long identificativoSportello,
-	@RequestParam(required = true) MultipartFile contratto,
-	@RequestPart(value = "allegati") List<MultipartFile> allegati) throws Exception {
+	public Long revocaOrdinariaMandato(
+			@ApiParam(value = "Cuaa del fascicolo a cui si vuole fare la revoca ordinaria del mandato")
+			@PathVariable(required = true, value = "cuaa")
+			String cuaa, @RequestParam
+			String codiceFiscaleRappresentante, @RequestParam(required = true)
+			Long identificativoSportello, @RequestParam(required = true)
+			MultipartFile contratto, @RequestPart(value = "allegati")
+			List<MultipartFile> allegati) throws Exception {
 		List<ByteArrayResource> attachments = null;
 		if (!CollectionUtils.isEmpty(allegati)) {
 			attachments = new ArrayList<>();
@@ -102,11 +124,11 @@ public class MandatoController {
 					}
 				});
 			}
-		} else {
+		}
+		else {
 			throw new IllegalArgumentException(FascicoloValidazioneEnum.ALLEGATO_NON_PRESENTE.name());
 		}
-		ApriFascicoloDto mandatoDto = new ApriFascicoloDto()
-				.setCodiceFiscale(cuaa)
+		ApriFascicoloDto mandatoDto = new ApriFascicoloDto().setCodiceFiscale(cuaa)
 				.setCodiceFiscaleRappresentante(codiceFiscaleRappresentante)
 				.setIdentificativoSportello(identificativoSportello)
 				.setContratto(new ByteArrayResource(contratto.getBytes(), contratto.getOriginalFilename()))
@@ -116,79 +138,85 @@ public class MandatoController {
 	
 	@ApiOperation("Controllo se l'utente autenticato puo' inserire una revoca immediata")
 	@GetMapping("/{cuaa}/puo-inserire-revoca-immediata")
-	public Boolean utenteCorrentePuoInserireRevocaImmediata(@ApiParam(value = "CUAA azienda agricola", required = true) @PathVariable(value = "cuaa") String cuaa) throws Exception {
+	public Boolean utenteCorrentePuoInserireRevocaImmediata(@ApiParam(value = "CUAA azienda agricola", required = true)
+	@PathVariable(value = "cuaa")
+	String cuaa) throws Exception {
 		return mandatoService.utenteCorrentePuoInserireRevocaImmediata(cuaa);
 	}
 	
 	@ApiOperation("Richiesta di revoca immediata del fascicolo indicato da parte del rappresentante legale/titolare")
 	@PostMapping("/{cuaa}/richiesta-revoca-immediata-mandato")
 	@PreAuthorize("@abilitazioniComponent.checkRichiestaRevocaImmediataMandato(#cuaa)")
-	public Long richiestaRevocaImmediataMandato(@ApiParam(value = "Cuaa del fascicolo di cui il titolare/rappresentante legale vuole fare richiesta di revoca immediata del mandato")
-	@PathVariable(required = true, value = "cuaa") String cuaa,
-	@RequestParam(required = true) String codiceFiscaleRappresentanteLegaleOTitolare,
-	@RequestParam(required = false) String causaRichiesta,
-	@RequestParam(required = true) String sportello,
-	@RequestParam(required = true) MultipartFile moduloRevocaFirmato) {
+	public Long richiestaRevocaImmediataMandato(
+			@ApiParam(value = "Cuaa del fascicolo di cui il titolare/rappresentante legale vuole fare richiesta di revoca immediata del mandato")
+			@PathVariable(required = true, value = "cuaa")
+			String cuaa, @RequestParam(required = true)
+			String codiceFiscaleRappresentanteLegaleOTitolare, @RequestParam(required = false)
+			String causaRichiesta, @RequestParam(required = true)
+			String sportello, @RequestParam(required = true)
+			MultipartFile moduloRevocaFirmato) {
 		try {
 			SportelloCAADto sportelloDto = objectMapper.readValue(sportello, SportelloCAADto.class);
 			RichiestaRevocaImmediataDto richiestaRevocaImmediataDto = new RichiestaRevocaImmediataDto()
-					.setCodiceFiscale(cuaa)
-					.setCodiceFiscaleRappresentante(codiceFiscaleRappresentanteLegaleOTitolare)
-					.setRichiestaRevocaImmediataFirmata(new ByteArrayResource(moduloRevocaFirmato.getBytes(), moduloRevocaFirmato.getOriginalFilename()))
-					.setCausaRichiesta(causaRichiesta)
-					.setSportello(sportelloDto);
+					.setCodiceFiscale(cuaa).setCodiceFiscaleRappresentante(codiceFiscaleRappresentanteLegaleOTitolare)
+					.setRichiestaRevocaImmediataFirmata(new ByteArrayResource(moduloRevocaFirmato.getBytes(),
+							moduloRevocaFirmato.getOriginalFilename()))
+					.setCausaRichiesta(causaRichiesta).setSportello(sportelloDto);
 			return mandatoService.richiestaRevocaImmediata(richiestaRevocaImmediataDto);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
 		}
 	}
 	
 	@ApiOperation("Recupera pdf contratto del mandato")
 	@GetMapping("/{mandatoId}/fascicolo/{fascicoloId}/contratto")
-	public ResponseEntity<Resource> getPdfAllegatoContrattoMandato(
-			@PathVariable Long fascicoloId,
-			@PathVariable Long mandatoId,
-			@RequestParam(required = false) Integer idValidazione
-			) throws Exception{
-		return ResponseEntity.ok()
-				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+	public ResponseEntity<Resource> getPdfAllegatoContrattoMandato(@PathVariable
+	Long fascicoloId, @PathVariable
+	Long mandatoId, @RequestParam(required = false)
+	Integer idValidazione) throws Exception {
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=contratto_" + mandatoId + ".pdf")
 				.body(mandatoService.getPdfAllegatoContrattoMandato(
 						new EntitaDominioFascicoloId(fascicoloId, idValidazione == null ? 0 : idValidazione),
 						new EntitaDominioFascicoloId(mandatoId, idValidazione == null ? 0 : idValidazione)));
 	}
-
+	
 	@ApiOperation("Modifica della sede operativa del CAA")
 	@PutMapping("/{cuaa}/sportello/{sportelloId}")
 	@PreAuthorize("@abilitazioniComponent.checkModificaSportelloMandato(#cuaa)")
-	public void cambioSportello(
-			@PathVariable final String cuaa,
-			@PathVariable final Long sportelloId,
-			@RequestBody(required = true) final CambioSportelloPatch cambioSportello) throws Exception {
+	public void cambioSportello(@PathVariable
+	final String cuaa, @PathVariable
+	final Long sportelloId, @RequestBody(required = true)
+	final CambioSportelloPatch cambioSportello) throws Exception {
 		mandatoService.cambioSportello(cuaa, cambioSportello);
 	}
 	
 	@ApiOperation("Dato un cuaa verifica se è stata presentata una revoca ordinaria")
 	@GetMapping("/{cuaa}/verifica-presenza-revoca-ordinaria")
-	public Boolean verificaPresenzaRevocaOrdinaria(@ApiParam(value = "CUAA", required = true) @PathVariable(value = "cuaa") String cuaa) throws Exception {
+	public Boolean verificaPresenzaRevocaOrdinaria(@ApiParam(value = "CUAA", required = true)
+	@PathVariable(value = "cuaa")
+	String cuaa) throws Exception {
 		return mandatoService.verificaPresenzaRevocaOrdinaria(cuaa);
 	}
 	
 	@ApiOperation("Mostra tutte le richieste di revoca immediata")
 	@GetMapping("/richieste-revoca-immediata-mandato")
-	@PreAuthorize("@abilitazioniComponent.checkListaRichiesteRevovaImmediataMandato(#isValutata)")
+	// @PreAuthorize("@abilitazioniComponent.checkListaRichiesteRevocaImmediataMandato(#isValutata)")
 	public List<DescrizioneRichiestaRevocaImmediataMandatoDto> getRichiesteRevocaImmediataMandato(
-			@RequestParam(required = true, value = "valutata") final Boolean isValutata) throws Exception {
+			@RequestParam(required = true, value = "valutata")
+			final Boolean isValutata) throws Exception {
 		return richiestaRevocaImmediataMandatoService.getRichiesteRevocaImmediataDto(isValutata);
 	}
 	
 	@ApiOperation("Mostra tutte le richieste di revoca immediata per il caa connesso")
 	@GetMapping("/richieste-revoca-immediata-mandato-paged")
-	@PreAuthorize("@abilitazioniComponent.checkListaRichiesteRevovaImmediataMandato(#isValutata)")
+	// @PreAuthorize("@abilitazioniComponent.checkListaRichiesteRevovaImmediataMandato(#isValutata)")
 	public RisultatiPaginati<DescrizioneRichiestaRevocaImmediataMandatoDto> getRichiesteRevocaImmediataMandatoPaged(
-			@RequestParam(required = true, value = "valutata") final Boolean isValutata,
-			Paginazione paginazione, Ordinamento ordinamento) throws Exception {
-		return richiestaRevocaImmediataMandatoService.getRichiesteRevocaImmediataDto(isValutata, paginazione, ordinamento);
+			@RequestParam(required = true, value = "valutata")
+			final Boolean isValutata, Paginazione paginazione, Ordinamento ordinamento) throws Exception {
+		return richiestaRevocaImmediataMandatoService.getRichiesteRevocaImmediataDto(isValutata, paginazione,
+				ordinamento);
 	}
 	
 	@ApiOperation("Dato un ID protocollo scarica il documento firmato di richiesta revoca mandato")
@@ -196,77 +224,84 @@ public class MandatoController {
 	@PreAuthorize("@abilitazioniComponent.checkLetturaFascicoloPerRevocaImmediata(#idProtocollo)")
 	public @ResponseBody byte[] getDocumentoFirmatoRichiestaRevocaImmediata(
 			@ApiParam(value = "ID protocollo della richiesta di revoca immediata del mandato")
-			@RequestParam(required = true, value = "idProtocollo") final String idProtocollo) {
+			@RequestParam(required = true, value = "idProtocollo")
+			final String idProtocollo) {
 		return richiestaRevocaImmediataMandatoService.getDocumentoRichiestaFirmato(idProtocollo);
 	}
-
+	
 	@ApiOperation("Accettazione o rifiuto revoca immediata")
 	@PutMapping("/{cuaa}/valuta-revoca-immediata")
 	@PreAuthorize("@abilitazioniComponent.checkValutaRevocaImmediataMandato(#cuaa)")
-	public BusinessResponsesDto valutaRichiestaRevocaImmediata(
-			@PathVariable String cuaa,
-			@RequestParam(required = true, value = "accettata") Boolean accettata,
-			@RequestBody(required = false) String motivazioneRifiuto) {
+	public BusinessResponsesDto valutaRichiestaRevocaImmediata(@PathVariable
+	String cuaa, @RequestParam(required = true, value = "accettata")
+	Boolean accettata, @RequestBody(required = false)
+	String motivazioneRifiuto) {
 		RichiestaRevocaImmediataDto richiestaRevocaImmediataDto = new RichiestaRevocaImmediataDto()
-				.setCodiceFiscale(cuaa)
-				.setMotivazioneRifiuto(motivazioneRifiuto);
+				.setCodiceFiscale(cuaa).setMotivazioneRifiuto(motivazioneRifiuto);
 		BusinessResponsesDto businessResponsesDto = new BusinessResponsesDto();
 		try {
-			richiestaRevocaImmediataDto = mandatoService.valutaRichiestaRevocaImmediata(richiestaRevocaImmediataDto, accettata);
-		} catch (ResponseStatusException e) {
+			richiestaRevocaImmediataDto = mandatoService.valutaRichiestaRevocaImmediata(richiestaRevocaImmediataDto,
+					accettata);
+		}
+		catch (ResponseStatusException e) {
 			businessResponsesDto.getResponseList().add(e.getReason());
 			businessResponsesDto.setEsito(Esiti.KO);
 			logger.error(Esiti.KO.toString(), e);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			businessResponsesDto.getResponseList().add(RevocaImmediataMandatoNotification.ERRORE_GENERICO.name());
 			businessResponsesDto.setEsito(Esiti.KO);
 			logger.error(Esiti.KO.toString(), e);
 		}
-		if (businessResponsesDto.getEsito() == Esiti.KO ) {
+		if (businessResponsesDto.getEsito() == Esiti.KO) {
 			logger.warn(Esiti.KO.toString());
 			return businessResponsesDto;
 		}
 		try {
 			mandatoService.notificaMailTitolareRappresentanteLegale(richiestaRevocaImmediataDto, accettata);
-		} catch (ResponseStatusException e) {
+		}
+		catch (ResponseStatusException e) {
 			businessResponsesDto.getResponseList().add(e.getReason());
 			businessResponsesDto.setEsito(Esiti.NON_BLOCCANTE);
 			logger.error(Esiti.NON_BLOCCANTE.toString(), e);
 		}
 		try {
 			mandatoService.notificaMailAppag(richiestaRevocaImmediataDto, accettata);
-		} catch (ResponseStatusException e) {
+		}
+		catch (ResponseStatusException e) {
 			businessResponsesDto.getResponseList().add(e.getReason());
 			businessResponsesDto.setEsito(Esiti.NON_BLOCCANTE);
 			logger.error(Esiti.NON_BLOCCANTE.toString(), e);
 		}
 		return businessResponsesDto;
 	}
-
+	
 	@ApiOperation("Dato un codice fiscale verifica se sia possibile acquisire un mandato da un fascicolo con revoca immediata")
 	@GetMapping("/revoca-immediata/{cuaa}/verifica/dati-acquisizione")
 	@PreAuthorize("@abilitazioniComponent.checkAperturaFascicolo(#cuaa)")
 	public DatiAperturaFascicoloDto verificaAcquisizioneMandatoFascicoloRevocaImmediata(
 			@ApiParam(value = "Codice fiscale per cui si vuole verificare se vi sono le condizioni per aprire un nuovo fascicolo", required = true)
-			@PathVariable(value = "cuaa") String cuaa) {
+			@PathVariable(value = "cuaa")
+			String cuaa) {
 		try {
 			return mandatoService.mandatoAcquisizioneVerifica(cuaa);
-		} catch (MandatoVerificaException afve) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-					afve.getMessage());
+		}
+		catch (MandatoVerificaException afve) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, afve.getMessage());
 		}
 	}
-
+	
 	@ApiOperation("Servizio che permette di acquisire il mandato")
 	@PostMapping("/{cuaa}/acquisisci-mandato")
 	@PreAuthorize("@abilitazioniComponent.checkAperturaFascicolo(#cuaa)")
 	public FascicoloCreationResultDto acquisisciMandato(
 			@ApiParam(value = "Codice fiscale per cui si vuole aprire un nuovo fascicolo", required = true)
-			@PathVariable(value = "cuaa", required = true) String cuaa,
-			@RequestParam String codiceFiscaleRappresentante,
-			@RequestParam(required = true) Long identificativoSportello,
-			@RequestParam(required = true) MultipartFile contratto,
-			@RequestPart(value = "allegati") List<MultipartFile> allegati) throws Exception {
+			@PathVariable(value = "cuaa", required = true)
+			String cuaa, @RequestParam
+			String codiceFiscaleRappresentante, @RequestParam(required = true)
+			Long identificativoSportello, @RequestParam(required = true)
+			MultipartFile contratto, @RequestPart(value = "allegati")
+			List<MultipartFile> allegati) throws Exception {
 		List<ByteArrayResource> attachments = null;
 		if (!CollectionUtils.isEmpty(allegati)) {
 			attachments = new ArrayList<>();
@@ -278,7 +313,8 @@ public class MandatoController {
 					}
 				});
 			}
-		} else {
+		}
+		else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 					FascicoloValidazioneEnum.ALLEGATO_NON_PRESENTE.name());
 		}
@@ -289,9 +325,9 @@ public class MandatoController {
 				.setAllegati(attachments);
 		try {
 			return mandatoService.acquisisciMandato(datiApertura);
-		} catch (Exception e) {
-			throw new ResponseStatusException(
-					HttpStatus.BAD_REQUEST, e.getMessage());
+		}
+		catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
 }

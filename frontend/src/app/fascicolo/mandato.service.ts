@@ -9,12 +9,14 @@ import { Paginazione } from '../a4g-common/utility/paginazione';
 import { RichiestaRevocaImmediataDto, RichiesteRevocaImmediata } from './richieste-revoca-mandato/dto/RichiestaRevocaImmediataDto';
 import { Cached } from 'src/assets/decorators/cached';
 import {DatiAperturaFascicoloDto} from "./creazione-fascicolo/dto/DatiAperturaFascicoloDto";
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable()
 export class MandatoService {
 
   constructor(
     private httpClient: HttpClient,
+    private oauthService: OAuthService,
     private configuration: Configuration,
   ) { }
 
@@ -36,8 +38,13 @@ export class MandatoService {
     return `${this.anagrafica_server_mandato}/${cuaa}/richiesta-revoca-immediata-mandato`;
   }
 
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
+
   public getRichiesteRevocheImmediate(valutata: boolean): Observable<RichiestaRevocaImmediataDto[]> {
-    return this.httpClient.get<RichiestaRevocaImmediataDto[]>(this.getUrlRevocaImmediata(valutata), { responseType: 'json' })
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.httpClient.get<RichiestaRevocaImmediataDto[]>(this.getUrlRevocaImmediata(valutata), { responseType: 'json', headers: headers })
       .pipe(map(richiesteList => {
         if (richiesteList) {
           const richiesteDtoList: RichiestaRevocaImmediataDto[] = [];

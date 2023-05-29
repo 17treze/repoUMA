@@ -65,7 +65,7 @@ export class HomeGuard implements CanActivate {
               this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat, this.utente)
             ) {
               console.log("SUCCESS (profili)");
-              return Promise.resolve(true);
+              // return Promise.resolve(true);
             }
             let codiceFiscale = '';
             if (this.utente) {
@@ -96,16 +96,17 @@ export class HomeGuard implements CanActivate {
                 return Promise.resolve(false);
               }
               else {
+                console.error('Here we are');
                 return Promise.resolve(true);
               }
             })
           },
           err => { 
             console.error('Observer error: ' + err);
+            return Promise.resolve(false);
           }
         );
       }
-      return Promise.resolve(false);
     })
   }
 }
