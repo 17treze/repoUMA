@@ -72,22 +72,15 @@ export class UtenteGuard implements CanActivate {
     }
 
     public vaiAHome() {
-        let urlReindirizzamento: string = "/"
-        this.authService.getUserFromSession().subscribe(
-          x => {
-            console.log('Observer next value: ' + x.codiceFiscale);
-            this.authService.setUser(x);
-            // ...
-            if ((x.profili == null) || (x.profili.length == 0)) {
-                urlReindirizzamento = environment.indexPage;
-            } else {
-                urlReindirizzamento = environment.frontendUrl;
-            }
-            window.location.href = urlReindirizzamento;
-          },
-          err => { 
-            console.error('Observer error: ' + err);
-          }
-        );
+      /*
+      let urlReindirizzamento: string = "/"
+      if ((user.profili == null) || (user.profili.length == 0)) {
+          urlReindirizzamento = environment.indexPage;
+      } else {
+          urlReindirizzamento = environment.frontendUrl;
+      }
+      window.location.href = urlReindirizzamento;
+      */
+      window.location.href = environment.indexPage;
     }
 }

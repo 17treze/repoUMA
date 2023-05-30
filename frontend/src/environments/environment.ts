@@ -6,7 +6,7 @@ export const environment = {
   // WSO2
   discoveryDocumentEndpoint: 'https://10.206.193.173:9443/oauth2/oidcdiscovery',
   redirectUri: 'http://localhost:4200/home',
-  logoutUrl: 'http://localhost:4200',
+  logoutUrl: 'http://localhost:4200/',
   clientId: 'IMmZukAFkU1q57oTlO4402Sy0Loa',
   dummyClientSecret: 'nSBQ41ZYYbikBX428ejUL0_cYf0a',
   scope: 'openid',
@@ -24,9 +24,9 @@ export const environment = {
   // legacy
   production: false,
   backendUrl: 'http://localhost:8080/',
-  frontendUrl: 'http://localhost:4200',
+  frontendUrl: 'http://localhost:4200/',
   TIMEOUT_SPINNER: 120000,
-  indexPage: 'http://localhost:4200',
+  indexPage: 'http://localhost:4201',
   annoInizioCampagnaUma: 2020,
   dtAperturaRevocaImmediata: new Date(new Date().getFullYear(), 0, 1),
   dtChiusuraRevocaImmediata: new Date(new Date().getFullYear(), 11, 31, 23, 59, 59),

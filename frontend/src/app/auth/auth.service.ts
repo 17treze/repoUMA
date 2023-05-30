@@ -76,6 +76,7 @@ export class AuthService {
 
   // WSO2
   public logout() {
+    sessionStorage.clear();
     this.oauthService.logOut();
   }
 
@@ -171,7 +172,7 @@ export class AuthService {
     if (!user) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    if (user && user.profili) {
+    if (user?.profili) {
       for (const profilo of user.profili) {
         if (profilo && profilo.identificativo == requiredRole) {
           console.log("Role: " + requiredRole + " -> true");
@@ -179,7 +180,6 @@ export class AuthService {
         }
       }
     }
-    // console.log("Role: " + requiredRole + " -> false");
     return false;
   }
 
@@ -199,7 +199,7 @@ export class AuthService {
 
   private getRoleFromSessionStorage() {
     const user: Utente = JSON.parse(sessionStorage.getItem("user"));
-    if (user && user.profili && user.profili.length) {
+    if (user?.profili?.length) {
       return user.profili[0].identificativo;
     }
     return null;

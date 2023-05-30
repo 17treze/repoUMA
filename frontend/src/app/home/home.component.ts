@@ -3,14 +3,11 @@ import { HomeService } from './home.service';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
 import { AuthService } from '../auth/auth.service';
 import { Utente } from '../auth/user';
-import { MenuItem } from 'primeng/api';
-import { Message } from 'primeng/api';
+import { MenuItem, Message } from 'primeng/api';
 import { Router } from '@angular/router';
-import { validaInput } from '../a4g-common/validazione/validaInput';
 import { Configuration } from '../app.constants';
 import { UtenteAgs } from '../a4g-common/classi/utenteAgs';
 import { FascicoloService } from '../fascicolo/fascicolo.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -65,6 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log("Home component ngOnInit... ");
     this.clearStorage();
     this.caricaUtente();
   }
@@ -84,6 +82,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   caricaUtente() {
+    console.log("caricaUtente...");
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
     this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
     this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
@@ -103,100 +102,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.roleAzienda) {
       this.getFascicoliAziendaUtente().then(() => this.caricaCollegamentiUtente());
     }
-    this.getRuoliSrTrento();
-    this.getUtenzeAgs();
     this.caricaCollegamentiUtente();
-  }
-
-  getRuoliSrTrento() {
-    console.log('home getRuoliSrTrento');
-    /*
-    if (this.utente && this.utente.codiceFiscale && validaInput.validaCf(this.utente.codiceFiscale, false)) {
-      this.srTrentoRuoli = this.homeService.getSrtRuoliPerUtente();
-      if (!this.srTrentoRuoli) {
-        this.homeService.ricercaSrtRuoliPerUtente(this.utente.codiceFiscale)
-          .subscribe((next) => {
-            this.srTrentoRuoli = next,
-              this.homeService.salvaSrtRuoliPerUtente(next);
-            this.caricaRuoliSrTrento();
-          });
-      } else {
-        this.caricaRuoliSrTrento();
-      }
-    }
-    */
-  }
-
-  caricaRuoliSrTrento() {
-    const roles = new Array<MenuItem>();
-    this.srTrentoMenu = [
-      {
-        label: 'Seleziona Ruoli',
-        items: roles,
-        expanded: true
-      }
-    ];
-    if (this.srTrentoRuoli) {
-      for (let index = 0; index < this.srTrentoRuoli.length; index++) {
-        roles.push(
-          {
-            label: this.srTrentoRuoli[index],
-            url: this._configuration.UrlRedirectSrTrento
-          }
-        );
-      }
-    } else {
-      roles.push(
-        {
-          label: 'Nessun ruolo disponibile',
-          url: this._configuration.UrlRedirectSrTrento
-        }
-      );
-    }
-  }
-
-  getUtenzeAgs() {
-    console.log('home getUtenzeAgs');
-    /*
-    this.agsUtenze = this.homeService.getUtenzeAgsPerUtente();
-    if (!this.agsUtenze) {
-      this.homeService.ricercaUtenzeAgsPerUtente()
-        .subscribe((next) => {
-          this.agsUtenze = next,
-            this.homeService.salvaUtenzeAgsPerUtente(next);
-          this.caricaUtenzeAgs();
-        });
-    } else {
-      this.caricaUtenzeAgs();
-    }
-    */
-  }
-
-  caricaUtenzeAgs() {
-    const roles = new Array<MenuItem>();
-    this.agsItems = [
-      {
-        label: 'Seleziona Utenza',
-        items: roles,
-        expanded: true
-      }
-    ];
-    if (this.agsUtenze) {
-      for (let index = 0; index < this.agsUtenze.length; index++) {
-        roles.push(
-          {
-            label: this.agsUtenze[index].utenza + ' ' + this.agsUtenze[index].descrizione,
-            url: this._configuration.UrlRedirectAgs
-          }
-        );
-      }
-    } else {
-      roles.push(
-        {
-          label: 'Nessuna utenza disponibile',
-        }
-      );
-    }
   }
 
   getFascicoliAziendaUtente() {
@@ -215,6 +121,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   caricaCollegamentiUtente() {
+    console.log("caricaCollegamentiUtente...");
     const roles = new Array<MenuItem>();
     this.a4GItems = [
       {
@@ -224,8 +131,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     ];
     if (this.roleAzienda && this.fascicoli) {
-      for (let index = 0; index < this.fascicoli.length; index++) {
-        const element = this.fascicoli[index];
+      for (let f of this.fascicoli) {
+        const element = f;
         roles.push({ label: element.denominazione, routerLink: '../fascicolo/' + element.idFascicolo + '/presentazioneIstanze' });
       }
       localStorage.setItem("selectedRole", 'azienda');

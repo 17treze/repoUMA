@@ -32,13 +32,6 @@ export class HomeGuard implements CanActivate {
 
     return this.authGuard.canActivate(route, state).then((auth) => {
       if (!auth) {
-        this.confirmationService.confirm({
-          message: A4gMessages.AUTENTICAZIONE_FALLITA,
-          accept: () => {
-            window.location.href = this.configuration.IndexPage;;
-          },
-          reject: () => { }
-        }); 
         return Promise.resolve(false);
       } 
       else {
@@ -65,18 +58,14 @@ export class HomeGuard implements CanActivate {
               this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat, this.utente)
             ) {
               console.log("SUCCESS (profili)");
-              // return Promise.resolve(true);
+              return Promise.resolve(true);
             }
-            let codiceFiscale = '';
-            if (this.utente) {
-              codiceFiscale = this.utente.codiceFiscale;
-            }    
             return this.roleGuard.canActivate(route, state).then((auth) => {
               if (!auth) {
                 this.protocollataGuard.canActivate(route, state).then((isRegistrabile) => {
                   if (isRegistrabile) {
                     this.confirmationService.confirm({
-                      message: A4gMessages.NESSUN_PROFILO(codiceFiscale),
+                      message: A4gMessages.NESSUN_PROFILO(this.utente.codiceFiscale),
                       accept: () => {
                         this.router.navigate([this.configuration.UrlRedirectUtenti]);
                       },
@@ -85,7 +74,7 @@ export class HomeGuard implements CanActivate {
                   }
                   else {
                     this.confirmationService.confirm({
-                      message: A4gMessages.DOMANDA_PROTOCOLLATA(codiceFiscale),
+                      message: A4gMessages.DOMANDA_PROTOCOLLATA(this.utente.codiceFiscale),
                       accept: () => {
                         window.location.href = this.configuration.IndexPage;
                       },
@@ -96,7 +85,6 @@ export class HomeGuard implements CanActivate {
                 return Promise.resolve(false);
               }
               else {
-                console.error('Here we are');
                 return Promise.resolve(true);
               }
             })

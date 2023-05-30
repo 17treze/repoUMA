@@ -20,9 +20,9 @@ export const environment = {
   // legacy
   production: false,
   backendUrl: 'http://localhost:8080/',
-  frontendUrl: 'http://localhost:4200',
+  frontendUrl: 'http://localhost:4200/',
   TIMEOUT_SPINNER: 120000,
-  indexPage: 'http://localhost:4200',
+  indexPage: 'http://localhost:4201',
   annoInizioCampagnaUma: 2020,
   dtAperturaRevocaImmediata: new Date(new Date().getFullYear(), 0, 1),
   dtChiusuraRevocaImmediata: new Date(new Date().getFullYear(), 11, 31, 23, 59, 59),

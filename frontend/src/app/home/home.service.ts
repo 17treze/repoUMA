@@ -1,12 +1,8 @@
-import { Injectable, ComponentFactoryResolver } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
-
-import { HttpClient, HttpHeaders, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Configuration } from '../app.constants';
-import { InputFascicolo } from '../a4g-common/classi/InputFascicolo';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
-import { UtenteAgs } from '../a4g-common/classi/utenteAgs';
 import { FascicoloService } from '../fascicolo/fascicolo.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -15,8 +11,8 @@ const httpOptions = {
 };
 
 const sessioneFascicoloUtente = "fascicoloUtente";
-const sessionAgsUtente = "agsUtenze";
-const sessioneSrtUtente = "srTrentoRuoli";
+// const sessionAgsUtente = "agsUtenze";
+// const sessioneSrtUtente = "srTrentoRuoli";
 
 @Injectable()
 export class HomeService {
@@ -27,9 +23,9 @@ export class HomeService {
     private authService: AuthService
   ) { }
 
-  public verificaUtente(): Observable<Boolean> {
+  public verificaUtente(): Observable<boolean> {
     let headers = new HttpHeaders().append('Authorization', this.authService.getAccessToken());
-    return this.http.get<Boolean>(this._configuration.urlIsUtenteRegistrabile, { headers: headers });
+    return this.http.get<boolean>(this._configuration.urlIsUtenteRegistrabile, { headers: headers });
   }
 
   // Fascicoli utente
@@ -39,7 +35,7 @@ export class HomeService {
     sessionStorage.setItem(parametroSessione, JSON.stringify(salva));
   }
 
-  public isAziendaUtente(cuaa: String): Boolean {
+  public isAziendaUtente(cuaa: string): boolean {
     let fascicoli: Array<Fascicolo> = this.getFascicoliAziendaUtente();
     if (fascicoli != null && fascicoli.filter(x => x.cuaa == cuaa).length > 0) 
       return true;
@@ -55,8 +51,9 @@ export class HomeService {
       console.log(sessione);
       return JSON.parse(sessione);
     }
+    return new Array<Fascicolo>();
   }
-
+  /*
   public salvaSrtRuoliPerUtente(salva: string[]) {
     let parametroSessione = sessioneSrtUtente;
     console.log("carica " + parametroSessione + " in sessione");
@@ -98,4 +95,5 @@ export class HomeService {
     console.log("chiama ricercaUtenzeAgsPerUtente");
     return this.http.get<Array<UtenteAgs>>(this._configuration.UrlAgsGetUtenzePerUtente);
   }
+  */
 }

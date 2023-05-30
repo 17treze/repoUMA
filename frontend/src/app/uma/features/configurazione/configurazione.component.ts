@@ -16,6 +16,7 @@ export class ConfigurazioneUmaComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.clear();
+    console.log('localStorage: ' + localStorage.getItem('selectedRole'));
     this.displayCardConfigurazioneUma = localStorage.getItem('selectedRole') === AuthService.roleCaa;
     console.log('this.displayCardConfigurazioneUma: ' + this.displayCardConfigurazioneUma);
   }

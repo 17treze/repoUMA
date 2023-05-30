@@ -54,17 +54,19 @@ export class AppTopBarComponent implements OnInit {
             {
                 label:'Logout', 
                 command: () => {
-                    this.redirectLogoutCittadino();
+                    this.authService.logout();
                 }, 
-                url: `${environment.backendUrl}sso/Shibboleth.sso/Logout`
+                url: `${environment.logoutUrl}`
             }
         ];
+        /*
         if (environment.tipoLogin == 'dipendente') {
             this.items[1].command = () => {
                 this.redirectLogoutDipendente();
             };
             this.items[1].disabled = true;
         }
+        */
     }
 
     redirectModificaUtente() {
