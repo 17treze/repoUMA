@@ -105,7 +105,15 @@ export class AuthService {
           console.log('Utente non autorizzato');
         }
         console.log('Result: ' + result);
-        this.authenticationEventObservable.next(result);
+        this.getUserFromSession().subscribe(
+          x => {
+            this.setUser(x);
+            this.authenticationEventObservable.next(result);
+          },
+          err => { 
+            console.error('Observer error: ' + err);
+          }
+        );
       })
       .catch((error) => {
         // this.toastr.showErrorMessage('Utente non autorizzato');

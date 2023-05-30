@@ -277,7 +277,8 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 				+ " , f.denominazione AS ragione_sociale_azienda ,\r\n" + " '000001' as sco_ruolo\r\n"
 				+ "FROM a4gt_persona p\r\n" + "    inner join a4gt_fascicolo f on f.id_persona = p.id\r\n"
 				+ "    left outer join a4gt_persona_fisica pf on pf.id = p.id\r\n"
-				+ "    left outer join a4gt_carica c on c.persona_fisica_id = pf.id and c.persona_fisica_id_validazione = pf.id_validazione ";
+				+ "    left outer join a4gt_carica c on c.persona_fisica_id = pf.id and c.persona_fisica_id_validazione = pf.id_validazione "
+				+ "WHERE p.codice_fiscale = :codiceFiscale";
 		
 		String SQL_GET_MODI_PAGAMENTO = "select IBAN.PKID AS ID, COD_IBAN, de_banca, de_filiale, dt_inizio, dt_fine  "
 				+ "from TMOD_PAGAMENTO_IBAN iban  "

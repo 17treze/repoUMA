@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log("Home component ngOnInit... ");
     this.clearStorage();
     this.caricaUtente();
   }
@@ -82,7 +81,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   caricaUtente() {
-    console.log("caricaUtente...");
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
     this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
     this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
@@ -109,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log('home getFascicoliAziendaUtente');
     return new Promise((resolve) => {
       this.fascicoli = this.homeService.getFascicoliAziendaUtente();
-      if (!this.fascicoli) {
+      if (!this.fascicoli || this.fascicoli.length == 0) {
         this.fascicoloService.ricercaFascicoliAziendaUtente()
           .subscribe((next) => {
             this.fascicoli = next;
@@ -121,7 +119,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   caricaCollegamentiUtente() {
-    console.log("caricaCollegamentiUtente...");
     const roles = new Array<MenuItem>();
     this.a4GItems = [
       {
@@ -130,9 +127,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         expanded: true
       }
     ];
+    console.log("caricaCollegamentiUtente: " + this.fascicoli);
     if (this.roleAzienda && this.fascicoli) {
-      for (let f of this.fascicoli) {
-        const element = f;
+      for (let element of this.fascicoli) {
         roles.push({ label: element.denominazione, routerLink: '../fascicolo/' + element.idFascicolo + '/presentazioneIstanze' });
       }
       localStorage.setItem("selectedRole", 'azienda');
