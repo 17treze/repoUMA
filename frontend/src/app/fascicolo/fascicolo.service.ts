@@ -27,8 +27,14 @@ export class FascicoloService {
   urlGetFascicoli = `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/?params=`;
   urlGetFascicoliMiei = `${this.anagrafica_server_fascicolo}/consultazione/mieifascicoli`;
 
-  public getAccessToken() {
-    return this.oauthService.getAccessToken();
+  public getAccessToken() : string {
+    if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
+      return this.oauthService.getAccessToken();
+    }
+    else {
+      // rimandare al login
+      return '';
+    }
   }
 
   public ricercaFascicoliAziendaUtente(): Observable<Array<Fascicolo>> {
@@ -49,7 +55,9 @@ export class FascicoloService {
   }
 
   public getUrlGetLegacyByCuaa(cuaa: string): Observable<FascicoloAgsDto> {
-    return this.http.get<FascicoloAgsDto>(`${this.anagrafica_server}/fascicolo/legacy/${cuaa}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    console.log(headers);
+    return this.http.get<FascicoloAgsDto>(this.getUrlFascioloLegacy() + '/${cuaa}', { headers: headers });
   }
 
   public getUrlGetListaPaged(testoDaCercare: string): string {
@@ -64,7 +72,8 @@ export class FascicoloService {
   // chiamata più aggiornata per reperire il fascicolo legacy
   public getLegacy(idFascicolo: number): Observable<FascicoloAgsDto> {
     console.log('ricercaLegacy ' + idFascicolo);
-    return this.http.get<FascicoloAgsDto>(this.getUrlGetLegacy(idFascicolo));
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<FascicoloAgsDto>(this.getUrlGetLegacy(idFascicolo), { headers: headers });
   }
 
   public getListaPaged(testoDaCercare: string, paginazione: Paginazione): Observable<PaginatorA4G<Array<RisultatiRicercaClientiDto>>> {
@@ -75,7 +84,8 @@ export class FascicoloService {
 
   public getFascicolo(idFascicolo: number): Observable<Fascicolo> {
     console.log('ricercaFascicolo ' + idFascicolo);
-    return this.http.get<Fascicolo>(this.getUrlGetFascicolo(idFascicolo));
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Fascicolo>(this.getUrlGetFascicolo(idFascicolo), { headers: headers });
   }
 
   public putCambioSportello(cuaa, idSportello, cambioSportelloPatch: CambioSportelloPatch): Observable<any> {

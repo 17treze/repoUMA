@@ -22,6 +22,10 @@ export class MandatoService {
 
   anagrafica_server_mandato = `${this.configuration.anagrafica_server}/mandato`;
 
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
+
   public getUrlAcquisizioneMandato(codiceFiscaleAzienda: string) {
     return `${this.anagrafica_server_mandato}/${codiceFiscaleAzienda}/acquisisci-mandato`;
   }
@@ -36,10 +40,6 @@ export class MandatoService {
 
   public postUrlRevocaImmediata(cuaa: string) {
     return `${this.anagrafica_server_mandato}/${cuaa}/richiesta-revoca-immediata-mandato`;
-  }
-
-  public getAccessToken() {
-    return this.oauthService.getAccessToken();
   }
 
   public getRichiesteRevocheImmediate(valutata: boolean): Observable<RichiestaRevocaImmediataDto[]> {
@@ -92,7 +92,8 @@ export class MandatoService {
     if (idValidazione) {
       paramsHttp = paramsHttp.set('idValidazione', String(idValidazione));
     }
-    return this.httpClient.get<MandatoDto[]>(this.getUrlGetMandatoByCuaa(cuaa), { params: paramsHttp })
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.httpClient.get<MandatoDto[]>(this.getUrlGetMandatoByCuaa(cuaa), { params: paramsHttp, headers: headers })
       .pipe(map(mandatiList => {
         const mandatiDtoList: MandatoDto[] = [];
         for (const mandato of mandatiList) {

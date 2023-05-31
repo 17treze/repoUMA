@@ -1,5 +1,5 @@
 import { DichiarazioneConsumiPatchDto } from './../models/dto/DichiarazioneConsumiDto';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DichiarazioneConsumiDto } from '../models/dto/DichiarazioneConsumiDto';
@@ -11,6 +11,7 @@ import { PaginatorA4G } from 'src/app/a4g-common/interfaces/paginator.model';
 import { DomandaUmaFilter } from '../models/dto/DomandaUmaFilter';
 import { HttpHelperService } from 'src/app/a4g-common/services/http-helper.service';
 import { DomandaUmaDto } from '../models/dto/DomandaUmaDto';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,14 @@ export class HttpClientDichiarazioneConsumiUmaService {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private httpClientCore: HttpClientUmaCoreService,
     private dtoBuilderService: DtoBuilderService,
     private httpHelperService: HttpHelperService) { }
+
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
 
   presentaDichiarazioneConsumi(cuaa: string, codiceFiscaleRichiedente: string): Observable<number> {
     return this.http.post<number>(this.urlConsumi(), this.dtoBuilderService.buildPresentaDomandaDto(cuaa, codiceFiscaleRichiedente));
@@ -31,7 +37,8 @@ export class HttpClientDichiarazioneConsumiUmaService {
 
   getDichiarazioniConsumi(filter: DomandaUmaFilter): Observable<Array<DichiarazioneConsumiDto>> {
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<Array<DichiarazioneConsumiDto>>(`${this.urlConsumi()}` + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<DichiarazioneConsumiDto>>(`${this.urlConsumi()}` + queryString, { headers: headers });
   }
 
   getDichiarazioniConsumiCaa(filter: DomandaUmaFilter): Observable<Array<DomandaUmaDto>> {

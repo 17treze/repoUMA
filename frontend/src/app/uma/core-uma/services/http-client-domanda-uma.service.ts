@@ -1,7 +1,7 @@
 import { PaginatorA4G } from './../../../a4g-common/interfaces/paginator.model';
 import { CarburanteDto } from 'src/app/uma/core-uma/models/dto/CarburanteDto';
 import { DtoBuilderService } from './dto-builder.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
 import { Observable } from 'rxjs/internal/Observable';
@@ -11,6 +11,7 @@ import { HttpHelperService } from '../../../a4g-common/services/http-helper.serv
 import { PrelievoDto } from '../models/dto/PrelievoDto';
 import { CarburanteTotale } from '../models/dto/CarburanteTotale';
 import { DomandaUmaDto } from '../models/dto/DomandaUmaDto';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,15 @@ export class HttpClientDomandaUmaService {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private httpClientCore: HttpClientUmaCoreService,
     private dtoBuilderService: DtoBuilderService,
     private httpHelperService: HttpHelperService
   ) {
+  }
+
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
   }
 
   presentaDomanda(cuaa: string, codiceFiscaleRichiedente: string): Observable<number> {
@@ -33,7 +39,8 @@ export class HttpClientDomandaUmaService {
 
   getDomande(filter: DomandaUmaFilter): Observable<Array<RichiestaCarburanteDto>> {
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<Array<RichiestaCarburanteDto>>(this.urlDomanda() + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<RichiestaCarburanteDto>>(this.urlDomanda() + queryString, { headers: headers });
   }
 
   getDomandeCaa(filter: DomandaUmaFilter): Observable<Array<DomandaUmaDto>> {
@@ -47,7 +54,8 @@ export class HttpClientDomandaUmaService {
   }
 
   getDomandaById(idDomanda: string): Observable<RichiestaCarburanteDto> {
-    return this.http.get<RichiestaCarburanteDto>(`${this.urlDomanda()}/${idDomanda}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<RichiestaCarburanteDto>(`${this.urlDomanda()}/${idDomanda}`, { headers: headers });
   }
 
   deleteDomandaById(idDomanda: string): Observable<void> {

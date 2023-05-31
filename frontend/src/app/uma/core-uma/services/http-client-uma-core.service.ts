@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class HttpClientUmaCoreService {
-  readonly HOST: string = environment.backendUrl;
+  readonly HOST: string = 'http://localhost:9012/'; // environment.backendUrl;
   readonly BASE_PATH: string = 'uma';
   readonly API_V1: string = '/api/v1';
   constructor() { }

@@ -282,7 +282,8 @@ export class AnagraficaFascicoloService {
   }
 
   public getDatiSportelloCAA(): Observable<DatiCAA> {
-    return this.http.get<any>(this.urlGetCaa).pipe(
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<any>(this.urlGetCaa, { headers: headers }).pipe(
       tap((retVal: any) => {
         return DatiCAA.toDto(retVal);
       })
@@ -382,27 +383,32 @@ export class AnagraficaFascicoloService {
   @Cached()
   public getFascicolo(cuaa: string, idValidazione: number): Observable<FascicoloDaCuaa> {
     let paramsHttp = new HttpParams();
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     if (idValidazione) {
       paramsHttp = paramsHttp.set('idValidazione', String(idValidazione));
     }
-    return this.http.get<FascicoloDaCuaa>(this.getUrlGetFascicoloDaCuaa(cuaa), { params: paramsHttp }).pipe(
+    return this.http.get<FascicoloDaCuaa>(this.getUrlGetFascicoloDaCuaa(cuaa), 
+      { params: paramsHttp, headers: headers }).pipe(
       map(res => FascicoloDaCuaa.toDto(res))
     );
   }
 
   public getFascicoloNotCached(cuaa: string, idValidazione: number): Observable<FascicoloDaCuaa> {
     let paramsHttp = new HttpParams();
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     if (idValidazione) {
       paramsHttp = paramsHttp.set('idValidazione', String(idValidazione));
     }
-    return this.http.get<FascicoloDaCuaa>(this.getUrlGetFascicoloDaCuaa(cuaa), { params: paramsHttp }).pipe(
+    return this.http.get<FascicoloDaCuaa>(this.getUrlGetFascicoloDaCuaa(cuaa), 
+    { params: paramsHttp, headers: headers }).pipe(
       map(res => FascicoloDaCuaa.toDto(res))
     );
   }
 
   @Cached()
   public getTitolariRappresentantiLegali(cuaa: string): Observable<PersonaAgsDto[]> {
-    return this.http.get<PersonaAgsDto[]>(this.getUrlgetTitolariRappresentantiLegali(cuaa), { responseType: 'json' });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<PersonaAgsDto[]>(this.getUrlgetTitolariRappresentantiLegali(cuaa), { responseType: 'json', headers: headers });
   }
 
   @Cached()
@@ -473,8 +479,9 @@ export class AnagraficaFascicoloService {
   }
 
   public getFirmatario(cuaa: string): Observable<PersonaFisicaConCaricaDto> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     return this.http.get<PersonaFisicaConCaricaDto>(
-      this.getUrlGetFirmatario(cuaa));
+      this.getUrlGetFirmatario(cuaa), { headers: headers });
   }
 
   public putSalvaFirmatario(firmatario: Firmatario, cuaa: string): Observable<void> {
@@ -635,11 +642,12 @@ export class AnagraficaFascicoloService {
 
   public getEredi(cuaa: string, idValidazione: number): Observable<EredeDto[]> {
     let paramsHttp = new HttpParams();
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     if (idValidazione) {
       paramsHttp = paramsHttp.set('idValidazione', String(idValidazione));
     }
     return this.http.get<EredeDto[]>
-      (this.getUrlEredi(cuaa), { params: paramsHttp })
+      (this.getUrlEredi(cuaa), { params: paramsHttp, headers: headers })
       .pipe(
         tap((retVal: any) => {
           return EredeDto.toDtos(retVal);
