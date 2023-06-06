@@ -57,7 +57,7 @@ export class FascicoloService {
   public getUrlGetLegacyByCuaa(cuaa: string): Observable<FascicoloAgsDto> {
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     console.log(headers);
-    return this.http.get<FascicoloAgsDto>(this.getUrlFascioloLegacy() + '/${cuaa}', { headers: headers });
+    return this.http.get<FascicoloAgsDto>(this.getUrlFascioloLegacy() + `/${cuaa}`, { headers: headers });
   }
 
   public getUrlGetListaPaged(testoDaCercare: string): string {

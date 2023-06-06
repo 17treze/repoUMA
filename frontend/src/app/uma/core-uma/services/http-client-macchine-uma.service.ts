@@ -23,7 +23,8 @@ export class HttpClientMacchineUmaService {
   }
 
   dichiaraMacchinariDomanda(idDomanda: string, macchine: Array<MacchinaDto>): Observable<Array<MacchinaDto>> {
-    return this.http.post<Array<MacchinaDto>>(`${this.urlDomanda()}/${idDomanda}/macchine`, macchine);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<Array<MacchinaDto>>(`${this.urlDomanda()}/${idDomanda}/macchine`, macchine, { headers: headers });
   }
 
   validaRichiestaCarburante(idDomanda: string): Observable<any> {

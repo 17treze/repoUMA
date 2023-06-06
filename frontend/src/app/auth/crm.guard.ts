@@ -39,11 +39,11 @@ export class CrmGuard implements CanActivate, CanActivateChild, CanLoad, CanDeac
   }
 
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
-    //const isLoggedIn = this.authService.isLoggedIn();
-    /*if (!isLoggedIn) {
-      this.router.navigate(['home'], { queryParams: { returnUrl: route.path } });
-    }*/    
     console.log('canLoad');
+    const isLoggedIn = this.authService.isLoggedIn();
+    if (!isLoggedIn) {
+      this.router.navigate(['home'], { queryParams: { returnUrl: route.path } });
+    }
     return true;
   }
 

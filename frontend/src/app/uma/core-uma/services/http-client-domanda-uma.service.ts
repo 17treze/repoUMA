@@ -59,23 +59,27 @@ export class HttpClientDomandaUmaService {
   }
 
   deleteDomandaById(idDomanda: string): Observable<void> {
-    return this.http.delete<void>(`${this.urlDomanda()}/${idDomanda}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.delete<void>(`${this.urlDomanda()}/${idDomanda}`, { headers: headers });
   }
 
   protocollaDomanda(id: number, documento: File, haFirma: boolean): Observable<number> {
     const queryString = haFirma != null ? '?' + this.httpHelperService.buildQueryStringFromObject({ haFirma }) : '';
     const formInput: FormData = new FormData();
     formInput.append('documento', documento);
-    return this.http.post<number>(`${this.urlDomanda()}/${id}/protocolla` + queryString, formInput);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<number>(`${this.urlDomanda()}/${id}/protocolla` + queryString, formInput, { headers: headers });
   }
 
   getPrelieviByCuaaAndCampagna(cuaa: string, campagna: string, dataPresentazione?: string): Observable<CarburanteTotale<PrelievoDto>> {
     const queryString = '?' + this.httpHelperService.buildQueryStringFromObject({ cuaa, dataPresentazione });
-    return this.http.get<CarburanteTotale<PrelievoDto>>(`${this.urlDomanda()}/${campagna}/prelievi`+ queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<CarburanteTotale<PrelievoDto>>(`${this.urlDomanda()}/${campagna}/prelievi`+ queryString, { headers: headers });
   }
 
   getCarburanteAmmissibile(idDomanda: string): Observable<CarburanteDto> {
-    return this.http.get<CarburanteDto>(`${this.urlDomanda()}/${idDomanda}/carburante`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<CarburanteDto>(`${this.urlDomanda()}/${idDomanda}/carburante`, { headers: headers });
   }
 
   getRichiestaCarburanteFile(idDomanda: string): Observable<any> {

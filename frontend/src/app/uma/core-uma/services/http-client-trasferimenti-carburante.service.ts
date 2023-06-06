@@ -1,5 +1,5 @@
 import { HttpHelperService } from '../../../a4g-common/services/http-helper.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
@@ -7,6 +7,7 @@ import { CarburanteTotale } from '../models/dto/CarburanteTotale';
 import { TrasferimentoDto } from '../models/dto/CarburanteRicevutoDto';
 import { CarburanteDto } from '../models/dto/CarburanteDto';
 import { AziendaDto } from '../models/dto/AziendaDto';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,15 @@ export class HttpClientTrasferimentiCarburanteService {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private httpClientCore: HttpClientUmaCoreService,
     private httpHelperService: HttpHelperService
   ) { }
 
+  public getAccessToken() {
+    return this.oauthService.getAccessToken();
+  }
+  
   postTrasferimento(idRichiestaMittente: String, idRichiestaDestinatario: String, carburanteTrasferito: CarburanteDto): Observable<number> {
     return this.http.post<number>(this.urlTrasferimenti(), {
       idRichiestaMittente: idRichiestaMittente, idRichiestaDestinatario: idRichiestaDestinatario, carburanteTrasferito: carburanteTrasferito
@@ -33,13 +39,15 @@ export class HttpClientTrasferimentiCarburanteService {
   getCarburanteRicevuto(cuaa: string, campagna: string): Observable<CarburanteTotale<TrasferimentoDto>> {
     const cuaaDestinatario = cuaa;
     const params = '?' + this.httpHelperService.buildQueryStringFromObject({ cuaaDestinatario, campagna });
-    return this.http.get<CarburanteTotale<TrasferimentoDto>>(`${this.urlTrasferimenti()}` + params);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<CarburanteTotale<TrasferimentoDto>>(`${this.urlTrasferimenti()}` + params, { headers: headers });
   }
 
   getCarburanteTrasferito(cuaa: string, campagna: string): Observable<CarburanteTotale<TrasferimentoDto>> {
     const cuaaMittente = cuaa;
     const params = '?' + this.httpHelperService.buildQueryStringFromObject({ cuaaMittente, campagna });
-    return this.http.get<CarburanteTotale<TrasferimentoDto>>(`${this.urlTrasferimenti()}` + params);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<CarburanteTotale<TrasferimentoDto>>(`${this.urlTrasferimenti()}` + params, { headers: headers });
   }
 
   deleteTraseferito(id: string): Observable<void> {

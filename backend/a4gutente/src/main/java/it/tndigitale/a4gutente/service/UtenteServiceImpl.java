@@ -210,10 +210,12 @@ public class UtenteServiceImpl implements IUtenteService {
 	
 	protected String getUsername() {
 		
-		log.info("SCW getName: {}", securityContextWrapper.getAuthentication().getName());
-		String userName = abilitazioniComponent.getWso2Username(securityContextWrapper.getAuthentication().getName());
+		String userName = securityContextWrapper.getAuthentication().getName();
+		log.info("SCW getName: {}", userName);
+		if (!userName.contains("@")) {
+			userName = abilitazioniComponent.getWso2Username(securityContextWrapper.getAuthentication().getName());
+		}
 		log.info("getUsername: {}", userName);
-		//		String username = securityContextWrapper.getAuthentication().getName();
 		return userName;
 	}
 	

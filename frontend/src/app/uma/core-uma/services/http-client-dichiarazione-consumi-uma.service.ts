@@ -52,20 +52,24 @@ export class HttpClientDichiarazioneConsumiUmaService {
   }
 
   getDichiarazioneConsumiById(id: string): Observable<DichiarazioneConsumiDto> {
-    return this.http.get<DichiarazioneConsumiDto>(`${this.urlConsumi()}/${id}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<DichiarazioneConsumiDto>(`${this.urlConsumi()}/${id}`, { headers: headers });
   }
 
   getResiduoAnnoPrecedente(cuaa: string, campagna: number, stati: Array<keyof typeof StatoDichiarazioneConsumiEnum>): Observable<Array<DichiarazioneConsumiDto>> {
     const queryString = this.dtoBuilderService.buildDichiarazioneConsumiFilterDto(cuaa, campagna, stati) != null ? '?' + this.httpHelperService.buildQueryStringFromObject(this.dtoBuilderService.buildDichiarazioneConsumiFilterDto(cuaa, campagna, stati)) : '';
-    return this.http.get<Array<DichiarazioneConsumiDto>>(`${this.urlConsumi()}` + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<DichiarazioneConsumiDto>>(`${this.urlConsumi()}` + queryString, { headers: headers });
   }
 
   getConsuntivi(id: string): Observable<Array<ConsuntivoDto>> {
-    return this.http.get<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${id}/consuntivi`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${id}/consuntivi`, { headers: headers });
   }
 
   getAmmissibile(id: string): Observable<Array<ConsuntivoDto>> {
-    return this.http.get<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${id}/carburante`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${id}/carburante`, { headers: headers });
   }
 
   getAllegatoConsuntivo(id: string, idConsuntivo: string, idAllegato: string): Observable<any> {
