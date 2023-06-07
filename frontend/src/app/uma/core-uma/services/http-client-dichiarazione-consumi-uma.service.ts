@@ -32,7 +32,8 @@ export class HttpClientDichiarazioneConsumiUmaService {
   }
 
   presentaDichiarazioneConsumi(cuaa: string, codiceFiscaleRichiedente: string): Observable<number> {
-    return this.http.post<number>(this.urlConsumi(), this.dtoBuilderService.buildPresentaDomandaDto(cuaa, codiceFiscaleRichiedente));
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<number>(this.urlConsumi(), this.dtoBuilderService.buildPresentaDomandaDto(cuaa, codiceFiscaleRichiedente), { headers: headers });
   }
 
   getDichiarazioniConsumi(filter: DomandaUmaFilter): Observable<Array<DichiarazioneConsumiDto>> {
@@ -43,7 +44,8 @@ export class HttpClientDichiarazioneConsumiUmaService {
 
   getDichiarazioniConsumiCaa(filter: DomandaUmaFilter): Observable<Array<DomandaUmaDto>> {
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<Array<DomandaUmaDto>>(`${this.urlConsumi()}/caa` + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<DomandaUmaDto>>(`${this.urlConsumi()}/caa` + queryString, { headers: headers });
   }
 
   getDichiarazioniConsumiPaged(filter: DomandaUmaFilter): Observable<PaginatorA4G<Array<DichiarazioneConsumiDto>>> {
@@ -73,11 +75,13 @@ export class HttpClientDichiarazioneConsumiUmaService {
   }
 
   getAllegatoConsuntivo(id: string, idConsuntivo: string, idAllegato: string): Observable<any> {
-    return this.http.get(`${this.urlConsumi()}/${id}/consuntivi/${idConsuntivo}/allegati/${idAllegato}/stampa`, { responseType: 'blob' });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get(`${this.urlConsumi()}/${id}/consuntivi/${idConsuntivo}/allegati/${idAllegato}/stampa`, { responseType: 'blob', headers: headers });
   }
 
   valida(id: string): Observable<any> {
-    return this.http.post(`${this.urlConsumi()}/${id}/valida`, null);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post(`${this.urlConsumi()}/${id}/valida`, null, { headers: headers });
   }
 
   /** @deprecated */
@@ -89,7 +93,8 @@ export class HttpClientDichiarazioneConsumiUmaService {
       });
     }
     formData.append('consuntivo', new Blob([JSON.stringify(consuntivo)], { type: "application/json" })); /** metadati consuntivo stringified*/
-    return this.http.post<string>(`${this.urlConsumi()}/${idDichiarazione}/consuntivo`, formData);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<string>(`${this.urlConsumi()}/${idDichiarazione}/consuntivo`, formData, { headers: headers });
   }
 
   /** 
@@ -106,34 +111,41 @@ export class HttpClientDichiarazioneConsumiUmaService {
       });
     }
     formData.append('consuntivo', new Blob([JSON.stringify(consuntivo)], { type: "application/json" })); /** metadati consuntivo stringified*/
-    return this.http.post<string>(`${this.urlConsumi()}/${idDichiarazione}/allegati`, formData);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<string>(`${this.urlConsumi()}/${idDichiarazione}/allegati`, formData, { headers: headers });
   }
 
   saveConsuntivi(idDichiarazione: string, consuntivoDtoList: Array<ConsuntivoDto>): Observable<Array<ConsuntivoDto>> {
-    return this.http.post<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${idDichiarazione}/consuntivi`, consuntivoDtoList);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<Array<ConsuntivoDto>>(`${this.urlConsumi()}/${idDichiarazione}/consuntivi`, consuntivoDtoList, { headers: headers });
   }
 
   updateDichiarazioneConsumi(idDichiarazione: string, dichiarazioneConsumiDto: DichiarazioneConsumiPatchDto): Observable<void> {
-    return this.http.put<void>(`${this.urlConsumi()}/${idDichiarazione}`, dichiarazioneConsumiDto);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.put<void>(`${this.urlConsumi()}/${idDichiarazione}`, dichiarazioneConsumiDto, { headers: headers });
   }
 
   deleteConsuntivo(id: string, idConsuntivo: string): Observable<void> {
-    return this.http.delete<void>(`${this.urlConsumi()}/${id}/consuntivi/${idConsuntivo}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.delete<void>(`${this.urlConsumi()}/${id}/consuntivi/${idConsuntivo}`, { headers: headers });
   }
 
   deleteDichiarazioneConsumi(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.urlConsumi()}/${id}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.delete<void>(`${this.urlConsumi()}/${id}`, { headers: headers });
   }
 
   getDichiarazioneConsumiFile(idDichiarazione: string): Observable<any> {
-    return this.http.get(`${this.urlConsumi()}/${idDichiarazione}/stampa`, { responseType: 'blob' });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get(`${this.urlConsumi()}/${idDichiarazione}/stampa`, { responseType: 'blob', headers: headers });
   }
 
   protocollaDichiarazioneConsumi(id: number, documento: File, haFirma: boolean): Observable<number> {
     const queryString = haFirma != null ? '?' + this.httpHelperService.buildQueryStringFromObject({ haFirma }) : '';
     const formInput: FormData = new FormData();
     formInput.append('documento', documento);
-    return this.http.post<number>(`${this.urlConsumi()}/${id}/protocolla` + queryString, formInput);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<number>(`${this.urlConsumi()}/${id}/protocolla` + queryString, formInput, { headers: headers });
   }
 
   urlConsumi() {

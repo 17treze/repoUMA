@@ -103,23 +103,24 @@ export class GruppiLavorazioneComponent implements OnInit {
     if (event != null) {
       this.sortDirection = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
       this.sortBy = event.sortField || this.sortBy;
-    }
-    let paginazione: Paginazione = Paginazione.of(
-      Math.floor(event.first / this.elementiPagina), this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
-    );
 
-    this.httpClientConfigurazioneUmaService.getGruppiLavorazioni(paginazione)
-      .pipe(switchMap((res: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
-        return of(res);
-      }),
-        catchError((err: ErrorDTO) => {
-          this.errorService.showError(err, 'tst-gruppi-lav');
-          return EMPTY;
-        })
-      )
-      .subscribe((result: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
-        this.gruppiLavorazione = result;
-      }, error => this.errorService.showError(error, 'tst-gruppi-lav'));
+      let paginazione: Paginazione = Paginazione.of(
+        Math.floor(event.first / this.elementiPagina), this.elementiPagina, this.sortBy, this.sortDirection || SortDirection.ASC
+      );
+
+      this.httpClientConfigurazioneUmaService.getGruppiLavorazioni(paginazione)
+        .pipe(switchMap((res: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
+          return of(res);
+        }),
+          catchError((err: ErrorDTO) => {
+            this.errorService.showError(err, 'tst-gruppi-lav');
+            return EMPTY;
+          })
+        )
+        .subscribe((result: PaginatorA4G<Array<GruppoLavorazioneDto>>) => {
+          this.gruppiLavorazione = result;
+        }, error => this.errorService.showError(error, 'tst-gruppi-lav'));
+    }
   }
 
 }

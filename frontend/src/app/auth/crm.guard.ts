@@ -50,10 +50,11 @@ export class CrmGuard implements CanActivate, CanActivateChild, CanLoad, CanDeac
   private checkUser(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const roles = route.data['roles'] as Array<string>;
     
-    /*if (!this.authService.isLoggedIn() ){//|| !this.authService.isUserInRoles(roles)) {
+    const isLoggedIn = this.authService.isLoggedIn();
+    if (!isLoggedIn) {
+    // if (!this.authService.isLoggedIn() ) {//|| !this.authService.isUserInRoles(roles)) {
       this.router.navigate(['home'], { queryParams: { returnUrl: state.url } });
-      return false;
-    }*/
+    }
     return true;
   }
 }
