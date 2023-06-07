@@ -121,6 +121,12 @@ public class UtenteController {
 		//		}
 		
 		utente.setProfili(utenteService.caricaProfiliUtente());
+		if (userName.contains("@")) {
+			utente.setIdentificativo(userName.split("@")[0]);
+		}
+		else {
+			utente.setIdentificativo(userName);
+		}
 		return utente;
 	}
 	

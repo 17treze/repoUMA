@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   a4GItems: MenuItem[];
   msgs: Message[] = [];
 
-  private _serviceSubscription;
+  // private _serviceSubscription;
 
   constructor(
     public router: Router,
@@ -54,15 +54,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private _configuration: Configuration,
     private fascicoloService: FascicoloService) {
-    this._serviceSubscription = this.authService.onUserChange.subscribe({
-      next: (event: AuthService) => {
-        this.caricaUtente();
-      }
-    });
+    // this._serviceSubscription = this.authService.onUserChange.subscribe({
+    //   next: (event: AuthService) => {
+    //     this.caricaUtente();
+    //   }
+    // });
   }
 
   ngOnInit() {
-    this.clearStorage();
+    // this.clearStorage();
     this.caricaUtente();
   }
 
@@ -75,12 +75,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private cleanup() {
-    if (this._serviceSubscription) {
-      this._serviceSubscription.unsubscribe();
-    }
+    // if (this._serviceSubscription) {
+    //   this._serviceSubscription.unsubscribe();
+    // }
   }
 
   caricaUtente() {
+    this.utente = this.authService.getUser();
+    console.log("CaricaUtente HomeComponent " + this.utente?.codiceFiscale);
+
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
     this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
     this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
@@ -127,7 +130,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         expanded: true
       }
     ];
-    console.log("caricaCollegamentiUtente: " + this.fascicoli);
     if (this.roleAzienda && this.fascicoli) {
       for (let element of this.fascicoli) {
         roles.push({ label: element.denominazione, routerLink: '../fascicolo/' + element.idFascicolo + '/presentazioneIstanze' });

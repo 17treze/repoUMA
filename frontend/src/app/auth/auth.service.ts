@@ -191,10 +191,12 @@ export class AuthService {
     return false;
   }
 
-  public caricaUtente(): Observable<Utente> {
-    return this.http.get<Utente>(this._configuration.urlGetSSO);
+  public getUser(): Utente {    
+    //   return this.http.get<Utente>(this._configuration.urlGetSSO);
+    const user: Utente = JSON.parse(sessionStorage.getItem("user"));
+    return user;
   }
-
+  
   public get userSelectedRole() {
     const ruoloSelezionato = this._userSelectedRole || localStorage.getItem("selectedRole"); // || this.getRoleFromSessionStorage();
     return ruoloSelezionato;
