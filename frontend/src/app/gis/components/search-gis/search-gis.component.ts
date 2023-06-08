@@ -106,7 +106,7 @@ export class SearchGisComponent implements OnInit, OnChanges {
         }
 
         this.utenteConnesso = this.utentiLavorazione.filter(utente => {
-            let user = this.authService.getUserFromSession(); 
+            let user = this.authService.getUser();
             if (user != null && utente.value === user.identificativo) {
                 return { name: utente.nome + ' ' + utente.cognome, value: utente.value };
             }

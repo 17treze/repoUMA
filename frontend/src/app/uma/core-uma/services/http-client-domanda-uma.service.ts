@@ -34,7 +34,8 @@ export class HttpClientDomandaUmaService {
   }
 
   presentaDomanda(cuaa: string, codiceFiscaleRichiedente: string): Observable<number> {
-    return this.http.post<number>(this.urlDomanda(), this.dtoBuilderService.buildPresentaDomandaDto(cuaa, codiceFiscaleRichiedente));
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<number>(this.urlDomanda(), this.dtoBuilderService.buildPresentaDomandaDto(cuaa, codiceFiscaleRichiedente), { headers: headers });
   }
 
   getDomande(filter: DomandaUmaFilter): Observable<Array<RichiestaCarburanteDto>> {

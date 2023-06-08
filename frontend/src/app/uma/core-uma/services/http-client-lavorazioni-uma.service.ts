@@ -57,11 +57,13 @@ export class HttpClientLavorazioniUmaService {
   }
 
   saveFabbisogni(idRichiesta: string, fabbisogni: Array<DichiarazioneDto>): Observable<any> {
-    return this.http.post<any>(`${this.urlRichiesta()}/${idRichiesta}/fabbisogni`, fabbisogni);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<any>(`${this.urlRichiesta()}/${idRichiesta}/fabbisogni`, fabbisogni, { headers: headers });
   }
 
   saveFabbisogniFabbricati(idRichiesta: string, fabbisogni: Array<DichiarazioneFabbricatoDto>): Observable<any> {
-    return this.http.post<any>(`${this.urlRichiesta()}/${idRichiesta}/fabbisogni-fabbricati`, fabbisogni);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<any>(`${this.urlRichiesta()}/${idRichiesta}/fabbisogni-fabbricati`, fabbisogni, { headers: headers });
   }
 
   deleteFabbisogniById(idRichiesta: string, tipiCarburante: Array<keyof typeof TipoCarburante>): Observable<void> {

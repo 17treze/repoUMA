@@ -51,11 +51,13 @@ export class HttpClientTrasferimentiCarburanteService {
   }
 
   deleteTraseferito(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.urlTrasferimenti()}/${id}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.delete<void>(`${this.urlTrasferimenti()}/${id}`, { headers: headers });
   }
   
   validaTrasferimento(idRichiestaMittente: String, idRichiestaDestinatario: String): Observable<AziendaDto> {
-    return this.http.post<AziendaDto>(`${this.urlTrasferimenti()}/valida`, {idRichiestaMittente: idRichiestaMittente, idRichiestaDestinatario: idRichiestaDestinatario});
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<AziendaDto>(`${this.urlTrasferimenti()}/valida`, {idRichiestaMittente: idRichiestaMittente, idRichiestaDestinatario: idRichiestaDestinatario, headers: headers});
   }
 
   urlTrasferimenti() {

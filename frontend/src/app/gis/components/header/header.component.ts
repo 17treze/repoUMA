@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user = this.authService.getUserFromSession();
+    let user = this.authService.getUser();
     if (user != null) {
       this.userId = user.identificativo;
     }

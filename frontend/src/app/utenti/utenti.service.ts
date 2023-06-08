@@ -429,17 +429,11 @@ export class UtentiService {
 
   public getListaCariche(codiceFiscale: string): Observable<CaricaDto[]> {
     if (!codiceFiscale) {
-      this.authService.getUserFromSession().subscribe(
-          x => {
-            console.log('Observer next value: ' + x.codiceFiscale);
-            this.authService.setUser(x);
-            codiceFiscale = x.codiceFiscale;
-            return this.http.get<CaricaDto[]>(`${this._configuration.anagrafica_server}/legacy/persona/${codiceFiscale}/carica`);
-          },
-          err => { 
-            console.error('Observer error: ' + err);
-          }
-      );
+      let user = this.authService.getUser();
+      if (user) {
+        codiceFiscale = user.codiceFiscale;
+        return this.http.get<CaricaDto[]>(`${this._configuration.anagrafica_server}/legacy/persona/${codiceFiscale}/carica`);
+      }
     }
     return EMPTY;
   }

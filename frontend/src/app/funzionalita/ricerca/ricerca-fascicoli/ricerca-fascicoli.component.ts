@@ -40,34 +40,27 @@ export class RicercaFascicoliComponent implements OnInit {
   ngOnInit() {
 
     this.isLoggedIn = this.authService.isLoggedIn();
-    let user: Utente;
     if (this.isLoggedIn) {
-      this.authService.getUserFromSession().subscribe(
-        x => {
-          console.log('Observer next value: ' + x.codiceFiscale);
-          this.authService.setUser(x);
-          // ...
-          if (this.authService.isUserInRole(AuthService.roleCaa) ||
-            this.authService.isUserInRole(AuthService.roleAppag) ||
-            this.authService.isUserInRole(AuthService.roleGestoreUtenti) ||
-            this.authService.isUserInRole(AuthService.roleAdmin) ||
-            this.authService.isUserInRole(AuthService.roleIstruttoreAMF)) {
-            this.inputRicerca.cuaa = '';
-            this.searchvisible = true;
-            this.resultvisible = false;
-          }
-          else {
-            this.inputRicerca.cuaa = user.codiceFiscale;
-            this.fascicoloService.ricercaFascicoli(this.inputRicerca).subscribe((next) => {
-              this.fascicoli = next,
-              this.caricFascicoloUtente()
-            });
-          }
-        },
-        err => { 
-          console.error('Observer error: ' + err);
+      let user = this.authService.getUser();
+      if (user) {
+        // ...
+        if (this.authService.isUserInRole(AuthService.roleCaa) ||
+          this.authService.isUserInRole(AuthService.roleAppag) ||
+          this.authService.isUserInRole(AuthService.roleGestoreUtenti) ||
+          this.authService.isUserInRole(AuthService.roleAdmin) ||
+          this.authService.isUserInRole(AuthService.roleIstruttoreAMF)) {
+          this.inputRicerca.cuaa = '';
+          this.searchvisible = true;
+          this.resultvisible = false;
         }
-      );
+        else {
+          this.inputRicerca.cuaa = user.codiceFiscale;
+          this.fascicoloService.ricercaFascicoli(this.inputRicerca).subscribe((next) => {
+            this.fascicoli = next,
+            this.caricFascicoloUtente()
+          });
+        }
+      }
     }
   }
   

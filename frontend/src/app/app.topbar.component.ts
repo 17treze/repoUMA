@@ -39,12 +39,6 @@ export class AppTopBarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        /*
-        this.user = this.authService.getUserFromSession();
-        if (this.user instanceof Utente) {
-            this.userId = this.user.identificativo;
-        }
-        */
         this.items = [
             {
                 label:'Richiedi modifica profilo', command: () => {
