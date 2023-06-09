@@ -50,7 +50,8 @@ export class HttpClientDichiarazioneConsumiUmaService {
 
   getDichiarazioniConsumiPaged(filter: DomandaUmaFilter): Observable<PaginatorA4G<Array<DichiarazioneConsumiDto>>> {
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<PaginatorA4G<Array<DichiarazioneConsumiDto>>>(`${this.urlConsumi()}/paged` + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<PaginatorA4G<Array<DichiarazioneConsumiDto>>>(`${this.urlConsumi()}/paged` + queryString, { headers: headers });
   }
 
   getDichiarazioneConsumiById(id: string): Observable<DichiarazioneConsumiDto> {

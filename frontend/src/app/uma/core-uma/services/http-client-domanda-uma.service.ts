@@ -52,7 +52,8 @@ export class HttpClientDomandaUmaService {
 
   getDomandePaged(filter: DomandaUmaFilter): Observable<PaginatorA4G<Array<RichiestaCarburanteDto>>> {
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<PaginatorA4G<Array<RichiestaCarburanteDto>>>(`${this.urlDomanda()}/paged` + queryString);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<PaginatorA4G<Array<RichiestaCarburanteDto>>>(`${this.urlDomanda()}/paged` + queryString, { headers: headers });
   }
 
   getDomandaById(idDomanda: string): Observable<RichiestaCarburanteDto> {
