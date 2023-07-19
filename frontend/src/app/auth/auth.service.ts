@@ -155,7 +155,7 @@ export class AuthService {
 
   public getUserFromSession(): Observable<Utente> {
     if (sessionStorage.getItem('user') !== null && sessionStorage.getItem('user') !== 'undefined') {
-      // console.log('User in session: ' + sessionStorage.getItem('user'));
+      console.log('User in session: ' + sessionStorage.getItem('user'));
       return of(JSON.parse(sessionStorage.getItem("user")));
     }
     else {

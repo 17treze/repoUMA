@@ -31,8 +31,21 @@ export class Azienda {
     cuaa: string;
 }
 
+// aggiunto...
+export class Ruolo {
+    id: number;
+    descrizione: string;
+    applicazione: string;
+}
+
 export class DatiUtente extends UtenteBase {
     id: number;
+    // aggiunti...
+    nome: string;
+    cognome: string;
+    codiceFiscale: string;
+    ruoli: Ruolo[];
+    // aggiunti...
     profili: Profilo[];
     sedi: SedeCaa[];
     distributori: Distributore[];

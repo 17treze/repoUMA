@@ -74,7 +74,10 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   public urlAvvioProtocollazioneUtente = this.a4gutente_server + "utenti/utente/avvio-protocollazione";
   public UrlScaricadomanda = this.UrlAntimafia + '${idDichiarazioneAntimafia}/scaricaDomanda';
   public UrlStatoDichiarazioneCount = this.UrlAntimafia + 'count/?params=';
-  public urlGetSSO = this.a4gutente_server + 'utenti/utente';
+  
+  // public urlGetSSO = this.a4gutente_server + 'utenti/utente';
+  public urlGetSSO = 'http://localhost:8081/' + 'gestioneutenti/api/v1/utente/getInfoUtente?applicazione=UMA';
+  
   public urlGetDatiAnagraficiUtente = this.a4gutente_server + 'utenti/utente/anagrafica';
   public UrlUtente = this.a4gutente_server + 'domande';
   public UrlCreaDomanda = this.a4gutente_server + 'utenti';
