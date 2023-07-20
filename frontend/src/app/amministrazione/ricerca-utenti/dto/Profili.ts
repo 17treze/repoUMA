@@ -32,10 +32,25 @@ export class Azienda {
 }
 
 // aggiunto...
+export class RuoloApplicazione {
+    applicazione: string;
+    ruoli: Ruolo[];
+}
+
+export class AziendaDelegataApplicazione {
+    applicazione: string;
+    aziendeDelegate: AziendaDelegata[];
+}
+
 export class Ruolo {
     id: number;
     descrizione: string;
     applicazione: string;
+}
+
+export class AziendaDelegata {
+    cuaa: string;
+    denominazione: string;
 }
 
 export class DatiUtente extends UtenteBase {
@@ -44,7 +59,8 @@ export class DatiUtente extends UtenteBase {
     nome: string;
     cognome: string;
     codiceFiscale: string;
-    ruoli: Ruolo[];
+    ruoli: RuoloApplicazione[];
+    aziendeDelegate: AziendaDelegataApplicazione[];
     // aggiunti...
     profili: Profilo[];
     sedi: SedeCaa[];

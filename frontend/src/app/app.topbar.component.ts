@@ -24,7 +24,7 @@ export class AppTopBarComponent implements OnInit {
     constructor(public app: AppComponent, private authService: AuthService, private router: Router, private configuration: Configuration,    private route: ActivatedRoute) {
         this._serviceSubscription = this.authService.onUserChange.subscribe(
             (next) => {
-                this.userId = next.identificativo;
+                this.userId = next.cognome;
             }
         )
         this.router.events.subscribe((event: any) => {

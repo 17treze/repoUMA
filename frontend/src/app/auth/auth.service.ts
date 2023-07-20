@@ -180,11 +180,15 @@ export class AuthService {
     if (!user) {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
-    if (user?.profili) {
-      for (const profilo of user.profili) {
-        if (profilo && profilo.identificativo == requiredRole) {
-          console.log("Role: " + requiredRole + " -> true");
-          return true;
+    if (user?.ruoli) {
+      for (const ruoloApp of user.ruoli) {
+        if (ruoloApp.applicazione == "UMA") {
+          for (const ruolo of ruoloApp.ruoli) {
+            // console.log("Ruolo trovato: " + ruolo.descrizione.toLowerCase() + ", cercato: " + requiredRole.toLowerCase());
+            if (ruolo.descrizione.toLowerCase() == requiredRole.toLowerCase()) {
+              return true;
+            }
+          }
         }
       }
     }

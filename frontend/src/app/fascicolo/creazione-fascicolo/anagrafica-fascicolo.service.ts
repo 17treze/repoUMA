@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Configuration } from 'src/app/app.constants';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ImpresaDto } from './dto/ImpresaDto';
 import { catchError, map, tap } from 'rxjs/operators';
 import { DatiCAA } from './dto/DatiSportelloCAA';
@@ -282,12 +282,15 @@ export class AnagraficaFascicoloService {
   }
 
   public getDatiSportelloCAA(): Observable<DatiCAA> {
+    /*
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     return this.http.get<any>(this.urlGetCaa, { headers: headers }).pipe(
       tap((retVal: any) => {
         return DatiCAA.toDto(retVal);
       })
     );
+    */
+    return of(DatiCAA.toDto({}));
   }
 
   public verificaFirmaSingola(file: File, codiceFiscale: string): Observable<any> {

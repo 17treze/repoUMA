@@ -15,11 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import com.google.common.collect.Lists;
-
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
 import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
 import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
@@ -27,7 +23,6 @@ import it.tndigitale.a4g.framework.pagination.model.Paginazione;
 import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.time.Clock;
-import it.tndigitale.a4g.uma.Ruoli;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
@@ -75,20 +70,20 @@ public class RicercaRichiestaCarburanteService {
 		List<DomandaUmaDto> richiesteAll = richiestaCarburanteDao.findStrictByCampagna(campagna);
 		
 		// recupera sia deleghe che mandati
-		List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
-		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
-				.collect(Collectors.toList());
+		//		List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
+		//		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
+		//				.collect(Collectors.toList());
 		
-		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
-		subLists.stream().forEach(list -> {
-			List<DomandaUmaDto> documenti = richiestaCarburanteDao.findByAbilitazioniAndCampagna(list, campagna)
-					.stream()
-					.map(documento -> isRichiestaRettificante(richiesteAll, documento).booleanValue()
-							? documento.setTipo(TipoDocumentoUma.RETTIFICA)
-							: documento.setTipo(TipoDocumentoUma.RICHIESTA))
-					.collect(Collectors.toList());
-			response.addAll(documenti);
-		});
+		//		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
+		//		subLists.stream().forEach(list -> {
+		//			List<DomandaUmaDto> documenti = richiestaCarburanteDao.findByAbilitazioniAndCampagna(list, campagna)
+		richiesteAll.stream()
+				.map(documento -> isRichiestaRettificante(richiesteAll, documento).booleanValue()
+						? documento.setTipo(TipoDocumentoUma.RETTIFICA)
+						: documento.setTipo(TipoDocumentoUma.RICHIESTA))
+				.collect(Collectors.toList());
+		response.addAll(richiesteAll);
+		//		});
 		return response;
 	}
 	
@@ -96,33 +91,33 @@ public class RicercaRichiestaCarburanteService {
 	public List<RichiestaCarburanteDto> getRichieste(RichiestaCarburanteFilter richiestaCarburanteFilter) {
 		
 		List<RichiestaCarburanteDto> response = new ArrayList<>();
-		List<String> cuaaList = new ArrayList<>();
-		if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_ENTE)) {
-			// recupera sia deleghe che mandati
-			List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
-			cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
-					.collect(Collectors.toList());
-		}
-		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_UTENTE)) {
-			cuaaList = utenteClient.getAziende();
-		}
-		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)) {
-			response.addAll(richiestaCarburanteDao
-					.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter)).stream()
-					.map(richiestaMapper).collect(Collectors.toList()));
-			return response;
-		}
-		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
-		
-		if (CollectionUtils.isEmpty(subLists)) {
-			return response;
-		}
-		
-		subLists.stream()
-				.forEach(subList -> response.addAll(richiestaCarburanteDao
-						.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter, subList))
-						.stream().map(richiestaMapper).collect(Collectors.toList())));
+		//		List<String> cuaaList = new ArrayList<>();
+		//		if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_ENTE)) {
+		//			// recupera sia deleghe che mandati
+		//			List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
+		//			cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
+		//					.collect(Collectors.toList());
+		//		}
+		//		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_UTENTE)) {
+		//			cuaaList = utenteClient.getAziende();
+		//		}
+		//		else if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)) {
+		response.addAll(
+				richiestaCarburanteDao.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter))
+						.stream().map(richiestaMapper).collect(Collectors.toList()));
 		return response;
+		//		}
+		//		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
+		//		
+		//		if (CollectionUtils.isEmpty(subLists)) {
+		//			return response;
+		//		}
+		//		
+		//		subLists.stream()
+		//				.forEach(subList -> response.addAll(richiestaCarburanteDao
+		//						.findAll(RichiestaCarburanteSpecification.getFilter(richiestaCarburanteFilter, subList))
+		//						.stream().map(richiestaMapper).collect(Collectors.toList())));
+		//		return response;
 	}
 	
 	// Servizio paginato utilizzato per la *ricerca* dell'applicativo da parte degli istruttori e distributori

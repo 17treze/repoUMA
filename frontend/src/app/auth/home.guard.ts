@@ -36,8 +36,8 @@ export class HomeGuard implements CanActivate {
       } 
       else {
         this.utente = this.authService.getUser();
-        console.log("CaricaUtente HomeGuard " + this.utente?.codiceFiscale);
-        if (this.utente?.profili?.length > 0 &&
+        console.log("CaricaUtente HomeGuard " + JSON.stringify(this.utente));
+        if (this.utente?.ruoli?.length > 0 &&
           this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
           this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
           this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||

@@ -32,8 +32,8 @@ export class UserGuard implements CanActivate {
       } else {
         this.utente = JSON.parse(sessionStorage.getItem("user"));
         console.log(this.utente);
-        if (this.utente.profili &&
-          this.utente.profili.length > 0 &&
+        if (this.utente?.ruoli &&
+          this.utente?.ruoli.length > 0 &&
           this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
           this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
           this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||

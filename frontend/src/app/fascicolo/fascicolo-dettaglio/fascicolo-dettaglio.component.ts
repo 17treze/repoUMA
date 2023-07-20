@@ -344,6 +344,8 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
           console.log('Ruolo selezionato in Home: ', localStorage.getItem('selectedRole'));
           if (localStorage.getItem('selectedRole') == AuthService.roleCaa && hasCAA) {  // -> ENTE
             return forkJoin([getTitRapprLeg$, of('ENTE'), richieste$]);
+          } else if (localStorage.getItem('selectedRole') == AuthService.roleAdmin) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
+            return forkJoin([loggedUser$, of('AMMINISTRATORE'), richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.rolePrivate) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
             return forkJoin([loggedUser$, of('UTENTE'), richieste$]);
           }
@@ -426,6 +428,8 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
           console.log('Ruolo selezionato in Home: ', localStorage.getItem('selectedRole'));
           if (localStorage.getItem('selectedRole') == AuthService.roleCaa && hasCAA) {  // -> ENTE
             return forkJoin([getTitRapprLeg$, of('ENTE'), dichiarazioniConsumi$, richieste$]);
+          } else if (localStorage.getItem('selectedRole') == AuthService.roleAdmin) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
+            return forkJoin([loggedUser$, of('AMMINISTRATORE'), dichiarazioniConsumi$, richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.rolePrivate) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
             return forkJoin([loggedUser$, of('UTENTE'), dichiarazioniConsumi$, richieste$]);
           }
