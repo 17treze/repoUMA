@@ -3,34 +3,31 @@ import { environment } from '../environments/environment';
 
 @Injectable()
 export class Configuration {
-
   
-// BASE_PATH
-public ags_server = environment.backendUrl + 'ags/api/v1';
-public fascicolo_territorio_server = `${environment.backendUrl}fascicolo/territorio/api/v1`;
-public antimafia_server = environment.backendUrl + 'a4gfascicolo/api/v1';
-public a4gfascicolo_server = environment.backendUrl + 'a4gfascicolo/api/v1';
-public a4gutente_server = environment.backendUrl + 'a4gutente/api/v1/';
+  // BASE_PATH
+  public ags_server = environment.backendUrl + 'ags/api/v1';
+  public fascicolo_territorio_server = `${environment.backendUrl}fascicolo/territorio/api/v1`;
+  public antimafia_server = environment.backendUrl + 'a4gfascicolo/api/v1';
+  public a4gfascicolo_server = environment.backendUrl + 'a4gfascicolo/api/v1';
+  public a4gutente_server = environment.backendUrl + 'gestioneutenti/api/v1/';
 
-public a4gistruttoria_server = environment.backendUrl + 'a4gistruttoria/api/v1/';
-public a4gproxy_server = environment.backendUrl + 'a4gproxy/api/v1/';
-public srt_server = environment.backendUrl + 'srt/api/v1/';
-public anagrafica_server = 'http://localhost:8888/' + 'anagrafica/api/v1'; // environment.backendUrl + 
-public zootecnia_server = environment.backendUrl + 'fascicolo/zootecnia/api/v1';
-public dotazione_tecnica_server = environment.backendUrl + 'fascicolo/dotazione-tecnica/api/v1';
-public territorio_server = environment.backendUrl + 'fascicolo/territorio/api/v1';
-public a4gproxy_server_V2 = environment.backendUrl + 'a4gproxy/api/v2/';
-public mediator_server = environment.backendUrl + 'fascicolo/mediator/api/v1';
-public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
-// END BASE_PATH
+  public a4gistruttoria_server = environment.backendUrl + 'a4gistruttoria/api/v1/';
+  public a4gproxy_server = environment.backendUrl + 'a4gproxy/api/v1/';
+  public srt_server = environment.backendUrl + 'srt/api/v1/';
+  public anagrafica_server = 'http://localhost:8888/' + 'anagrafica/api/v1'; // environment.backendUrl + 
+  public zootecnia_server = environment.backendUrl + 'fascicolo/zootecnia/api/v1';
+  public dotazione_tecnica_server = environment.backendUrl + 'fascicolo/dotazione-tecnica/api/v1';
+  public territorio_server = environment.backendUrl + 'fascicolo/territorio/api/v1';
+  public a4gproxy_server_V2 = environment.backendUrl + 'a4gproxy/api/v2/';
+  public mediator_server = environment.backendUrl + 'fascicolo/mediator/api/v1';
+  public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
+  // END BASE_PATH
 
-
-  public UrlGetEntiCAA = this.a4gutente_server + 'domande/EntiCAA';
-  public UrlGetProfili = this.a4gutente_server + 'profili';
-  public UrlGetProfiliUtente = this.a4gutente_server + 'profili/utente';
-  public UrlGetDipartimentiPat = this.a4gutente_server + 'domande/dipartimenti';
-  public UrlPdfAutorizzazione =
-    this.a4gutente_server + 'domande/fileAutorizzazione'; // get e set
+  // public UrlGetEntiCAA = this.a4gutente_server + 'domande/EntiCAA';
+  // public UrlGetProfili = this.a4gutente_server + 'profili';
+  // public UrlGetProfiliUtente = this.a4gutente_server + 'profili/utente';
+  // public UrlGetDipartimentiPat = this.a4gutente_server + 'domande/dipartimenti';
+  // public UrlPdfAutorizzazione = this.a4gutente_server + 'domande/fileAutorizzazione'; // get e set
 
   public UrlCheckFascicoloValido =
     this.antimafia_server +
@@ -71,21 +68,21 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
     return this.UrlAntimafia + `${idDichiarazioneAntimafia}/chiudiRicreaDichiarazione`;
   } 
 
-  public urlAvvioProtocollazioneUtente = this.a4gutente_server + "utenti/utente/avvio-protocollazione";
+  // public urlAvvioProtocollazioneUtente = this.a4gutente_server + "utenti/utente/avvio-protocollazione";
   public UrlScaricadomanda = this.UrlAntimafia + '${idDichiarazioneAntimafia}/scaricaDomanda';
   public UrlStatoDichiarazioneCount = this.UrlAntimafia + 'count/?params=';
   
   // public urlGetSSO = this.a4gutente_server + 'utenti/utente';
-  public urlGetSSO = 'http://localhost:8081/' + 'gestioneutenti/api/v1/utente/getInfoUtente?applicazione=UMA';
+  public urlGetSSO = this.a4gutente_server + 'utente/getInfoUtente?applicazione=UMA';
   
-  public urlGetDatiAnagraficiUtente = this.a4gutente_server + 'utenti/utente/anagrafica';
-  public UrlUtente = this.a4gutente_server + 'domande';
-  public UrlCreaDomanda = this.a4gutente_server + 'utenti';
-  public UrlPersone = this.a4gutente_server + 'persone/';
-  public UrlPersonaPrivacy = this.a4gutente_server + 'persone/?params=';
-  public UrlRicercaDomanda = this.a4gutente_server + 'domande/?';
-  public UrlGetDomanda = this.a4gutente_server + 'domande/${id}';
-  public UrlChiudiDomanda = this.a4gutente_server + 'domande/${id}/chiudi';
+  // public urlGetDatiAnagraficiUtente = this.a4gutente_server + 'utenti/utente/anagrafica';
+  // public UrlUtente = this.a4gutente_server + 'domande';
+  // public UrlCreaDomanda = this.a4gutente_server + 'utenti';
+  // public UrlPersone = this.a4gutente_server + 'persone/';
+  // public UrlPersonaPrivacy = this.a4gutente_server + 'persone/?params=';
+  // public UrlRicercaDomanda = this.a4gutente_server + 'domande/?';
+  // public UrlGetDomanda = this.a4gutente_server + 'domande/${id}';
+  // public UrlChiudiDomanda = this.a4gutente_server + 'domande/${id}/chiudi';
 
   public UrlGetIstruttorie = this.a4gistruttoria_server + 'istruttorie/';
   public UrlGetIstruttoria = this.a4gistruttoria_server + 'istruttorie/${id}';
@@ -110,10 +107,10 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   public urlPostSincronizzazioneAntimafia = this.a4gproxy_server + 'sincronizzazione/antimafia';
 
   public UrlStampaPDF = this.a4gproxy_server + 'stampa/';
-  public UrlGetUtentiCodiceFiscale = this.a4gutente_server + 'utenti/{codiceFiscale}';
-  public UrlGetUtentiById = this.a4gutente_server + 'utenti/idutente/{id}';
-  public urlIsUtenteRegistrabile = this.a4gutente_server + 'utenti/utente/isRegistrabile';
-  public urlGetProfiliUtenteConnesso = this.a4gutente_server + 'utenti/utente/profili';
+  // public UrlGetUtentiCodiceFiscale = this.a4gutente_server + 'utenti/{codiceFiscale}';
+  // public UrlGetUtentiById = this.a4gutente_server + 'utenti/idutente/{id}';
+  // public urlIsUtenteRegistrabile = this.a4gutente_server + 'utenti/utente/isRegistrabile';
+  // public urlGetProfiliUtenteConnesso = this.a4gutente_server + 'utenti/utente/profili';
 
   public UrlAggiornaStatoBloccoDomande = this.a4gistruttoria_server + 'domande/aggiornaStatoBloccoDomande';
 
@@ -212,13 +209,10 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   // public urlGetTemplateModuloRegistrazioneUtente =
   //   environment.frontendUrl +
   //   "assets/templates/AS/templateModuloDomandaRegistrazione.docx";
-  public urlDomandaRegUtenteStampa =
-    this.a4gutente_server + 'domande/{id}/export';
-  public urlDomandaRegUtenteFirma =
-    this.a4gutente_server + 'domande/{id}/firma';
-  public urlDomandaProtocolla =
-    this.a4gutente_server + 'domande/{id}/protocolla';
-  public urlFirmaUtente = this.a4gutente_server + 'utenti/utente/firma';
+  // public urlDomandaRegUtenteStampa = this.a4gutente_server + 'domande/{id}/export';
+  // public urlDomandaRegUtenteFirma = this.a4gutente_server + 'domande/{id}/firma';
+  // public urlDomandaProtocolla = this.a4gutente_server + 'domande/{id}/protocolla';
+  // public urlFirmaUtente = this.a4gutente_server + 'utenti/utente/firma';
 
   public FrontendUrl = environment.frontendUrl;
 
@@ -315,15 +309,15 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   public UrlGetDomandeIbanErrato = this.a4gistruttoria_server + 'domande/ibanerrato';
 
   //Domande registrazione utente
-  public UrlGetDomandaRegistrazioneUtente = this.a4gutente_server + "domande/{id}";
-  public UrlStatoRichiestaCount = this.a4gutente_server + 'domande/counters/';
-  public UrlPresaInCarico = this.a4gutente_server + 'domande/${id}/presaincarico';
+  // public UrlGetDomandaRegistrazioneUtente = this.a4gutente_server + "domande/{id}";
+  // public UrlStatoRichiestaCount = this.a4gutente_server + 'domande/counters/';
+  // public UrlPresaInCarico = this.a4gutente_server + 'domande/${id}/presaincarico';
 
-  public UrlIstruttoriaByDomanda = this.a4gutente_server + 'istruttoria/domanda';
+  // public UrlIstruttoriaByDomanda = this.a4gutente_server + 'istruttoria/domanda';
   public UrlGetIstruttoriaByDomanda = this.UrlIstruttoriaByDomanda + '/${id}';
-  public UrlApprovaDomanda = this.a4gutente_server + 'domande/${id}/approva';
-  public UrlRifiutaDomanda = this.a4gutente_server + 'domande/${id}/rifiuta';
-  public UrlPostIstruttoriaUtenteByIdUtente = this.a4gutente_server + 'istruttoria/utente/${idUtente}';
+  // public UrlApprovaDomanda = this.a4gutente_server + 'domande/${id}/approva';
+  // public UrlRifiutaDomanda = this.a4gutente_server + 'domande/${id}/rifiuta';
+  // public UrlPostIstruttoriaUtenteByIdUtente = this.a4gutente_server + 'istruttoria/utente/${idUtente}';
   public UrlGetStoricoIstruttoria = this.UrlPostIstruttoriaUtenteByIdUtente + '/storico';
 
   // V2
@@ -335,8 +329,8 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   //ricerca profili
   public UrlGetProfiliSrt = this.srt_server + 'utenti';
   public UrlGetProfiliAgs = this.ags_server + '/utente';
-  public UrlGetProfiliA4g = this.a4gutente_server + 'utenti/ricerca';
-  public UrlUtentiA4gCsv = this.a4gutente_server + 'utenti/utentia4gcsv';
+  // public UrlGetProfiliA4g = this.a4gutente_server + 'utenti/ricerca';
+  // public UrlUtentiA4gCsv = this.a4gutente_server + 'utenti/utentia4gcsv';
 
   public UrlGetRicercaIstruttorieDU = this.a4gistruttoria_server + 'istruttorie/du';
 
@@ -395,7 +389,7 @@ public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   public getUrlTotaleSuperficiePerIntervento(annoCampagna: number) {
     return this.UrlAcsDUSuperficie + `/${annoCampagna}/superficie-intervento`;
   }
-  public UrlGetDistributori = this.a4gutente_server + 'domande/distributori';
+  // public UrlGetDistributori = this.a4gutente_server + 'domande/distributori';
 
   public UrlgetRicercaDomandeUniche = this.a4gistruttoria_server + 'ricercaDomande';
   public UrlgetRicercaDomandeUnicheListaStati = this.UrlgetRicercaDomandeUniche + '/listaStati';

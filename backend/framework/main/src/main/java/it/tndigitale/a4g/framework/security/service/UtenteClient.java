@@ -2,6 +2,7 @@ package it.tndigitale.a4g.framework.security.service;
 
 import java.net.URI;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,10 @@ import it.tndigitale.a4g.framework.client.ClientServiceBuilder;
 
 @Component
 public class UtenteClient {
-	private static final String PREFISSO_UTENTE = "utente";
-	private static final String RUOLI_UTENTE = PREFISSO_UTENTE + "/getInfoUtente?applicazione=UMA";
-	private static final String ENTI_UTENTE = PREFISSO_UTENTE + "/getInfoUtente?applicazione=UMA";
-	private static final String AZIENDE_UTENTE = PREFISSO_UTENTE + "/getInfoUtente?applicazione=UMA";
+	// private static final String PREFISSO_UTENTE = "utente";
+	private static final String RUOLI_UTENTE = "ruoli";
+	private static final String ENTI_UTENTE = "N.D.";
+	private static final String AZIENDE_UTENTE = "aziendeDelegate";
 	
 	private static Logger log = LoggerFactory.getLogger(UtenteClient.class);
 	
@@ -37,46 +38,48 @@ public class UtenteClient {
 	
 	public List<String> getRuoliUtente(final String username) throws Exception {
 		RestTemplate restTemplate = clientServiceBuilder.buildWith(() -> username);
-		
-		return getDatiUtente(ServiziUtente.RUOLI.getPath(), restTemplate);
+		return getDatiUtente(RUOLI_UTENTE, restTemplate);
 	}
 	
 	public List<String> getEntiUtente() throws Exception {
-		return getDatiUtente(ServiziUtente.ENTI.getPath(), restTemplate);
+		return getDatiUtente(ENTI_UTENTE, restTemplate);
 	}
 	
 	public List<String> getAziendeUtente() throws Exception {
-		return getDatiUtente(ServiziUtente.AZIENDE.getPath(), restTemplate);
+		return getDatiUtente(AZIENDE_UTENTE, restTemplate);
 	}
 	
 	protected List<String> getDatiUtente(String path, RestTemplate restTemplate) throws Exception {
 		log.info("getDatiUtente: path = " + path);
 		
 		ObjectMapper mapper = new ObjectMapper();
+		List<String> keys = new ArrayList<String>();
 		
-		ResponseEntity<String> response = restTemplate.getForEntity(new URI(utenteUrl + path), String.class);
 		//		ResponseEntity<List<String>> response = restTemplate.exchange(new URI(utenteUrl + path), HttpMethod.GET, null,
 		//				new ParameterizedTypeReference<List<String>>() {
 		//				});
+		ResponseEntity<String> response = restTemplate.getForEntity(new URI(utenteUrl + "utente/getInfoUtente?applicazione=UMA"), String.class);
 		
-		JsonNode dati = mapper.readTree(response.getBody());
 		//		List<String> dati = response.getBody();
-		log.info("getDatiUtente: " + dati);
-		return null;
-	}
-	
-	enum ServiziUtente {
-		
-		RUOLI(RUOLI_UTENTE), ENTI(ENTI_UTENTE), AZIENDE(AZIENDE_UTENTE);
-		
-		private String path;
-		
-		private ServiziUtente(String path) {
-			this.path = path;
+		JsonNode dati = mapper.readTree(response.getBody());
+		JsonNode keysApp = dati.get(path);
+		if (keysApp.isArray()) {
+			for (JsonNode keyApp : keysApp) {
+				if (keyApp.get("applicazione").textValue().equals("UMA")) {
+					JsonNode values = keyApp.get(path);
+					if (values.isArray()) {
+						for (JsonNode value : values) {
+							if (path.equals(RUOLI_UTENTE)) {
+								keys.add(value.get("descrizione").textValue());
+							} else if (path.equals(AZIENDE_UTENTE)) {
+								keys.add(value.get("cuaa").textValue());
+							}
+						}
+					}
+				}
+			}
 		}
-		
-		public String getPath() {
-			return path;
-		}
+		log.info("getDatiUtente: " + keys);
+		return keys;
 	}
 }
