@@ -58,15 +58,18 @@ public class UtenteClient {
 		//		ResponseEntity<List<String>> response = restTemplate.exchange(new URI(utenteUrl + path), HttpMethod.GET, null,
 		//				new ParameterizedTypeReference<List<String>>() {
 		//				});
+		log.info("Path: " + utenteUrl + "utente/getInfoUtente?applicazione=UMA");
 		ResponseEntity<String> response = restTemplate.getForEntity(new URI(utenteUrl + "utente/getInfoUtente?applicazione=UMA"), String.class);
 		
 		//		List<String> dati = response.getBody();
 		JsonNode dati = mapper.readTree(response.getBody());
+		log.info("Response: " + dati);
 		JsonNode keysApp = dati.get(path);
 		if (keysApp.isArray()) {
 			for (JsonNode keyApp : keysApp) {
 				if (keyApp.get("applicazione").textValue().equals("UMA")) {
 					JsonNode values = keyApp.get(path);
+					log.info("Values UMA: " + values);
 					if (values.isArray()) {
 						for (JsonNode value : values) {
 							if (path.equals(RUOLI_UTENTE)) {

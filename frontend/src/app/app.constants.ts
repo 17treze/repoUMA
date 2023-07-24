@@ -23,11 +23,11 @@ export class Configuration {
   public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
   // END BASE_PATH
 
-  // public UrlGetEntiCAA = this.a4gutente_server + 'domande/EntiCAA';
-  // public UrlGetProfili = this.a4gutente_server + 'profili';
-  // public UrlGetProfiliUtente = this.a4gutente_server + 'profili/utente';
-  // public UrlGetDipartimentiPat = this.a4gutente_server + 'domande/dipartimenti';
-  // public UrlPdfAutorizzazione = this.a4gutente_server + 'domande/fileAutorizzazione'; // get e set
+  public UrlGetEntiCAA = this.a4gutente_server + 'domande/EntiCAA';
+  public UrlGetProfili = this.a4gutente_server + 'profili';
+  public UrlGetProfiliUtente = this.a4gutente_server + 'profili/utente';
+  public UrlGetDipartimentiPat = this.a4gutente_server + 'domande/dipartimenti';
+  public UrlPdfAutorizzazione = this.a4gutente_server + 'domande/fileAutorizzazione'; // get e set
 
   public UrlCheckFascicoloValido =
     this.antimafia_server +
@@ -68,21 +68,21 @@ export class Configuration {
     return this.UrlAntimafia + `${idDichiarazioneAntimafia}/chiudiRicreaDichiarazione`;
   } 
 
-  // public urlAvvioProtocollazioneUtente = this.a4gutente_server + "utenti/utente/avvio-protocollazione";
+  public urlAvvioProtocollazioneUtente = this.a4gutente_server + "utenti/utente/avvio-protocollazione";
   public UrlScaricadomanda = this.UrlAntimafia + '${idDichiarazioneAntimafia}/scaricaDomanda';
   public UrlStatoDichiarazioneCount = this.UrlAntimafia + 'count/?params=';
   
   // public urlGetSSO = this.a4gutente_server + 'utenti/utente';
   public urlGetSSO = this.a4gutente_server + 'utente/getInfoUtente?applicazione=UMA';
   
-  // public urlGetDatiAnagraficiUtente = this.a4gutente_server + 'utenti/utente/anagrafica';
-  // public UrlUtente = this.a4gutente_server + 'domande';
-  // public UrlCreaDomanda = this.a4gutente_server + 'utenti';
-  // public UrlPersone = this.a4gutente_server + 'persone/';
-  // public UrlPersonaPrivacy = this.a4gutente_server + 'persone/?params=';
-  // public UrlRicercaDomanda = this.a4gutente_server + 'domande/?';
-  // public UrlGetDomanda = this.a4gutente_server + 'domande/${id}';
-  // public UrlChiudiDomanda = this.a4gutente_server + 'domande/${id}/chiudi';
+  public urlGetDatiAnagraficiUtente = this.a4gutente_server + 'utenti/utente/anagrafica';
+  public UrlUtente = this.a4gutente_server + 'domande';
+  public UrlCreaDomanda = this.a4gutente_server + 'utenti';
+  public UrlPersone = this.a4gutente_server + 'persone/';
+  public UrlPersonaPrivacy = this.a4gutente_server + 'persone/?params=';
+  public UrlRicercaDomanda = this.a4gutente_server + 'domande/?';
+  public UrlGetDomanda = this.a4gutente_server + 'domande/${id}';
+  public UrlChiudiDomanda = this.a4gutente_server + 'domande/${id}/chiudi';
 
   public UrlGetIstruttorie = this.a4gistruttoria_server + 'istruttorie/';
   public UrlGetIstruttoria = this.a4gistruttoria_server + 'istruttorie/${id}';
@@ -107,10 +107,10 @@ export class Configuration {
   public urlPostSincronizzazioneAntimafia = this.a4gproxy_server + 'sincronizzazione/antimafia';
 
   public UrlStampaPDF = this.a4gproxy_server + 'stampa/';
-  // public UrlGetUtentiCodiceFiscale = this.a4gutente_server + 'utenti/{codiceFiscale}';
-  // public UrlGetUtentiById = this.a4gutente_server + 'utenti/idutente/{id}';
-  // public urlIsUtenteRegistrabile = this.a4gutente_server + 'utenti/utente/isRegistrabile';
-  // public urlGetProfiliUtenteConnesso = this.a4gutente_server + 'utenti/utente/profili';
+  public UrlGetUtentiCodiceFiscale = this.a4gutente_server + 'utenti/{codiceFiscale}';
+  public UrlGetUtentiById = this.a4gutente_server + 'utenti/idutente/{id}';
+  public urlIsUtenteRegistrabile = this.a4gutente_server + 'utenti/utente/isRegistrabile';
+  public urlGetProfiliUtenteConnesso = this.a4gutente_server + 'utenti/utente/profili';
 
   public UrlAggiornaStatoBloccoDomande = this.a4gistruttoria_server + 'domande/aggiornaStatoBloccoDomande';
 
@@ -209,10 +209,10 @@ export class Configuration {
   // public urlGetTemplateModuloRegistrazioneUtente =
   //   environment.frontendUrl +
   //   "assets/templates/AS/templateModuloDomandaRegistrazione.docx";
-  // public urlDomandaRegUtenteStampa = this.a4gutente_server + 'domande/{id}/export';
-  // public urlDomandaRegUtenteFirma = this.a4gutente_server + 'domande/{id}/firma';
-  // public urlDomandaProtocolla = this.a4gutente_server + 'domande/{id}/protocolla';
-  // public urlFirmaUtente = this.a4gutente_server + 'utenti/utente/firma';
+  public urlDomandaRegUtenteStampa = this.a4gutente_server + 'domande/{id}/export';
+  public urlDomandaRegUtenteFirma = this.a4gutente_server + 'domande/{id}/firma';
+  public urlDomandaProtocolla = this.a4gutente_server + 'domande/{id}/protocolla';
+  public urlFirmaUtente = this.a4gutente_server + 'utenti/utente/firma';
 
   public FrontendUrl = environment.frontendUrl;
 
@@ -309,15 +309,15 @@ export class Configuration {
   public UrlGetDomandeIbanErrato = this.a4gistruttoria_server + 'domande/ibanerrato';
 
   //Domande registrazione utente
-  // public UrlGetDomandaRegistrazioneUtente = this.a4gutente_server + "domande/{id}";
-  // public UrlStatoRichiestaCount = this.a4gutente_server + 'domande/counters/';
-  // public UrlPresaInCarico = this.a4gutente_server + 'domande/${id}/presaincarico';
+  public UrlGetDomandaRegistrazioneUtente = this.a4gutente_server + "domande/{id}";
+  public UrlStatoRichiestaCount = this.a4gutente_server + 'domande/counters/';
+  public UrlPresaInCarico = this.a4gutente_server + 'domande/${id}/presaincarico';
 
-  // public UrlIstruttoriaByDomanda = this.a4gutente_server + 'istruttoria/domanda';
+  public UrlIstruttoriaByDomanda = this.a4gutente_server + 'istruttoria/domanda';
   public UrlGetIstruttoriaByDomanda = this.UrlIstruttoriaByDomanda + '/${id}';
-  // public UrlApprovaDomanda = this.a4gutente_server + 'domande/${id}/approva';
-  // public UrlRifiutaDomanda = this.a4gutente_server + 'domande/${id}/rifiuta';
-  // public UrlPostIstruttoriaUtenteByIdUtente = this.a4gutente_server + 'istruttoria/utente/${idUtente}';
+  public UrlApprovaDomanda = this.a4gutente_server + 'domande/${id}/approva';
+  public UrlRifiutaDomanda = this.a4gutente_server + 'domande/${id}/rifiuta';
+  public UrlPostIstruttoriaUtenteByIdUtente = this.a4gutente_server + 'istruttoria/utente/${idUtente}';
   public UrlGetStoricoIstruttoria = this.UrlPostIstruttoriaUtenteByIdUtente + '/storico';
 
   // V2
@@ -329,8 +329,8 @@ export class Configuration {
   //ricerca profili
   public UrlGetProfiliSrt = this.srt_server + 'utenti';
   public UrlGetProfiliAgs = this.ags_server + '/utente';
-  // public UrlGetProfiliA4g = this.a4gutente_server + 'utenti/ricerca';
-  // public UrlUtentiA4gCsv = this.a4gutente_server + 'utenti/utentia4gcsv';
+  public UrlGetProfiliA4g = this.a4gutente_server + 'utenti/ricerca';
+  public UrlUtentiA4gCsv = this.a4gutente_server + 'utenti/utentia4gcsv';
 
   public UrlGetRicercaIstruttorieDU = this.a4gistruttoria_server + 'istruttorie/du';
 
@@ -389,7 +389,8 @@ export class Configuration {
   public getUrlTotaleSuperficiePerIntervento(annoCampagna: number) {
     return this.UrlAcsDUSuperficie + `/${annoCampagna}/superficie-intervento`;
   }
-  // public UrlGetDistributori = this.a4gutente_server + 'domande/distributori';
+  
+  public UrlGetDistributori = this.a4gutente_server + 'domande/distributori';
 
   public UrlgetRicercaDomandeUniche = this.a4gistruttoria_server + 'ricercaDomande';
   public UrlgetRicercaDomandeUnicheListaStati = this.UrlgetRicercaDomandeUniche + '/listaStati';

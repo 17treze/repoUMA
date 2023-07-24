@@ -165,6 +165,7 @@ export class AuthService {
 
   getUserService(): Observable<Utente> {
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    console.log('Authorization: ' + this.getAccessToken());
     console.log('URL: ' + this._configuration.urlGetSSO);
     return this.http.get<Utente>(this._configuration.urlGetSSO, { headers: headers });  
   }

@@ -19,15 +19,16 @@ public class ClientServiceBuilder {
 	
 	protected ClientHttpRequestInterceptor buildUsernameHeader(Supplier<String> username) {
 		return (request, body, execution) -> {
-			String currentUser = username.get();
-			log.info("buildUsernameHeader: " + currentUser);
-			if (isADDAuthentication(currentUser)) {
-				request.getHeaders().set(HEADER_UPN, currentUser);
-			}
-			else {
-				// request.getHeaders().set(HEADER_CF, currentUser);
-				request.getHeaders().set(TOKEN_KEY_PORTALE, currentUser);
-			}
+			String token = username.get();
+			log.info("buildUsernameHeader: " + token);
+//			if (isADDAuthentication(token)) {
+//				request.getHeaders().set(HEADER_UPN, token);
+//			}
+//			else {
+//				// request.getHeaders().set(HEADER_CF, token);
+//				request.getHeaders().set(TOKEN_KEY_PORTALE, token);
+//			}
+			request.getHeaders().set(TOKEN_KEY_PORTALE, token);
 			return execution.execute(request, body);
 		};
 	}
