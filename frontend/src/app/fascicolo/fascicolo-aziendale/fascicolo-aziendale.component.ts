@@ -35,7 +35,7 @@ export class FascicoloAziendaleComponent implements OnInit {
       return;
     }
     this.setShowLink();
-    this.getRichiesteDaValutare(false);
+    // this.getRichiesteDaValutare(false);
   }
 
   private setShowLink() {

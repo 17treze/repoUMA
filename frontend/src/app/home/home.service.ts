@@ -5,6 +5,7 @@ import { Configuration } from '../app.constants';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
 import { FascicoloService } from '../fascicolo/fascicolo.service';
 import { AuthService } from '../auth/auth.service';
+import { Utente } from "../auth/user";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -45,13 +46,32 @@ export class HomeService {
 
   public getFascicoliAziendaUtente(): Array<Fascicolo> {
     let parametroSessione = sessioneFascicoloUtente;
+    let fascicoli = new Array<Fascicolo>();
     let sessione = sessionStorage.getItem(parametroSessione);
     if (sessione != null) {
       console.log("carica " + parametroSessione + " da sessione");
       console.log(sessione);
       return JSON.parse(sessione);
     }
-    return new Array<Fascicolo>();
+    // qui devo leggere le aziende delegate da altro oggetto in sessione e riempire questo
+    const sessionUser: Utente = JSON.parse(sessionStorage.getItem("user"));
+    if (sessionUser != null) {
+      console.log("carica " + parametroSessione + " da sessione");
+      console.log(sessionUser);
+      if (sessionUser?.aziendeDelegate) {
+        for (const azieApp of sessionUser.aziendeDelegate) {
+          if (azieApp.applicazione == "UMA") {
+            for (const azie of azieApp.aziendeDelegate) {
+              let fascicolo = new Fascicolo();
+              fascicolo.cuaa = azie.cuaa;
+              fascicolo.denominazione = azie.denominazione;
+              fascicoli.push(fascicolo);
+            }
+          }
+        }
+      }
+    }
+    return fascicoli;
   }
   /*
   public salvaSrtRuoliPerUtente(salva: string[]) {
