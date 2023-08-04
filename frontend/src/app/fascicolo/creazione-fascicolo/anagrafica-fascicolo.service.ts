@@ -51,6 +51,7 @@ export class AnagraficaFascicoloService {
   }
 
   private urlAnagraficaFascicolo = `${this.configuration.anagrafica_server}/fascicolo`;
+  private urlAnagraficaFascicoloTn = `${this.configuration.anagrafica_server_tn}/fascicolo`;
   private urlGetCaa = `${this.configuration.anagrafica_server}/caa`;
 
   // SEZIONE URL FASCICOLO
@@ -232,7 +233,7 @@ export class AnagraficaFascicoloService {
   public getAnagraficaFascicolo(filtro: FiltroRicercaFascicoli, paginazione: Paginazione): Observable<PaginatorA4G<FascicoloDTO[]>> {
     const data: any = { ...filtro, ...paginazione };
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-    return this.http.get<PaginatorA4G<FascicoloDTO[]>>(`${this.urlAnagraficaFascicolo}`, { params: data, headers: headers });
+    return this.http.get<PaginatorA4G<FascicoloDTO[]>>(`${this.urlAnagraficaFascicoloTn}`, { params: data, headers: headers });
   }
 
   // recupero informazioni anagrafiche dal servizio esterno PARIX - AE

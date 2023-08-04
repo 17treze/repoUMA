@@ -15,6 +15,7 @@ export class Configuration {
   public a4gproxy_server = environment.backendUrl + 'a4gproxy/api/v1/';
   public srt_server = environment.backendUrl + 'srt/api/v1/';
   public anagrafica_server = 'http://localhost:8888/' + 'anagrafica/api/v1'; // environment.backendUrl + 
+  public anagrafica_server_tn = 'http://localhost:8088/' + 'anagrafica/api/v1'; // environment.backendUrl + 
   public zootecnia_server = environment.backendUrl + 'fascicolo/zootecnia/api/v1';
   public dotazione_tecnica_server = environment.backendUrl + 'fascicolo/dotazione-tecnica/api/v1';
   public territorio_server = environment.backendUrl + 'fascicolo/territorio/api/v1';
