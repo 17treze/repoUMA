@@ -20,7 +20,7 @@ export class MandatoService {
     private configuration: Configuration,
   ) { }
 
-  anagrafica_server_mandato = `${this.configuration.anagrafica_server}/mandato`;
+  anagrafica_server_mandato = `${this.configuration.anagrafica_server_tn}/mandato`;
 
   public getAccessToken() {
     return this.oauthService.getAccessToken();

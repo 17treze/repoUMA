@@ -140,7 +140,7 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
         this.cuaa = urlParams['cuaa'];
         this.idFascicoloCorrente = urlParams['id'];
       });
-
+    /*
     this.route.params
       .pipe(
         switchMap((params: Params) => {
@@ -153,6 +153,7 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
             this.fascicoloCorrente.fascicolo = fascicolo;
           }
         }, error => this.errorService.showError(error));
+     */
   }
 
   buildFilter(paginator: PaginatorEvent, tipo: TipoIntestazioneUma): DomandaUmaFilter {

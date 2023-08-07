@@ -50,7 +50,7 @@ export class AnagraficaFascicoloService {
     return this.oauthService.getAccessToken();
   }
 
-  private urlAnagraficaFascicolo = `${this.configuration.anagrafica_server}/fascicolo`;
+  private urlAnagraficaFascicolo = `${this.configuration.anagrafica_server_tn}/fascicolo`;
   private urlAnagraficaFascicoloTn = `${this.configuration.anagrafica_server_tn}/fascicolo`;
   private urlGetCaa = `${this.configuration.anagrafica_server}/caa`;
 
@@ -100,7 +100,7 @@ export class AnagraficaFascicoloService {
   }
 
   public getUrlGetFirmatario(cuaa: string) {
-    return `${this.configuration.anagrafica_server}/personagiuridica/${cuaa}/carica/firmatario`;
+    return `${this.configuration.anagrafica_server_tn}/personagiuridica/${cuaa}/carica/firmatario`;
   }
 
   public getUrlPutSalvaFirmatario(cuaa: string) {
@@ -192,7 +192,7 @@ export class AnagraficaFascicoloService {
   }
 
   public getUrlEredi(cuaa: string) {
-    return `${this.configuration.anagrafica_server}/fascicolo/${cuaa}/eredi`;
+    return `${this.configuration.anagrafica_server_tn}/fascicolo/${cuaa}/eredi`;
   }
 
   public putUrlChiudiFascicolo(cuaa: string) {

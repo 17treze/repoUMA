@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
+import { FascicoloLazio } from '../a4g-common/classi/FascicoloLazio';
 import { InputFascicolo } from '../a4g-common/classi/InputFascicolo';
 import { FascicoloAgsDto } from '../a4g-common/classi/FascicoloAgsDto';
 import { PaginatorA4G } from '../a4g-common/interfaces/paginator.model';
@@ -23,7 +24,8 @@ export class FascicoloService {
   ) { }
 
   anagrafica_server_fascicolo = `${this._configuration.anagrafica_server}`;
-  anagrafica_server = `${this._configuration.anagrafica_server}`;
+  anagrafe_unica_lazio = `${this._configuration.anagrafe_unica_lazio}`;
+  anagrafica_server = `${this._configuration.anagrafica_server_tn}`;
   urlGetFascicoli = `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/?params=`;
   urlGetFascicoliMiei = `${this.anagrafica_server_fascicolo}/consultazione/mieifascicoli`;
 
@@ -48,6 +50,10 @@ export class FascicoloService {
 
   public getUrlGetFascicolo(id: number): string {
     return `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/${id}`;
+  }
+
+  public getUrlGetFascicoloLazio(cuaa: string): string {
+    return `${this.anagrafe_unica_lazio}/fascicoloFS6/trovaFascicoloFS6?cuaa=${cuaa}`;
   }
 
   public getUrlGetLegacy(id: number): string {
@@ -86,6 +92,13 @@ export class FascicoloService {
     console.log('ricercaFascicolo ' + idFascicolo);
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     return this.http.get<Fascicolo>(this.getUrlGetFascicolo(idFascicolo), { headers: headers });
+  }
+
+  public getFascicoloLazio(cuaa: string): Observable<FascicoloLazio> {
+    console.log('ricercaFascicoloLazio ' + cuaa);
+    // let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    let headers = new HttpHeaders().append('Content-Type', 'application/json');
+    return this.http.get<FascicoloLazio>(this.getUrlGetFascicoloLazio(cuaa), { headers: headers });
   }
 
   public putCambioSportello(cuaa, idSportello, cambioSportelloPatch: CambioSportelloPatch): Observable<any> {

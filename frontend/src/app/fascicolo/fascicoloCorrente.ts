@@ -8,6 +8,7 @@ import { Fascicolo } from "../a4g-common/classi/Fascicolo";
 export class FascicoloCorrente {
     public fascicolo: Fascicolo;
     public fascicoloLegacy: FascicoloAgsDto;
+    public fascicoloLazio: FascicoloLazio;
 
     public isPersonaFisica(cuaa: string): boolean {
         return cuaa && cuaa.length === 16;
