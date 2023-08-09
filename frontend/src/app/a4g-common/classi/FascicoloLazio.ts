@@ -7,7 +7,11 @@ export class FascicoloData {
    caacodice: string;
    sportello: string;
    tipoDetenzione: TipoDetenzione;
-   detentore: string
+   detentore: string;
+   organismoPagatore: string;
+   dataValidazFascicolo: string;
+   dataElaborazione: string;
+   dataAperturaFascicolo: string   
 }
 
 export class FascicoloLazio {

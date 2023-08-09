@@ -41,7 +41,9 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cuaa = this.router.url.split('/').pop();
+    while (!this.cuaa || this.cuaa.length != 16) {
+       this.cuaa = this.router.url.split('/').pop();
+    }
     this.title = this.route.snapshot.data[A4gCostanti.ROUTE_DATA_BREADCRUMB].toUpperCase();
     this.fascicoloService.getFascicoloLazio(this.cuaa).subscribe(
       fascicolo => {
@@ -54,7 +56,7 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
             this.errorService.showErrorWithMessage(fascicolo.text);
           }
       }, err => {
-         this.errorService.showError(error, 'tst-fas-ap');
+         this.errorService.showError(err, 'tst-fas-ap');
       });
   }
 
@@ -72,9 +74,9 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
     this.caa = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].caa : null;
     this.stato = "VALIDO"; // this.fascicoloCorrente.fascicoloLegacy.stato;
     this.sportello = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].sportello : null;
-    this.dataInizio = this.fascicoloCorrente.fascicoloLazio.data.dataAperturaFascicolo;
-    this.dataUltimoAggiornamento = this.fascicoloCorrente.fascicoloLazio.data.dataElaborazione;
-    this.dataUltimaValidazione = this.fascicoloCorrente.fascicoloLazio.data.dataValidazFascicolo;
+    // this.dataInizio = this.fascicoloCorrente.fascicoloLazio.data.dataAperturaFascicolo;
+    // this.dataUltimoAggiornamento = this.fascicoloCorrente.fascicoloLazio.data.dataElaborazione;
+    // this.dataUltimaValidazione = this.fascicoloCorrente.fascicoloLazio.data.dataValidazFascicolo;
     this.organismoPagatore = this.fascicoloCorrente.fascicoloLazio.data.organismoPagatore;
   }
 }

@@ -1,6 +1,7 @@
 import { FascicoloAgsDto } from 'src/app/a4g-common/classi/FascicoloAgsDto';
 import { Injectable } from "@angular/core";
 import { Fascicolo } from "../a4g-common/classi/Fascicolo";
+import { FascicoloLazio } from "../a4g-common/classi/FascicoloLazio";
 
 @Injectable({
     providedIn: "root"

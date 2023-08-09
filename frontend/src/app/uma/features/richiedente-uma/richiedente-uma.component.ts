@@ -15,6 +15,7 @@ import { DateUtilService } from 'src/app/a4g-common/services/date-util.service';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { FascicoloService } from 'src/app/fascicolo/fascicolo.service';
 import { Fascicolo } from 'src/app/a4g-common/classi/Fascicolo';
+import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { PersonaAgsDto } from '../../core-uma/models/dto/PersonaAgsDto';
 import { HttpClientDomandaUmaService } from '../../core-uma/services/http-client-domanda-uma.service';
 import { catchError } from 'rxjs/operators';
@@ -70,6 +71,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
   }
 
   setSubscriptions() {
+  	/*
     // Valorizzazione del FascicoloCorrente (BehaviouralSubject di FascicoloService) per valorizzare l'intestazione del fascicolo
     // a fronte del caricamento del nuovo  modulo (uma)
     this.subscription = this.route.params.pipe(
@@ -101,6 +103,41 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
         } else {
           return this.anagraficaFascicoloService.getTitolariRappresentantiLegali(this.cuaa);
         }
+      }),
+    ).subscribe((personeConCarica: Array<PersonaAgsDto>) => {
+      this.soggetti = personeConCarica.map((persona: PersonaAgsDto) => {
+        const personaCopy = persona;
+        personaCopy.carica = personaCopy.carica.split('_').join(' ');
+        return personaCopy;
+      });
+      this.richiedenteForm.get('richiedente').setValue(this.soggetti[0]);
+    }, error => this.errorService.showError(error));
+	*/
+
+
+    // Valorizzazione del FascicoloCorrente (BehaviouralSubject di FascicoloService) per valorizzare l'intestazione del fascicolo
+    // a fronte del caricamento del nuovo  modulo (uma)
+    this.subscription = this.route.params.pipe(
+      catchError((err: ErrorDTO) => {
+        this.errorService.showError(err);
+        return EMPTY;
+      }),
+      switchMap((params: Params) => {
+        this.TIPO_RICHIEDENTE = params['tipoRichiesta'];
+        return this.fascicoloService.getFascicoloLazio(params['idFascicolo']);
+      }),
+      catchError((err: ErrorDTO) => {
+        this.errorService.showError(err);
+        return EMPTY;
+      }),
+      switchMap((fascicolo: FascicoloLazio) => {
+        this.cuaa = null;
+        console.log('Arrivati qui: ' + fascicolo.data.cuaa);
+        if (fascicolo && fascicolo.data.cuaa) {
+          this.fascicoloCorrente.fascicoloLazio = fascicolo;
+          this.cuaa = fascicolo.data.cuaa;
+        }
+        return this.anagraficaFascicoloService.getTitolariRappresentantiLegali(this.cuaa);
       }),
     ).subscribe((personeConCarica: Array<PersonaAgsDto>) => {
       this.soggetti = personeConCarica.map((persona: PersonaAgsDto) => {

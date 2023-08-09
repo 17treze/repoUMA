@@ -58,6 +58,7 @@ export class HttpClientDomandaUmaService {
 
   getDomandaById(idDomanda: string): Observable<RichiestaCarburanteDto> {
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    console.log('Chiamata richiesta carb. per id');
     return this.http.get<RichiestaCarburanteDto>(`${this.urlDomanda()}/${idDomanda}`, { headers: headers });
   }
 

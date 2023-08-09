@@ -374,7 +374,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
                 this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
                 return EMPTY;
               }
-              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/richiedente/${TipoRichiedenteUma.richiesta}`]);
+              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiedente/${TipoRichiedenteUma.richiesta}`]);
               return EMPTY;
             } else {
               return of(richieste);

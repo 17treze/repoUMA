@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
 import { FascicoloLazio } from '../a4g-common/classi/FascicoloLazio';
 import { InputFascicolo } from '../a4g-common/classi/InputFascicolo';
@@ -78,8 +78,9 @@ export class FascicoloService {
   // chiamata più aggiornata per reperire il fascicolo legacy
   public getLegacy(idFascicolo: number): Observable<FascicoloAgsDto> {
     console.log('ricercaLegacy ' + idFascicolo);
-    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-    return this.http.get<FascicoloAgsDto>(this.getUrlGetLegacy(idFascicolo), { headers: headers });
+    // let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    // return this.http.get<FascicoloAgsDto>(this.getUrlGetLegacy(idFascicolo), { headers: headers });
+    return EMPTY;
   }
 
   public getListaPaged(testoDaCercare: string, paginazione: Paginazione): Observable<PaginatorA4G<Array<RisultatiRicercaClientiDto>>> {
