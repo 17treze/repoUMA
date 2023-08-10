@@ -2,6 +2,7 @@ package it.tndigitale.a4g.fascicolo.anagrafica.business.persistence.entity;
 
 public enum OrganismoPagatoreEnum {
 	APPAG("Agenzia Provinciale Per i Pagamenti"),
+    IT01("AGEA"),
 	ALTRO_OP("Altro organismo pagatore");
 
 	private String denominazione;

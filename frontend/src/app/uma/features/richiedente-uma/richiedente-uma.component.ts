@@ -15,6 +15,7 @@ import { DateUtilService } from 'src/app/a4g-common/services/date-util.service';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { FascicoloService } from 'src/app/fascicolo/fascicolo.service';
 import { Fascicolo } from 'src/app/a4g-common/classi/Fascicolo';
+import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { PersonaAgsDto } from '../../core-uma/models/dto/PersonaAgsDto';
 import { HttpClientDomandaUmaService } from '../../core-uma/services/http-client-domanda-uma.service';
 import { catchError } from 'rxjs/operators';
@@ -79,28 +80,24 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
       }),
       switchMap((params: Params) => {
         this.TIPO_RICHIEDENTE = params['tipoRichiesta'];
-        return forkJoin([this.fascicoloService.getFascicolo(params['idFascicolo']), this.fascicoloService.getLegacy(params['idFascicolo'])]);
+        return this.fascicoloService.getFascicoloLazio('MPRMDL65D69H501P'); // params['idFascicolo']
       }),
       catchError((err: ErrorDTO) => {
         this.errorService.showError(err);
         return EMPTY;
       }),
-      switchMap(([fascicolo, fascicoloLegacy]: [Fascicolo, FascicoloAgsDto]) => {
+      switchMap((fascicolo: FascicoloLazio) => {
         this.cuaa = null;
-        if (fascicolo && fascicolo.cuaa) {
-          this.fascicoloCorrente.fascicolo = fascicolo;
-          this.cuaa = this.fascicoloCorrente.fascicolo.cuaa;
+        if (fascicolo.data?.cuaa) {
+          console.log('Cuaa: ' + fascicolo.data.cuaa);
+          this.fascicoloCorrente.fascicoloLazio = fascicolo;
+          this.cuaa = fascicolo.data.cuaa;
         }
-        if (fascicoloLegacy && fascicoloLegacy.cuaa) {
-          this.fascicoloCorrente.fascicoloLegacy = fascicoloLegacy;
+        else {
+          this.errorService.showErrorWithMessage(fascicolo.text);
         }
         // Se è una persona fisica ed è deceduto (IMPLICITAMENTE SOLO PER LA RETTIFICA e per la DICHIARAZIONE CONSUMI)
-        // Deve essere chiamata al posto dei titolari rappresentanti -> gli eredi
-        if (this.fascicoloCorrente.isPersonaFisica(this.cuaa) && this.fascicoloCorrente.fascicoloLegacy.dataMorteTitolare != null) {
-          return this.fascicoloService.getEredi(this.cuaa);
-        } else {
-          return this.anagraficaFascicoloService.getTitolariRappresentantiLegali(this.cuaa);
-        }
+        return this.anagraficaFascicoloService.getTitolariRappresentantiLegali(this.cuaa);
       }),
     ).subscribe((personeConCarica: Array<PersonaAgsDto>) => {
       this.soggetti = personeConCarica.map((persona: PersonaAgsDto) => {
