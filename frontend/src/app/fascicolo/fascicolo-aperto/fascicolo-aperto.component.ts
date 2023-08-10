@@ -41,10 +41,11 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cuaa = this.router.url.split('/').pop();
-    this.title = this.route.snapshot.data[A4gCostanti.ROUTE_DATA_BREADCRUMB].toUpperCase();
-    this.fascicoloService.getFascicoloLazio(this.cuaa).subscribe(
-      fascicolo => {
+    this.sub = this.route.params
+      .pipe(
+        switchMap((params: Params) => {
+          return this.fascicoloService.getFascicoloLazio(params['idFascicolo']);
+        })).subscribe((fascicolo: FascicoloLazio) => {
           if (fascicolo.data?.cuaa) {
             console.log('Cuaa: ' + fascicolo.data.cuaa);
             this.fascicoloCorrente.fascicoloLazio = fascicolo;
@@ -53,9 +54,8 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
           else {
             this.errorService.showErrorWithMessage(fascicolo.text);
           }
-      }, err => {
-         this.errorService.showError(err, 'tst-fas-ap');
-      });
+        }, error => this.errorService.showError(error, 'tst-fas-ap'));
+    this.title = this.route.snapshot.data[A4gCostanti.ROUTE_DATA_BREADCRUMB].toUpperCase();
   }
 
   ngOnDestroy() {
@@ -72,9 +72,14 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
     this.caa = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].caa : null;
     this.stato = "VALIDO"; // this.fascicoloCorrente.fascicoloLegacy.stato;
     this.sportello = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].sportello : null;
-    // this.dataInizio = this.fascicoloCorrente.fascicoloLazio.data.dataAperturaFascicolo;
-    // this.dataUltimoAggiornamento = this.fascicoloCorrente.fascicoloLazio.data.dataElaborazione;
-    // this.dataUltimaValidazione = this.fascicoloCorrente.fascicoloLazio.data.dataValidazFascicolo;
+    this.dataInizio = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataAperturaFascicolo);
+    this.dataUltimoAggiornamento = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataElaborazione);
+    this.dataUltimaValidazione = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataValidazFascicolo);
     this.organismoPagatore = this.fascicoloCorrente.fascicoloLazio.data.organismoPagatore;
+  }
+  
+  dateFromString (dateStr) {
+    return new Date(parseInt(dateStr.substring(0, 4)), 
+    	parseInt(dateStr.substring(4, 6)), parseInt(dateStr.substring(6, 8)));
   }
 }

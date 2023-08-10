@@ -80,7 +80,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
       }),
       switchMap((params: Params) => {
         this.TIPO_RICHIEDENTE = params['tipoRichiesta'];
-        return this.fascicoloService.getFascicoloLazio('MPRMDL65D69H501P'); // params['idFascicolo']
+        return this.fascicoloService.getFascicoloLazio(params['idFascicolo']); // 
       }),
       catchError((err: ErrorDTO) => {
         this.errorService.showError(err);
