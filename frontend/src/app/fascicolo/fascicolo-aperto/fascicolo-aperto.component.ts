@@ -44,17 +44,22 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
     this.sub = this.route.params
       .pipe(
         switchMap((params: Params) => {
+          console.log('step-fascicoloaperto');
           return this.fascicoloService.getFascicoloLazio(params['idFascicolo']);
         })).subscribe((fascicolo: FascicoloLazio) => {
-          if (fascicolo.data?.cuaa) {
-            console.log('Cuaa: ' + fascicolo.data.cuaa);
+          if (fascicolo.data) {
+            console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
             this.fascicoloCorrente.fascicoloLazio = fascicolo;
             this.formatDatiFascicolo();
           }
           else {
+            console.log('err11');
             this.errorService.showErrorWithMessage(fascicolo.text);
           }
-        }, error => this.errorService.showError(error, 'tst-fas-ap'));
+        }, error => {
+          console.log('err12');
+          this.errorService.showError(error, 'tst-fas-ap');
+        });
     this.title = this.route.snapshot.data[A4gCostanti.ROUTE_DATA_BREADCRUMB].toUpperCase();
   }
 

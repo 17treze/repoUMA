@@ -18,7 +18,7 @@ import { Fascicolo } from 'src/app/a4g-common/classi/Fascicolo';
 import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { PersonaAgsDto } from '../../core-uma/models/dto/PersonaAgsDto';
 import { HttpClientDomandaUmaService } from '../../core-uma/services/http-client-domanda-uma.service';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { UMA_MESSAGES } from '../../uma.messages';
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
 
@@ -75,31 +75,43 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
     // a fronte del caricamento del nuovo  modulo (uma)
     this.subscription = this.route.params.pipe(
       catchError((err: ErrorDTO) => {
+        console.log('err-1');
         this.errorService.showError(err);
         return EMPTY;
       }),
-      map((params: Params) => {
+      switchMap((params: Params) => {
         this.TIPO_RICHIEDENTE = params['tipoRichiesta'];
+        console.log('step-richiedenteuma');
         return this.fascicoloService.getFascicoloLazio(params['idFascicolo']); // 
       }),
       catchError((err: ErrorDTO) => {
+        console.log('err0');
         this.errorService.showError(err);
         return EMPTY;
       }),
-    ).subscribe((obs: Observable<FascicoloLazio>) => {
-      map ((fascicolo: FascicoloLazio) => {
-        console.log('fascciolo: ' + fascicolo);
-        if (fascicolo.data?.cuaa) {
-          console.log('Cuaa: ' + fascicolo.data.cuaa);
-          this.fascicoloCorrente.fascicoloLazio = fascicolo;
-          this.cuaa = fascicolo.data.cuaa;
-          this.richiedenteForm.get('richiedente').setValue(fascicolo);
+    ).subscribe((fascicolo: FascicoloLazio) => {
+        if (fascicolo.data) {
+          console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
+          // this.fascicoloCorrente.fascicoloLazio = fascicolo.data;
+          this.cuaa = fascicolo.data.codiCuaa;
+          let personaDto = new PersonaAgsDto();
+          personaDto.codiceFiscale = fascicolo.data.codiCuaa;
+          personaDto.carica = "Titolare";
+          personaDto.tipo = fascicolo.data.codiTipoAzie; // Nella response da swagger non trovo questo tipo. Inoltre sembra che nessuno acceda a questo campo (refuso?)
+          personaDto.cuaa = fascicolo.data.codiCuaa;
+          personaDto.denominazione = fascicolo.data.descDeno;
+          personaDto.nome = fascicolo.data.descDeno;
+          personaDto.cognome = fascicolo.data.descDeno;
+          this.richiedenteForm.get('richiedente').setValue(personaDto);
         }
         else {
+          console.log('err1');
           this.errorService.showErrorWithMessage(fascicolo.text);
         }
-      })
-    }, error => this.errorService.showError(error));
+      }, error => {
+        console.log('err2');
+        this.errorService.showError(error, 'tst-fas-ap')
+      });
   }
 
   initForm() {
