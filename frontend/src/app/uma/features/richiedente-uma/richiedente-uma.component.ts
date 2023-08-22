@@ -9,16 +9,16 @@ import { MessageService } from 'primeng/api';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
-import { EMPTY, forkJoin, of, Subscription } from 'rxjs';
+import { EMPTY, forkJoin, Observable, of, Subscription } from 'rxjs';
 import { FascicoloCorrente } from 'src/app/fascicolo/fascicoloCorrente';
 import { DateUtilService } from 'src/app/a4g-common/services/date-util.service';
-import { switchMap } from 'rxjs/internal/operators/switchMap';
+// import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { FascicoloService } from 'src/app/fascicolo/fascicolo.service';
 import { Fascicolo } from 'src/app/a4g-common/classi/Fascicolo';
 import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { PersonaAgsDto } from '../../core-uma/models/dto/PersonaAgsDto';
 import { HttpClientDomandaUmaService } from '../../core-uma/services/http-client-domanda-uma.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { UMA_MESSAGES } from '../../uma.messages';
 import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
 
@@ -78,7 +78,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
         this.errorService.showError(err);
         return EMPTY;
       }),
-      switchMap((params: Params) => {
+      map((params: Params) => {
         this.TIPO_RICHIEDENTE = params['tipoRichiesta'];
         return this.fascicoloService.getFascicoloLazio(params['idFascicolo']); // 
       }),
@@ -86,26 +86,19 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
         this.errorService.showError(err);
         return EMPTY;
       }),
-      switchMap((fascicolo: FascicoloLazio) => {
-        this.cuaa = null;
+    ).subscribe((obs: Observable<FascicoloLazio>) => {
+      map ((fascicolo: FascicoloLazio) => {
+        console.log('fascciolo: ' + fascicolo);
         if (fascicolo.data?.cuaa) {
           console.log('Cuaa: ' + fascicolo.data.cuaa);
           this.fascicoloCorrente.fascicoloLazio = fascicolo;
           this.cuaa = fascicolo.data.cuaa;
+          this.richiedenteForm.get('richiedente').setValue(fascicolo);
         }
         else {
           this.errorService.showErrorWithMessage(fascicolo.text);
         }
-        // Se è una persona fisica ed è deceduto (IMPLICITAMENTE SOLO PER LA RETTIFICA e per la DICHIARAZIONE CONSUMI)
-        return this.anagraficaFascicoloService.getTitolariRappresentantiLegali(this.cuaa);
-      }),
-    ).subscribe((personeConCarica: Array<PersonaAgsDto>) => {
-      this.soggetti = personeConCarica.map((persona: PersonaAgsDto) => {
-        const personaCopy = persona;
-        personaCopy.carica = personaCopy.carica.split('_').join(' ');
-        return personaCopy;
-      });
-      this.richiedenteForm.get('richiedente').setValue(this.soggetti[0]);
+      })
     }, error => this.errorService.showError(error));
   }
 
