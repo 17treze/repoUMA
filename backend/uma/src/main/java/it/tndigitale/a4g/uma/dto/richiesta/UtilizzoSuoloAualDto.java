@@ -3,7 +3,10 @@ package it.tndigitale.a4g.uma.dto.richiesta;
 import java.util.Date;
 import java.util.List;
 
-   public class UtilizzoSuoloAualDto {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UtilizzoSuoloAualDto {
 
       private Integer codiSuol;
       private String numeSupeUtil;

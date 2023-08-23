@@ -7,7 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Subscription } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { TipoIntestazioneUma } from 'src/app/a4g-common/classi/enums/uma/TipoDocumentoUma.enum';
-import { HttpClientAnagraficaService } from 'src/app/uma/shared-uma/services/http-client-anagrafica.service';
+import { FascicoloService } from 'src/app/fascicolo/fascicolo.service';
+// import { HttpClientAnagraficaService } from 'src/app/uma/shared-uma/services/http-client-anagrafica.service';
 import { UmaLabels } from 'src/app/uma/uma.labels';
 import { HttpClientDichiarazioneConsumiUmaService } from '../../services/http-client-dichiarazione-consumi-uma.service';
 import { HttpClientDomandaUmaService } from '../../services/http-client-domanda-uma.service';
@@ -29,7 +30,7 @@ export class IntestazioneUmaComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private httpClientDomandaUma: HttpClientDomandaUmaService,
     private httpClientDichiarazioneConsumiUmaService: HttpClientDichiarazioneConsumiUmaService,
-    private httpClientAnagraficaService: HttpClientAnagraficaService,
+    private fascicoloService: FascicoloService,
     private activeRoute: ActivatedRoute,
     private errorService: ErrorService
   ) { }
@@ -56,10 +57,11 @@ export class IntestazioneUmaComponent implements OnInit, OnChanges, OnDestroy {
         }),
         switchMap((richiestaOrDichiarazione: RichiestaCarburanteDto | DichiarazioneConsumiDto) => {
           this.richiestaOrDichiarazione = richiestaOrDichiarazione;
-          return this.httpClientAnagraficaService.getFascicoloAgs(this.richiestaOrDichiarazione.cuaa)
+          return this.fascicoloService.getFascicoloLazio(this.richiestaOrDichiarazione.cuaa);
+          // return this.httpClientAnagraficaService.getFascicoloAgs(this.richiestaOrDichiarazione.cuaa)
         }))
       .subscribe(fascicolo => { // TODO usa solo la denominazione non dovrebbe essere necessario oltre
-        this.richiestaOrDichiarazione.denominazione = fascicolo.denominazione;
+        this.richiestaOrDichiarazione.denominazione = fascicolo.data.descDeno;
         if (this.ctx == TipoIntestazioneUma.GESTIONE_CARBURANTE_IN_ESUBERO) 
         {
           this.setTemplateIntestazioneByType(TipoIntestazioneUma.GESTIONE_CARBURANTE_IN_ESUBERO);

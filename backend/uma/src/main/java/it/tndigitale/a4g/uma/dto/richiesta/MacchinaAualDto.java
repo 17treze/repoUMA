@@ -2,8 +2,9 @@ package it.tndigitale.a4g.uma.dto.richiesta;
 
 import java.util.Date;
 
-// {"codiMacc":910219,"codiCuaa":"MPRMDL65D69H501P","carburante":{"codiCarb":"G","descCarb":"Gasolio","codiCarbSian":"G"},"dataCess":null,"dataIscr":"20190222","formaPossesso":{"codiFormPoss":"P ","descFormPoss":"Proprietario","codiFormPossSian":"P "},"descMarc":"IVECOAIFO","descMode":null,"descTarg":"VT29822","descTela":"8061I25+7.00","tipoMacchina":{"codiTipoMacc":"MP","descMacc":"MOTOPOMPA SERVIZI AZIENDALI","codiTipoMaccSian":"MP"},"tipoTarga":{"codiTipoTarg":"T","descTipoTarg":"Triangolare","codiTipoTargSian":"T"},"trazione":{"codiTraz":"R ","descTraz":"Ruote","codiTrazSian":"R "},"descMatrMoto":null,"descMarcMoto":null,"descNomeMoto":null,"numePoteKwat":null,"numePesoRimoTota":null,"numePesoRimoTara":null,"numeConsOrar":null,"numeAnnoIscr":null,"flagNuovUsat":null,"descDittScar":null,"codiMaccUma":null}
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MacchinaAualDto {
 
     private Long codiMacc;
