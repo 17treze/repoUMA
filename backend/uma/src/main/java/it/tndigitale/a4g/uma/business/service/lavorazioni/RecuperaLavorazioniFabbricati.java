@@ -13,6 +13,7 @@ import it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model.FabbricatoAgsDt
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.FabbricatoGruppiDao;
+import it.tndigitale.a4g.uma.dto.richiesta.FabbricatoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.LavorazioneFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.RaggruppamentoLavorazioniDto;
 
@@ -40,5 +41,12 @@ public class RecuperaLavorazioniFabbricati extends RecuperaLavorazioniStrategy {
 		return Optional.empty();
 	};
 
+	public final Function<FabbricatoAualDto, Optional<FabbricatoGruppiModel>> tipoAualToFabbricatoGruppoModel = fabbricatoAualDto -> {
+		Optional<FabbricatoGruppiModel> fabbricatoGruppiModelOpt = Optional.ofNullable(fabbricatoGruppiDao.findByCodiceFabbricato("000007"));
+		if (fabbricatoGruppiModelOpt.isPresent()) {
+			return Optional.of(fabbricatoGruppiModelOpt.get());
+		}
+		return Optional.empty();
+	};
 
 }

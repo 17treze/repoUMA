@@ -1,17 +1,23 @@
 export class FascicoloData {
-   cuaa: string;
-   denominazione: string;
-   tipoDetentore: string;
-   stato: string;
-   caa: string;
-   caacodice: string;
-   sportello: string;
-   tipoDetenzione: TipoDetenzione;
-   detentore: string;
-   organismoPagatore: string;
-   dataValidazFascicolo: string;
-   dataElaborazione: string;
-   dataAperturaFascicolo: string
+   codiCuaa: string;
+   descDeno: string;
+   codiTipoDete: string;
+   // stato: string;
+   // caa: string;
+   // caacodice: string;
+   // sportello: string;
+   // tipoDetenzione: TipoDetenzione;
+   // detentore: string;
+   op: OrgaPagaData;
+   codiTipoAzie: string;
+   dataValiFasc: string;
+   dataElab: string;
+   dataAperFasc: string
+}
+
+export class OrgaPagaData {
+  codiOrgaPaga: string;
+  descOrgaPaga: string;
 }
 
 export class FascicoloLazio {

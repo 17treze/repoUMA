@@ -1,5 +1,9 @@
 package it.tndigitale.a4g.uma.business.service.richiesta;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,12 +15,19 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+// import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
 import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
 import it.tndigitale.a4g.framework.pagination.model.Paginazione;
@@ -26,31 +37,38 @@ import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
+import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburante;
+import it.tndigitale.a4g.uma.business.persistence.entity.UtilizzoMacchinariModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.FabbricatiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteSpecification;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
-import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
+// import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.dto.DomandaUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
+import it.tndigitale.a4g.uma.dto.richiesta.MacchinaAualDto;
+import it.tndigitale.a4g.uma.dto.richiesta.RespTerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburantePagedFilter;
+import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.RichiestaCarburanteDtoBuilder;
 
 @Service
 public class RicercaRichiestaCarburanteService {
 	
 	private static final int QUERY_LIMIT = 999;
+
+	private static final Logger logger = LoggerFactory.getLogger(RicercaRichiestaCarburanteService.class);
 	
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
 	private FabbricatiDao fabbricatiDao;
-	@Autowired
-	private UmaTerritorioClient territorioClient;
+	// @Autowired
+	// private UmaTerritorioClient territorioClient;
 	@Autowired
 	private RichiestaCarburanteDtoBuilder builder;
 	@Autowired
@@ -152,9 +170,11 @@ public class RicercaRichiestaCarburanteService {
 		
 		// Controllo se la richiesta ha associati dei fabbricati - Già importati in fase di creazione della richiesta
 		List<FabbricatoModel> fabbricati = fabbricatiDao.findByRichiestaCarburante_id(id);
-		// reperisco informazioni sulle colture da ags
-		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(),
-				richiesta.getDataPresentazione());
+
+//		// reperisco informazioni sulle colture da ags
+//		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(),
+//				richiesta.getDataPresentazione());
+		List<TerritorioAualDto> particelle = this.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataPresentazione());
 		
 		var idRettificataOpt = getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(),
 				richiesta.getDataPresentazione());
@@ -220,4 +240,30 @@ public class RicercaRichiestaCarburanteService {
 		return builder.newDto().from(richiestaModel)
 				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null).build();
 	};
+
+	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
+	private List<TerritorioAualDto> getColtureFromAual(String cuaa, LocalDateTime data) {
+		
+        final String uri = "http://localhost:8888/anagrafeWSNew/fascicoloFS6/leggiConsistenzaFS7?cuaa=" + cuaa;
+        
+		try {
+	        RestTemplate restTemplate = new RestTemplate();
+	        URL url = new URL(uri);
+	        HttpURLConnection http = (HttpURLConnection)url.openConnection();
+	        http.setRequestProperty("Content-Type", "application/json");
+	        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+	        logger.info(response.getBody());
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        RespTerritorioAualDto responseAual = objectMapper.readValue(response.getBody(), new TypeReference<RespTerritorioAualDto>(){});
+	        return responseAual.getData();
+		}
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

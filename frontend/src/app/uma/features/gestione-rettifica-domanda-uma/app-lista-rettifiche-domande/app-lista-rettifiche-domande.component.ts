@@ -79,7 +79,7 @@ export class ListaRettificheDomandeComponent implements OnInit, OnChanges {
   }
 
   visualizzaRichiesta(nrDomanda: number) {
-    this.router.navigate([`uma/${this.fascicoloCorrente.fascicolo.idFascicolo}/richiesta/${nrDomanda}/indice`]);
+    this.router.navigate([`uma/${this.fascicoloCorrente.fascicoloLazio.data.codiCuaa}/richiesta/${nrDomanda}/indice`]);
   }
 
 

@@ -4,12 +4,12 @@ import { ErrorService } from './../../../a4g-common/services/error.service';
 import { HttpClientDichiarazioneConsumiUmaService } from '../../core-uma/services/http-client-dichiarazione-consumi-uma.service';
 import { TipoRichiedenteUma } from '../../../a4g-common/classi/TipoRichiedenteUma-enum';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AnagraficaFascicoloService } from '../../../fascicolo/creazione-fascicolo/anagrafica-fascicolo.service';
+// import { AnagraficaFascicoloService } from '../../../fascicolo/creazione-fascicolo/anagrafica-fascicolo.service';
 import { MessageService } from 'primeng/api';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
-import { EMPTY, forkJoin, Observable, of, Subscription } from 'rxjs';
+import { EMPTY, Subscription } from 'rxjs';
 import { FascicoloCorrente } from 'src/app/fascicolo/fascicoloCorrente';
 import { DateUtilService } from 'src/app/a4g-common/services/date-util.service';
 // import { switchMap } from 'rxjs/internal/operators/switchMap';
@@ -42,7 +42,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
   constructor(
     public dateUtilService: DateUtilService,
     private messageService: MessageService,
-    private anagraficaFascicoloService: AnagraficaFascicoloService,
+    // private anagraficaFascicoloService: AnagraficaFascicoloService,
     private fascicoloCorrente: FascicoloCorrente,
     private router: Router,
     private route: ActivatedRoute,
@@ -92,7 +92,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
     ).subscribe((fascicolo: FascicoloLazio) => {
         if (fascicolo.data) {
           console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
-          // this.fascicoloCorrente.fascicoloLazio = fascicolo.data;
+          this.fascicoloCorrente.fascicoloLazio = fascicolo;
           this.cuaa = fascicolo.data.codiCuaa;
           let personaDto = new PersonaAgsDto();
           personaDto.codiceFiscale = fascicolo.data.codiCuaa;
@@ -102,6 +102,7 @@ export class RichiedenteUmaComponent implements OnInit, OnDestroy {
           personaDto.denominazione = fascicolo.data.descDeno;
           personaDto.nome = fascicolo.data.descDeno;
           personaDto.cognome = fascicolo.data.descDeno;
+          this.soggetti.push(personaDto);
           this.richiedenteForm.get('richiedente').setValue(personaDto);
         }
         else {

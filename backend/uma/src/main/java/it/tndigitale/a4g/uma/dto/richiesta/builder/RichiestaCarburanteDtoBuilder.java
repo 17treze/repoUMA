@@ -21,6 +21,7 @@ import it.tndigitale.a4g.uma.business.persistence.entity.UtilizzoMacchinariModel
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
+import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
 
 @Component
 public class RichiestaCarburanteDtoBuilder {
@@ -107,20 +108,20 @@ public class RichiestaCarburanteDtoBuilder {
 	}
 	
 	// verifica se esiste almeno un gruppo di lavorazione per le colture per l'anno campagna della domanda 
-	public RichiestaCarburanteDtoBuilder withFlagSuperficiPresenti(List<ParticellaDto> particelle,
+	public RichiestaCarburanteDtoBuilder withFlagSuperficiPresenti(List<TerritorioAualDto> particelle,
 			RichiestaCarburanteModel domanda) {
 		if (CollectionUtils.isEmpty(particelle)) {
 			richiestaCarburanteDto.setHaSuperfici(false);
 			return this;
 		}
-		Optional<CodificaColtura> gruppoColtura = particelle.stream().map(ParticellaDto::getColture)
-				.flatMap(List::stream).map(ColturaDto::getCodifica).filter(c -> {
-					ColturaGruppiModel coltura = colturaGruppiDao.findByCodificaAndAnno(c.getCodiceSuolo(),
-							c.getCodiceDestinazioneUso(), c.getCodiceUso(), c.getCodiceQualita(), c.getCodiceVarieta(),
-							domanda.getCampagna().intValue());
-					return coltura != null ? Boolean.TRUE : Boolean.FALSE;
-				}).findFirst();
-		richiestaCarburanteDto.setHaSuperfici(gruppoColtura.isPresent());
+//		Optional<CodificaColtura> gruppoColtura = particelle.stream().map(ParticellaDto::getColture)
+//				.flatMap(List::stream).map(ColturaDto::getCodifica).filter(c -> {
+//					ColturaGruppiModel coltura = colturaGruppiDao.findByCodificaAndAnno(c.getCodiceSuolo(),
+//							c.getCodiceDestinazioneUso(), c.getCodiceUso(), c.getCodiceQualita(), c.getCodiceVarieta(),
+//							domanda.getCampagna().intValue());
+//					return coltura != null ? Boolean.TRUE : Boolean.FALSE;
+//				}).findFirst();
+		richiestaCarburanteDto.setHaSuperfici(true); //gruppoColtura.isPresent()
 		return this;
 	}
 	
