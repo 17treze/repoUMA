@@ -24,6 +24,7 @@ import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniSuperficie;
 import it.tndigitale.a4g.uma.business.service.richiesta.CarburanteConverter;
+import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
 
 @Component
 public class DichiarazioneConsumiCarburanteComponent {
@@ -40,17 +41,17 @@ public class DichiarazioneConsumiCarburanteComponent {
 	public CarburanteDecimal calcolaSuperfici(RichiestaCarburanteModel richiesta, LocalDateTime dataConduzione) {
 
 		// Interrogare il piano colturale alla data di protocollazione della richiesta
-		List<ParticellaDto> pcOld = territorioClient.getColture(richiesta.getCuaa(), richiesta.getDataProtocollazione());
+		List<TerritorioAualDto> pcOld = territorioClient.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataProtocollazione());
 
 		// Interrogare il piano colturale al primo novembre dell'anno di campagna
-		List<ParticellaDto> pcNew = territorioClient.getColture(richiesta.getCuaa(), dataConduzione);
+		List<TerritorioAualDto> pcNew = territorioClient.getColtureFromAual(richiesta.getCuaa(), dataConduzione);
 
 		if (CollectionUtils.isEmpty(pcOld) || CollectionUtils.isEmpty(pcNew)) {
 			return new CarburanteDecimal();
 		}
 
 		// Scartare le particelle presenti al primo di novembre ma non alla data di protocollazione della Richiesta di carburante.
-		List<ParticellaDto> particelle = pcNew.stream()
+		List<TerritorioAualDto> particelle = pcNew.stream()
 				.filter(p -> contains(p, pcOld))
 				.collect(Collectors.toList());
 
@@ -113,11 +114,14 @@ public class DichiarazioneConsumiCarburanteComponent {
 	}
 
 	// restituisce true se l'elemento è contenuto nella lista, false altrimenti
-	private boolean contains(ParticellaDto p, List<ParticellaDto> particelle) {
+	private boolean contains(TerritorioAualDto p, List<TerritorioAualDto> particelle) {
 		return particelle.stream().anyMatch(particella -> 
-		p.getCodiceNazionale().equals(particella.getCodiceNazionale()) && 
-		p.getFoglio().equals(particella.getFoglio()) &&
-		p.getNumero().equals(particella.getNumero()) &&
-		(p.getSubalterno() == null ? particella.getSubalterno() == null : p.getSubalterno().equals(particella.getSubalterno())));
+			p.getCodiProv().equals(particella.getCodiProv()) && 
+			p.getCodiComu().equals(particella.getCodiComu()) && 
+			(p.getDescSezi() == null ? particella.getDescSezi() == null : p.getDescSezi().equals(particella.getDescSezi())) &&
+			p.getDescFogl().equals(particella.getDescFogl()) &&
+			p.getDescPart().equals(particella.getDescPart()) &&
+			(p.getDescSuba() == null ? particella.getDescSuba() == null : p.getDescSuba().equals(particella.getDescSuba()))
+		);
 	}
 }

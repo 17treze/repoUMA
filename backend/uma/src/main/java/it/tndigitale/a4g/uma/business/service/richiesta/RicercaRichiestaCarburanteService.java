@@ -1,9 +1,5 @@
 package it.tndigitale.a4g.uma.business.service.richiesta;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,12 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 // import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
@@ -37,19 +28,15 @@ import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
-import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburante;
-import it.tndigitale.a4g.uma.business.persistence.entity.UtilizzoMacchinariModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.FabbricatiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteSpecification;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
-// import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
+import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.dto.DomandaUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
-import it.tndigitale.a4g.uma.dto.richiesta.MacchinaAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.RespTerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburantePagedFilter;
@@ -67,8 +54,8 @@ public class RicercaRichiestaCarburanteService {
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
 	private FabbricatiDao fabbricatiDao;
-	// @Autowired
-	// private UmaTerritorioClient territorioClient;
+	@Autowired
+	private UmaTerritorioClient territorioClient;
 	@Autowired
 	private RichiestaCarburanteDtoBuilder builder;
 	@Autowired
@@ -174,7 +161,7 @@ public class RicercaRichiestaCarburanteService {
 //		// reperisco informazioni sulle colture da ags
 //		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(),
 //				richiesta.getDataPresentazione());
-		List<TerritorioAualDto> particelle = this.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataPresentazione());
+		List<TerritorioAualDto> particelle = territorioClient.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataPresentazione());
 		
 		var idRettificataOpt = getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(),
 				richiesta.getDataPresentazione());
@@ -241,29 +228,4 @@ public class RicercaRichiestaCarburanteService {
 				.withIdRettificata(idRettificataOpt.isPresent() ? idRettificataOpt.get() : null).build();
 	};
 
-	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
-	private List<TerritorioAualDto> getColtureFromAual(String cuaa, LocalDateTime data) {
-		
-        final String uri = "http://localhost:8888/anagrafeWSNew/fascicoloFS6/leggiConsistenzaFS7?cuaa=" + cuaa;
-        
-		try {
-	        RestTemplate restTemplate = new RestTemplate();
-	        URL url = new URL(uri);
-	        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-	        http.setRequestProperty("Content-Type", "application/json");
-	        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-	        logger.info(response.getBody());
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        RespTerritorioAualDto responseAual = objectMapper.readValue(response.getBody(), new TypeReference<RespTerritorioAualDto>(){});
-	        return responseAual.getData();
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
 }

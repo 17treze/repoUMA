@@ -52,6 +52,8 @@ import it.tndigitale.a4g.uma.dto.richiesta.MacchinaAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.FabbricatoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelievoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PresentaRichiestaDto;
+import it.tndigitale.a4g.uma.dto.richiesta.RespFabbricatiAualDto;
+import it.tndigitale.a4g.uma.dto.richiesta.RespMacchineAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.PrelievoBuilder;
 
 @Service
@@ -259,8 +261,9 @@ public class RichiestaCarburanteService {
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
         logger.info(response.getBody());
         ObjectMapper objectMapper = new ObjectMapper();
-        List<FabbricatoAualDto> fabbricatiAual = objectMapper.readValue(response.getBody(), new TypeReference<List<FabbricatoAualDto>>(){});
-
+        RespFabbricatiAualDto respFabbricati = objectMapper.readValue(response.getBody(), new TypeReference<RespFabbricatiAualDto>(){});
+        List<FabbricatoAualDto> fabbricatiAual = respFabbricati.getData();
+        
 		if (CollectionUtils.isEmpty(fabbricatiAual)) {
 			return new ArrayList<>();
 		}
@@ -313,7 +316,9 @@ public class RichiestaCarburanteService {
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
         logger.info(response.getBody());
         ObjectMapper objectMapper = new ObjectMapper();
-        List<MacchinaAualDto> macchineAual = objectMapper.readValue(response.getBody(), new TypeReference<List<MacchinaAualDto>>(){});
+        RespMacchineAualDto respMacchine = objectMapper.readValue(response.getBody(), new TypeReference<RespMacchineAualDto>(){});
+        List<MacchinaAualDto> macchineAual = respMacchine.getData();
+        logger.info("N.macchine: " + macchineAual.size());
         return macchineAual.stream().map(macchinaAual -> new UtilizzoMacchinariModel()
 				.setFlagUtilizzo(false)
 				.setRichiestaCarburante(richiesta)
