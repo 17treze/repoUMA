@@ -98,27 +98,14 @@ public class RecuperaLavorazioniSuperficie extends RecuperaLavorazioniStrategy {
 			for (UtilizzoTerrenoAualDto t : p.getListaUtilizzoTerreno()) {
 				for (UtilizzoSuoloAualDto u : t.getListaUtilizzoSuolo()) {
 					Optional<GruppoLavorazioneModel> gruppoOpt = codificaToGruppo.apply(u);
+					logger.info("Coltura: " + u);
 					if (gruppoOpt.isPresent()) {
+						logger.info("Superficie: " + u.getNumeSupeUtil());
 						mappaGruppoSuperficie.merge(gruppoOpt.get(), Integer.parseInt(u.getNumeSupeUtil()), (a,b) -> a + b);
 					}
 				}
 			}
 		}
-		/*
-		particelle.stream()
-		.map(TerritorioAualDto::getListaUtilizzoTerreno)
-		.flatMap(List::stream)
-		.map(UtilizzoTerrenoAualDto::getListaUtilizzoSuolo)
-		.flatMap(List::stream)
-		// TASK-UMA-45: Recupero Superficie Dichiarata - Se il valore della superficie accertata è null o è zero, recuperare il valore della sup. Dichiarata.
-		.collect(Collectors.groupingBy(UtilizzoSuoloAualDto::, Collectors.summingInt(x -> x.getSupeElig() != 0 ? x.getSupeElig() : x.getNumeSupeUtil())))
-		.forEach((utilizzoSuoloAualDto, superficie) -> {
-			Optional<GruppoLavorazioneModel> gruppoOpt = codificaToGruppo.apply(utilizzoSuoloAualDto);
-			if (gruppoOpt.isPresent()) {
-				mappaGruppoSuperficie.merge(gruppoOpt.get(), superficie, (a,b) -> a + b);
-			}
-		});
-		*/	
 		mappaGruppoSuperficie.forEach((g,s) -> logger.info("[Lavorazioni UMA] - Calcolo superficie massima: gruppo {} superficie {}" , g.getIndice() ,s));
 		return mappaGruppoSuperficie;
 	}

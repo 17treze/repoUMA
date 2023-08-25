@@ -45,7 +45,7 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((params: Params) => {
           console.log('step-fascicoloaperto');
-          return this.fascicoloService.getFascicoloLazio('MPRMDL65D69H501P'); // params['idFascicolo']
+          return this.fascicoloService.getFascicoloLazio(params['idFascicolo']);
         })).subscribe((fascicolo: FascicoloLazio) => {
           if (fascicolo.data) {
             console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));

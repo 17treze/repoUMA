@@ -313,7 +313,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
       // se carburante in esubero > 0 => navigate else toast errore
       console.log("Carburante in esubero ", carburanteInEsubero);
       if (carburanteInEsubero && (carburanteInEsubero.benzina > 0 || carburanteInEsubero.gasolio > 0 || carburanteInEsubero.gasolioSerre > 0)) {
-        this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/esubero-carburante/${idRichiestaCarburante}`]);
+        this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/esubero-carburante/${idRichiestaCarburante}`]);
       } else {
         this.errorService.showErrorWithMessage(UMA_MESSAGES.erroreCarburanteInEsubero, 'tst');
         return;
@@ -384,10 +384,10 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
       ).subscribe((idDomandaOrDomande: number | Array<RichiestaCarburanteDto>) => {
         if (typeof idDomandaOrDomande === "number") {
           // E' stata creata una nuova domanda uma per il cuaa fornito
-          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/richiesta`, idDomandaOrDomande]);
+          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiesta`, idDomandaOrDomande]);
         } else {
           // Esiste già almeno una richiesta o rettifica per il cuaa fornito
-          this.router.navigate([`./fascicolo/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/rettifiche/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}`], { relativeTo: this.route.parent.parent.parent });
+          this.router.navigate([`./fascicolo/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/rettifiche/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}`], { relativeTo: this.route.parent.parent.parent });
         }
       }, (error: ErrorDTO) => this.errorService.showError(error));
   }
@@ -468,7 +468,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
                 this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
                 return EMPTY;
               }
-              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/richiedente/${TipoRichiedenteUma['dichiarazione-consumi']}`]);
+              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiedente/${TipoRichiedenteUma['dichiarazione-consumi']}`]);
               return EMPTY;
             } else {
               return of(dichiarazioniFiltrate);
@@ -478,12 +478,12 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
       ).subscribe((idDichiarazioneOrDichiarazioni: number | Array<DichiarazioneConsumiDto>) => {
         if (typeof idDichiarazioneOrDichiarazioni === "number") {
           // E' stata creata una nuova domanda uma per il cuaa fornito
-          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/dichiarazione-consumi`, idDichiarazioneOrDichiarazioni]);
+          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/dichiarazione-consumi`, idDichiarazioneOrDichiarazioni]);
         } else {
           // Esiste già una domanda uma per il cuaa fornito
           const orderedList = _.orderBy(idDichiarazioneOrDichiarazioni, ['campagnaRichiesta'], ['desc']);
           idDichiarazioneOrDichiarazioni = orderedList;
-          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/dichiarazione-consumi`, (idDichiarazioneOrDichiarazioni as Array<DichiarazioneConsumiDto>)[0].id]);
+          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/dichiarazione-consumi`, (idDichiarazioneOrDichiarazioni as Array<DichiarazioneConsumiDto>)[0].id]);
         }
       }, (error: ErrorDTO) => this.errorService.showError(error));
   }

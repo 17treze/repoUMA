@@ -2,8 +2,11 @@ package it.tndigitale.a4g.uma.dto.richiesta.builder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -15,17 +18,23 @@ import it.tndigitale.a4g.uma.business.persistence.entity.AmbitoLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.entity.ColturaGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbisognoModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoModel;
+import it.tndigitale.a4g.uma.business.persistence.entity.GruppoLavorazioneModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburante;
 import it.tndigitale.a4g.uma.business.persistence.entity.UtilizzoMacchinariModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
+import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniSuperficie;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
 import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoSuoloAualDto;
+import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoTerrenoAualDto;
 
 @Component
 public class RichiestaCarburanteDtoBuilder {
 	
+	private static Logger logger = LoggerFactory.getLogger(RichiestaCarburanteDtoBuilder.class);
+
 	@Autowired
 	private ColturaGruppiDao colturaGruppiDao;
 	
@@ -110,21 +119,25 @@ public class RichiestaCarburanteDtoBuilder {
 	// verifica se esiste almeno un gruppo di lavorazione per le colture per l'anno campagna della domanda 
 	public RichiestaCarburanteDtoBuilder withFlagSuperficiPresenti(List<TerritorioAualDto> particelle,
 			RichiestaCarburanteModel domanda) {
+		logger.warn("Check terreni: " + particelle.size());
 		if (CollectionUtils.isEmpty(particelle)) {
 			richiestaCarburanteDto.setHaSuperfici(false);
 			return this;
 		}
-//		Optional<CodificaColtura> gruppoColtura = particelle.stream().map(ParticellaDto::getColture)
-//				.flatMap(List::stream).map(ColturaDto::getCodifica).filter(c -> {
-//					ColturaGruppiModel coltura = colturaGruppiDao.findByCodificaAndAnno(c.getCodiceSuolo(),
-//							c.getCodiceDestinazioneUso(), c.getCodiceUso(), c.getCodiceQualita(), c.getCodiceVarieta(),
-//							domanda.getCampagna().intValue());
-//					return coltura != null ? Boolean.TRUE : Boolean.FALSE;
-//				}).findFirst();
-		richiestaCarburanteDto.setHaSuperfici(true); //gruppoColtura.isPresent()
+		for (TerritorioAualDto p : particelle) {
+			for (UtilizzoTerrenoAualDto t : p.getListaUtilizzoTerreno()) {
+				for (UtilizzoSuoloAualDto u : t.getListaUtilizzoSuolo()) {
+					Optional<ColturaGruppiModel> colturaGruppiModelOpt = Optional.ofNullable(colturaGruppiDao.findByCodificaAndAnno(u.getCodiOccu(), u.getCodiDest(), u.getCodiUso(), u.getCodiQual(), u.getCodiOccuVari(), domanda.getCampagna().intValue()));
+					logger.warn("Coltura: " + u);
+					if (colturaGruppiModelOpt.isPresent()) {
+						richiestaCarburanteDto.setHaSuperfici(colturaGruppiModelOpt.isPresent());
+					}
+				}
+			}
+		}
 		return this;
 	}
-	
+
 	// verifica se esiste almeno una dichiarazione effettuata per qualsiasi ambito di lavorazione
 	public RichiestaCarburanteDtoBuilder withFlagDichiarazioniPresenti(List<FabbisognoModel> fabbisogni) {
 		richiestaCarburanteDto.setHaDichiarazioni(!CollectionUtils.isEmpty(fabbisogni));
