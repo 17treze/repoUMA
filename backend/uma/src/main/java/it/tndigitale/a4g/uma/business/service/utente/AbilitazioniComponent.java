@@ -39,6 +39,8 @@ import it.tndigitale.a4g.uma.business.persistence.repository.TrasferimentoCarbur
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.business.service.elenchi.TipoElenco;
+import it.tndigitale.a4g.uma.dto.aual.RappresentanteLegaleAualDto;
+import it.tndigitale.a4g.uma.dto.aual.SoggettoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelievoDto;
 
 /**
@@ -529,8 +531,9 @@ public class AbilitazioniComponent {
 	// l'utente connesso è un Titolare/Rappresentate Legale dell'azienda
 	private boolean isFascicoloAbilitatoUtente(String cuaa) {
 		String codiceFiscaleUtenteConnesso = umaUtenteClient.getUtenteConnesso().getCodiceFiscale();
-		boolean isAbilitato = !anagraficaClient.getTitolariRappresentantiLegali(cuaa).stream()
-				.map(CaricaAgsDto::getCodiceFiscale).filter(codiceFiscaleUtenteConnesso::equals)
+		SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
+		boolean isAbilitato = soggetto.getRappresentanteLegale().stream()
+				.map(RappresentanteLegaleAualDto::getCodiFisc).filter(codiceFiscaleUtenteConnesso::equals)
 				.collect(Collectors.toList()).isEmpty();
 		if (!isAbilitato) {
 			logger.warn("[ABILITAZIONE FALLITA UTENTE] - Tentato Accesso al fascicolo {} da parte di {}", cuaa,

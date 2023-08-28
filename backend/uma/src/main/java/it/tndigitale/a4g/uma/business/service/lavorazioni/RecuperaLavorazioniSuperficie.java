@@ -26,10 +26,10 @@ import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburant
 import it.tndigitale.a4g.uma.business.persistence.entity.SuperficieMassimaModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
+import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.aual.UtilizzoSuoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.UtilizzoTerrenoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RaggruppamentoLavorazioniDto;
-import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoSuoloAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoTerrenoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.RaggruppamentoLavorazioniBuilder;
 
 @Component("RECUPERO_LAVORAZIONI_SUPERFICIE")

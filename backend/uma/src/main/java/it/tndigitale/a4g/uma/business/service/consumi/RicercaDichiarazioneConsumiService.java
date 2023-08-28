@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
+// import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
 import it.tndigitale.a4g.framework.pagination.builder.PageableBuilder;
 import it.tndigitale.a4g.framework.pagination.model.Ordinamento;
 import it.tndigitale.a4g.framework.pagination.model.Paginazione;
@@ -59,16 +59,16 @@ public class RicercaDichiarazioneConsumiService {
 	public List<DomandaUmaDto> getDichiarazioniConsumi(Long campagna) {
 		List<DomandaUmaDto> response = new ArrayList<>();
 		// recupera sia deleghe che mandati
-		List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
-		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
-				.collect(Collectors.toList());
-		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
-		subLists.stream().forEach(list -> {
-			List<DomandaUmaDto> documenti = dichiarazioneConsumiDao.findByAbilitazioniAndCampagna(list, campagna)
-					.stream().map(documento -> documento.setTipo(TipoDocumentoUma.DICHIARAZIONE_CONSUMI))
-					.collect(Collectors.toList());
-			response.addAll(documenti);
-		});
+//		List<SportelloFascicoloDto> sportelliFascicoliDto = anagraficaClient.getSportelliFascicoli();
+//		var cuaaList = sportelliFascicoliDto.stream().map(SportelloFascicoloDto::getCuaaList).flatMap(List::stream)
+//				.collect(Collectors.toList());
+//		final List<List<String>> subLists = Lists.partition(cuaaList, QUERY_LIMIT);
+//		subLists.stream().forEach(list -> {
+//			List<DomandaUmaDto> documenti = dichiarazioneConsumiDao.findByAbilitazioniAndCampagna(list, campagna)
+//					.stream().map(documento -> documento.setTipo(TipoDocumentoUma.DICHIARAZIONE_CONSUMI))
+//					.collect(Collectors.toList());
+//			response.addAll(documenti);
+//		});
 		return response;
 	}
 	

@@ -26,8 +26,8 @@ import it.tndigitale.a4g.fascicolo.territorio.client.model.CriterioMantenimento;
 import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.fascicolo.territorio.client.model.TitoloConduzione;
 import it.tndigitale.a4g.uma.business.service.richiesta.RicercaRichiestaCarburanteService;
-import it.tndigitale.a4g.uma.dto.richiesta.RespTerritorioAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.aual.RespTerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
 
 @Component
 public class UmaTerritorioClient extends AbstractClient {

@@ -1,5 +1,7 @@
 package it.tndigitale.a4g.uma.business.service.richiesta;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -13,8 +15,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto.StatoEnum;
 import it.tndigitale.a4g.framework.pagination.model.RisultatiPaginati;
 import it.tndigitale.a4g.framework.support.PersonaSelector;
 import it.tndigitale.a4g.framework.time.Clock;
@@ -24,6 +24,9 @@ import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburant
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
 import it.tndigitale.a4g.uma.business.service.consumi.RicercaDichiarazioneConsumiService;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.RespFascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.RespMacchineAualDto;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiDto;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiFilter;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiPagedFilter;
@@ -53,8 +56,8 @@ public class RichiestaCarburanteValidator {
 	
 	@Autowired
 	private UmaAnagraficaClient anagraficaClient;
-	@Autowired
-	private UmaDotazioneTecnicaClient dotazioneTecnicaClient;
+//	@Autowired
+//	private UmaDotazioneTecnicaClient dotazioneTecnicaClient;
 	@Autowired
 	private RicercaRichiestaCarburanteService ricercaRichiestaCarburanteService;
 	@Autowired
@@ -72,24 +75,25 @@ public class RichiestaCarburanteValidator {
 				.andThen(nonEsisteUnaDichiarazioneConsumiInCompilazione).accept(cuaa);
 		
 		// controlli fascicolo
-		FascicoloAgsDto fascicolo = anagraficaClient.getFascicolo(cuaa);
+		FascicoloAualDto fascicolo = anagraficaClient.getFascicolo(cuaa);
+		
 		Optional<Long> idRettificata = ricercaRichiestaCarburanteService.getIdRettificata(cuaa,
 				Long.valueOf(now.getYear()), now);
 		
 		haFascicoloValido.andThen(haIscrizioniSpeciali).accept(fascicolo);
 		
-		if (fascicolo.getDataMorteTitolare() != null && PersonaSelector.isPersonaFisica(cuaa)) {
-			// l'erede non può presentare una richiesta di carburante, può solo rettificare.
-			Assert.isTrue(idRettificata.isPresent(), TASK_UMA_46_ERR_CREAZIONE_RICHIESTA);
-			
-			// esistenza di almeno un erede
-			Assert.isTrue(!CollectionUtils.isEmpty(anagraficaClient.getEredi(cuaa)), TASK_UMA_46_ERR_NO_EREDI);
-		}
-		else {
-			// esistenza di almeno un Titolare/Rappresentante legale
-			Assert.isTrue(!CollectionUtils.isEmpty(anagraficaClient.getTitolariRappresentantiLegali(cuaa)),
-					UMA_01_01_BR1_ERR_MSG);
-		}
+//		if (fascicolo.getDataMorteTitolare() != null && PersonaSelector.isPersonaFisica(cuaa)) {
+//			// l'erede non può presentare una richiesta di carburante, può solo rettificare.
+//			Assert.isTrue(idRettificata.isPresent(), TASK_UMA_46_ERR_CREAZIONE_RICHIESTA);
+//			
+//			// esistenza di almeno un erede
+//			Assert.isTrue(!CollectionUtils.isEmpty(anagraficaClient.getEredi(cuaa)), TASK_UMA_46_ERR_NO_EREDI);
+//		}
+//		else {
+//			// esistenza di almeno un Titolare/Rappresentante legale
+//			Assert.isTrue(!CollectionUtils.isEmpty(anagraficaClient.getTitolariRappresentantiLegali(cuaa)),
+//					UMA_01_01_BR1_ERR_MSG);
+//		}
 	}
 	
 	public void validaProtocollazione(RichiestaCarburanteModel richiesta) {
@@ -97,16 +101,16 @@ public class RichiestaCarburanteValidator {
 	}
 	
 	// Esiste un fascicolo AGS validato almeno una volta nell'anno in corso ed è nello stato VALIDO.
-	private Consumer<FascicoloAgsDto> haFascicoloValido = fascicolo -> {
+	private Consumer<FascicoloAualDto> haFascicoloValido = fascicolo -> {
 		//BR2 - Fascicolo non valido
-		//		if (fascicolo == null || !StatoEnum.VALIDO.equals(fascicolo.getStato()) || fascicolo.getDataValidazione().getYear() != clock.now().getYear()) {
-		//			logger.info("UMA_01_01_BR2 - CUAA: {}", fascicolo.getCuaa());
-		//			throw new IllegalArgumentException(UMA_01_01_BR2_ERR_MSG);
-		//		}
+		if (fascicolo == null || fascicolo.getDataValiFasc() == null || !fascicolo.getDataValiFasc().startsWith("" + clock.now().getYear())) {
+			logger.info("UMA_01_01_BR2 - CUAA: {}", fascicolo.getCodiCuaa());
+			throw new IllegalArgumentException(UMA_01_01_BR2_ERR_MSG);
+		}
 	};
 	
 	// Verifica che nel fascicolo aziendale sia selezionata una delle due seguenti voci: Iscritto alla sezione speciale agricola oppure Non iscritto alla sezione speciale agricola, art.2 ,c.1, D.M. n.454/2001.
-	private Consumer<FascicoloAgsDto> haIscrizioniSpeciali = fascicolo -> {
+	private Consumer<FascicoloAualDto> haIscrizioniSpeciali = fascicolo -> {
 		//BR3 - Info CIAA
 		//		if (!(fascicolo.isIscrittoSezioneSpecialeAgricola() || fascicolo.isNonIscrittoSezioneSpecialeAgricola())) {
 		//			throw new IllegalArgumentException(UMA_01_01_BR3_ERR_MSG);
@@ -115,9 +119,9 @@ public class RichiestaCarburanteValidator {
 	
 	// Presenza di almeno una macchina nel fascicolo.
 	private Consumer<String> haAlmenoUnaMacchina = cuaa -> {
-		if (CollectionUtils.isEmpty(dotazioneTecnicaClient.getMacchine(cuaa, clock.now()))) {
-			throw new IllegalArgumentException(UMA_01_01_BR4_ERR_MSG);
-		}
+//		if (CollectionUtils.isEmpty(dotazioneTecnicaClient.getMacchine(cuaa, clock.now()))) {
+//			throw new IllegalArgumentException(UMA_01_01_BR4_ERR_MSG);
+//		}
 	};
 	
 	// Esiste già in A4G una domanda UMA con lo stato in compilazione per quell'azienda nell'anno in corso.
@@ -216,12 +220,21 @@ public class RichiestaCarburanteValidator {
 	
 	// Controllo effettuato solo in fase di protocollazione della richiesta
 	private Consumer<RichiestaCarburanteModel> validaFascicolo = richiesta -> {
-		FascicoloAgsDto fascicoloValido = anagraficaClient.getFascicolo(richiesta.getCuaa());
-		if (fascicoloValido == null
-				|| fascicoloValido.getDataValidazione().compareTo(richiesta.getDataPresentazione()) > 0) {
+		FascicoloAualDto fascicoloValido = anagraficaClient.getFascicolo(richiesta.getCuaa());
+		
+        if (fascicoloValido != null && fascicoloValido.getDataValiFasc() != null) {
+        	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        	String dataValidazioneFascicolo = fascicoloValido.getDataValiFasc();
+        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        	if (dataValidazioneFascicolo.compareTo(richiesta.getDataPresentazione().format(formatter)) > 0) {
+    			logger.info("UMA_08_BR1 - CUAA: {}", richiesta.getCuaa());
+    			throw new IllegalArgumentException(UMA_08_BR1_ERR_MSG);
+        	}
+		}
+        else {
 			logger.info("UMA_08_BR1 - CUAA: {}", richiesta.getCuaa());
 			throw new IllegalArgumentException(UMA_08_BR1_ERR_MSG);
-		}
+        }
 		haFascicoloValido.accept(fascicoloValido);
 	};
 	
@@ -236,4 +249,5 @@ public class RichiestaCarburanteValidator {
 			Assert.isTrue(!StringUtils.isEmpty(richiesta.getNote()), NOTE_NON_PRESENTI);
 		}
 	};
+	
 }

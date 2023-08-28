@@ -18,6 +18,7 @@ import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburante
 import it.tndigitale.a4g.uma.business.persistence.repository.TrasferimentiSpecification;
 import it.tndigitale.a4g.uma.business.persistence.repository.TrasferimentoCarburanteDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDto;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDtoBuilder;
 import it.tndigitale.a4g.uma.dto.richiesta.AziendaDto;
@@ -90,8 +91,8 @@ public class TrasferimentiCarburanteService {
 		TrasferimentoCarburanteModel trasferimento = trasferimentoCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Nessun trasferimento di carburante trovato con id ".concat(id.toString())));
 		RichiestaCarburanteModel richiesta = trasferimento.getRichiestaCarburante();
 
-		FascicoloAgsDto fascicolo = anagraficaClient.getFascicolo(trasferimento.getCuaaDestinatario());
-		String denominazione = fascicolo != null ? fascicolo.getDenominazione() : null;
+		FascicoloAualDto fascicolo = anagraficaClient.getFascicolo(trasferimento.getCuaaDestinatario());
+		String denominazione = fascicolo != null ? fascicolo.getDescDeno() : null;
 
 		return new TrasferimentoDto()
 				.setId(trasferimento.getId())

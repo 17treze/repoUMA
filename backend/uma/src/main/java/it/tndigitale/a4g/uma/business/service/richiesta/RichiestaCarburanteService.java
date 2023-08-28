@@ -15,19 +15,10 @@ import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model.FabbricatoAgsDto;
-import it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model.MacchinaAgsDto;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.PrelievoModel;
@@ -43,17 +34,16 @@ import it.tndigitale.a4g.uma.business.persistence.repository.UtilizzoMacchinariD
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniFabbricati;
+import it.tndigitale.a4g.uma.dto.aual.FabbricatoAualDto;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.MacchinaAualDto;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDto;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDtoBuilder;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteRichiestoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteTotale;
-import it.tndigitale.a4g.uma.dto.richiesta.MacchinaAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.FabbricatoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelievoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PresentaRichiestaDto;
-import it.tndigitale.a4g.uma.dto.richiesta.RespFabbricatiAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.RespMacchineAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.PrelievoBuilder;
 
 @Service
@@ -86,11 +76,11 @@ public class RichiestaCarburanteService {
 	public Long presenta(PresentaRichiestaDto presentaRichiestaDto) {
 		// richiestaCarburanteValidator.validaPresentazioneRichiesta(presentaRichiestaDto.getCuaa());
 
-		FascicoloAgsDto fascicoloAgs = new FascicoloAgsDto();
+		FascicoloAualDto fascicoloAgs = new FascicoloAualDto();
 		
 		// anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
-		fascicoloAgs.setCuaa(presentaRichiestaDto.getCuaa());
-		fascicoloAgs.setDenominazione(presentaRichiestaDto.getCuaa());
+		fascicoloAgs.setCodiCuaa(presentaRichiestaDto.getCuaa());
+		fascicoloAgs.setDescDeno(presentaRichiestaDto.getCuaa());
 		
 		// Reperisco la detenzione del fascicolo ags
 //		var det = fascicoloAgs.getDetenzioni().stream()
@@ -107,7 +97,7 @@ public class RichiestaCarburanteService {
 				.setDataPresentazione(clock.now())
 				.setCampagna(Long.valueOf(clock.now().getYear()))
 				.setStato(StatoRichiestaCarburante.IN_COMPILAZIONE)
-				.setDenominazione(fascicoloAgs.getDenominazione()) // reperisco la denominazione del fascicolo da anagrafica legacy
+				.setDenominazione(fascicoloAgs.getDescDeno()) // reperisco la denominazione del fascicolo da anagrafica legacy
 //				.setEntePresentatore(det.getSportello())
 				;
 				
@@ -253,16 +243,7 @@ public class RichiestaCarburanteService {
 
 		List<FabbricatoModel> fabbricatiToSave = new ArrayList<>();
 		
-        final String uri = "http://localhost:8888/anagrafeWSNew/fascicoloFS6/leggiFabbricatiFS6?cuaa=" + cuaa;
-        RestTemplate restTemplate = new RestTemplate();
-        URL url = new URL(uri);
-        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-        http.setRequestProperty("Content-Type", "application/json");
-        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        logger.info(response.getBody());
-        ObjectMapper objectMapper = new ObjectMapper();
-        RespFabbricatiAualDto respFabbricati = objectMapper.readValue(response.getBody(), new TypeReference<RespFabbricatiAualDto>(){});
-        List<FabbricatoAualDto> fabbricatiAual = respFabbricati.getData();
+        List<FabbricatoAualDto> fabbricatiAual = dotazioneTecnicaClient.getFabbricati(cuaa);
         
 		if (CollectionUtils.isEmpty(fabbricatiAual)) {
 			return new ArrayList<>();
@@ -308,16 +289,7 @@ public class RichiestaCarburanteService {
 	private List<UtilizzoMacchinariModel> getMacchineFromAual(String cuaa, RichiestaCarburanteModel richiesta) 
 			throws MalformedURLException, IOException {
 		
-        final String uri = "http://localhost:8888/anagrafeWSNew/fascicoloFS6/leggiMacchineFS6?cuaa=" + cuaa;
-        RestTemplate restTemplate = new RestTemplate();
-        URL url = new URL(uri);
-        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-        http.setRequestProperty("Content-Type", "application/json");
-        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        logger.info(response.getBody());
-        ObjectMapper objectMapper = new ObjectMapper();
-        RespMacchineAualDto respMacchine = objectMapper.readValue(response.getBody(), new TypeReference<RespMacchineAualDto>(){});
-        List<MacchinaAualDto> macchineAual = respMacchine.getData();
+        List<MacchinaAualDto> macchineAual = dotazioneTecnicaClient.getMacchine(cuaa);
         logger.info("N.macchine: " + macchineAual.size());
         return macchineAual.stream().map(macchinaAual -> new UtilizzoMacchinariModel()
 				.setFlagUtilizzo(false)

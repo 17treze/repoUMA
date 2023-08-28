@@ -26,14 +26,14 @@ public class ClientiValidator {
 	private UmaAnagraficaClient anagraficaClient;
 
 	MovimentoValidazioneFascicoloAgsDto validaFascicoloCliente(Long id, Integer campagna) {
-		MovimentoValidazioneFascicoloAgsDto movimentoValidazioneFascicolo = anagraficaClient.getMovimentazioniValidazioneFascicolo(id, campagna.longValue()); 
-		if (movimentoValidazioneFascicolo != null) {
-			fascicoloValidoValidatoAnnoPrecedente
-			.accept(movimentoValidazioneFascicolo);
-		} else {
-			throw new IllegalArgumentException("Non è stato possibile reperire i dati del fascicolo con id: " + id.toString());
-		}
-		return movimentoValidazioneFascicolo;
+//		MovimentoValidazioneFascicoloAgsDto movimentoValidazioneFascicolo = anagraficaClient.getMovimentazioniValidazioneFascicolo(id, campagna.longValue()); 
+//		if (movimentoValidazioneFascicolo != null) {
+//			fascicoloValidoValidatoAnnoPrecedente
+//			.accept(movimentoValidazioneFascicolo);
+//		} else {
+//			throw new IllegalArgumentException("Non è stato possibile reperire i dati del fascicolo con id: " + id.toString());
+//		}
+		return null; // movimentoValidazioneFascicolo;
 	}
 
 	DichiarazioneConsumiModel validaDichiarazioneConsumiCliente(Long id, MovimentoValidazioneFascicoloAgsDto movFas) {

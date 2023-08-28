@@ -1,6 +1,7 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -12,10 +13,8 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto.StatoEnum;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.VerificaFirmaClient;
 import it.tndigitale.a4g.framework.event.store.handler.EventBus;
@@ -25,6 +24,9 @@ import it.tndigitale.a4g.uma.business.persistence.repository.GruppiLavorazioneDa
 import it.tndigitale.a4g.uma.business.persistence.repository.SuperficieMassimaDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniSuperficie;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.RappresentanteLegaleAualDto;
+import it.tndigitale.a4g.uma.dto.aual.SoggettoAualDto;
 import it.tndigitale.a4g.uma.dto.protocollo.ProtocollaDocumentoUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 
@@ -67,21 +69,22 @@ public abstract class ProtocollazioneStrategy {
 		}
 	}
 	
-	protected FascicoloAgsDto getFascicolo(String cuaa) {
+	protected FascicoloAualDto getFascicolo(String cuaa) {
 		return anagraficaClient.getFascicolo(cuaa);
 	}
 	
 	// Reperisce la detenzione del fascicolo ags, dando priorità alla detenzione di tipo DELEGA
-	protected String getEntePresentatore(FascicoloAgsDto fascicolo) {
+	protected String getEntePresentatore(FascicoloAualDto fascicolo) {
 		// Reperisco la detenzione del fascicolo ags
-		var det = fascicolo.getDetenzioni().stream()
-				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO)).findFirst()
-				.orElseGet(() -> fascicolo.getDetenzioni().stream()
-						.filter(detenzione -> fascicolo.getDetenzioni().size() == 1
-								&& detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
-						.findFirst()
-						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
-		return det.getSportello();
+//		var det = fascicolo.getDetenzioni().stream()
+//				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO)).findFirst()
+//				.orElseGet(() -> fascicolo.getDetenzioni().stream()
+//						.filter(detenzione -> fascicolo.getDetenzioni().size() == 1
+//								&& detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
+//						.findFirst()
+//						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
+//		return det.getSportello();
+		return fascicolo.getDescDete();
 	}
 	
 	/**
@@ -94,22 +97,31 @@ public abstract class ProtocollazioneStrategy {
 	 * @param tipo
 	 * @return
 	 */
-	protected CaricaAgsDto reperisciDatiRichiedente(String cuaa, String cfRichiedente, TipoDocumentoUma tipo) {
-		FascicoloAgsDto fascicolo = getFascicolo(cuaa);
-		List<CaricaAgsDto> soggetti;
+	protected SoggettoAualDto reperisciDatiRichiedente(String cuaa, String cfRichiedente, TipoDocumentoUma tipo) {
+		FascicoloAualDto fascicolo = getFascicolo(cuaa);
+		List<RappresentanteLegaleAualDto> soggetti = new ArrayList<RappresentanteLegaleAualDto>();
+		SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
 		if (TipoDocumentoUma.RICHIESTA.equals(tipo)) {
-			soggetti = anagraficaClient.getTitolariRappresentantiLegali(cuaa);
+			soggetti.addAll(soggetto.getRappresentanteLegale());
 		}
 		else {
-			soggetti = fascicolo.getDataMorteTitolare() == null ? anagraficaClient.getTitolariRappresentantiLegali(cuaa)
-					: anagraficaClient.getEredi(cuaa);
+//			soggetti = fascicolo.getDataMorteTitolare() == null ? anagraficaClient.getTitolariRappresentantiLegali(cuaa)
+//					: anagraficaClient.getEredi(cuaa);
+			soggetti.addAll(soggetto.getRappresentanteLegale());
 		}
 		Assert.isTrue(!CollectionUtils.isEmpty(soggetti),
 				String.format("Nessun soggetto trovato nel fascicolo per il cuaa %s", cuaa));
+
+		logger.warn("Soggetto: " + soggetti.size() + ", richiedente: " + cfRichiedente);
 		
-		return soggetti.stream().filter(persona -> persona.getCodiceFiscale().equals(cfRichiedente)).findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("La persona ".concat(cfRichiedente)
-						.concat(" non è presente nel fascicolo aziendale ").concat(cuaa)));
+		for (RappresentanteLegaleAualDto rl : soggetti) {
+			if (!rl.getCodiFisc().equals(cfRichiedente)) {
+				throw new IllegalArgumentException("La persona ".concat(cfRichiedente)
+						.concat(" non è presente nel fascicolo aziendale ").concat(cuaa));
+			}
+		}
+
+		return soggetto;
 	}
 	
 	protected void verificaFirmaDocumento(ByteArrayResource document, String codiceFiscaleFirmatario) {
@@ -136,9 +148,9 @@ public abstract class ProtocollazioneStrategy {
 		}
 	}
 	
-	protected void controlloFascicoloValido(FascicoloAgsDto fascicolo) {
-		if (!StatoEnum.VALIDO.equals(fascicolo.getStato())) {
-			var errMsg = String.format("Il fascicolo %s non risulta valido", fascicolo.getCuaa());
+	protected void controlloFascicoloValido(FascicoloAualDto fascicolo) {
+		if (fascicolo.getDataValiFasc() == null) {
+			var errMsg = String.format("Il fascicolo %s non risulta valido", fascicolo.getCodiCuaa());
 			logger.error(errMsg);
 			throw new IllegalArgumentException(errMsg);
 		}

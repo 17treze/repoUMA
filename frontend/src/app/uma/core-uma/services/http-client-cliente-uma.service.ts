@@ -41,6 +41,7 @@ export class HttpClientClienteUmaService {
   }
 
   validaClientiContoterzi(idDichiarazione: number, idFascicolo: number): Observable<void> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     return this.http.post<void>(`${this.urlConsumi()}/${idDichiarazione}/clienti/valida?idFascicolo=${idFascicolo}`, {});
   }
 
@@ -74,6 +75,7 @@ export class HttpClientClienteUmaService {
     allegati.forEach(allegato => {
       formInput.append('allegati', allegato);
     });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     return this.http.post<any>(`${this.urlConsumi()}/${idDichiarazione}/clienti?idFascicolo=${idFascicolo}`, formInput);
   }
 

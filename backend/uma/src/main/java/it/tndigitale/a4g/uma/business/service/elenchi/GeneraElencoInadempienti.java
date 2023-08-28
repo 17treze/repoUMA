@@ -57,12 +57,12 @@ public class GeneraElencoInadempienti extends ElenchiTemplate {
 			return new ArrayList<>();
 		}
 
-		if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_ENTE)) { // OPERATORE CAA: effettua filtro
-			cuaaList = anagraficaClient.getSportelliFascicoli().stream()
-					.map(SportelloFascicoloDto::getCuaaList)
-					.flatMap(List::stream)
-					.collect(Collectors.toList());
-		}
+//		if (utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_ENTE)) { // OPERATORE CAA: effettua filtro
+//			cuaaList = anagraficaClient.getSportelliFascicoli().stream()
+//					.map(SportelloFascicoloDto::getCuaaList)
+//					.flatMap(List::stream)
+//					.collect(Collectors.toList());
+//		}
 
 		if (!CollectionUtils.isEmpty(cuaaList)) {
 			final var list = cuaaList;

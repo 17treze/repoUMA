@@ -86,7 +86,8 @@ export class HttpClientDomandaUmaService {
   }
 
   getRichiestaCarburanteFile(idDomanda: string): Observable<any> {
-    return this.http.get(`${this.urlDomanda()}/${idDomanda}/stampa`, { responseType: 'blob' });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get(`${this.urlDomanda()}/${idDomanda}/stampa`, { responseType: 'blob', headers: headers });
   }
 
   urlDomanda() {

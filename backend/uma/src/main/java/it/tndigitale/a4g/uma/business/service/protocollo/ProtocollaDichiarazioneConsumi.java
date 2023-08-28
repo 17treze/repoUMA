@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto.TipologiaDocumentoPrincipale;
@@ -35,6 +35,8 @@ import it.tndigitale.a4g.uma.business.persistence.entity.StatoDichiarazioneConsu
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburanteConsuntivo;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoConsuntivo;
 import it.tndigitale.a4g.uma.business.persistence.repository.DichiarazioneConsumiDao;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.SoggettoAualDto;
 import it.tndigitale.a4g.uma.dto.protocollo.ProtocollaDocumentoUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 
@@ -61,10 +63,10 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 		RichiestaCarburanteModel richiesta = dichiarazioneConsumi.getRichiestaCarburante();
 
 		// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
-		FascicoloAgsDto fascicolo = getFascicolo(richiesta.getCuaa());
+		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 
 		// trova dati richiedente
-		CaricaAgsDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), dichiarazioneConsumi.getCfRichiedente(), TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
+		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), dichiarazioneConsumi.getCfRichiedente(), TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
 
 		// aggiornamento dichiarazione
 		dichiarazioneConsumiDao.save(dichiarazioneConsumi.setStato(StatoDichiarazioneConsumi.PROTOCOLLATA)
@@ -83,10 +85,10 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 				.setId(id)
 				.setCuaa(richiesta.getCuaa())
 				.setAnno(richiesta.getCampagna().intValue())
-				.setNome(richiedente.getNome())
-				.setCognome(richiedente.getCognome())
-				.setDescrizioneImpresa(fascicolo.getDenominazione())
-				.setPec(fascicolo.getPec())
+				.setNome(richiedente.getDescNome())
+				.setCognome(richiedente.getDescCogn())
+				.setDescrizioneImpresa(fascicolo.getDescDeno())
+				.setPec(fascicolo.getDescPec())
 				.setAllegati(allegati) // Aggiungo gli allegati solo se presenti (Dichiarazione Consumi)
 				.setTipoDocumentoUma(TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
 

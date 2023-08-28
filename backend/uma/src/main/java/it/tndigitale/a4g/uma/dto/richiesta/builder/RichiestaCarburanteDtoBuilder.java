@@ -24,11 +24,11 @@ import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburante;
 import it.tndigitale.a4g.uma.business.persistence.entity.UtilizzoMacchinariModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.ColturaGruppiDao;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniSuperficie;
+import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.aual.UtilizzoSuoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.UtilizzoTerrenoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
-import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoSuoloAualDto;
-import it.tndigitale.a4g.uma.dto.richiesta.UtilizzoTerrenoAualDto;
 
 @Component
 public class RichiestaCarburanteDtoBuilder {

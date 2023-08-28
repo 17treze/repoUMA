@@ -24,7 +24,8 @@ import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.RecuperaLavorazioniSuperficie;
 import it.tndigitale.a4g.uma.business.service.richiesta.CarburanteConverter;
-import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
+import it.tndigitale.a4g.uma.dto.aual.FabbricatoAualDto;
+import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
 
 @Component
 public class DichiarazioneConsumiCarburanteComponent {
@@ -77,13 +78,13 @@ public class DichiarazioneConsumiCarburanteComponent {
 		List<FabbricatoModel> fabbricatiOld = richiesta.getFabbricati();
 
 		// Leggere i fabbricati presenti nel fascicolo e con titolo di conduzione pari a proprietà, affitto, comodato al primo di novembre dell'anno di campagna.
-		List<FabbricatoAgsDto> fabbricatiNew = dotazioneTecnicaClient.getFabbricati(richiesta.getCuaa(), dataConduzione);
+		List<FabbricatoAualDto> fabbricatiNew = dotazioneTecnicaClient.getFabbricati(richiesta.getCuaa());
 
 		if (CollectionUtils.isEmpty(fabbricatiNew)) {return new CarburanteDecimal();}
 
 		// Dalla lista ottenuta al passo 2 togliere i fabbricati  che non sono presenti in Richiesta di carburante (passo 1)
 		List<FabbricatoModel> fabbricati = fabbricatiOld.stream()
-				.filter(f -> fabbricatiNew.stream().anyMatch(fab -> fab.getIdAgs().equals(f.getIdentificativoAgs())))
+				.filter(f -> fabbricatiNew.stream().anyMatch(fab -> fab.getCodiFabb().equals(f.getIdentificativoAgs())))
 				.collect(Collectors.toList());
 
 		// Sommo i vari valori di tutte le lavorazioni rimaste moltiplicando la quantità dichiarata per il coefficiente della lavorazione e sommando tutte le quantità ottenute.

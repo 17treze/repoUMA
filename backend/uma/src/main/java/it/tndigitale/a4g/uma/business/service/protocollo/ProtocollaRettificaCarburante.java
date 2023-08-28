@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto.TipologiaDocumentoPrincipale;
@@ -26,6 +26,8 @@ import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteMode
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
 import it.tndigitale.a4g.uma.business.service.richiesta.RicercaRichiestaCarburanteService;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
+import it.tndigitale.a4g.uma.dto.aual.SoggettoAualDto;
 import it.tndigitale.a4g.uma.dto.protocollo.ProtocollaDocumentoUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 
@@ -52,10 +54,10 @@ public class ProtocollaRettificaCarburante extends ProtocollazioneStrategy {
 		RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
 
 		// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
-		FascicoloAgsDto fascicolo = getFascicolo(richiesta.getCuaa());
+		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 
 		// trova dati richiedente
-		CaricaAgsDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RETTIFICA);
+		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RETTIFICA);
 
 		// assicurati che il fascicolo sia valido
 		controlloFascicoloValido(fascicolo);
@@ -94,10 +96,10 @@ public class ProtocollaRettificaCarburante extends ProtocollazioneStrategy {
 				.setId(id)
 				.setCuaa(richiesta.getCuaa())
 				.setAnno(richiesta.getCampagna().intValue())
-				.setNome(richiedente.getNome())
-				.setCognome(richiedente.getCognome())
-				.setDescrizioneImpresa(fascicolo.getDenominazione())
-				.setPec(fascicolo.getPec())
+				.setNome(richiedente.getDescNome())
+				.setCognome(richiedente.getDescCogn())
+				.setDescrizioneImpresa(fascicolo.getDescDeno())
+				.setPec(fascicolo.getDescPec())
 				.setTipoDocumentoUma(TipoDocumentoUma.RETTIFICA);
 
 		// pubblica evento

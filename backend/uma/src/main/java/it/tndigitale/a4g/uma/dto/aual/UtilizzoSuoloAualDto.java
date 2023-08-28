@@ -1,4 +1,4 @@
-package it.tndigitale.a4g.uma.dto.richiesta;
+package it.tndigitale.a4g.uma.dto.aual;
 
 import java.util.Date;
 import java.util.List;
@@ -128,7 +128,7 @@ public class UtilizzoSuoloAualDto {
 		this.codiUso = codiUso;
 	}
 	public String getCodiQual() {
-		return codiQual;
+		return (codiQual != null ? codiQual : "000");
 	}
 	public void setCodiQual(String codiQual) {
 		this.codiQual = codiQual;
@@ -223,5 +223,12 @@ public class UtilizzoSuoloAualDto {
 	public void setAlti(String alti) {
 		this.alti = alti;
 	}
+	@Override
+	public String toString() {
+		return "UtilizzoSuoloAualDto [numeSupeUtil=" + numeSupeUtil + ", codiOccu=" + codiOccu + ", codiDest="
+				+ codiDest + ", codiUso=" + codiUso + ", codiQual=" + codiQual + ", codiOccuVari=" + codiOccuVari
+				+ ", supeElig=" + supeElig + "]";
+	}
+	
 }
 

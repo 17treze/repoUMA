@@ -13,7 +13,7 @@ import it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model.FabbricatoAgsDt
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbricatoGruppiModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.FabbricatoGruppiDao;
-import it.tndigitale.a4g.uma.dto.richiesta.FabbricatoAualDto;
+import it.tndigitale.a4g.uma.dto.aual.FabbricatoAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.LavorazioneFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.RaggruppamentoLavorazioniDto;
 

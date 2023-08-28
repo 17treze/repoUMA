@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
+// import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
 import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.Ruoli;
@@ -28,6 +28,7 @@ import it.tndigitale.a4g.uma.business.persistence.repository.FattureClientiDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.consumi.calcoli.CarburanteDecimal;
 import it.tndigitale.a4g.uma.business.service.consumi.calcoli.DichiarazioneConsumiCarburanteComponent;
+import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDto;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiPatch;
 import it.tndigitale.a4g.uma.dto.richiesta.PresentaRichiestaDto;
@@ -67,24 +68,18 @@ public class DichiarazioneConsumiService {
 		var primoNovembreAnnoCampagna = Clock.ofEndOfDay(LocalDate.of(Integer.valueOf(richiesta.getCampagna().toString()), 11, 1));
 		var dataConduzione = primoNovembreAnnoCampagna.isAfter(clock.now()) ? clock.now() : primoNovembreAnnoCampagna;
 
-		FascicoloAgsDto fascicoloAgs = anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
+		FascicoloAualDto fascicoloAual = anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
 
 		// Reperisco la detenzione del fascicolo ags
-		var det = fascicoloAgs.getDetenzioni().stream()
-				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO))
-				.findFirst()
-				.orElseGet(() -> fascicoloAgs.getDetenzioni().stream()
-						.filter(detenzione -> fascicoloAgs.getDetenzioni().size() == 1 && detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
-						.findFirst()
-						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
-
+		var det = fascicoloAual.getDescDete();
+		
 		DichiarazioneConsumiModel dichiarazioneDaSalvare = new DichiarazioneConsumiModel()
 				.setRichiestaCarburante(richiesta)
 				.setCfRichiedente(presentaRichiestaDto.getCodiceFiscaleRichiedente())
 				.setDataPresentazione(clock.now())
 				.setDataConduzione(dataConduzione)
 				.setStato(StatoDichiarazioneConsumi.IN_COMPILAZIONE)
-				.setEntePresentatore(det.getSportello());
+				.setEntePresentatore(det);
 
 		DichiarazioneConsumiModel dichiarazioneSalvata = dichiarazioneConsumiDao.save(dichiarazioneDaSalvare);
 

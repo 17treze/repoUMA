@@ -28,9 +28,11 @@ export class HttpClientMacchineUmaService {
   }
 
   validaRichiestaCarburante(idDomanda: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.append('Authorization', this.getAccessToken());
-    return this.http.post<any>(`${this.urlDomanda()}/${idDomanda}/valida`, { headers: headers });
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // headers.append('Authorization', this.getAccessToken());
+    const formInput = null;
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<any>(`${this.urlDomanda()}/${idDomanda}/valida`, formInput, { headers: headers });
   }
 
   getMacchineByIdDomanda(idDomanda: string): Observable<Array<MacchinaDto>> {

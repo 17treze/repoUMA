@@ -35,12 +35,12 @@ import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.dto.DomandaUmaDto;
+import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 import it.tndigitale.a4g.uma.dto.richiesta.CarburanteCompletoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteDto;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburanteFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.RichiestaCarburantePagedFilter;
-import it.tndigitale.a4g.uma.dto.richiesta.TerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.RichiestaCarburanteDtoBuilder;
 
 @Service

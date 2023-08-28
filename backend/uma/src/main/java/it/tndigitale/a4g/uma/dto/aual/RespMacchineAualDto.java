@@ -1,4 +1,4 @@
-package it.tndigitale.a4g.uma.dto.richiesta;
+package it.tndigitale.a4g.uma.dto.aual;
 
 import java.util.List;
 
