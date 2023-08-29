@@ -33,16 +33,8 @@ public class RecuperaLavorazioniFabbricati extends RecuperaLavorazioniStrategy {
 		return getRaggruppamentiFabbricati(richiestaCarburante, LavorazioneFilter.LavorazioniFabbricati.FABBRICATI);
 	}
 
-	public final Function<FabbricatoAgsDto, Optional<FabbricatoGruppiModel>> tipoToFabbricatoGruppoModel = fabbricatoAgsDto -> {
-		Optional<FabbricatoGruppiModel> fabbricatoGruppiModelOpt = Optional.ofNullable(fabbricatoGruppiDao.findByCodiceFabbricato(fabbricatoAgsDto.getTipoFabbricatoCodice()));
-		if (fabbricatoGruppiModelOpt.isPresent()) {
-			return Optional.of(fabbricatoGruppiModelOpt.get());
-		}
-		return Optional.empty();
-	};
-
-	public final Function<FabbricatoAualDto, Optional<FabbricatoGruppiModel>> tipoAualToFabbricatoGruppoModel = fabbricatoAualDto -> {
-		Optional<FabbricatoGruppiModel> fabbricatoGruppiModelOpt = Optional.ofNullable(fabbricatoGruppiDao.findByCodiceFabbricato("000007"));
+	public final Function<FabbricatoAualDto, Optional<FabbricatoGruppiModel>> tipoToFabbricatoGruppoModel = fabbricatoAualDto -> {
+		Optional<FabbricatoGruppiModel> fabbricatoGruppiModelOpt = Optional.ofNullable(fabbricatoGruppiDao.findByCodiceFabbricato(fabbricatoAualDto.getTipoFabbricato().getCodiTipoFabb()));
 		if (fabbricatoGruppiModelOpt.isPresent()) {
 			return Optional.of(fabbricatoGruppiModelOpt.get());
 		}

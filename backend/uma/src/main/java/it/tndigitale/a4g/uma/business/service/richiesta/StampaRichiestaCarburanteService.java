@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -21,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.AmbitoLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
+import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipologiaLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaProxyClient;
@@ -68,13 +71,13 @@ public class StampaRichiestaCarburanteService {
 	private RicercaRichiestaCarburanteService ricercaRichiestaCarburanteService;
 	
 	public Resource stampaRichiestaCarburante(Long idRichiesta) throws IOException {
-		//		RichiestaCarburanteModel richiestaModel = richiestaCarburanteDao.findById(idRichiesta).orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat("non trovata")));
-		//		
-		//		// Se la richiesta è autorizzata oppure rettificata, viene scaricato il documento caricato in fase di protocollazione
-		//		if (richiestaModel.getStato().equals(StatoRichiestaCarburante.AUTORIZZATA) || richiestaModel.getStato().equals(StatoRichiestaCarburante.RETTIFICATA)) {
-		//			return new ByteArrayResource(richiestaModel.getDocumento());
-		//		}
-		//		
+		RichiestaCarburanteModel richiestaModel = richiestaCarburanteDao.findById(idRichiesta).orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat("non trovata")));
+		
+		// Se la richiesta è autorizzata oppure rettificata, viene scaricato il documento caricato in fase di protocollazione
+		if (richiestaModel.getStato().equals(StatoRichiestaCarburante.AUTORIZZATA) || richiestaModel.getStato().equals(StatoRichiestaCarburante.RETTIFICATA)) {
+			return new ByteArrayResource(richiestaModel.getDocumento());
+		}
+	
 		//		var json = objectMapper.writeValueAsString(buildStampaDto(richiestaModel));
 		//		return new ByteArrayResource(proxyClient.stampa(json, TEMPLATE_PATH));
 		return new ByteArrayResource(Base64.getDecoder().decode(dummyPdf.getBytes()));

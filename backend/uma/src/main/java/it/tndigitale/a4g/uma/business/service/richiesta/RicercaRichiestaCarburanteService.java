@@ -158,10 +158,8 @@ public class RicercaRichiestaCarburanteService {
 		// Controllo se la richiesta ha associati dei fabbricati - Già importati in fase di creazione della richiesta
 		List<FabbricatoModel> fabbricati = fabbricatiDao.findByRichiestaCarburante_id(id);
 
-//		// reperisco informazioni sulle colture da ags
-//		List<ParticellaDto> particelle = territorioClient.getColture(richiesta.getCuaa(),
-//				richiesta.getDataPresentazione());
-		List<TerritorioAualDto> particelle = territorioClient.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataPresentazione());
+		// reperisco informazioni sulle colture da ags
+		List<TerritorioAualDto> particelle = territorioClient.getColture(richiesta.getCuaa(), richiesta.getDataPresentazione());
 		
 		var idRettificataOpt = getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(),
 				richiesta.getDataPresentazione());

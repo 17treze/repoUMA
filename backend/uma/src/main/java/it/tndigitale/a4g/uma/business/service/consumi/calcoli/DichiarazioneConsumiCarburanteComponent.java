@@ -42,19 +42,20 @@ public class DichiarazioneConsumiCarburanteComponent {
 	public CarburanteDecimal calcolaSuperfici(RichiestaCarburanteModel richiesta, LocalDateTime dataConduzione) {
 
 		// Interrogare il piano colturale alla data di protocollazione della richiesta
-		List<TerritorioAualDto> pcOld = territorioClient.getColtureFromAual(richiesta.getCuaa(), richiesta.getDataProtocollazione());
+		List<TerritorioAualDto> particelle = territorioClient.getColture(richiesta.getCuaa(), richiesta.getDataProtocollazione());
 
 		// Interrogare il piano colturale al primo novembre dell'anno di campagna
-		List<TerritorioAualDto> pcNew = territorioClient.getColtureFromAual(richiesta.getCuaa(), dataConduzione);
+		// rimosso perchè il ws non prevede la data
+		// List<TerritorioAualDto> pcNew = territorioClient.getColture(richiesta.getCuaa(), dataConduzione);
 
-		if (CollectionUtils.isEmpty(pcOld) || CollectionUtils.isEmpty(pcNew)) {
+		if (CollectionUtils.isEmpty(particelle)) { // || CollectionUtils.isEmpty(pcNew)) {
 			return new CarburanteDecimal();
 		}
 
 		// Scartare le particelle presenti al primo di novembre ma non alla data di protocollazione della Richiesta di carburante.
-		List<TerritorioAualDto> particelle = pcNew.stream()
-				.filter(p -> contains(p, pcOld))
-				.collect(Collectors.toList());
+		// List<TerritorioAualDto> particelle = pcNew.stream()
+		// 		.filter(p -> contains(p, pcOld))
+		// 		.collect(Collectors.toList());
 
 		// Calcolo la superficie massima
 		Map<GruppoLavorazioneModel, Integer> mappaSuperficieMassima = recuperaLavorazioniSuperficie.calcolaSuperficieMassima(particelle);

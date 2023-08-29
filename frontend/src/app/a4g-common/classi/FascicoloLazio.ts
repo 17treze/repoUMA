@@ -2,12 +2,7 @@ export class FascicoloData {
    codiCuaa: string;
    descDeno: string;
    codiTipoDete: string;
-   // stato: string;
-   // caa: string;
-   // caacodice: string;
-   // sportello: string;
-   // tipoDetenzione: TipoDetenzione;
-   // detentore: string;
+   descDete: string;
    op: OrgaPagaData;
    codiTipoAzie: string;
    dataValiFasc: string;

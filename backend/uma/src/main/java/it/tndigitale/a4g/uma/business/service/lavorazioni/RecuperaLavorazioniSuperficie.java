@@ -54,7 +54,7 @@ public class RecuperaLavorazioniSuperficie extends RecuperaLavorazioniStrategy {
 			return buildDtoSuperficiWithSuperficiMassime(richiestaCarburante.getSuperficiMassime());
 		}
 		// List<ParticellaDto> particelle = territorioClient.getColture(richiestaCarburante.getCuaa(), richiestaCarburante.getDataPresentazione());
-		List<TerritorioAualDto> particelle = territorioClient.getColtureFromAual(richiestaCarburante.getCuaa(), richiestaCarburante.getDataPresentazione());
+		List<TerritorioAualDto> particelle = territorioClient.getColture(richiestaCarburante.getCuaa(), richiestaCarburante.getDataPresentazione());
 		return buildDtoSuperfici(particelle);
 
 	}
@@ -62,7 +62,7 @@ public class RecuperaLavorazioniSuperficie extends RecuperaLavorazioniStrategy {
 	// utilizzato per recupero lavorazioni a superficie dichiarazioni consumi - Clienti conto terzi 
 	public List<RaggruppamentoLavorazioniDto> getRaggruppamenti(String cuaaCliente, LocalDateTime dataConduzione) {
 		// List<ParticellaDto> particelle = territorioClient.getColture(cuaaCliente, dataConduzione);
-		List<TerritorioAualDto> particelle = territorioClient.getColtureFromAual(cuaaCliente, dataConduzione);
+		List<TerritorioAualDto> particelle = territorioClient.getColture(cuaaCliente, dataConduzione);
 		return buildDtoSuperfici(particelle);
 	}
 
@@ -98,9 +98,9 @@ public class RecuperaLavorazioniSuperficie extends RecuperaLavorazioniStrategy {
 			for (UtilizzoTerrenoAualDto t : p.getListaUtilizzoTerreno()) {
 				for (UtilizzoSuoloAualDto u : t.getListaUtilizzoSuolo()) {
 					Optional<GruppoLavorazioneModel> gruppoOpt = codificaToGruppo.apply(u);
-					logger.info("Coltura: " + u);
+					logger.debug("Coltura: " + u);
 					if (gruppoOpt.isPresent()) {
-						logger.info("Superficie: " + u.getNumeSupeUtil());
+						logger.debug("Superficie: " + u.getNumeSupeUtil());
 						mappaGruppoSuperficie.merge(gruppoOpt.get(), Integer.parseInt(u.getNumeSupeUtil()), (a,b) -> a + b);
 					}
 				}

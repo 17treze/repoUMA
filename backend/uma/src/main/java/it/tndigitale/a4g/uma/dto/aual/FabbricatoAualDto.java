@@ -36,7 +36,7 @@ public class FabbricatoAualDto {
 	private String descSuba;
 	private String numeSupeCope;
 	private String numeSupeScop;
-	// private TipoFabbricato tipoFabbricato;
+	private TipoFabbricatoAualDto tipoFabbricato;
 	// private TipoConduzione tipoConduzione;
 	private String numeVolu;
 	private Date dataInizVali;
@@ -207,6 +207,12 @@ public class FabbricatoAualDto {
 	}
 	public void setCodiOccuVari(String codiOccuVari) {
 		this.codiOccuVari = codiOccuVari;
+	}	
+	public TipoFabbricatoAualDto getTipoFabbricato() {
+		return tipoFabbricato;
+	}
+	public void setTipoFabbricato(TipoFabbricatoAualDto tipoFabbricato) {
+		this.tipoFabbricato = tipoFabbricato;
 	}
 }
 

@@ -9,15 +9,15 @@ public class MacchinaAualDto {
 
     private Long codiMacc;
     private String codiCuaa;
-    // private Carburante carburante;
+    private CarburanteAualDto carburante;
     private String dataCess;
     private String dataIscr;
-    // private FormaPossesso formaPossesso;
+    private FormaPossessoAualDto formaPossesso;
     private String descMarc;
     private String descMode;
     private String descTarg;
     private String descTela;
-    // private TipoMacchina tipoMacchina;
+    private TipoMacchinaAualDto tipoMacchina;
     // private TipoTarga tipoTarga;
     // private Trazione trazione;
     private Date dataInizVali;
@@ -176,4 +176,23 @@ public class MacchinaAualDto {
 	public void setCodiMaccUma(Integer codiMaccUma) {
 		this.codiMaccUma = codiMaccUma;
 	}
+	public CarburanteAualDto getCarburante() {
+		return carburante;
+	}
+	public void setCarburante(CarburanteAualDto carburante) {
+		this.carburante = carburante;
+	}
+	public FormaPossessoAualDto getFormaPossesso() {
+		return formaPossesso;
+	}
+	public void setFormaPossesso(FormaPossessoAualDto formaPossesso) {
+		this.formaPossesso = formaPossesso;
+	}
+	public TipoMacchinaAualDto getTipoMacchina() {
+		return tipoMacchina;
+	}
+	public void setTipoMacchina(TipoMacchinaAualDto tipoMacchina) {
+		this.tipoMacchina = tipoMacchina;
+	}
+	
 }

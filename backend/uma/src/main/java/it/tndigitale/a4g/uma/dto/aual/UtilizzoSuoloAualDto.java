@@ -33,8 +33,8 @@ public class UtilizzoSuoloAualDto {
       private String flagColtPrin;
       private String dataInizUtil;
       private String dataFineUtil;
-      // private TipoMantenimento tipoMantenimento;
-      // private TipoPratica tipoPratica;
+      private TipoMantenimentoAualDto tipoMantenimento;
+	private TipoPraticaAualDto tipoPratica;
       private Integer supeEligOp;
       private String prodInte;
       private String numePian;
@@ -223,6 +223,19 @@ public class UtilizzoSuoloAualDto {
 	public void setAlti(String alti) {
 		this.alti = alti;
 	}
+    public TipoMantenimentoAualDto getTipoMantenimento() {
+		return tipoMantenimento;
+	}
+	public void setTipoMantenimento(TipoMantenimentoAualDto tipoMantenimento) {
+		this.tipoMantenimento = tipoMantenimento;
+	}
+	public TipoPraticaAualDto getTipoPratica() {
+		return tipoPratica;
+	}
+	public void setTipoPratica(TipoPraticaAualDto tipoPratica) {
+		this.tipoPratica = tipoPratica;
+	}
+	
 	@Override
 	public String toString() {
 		return "UtilizzoSuoloAualDto [numeSupeUtil=" + numeSupeUtil + ", codiOccu=" + codiOccu + ", codiDest="

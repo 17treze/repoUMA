@@ -70,13 +70,13 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
   }
 
   formatDatiFascicolo() {
-    // const detenzioneMandato = this.fascicoloCorrente.fascicoloLegacy.detenzioni.filter(detenzione => detenzione.tipoDetenzione === TipoDetenzioneAgs.MANDATO);
-    // this.idFascicolo = this.fascicoloCorrente.fascicoloLegacy.idAgs.toString();
+    const detenzioneMandato = this.fascicoloCorrente.fascicoloLazio.data.codiTipoDete;
+    this.idFascicolo = this.fascicoloCorrente.fascicoloLazio.data.codiCuaa;
     this.denominazione = this.fascicoloCorrente.fascicoloLazio.data.descDeno;
     this.cuaa = this.fascicoloCorrente.fascicoloLazio.data.codiCuaa;
-    // this.caa = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].caa : null;
+    this.caa = this.fascicoloCorrente.fascicoloLazio.data.descDete; 
     this.stato = "VALIDO"; // this.fascicoloCorrente.fascicoloLegacy.stato;
-    // this.sportello = this.fascicoloCorrente.fascicoloLazio.data.detentore; // detenzioneMandato != null && detenzioneMandato.length === 1 ? detenzioneMandato[0].sportello : null;
+    this.sportello = this.fascicoloCorrente.fascicoloLazio.data.descDete; 
     this.dataInizio = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataAperFasc);
     this.dataUltimoAggiornamento = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataElab);
     this.dataUltimaValidazione = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataValiFasc);

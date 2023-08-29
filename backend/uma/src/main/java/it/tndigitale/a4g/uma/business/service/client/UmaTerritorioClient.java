@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +23,8 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.tndigitale.a4g.fascicolo.territorio.client.api.PianoColturaleControllerApi;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ColturaDto;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.CriterioMantenimento;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.TitoloConduzione;
 import it.tndigitale.a4g.uma.business.service.richiesta.RicercaRichiestaCarburanteService;
+import it.tndigitale.a4g.uma.dto.aual.MacchinaAualDto;
 import it.tndigitale.a4g.uma.dto.aual.RespTerritorioAualDto;
 import it.tndigitale.a4g.uma.dto.aual.TerritorioAualDto;
 
@@ -34,6 +33,8 @@ public class UmaTerritorioClient extends AbstractClient {
 
 	@Value("${it.tndigit.a4g.uma.fascicolo.territorio.url}")
 	private String urlTerritorio;
+
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
 	private static final Logger logger = LoggerFactory.getLogger(UmaTerritorioClient.class);
 	
@@ -59,7 +60,7 @@ public class UmaTerritorioClient extends AbstractClient {
 //	}
 	
 	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
-	public List<TerritorioAualDto> getColtureFromAual(String cuaa, LocalDateTime data) {
+	public List<TerritorioAualDto> getColture(String cuaa, LocalDateTime data) {
 		
         final String uri = urlTerritorio + "/leggiConsistenzaFS7?cuaa=" + cuaa;
         
@@ -72,7 +73,10 @@ public class UmaTerritorioClient extends AbstractClient {
 	        logger.info(response.getBody());
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        RespTerritorioAualDto responseAual = objectMapper.readValue(response.getBody(), new TypeReference<RespTerritorioAualDto>(){});
-	        return responseAual.getData();
+	        // rimuovere le particelle con data fine o con nessun mantenimento e convertire il codice qualità (null -> 000)
+	        return responseAual.getData().stream()
+	        		.filter(item -> isColturaValida(item))
+	        		.collect(Collectors.toList());
 		}
 		catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -81,6 +85,19 @@ public class UmaTerritorioClient extends AbstractClient {
 		catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	private boolean isColturaValida(TerritorioAualDto terreno) {
+		try {
+			return !sdf.parse(terreno.getDataFineCond()).before(new Date()) &&
+					terreno.getListaUtilizzoTerreno().stream().allMatch(
+							ut -> ut.getListaUtilizzoSuolo().stream().allMatch(
+									us -> us == null)); // da rivedere!!!
+		}
+		catch (ParseException ex) {
+			logger.error(ex.getMessage());
+			return false;
 		}
 	}
 }

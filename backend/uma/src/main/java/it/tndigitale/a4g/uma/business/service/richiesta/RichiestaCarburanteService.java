@@ -74,13 +74,9 @@ public class RichiestaCarburanteService {
 
 	@Transactional
 	public Long presenta(PresentaRichiestaDto presentaRichiestaDto) {
-		// richiestaCarburanteValidator.validaPresentazioneRichiesta(presentaRichiestaDto.getCuaa());
+		richiestaCarburanteValidator.validaPresentazioneRichiesta(presentaRichiestaDto.getCuaa());
 
-		FascicoloAualDto fascicoloAgs = new FascicoloAualDto();
-		
-		// anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
-		fascicoloAgs.setCodiCuaa(presentaRichiestaDto.getCuaa());
-		fascicoloAgs.setDescDeno(presentaRichiestaDto.getCuaa());
+		FascicoloAualDto fascicoloAgs = anagraficaClient.getFascicolo(presentaRichiestaDto.getCuaa());
 		
 		// Reperisco la detenzione del fascicolo ags
 //		var det = fascicoloAgs.getDetenzioni().stream()
@@ -98,7 +94,7 @@ public class RichiestaCarburanteService {
 				.setCampagna(Long.valueOf(clock.now().getYear()))
 				.setStato(StatoRichiestaCarburante.IN_COMPILAZIONE)
 				.setDenominazione(fascicoloAgs.getDescDeno()) // reperisco la denominazione del fascicolo da anagrafica legacy
-//				.setEntePresentatore(det.getSportello())
+				.setEntePresentatore(fascicoloAgs.getDescDete())
 				;
 				
 		RichiestaCarburanteModel richiestaSalvata = richiestaCarburanteDao.save(richiestaDaSalvare);
@@ -208,35 +204,6 @@ public class RichiestaCarburanteService {
 				.orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat(" non trovata")));
 	}
 
-//	// al momento di creazione della richiesta di carburante importa i fabbricati significativi per cui si portrebbe richiedere carburante
-//	private List<FabbricatoModel> getFabbricatiFromAgs(String cuaa, RichiestaCarburanteModel richiesta) {
-//
-//		List<FabbricatoAgsDto> fabbricatiAgs = dotazioneTecnicaClient.getFabbricati(cuaa, clock.now());
-//		List<FabbricatoModel> fabbricatiToSave = new ArrayList<>();
-//
-//		if (CollectionUtils.isEmpty(fabbricatiAgs)) {
-//			return new ArrayList<>();
-//		}
-//
-//		fabbricatiAgs.stream()
-//		.collect(Collectors.groupingBy(recuperaLavorazioniFabbricati.tipoToFabbricatoGruppoModel))
-//		.forEach((tipoFabbricato, fabbricati) -> {
-//			if (tipoFabbricato.isPresent()) {
-//				fabbricati.forEach(f ->
-//				fabbricatiToSave.add(new FabbricatoModel()
-//						.setTipoFabbricato(tipoFabbricato.get())
-//						.setRichiestaCarburante(richiesta)
-//						.setComune(f.getComune())
-//						.setIdentificativoAgs(f.getIdAgs())
-//						.setParticella(f.getParticella())
-//						.setVolume(f.getVolume())
-//						.setSubalterno(f.getSubalterno())
-//						.setProvincia(f.getProvincia())
-//						.setSiglaProvincia(f.getSiglaProvincia())));
-//			}
-//		});
-//		return fabbricatiToSave;
-//	}
 	// al momento di creazione della richiesta di carburante importa i fabbricati significativi per cui si portrebbe richiedere carburante
 	private List<FabbricatoModel> getFabbricatiFromAual(String cuaa, RichiestaCarburanteModel richiesta)
 		throws MalformedURLException, IOException {
@@ -250,7 +217,7 @@ public class RichiestaCarburanteService {
 		}
 
 		fabbricatiAual.stream()
-		.collect(Collectors.groupingBy(recuperaLavorazioniFabbricati.tipoAualToFabbricatoGruppoModel))
+		.collect(Collectors.groupingBy(recuperaLavorazioniFabbricati.tipoToFabbricatoGruppoModel))
 		.forEach((tipoFabbricato, fabbricati) -> {
 			if (tipoFabbricato.isPresent()) {
 				fabbricati.forEach(f ->
@@ -263,28 +230,13 @@ public class RichiestaCarburanteService {
 						.setVolume(Integer.parseInt(f.getNumeVolu()))
 						.setSubalterno(f.getDescSuba())
 						.setProvincia(f.getCodiProv())
-						//.setSiglaProvincia(f.getSiglaProvincia())
+						.setSiglaProvincia(f.getCodiProv())
 						));
 			}
 		});
 		return fabbricatiToSave;
 	}
 	
-//	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
-//	private List<UtilizzoMacchinariModel> getMacchineFromAgs(String cuaa, RichiestaCarburanteModel richiesta) {
-//		List<MacchinaAgsDto> macchineAgs = dotazioneTecnicaClient.getMacchine(cuaa, clock.now());
-//		return macchineAgs.stream().map(macchinaAgs -> new UtilizzoMacchinariModel()
-//				.setFlagUtilizzo(false)
-//				.setRichiestaCarburante(richiesta)
-//				.setAlimentazione(TipoCarburante.valueOf(macchinaAgs.getAlimentazione().name()))
-//				.setClasse(macchinaAgs.getClasse())
-//				.setDescrizione(macchinaAgs.getDescrizione())
-//				.setIdentificativoAgs(macchinaAgs.getIdAgs())
-//				.setMarca(macchinaAgs.getMarca())
-//				.setPossesso(macchinaAgs.getPossesso())
-//				.setTarga(macchinaAgs.getTarga()))
-//				.collect(Collectors.toList());
-//	}
 	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
 	private List<UtilizzoMacchinariModel> getMacchineFromAual(String cuaa, RichiestaCarburanteModel richiesta) 
 			throws MalformedURLException, IOException {
@@ -294,12 +246,12 @@ public class RichiestaCarburanteService {
         return macchineAual.stream().map(macchinaAual -> new UtilizzoMacchinariModel()
 				.setFlagUtilizzo(false)
 				.setRichiestaCarburante(richiesta)
-				.setAlimentazione(TipoCarburante.BENZINA) // valueOf(macchinaAual.getAlimentazione().name()))
-				// .setClasse(macchinaAgs.getClasse())
+				.setAlimentazione(macchinaAual.getCarburante().getCodiCarb().equals("G") ? TipoCarburante.GASOLIO : TipoCarburante.BENZINA)
+				.setClasse(macchinaAual.getTipoMacchina().getDescMacc())
 				.setDescrizione(macchinaAual.getDescMode())
 				.setIdentificativoAgs(macchinaAual.getCodiMacc())
 				.setMarca(macchinaAual.getDescMarc())
-				// .setPossesso(macchinaAual.getPossesso())
+				.setPossesso(macchinaAual.getFormaPossesso().getDescFormPoss())
 				.setTarga(macchinaAual.getDescTarg()))
 				.collect(Collectors.toList());
 	}

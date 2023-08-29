@@ -25,8 +25,6 @@ import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
 import it.tndigitale.a4g.uma.business.service.consumi.RicercaDichiarazioneConsumiService;
 import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
-import it.tndigitale.a4g.uma.dto.aual.RespFascicoloAualDto;
-import it.tndigitale.a4g.uma.dto.aual.RespMacchineAualDto;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiDto;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiFilter;
 import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiPagedFilter;
@@ -56,8 +54,8 @@ public class RichiestaCarburanteValidator {
 	
 	@Autowired
 	private UmaAnagraficaClient anagraficaClient;
-//	@Autowired
-//	private UmaDotazioneTecnicaClient dotazioneTecnicaClient;
+	@Autowired
+	private UmaDotazioneTecnicaClient dotazioneTecnicaClient;
 	@Autowired
 	private RicercaRichiestaCarburanteService ricercaRichiestaCarburanteService;
 	@Autowired
@@ -119,9 +117,9 @@ public class RichiestaCarburanteValidator {
 	
 	// Presenza di almeno una macchina nel fascicolo.
 	private Consumer<String> haAlmenoUnaMacchina = cuaa -> {
-//		if (CollectionUtils.isEmpty(dotazioneTecnicaClient.getMacchine(cuaa, clock.now()))) {
-//			throw new IllegalArgumentException(UMA_01_01_BR4_ERR_MSG);
-//		}
+		if (CollectionUtils.isEmpty(dotazioneTecnicaClient.getMacchine(cuaa))) {
+			throw new IllegalArgumentException(UMA_01_01_BR4_ERR_MSG);
+		}
 	};
 	
 	// Esiste già in A4G una domanda UMA con lo stato in compilazione per quell'azienda nell'anno in corso.
