@@ -246,9 +246,9 @@ export class Labels {
   // Breadcrumb e titoli
   static DIPENDENTE_CAA = 'Dipendente CAA';
   static DIPENDENTE_PAT = 'Dipendente PAT';
-  static DIPENDENTE_PAT_VISUALIZZATORE = 'Operatore PAT - Visualizzatore';
+  static DIPENDENTE_PAT_VISUALIZZATORE = 'Funzionario regionale - Visualizzatore';
   static DIPENDENTE_PAT_RESPONSABILE_FASCICOLO = 'Responsabile fascicolo PAT Appag';
-  static DIPENDENTE_PAT_ISTRUTTORE_UMA = 'Operatore PAT - Istruttore UMA';
+  static DIPENDENTE_PAT_ISTRUTTORE_UMA = 'Funzionario comunale';
   static DIPENDENTE_DOGANE = 'Dipendente Agenzia delle Dogane - Consultazione UMA';
   static DIPENDENTE_ALTRI_ENTI = 'Utenza di un ente differente da CAA';
   static DIPENDENTE_VISUALIZZATORE = 'Operatore Altro Ente';

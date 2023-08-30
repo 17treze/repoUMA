@@ -35,14 +35,15 @@ export class UserGuard implements CanActivate {
         if (this.utente?.ruoli &&
           this.utente?.ruoli.length > 0 &&
           this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
           this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
-          this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
+          // this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
+          this.authService.isUserInRole(AuthService.roleIstruttoreUMA, this.utente) ||
           this.authService.isUserInRole(AuthService.roleDistributore, this.utente)
         ) {
           return this.roleGuard.canActivate(route, state).then((auth) => {

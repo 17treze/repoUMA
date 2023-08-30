@@ -140,16 +140,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       roles.push({ label: 'Operatore CAA', routerLink: '../funzioniCaa', command: (event) => { localStorage.setItem("selectedRole", 'caa') } });
     }
     if (this.roleAPPAG) {
-      roles.push({ label: 'Operatore PAT Appag - Admin', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'appag') } })
+      roles.push({ label: 'Funzionario regionale - Admin', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'appag') } })
     }
     if (this.roleGestoreUtenti) {
-      roles.push({ label: 'Operatore PAT Appag - Gestione Utenti', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'gestoreutenti') } })
+      roles.push({ label: 'Funzionario regionale - Gestione Utenti', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'gestoreutenti') } })
     }
     if (this.roleViewerPAT) {
-      roles.push({ label: 'Operatore PAT - Visualizzatore', routerLink: '../funzioniPatVisualizzatore', command: (event) => { localStorage.setItem("selectedRole", 'viewer_pat') } })
+      roles.push({ label: 'Funzionario regionale - Visualizzatore', routerLink: '../funzioniPatVisualizzatore', command: (event) => { localStorage.setItem("selectedRole", 'viewer_pat') } })
     }
     if (this.roleIstruttoreUMA) {
-      roles.push({ label: 'Operatore PAT - Istruttore UMA', routerLink: '../funzioniPatIstruttoreUMA', command: (event) => { this.authService.userSelectedRole = AuthService.roleIstruttoreUMA } });
+      roles.push({ label: 'Funzionario comunale - Istruttore UMA', routerLink: '../funzioniPatIstruttoreUMA', command: (event) => { this.authService.userSelectedRole = AuthService.roleIstruttoreUMA } });
     }
     if (this.roleDistributore) {
       roles.push({ label: 'Distributore', routerLink: '../funzioniDistributore', command: (event) => { this.authService.userSelectedRole = AuthService.roleDistributore } });
@@ -158,25 +158,25 @@ export class HomeComponent implements OnInit, OnDestroy {
       roles.push({ label: 'Amministratore', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'amministratore') } });
     }
     if (this.roleIstruttoreAMF) {
-      roles.push({ label: 'Operatore PAT Appag - Istruttore AMF', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'istruttoreamf') } });
+      roles.push({ label: 'Funzionario comunale - Istruttore AMF', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'istruttoreamf') } });
     }
     if (this.roleIstruttoreDU) {
-      roles.push({ label: 'Operatore PAT Appag - Istruttore DU', routerLink: '../funzioniPat/gestioneIstruttoria', command: (event) => { localStorage.setItem("selectedRole", 'istruttoredu') } });
+      roles.push({ label: 'Funzionario comunale - Istruttore DU', routerLink: '../funzioniPat/gestioneIstruttoria', command: (event) => { localStorage.setItem("selectedRole", 'istruttoredu') } });
     }
     if (this.roleAltroEnte) {
       roles.push({ label: 'Operatore Altri Enti - Visualizzatore', routerLink: '../funzioniOperatoreVisualizzatore', command: (event) => { localStorage.setItem("selectedRole", 'viewer_altro_ente') } })
     }
     if (this.roleBackOffice) {
-      roles.push({ label: 'Operatore PAT - BackOffice', routerLink: '../gis', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleBackOffice) } })
+      roles.push({ label: 'Funzionario comunale - BackOffice', routerLink: '../gis', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleBackOffice) } })
     }
     if (this.roleViticolo) {
-      roles.push({ label: 'Operatore PAT - Viticolo', routerLink: '../gis', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleViticolo) } })
+      roles.push({ label: 'Funzionario comunale - Viticolo', routerLink: '../gis', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleViticolo) } })
     }
     if (this.roleDogane) {
       roles.push({ label: 'Dipendente Agenzia delle Dogane', routerLink: '../funzioniPatAgenziaDogane', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleDogane) } })
     }
     if (this.roleResponsabileFascicoloPat) {
-      roles.push({ label: 'Responsabile fascicolo PAT Appag', routerLink: '../funzioniPatResponsabileFascicolo', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleResponsabileFascicoloPat) } })
+      roles.push({ label: 'Responsabile fascicolo Reg. Lazio', routerLink: '../funzioniPatResponsabileFascicolo', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleResponsabileFascicoloPat) } })
     }
     if (roles.length === 0) {
       roles.push(

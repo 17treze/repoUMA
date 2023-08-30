@@ -46,6 +46,7 @@ export class Ruolo {
     id: number;
     descrizione: string;
     applicazione: string;
+    codice: string;
 }
 
 export class AziendaDelegata {
@@ -55,18 +56,28 @@ export class AziendaDelegata {
 
 export class DatiUtente extends UtenteBase {
     id: number;
-    // aggiunti...
     nome: string;
     cognome: string;
     codiceFiscale: string;
+    email: string;
+    telefono: string;
+    pec: string;
+    indirizzo: string;
+    comune: string;
+    provincia: string;
+    cap: string;
     ruoli: RuoloApplicazione[];
     aziendeDelegate: AziendaDelegataApplicazione[];
-    // aggiunti...
-    profili: Profilo[];
-    sedi: SedeCaa[];
-    distributori: Distributore[];
-    aziende: Azienda[];
-    motivazioneDisattivazione: string;
+    stato: string;
+    dataNascita: string;
+    luogoNascita: string;
+    dataAbilitazione: string;
+    dataDisabilitazione: string;
+    // profili: Profilo[];
+    // sedi: SedeCaa[];
+    // distributori: Distributore[];
+    // aziende: Azienda[];
+    // motivazioneDisattivazione: string;
 }
 
 export class ProfiliSrt extends UtenteBase {
