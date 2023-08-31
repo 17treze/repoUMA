@@ -377,7 +377,7 @@ export class FabbisognoComponent implements OnInit {
 
   controllaIstruttoreUMA() {
     if (this.authService.userSelectedRole == AuthService.roleIstruttoreUMA ||
-      this.authService.userSelectedRole == AuthService.roleAppag) {
+      this.authService.userSelectedRole == AuthService.roleAdmin) {
       this.inCompilazione = false;
     }
   }

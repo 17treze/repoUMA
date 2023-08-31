@@ -39,17 +39,17 @@ export class AuthService {
 
   public static roleCaa = "uma_caa";
   public static rolePrivate = "uma_azienda";
+  public static roleAdmin = "uma_funzionario_regionale";
+  public static roleIstruttoreUMA = "uma_funzionario_comunale";
+  public static roleDistributore = "uma_distributore";
   // public static roleAppag = "appag";
   // public static roleGestoreUtenti = "gestoreutenti";
-  public static roleAdmin = "uma_funzionario_regionale";
   // public static roleIstruttoreAMF = "istruttoreamf";
   // public static roleIstruttoreDomandaUnica = "istruttoredu";
   // public static roleAltroEnte = "viewer_altro_ente";
   // public static roleViewerPAT = "viewer_pat";
   // public static roleBackOffice = "backoffice";
   // public static roleViticolo = "viticolo";
-  public static roleIstruttoreUMA = "uma_funzionario_comunale";
-  public static roleDistributore = "uma_distributore";
   // public static roleDogane = "operatore_dogane";
   // public static roleResponsabileFascicoloPat = "responsabile_fascicolo_pat";
   private _userSelectedRole: string;
@@ -185,14 +185,16 @@ export class AuthService {
       for (const ruoloApp of user.ruoli) {
         if (ruoloApp.applicazione == "UMA") {
           for (const ruolo of ruoloApp.ruoli) {
-            console.log("Ruolo trovato: " + JSON.stringify(ruolo));
+            // console.log("Ruolo trovato: " + JSON.stringify(ruolo));
             if (ruolo.codice.toLowerCase() == requiredRole.toLowerCase()) {
+              console.log("Ruolo trovato: " + JSON.stringify(ruolo));
               return true;
             }
           }
         }
       }
     }
+    console.log("Ruolo non trovato :-(");
     return false;
   }
 
@@ -211,7 +213,7 @@ export class AuthService {
     this._userSelectedRole = role;
     localStorage.setItem("selectedRole", this.userSelectedRole);
   }
-
+  /*
   private getRoleFromSessionStorage() {
     const user: Utente = JSON.parse(sessionStorage.getItem("user"));
     if (user?.profili?.length) {
@@ -219,4 +221,5 @@ export class AuthService {
     }
     return null;
   }
+  */
 }

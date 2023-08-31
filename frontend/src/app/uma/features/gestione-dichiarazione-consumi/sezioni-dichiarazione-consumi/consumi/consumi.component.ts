@@ -748,7 +748,7 @@ export class ConsumiComponent implements OnInit, OnDestroy {
   private initRoles() {
     // se istruttore o appag posso modificare la data di conduzione
     if (this.authService.userSelectedRole == AuthService.roleIstruttoreUMA ||
-      this.authService.userSelectedRole == AuthService.roleAppag) {
+      this.authService.userSelectedRole == AuthService.roleAdmin) {
       this.isUtenteIstruttoreUma = true;
     }
   }

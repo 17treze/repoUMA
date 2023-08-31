@@ -382,8 +382,8 @@ export class RicercaAziendeComponentIstruttoreUMA implements OnInit, OnDestroy {
   }
 
   public disabledNuovoPrelievo() {
-    return this.authService.userSelectedRole === AuthService.roleViewerPAT ||
-      this.authService.userSelectedRole === AuthService.roleAltroEnte;
+    return this.authService.userSelectedRole === AuthService.roleCaa ||
+      this.authService.userSelectedRole === AuthService.rolePrivate;
   }
 
 }

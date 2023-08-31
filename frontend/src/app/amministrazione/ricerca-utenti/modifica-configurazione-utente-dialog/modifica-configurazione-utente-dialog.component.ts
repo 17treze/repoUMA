@@ -202,7 +202,8 @@ export class ModificaConfigurazioneUtenteDialogComponent implements OnInit, OnDe
 
   private popolaDatiDomanda(): void {
     this.profiloUtenteFormGroup.reset();
-    let sediAssegnate = this.datiUtente.sedi;
+    // let sediAssegnate = this.datiUtente.sedi;
+    /*
     let multiProfileControls: Profilo[] = undefined;
     for (let selectedIdProfilo of this.datiUtente.profili) {
       let profiloUtenteFormControl = this.profiloUtenteFormGroup.controls[selectedIdProfilo.id];
@@ -211,12 +212,13 @@ export class ModificaConfigurazioneUtenteDialogComponent implements OnInit, OnDe
         this.disableInput(selectedIdProfilo, selectedIdProfilo.disabled);
         if (selectedIdProfilo.identificativo === 'caa') {
           // preseleziona sedi
-          this.selectedSediNodes = EnteTreeNode.selectEntiSedi(
-            this.entiCaaTreeNode, sediAssegnate.map(sede => sede.id));
+          // this.selectedSediNodes = EnteTreeNode.selectEntiSedi(
+          //  this.entiCaaTreeNode, sediAssegnate.map(sede => sede.id));
           // preselezeziona utente caa
           let profileAssigned: boolean = this.selectedSediNodes.length > 0;
           this.profiloUtenteFormGroup.controls[selectedIdProfilo.id].setValue(profileAssigned);
-        } else {
+        } 
+        else {
           // profiloUtente.disable();
           let isMultiProfile = this.responsabilitaPresentationMultiProfile.some(
             resp => resp.profili.some(prof => prof.id === selectedIdProfilo.id));
@@ -243,6 +245,7 @@ export class ModificaConfigurazioneUtenteDialogComponent implements OnInit, OnDe
     if (this.profiloUtenteFormGroup.controls['motivazioneDisattivazione']) {
       this.profiloUtenteFormGroup.controls['motivazioneDisattivazione'].setValue(this.datiUtente.motivazioneDisattivazione);
     }
+    */
   }
 
   public isDisplayMotivation(): boolean {

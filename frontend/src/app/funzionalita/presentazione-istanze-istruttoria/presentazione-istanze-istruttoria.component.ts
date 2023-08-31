@@ -90,10 +90,10 @@ export class PresentazioneIstanzeIstruttoriaComponent implements OnInit, OnDestr
 
   onClickPac() {
     if (
-      this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica) ||
-      this.authService.isUserInRole(AuthService.roleAdmin) ||
-      this.authService.isUserInRole(AuthService.roleAppag) ||
-      this.authService.isUserInRole(AuthService.roleViewerPAT)
+      // this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica) ||
+      this.authService.isUserInRole(AuthService.roleAdmin) // ||
+      // this.authService.isUserInRole(AuthService.roleAppag) ||
+      // this.authService.isUserInRole(AuthService.roleViewerPAT)
     ) {
       this.router.navigate(['../istruttoriaPac'], {
         relativeTo: this.route,
@@ -111,11 +111,11 @@ export class PresentazioneIstanzeIstruttoriaComponent implements OnInit, OnDestr
 
   onClickCertificazioniAntimafia() {
     if (
-      this.authService.isUserInRole(AuthService.roleIstruttoreAMF) ||
-      this.authService.isUserInRole(AuthService.roleAdmin) ||
-      this.authService.isUserInRole(AuthService.roleAppag) ||
-      this.authService.isUserInRole(AuthService.roleAltroEnte) ||
-      this.authService.isUserInRole(AuthService.roleViewerPAT)
+      // this.authService.isUserInRole(AuthService.roleIstruttoreAMF) ||
+      this.authService.isUserInRole(AuthService.roleAdmin) // ||
+      // this.authService.isUserInRole(AuthService.roleAppag) ||
+      // this.authService.isUserInRole(AuthService.roleAltroEnte) ||
+      // this.authService.isUserInRole(AuthService.roleViewerPAT)
     ) {
       this.router.navigate(['../istruttoriaAntimafia'], {
         relativeTo: this.route,
@@ -133,11 +133,11 @@ export class PresentazioneIstanzeIstruttoriaComponent implements OnInit, OnDestr
 
   onClickPac1420() {
     if (
-      this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica) ||
-      this.authService.isUserInRole(AuthService.roleAdmin) ||
-      this.authService.isUserInRole(AuthService.roleAppag) ||
-      this.authService.isUserInRole(AuthService.roleAltroEnte) ||
-      this.authService.isUserInRole(AuthService.roleViewerPAT)
+      // this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica) ||
+      this.authService.isUserInRole(AuthService.roleAdmin) // ||
+      // this.authService.isUserInRole(AuthService.roleAppag) ||
+      // this.authService.isUserInRole(AuthService.roleAltroEnte) ||
+      // this.authService.isUserInRole(AuthService.roleViewerPAT)
     ) {
       this.router.navigate(['../istruttoriaPac1420'], {
         relativeTo: this.route,
@@ -156,10 +156,10 @@ export class PresentazioneIstanzeIstruttoriaComponent implements OnInit, OnDestr
   onClickUma(percorso: string) {
     if (
       this.authService.userSelectedRole === AuthService.roleIstruttoreUMA ||
-      this.authService.userSelectedRole === AuthService.roleAppag ||
-      this.authService.userSelectedRole === AuthService.roleAdmin ||
-      this.authService.userSelectedRole === AuthService.roleAltroEnte ||
-      this.authService.userSelectedRole === AuthService.roleViewerPAT
+      // this.authService.userSelectedRole === AuthService.roleAppag ||
+      this.authService.userSelectedRole === AuthService.roleAdmin // ||
+      // this.authService.userSelectedRole === AuthService.roleAltroEnte ||
+      // this.authService.userSelectedRole === AuthService.roleViewerPAT
     ) {
       this.router.navigate(['../' + percorso], {
         relativeTo: this.route,
@@ -185,20 +185,21 @@ export class PresentazioneIstanzeIstruttoriaComponent implements OnInit, OnDestr
   ruoliAbilitatiSecondoGruppo(): boolean {
     // SE AMBIENTE DI PRODUZIONE NON VIENE VISUALIZZATO
     return this.authService.userSelectedRole === AuthService.roleIstruttoreUMA ||
-      this.authService.userSelectedRole === AuthService.roleAppag ||
-      this.authService.userSelectedRole === AuthService.roleAdmin ||
-      this.authService.userSelectedRole === AuthService.roleAltroEnte ||
-      this.authService.userSelectedRole === AuthService.roleViewerPAT;
+      // this.authService.userSelectedRole === AuthService.roleAppag ||
+      this.authService.userSelectedRole === AuthService.roleAdmin // ||
+      // this.authService.userSelectedRole === AuthService.roleAltroEnte ||
+      // this.authService.userSelectedRole === AuthService.roleViewerPAT;
   }
 
   public displayValidazionePrelievi() {
-    return this.authService.userSelectedRole !== AuthService.roleAltroEnte &&
-      this.authService.userSelectedRole !== AuthService.roleViewerPAT;
+    return true; 
+      // this.authService.userSelectedRole !== AuthService.roleAltroEnte &&
+      // this.authService.userSelectedRole !== AuthService.roleViewerPAT;
   }
 
   ruoloAPPAG(): boolean {
     // SE AMBIENTE DI PRODUZIONE NON VIENE VISUALIZZATO
-    return this.authService.userSelectedRole === AuthService.roleAppag ||
+    return // this.authService.userSelectedRole === AuthService.roleAppag ||
       this.authService.userSelectedRole === AuthService.roleAdmin;
   }
 

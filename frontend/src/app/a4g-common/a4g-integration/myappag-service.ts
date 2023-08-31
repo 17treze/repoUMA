@@ -15,7 +15,7 @@ export class MyappagService {
     return this.authService.isUserInRole(AuthService.roleCaa, currentUser)
       || this.authService.isUserInRole(AuthService.rolePrivate, currentUser)
       || this.authService.isUserInRole(AuthService.roleAdmin, currentUser)
-      || this.authService.isUserInRole(AuthService.roleAppag, currentUser);
+      || this.authService.isUserInRole(AuthService.roleIstruttoreUMA, currentUser);
   }
 
   navigateForCuaa(cuaa: string) {

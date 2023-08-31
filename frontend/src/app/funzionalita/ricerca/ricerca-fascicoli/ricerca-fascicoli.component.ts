@@ -45,10 +45,10 @@ export class RicercaFascicoliComponent implements OnInit {
       if (user) {
         // ...
         if (this.authService.isUserInRole(AuthService.roleCaa) ||
-          this.authService.isUserInRole(AuthService.roleAppag) ||
-          this.authService.isUserInRole(AuthService.roleGestoreUtenti) ||
+          // this.authService.isUserInRole(AuthService.roleAppag) ||
+          // this.authService.isUserInRole(AuthService.roleGestoreUtenti) ||
           this.authService.isUserInRole(AuthService.roleAdmin) ||
-          this.authService.isUserInRole(AuthService.roleIstruttoreAMF)) {
+          this.authService.isUserInRole(AuthService.roleIstruttoreUMA)) {
           this.inputRicerca.cuaa = '';
           this.searchvisible = true;
           this.resultvisible = false;

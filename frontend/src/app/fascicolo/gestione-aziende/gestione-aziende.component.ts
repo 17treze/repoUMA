@@ -30,11 +30,11 @@ export class GestioneAziendeComponent implements OnInit {
       return;
     }
     this.displayCardConsultazioneUma = localStorage.getItem('selectedRole') === AuthService.roleCaa;
-    this.displayCardSuolo = localStorage.getItem('selectedRole') === AuthService.roleCaa
-      || localStorage.getItem('selectedRole') === AuthService.roleAltroEnte
-      || localStorage.getItem('selectedRole') === AuthService.roleAppag
-      || localStorage.getItem('selectedRole') === AuthService.roleViewerPAT;
-    this.displayCardCercaFascicolo = !(localStorage.getItem('selectedRole') === AuthService.roleAltroEnte || localStorage.getItem('selectedRole') === AuthService.roleViewerPAT);
+    this.displayCardSuolo = localStorage.getItem('selectedRole') === AuthService.roleCaa;
+      // || localStorage.getItem('selectedRole') === AuthService.roleAltroEnte
+      // || localStorage.getItem('selectedRole') === AuthService.roleAppag
+      // || localStorage.getItem('selectedRole') === AuthService.roleViewerPAT;
+    // this.displayCardCercaFascicolo = !(localStorage.getItem('selectedRole') === AuthService.roleAltroEnte || localStorage.getItem('selectedRole') === AuthService.roleViewerPAT);
   }
 
   openDialogScarica() {

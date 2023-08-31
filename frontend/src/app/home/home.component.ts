@@ -26,20 +26,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   srTrentoRuoli: string[];
   agsUtenze: UtenteAgs[];
   roleCAA: boolean = false;
-  roleAPPAG: boolean = false;
-  roleGestoreUtenti: boolean = false;
+  // roleAPPAG: boolean = false;
+  // roleGestoreUtenti: boolean = false;
   roleADMIN: boolean = false;
   roleAzienda: boolean = false;
-  roleIstruttoreAMF: boolean = false;
-  roleIstruttoreDU: boolean = false;
-  roleAltroEnte: boolean = false;
-  roleViewerPAT: boolean = false;
-  roleBackOffice: boolean = false;
-  roleViticolo: boolean = false;
+  // roleIstruttoreAMF: boolean = false;
+  // roleIstruttoreDU: boolean = false;
+  // roleAltroEnte: boolean = false;
+  // roleViewerPAT: boolean = false;
+  // roleBackOffice: boolean = false;
+  // roleViticolo: boolean = false;
   roleIstruttoreUMA: boolean = false;
   roleDistributore: boolean = false;
-  roleDogane: boolean = false;
-  roleResponsabileFascicoloPat: boolean = false;
+  // roleDogane: boolean = false;
+  // roleResponsabileFascicoloPat: boolean = false;
   utente: Utente;
   srTrentoMenu: MenuItem[];
   agsItems: MenuItem[];
@@ -85,20 +85,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log("CaricaUtente HomeComponent " + this.utente?.codiceFiscale);
 
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
-    this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
-    this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
+    // this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
+    // this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
     this.roleADMIN = this.authService.isUserInRole(AuthService.roleAdmin);
     this.roleAzienda = this.authService.isUserInRole(AuthService.rolePrivate);
-    this.roleIstruttoreAMF = this.authService.isUserInRole(AuthService.roleIstruttoreAMF);
-    this.roleIstruttoreDU = this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica);
-    this.roleAltroEnte = this.authService.isUserInRole(AuthService.roleAltroEnte);
-    this.roleViewerPAT = this.authService.isUserInRole(AuthService.roleViewerPAT);
-    this.roleBackOffice = this.authService.isUserInRole(AuthService.roleBackOffice);
-    this.roleViticolo = this.authService.isUserInRole(AuthService.roleViticolo);
+    // this.roleIstruttoreAMF = this.authService.isUserInRole(AuthService.roleIstruttoreAMF);
+    // this.roleIstruttoreDU = this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica);
+    // this.roleAltroEnte = this.authService.isUserInRole(AuthService.roleAltroEnte);
+    // this.roleViewerPAT = this.authService.isUserInRole(AuthService.roleViewerPAT);
+    // this.roleBackOffice = this.authService.isUserInRole(AuthService.roleBackOffice);
+    // this.roleViticolo = this.authService.isUserInRole(AuthService.roleViticolo);
     this.roleIstruttoreUMA = this.authService.isUserInRole(AuthService.roleIstruttoreUMA);
     this.roleDistributore = this.authService.isUserInRole(AuthService.roleDistributore);
-    this.roleDogane = this.authService.isUserInRole(AuthService.roleDogane);
-    this.roleResponsabileFascicoloPat = this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat);
+    // this.roleDogane = this.authService.isUserInRole(AuthService.roleDogane);
+    // this.roleResponsabileFascicoloPat = this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat);
 
     if (this.roleAzienda) {
       this.getFascicoliAziendaUtente().then(() => this.caricaCollegamentiUtente());
@@ -137,16 +137,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       localStorage.setItem("selectedRole", 'azienda');
     }
     if (this.roleCAA) {
-      roles.push({ label: 'Operatore CAA', routerLink: '../funzioniCaa', command: (event) => { localStorage.setItem("selectedRole", 'caa') } });
-    }
-    if (this.roleAPPAG) {
-      roles.push({ label: 'Funzionario regionale - Admin', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'appag') } })
-    }
-    if (this.roleGestoreUtenti) {
-      roles.push({ label: 'Funzionario regionale - Gestione Utenti', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'gestoreutenti') } })
-    }
-    if (this.roleViewerPAT) {
-      roles.push({ label: 'Funzionario regionale - Visualizzatore', routerLink: '../funzioniPatVisualizzatore', command: (event) => { localStorage.setItem("selectedRole", 'viewer_pat') } })
+      roles.push({ label: 'Operatore CAA', routerLink: '../funzioniCaa', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleCaa) } });
     }
     if (this.roleIstruttoreUMA) {
       roles.push({ label: 'Funzionario comunale - Istruttore UMA', routerLink: '../funzioniPatIstruttoreUMA', command: (event) => { this.authService.userSelectedRole = AuthService.roleIstruttoreUMA } });
@@ -155,7 +146,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       roles.push({ label: 'Distributore', routerLink: '../funzioniDistributore', command: (event) => { this.authService.userSelectedRole = AuthService.roleDistributore } });
     }
     if (this.roleADMIN) {
-      roles.push({ label: 'Amministratore', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'amministratore') } });
+      roles.push({ label: 'Amministratore', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleAdmin) } });
+    }
+    /*
+    if (this.roleAPPAG) {
+      roles.push({ label: 'Funzionario regionale - Admin', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'appag') } })
+    }
+    if (this.roleGestoreUtenti) {
+      roles.push({ label: 'Funzionario regionale - Gestione Utenti', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'gestoreutenti') } })
+    }
+    if (this.roleViewerPAT) {
+      roles.push({ label: 'Funzionario regionale - Visualizzatore', routerLink: '../funzioniPatVisualizzatore', command: (event) => { localStorage.setItem("selectedRole", 'viewer_pat') } })
     }
     if (this.roleIstruttoreAMF) {
       roles.push({ label: 'Funzionario comunale - Istruttore AMF', routerLink: '../funzioniPat', command: (event) => { localStorage.setItem("selectedRole", 'istruttoreamf') } });
@@ -178,6 +179,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.roleResponsabileFascicoloPat) {
       roles.push({ label: 'Responsabile fascicolo Reg. Lazio', routerLink: '../funzioniPatResponsabileFascicolo', command: (event) => { localStorage.setItem("selectedRole", AuthService.roleResponsabileFascicoloPat) } })
     }
+    */
     if (roles.length === 0) {
       roles.push(
         {

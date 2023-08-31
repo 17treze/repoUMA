@@ -69,9 +69,9 @@ export class SezioniDichiarazioneConsumiComponent implements OnInit {
   private setPageStatus(dichiarazioneConsumiDto: DichiarazioneConsumiDto) {
     if (dichiarazioneConsumiDto.stato === StatoDichiarazioneConsumiEnum.IN_COMPILAZIONE &&
       this.authService.userSelectedRole !== AuthService.roleIstruttoreUMA &&
-      this.authService.userSelectedRole !== AuthService.roleAppag &&
-      this.authService.userSelectedRole !== AuthService.roleViewerPAT &&
-      this.authService.userSelectedRole !== AuthService.roleAltroEnte) {
+      this.authService.userSelectedRole !== AuthService.roleAdmin &&
+      this.authService.userSelectedRole !== AuthService.rolePrivate &&
+      this.authService.userSelectedRole !== AuthService.roleCaa) {
       this.indiceUmaService.READONLY_MODE_DICHIARAZIONE = false;
       this.isInCompilazione = true;
       this.mostraScarica = false;

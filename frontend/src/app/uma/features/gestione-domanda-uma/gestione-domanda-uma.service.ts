@@ -35,9 +35,9 @@ export class GestioneDomandaUmaService {
     let mostraScarica: boolean = false;
     if (richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE &&
       this.authService.userSelectedRole !== AuthService.roleIstruttoreUMA &&
-      this.authService.userSelectedRole !== AuthService.roleAppag &&
-      this.authService.userSelectedRole !== AuthService.roleViewerPAT &&
-      this.authService.userSelectedRole !== AuthService.roleAltroEnte) {
+      this.authService.userSelectedRole !== AuthService.roleAdmin &&
+      this.authService.userSelectedRole !== AuthService.rolePrivate &&
+      this.authService.userSelectedRole !== AuthService.roleCaa) {
       this.indiceUmaService.READONLY_MODE = false;
       inCompilazione = !this.indiceUmaService.READONLY_MODE;
       mostraScarica = false;

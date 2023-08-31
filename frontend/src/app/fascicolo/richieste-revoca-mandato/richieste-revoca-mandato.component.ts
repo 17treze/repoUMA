@@ -39,7 +39,7 @@ export class RichiesteRevocaMandatoComponent implements OnInit {
   }
 
   public setupRouting() {
-    if (localStorage.getItem('selectedRole') == AuthService.roleAppag) {
+    if (localStorage.getItem('selectedRole') == AuthService.roleAdmin) {
       this.roleAppag = true;
     }
     this.route.queryParams.pipe(

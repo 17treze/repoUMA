@@ -162,6 +162,7 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
     profiliAgs: ProfiliAgs[],
     profiliA4g: DatiUtente[]) {
     let utenteProfilo: Map<string, UtenteProfiloPresentationValue> = new Map<string, UtenteProfiloPresentationValue>();
+    /*
     if (profiliSrt) {
       profiliSrt.forEach(element => {
         if (element) {
@@ -192,6 +193,8 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
         }
       });
     }
+    */
+    /*
     if (profiliA4g) {
       profiliA4g.forEach(element => {
         if (element) {
@@ -216,6 +219,7 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
         }
       });
     }
+    */
     if (Object.keys(utenteProfilo).length === 0) {
       this.messages.add(A4gMessages.getToast('tst', A4gSeverityMessage.warn, A4gMessages.utenteNonTrovato));
     } else {

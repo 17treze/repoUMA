@@ -346,6 +346,8 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
             return forkJoin([getTitRapprLeg$, of('ENTE'), richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.roleAdmin) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
             return forkJoin([loggedUser$, of('AMMINISTRATORE'), richieste$]);
+          } else if (localStorage.getItem('selectedRole') == AuthService.roleIstruttoreUMA) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
+            return forkJoin([loggedUser$, of('ISTRUTTORE_UMA'), richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.rolePrivate) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
             return forkJoin([loggedUser$, of('UTENTE'), richieste$]);
           }
