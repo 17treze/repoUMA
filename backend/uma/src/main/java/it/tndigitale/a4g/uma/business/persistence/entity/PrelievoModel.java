@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_PRELIEVI")
+@Table(name="TAB_AGRI_UMAL_PRELIEVI")
 public class PrelievoModel extends EntitaDominio {
 
 	private static final long serialVersionUID = 6468885195977338650L;

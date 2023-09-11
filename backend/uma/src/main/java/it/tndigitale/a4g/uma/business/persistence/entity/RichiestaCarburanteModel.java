@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_RICHIESTA_CARBURANTE")
+@Table(name="TAB_AGRI_UMAL_RICHIESTA_CARBURANTE")
 public class RichiestaCarburanteModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = -238853354125405813L;

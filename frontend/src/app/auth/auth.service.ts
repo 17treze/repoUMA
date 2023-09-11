@@ -186,7 +186,7 @@ export class AuthService {
         if (ruoloApp.applicazione == "UMA") {
           for (const ruolo of ruoloApp.ruoli) {
             // console.log("Ruolo trovato: " + JSON.stringify(ruolo));
-            if (ruolo.codice.toLowerCase() == requiredRole.toLowerCase()) {
+            if (ruolo.id && ruolo.id.toLowerCase() == requiredRole.toLowerCase()) {
               console.log("Ruolo trovato: " + JSON.stringify(ruolo));
               return true;
             }
@@ -206,6 +206,7 @@ export class AuthService {
   
   public get userSelectedRole() {
     const ruoloSelezionato = this._userSelectedRole || localStorage.getItem("selectedRole"); // || this.getRoleFromSessionStorage();
+    console.log("Ruolo selezionato: " + ruoloSelezionato);
     return ruoloSelezionato;
   }
 
@@ -213,13 +214,4 @@ export class AuthService {
     this._userSelectedRole = role;
     localStorage.setItem("selectedRole", this.userSelectedRole);
   }
-  /*
-  private getRoleFromSessionStorage() {
-    const user: Utente = JSON.parse(sessionStorage.getItem("user"));
-    if (user?.profili?.length) {
-      return user.profili[0].identificativo;
-    }
-    return null;
-  }
-  */
 }

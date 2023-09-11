@@ -19,7 +19,7 @@ public abstract class EntitaDominio implements Serializable {
 		private static final long serialVersionUID = -2741312835656701915L;
 
 		@Id
-		@SequenceGenerator(name = "NXTNBR_GENERATOR", sequenceName = "NXTNBR", allocationSize = 1, initialValue = 1)
+		@SequenceGenerator(name = "NXTNBR_GENERATOR", sequenceName = "SEQ_AGRI_UMAL_NXTNBR", allocationSize = 1, initialValue = 1)
 		@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NXTNBR_GENERATOR")
 		@Column(name = "ID")
 		protected Long id;

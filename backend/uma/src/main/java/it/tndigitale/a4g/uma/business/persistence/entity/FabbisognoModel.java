@@ -18,7 +18,7 @@ import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 
 @Entity
-@Table(name="A4GT_FABBISOGNO")
+@Table(name="TAB_AGRI_UMAL_FABBISOGNO")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class FabbisognoModel extends EntitaDominio implements Serializable {
 	private static final long serialVersionUID = 5553741090158402913L;

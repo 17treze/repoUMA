@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_CONSUNTIVI_CONSUMI" , uniqueConstraints = @UniqueConstraint(columnNames = {"ID_CONSUMI" , "TIPO" , "CARBURANTE"}, name = "A4GT_CONSUNTIVI_CONSUMI_UIDX"))
+@Table(name="TAB_AGRI_UMAL_CONSUNTIVI_CONSUMI" , uniqueConstraints = @UniqueConstraint(columnNames = {"ID_CONSUMI" , "TIPO" , "CARBURANTE"}, name = "A4GT_CONSUNTIVI_CONSUMI_UIDX"))
 public class ConsuntivoConsumiModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = -5159732199786160498L;

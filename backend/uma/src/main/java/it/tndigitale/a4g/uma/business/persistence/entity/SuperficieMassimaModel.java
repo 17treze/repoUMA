@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_SUPERFICIE_MASSIMA")
+@Table(name="TAB_AGRI_UMAL_SUPERFICIE_MASSIMA")
 public class SuperficieMassimaModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = -7772351481913281929L;

@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { FascicoloService } from '../fascicolo.service';
 import { A4gCostanti } from 'src/app/a4g-common/a4g-costanti';
 import { FascicoloAgsDto, TipoDetenzioneAgs } from 'src/app/a4g-common/classi/FascicoloAgsDto';
@@ -34,7 +34,6 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
   constructor(
     public fascicoloCorrente: FascicoloCorrente,
     private route: ActivatedRoute,
-    private router: Router,
     private fascicoloService: FascicoloService,
     private errorService: ErrorService
   ) {
@@ -80,7 +79,7 @@ export class FascicoloApertoComponent implements OnInit, OnDestroy {
     this.dataInizio = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataAperFasc);
     this.dataUltimoAggiornamento = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataElab);
     this.dataUltimaValidazione = this.dateFromString(this.fascicoloCorrente.fascicoloLazio.data.dataValiFasc);
-    this.organismoPagatore = this.fascicoloCorrente.fascicoloLazio.data.op.codiOrgaPaga;
+    this.organismoPagatore = this.fascicoloCorrente.fascicoloLazio.data.op.descOrgaPaga;
   }
   
   dateFromString (dateStr) {

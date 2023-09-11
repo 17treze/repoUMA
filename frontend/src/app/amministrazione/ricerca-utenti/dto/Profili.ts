@@ -43,10 +43,9 @@ export class AziendaDelegataApplicazione {
 }
 
 export class Ruolo {
-    id: number;
+    id: string;
     descrizione: string;
     applicazione: string;
-    codice: string;
 }
 
 export class AziendaDelegata {

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_DISTRIBUTORI")
+@Table(name="TAB_AGRI_UMAL_DISTRIBUTORI")
 public class DistributoreModel extends EntitaDominio {
 
 	private static final long serialVersionUID = 5205894881626430379L;

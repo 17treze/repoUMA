@@ -14,7 +14,7 @@ public interface CoefficienteDao extends
 		JpaRepository<CoefficienteModel, Long>,
 		JpaSpecificationExecutor<CoefficienteModel> {
 	
-	@Query(value = "SELECT * FROM A4GD_COEFFICIENTI WHERE EXTRACT(YEAR FROM SYSDATE) >= ANNO_INIZIO"
+	@Query(value = "SELECT * FROM TAB_AGRI_UMAL_COEFFICIENTI WHERE EXTRACT(YEAR FROM SYSDATE) >= ANNO_INIZIO"
 			+ " AND (ANNO_FINE IS NULL OR EXTRACT(YEAR FROM SYSDATE) <= ANNO_FINE)", nativeQuery = true)
 	public Page<CoefficienteModel> findAllValid(Pageable pageable);
 	

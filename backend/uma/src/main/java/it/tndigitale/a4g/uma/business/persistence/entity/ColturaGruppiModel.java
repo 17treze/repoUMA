@@ -13,7 +13,7 @@ import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 
 @Entity
-@Table(name="A4GR_COLTURA_GRUPPI")
+@Table(name="TAB_AGRI_UMAL_COLTURA_GRUPPI")
 public class ColturaGruppiModel  extends EntitaDominio implements Serializable {
 	private static final long serialVersionUID = -962678114269147325L;
 

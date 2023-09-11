@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_UTILIZZO_MACCHINARI")
+@Table(name="TAB_AGRI_UMAL_UTILIZZO_MACCHINARI")
 public class UtilizzoMacchinariModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = -2146875654751667900L;

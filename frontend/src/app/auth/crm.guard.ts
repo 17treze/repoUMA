@@ -39,7 +39,7 @@ export class CrmGuard implements CanActivate, CanActivateChild, CanLoad, CanDeac
   }
 
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
-    console.log('canLoad');
+    // console.log('canLoad');
     const isLoggedIn = this.authService.isLoggedIn();
     if (!isLoggedIn) {
       this.router.navigate(['home'], { queryParams: { returnUrl: route.path } });
@@ -48,8 +48,7 @@ export class CrmGuard implements CanActivate, CanActivateChild, CanLoad, CanDeac
   }
 
   private checkUser(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const roles = route.data['roles'] as Array<string>;
-    
+    // const roles = route.data['roles'] as Array<string>;
     const isLoggedIn = this.authService.isLoggedIn();
     if (!isLoggedIn) {
     // if (!this.authService.isLoggedIn() ) {//|| !this.authService.isUserInRoles(roles)) {

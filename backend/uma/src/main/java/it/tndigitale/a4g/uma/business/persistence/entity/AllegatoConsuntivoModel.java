@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_ALLEGATI_CONSUNTIVI")
+@Table(name="TAB_AGRI_UMAL_ALLEGATI_CONSUNTIVI")
 public class AllegatoConsuntivoModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = 3860626060681709952L;

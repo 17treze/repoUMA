@@ -22,7 +22,7 @@ public class LoggingDao extends JdbcDaoSupport {
     }
 
     protected Long getGeneratedId() {
-        return getJdbcTemplate().queryForObject("SELECT NXTNBR.NEXTVAL FROM DUAL", null, Long.class);
+        return getJdbcTemplate().queryForObject("SELECT SEQ_AGRI_UMAL_NXTNBR.NEXTVAL FROM DUAL", null, Long.class);
     }
 
     public void save(LoggingUser dati) throws Exception {
@@ -37,7 +37,7 @@ public class LoggingDao extends JdbcDaoSupport {
         params.add(dati.getIdEntita());
         params.add(Timestamp.valueOf(dati.getDtEvento()));
        	this.getJdbcTemplate().update(
-        		"INSERT INTO A4GT_LOGGING (id, versione, utente, tipo_evento, tabella, id_entita, dt_evento) values (?, 0, ?, ?, ?, ?, ?)",
+        		"INSERT INTO TAB_AGRI_UMAL_LOGGING (id, versione, utente, tipo_evento, tabella, id_entita, dt_evento) values (?, 0, ?, ?, ?, ?, ?)",
         		params.toArray());
     }
 }

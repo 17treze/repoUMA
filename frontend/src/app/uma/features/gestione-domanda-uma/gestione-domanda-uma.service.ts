@@ -33,6 +33,7 @@ export class GestioneDomandaUmaService {
   isInCompilazione(richiesta: RichiestaCarburanteDto, items?: Array<MenuItem>): { inCompilazione: boolean, mostraScarica: boolean } {
     let inCompilazione: boolean = false;
     let mostraScarica: boolean = false;
+    console.log('userRole CAA: ' + this.authService.userSelectedRole !== AuthService.roleCaa);
     if (richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE &&
       this.authService.userSelectedRole !== AuthService.roleIstruttoreUMA &&
       this.authService.userSelectedRole !== AuthService.roleAdmin &&
@@ -50,6 +51,7 @@ export class GestioneDomandaUmaService {
       mostraScarica = richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE ? false : true;
     }
     localStorage.setItem("UMA_RO", this.indiceUmaService.READONLY_MODE.toString());
+    console.log('inCompilazione: ' + inCompilazione);
     return { inCompilazione: inCompilazione, mostraScarica: mostraScarica };
   }
 

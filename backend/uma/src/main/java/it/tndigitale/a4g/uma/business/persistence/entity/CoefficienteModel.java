@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GD_COEFFICIENTI")
+@Table(name="TAB_AGRI_UMAL_COEFFICIENTI")
 public class CoefficienteModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = 1543374526522006579L;

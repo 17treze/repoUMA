@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="A4GT_FABBISOGNO_FABBRICATI")
+@Table(name="TAB_AGRI_UMAL_FABBISOGNO_FABBRICATI")
 public class FabbisognoFabbricatoModel extends FabbisognoModel implements Serializable {
 
 	private static final long serialVersionUID = -8182144211702106179L;

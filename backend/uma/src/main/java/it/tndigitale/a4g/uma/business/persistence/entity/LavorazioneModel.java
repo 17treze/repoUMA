@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GD_LAVORAZIONE")
+@Table(name="TAB_AGRI_UMAL_LAVORAZIONE")
 public class LavorazioneModel extends EntitaDominio implements Serializable {
 	private static final long serialVersionUID = 7898411418029362843L;
 

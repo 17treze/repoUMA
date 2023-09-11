@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_CONF")
+@Table(name="TAB_AGRI_UMAL_CONF")
 public class ConfigurazioneModel  extends EntitaDominio implements Serializable {
 	private static final long serialVersionUID = 4844786332004495577L;
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_FATTURE_CLIENTI")
+@Table(name="TAB_AGRI_UMAL_FATTURE_CLIENTI")
 public class FatturaClienteModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = -2881061942345072826L;

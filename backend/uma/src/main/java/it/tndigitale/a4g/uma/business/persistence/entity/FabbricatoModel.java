@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_FABBRICATI")
+@Table(name="TAB_AGRI_UMAL_FABBRICATI")
 public class FabbricatoModel extends EntitaDominio implements Serializable {
 
 	private static final long serialVersionUID = 3501632049529793583L;

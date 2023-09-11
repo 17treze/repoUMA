@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import it.tndigitale.a4g.framework.repository.model.EntitaDominio;
 
 @Entity
-@Table(name="A4GT_LOGGING")
+@Table(name="TAB_AGRI_UMAL_LOGGING")
 public class LoggingModel extends EntitaDominio {
 	private static final long serialVersionUID = 2834135809795870573L;
 	

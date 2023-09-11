@@ -15,7 +15,7 @@ import it.tndigitale.a4g.uma.business.persistence.entity.GruppoLavorazioneModel;
 public interface GruppiLavorazioneDao extends JpaRepository<GruppoLavorazioneModel, Long> {
 	public List<GruppoLavorazioneModel> findByAmbitoLavorazione(AmbitoLavorazione ambito);
 	
-	@Query(value = "SELECT * FROM A4GD_GRUPPI_LAVORAZIONE WHERE EXTRACT(YEAR FROM SYSDATE) >= ANNO_INIZIO"
+	@Query(value = "SELECT * FROM TAB_AGRI_UMAL_GRUPPI_LAVORAZIONE WHERE EXTRACT(YEAR FROM SYSDATE) >= ANNO_INIZIO"
 			+ " AND (ANNO_FINE IS NULL OR EXTRACT(YEAR FROM SYSDATE) <= ANNO_FINE)", nativeQuery = true)
 	public Page<GruppoLavorazioneModel> findAllValid(Pageable pageable);
 }
