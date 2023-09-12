@@ -49,4 +49,6 @@ public class ApiUrls {
 	public static final String GRUPPI_FABBRICATI = "/gruppi-fabbricati";
 	
 	public static final String COEFFICIENTI = "/coefficienti";
+
+	public static final String COMUNI = "/comuni";
 }

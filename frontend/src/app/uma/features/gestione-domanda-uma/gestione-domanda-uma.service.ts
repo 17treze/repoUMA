@@ -33,25 +33,23 @@ export class GestioneDomandaUmaService {
   isInCompilazione(richiesta: RichiestaCarburanteDto, items?: Array<MenuItem>): { inCompilazione: boolean, mostraScarica: boolean } {
     let inCompilazione: boolean = false;
     let mostraScarica: boolean = false;
-    console.log('userRole CAA: ' + this.authService.userSelectedRole !== AuthService.roleCaa);
     if (richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE &&
-      this.authService.userSelectedRole !== AuthService.roleIstruttoreUMA &&
-      this.authService.userSelectedRole !== AuthService.roleAdmin &&
-      this.authService.userSelectedRole !== AuthService.rolePrivate &&
-      this.authService.userSelectedRole !== AuthService.roleCaa) {
+      this.authService.userSelectedRole !== AuthService.roleAdmin) {
       this.indiceUmaService.READONLY_MODE = false;
+      console.log('inCompilazione(1): ' + inCompilazione);
       inCompilazione = !this.indiceUmaService.READONLY_MODE;
       mostraScarica = false;
       if (items && items.length) {
         items.push({ label: 'Protocollazione' });
       }
     } else { // se il ruolo è istruttore UMA oppure la domanda non è in compilazione, visualizzo in sola lettura
+      console.log('inCompilazione(2): ' + inCompilazione);
       this.indiceUmaService.READONLY_MODE = true;
       inCompilazione = !this.indiceUmaService.READONLY_MODE;
       mostraScarica = richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE ? false : true;
     }
     localStorage.setItem("UMA_RO", this.indiceUmaService.READONLY_MODE.toString());
-    console.log('inCompilazione: ' + inCompilazione);
+    console.log('inCompilazione(3): ' + inCompilazione);
     return { inCompilazione: inCompilazione, mostraScarica: mostraScarica };
   }
 
