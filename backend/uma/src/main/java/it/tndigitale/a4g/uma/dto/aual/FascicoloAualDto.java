@@ -19,6 +19,10 @@ public class FascicoloAualDto {
 	private String descDeno;
 	private String descDete;
 	private String numeScheVali;
+	private String email;
+	private String descPec;
+	private String numeIscrRea;
+	private String numeIscrRegiImpr;
 	
 	public String getCodiCuaa() {
 		return codiCuaa;
@@ -104,16 +108,25 @@ public class FascicoloAualDto {
 	public void setDescPec(String descPec) {
 		this.descPec = descPec;
 	}
-	//	private String numeIscrRea;
-//	private String numeIscrRegiImpr;
+	public String getNumeIscrRea() {
+		return numeIscrRea;
+	}
+	public void setNumeIscrRea(String numeIscrRea) {
+		this.numeIscrRea = numeIscrRea;
+	}
+	public String getNumeIscrRegiImpr() {
+		return numeIscrRegiImpr;
+	}
+	public void setNumeIscrRegiImpr(String numeIscrRegiImpr) {
+		this.numeIscrRegiImpr = numeIscrRegiImpr;
+	}
+
 //	private String codiTipoAzie;
 //	private String numeDocu;
 //	private String dataDocu;
 //	private String dataScadDocu;
 //	private String dataInizInps;
 //	private String dataCessInps;
-	private String email;
-	private String descPec;
 	
 /*
         "tipoDocumento": {

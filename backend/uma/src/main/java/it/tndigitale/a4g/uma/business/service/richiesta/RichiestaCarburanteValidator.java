@@ -110,9 +110,14 @@ public class RichiestaCarburanteValidator {
 	// Verifica che nel fascicolo aziendale sia selezionata una delle due seguenti voci: Iscritto alla sezione speciale agricola oppure Non iscritto alla sezione speciale agricola, art.2 ,c.1, D.M. n.454/2001.
 	private Consumer<FascicoloAualDto> haIscrizioniSpeciali = fascicolo -> {
 		//BR3 - Info CIAA
-		//		if (!(fascicolo.isIscrittoSezioneSpecialeAgricola() || fascicolo.isNonIscrittoSezioneSpecialeAgricola())) {
-		//			throw new IllegalArgumentException(UMA_01_01_BR3_ERR_MSG);
-		//		}
+		if ((fascicolo.getNumeIscrRea() == null || 
+				fascicolo.getNumeIscrRea().isEmpty() ||
+				fascicolo.getNumeIscrRea().equals("N.D.")) && 
+				(fascicolo.getNumeIscrRegiImpr() == null ||
+				fascicolo.getNumeIscrRegiImpr().isEmpty() ||
+				fascicolo.getNumeIscrRegiImpr().equals("N.D."))) {
+			throw new IllegalArgumentException(UMA_01_01_BR3_ERR_MSG);
+		}
 	};
 	
 	// Presenza di almeno una macchina nel fascicolo.
