@@ -33,7 +33,7 @@ public class ComuniController {
 	private ComuniService comuniService;
 
 	@Operation(summary = "Recupera i comuni capofila", description = "Vengono recuperati i comuni capofila")
-	@GetMapping
+	@GetMapping("/capofila")
 	public List<ComuneDto> getComuniCapofila() {
 		return comuniService.getComuniCapofila();
 	}
