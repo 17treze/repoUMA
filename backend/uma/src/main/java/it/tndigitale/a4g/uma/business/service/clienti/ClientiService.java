@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.MovimentoValidazioneFascicoloAgsDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.MovimentoValidazioneFascicoloAgsDto;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.ClienteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.DichiarazioneConsumiModel;
@@ -66,22 +66,24 @@ public class ClientiService {
 	@Transactional
 	public Long importaDatiCliente(Long id, Long idFascicolo, List<MultipartFile> allegati) {
 
-		MovimentoValidazioneFascicoloAgsDto movFas = clientiValidator.validaFascicoloCliente(idFascicolo, clock.now().getYear() - 1);
-		DichiarazioneConsumiModel dichiarazioneConsumi = clientiValidator.validaDichiarazioneConsumiCliente(id, movFas);
-
-		var clienteToSave = new ClienteModel()
-				.setCuaa(movFas.getCuaa())
-				.setDenominazione(movFas.getDenominazione())
-				.setDichiarazioneConsumi(dichiarazioneConsumi)
-				.setIdFascicolo(movFas.getIdFascicolo());
-
-		// Salvataggio del cliente
-		ClienteModel clienteSaved = clienteDao.save(clienteToSave);
-
-		// Salvo i nuovi allegati per il cliente
-		allegati.forEach(allegato -> fattureClientiDao.save(buildFatturaClienteModel(clienteSaved, allegato)));
-		logger.info("[UMA] - Salvataggio nuovo cliente con fascicolo {} dichiarazione consumi {}", idFascicolo , id);
-		return clienteSaved.getId();
+//		MovimentoValidazioneFascicoloAgsDto movFas = clientiValidator.validaFascicoloCliente(idFascicolo, clock.now().getYear() - 1);
+//		DichiarazioneConsumiModel dichiarazioneConsumi = clientiValidator.validaDichiarazioneConsumiCliente(id, movFas);
+//
+//		var clienteToSave = new ClienteModel()
+//				.setCuaa(movFas.getCuaa())
+//				.setDenominazione(movFas.getDenominazione())
+//				.setDichiarazioneConsumi(dichiarazioneConsumi)
+//				.setIdFascicolo(movFas.getIdFascicolo());
+//
+//		// Salvataggio del cliente
+//		ClienteModel clienteSaved = clienteDao.save(clienteToSave);
+//
+//		// Salvo i nuovi allegati per il cliente
+//		allegati.forEach(allegato -> fattureClientiDao.save(buildFatturaClienteModel(clienteSaved, allegato)));
+//		logger.info("[UMA] - Salvataggio nuovo cliente con fascicolo {} dichiarazione consumi {}", idFascicolo , id);
+//		return clienteSaved.getId();
+		// da rivedere
+		return 1L;
 	}
 
 	public ClienteConsumiDto getCliente(Long idCliente) {
@@ -125,8 +127,8 @@ public class ClientiService {
 	}
 
 	public void validaCliente(Long id, Long idFascicolo) {
-		MovimentoValidazioneFascicoloAgsDto movFas = clientiValidator.validaFascicoloCliente(idFascicolo, clock.now().getYear() - 1);
-		clientiValidator.validaDichiarazioneConsumiCliente(id, movFas);
+//		MovimentoValidazioneFascicoloAgsDto movFas = clientiValidator.validaFascicoloCliente(idFascicolo, clock.now().getYear() - 1);
+//		clientiValidator.validaDichiarazioneConsumiCliente(id, movFas);
 	}
 
 	@Transactional

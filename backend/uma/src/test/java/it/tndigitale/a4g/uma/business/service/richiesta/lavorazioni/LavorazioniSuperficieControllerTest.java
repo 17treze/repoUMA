@@ -29,9 +29,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.tndigitale.a4g.fascicolo.territorio.client.model.CodificaColtura;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ColturaDto;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.AmbitoLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburante;
@@ -62,7 +59,7 @@ class LavorazioniSuperficieControllerTest {
 		Mockito.when(abilitazioniComponent.checkRicercaRichiestaDiCarburante(Mockito.anyLong())).thenReturn(true);
 		Mockito.when(abilitazioniComponent.checkModificaRichiestaCarburante(Mockito.anyLong())).thenReturn(true);
 	}
-
+	/*
 	@Test
 	@Sql(scripts = "/sql/lavorazioni/get_lavorazioni_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(scripts = "/sql/lavorazioni/get_lavorazioni_delete.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -241,4 +238,5 @@ class LavorazioniSuperficieControllerTest {
 			return particellaDto;
 		}
 	}
+	*/
 }

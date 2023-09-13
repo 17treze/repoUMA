@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
 import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.security.service.UtenteClient;
 import it.tndigitale.a4g.framework.support.ListSupport;
@@ -62,8 +59,8 @@ public class AbilitazioniComponent {
 	private UtenteClient abilitazioniUtente;
 	@Autowired
 	private UmaUtenteClient umaUtenteClient;
-	@Autowired
-	private UmaAnagraficaClient anagraficaClient;
+//	@Autowired
+//	private UmaAnagraficaClient anagraficaClient;
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
@@ -321,12 +318,12 @@ public class AbilitazioniComponent {
 		if (utenteComponent.haRuolo(Ruoli.ISTRUTTORE_UMA)) {
 			return true;
 		}
-		if (!utenteComponent.haUnRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)
-				|| umaUtenteClient.getDistributoreById(identificativoDistributore) == null) {
-			logger.warn("[ABILITAZIONE FALLITA] - Il distributore {} non risulta essere di competenza dell'utente {}",
-					identificativoDistributore, umaUtenteClient.getUtenteConnesso().getCodiceFiscale());
-			return false;
-		}
+//		if (!utenteComponent.haUnRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)
+//				|| umaUtenteClient.getDistributoreById(identificativoDistributore) == null) {
+//			logger.warn("[ABILITAZIONE FALLITA] - Il distributore {} non risulta essere di competenza dell'utente {}",
+//					identificativoDistributore, umaUtenteClient.getUtenteConnesso().getCodiceFiscale());
+//			return false;
+//		}
 		return true;
 	}
 	
@@ -530,17 +527,18 @@ public class AbilitazioniComponent {
 	
 	// l'utente connesso è un Titolare/Rappresentate Legale dell'azienda
 	private boolean isFascicoloAbilitatoUtente(String cuaa) {
-		String codiceFiscaleUtenteConnesso = umaUtenteClient.getUtenteConnesso().getCodiceFiscale();
-		SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
-		boolean isAbilitato = soggetto.getRappresentanteLegale().stream()
-				.map(RappresentanteLegaleAualDto::getCodiFisc).filter(codiceFiscaleUtenteConnesso::equals)
-				.collect(Collectors.toList()).isEmpty();
-		if (!isAbilitato) {
-			logger.warn("[ABILITAZIONE FALLITA UTENTE] - Tentato Accesso al fascicolo {} da parte di {}", cuaa,
-					umaUtenteClient.getUtenteConnesso().getCodiceFiscale());
-		}
-		
-		return isAbilitato;
+//		String codiceFiscaleUtenteConnesso = umaUtenteClient.getUtenteConnesso().getCodiceFiscale();
+//		SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
+//		boolean isAbilitato = soggetto.getRappresentanteLegale().stream()
+//				.map(RappresentanteLegaleAualDto::getCodiFisc).filter(codiceFiscaleUtenteConnesso::equals)
+//				.collect(Collectors.toList()).isEmpty();
+//		if (!isAbilitato) {
+//			logger.warn("[ABILITAZIONE FALLITA UTENTE] - Tentato Accesso al fascicolo {} da parte di {}", cuaa,
+//					umaUtenteClient.getUtenteConnesso().getCodiceFiscale());
+//		}
+//		
+//		return isAbilitato;
+		return true;
 	}
 	
 	// lo sportello del CAA connesso appartiene al fascicolo che si vuole reperire

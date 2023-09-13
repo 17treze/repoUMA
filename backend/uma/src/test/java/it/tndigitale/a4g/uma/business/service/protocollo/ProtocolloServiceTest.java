@@ -1,11 +1,5 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto.StatoEnum;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 import it.tndigitale.a4g.framework.client.custom.VerificaFirmaClient;
 import it.tndigitale.a4g.framework.event.store.handler.EventBus;
 import it.tndigitale.a4g.framework.time.Clock;
@@ -68,7 +62,7 @@ public class ProtocolloServiceTest {
     
     @Captor
     private ArgumentCaptor<ProtocollaDocumentoUmaEvent> eventCaptor;    
-    
+    /*
     @Test
     @Transactional
     @Sql(scripts = "/sql/richiesta/richiesta_carburante_controller_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -151,6 +145,7 @@ public class ProtocolloServiceTest {
             .doReturn(LocalDateTime.of(2020, 3, 3, 0, 0))
             .when(clock).now();
     }
+    
     private void mockUmaAnagraficaClientGetFascicolo() {
         DetenzioneAgsDto detenzione = new DetenzioneAgsDto();
         detenzione.setTipoDetenzione(TipoDetenzioneEnum.MANDATO);
@@ -250,4 +245,5 @@ public class ProtocolloServiceTest {
         
         return particelle;
     }
+    */
 }

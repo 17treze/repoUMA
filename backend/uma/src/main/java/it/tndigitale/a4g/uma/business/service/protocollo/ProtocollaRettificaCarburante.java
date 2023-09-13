@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
 //import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;

@@ -15,13 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.api.CaaAgsControllerApi;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.api.FascicoloAgsControllerApi;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.FascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.MovimentoValidazioneFascicoloAgsDto;
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
-import it.tndigitale.a4g.uma.business.service.richiesta.RichiestaCarburanteService;
 import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
 import it.tndigitale.a4g.uma.dto.aual.RespFascicoloAualDto;
 import it.tndigitale.a4g.uma.dto.aual.RespSoggettoAualDto;

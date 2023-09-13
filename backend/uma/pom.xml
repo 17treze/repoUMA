@@ -88,6 +88,7 @@
 			<artifactId>framework</artifactId>
 			<version>${a4g.framework.version}</version>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>it.tndigitale.a4g</groupId>
 			<artifactId>client-sdk-uma</artifactId>
@@ -107,7 +108,7 @@
 				</exclusion>
             </exclusions>
 		</dependency>
-
+		-->
 		<!-- Dipendenze per Swagger -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

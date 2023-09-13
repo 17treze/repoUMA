@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema.ColumnType;
 
-import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
+//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.SportelloFascicoloDto;
 import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.uma.Ruoli;
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;

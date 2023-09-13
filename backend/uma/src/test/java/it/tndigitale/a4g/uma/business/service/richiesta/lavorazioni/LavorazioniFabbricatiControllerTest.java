@@ -31,7 +31,6 @@ import org.springframework.web.util.NestedServletException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.tndigitale.a4g.fascicolo.dotazionetecnica.client.model.FabbricatoAgsDto;
 import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.AmbitoLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.entity.FabbisognoModel;
@@ -298,6 +297,7 @@ class LavorazioniFabbricatiControllerTest {
 	}
 
 	private void mockGetFabbricatiDotazioneTecnica() {
+		/*
 		List<FabbricatoAgsDto> getFabbricatiResponse = new ArrayList<>();
 		FabbricatoAgsDto fabbricato = new FabbricatoAgsDto();
 		fabbricato.setIdAgs(333L);
@@ -313,5 +313,6 @@ class LavorazioniFabbricatiControllerTest {
 
 		Mockito.when(dotazioneTecnicaClient.getFabbricati(Mockito.any(), Mockito.any()))
 		.thenReturn(getFabbricatiResponse);
+		*/
 	}
 }

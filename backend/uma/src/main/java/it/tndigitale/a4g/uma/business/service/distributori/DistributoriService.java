@@ -30,7 +30,7 @@ import it.tndigitale.a4g.uma.dto.distributori.DistributoreDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelieviFilter;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelievoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.builder.PrelievoBuilder;
-import it.tndigitale.a4g.utente.client.model.Distributore;
+// import it.tndigitale.a4g.utente.client.model.Distributore;
 
 @Service
 public class DistributoriService {
@@ -62,25 +62,25 @@ public class DistributoriService {
 		// Cerco in A4G il distributore indicato
 		Optional<DistributoreModel> distributoreA4GOpt = distributoriDao.findByIdentificativo(identificativoDistributore);
 
-		DistributoreModel distributoreModel;
+//		DistributoreModel distributoreModel;
 
-		// Se non esiste il distributore indicato in A4G, viene salvato
-		if (!distributoreA4GOpt.isPresent()) {
-			var distributore = umaUtenteClient.getDistributoreById(prelievo.getDistributore().getIdentificativo());
-
-			distributoreModel = distributoriDao.save(new DistributoreModel()
-					.setIdentificativo(distributore.getId())
-					.setComune(distributore.getComune())
-					.setDenominazione(distributore.getDenominazioneAzienda())
-					.setIndirizzo(distributore.getIndirizzo())
-					.setProvincia(distributore.getProvincia())
-					);
-		} else {
-			distributoreModel = distributoreA4GOpt.get();
-		}
+//		// Se non esiste il distributore indicato in A4G, viene salvato
+//		if (!distributoreA4GOpt.isPresent()) {
+//			var distributore = umaUtenteClient.getDistributoreById(prelievo.getDistributore().getIdentificativo());
+//
+//			distributoreModel = distributoriDao.save(new DistributoreModel()
+//					.setIdentificativo(distributore.getId())
+//					.setComune(distributore.getComune())
+//					.setDenominazione(distributore.getDenominazioneAzienda())
+//					.setIndirizzo(distributore.getIndirizzo())
+//					.setProvincia(distributore.getProvincia())
+//					);
+//		} else {
+//			distributoreModel = distributoreA4GOpt.get();
+//		}
 
 		return prelieviDao.save(new PrelievoModel()
-				.setDistributore(distributoreModel)
+				.setDistributore(distributoreA4GOpt.get())
 				.setRichiestaCarburante(richiesta)
 				.setBenzina(prelievo.getCarburante().getBenzina())
 				.setGasolio(prelievo.getCarburante().getGasolio())
@@ -102,25 +102,25 @@ public class DistributoriService {
 		// Cerco in A4G il distributore indicato
 		Optional<DistributoreModel> distributoreA4GOpt = distributoriDao.findByIdentificativo(prelievo.getDistributore().getIdentificativo());
 
-		DistributoreModel distributoreModel;
-
-		// Se non esiste il distributore indicato in A4G, viene salvato
-		if (!distributoreA4GOpt.isPresent()) {
-			var distributore = umaUtenteClient.getDistributoreById(prelievo.getDistributore().getIdentificativo());
-
-			distributoreModel = distributoriDao.save(new DistributoreModel()
-					.setIdentificativo(distributore.getId())
-					.setComune(distributore.getComune())
-					.setDenominazione(distributore.getDenominazioneAzienda())
-					.setIndirizzo(distributore.getIndirizzo())
-					.setProvincia(distributore.getProvincia())
-					);
-		} else {
-			distributoreModel = distributoreA4GOpt.get();
-		}
+//		DistributoreModel distributoreModel;
+//
+//		// Se non esiste il distributore indicato in A4G, viene salvato
+//		if (!distributoreA4GOpt.isPresent()) {
+//			var distributore = umaUtenteClient.getDistributoreById(prelievo.getDistributore().getIdentificativo());
+//
+//			distributoreModel = distributoriDao.save(new DistributoreModel()
+//					.setIdentificativo(distributore.getId())
+//					.setComune(distributore.getComune())
+//					.setDenominazione(distributore.getDenominazioneAzienda())
+//					.setIndirizzo(distributore.getIndirizzo())
+//					.setProvincia(distributore.getProvincia())
+//					);
+//		} else {
+//			distributoreModel = distributoreA4GOpt.get();
+//		}
 
 		return prelieviDao.save(prelievoDaAggiornare
-				.setDistributore(distributoreModel)
+				.setDistributore(distributoreA4GOpt.get())
 				.setBenzina(prelievo.getCarburante().getBenzina())
 				.setGasolio(prelievo.getCarburante().getGasolio())
 				.setGasolioSerre(prelievo.getCarburante().getGasolioSerre())
@@ -203,17 +203,18 @@ public class DistributoriService {
 			return buildDistributoriDtoFromPrelievi(prelievi);
 		}
 
-		var distributoriUtente = umaUtenteClient.getDistributori();
-		if (CollectionUtils.isEmpty(distributoriUtente)) {return new ArrayList<>();}
+		// var distributoriUtente = umaUtenteClient.getDistributori();
+		// if (CollectionUtils.isEmpty(distributoriUtente)) {return new ArrayList<>();}
 		// filtra i distributori che hanno prelievi non consegnati e tali che le aziende non hanno una dichiarazione consumi protocollata
-		List<DistributoreModel> distributoriSalvati = distributoriDao.findByIdentificativoIn(distributoriUtente.stream().map(Distributore::getId).collect(Collectors.toList()));
-
-		List<PrelievoModel> prelievi = distributoriSalvati
-				.stream()
-				.flatMap(x -> x.getPrelievi().stream())
-				.filter(p -> !p.getConsegnato() && campagna.equals(p.getRichiestaCarburante().getCampagna()) && dichiarazioneConsumiNonProtocollata.test(p))
-				.collect(Collectors.toList());
-		return buildDistributoriDtoFromPrelievi(prelievi);
+//		List<DistributoreModel> distributoriSalvati = distributoriDao.findByIdentificativoIn(distributoriUtente.stream().map(Distributore::getId).collect(Collectors.toList()));
+//
+//		List<PrelievoModel> prelievi = distributoriSalvati
+//				.stream()
+//				.flatMap(x -> x.getPrelievi().stream())
+//				.filter(p -> !p.getConsegnato() && campagna.equals(p.getRichiestaCarburante().getCampagna()) && dichiarazioneConsumiNonProtocollata.test(p))
+//				.collect(Collectors.toList());
+//		return buildDistributoriDtoFromPrelievi(prelievi);
+		return null;
 	}
 
 	// almeno un prelievo di quel distributore non ha dichiarazione consumi protocollata (equivalente a dire: ha una dichiarazione consumi e questa è in compilazione || non ce l'ha proprio)

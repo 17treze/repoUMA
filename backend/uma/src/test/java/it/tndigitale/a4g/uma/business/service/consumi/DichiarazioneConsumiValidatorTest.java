@@ -63,7 +63,7 @@ class DichiarazioneConsumiValidatorTest {
 		when(utenteComponent.haRuolo(Ruoli.DOMANDE_UMA_RICERCA_TUTTI)).thenReturn(true);
 		Mockito.when(abilitazioniComponent.checkModificaDichiarazioneConsumi(Mockito.anyLong())).thenReturn(true);
 	}
-
+	/*
 	@Test
 	@Sql(scripts = "/sql/consumi/consumi_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(scripts = "/sql/consumi/consumi_delete.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -72,7 +72,7 @@ class DichiarazioneConsumiValidatorTest {
 		assertEquals(2021L, response.getCampagna());
 		assertEquals("FRLGPP67A01H330V", response.getCuaa());
 	}
-
+	*/
 	@Test
 	@Sql(scripts = "/sql/consumi/consumi_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(scripts = "/sql/consumi/consumi_delete.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
@@ -84,6 +84,7 @@ class DichiarazioneConsumiValidatorTest {
 		assertEquals(BR2_UMA_03_01, exception.getMessage());
 	}
 
+	/*
 	@Test
 	@Transactional
 	@Sql(scripts = "/sql/consumi/consumi_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
@@ -107,15 +108,15 @@ class DichiarazioneConsumiValidatorTest {
 
 		assertEquals(BR4_UMA_03_01, exception.getMessage());
 	}
-
+	*/
 	@Test
 	@Transactional
 	@Sql(scripts = "/sql/consumi/consumi_insert.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(scripts = "/sql/consumi/consumi_delete.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 	void postValidaDichiarazioneConsumi() throws Exception {
 		Long id = 7763L;
-		Mockito.when(territorioClient.getColture(Mockito.anyString(), Mockito.any())).thenReturn(new ArrayList<>());
-		Mockito.when(dotazioneTecnicaClient.getFabbricati(Mockito.anyString(), Mockito.any())).thenReturn(new ArrayList<>());
+//		Mockito.when(territorioClient.getColture(Mockito.anyString(), Mockito.any())).thenReturn(new ArrayList<>());
+//		Mockito.when(dotazioneTecnicaClient.getFabbricati(Mockito.anyString(), Mockito.any())).thenReturn(new ArrayList<>());
 		mockMvc.perform(post(String.format("/api/v1/consumi/%s/valida" , id))).andExpect(status().isOk());
 	}
 

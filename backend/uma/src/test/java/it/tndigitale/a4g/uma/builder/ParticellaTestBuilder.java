@@ -2,11 +2,11 @@ package it.tndigitale.a4g.uma.builder;
 
 import java.util.ArrayList;
 
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ColturaDto;
-import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
+// import it.tndigitale.a4g.fascicolo.territorio.client.model.ColturaDto;
+// import it.tndigitale.a4g.fascicolo.territorio.client.model.ParticellaDto;
 
 public class ParticellaTestBuilder {
-
+	/*
 	private ParticellaDto particellaDto;
 
 	public ParticellaTestBuilder() {
@@ -35,4 +35,5 @@ public class ParticellaTestBuilder {
 	public ParticellaDto build() {
 		return particellaDto;
 	}
+	*/
 }
