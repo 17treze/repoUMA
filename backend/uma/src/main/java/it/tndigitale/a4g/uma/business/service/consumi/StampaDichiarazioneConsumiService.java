@@ -23,7 +23,6 @@ import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteMode
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoCarburanteConsuntivo;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipoConsuntivo;
 import it.tndigitale.a4g.uma.business.persistence.repository.DichiarazioneConsumiDao;
-import it.tndigitale.a4g.uma.business.service.client.UmaProxyClient;
 import it.tndigitale.a4g.uma.business.service.consumi.calcoli.CarburanteHelper;
 import it.tndigitale.a4g.uma.business.service.richiesta.RichiestaCarburanteService;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDto;
@@ -41,8 +40,6 @@ public class StampaDichiarazioneConsumiService {
 	private DichiarazioneConsumiDao dichiarazioneConsumiDao;
 	@Autowired
 	private RichiestaCarburanteService prelieviService;
-	@Autowired
-	private UmaProxyClient proxyClient;
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired

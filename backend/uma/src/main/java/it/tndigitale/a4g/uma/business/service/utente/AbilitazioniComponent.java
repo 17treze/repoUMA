@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,8 @@ public class AbilitazioniComponent {
 	private UtenteClient abilitazioniUtente;
 	@Autowired
 	private UmaUtenteClient umaUtenteClient;
-//	@Autowired
-//	private UmaAnagraficaClient anagraficaClient;
+	@Autowired
+	private UmaAnagraficaClient anagraficaClient;
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
@@ -527,18 +529,23 @@ public class AbilitazioniComponent {
 	
 	// l'utente connesso è un Titolare/Rappresentate Legale dell'azienda
 	private boolean isFascicoloAbilitatoUtente(String cuaa) {
-//		String codiceFiscaleUtenteConnesso = umaUtenteClient.getUtenteConnesso().getCodiceFiscale();
-//		SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
-//		boolean isAbilitato = soggetto.getRappresentanteLegale().stream()
-//				.map(RappresentanteLegaleAualDto::getCodiFisc).filter(codiceFiscaleUtenteConnesso::equals)
-//				.collect(Collectors.toList()).isEmpty();
-//		if (!isAbilitato) {
-//			logger.warn("[ABILITAZIONE FALLITA UTENTE] - Tentato Accesso al fascicolo {} da parte di {}", cuaa,
-//					umaUtenteClient.getUtenteConnesso().getCodiceFiscale());
-//		}
-//		
-//		return isAbilitato;
-		return true;
+		
+		try {
+			List<String> aziendeUtenteConnesso = abilitazioniUtente.getAziendeUtente();
+			SoggettoAualDto soggetto = anagraficaClient.getSoggetto(cuaa);
+			boolean isAbilitato = soggetto.getRappresentanteLegale().stream()
+					.map(RappresentanteLegaleAualDto::getCodiFisc).filter(aziendeUtenteConnesso::equals)
+					.collect(Collectors.toList()).isEmpty();
+			if (!isAbilitato) {
+				logger.warn("[ABILITAZIONE FALLITA UTENTE] - Tentato Accesso al fascicolo {} da parte di {}", cuaa,
+						abilitazioniUtente.getAziendeUtente());
+			}
+			return isAbilitato;
+		}
+		catch (Exception ex) {
+			logger.error(ex.getMessage());
+			return false;
+		}
 	}
 	
 	// lo sportello del CAA connesso appartiene al fascicolo che si vuole reperire

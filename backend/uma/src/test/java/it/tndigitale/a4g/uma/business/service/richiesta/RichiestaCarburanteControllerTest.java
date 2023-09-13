@@ -69,7 +69,6 @@ import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburant
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
-import it.tndigitale.a4g.uma.business.service.client.UmaProxyClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.business.service.utente.AbilitazioniComponent;
@@ -101,8 +100,8 @@ class RichiestaCarburanteControllerTest {
 	private RichiestaCarburanteValidator richiestaCarburanteValidator;
 	@MockBean
 	private EventBus eventBus;
-	@MockBean
-	private UmaProxyClient stampaClient;
+//	@MockBean
+//	private UmaProxyClient stampaClient;
 	@MockBean
 	private Clock clock;
 	@MockBean

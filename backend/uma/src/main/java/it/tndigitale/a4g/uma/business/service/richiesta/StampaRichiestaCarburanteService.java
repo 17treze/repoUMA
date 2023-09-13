@@ -26,7 +26,6 @@ import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteMode
 import it.tndigitale.a4g.uma.business.persistence.entity.StatoRichiestaCarburante;
 import it.tndigitale.a4g.uma.business.persistence.entity.TipologiaLavorazione;
 import it.tndigitale.a4g.uma.business.persistence.repository.RichiestaCarburanteDao;
-import it.tndigitale.a4g.uma.business.service.client.UmaProxyClient;
 import it.tndigitale.a4g.uma.business.service.consumi.calcoli.CarburanteHelper;
 import it.tndigitale.a4g.uma.business.service.lavorazioni.LavorazioniService;
 import it.tndigitale.a4g.uma.dto.consumi.CarburanteDto;
@@ -61,8 +60,6 @@ public class StampaRichiestaCarburanteService {
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
 	private CarburanteHelper carburanteHelper;
-	@Autowired
-	private UmaProxyClient proxyClient;
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired

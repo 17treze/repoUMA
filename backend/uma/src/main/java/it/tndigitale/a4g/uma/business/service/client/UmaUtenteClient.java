@@ -1,38 +1,51 @@
 package it.tndigitale.a4g.uma.business.service.client;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//import it.tndigitale.a4g.utente.client.api.UtenteControllerApi;
-//import it.tndigitale.a4g.utente.client.model.Distributore;
-//import it.tndigitale.a4g.utente.client.model.Utente;
+import it.tndigitale.a4g.uma.business.persistence.entity.DistributoreModel;
+import it.tndigitale.a4g.uma.business.persistence.repository.DistributoriDao;
+import it.tndigitale.a4g.uma.dto.distributori.DistributoreDto;
 
 @Component
 public class UmaUtenteClient extends AbstractClient {
-	@Value("${it.tndigit.a4g.uma.utente.url}")
-	private String urlUtente;
 
-//	// Methods from Controllers
-//	public Utente getUtenteConnesso() {
-//		return this.getUtenteControllerApi().caricaMieiDatiUsingGET();
-//	}
-//
-//	public Distributore getDistributoreById(Long identificativoDistributore) {
-//		return this.getUtenteControllerApi().getDistributoreByIdUsingGET(identificativoDistributore);
-//	}
-//
-//	public List<Distributore> getDistributori() {
-//		return this.getUtenteControllerApi().getDistributoriUsingGET();
-//	}
-//	
-//	public List<String> getAziende() {
-//		return this.getUtenteControllerApi().getAziendeUsingGET();
-//	}
-//
-//	// Get Controller
-//	private UtenteControllerApi getUtenteControllerApi() {
-//		return restClientProxy(UtenteControllerApi.class, urlUtente);
-//	}
+	@Autowired
+	private DistributoriDao distributoriDao;
+	
+	private static final Logger logger = LoggerFactory.getLogger(UmaAnagraficaClient.class);
+
+	// Methods from Controllers
+	public DistributoreDto getDistributoreById(Long identificativoDistributore) {
+		Optional<DistributoreModel> optDistributore = distributoriDao.findByIdentificativo(identificativoDistributore);
+		if (optDistributore.isPresent()) {
+			DistributoreModel c = optDistributore.get();
+			return new DistributoreDto(
+					c.getId(), 
+					c.getDenominazione(),
+					c.getComune(),
+					c.getIndirizzo(),
+					c.getProvincia(),
+					c.getIdentificativo());
+		}
+		return null;
+	}
+
+	public List<DistributoreDto> getDistributori() {
+		List<DistributoreModel> distributoriModel = distributoriDao.findAll();
+		return distributoriModel.stream().map(c -> new DistributoreDto(
+				c.getId(), 
+				c.getDenominazione(),
+				c.getComune(),
+				c.getIndirizzo(),
+				c.getProvincia(),
+				c.getIdentificativo())).collect(Collectors.toList());
+	}
+	
 }

@@ -63,7 +63,6 @@ import it.tndigitale.a4g.uma.business.persistence.entity.StatoDichiarazioneConsu
 import it.tndigitale.a4g.uma.business.persistence.repository.DichiarazioneConsumiDao;
 import it.tndigitale.a4g.uma.business.service.client.UmaAnagraficaClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaDotazioneTecnicaClient;
-import it.tndigitale.a4g.uma.business.service.client.UmaProxyClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaTerritorioClient;
 import it.tndigitale.a4g.uma.business.service.client.UmaUtenteClient;
 import it.tndigitale.a4g.uma.business.service.utente.AbilitazioniComponent;
@@ -96,8 +95,8 @@ class ConsumiControllerTest {
 	private UmaTerritorioClient territorioClient;
 	@MockBean
 	private UmaDotazioneTecnicaClient dotazioneTecnicaClient;
-	@MockBean
-	private UmaProxyClient stampaClient;
+//	@MockBean
+//	private UmaProxyClient stampaClient;
 	@MockBean
 	private UmaUtenteClient utenteClient;
 	

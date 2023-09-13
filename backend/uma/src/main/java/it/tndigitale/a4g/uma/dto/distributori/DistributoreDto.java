@@ -8,7 +8,22 @@ public class DistributoreDto {
 	private String indirizzo;
 	private String provincia;
 	private Long identificativo;
-
+	
+	public DistributoreDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public DistributoreDto(Long id, String denominazione, String comune, String indirizzo, String provincia,
+			Long identificativo) {
+		super();
+		this.id = id;
+		this.denominazione = denominazione;
+		this.comune = comune;
+		this.indirizzo = indirizzo;
+		this.provincia = provincia;
+		this.identificativo = identificativo;
+	}
 	public String getDenominazione() {
 		return denominazione;
 	}
