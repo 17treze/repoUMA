@@ -820,7 +820,7 @@
                         title="Allega un documento"
                         icon="pi pi-attachment"></button>
                       <button
-                        *ngIf="!inputRecuperoGasolioContoProprio?.disabled && motivoRecuperoGasolioContoProprio?.allegati?.length"
+                        *ngIf="inputRecuperoGasolioContoProprio.value > 0 && motivoRecuperoGasolioContoProprio?.allegati?.length"
                         pButton
                         type="button"
                         class="icon-button-square border-left-0"
@@ -878,7 +878,7 @@
                         title="Allega un documento"
                         icon="pi pi-attachment"></button>
                       <button
-                        *ngIf="!inputRecuperoGasolioContoTerzi.disabled && motivoRecuperoGasolioContoTerzi?.allegati?.length"
+                        *ngIf="inputRecuperoGasolioContoTerzi.value > 0 && motivoRecuperoGasolioContoTerzi?.allegati?.length"
                         pButton
                         type="button"
                         class="icon-button-square border-left-0"
@@ -943,7 +943,7 @@
                         title="Allega un documento"
                         icon="pi pi-attachment"></button>
                       <button
-                        *ngIf="!inputRecuperoBenzina.disabled && motivoRecuperoBenzina?.allegati?.length"
+                        *ngIf="inputRecuperoBenzina.value > 0 && motivoRecuperoBenzina?.allegati?.length"
                         pButton
                         type="button"
                         class="icon-button-square border-left-0"
@@ -1001,7 +1001,7 @@
                         title="Allega un documento"
                         icon="pi pi-attachment"></button>
                       <button
-                        *ngIf="!inputRecuperoGasolioSerre.disabled && motivoRecuperoGasolioSerre?.allegati?.length"
+                        *ngIf="inputRecuperoGasolioSerre.value > 0 && motivoRecuperoGasolioSerre?.allegati?.length"
                         pButton
                         type="button"
                         class="icon-button-square border-left-0"

@@ -179,46 +179,62 @@
               </time>
             </div>
           </span>
+          <span *ngIf="isFascicoloAttuale() && fascicoloCorrente.dataUltimaValidazione" style="display: inline-flex">
+            <div class="p-col-fixed stile-descrizione" style="width:150px">
+              <h6 class="mb-0">{{ 'FAS_ANA.SCHEDA_VALIDAZIONE' | translate }}:</h6>
+            </div>
+            <div class="p-col-fixed stile-data"><time class="fw-700">
+                {{ fascicoloCorrente.numeScheVali }}
+              </time>
+            </div>
+          </span>
         </div>
         <hr class="hr-dark">
         <div class="row">
           <div class="col-3 border-r d-flex flex-column">
-            <h6 class="mb-0">Centro Assistenza Agricola:</h6>
+            <h6 class="mb-0">{{ "FAS_ANA.DATI_CAA" | translate }}:</h6>
             <span class="fw-700 d-block">
               {{ fascicoloCorrente?.mandatoDto?.denominazione }}
             </span>
+            <!--
             <div *ngIf="canGetMandato()" class="d-flex align-items-center mt-auto"
               [class]="isFascicoloAttuale() ? 'collegamento' : 'collegamento-grey'" (click)="getMandato()">
               <span><img class="collegamento-icon"
                   [src]="isFascicoloAttuale() ? 'assets/img/pi-file.png' : 'assets/img/pi-file-grey.png'"></span>
               <span class="desc-collegamento"> {{ 'FAS_ANA.VISUALIZZA_DOC_MANDATO' | translate }} </span>
             </div>
+            -->
           </div>
           <div class="col-3 border-r d-flex flex-column">
-            <h6 class="mb-0">Sportello:</h6>
+            <h6 class="mb-0">{{ "UMA.COMUNE_CAPOFILA" | translate }}:</h6>
             <span class="fw-700 d-block">
               {{ fascicoloCorrente?.mandatoDto?.sportello?.denominazione }}
             </span>
+            <!--
             <div *ngIf="canModificaSede()" class="d-flex align-items-center mt-auto collegamento"
               (click)="openPopupModificaSede()">
               <span><img class="collegamento-icon" src="assets/img/pi-pencil.png"></span>
               <span class="desc-collegamento"> Modifica </span>
             </div>
+            -->
             <!-- <div *ngIf="!isFascicoloAttuale()" class="d-flex align-items-center mt-auto collegamento"  (click)="tornaAlFascicoloAttuale()">
               <span><img class="collegamento-icon" src="assets/img/pi-pencil.png" /></span>
               <span class="desc-collegamento"> Attuale </span>
             </div> -->
           </div>
           <div class="col-3 border-r d-flex flex-column">
+            <!--
             <ng-template #altroOP>
               <span>
                 {{ "FAS_ANA.ALTRO_OP" | translate }}
               </span>
             </ng-template>
+            -->            
             <h6 class="mb-0">{{ "FAS_ANA.FIRMATARIO" | translate }}:</h6>
             <span class="fw-700 d-block">
               {{ getFirmatarioEsteso() }}
             </span>
+            <!--
             <div *ngIf="canModificaFirmatario()" class="d-flex align-items-center mt-auto"
               [class]="isFascicoloAttuale() ? 'collegamento' : 'collegamento-grey'"
               (click)="openPopupModificaFirmatario()">
@@ -230,12 +246,14 @@
                 {{isFascicoloAttuale() ? ('FAS_ANA.MODIFICA_FIRMATARIO' | translate) : 'FAS_ANA.VISUALIZZA_FIRMATARIO' | translate}}
               </span>
             </div>
+            -->            
           </div>
           <div class="col-3 d-flex flex-column" *ngIf="fascicoloCorrente.mandatoDto">
-            <h6 class="mb-0">Organismo pagatore:</h6>
+            <h6 class="mb-0">{{ "ICC" | translate }}:</h6>
             <span *ngIf="fascicoloCorrente.organismoPagatore === 'APPAG'; else altroOP" class="fw-700 d-block">
               {{ "FAS_ANA.APPAG" | translate }}
             </span>
+            <!--
             <div *ngIf="canCompletaTrasferimentoInAppag()" class="d-flex align-items-center mt-auto collegamento"
               (click)="completaTrasferimentoInAppag()">
               <span><img class="collegamento-icon" src="assets/img/pi-pencil.png"></span>
@@ -246,6 +264,7 @@
               <span><img class="collegamento-icon" src="assets/img/pi-pencil.png"></span>
               <span class="desc-collegamento"> {{ 'FAS_ANA.COMPLETA_TRASFERIMENTO_DA_APPAG' | translate }} </span>
             </div>
+            -->
           </div>
         </div>
       </div>

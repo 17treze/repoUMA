@@ -12,8 +12,10 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
 import { FascicoloDettaglioService } from './fascicolo-dettaglio.service';
 import { FascicoloDettaglio } from '../shared/fascicolo.model';
-import { MandatoService } from '../mandato.service';
-import { AnagraficaFascicoloService } from '../creazione-fascicolo/anagrafica-fascicolo.service';
+import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
+import { FascicoloService } from '../fascicolo.service';
+// import { MandatoService } from '../mandato.service';
+// import { AnagraficaFascicoloService } from '../creazione-fascicolo/anagrafica-fascicolo.service';
 import { TranslateService } from '@ngx-translate/core';
 import { PersonaFisicaConCaricaDto } from '../creazione-fascicolo/dto/PersonaDto';
 import * as  moment from 'moment';
@@ -23,6 +25,8 @@ import { MediatorService } from '../mediator.service';
 import * as FileSaver from 'file-saver';
 import { Firmatario } from '../creazione-fascicolo/dto/FirmatarioDto';
 import { SospensioneFascicolo } from 'src/app/a4g-common/classi/Fascicolo';
+import { ErrorService } from 'src/app/a4g-common/services/error.service';
+
 
 @Component({
   selector: 'app-fascicolo-dettaglio-container',
@@ -41,10 +45,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   public popupCompletaTrasferimentoInAppagOpen = false;
   public cuaa: string;
   public mandatoWarning: string;
-  public idValidazione: number = undefined;
+  public idValidazione: number = 0;
   public firmatario: PersonaFisicaConCaricaDto;
   public dataUltimoAggiornamento: Date;
   public dataUltimaValidazione: Date;
+  public numeroSchedaValidazione: string;
   public conduzioneTerreniList: ConduzioneDto[];
   public activeState = true;
   public statoFascicoloEnum = StatoFascicoloEnum;
@@ -59,9 +64,10 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   public showItemDropdown = false;
 
   constructor(
-    private anagraficaFascicoloService: AnagraficaFascicoloService,
-    // private fascicoloService: FascicoloService,
-    private mandatoService: MandatoService,
+    private fascicoloService: FascicoloService,
+    private errorService: ErrorService,
+    // private anagraficaFascicoloService: AnagraficaFascicoloService,
+    // private mandatoService: MandatoService,
     private route: ActivatedRoute,
     private router: Router,
     private messageService: MessageService,
@@ -93,7 +99,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mandatoWarning = null;
+    // this.mandatoWarning = null;
     this.route.params.pipe(
       takeUntil(this.componentDestroyed$),
       switchMap(params => {
@@ -126,6 +132,8 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   private loadFirmatario(cuaa: string) {
+    // da riscrivere
+    /*
     this.anagraficaFascicoloService.getFirmatario(cuaa).pipe(
       takeUntil(this.componentDestroyed$))
       .subscribe((firmatario: PersonaFisicaConCaricaDto) => {
@@ -133,6 +141,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           this.fascicoloDettaglioService.firmatario.next(firmatario);
         }
       });
+    */
   }
 
   interruttore() {
@@ -208,6 +217,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   private loadFascicolo(cuaa: string, idValidazione: number): void {
+    /*
     const mandatiByCuaa$ = this.mandatoService.getMandati(cuaa, idValidazione);
     const fascicoloByCuaa$ = this.anagraficaFascicoloService.getFascicolo(cuaa, idValidazione);
     forkJoin(mandatiByCuaa$, fascicoloByCuaa$).pipe(
@@ -249,6 +259,30 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           this.fascicoloDettaglioService.fascicoloCorrente.next(res[1] as FascicoloDaCuaa);
           this.setItemDropdown();
         }
+      });
+    */
+    this.fascicoloService.getFascicoloLazio(cuaa).subscribe((fascicolo: FascicoloLazio) => {
+        if (fascicolo.data) {
+          console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
+          // inizializzare FascicoloDaCuaa...
+          let fascicoloDaCuaa = new FascicoloDaCuaa();
+          fascicoloDaCuaa.cuaa = fascicolo.data.codiCuaa;
+          fascicoloDaCuaa.denominazione = fascicolo.data.descDeno;
+          fascicoloDaCuaa.dataApertura = this.dateFromString(fascicolo.data.dataAperFasc);
+          fascicoloDaCuaa.dataModifica = this.dateFromString(fascicolo.data.dataElab);
+          fascicoloDaCuaa.dataUltimaValidazione = this.dateFromString(fascicolo.data.dataScheVali);
+          fascicoloDaCuaa.numeScheVali = fascicolo.data.numeScheVali;
+          // ...
+          this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);
+          this.setItemDropdown();
+        }
+        else {
+          console.log('err11');
+          this.errorService.showErrorWithMessage(fascicolo.text);
+        }
+      }, error => {
+        console.log('err12');
+        this.errorService.showError(error, 'tst-fas-ap');
       });
   }
 
@@ -300,49 +334,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     return this.fascicoloCorrente.stato === StatoFascicoloEnum.IN_ATTESA_TRASFERIMENTO;
   }
 
-  public completaTrasferimentoInAppag() {
-    this.anagraficaFascicoloService.completaTrasferimentoDaAltroOP(this.cuaa)
-      .pipe(
-        takeUntil(this.componentDestroyed$),
-        switchMap((result: FascicoloCreationResultDto) => {
-          const fascicoloDto = result.fascicoloDto;
-          this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDto);
-          this.setItemDropdown();
-          this.messageService.add(A4gMessages.getToast(
-            'fdc-toast', A4gSeverityMessage.success, A4gMessages.OPERAZIONE_OK));
-          /** FAS-CON-06 - Trasferimento da altro OP - disattivare migrazione titoli
-          return this.fascicoloTerritorioService.getConduzioneTerreni(this.cuaa);
-          */
-          return EMPTY;
-        }),
-        catchError((error: HttpErrorResponse) => {
-          const errMsg = error.error!.message ? error.error.message : error.error;
-          const severityMsg = (errMsg === this.translateService.instant('FAS_ANA.ITER_TRASFERIMENTO_SIAN_NON_COMPLETATO')) ? A4gSeverityMessage.info : A4gSeverityMessage.error;
-          this.messageService.add(A4gMessages.getToast(
-            'fdc-toast', severityMsg, errMsg));
-          return EMPTY;
-        })
-        /** FAS-CON-06 - Trasferimento da altro OP - disattivare migrazione titoli
-        switchMap((conduzioni: ConduzioneDto[]) => {
-          if (conduzioni && conduzioni.length > 0) {
-            this.conduzioneTerreniList = conduzioni;
-            this.openPopupCompletaTrasferimentoInAppag();
-          } else {
-            this.messageService.add(A4gMessages.getToast(
-              'fdc-toast', A4gSeverityMessage.info, this.translateService.instant('FAS_ANA.NO_CONDUZIONI_SIAN')
-            ));
-          }
-          return of(conduzioni);
-        }),
-        catchError((error: HttpErrorResponse) => {
-          this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error, error.error));
-          return EMPTY;
-        })
-        */
-      )
-      .subscribe();
-  }
-
+ 
   public openPopupCompletaTrasferimentoDaAppag() {
     if (this.isStatoFascicoloControlliInCorso()) {
       this.messageService.add(A4gMessages.getToast(
@@ -421,6 +413,8 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public getMandato() {
+    // da riscrivere
+    /*
     if (!this.isFascicoloAttuale()) {
       if (this.paramIdVal) {
         // parametro per l'apertura storico id validazione
@@ -441,6 +435,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           'fdc-toast', A4gSeverityMessage.error, A4gMessages.erroreVisualizzazioneMandato));
       }
     );
+    */
   }
 
   public goToFascicoliValidati() {
@@ -464,23 +459,6 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
       this.loadFirmatario(this.cuaa);
       this.loadFascicolo(this.cuaa, this.idValidazione);
     }
-  }
-
-  public saveFirmatario(firmatario: Firmatario) {
-    this.anagraficaFascicoloService.putSalvaFirmatario(firmatario, this.cuaa).pipe(
-      takeUntil(this.componentDestroyed$),
-      catchError(error => {
-        this.messageService.add(A4gMessages.getToast(
-          'fdc-toast', A4gSeverityMessage.error,
-          this.translateService.instant('ERRORE_GENERICO')));
-        return EMPTY;
-      })).subscribe(
-        () => {
-          this.closePopupModificaFirmatario(true);
-          this.messageService.add(A4gMessages.getToast(
-            'fdc-toast', A4gSeverityMessage.success,
-            this.translateService.instant('FIRMATARIO.SALVATAGGIO_OK')));
-        });
   }
 
   /*private loadDates(cuaa: string) {
@@ -541,6 +519,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public getSchedaValidazione() {
+    /*
     if (!this.isFascicoloAttuale() || this.isStatoFascicoloValidato()) {
       this.anagraficaFascicoloService.getReportSchedaValidazioneSnapshot(this.cuaa, this.idValidazione).pipe(
         takeUntil(this.componentDestroyed$),
@@ -580,6 +559,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
             this.updateStatoFascicolo();
           });
     }
+    */
   }
 
   public isPopupPassaAEnabled() {
@@ -619,6 +599,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public schedaValidazioneFirmaCaaChange(file) {
+    /*
     this.anagraficaFascicoloService.putReportSchedaValidazione(file, this.fascicoloCorrente.cuaa)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(
@@ -631,9 +612,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
             'tst', A4gSeverityMessage.error, this.translateService.instant('EXC_VERIFICA_FIRMA.FIRMA_NON_VALIDA')
           ));
         });
+    */
   }
 
   public schedaValidazioneFirmaCaaAziendaChange(file) {
+    /*
     this.anagraficaFascicoloService.putReportSchedaValidazioneFirmaCaaAzienda(file, this.fascicoloCorrente.cuaa)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe(
@@ -648,6 +631,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
             'tst', A4gSeverityMessage.error, this.translateService.instant('EXC_VERIFICA_FIRMA.FIRMA_NON_VALIDA')
           ));
         });
+    */
   }
 
   public changeStatusInAggiornamentoFascicolo() {
@@ -665,6 +649,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public setAllaFirmaAzienda(cuaa: string) {
+    /*
     this.anagraficaFascicoloService.putStatoAllaFirmaAziendaFascicolo(cuaa)
       .subscribe(
         () => {
@@ -682,9 +667,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           this.messageService.add(A4gMessages.getToast(
             'tst', A4gSeverityMessage.error, messaggioErrore));
         });
+    */
   }
 
   public setInAggiornamento(cuaa: string) {
+    /*
     let service;
     if (this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_CAA
       || this.fascicoloCorrente.stato === StatoFascicoloEnum.ALLA_FIRMA_AZIENDA
@@ -704,6 +691,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         this.messageService.add(A4gMessages.getToast(
           'tst', A4gSeverityMessage.error, A4gMessages.changeStatusInAggiornamentoKo));
       });
+    */
   }
 
   public canMoveInAggiornamento(): boolean {
@@ -762,6 +750,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public updateStatoFascicolo() {
+    /*
     this.anagraficaFascicoloService.getFascicoloNotCached(this.cuaa, this.idValidazione)
       .subscribe(res => {
         if (res) {
@@ -777,6 +766,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
             this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error, e));
           }
         });
+    */
   }
 
   private isStatoFascicoloControlliInCorso() {
@@ -791,6 +781,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
 
   public confirmChiudiFascicolo() {
     this.messageService.clear('chiudiFascicolo');
+    /*
     this.anagraficaFascicoloService.chiudiFascicolo(this.fascicoloCorrente.cuaa)
       .subscribe(
         res => {
@@ -800,6 +791,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error, err.error.message));
         }
       );
+    */
   }
 
   public rejectChiudiFascicolo() {
@@ -831,6 +823,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   public sospendiFascicolo(sospensioneFascicolo: SospensioneFascicolo) {
+    /*
     let service;
     if (this.fascicoloCorrente.stato === StatoFascicoloEnum.SOSPESO) {
       service = this.anagraficaFascicoloService.rimuoviSospensioneFascicolo(this.fascicoloCorrente.cuaa, sospensioneFascicolo);
@@ -846,6 +839,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error, err.error.message));
       }
     );
+    */
   }
 
   public isResponsabileFascicoloPat() {
@@ -904,11 +898,14 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
   }
 
   private getEredi() {
+    // Il SIAN mi pare non li restituisca
+    /*
     this.anagraficaFascicoloService.getEredi(this.cuaa, this.idValidazione)
       .subscribe(res => {
         this.eredi = res;
         this.fascicoloDettaglioService.eredi.next(this.eredi);
       });
+    */
   }
 
   public canGetMandato(): boolean {
@@ -933,6 +930,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
 
   public canGetSchedaValidazioneBozza(): boolean {
     return this.isFascicoloAttuale() && !this.isFascicoloChiuso() && !this.isFascicoloSospeso();
+  }
+  
+  dateFromString (dateStr: string): Date {
+    return new Date(parseInt(dateStr.substring(0, 4)), 
+    	parseInt(dateStr.substring(4, 6)) - 1, parseInt(dateStr.substring(6, 8)));
   }
 
 }

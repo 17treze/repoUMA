@@ -158,12 +158,14 @@ export class SezioniDichiarazioneConsumiComponent implements OnInit {
         });
         break;
       }
+      /*
       case SezioniDichiarazioneConsumi.TRASFERIMENTI: {
         this.router.navigate(["trasferimenti"], {
           relativeTo: this.activeRoute.parent,
         });
         break;
       }
+      */
       default: {
         break;
       }

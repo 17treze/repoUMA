@@ -7,7 +7,9 @@ export class FascicoloData {
    codiTipoAzie: string;
    dataValiFasc: string;
    dataElab: string;
-   dataAperFasc: string
+   dataAperFasc: string;
+   dataScheVali: string;
+   numeScheVali: string
 }
 
 export class OrgaPagaData {

@@ -60,7 +60,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
   public statoFascicoloEnum = StatoFascicoloEnum;
   public eredi: EredeDto[];
   protected componentDestroyed$: Subject<boolean> = new Subject();
-  private idValidazione: number = undefined;
+  private idValidazione: number = 0;
   dichiarazioniAntimafia: DichiarazioneAntimafia[];
   readonly UMA_01_01_BR1_ERR_MSG = "Solamente il titolare o il rappresentante legale di un'azienda agricola è autorizzato alla presentazione della Richiesta di carburante on line";
   readonly UMA_FASCICOLO_NON_VALIDO = "Non è possibile reperire il fascicolo selezionato";
@@ -137,7 +137,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
         this.fascicoloCorrente = fascicoloCorrente;
         if (this.fascicoloCorrente !== null) {
           this.idFascicolo = this.fascicoloCorrente.id;
-          this.idMandato = this.fascicoloCorrente.mandatoDto.id;
+          // this.idMandato = this.fascicoloCorrente.mandatoDto.id;
           this.caricaIdFascicoloUMA();
         }
       });
@@ -537,10 +537,13 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
   }
 
   private caricaIdFascicoloUMA() {
+    /*
     this.getFascicoloAgsByCuaaSub = this.fascicoloService.getUrlGetLegacyByCuaa(this.fascicoloCorrente.cuaa)
       .subscribe((response: FascicoloAgsDto) => {
         this.fascicoloCorrenteUMA.fascicoloLegacy = response;
       }, error => console.log(error));
+    */
+    console.log('caricaIdFascicoloUMA: ' + this.fascicoloCorrente.cuaa);
   }
 
   public goMyappag() {

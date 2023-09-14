@@ -11,6 +11,7 @@ export class FascicoloDaCuaa { /** Fascicolo DTO */
   dataValidazione: Date;
   dataModifica: Date;
   dataUltimaValidazione: Date;
+  numeScheVali: string;
   idSchedaValidazione: number;
   
   static toDto(inc: any): FascicoloDaCuaa {

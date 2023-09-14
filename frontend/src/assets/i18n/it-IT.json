@@ -1069,7 +1069,8 @@
             "RICERCA_CLIENTI": "Ricerca clienti",
             "ALLEGATI": "ALLEGATI",
             "ATTENZIONE": "Attenzione"
-        }
+        },
+        "COMUNE_CAPOFILA": "Comune capofila"
     },
     "RICHIESTA_REVOCA_IMMEDIATA": {
         "CUAA": "CUAA",
