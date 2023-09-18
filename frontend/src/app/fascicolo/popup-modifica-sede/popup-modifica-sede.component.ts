@@ -56,6 +56,7 @@ export class PopupModificaSedeComponent implements OnInit {
   }
 
   public conferma() {
+    /*
     // PUT
     this.fascicoloService.putCambioSportello(
       this.fascicolo.cuaa,
@@ -74,6 +75,7 @@ export class PopupModificaSedeComponent implements OnInit {
       console.log('Error', error);
       A4gMessages.handleError(this.messages, error, A4gMessages.ERRORE_GENERICO);
     });
+    */
   }
 
   public onHide() {

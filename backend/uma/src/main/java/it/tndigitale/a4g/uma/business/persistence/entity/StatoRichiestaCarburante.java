@@ -7,6 +7,7 @@ package it.tndigitale.a4g.uma.business.persistence.entity;
  */
 public enum StatoRichiestaCarburante {
 	IN_COMPILAZIONE,
+	PROTOCOLLATA,
 	AUTORIZZATA,
 	RETTIFICATA;
 }

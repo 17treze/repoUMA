@@ -37,7 +37,7 @@ export class DatiSospensioneComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.cuaa = this.route.snapshot.paramMap.get('cuaa');
-    this.getDatiSospensione(this.cuaa);
+    // this.getDatiSospensione(this.cuaa);
     this.setCols();
   }
 
@@ -50,7 +50,7 @@ export class DatiSospensioneComponent implements OnInit, OnDestroy {
       { field: 'utente', header: 'Utente' }
     ];
   }
-
+  /*
   private getDatiSospensione(cuaa: string) {
     this.fascicoloService.getDatiSospensioneFascicolo(cuaa).pipe(
       takeUntil(this.componentDestroyed$),
@@ -65,7 +65,7 @@ export class DatiSospensioneComponent implements OnInit, OnDestroy {
       this.sospensioniList.sort((a, b) => (a.dataInizio < b.dataInizio) ? 1 : -1);
     });
   }
-
+  */
   public handleClick() {
     this.fascicoloDettaglioService.mostraDettaglioSezione.next(FascicoloDettaglio.DATI);
   }

@@ -54,6 +54,7 @@ export class FascicoliValidatiComponent implements OnInit, OnDestroy {
   }
 
   loadList(event: PaginatorEvent) {
+    /*
     let sortOrder;
     const sortBy: string = event.sortField || 'dataValidazione';
     if (event.sortField) {
@@ -78,6 +79,7 @@ export class FascicoliValidatiComponent implements OnInit, OnDestroy {
         this.validazioniFascicoloList = res.risultati;
         this.elementiTotali = res.count;
       });
+    */
   }
 
   public lazyLoadData(event: PaginatorEvent) {

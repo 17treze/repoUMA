@@ -388,6 +388,14 @@
         "CAMBIA_STATO_IN_AGGIORNAMENTO": "L'attuale stato del fascicolo non permette di eseguire questa operazione",
         "ACQUISIZIONE_MANDATO":  "Acquisisci mandato"
     },
+    "FAS_CONS": {
+        "HEADER": "Dimensioni consistenza aziendale",
+        "SIZE": {
+            "TERRENI": "N. Particelle",
+            "FABBRICATI": "N. Fabbricati",
+            "MACCHINE": "N. Macchine agricole"
+        }
+    },
     "NO_CONTENT": "Contenuto non disponibile",
     "SOSTEGNO": {
         "SALDO": "Saldo",

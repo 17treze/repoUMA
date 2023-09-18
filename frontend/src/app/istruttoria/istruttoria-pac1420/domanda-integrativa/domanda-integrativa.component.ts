@@ -449,10 +449,12 @@ export class DomandaIntegrativaComponent implements OnInit, OnDestroy {
     }
 
     getFascicolo(idFascicolo: number): void {
-        this.fascicoloService.getFascicolo(idFascicolo).subscribe((next) => {
-            this.cuaa = next.cuaa;
-            this.getDatiDomanda();
-        });
+      /*
+      this.fascicoloService.getFascicolo(idFascicolo).subscribe((next) => {
+        this.cuaa = next.cuaa;
+        this.getDatiDomanda();
+      });
+      */
     }
 
     private getDatiDomanda() {

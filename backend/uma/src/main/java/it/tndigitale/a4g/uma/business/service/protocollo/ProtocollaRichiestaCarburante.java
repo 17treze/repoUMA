@@ -1,5 +1,12 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.slf4j.Logger;
@@ -16,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto.TipologiaDocumentoPrincipale;
+import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.client.custom.MittenteDto;
 import it.tndigitale.a4g.framework.support.PersonaSelector;
 import it.tndigitale.a4g.framework.time.Clock;
@@ -34,59 +42,81 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 	private static final String SUFFISSO_NOME_FILE_RICHIESTA_CARBURANTE = "_richiestacarburante";
 	private static final String PREFISSO_OGGETTO_RICHIESTA_CARBURANTE = "A4G - RICHIESTA CARBURANTE UMA - ";
 
+	private static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
+
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
 	@Autowired
 	private Clock clock;
+	@Autowired
+	private UtenteComponent utenteComponent;
+
 	@Value("${it.tndigit.a4g.uma.protocollazione.firma.obbligatoria}")
 	private boolean firmaObbligatoria;
+	
+	@Value("${pathDownload}")
+	private String pathDownload;
 
 	@Override
 	@Transactional
 	public void avviaProtocollo(Long id, ByteArrayResource documento, boolean haFirma) {
 
-		RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
+		try {
+			RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
 
-		// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
-		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
+			// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
+			FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 
-		// trova dati richiedente
-		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RICHIESTA);
+			// trova dati richiedente
+			SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RICHIESTA);
 
-		// assicurati che il fascicolo sia valido
-		controlloFascicoloValido(fascicolo);
+			// assicurati che il fascicolo sia valido
+			controlloFascicoloValido(fascicolo);
 
-		// controlla la firma del documento
-		if (firmaObbligatoria) {
-			verificaFirmaDocumento(documento, richiesta.getCfRichiedente());
-		} else {
-			verificaFirmaDocumentoAndSave(documento, richiesta.getCfRichiedente(), haFirma);
+			// controlla la firma del documento
+			if (firmaObbligatoria) {
+				verificaFirmaDocumento(documento, richiesta.getCfRichiedente());
+			} else {
+				verificaFirmaDocumentoAndSave(documento, richiesta.getCfRichiedente(), haFirma);
+			}
+
+			// replica i controlli che ha fatto in fase di creazione della domanda (se non già fatto nel service)
+
+			// salva la superficie massima
+			salvaSuperficiMassime(richiesta);
+
+			// Salva la richiesta
+			richiestaCarburanteDao.save(richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA)
+//					.setDocumento(documento.getByteArray())
+					.setNomeFile(richiesta.getCuaa() + "_" + clock.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ".pdf")
+					.setFirma(firmaObbligatoria ? Boolean.TRUE : haFirma)
+					.setEntePresentatore(getEntePresentatore(fascicolo)));
+
+			// Salvataggio documento su file system
+			Path filePath = Paths.get(this.pathDownload +
+					   this.SUB_DIRECTORY_RICHIESTE +
+					   "/" + utenteComponent.username() +
+					   "/" + richiesta.getCuaa() + "_" + clock.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ".pdf");
+			
+			Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
+			
+			ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
+					.setDocumento(documento)
+					.setId(id)
+					.setCuaa(richiesta.getCuaa())
+					.setAnno(richiesta.getCampagna().intValue())
+					.setNome(richiedente.getDescNome())
+					.setCognome(richiedente.getDescCogn())
+					.setDescrizioneImpresa(fascicolo.getDescDeno())
+					.setPec(fascicolo.getDescPec())
+					.setTipoDocumentoUma(TipoDocumentoUma.RICHIESTA);
+
+			// pubblica evento
+			publish(protocollaRichiestaCarburanteDto);
 		}
-
-		// replica i controlli che ha fatto in fase di creazione della domanda (se non già fatto nel service)
-
-		// salva la superficie massima
-		salvaSuperficiMassime(richiesta);
-
-		// Salva la richiesta
-		richiestaCarburanteDao.save(richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA)
-				.setDocumento(documento.getByteArray())
-				.setFirma(firmaObbligatoria ? Boolean.TRUE : haFirma)
-				.setEntePresentatore(getEntePresentatore(fascicolo)));
-
-		ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
-				.setDocumento(documento)
-				.setId(id)
-				.setCuaa(richiesta.getCuaa())
-				.setAnno(richiesta.getCampagna().intValue())
-				.setNome(richiedente.getDescNome())
-				.setCognome(richiedente.getDescCogn())
-				.setDescrizioneImpresa(fascicolo.getDescDeno())
-				.setPec(fascicolo.getDescPec())
-				.setTipoDocumentoUma(TipoDocumentoUma.RICHIESTA);
-
-		// pubblica evento
-		publish(protocollaRichiestaCarburanteDto);
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

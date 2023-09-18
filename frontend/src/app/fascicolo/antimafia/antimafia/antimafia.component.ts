@@ -57,6 +57,7 @@ export class AntimafiaComponent implements OnInit, OnDestroy {
   }
 
   getDichiarazioniAntimafia(): void {
+    /*
     if (this.fascicoloCorrente == null || this.fascicoloCorrente.fascicoloLegacy == null || this.fascicoloCorrente.fascicoloLegacy.cuaa == null) {
       this.getFascicoloAgsByCuaaSub = this.route.params
         .pipe(
@@ -88,6 +89,7 @@ export class AntimafiaComponent implements OnInit, OnDestroy {
           this.rerouteAntimafia();
         }, err => this.errorService.showError(err));
     }
+    */
   }
 
   selected(value: string) {

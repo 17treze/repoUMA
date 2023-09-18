@@ -13,7 +13,9 @@ export class FascicoloDaCuaa { /** Fascicolo DTO */
   dataUltimaValidazione: Date;
   numeScheVali: string;
   idSchedaValidazione: number;
-  
+  numeIscrRea: string;
+  numeIscrRegiImpr: string;
+ 
   static toDto(inc: any): FascicoloDaCuaa {
     if (!inc) return null;
     const dati: FascicoloDaCuaa = new FascicoloDaCuaa();

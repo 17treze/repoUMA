@@ -10,6 +10,22 @@ export class FascicoloData {
    dataAperFasc: string;
    dataScheVali: string;
    numeScheVali: string
+   numeIscrRea: string;
+   numeIscrRegiImpr: string;
+   comuneCapofila: string
+}
+
+export class TerrenoData {
+  codiTerr: string
+  // ..
+}
+export class FabbricatoData {
+  codiFabb: string
+  // ..
+}
+export class MacchinaData {
+  codiMacc: string
+  // ...
 }
 
 export class OrgaPagaData {
@@ -20,6 +36,42 @@ export class OrgaPagaData {
 export class FascicoloLazio {
   text: string;
   data: FascicoloData;
+
+  public clean() {
+    for (const propName in this) {
+      if (this[propName] === null || this[propName] === undefined) {
+        delete this[propName];
+      }
+    }
+  }
+}
+export class MacchineLazio {
+  text: string;
+  data: MacchinaData[];
+ 
+  public clean() {
+    for (const propName in this) {
+      if (this[propName] === null || this[propName] === undefined) {
+        delete this[propName];
+      }
+    }
+  }
+}
+export class TerreniLazio {
+  text: string;
+  data: TerrenoData[];
+
+  public clean() {
+    for (const propName in this) {
+      if (this[propName] === null || this[propName] === undefined) {
+        delete this[propName];
+      }
+    }
+  }
+}
+export class FabbricatiLazio {
+  text: string;
+  data: FabbricatoData[];
 
   public clean() {
     for (const propName in this) {

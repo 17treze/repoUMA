@@ -38,6 +38,7 @@ export class SintesiDomandeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    /*
     const dichiarazioneAntimafiaParams = new DichiarazioneAntimafiaFilter();
 
     this.route.params.subscribe(params => {
@@ -129,7 +130,7 @@ export class SintesiDomandeComponent implements OnInit {
         ]
       }
     ];
-
+    */
   }
 
   onDropdownMenuOpen(i: number) {

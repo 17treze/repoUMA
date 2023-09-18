@@ -94,6 +94,7 @@ export class PresentazioneIstanzeComponent implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit(): void {
+    /*
     this.isMyappagEnabled = this.myappagService.isMyappagEnabled;
     this.routeSubscription = this.route.params
       .pipe(
@@ -107,6 +108,7 @@ export class PresentazioneIstanzeComponent implements OnDestroy, OnInit {
             this.fascicoloCorrente.fascicolo = fascicolo;
           }
         }, error => this.errorService.showError(error));
+    */
   }
 
   ngOnDestroy() {

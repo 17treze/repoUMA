@@ -138,7 +138,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
         if (this.fascicoloCorrente !== null) {
           this.idFascicolo = this.fascicoloCorrente.id;
           // this.idMandato = this.fascicoloCorrente.mandatoDto.id;
-          this.caricaIdFascicoloUMA();
+          // this.caricaIdFascicoloUMA();
         }
       });
   }
@@ -325,11 +325,11 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
   }
 
   public onClickRichiestaRettificaUma() {
-    if (!this.isFascicoloSelezionato()) {
-      return;
-    }
+    // if (!this.isFascicoloSelezionato()) {
+    //   return;
+    // }
     const cuaa = this.fascicoloCorrente.cuaa;
-    const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
+    // const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
     const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
     const richieste$: Observable<Array<RichiestaCarburanteDto>> = this.httpClientDomandaUmaService.getDomande(this.dtoBuilderService.buildDomandaUmaFilterWithAllStates(cuaa));
 
@@ -343,7 +343,8 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
           const hasCAA: boolean = caa != null ? true : false;
           console.log('Ruolo selezionato in Home: ', localStorage.getItem('selectedRole'));
           if (localStorage.getItem('selectedRole') == AuthService.roleCaa && hasCAA) {  // -> ENTE
-            return forkJoin([getTitRapprLeg$, of('ENTE'), richieste$]);
+            // return forkJoin([getTitRapprLeg$, of('ENTE'), richieste$]);
+            return forkJoin([loggedUser$, of('ENTE'), richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.roleAdmin) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
             return forkJoin([loggedUser$, of('AMMINISTRATORE'), richieste$]);
           } else if (localStorage.getItem('selectedRole') == AuthService.roleIstruttoreUMA) { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE Controllo se è effetivamente un' azienda per evitare accessi da utenze non permesse
@@ -384,6 +385,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
           }
         })
       ).subscribe((idDomandaOrDomande: number | Array<RichiestaCarburanteDto>) => {
+        // Errore a linea 393
         if (typeof idDomandaOrDomande === "number") {
           // E' stata creata una nuova domanda uma per il cuaa fornito
           this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiesta`, idDomandaOrDomande]);
@@ -491,9 +493,10 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
   }
 
   public onClickDomandaAntimafia() {
-    if (this.controlloStatoFascicolo()) {
-      this.controlloStatoDichiarazioneAntimafia();
-    }
+    console.log('No more used');
+    // if (this.controlloStatoFascicolo()) {
+    //   this.controlloStatoDichiarazioneAntimafia();
+    // }
   }
 
   private controlloStatoFascicolo(): boolean {
@@ -505,6 +508,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  /*
   private controlloStatoDichiarazioneAntimafia() {
     if (this.fascicoloCorrenteUMA == null || this.fascicoloCorrenteUMA.fascicoloLegacy == null || this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa == null) {
       return;
@@ -528,8 +532,10 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
         this.router.navigate([`./fascicolo/${this.fascicoloCorrenteUMA.fascicoloLegacy.idAgs}/antimafia`], { relativeTo: this.route.parent.parent.parent });
       }, err => this.errorService.showError(err));
   }
+  */
 
   private isFascicoloSelezionato(): boolean {
+    console.log('this.fascicoloCorrente: ' + this.fascicoloCorrente?.cuaa);
     if (!this.fascicoloCorrente || !this.fascicoloCorrente.cuaa || !this.fascicoloCorrenteUMA || !this.fascicoloCorrenteUMA.fascicoloLegacy) {
       this.errorService.showErrorWithMessage(this.UMA_FASCICOLO_NON_VALIDO);
       return false;

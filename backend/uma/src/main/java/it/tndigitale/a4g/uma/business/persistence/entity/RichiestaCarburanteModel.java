@@ -60,9 +60,9 @@ public class RichiestaCarburanteModel extends EntitaDominio implements Serializa
 	@Column(name="NOTE", length = 200)
 	private String note;
 
-	@Lob
-	@Column(name="DOCUMENTO")
-	private byte[] documento;
+//	@Lob
+//	@Column(name="DOCUMENTO")
+//	private byte[] documento;
 
 	@Column(name="DENOMINAZIONE", length = 200)
 	private String denominazione;
@@ -73,6 +73,9 @@ public class RichiestaCarburanteModel extends EntitaDominio implements Serializa
 	// Denominazione dello sportello che al momento della creazione/protocollazione della domanda detiene il fascicolo
 	@Column(name="ENTE_PRESENTATORE", length = 100)
 	private String entePresentatore;
+	
+	@Column(name="NOME_FILE", nullable = false, length = 50)
+	private String nomeFile;
 
 	@OneToMany(mappedBy = "richiestaCarburante", fetch = FetchType.LAZY)
 	private List<UtilizzoMacchinariModel> macchine;
@@ -190,13 +193,22 @@ public class RichiestaCarburanteModel extends EntitaDominio implements Serializa
 		this.note = note;
 		return this;
 	}
-	public byte[] getDocumento() {
-		return documento;
+
+	public String getNomeFile() {
+		return nomeFile;
 	}
-	public RichiestaCarburanteModel setDocumento(byte[] documento) {
-		this.documento = documento;
+	public RichiestaCarburanteModel setNomeFile(String nomeFile) {
+		this.nomeFile = nomeFile;
 		return this;
 	}
+	
+//	public byte[] getDocumento() {
+//		return documento;
+//	}
+//	public RichiestaCarburanteModel setDocumento(byte[] documento) {
+//		this.documento = documento;
+//		return this;
+//	}
 	public List<PrelievoModel> getPrelievi() {
 		return prelievi;
 	}

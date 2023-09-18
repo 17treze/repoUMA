@@ -1,5 +1,11 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -19,6 +25,7 @@ import org.springframework.util.Assert;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto.TipologiaDocumentoPrincipale;
+import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.client.custom.MittenteDto;
 import it.tndigitale.a4g.framework.support.PersonaSelector;
 import it.tndigitale.a4g.framework.time.Clock;
@@ -38,6 +45,7 @@ public class ProtocollaRettificaCarburante extends ProtocollazioneStrategy {
 
 	private static final String SUFFISSO_NOME_FILE_RETTIFICA_CARBURANTE = "_rettificarichiestacarburante";
 	private static final String PREFISSO_OGGETTO_RETTIFICA_CARBURANTE = "A4G - RETTIFICA RICHIESTA CARBURANTE UMA - ";
+	private static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
 
 	@Autowired
 	private RichiestaCarburanteDao richiestaCarburanteDao;
@@ -45,65 +53,86 @@ public class ProtocollaRettificaCarburante extends ProtocollazioneStrategy {
 	private RicercaRichiestaCarburanteService ricercaRichiestaCarburanteService;
 	@Autowired
 	private Clock clock;
+	@Autowired
+	private UtenteComponent utenteComponent;
+
 	@Value("${it.tndigit.a4g.uma.protocollazione.firma.obbligatoria}")
 	private boolean firmaObbligatoria;
+	
+	@Value("${pathDownload}")
+	private String pathDownload;
 
 	@Override
 	@Transactional
 	public void avviaProtocollo(Long id, ByteArrayResource documento, boolean haFirma) {
-		RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
 
-		// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
-		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
+		try {
+			RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
 
-		// trova dati richiedente
-		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RETTIFICA);
+			// chiamata ad anagrafica - get fascicolo per i campi: PEC, descrizione impresa e denominazione sportello
+			FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 
-		// assicurati che il fascicolo sia valido
-		controlloFascicoloValido(fascicolo);
+			// trova dati richiedente
+			SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RETTIFICA);
 
-		// controlla la firma del documento
-		if (firmaObbligatoria) {
-			verificaFirmaDocumento(documento, richiesta.getCfRichiedente());
-		} else {
-			verificaFirmaDocumentoAndSave(documento, richiesta.getCfRichiedente(), haFirma);
+			// assicurati che il fascicolo sia valido
+			controlloFascicoloValido(fascicolo);
+
+			// controlla la firma del documento
+			if (firmaObbligatoria) {
+				verificaFirmaDocumento(documento, richiesta.getCfRichiedente());
+			} else {
+				verificaFirmaDocumentoAndSave(documento, richiesta.getCfRichiedente(), haFirma);
+			}
+
+			// replica i controlli che ha fatto in fase di creazione della domanda (se non già fatto nel service)
+
+			// salva la superficie massima
+			salvaSuperficiMassime(richiesta);
+
+			// Salva la rettifica
+			richiestaCarburanteDao.save(richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA)
+					// .setDocumento(documento.getByteArray())
+					.setNomeFile(richiesta.getCuaa() + "_" + clock.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ".pdf")
+					.setFirma(firmaObbligatoria ? Boolean.TRUE : haFirma)
+					.setEntePresentatore(getEntePresentatore(fascicolo)));
+
+			// aggiorna la richiesta precedente
+			Optional<Long> idRettificata = ricercaRichiestaCarburanteService.getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(), richiesta.getDataPresentazione());
+
+			Assert.isTrue(idRettificata.isPresent(), "Errore in fase di protocollazione Rettifica di carburante: Nessuna domanda da rettificare");
+
+			RichiestaCarburanteModel richiestaDaRettificare = richiestaCarburanteDao.findById(idRettificata.get()).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
+
+			richiestaDaRettificare.setStato(StatoRichiestaCarburante.RETTIFICATA);
+
+			richiestaCarburanteDao.save(richiestaDaRettificare);
+
+			// Salvataggio documento su file system
+			Path filePath = Paths.get(this.pathDownload +
+					   this.SUB_DIRECTORY_RICHIESTE +
+					   "/" + utenteComponent.username() +
+					   "/" + richiesta.getCuaa() + "_" + clock.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ".pdf");
+			
+			Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
+
+			ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
+					.setDocumento(documento)
+					.setId(id)
+					.setCuaa(richiesta.getCuaa())
+					.setAnno(richiesta.getCampagna().intValue())
+					.setNome(richiedente.getDescNome())
+					.setCognome(richiedente.getDescCogn())
+					.setDescrizioneImpresa(fascicolo.getDescDeno())
+					.setPec(fascicolo.getDescPec())
+					.setTipoDocumentoUma(TipoDocumentoUma.RETTIFICA);
+
+			// pubblica evento
+			publish(protocollaRichiestaCarburanteDto);
 		}
-
-		// replica i controlli che ha fatto in fase di creazione della domanda (se non già fatto nel service)
-
-		// salva la superficie massima
-		salvaSuperficiMassime(richiesta);
-
-		// Salva la rettifica
-		richiestaCarburanteDao.save(richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA)
-				.setDocumento(documento.getByteArray())
-				.setFirma(firmaObbligatoria ? Boolean.TRUE : haFirma)
-				.setEntePresentatore(getEntePresentatore(fascicolo)));
-
-		// aggiorna la richiesta precedente
-		Optional<Long> idRettificata = ricercaRichiestaCarburanteService.getIdRettificata(richiesta.getCuaa(), richiesta.getCampagna(), richiesta.getDataPresentazione());
-
-		Assert.isTrue(idRettificata.isPresent(), "Errore in fase di protocollazione Rettifica di carburante: Nessuna domanda da rettificare");
-
-		RichiestaCarburanteModel richiestaDaRettificare = richiestaCarburanteDao.findById(idRettificata.get()).orElseThrow(() -> new EntityNotFoundException(String.format("Richiesta Carburante con id : %s non trovata", id)));
-
-		richiestaDaRettificare.setStato(StatoRichiestaCarburante.RETTIFICATA);
-
-		richiestaCarburanteDao.save(richiestaDaRettificare);
-
-		ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
-				.setDocumento(documento)
-				.setId(id)
-				.setCuaa(richiesta.getCuaa())
-				.setAnno(richiesta.getCampagna().intValue())
-				.setNome(richiedente.getDescNome())
-				.setCognome(richiedente.getDescCogn())
-				.setDescrizioneImpresa(fascicolo.getDescDeno())
-				.setPec(fascicolo.getDescPec())
-				.setTipoDocumentoUma(TipoDocumentoUma.RETTIFICA);
-
-		// pubblica evento
-		publish(protocollaRichiestaCarburanteDto);
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
