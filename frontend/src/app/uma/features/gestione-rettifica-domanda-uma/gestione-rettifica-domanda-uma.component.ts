@@ -138,7 +138,7 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params
       .subscribe((urlParams) => {
         this.cuaa = urlParams['cuaa'];
-        this.idFascicoloCorrente = urlParams['id'];
+        // this.idFascicoloCorrente = urlParams['id'];
       });
     /*
     this.route.params
@@ -175,8 +175,8 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const cuaa = this.fascicoloCorrente.fascicolo.cuaa;
-    const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
+    const cuaa = this.cuaa;
+    // const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
     const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
 
     this.richiestaCarburanteSubscription = this.anagraficaFascicoloService.getDatiSportelloCAA()
@@ -189,7 +189,7 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
           const hasCAA: boolean = caa != null ? true : false;
           console.log('Ruolo selezionato in Home: ', localStorage.getItem('selectedRole'));
           if (localStorage.getItem('selectedRole') == AuthService.roleCaa && hasCAA) {  // -> ENTE
-            return forkJoin([getTitRapprLeg$, of('ENTE')]);
+            return forkJoin([loggedUser$, of('ENTE')]);
           } else { // se non ho caa associati o se non ho selezionato il ruolo caa -> UTENTE
             return forkJoin([loggedUser$, of('UTENTE')]);
           }
@@ -202,22 +202,24 @@ export class GestioneRettificaDomandaUMAComponent implements OnInit, OnDestroy {
           if (tipo === 'UTENTE') {  // -> azienda
             return this.httpClientDomandaUmaService.presentaDomanda(cuaa, (titolariRapprOrUtente as Utente).codiceFiscale);
           } else {                  // tipo == ENTE -> caa
-            if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
-              this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
-              return EMPTY;
-            }
-            this.router.navigate([`uma/${this.fascicoloCorrente.fascicolo.idFascicolo}/richiedente/${TipoRichiedenteUma.richiesta}`]);
+            // if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
+            //   this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
+            //   return EMPTY;
+            // }
+            this.router.navigate([`uma/${this.cuaa}/richiedente/${TipoRichiedenteUma.richiesta}`]);
             return EMPTY;
           }
         })
       ).subscribe((idRettifica: number) => {
         // Nel caso UTENTE è' stata creata una nuova rettifica uma per il cuaa fornito
-        this.router.navigate([`uma/${this.fascicoloCorrente.fascicolo.idFascicolo}/richiesta`, idRettifica]);
+        this.router.navigate([`uma/${this.cuaa}/richiesta`, idRettifica]);
       }, (error: ErrorDTO) => this.errorService.showError(error));
   }
 
   private isFascicoloSelezionato(): boolean {
-    if (!this.fascicoloCorrente || !this.fascicoloCorrente.fascicolo || !this.fascicoloCorrente.fascicolo.cuaa) {
+    console.log('this.cuaa: ' + this.cuaa);
+    if (!this.cuaa) {    
+    // if (!this.fascicoloCorrente || !this.fascicoloCorrente.fascicolo || !this.fascicoloCorrente.fascicolo.cuaa) {
       this.errorService.showErrorWithMessage(this.UMA_FASCICOLO_NON_VALIDO);
       return false;
     } else return true;

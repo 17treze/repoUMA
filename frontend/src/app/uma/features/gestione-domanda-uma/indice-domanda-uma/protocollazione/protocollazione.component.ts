@@ -172,6 +172,7 @@ export class ProtocollazioneComponent implements OnInit, OnDestroy {
       this.enabledProtocolla.enableHeader = false;
       const file: File = (event.target as HTMLInputElement).files[0];
       const uploadHelper = new UploadHelper(this.fileConfig.fileExt, this.fileConfig.maxSize);
+      // La verifica della firma deve essere adeguata e bypassata se l'utente è il titolare dellì'azienda
       if (uploadHelper.isValidFileExtension(file, UMA_MESSAGES.FILE_ERRORS.EXT) && uploadHelper.isValidFileSize(file, UMA_MESSAGES.FILE_ERRORS.SIZE)) {
         this.firmaSingolaSubscription = this.httpClientProxy.verificaFirmaSingola(file, this.richiestaCarburante.cfRichiedente).subscribe((res) => {
           this.enableNextFields(tipo, file);

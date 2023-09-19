@@ -325,9 +325,9 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
   }
 
   public onClickRichiestaRettificaUma() {
-    // if (!this.isFascicoloSelezionato()) {
-    //   return;
-    // }
+    if (!this.isFascicoloSelezionato()) {
+      return;
+    }
     const cuaa = this.fascicoloCorrente.cuaa;
     // const getTitRapprLeg$: Observable<Array<PersonaAgsDto>> = this.anagraficaFascicoloService.getTitolariRappresentantiLegali(cuaa);
     const loggedUser$: Observable<Utente> = this.authService.getUserFromSession();
@@ -391,7 +391,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
           this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiesta`, idDomandaOrDomande]);
         } else {
           // Esiste già almeno una richiesta o rettifica per il cuaa fornito
-          this.router.navigate([`./fascicolo/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/rettifiche/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}`], { relativeTo: this.route.parent.parent.parent });
+          this.router.navigate([`./fascicolo/${this.fascicoloCorrente.cuaa}/rettifiche/${this.fascicoloCorrente.cuaa}`], { relativeTo: this.route.parent.parent.parent });
         }
       }, (error: ErrorDTO) => this.errorService.showError(error));
   }
@@ -472,7 +472,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
                 this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
                 return EMPTY;
               }
-              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiedente/${TipoRichiedenteUma['dichiarazione-consumi']}`]);
+              this.router.navigate([`uma/${this.fascicoloCorrente.cuaa}/richiedente/${TipoRichiedenteUma['dichiarazione-consumi']}`]);
               return EMPTY;
             } else {
               return of(dichiarazioniFiltrate);
@@ -482,12 +482,12 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
       ).subscribe((idDichiarazioneOrDichiarazioni: number | Array<DichiarazioneConsumiDto>) => {
         if (typeof idDichiarazioneOrDichiarazioni === "number") {
           // E' stata creata una nuova domanda uma per il cuaa fornito
-          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/dichiarazione-consumi`, idDichiarazioneOrDichiarazioni]);
+          this.router.navigate([`uma/${this.fascicoloCorrente.cuaa}/dichiarazione-consumi`, idDichiarazioneOrDichiarazioni]);
         } else {
           // Esiste già una domanda uma per il cuaa fornito
           const orderedList = _.orderBy(idDichiarazioneOrDichiarazioni, ['campagnaRichiesta'], ['desc']);
           idDichiarazioneOrDichiarazioni = orderedList;
-          this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/dichiarazione-consumi`, (idDichiarazioneOrDichiarazioni as Array<DichiarazioneConsumiDto>)[0].id]);
+          this.router.navigate([`uma/${this.fascicoloCorrente.cuaa}/dichiarazione-consumi`, (idDichiarazioneOrDichiarazioni as Array<DichiarazioneConsumiDto>)[0].id]);
         }
       }, (error: ErrorDTO) => this.errorService.showError(error));
   }
@@ -536,7 +536,7 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
 
   private isFascicoloSelezionato(): boolean {
     console.log('this.fascicoloCorrente: ' + this.fascicoloCorrente?.cuaa);
-    if (!this.fascicoloCorrente || !this.fascicoloCorrente.cuaa || !this.fascicoloCorrenteUMA || !this.fascicoloCorrenteUMA.fascicoloLegacy) {
+    if (!this.fascicoloCorrente || !this.fascicoloCorrente.cuaa) { // || !this.fascicoloCorrenteUMA || !this.fascicoloCorrenteUMA.fascicoloLegacy) {
       this.errorService.showErrorWithMessage(this.UMA_FASCICOLO_NON_VALIDO);
       return false;
     } else return true;
