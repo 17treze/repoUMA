@@ -1,7 +1,12 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
-import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -13,11 +18,13 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
-//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
-//import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
+// import it.tndigitale.a4g.fascicolo.anagrafica.client.model.CaricaAgsDto;
+// import it.tndigitale.a4g.fascicolo.anagrafica.client.model.DetenzioneAgsDto.TipoDetenzioneEnum;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.VerificaFirmaClient;
 import it.tndigitale.a4g.framework.event.store.handler.EventBus;
+import it.tndigitale.a4g.framework.security.model.UtenteComponent;
+import it.tndigitale.a4g.framework.time.Clock;
 import it.tndigitale.a4g.uma.business.persistence.entity.RichiestaCarburanteModel;
 import it.tndigitale.a4g.uma.business.persistence.entity.SuperficieMassimaModel;
 import it.tndigitale.a4g.uma.business.persistence.repository.GruppiLavorazioneDao;
@@ -31,6 +38,8 @@ import it.tndigitale.a4g.uma.dto.protocollo.ProtocollaDocumentoUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
 
 public abstract class ProtocollazioneStrategy {
+	
+	protected static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
 	
 	@Value("${it.tndigit.a4g.uma.protocollazione.firma.obbligatoria}")
 	private boolean firmaObbligatoria;
@@ -48,6 +57,15 @@ public abstract class ProtocollazioneStrategy {
 	@Autowired
 	private GruppiLavorazioneDao gruppiLavorazioneDao;
 	
+	@Autowired
+	private Clock clock;
+	
+	@Autowired
+	private UtenteComponent utenteComponent;
+	
+	@Value("${pathDownload}")
+	private String pathDownload;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ProtocollazioneStrategy.class);
 	
 	abstract DocumentDto buildDocumentDto(ProtocollaDocumentoUmaDto protocollaDocumentoUmaDto);
@@ -55,6 +73,8 @@ public abstract class ProtocollazioneStrategy {
 	abstract void avviaProtocollo(Long id, ByteArrayResource documento, boolean haFirma);
 	
 	abstract void aggiornaDomanda(ProtocollaDocumentoUmaDto data, String numeroProtocollo);
+	
+	abstract String getFilename(Long idRichiesta);
 	
 	// Salva le superfici massime - solo per RICHIESTA e RETTIFICA
 	protected void salvaSuperficiMassime(RichiestaCarburanteModel richiesta) {
@@ -76,14 +96,14 @@ public abstract class ProtocollazioneStrategy {
 	// Reperisce la detenzione del fascicolo ags, dando priorità alla detenzione di tipo DELEGA
 	protected String getEntePresentatore(FascicoloAualDto fascicolo) {
 		// Reperisco la detenzione del fascicolo ags
-//		var det = fascicolo.getDetenzioni().stream()
-//				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO)).findFirst()
-//				.orElseGet(() -> fascicolo.getDetenzioni().stream()
-//						.filter(detenzione -> fascicolo.getDetenzioni().size() == 1
-//								&& detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
-//						.findFirst()
-//						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
-//		return det.getSportello();
+		//		var det = fascicolo.getDetenzioni().stream()
+		//				.filter(detenzione -> detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.MANDATO)).findFirst()
+		//				.orElseGet(() -> fascicolo.getDetenzioni().stream()
+		//						.filter(detenzione -> fascicolo.getDetenzioni().size() == 1
+		//								&& detenzione.getTipoDetenzione().equals(TipoDetenzioneEnum.DELEGA))
+		//						.findFirst()
+		//						.orElseThrow(() -> new IllegalArgumentException("Errore nel reperimento della detenzione")));
+		//		return det.getSportello();
 		return fascicolo.getDescDete();
 	}
 	
@@ -105,13 +125,13 @@ public abstract class ProtocollazioneStrategy {
 			soggetti.addAll(soggetto.getRappresentanteLegale());
 		}
 		else {
-//			soggetti = fascicolo.getDataMorteTitolare() == null ? anagraficaClient.getTitolariRappresentantiLegali(cuaa)
-//					: anagraficaClient.getEredi(cuaa);
+			//			soggetti = fascicolo.getDataMorteTitolare() == null ? anagraficaClient.getTitolariRappresentantiLegali(cuaa)
+			//					: anagraficaClient.getEredi(cuaa);
 			soggetti.addAll(soggetto.getRappresentanteLegale());
 		}
 		Assert.isTrue(!CollectionUtils.isEmpty(soggetti),
 				String.format("Nessun soggetto trovato nel fascicolo per il cuaa %s", cuaa));
-
+		
 		logger.warn("Soggetto: " + soggetti.size() + ", richiedente: " + cfRichiedente);
 		
 		for (RappresentanteLegaleAualDto rl : soggetti) {
@@ -120,7 +140,7 @@ public abstract class ProtocollazioneStrategy {
 						.concat(" non è presente nel fascicolo aziendale ").concat(cuaa));
 			}
 		}
-
+		
 		return soggetto;
 	}
 	
@@ -161,4 +181,18 @@ public abstract class ProtocollazioneStrategy {
 		eventBus.publishEvent(event);
 	}
 	
+	protected String salvaDocProtocollato(Long id, Integer anno, ByteArrayResource documento) throws IOException {
+		
+		String filename = this.getFilename(id);
+		
+		Path filePath = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/" + anno + "/"
+				+ utenteComponent.username() + "/" + filename);
+		
+		Path parentDir = filePath.getParent();
+		if (!Files.exists(parentDir)) {
+			Files.createDirectories(parentDir);
+		}
+		Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
+		return filename;
+	}
 }

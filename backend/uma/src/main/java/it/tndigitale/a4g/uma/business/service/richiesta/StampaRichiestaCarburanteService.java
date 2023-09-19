@@ -1,6 +1,5 @@
 package it.tndigitale.a4g.uma.business.service.richiesta;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -78,23 +77,24 @@ public class StampaRichiestaCarburanteService {
 	
 	@Value("${pathDownload}")
 	private String pathDownload;
-
+	
 	public Resource stampaRichiestaCarburante(Long idRichiesta) throws IOException {
-		RichiestaCarburanteModel richiestaModel = richiestaCarburanteDao.findById(idRichiesta).orElseThrow(() -> new EntityNotFoundException("Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat("non trovata")));
+		RichiestaCarburanteModel richiestaModel = richiestaCarburanteDao.findById(idRichiesta)
+				.orElseThrow(() -> new EntityNotFoundException(
+						"Richiesta con id: ".concat(String.valueOf(idRichiesta)).concat("non trovata")));
 		
 		// Se la richiesta è autorizzata oppure rettificata, viene scaricato il documento caricato in fase di protocollazione
-		if (richiestaModel.getStato().equals(StatoRichiestaCarburante.AUTORIZZATA) || 
-				richiestaModel.getStato().equals(StatoRichiestaCarburante.RETTIFICATA) ||
-				richiestaModel.getStato().equals(StatoRichiestaCarburante.PROTOCOLLATA)) {
+		if (richiestaModel.getStato().equals(StatoRichiestaCarburante.AUTORIZZATA)
+				|| richiestaModel.getStato().equals(StatoRichiestaCarburante.RETTIFICATA)
+				|| richiestaModel.getStato().equals(StatoRichiestaCarburante.PROTOCOLLATA)) {
 			// Il documento va recuperato da file system
 			// return new ByteArrayResource(richiestaModel.getDocumento());
-			Path fileRichiesta = Paths.get(this.pathDownload +
-				   this.SUB_DIRECTORY_RICHIESTE +
-				   "/" + utenteComponent.username() +
-				   "/" + richiestaModel.getNomeFile());
-		   	return new ByteArrayResource(Files.readAllBytes(fileRichiesta));
+			Path fileRichiesta = Paths
+					.get(this.pathDownload + this.SUB_DIRECTORY_RICHIESTE + "/" + richiestaModel.getCampagna() + "/"
+							+ utenteComponent.username() + "/" + richiestaModel.getNomeFile());
+			return new ByteArrayResource(Files.readAllBytes(fileRichiesta));
 		}
-	
+		
 		//		var json = objectMapper.writeValueAsString(buildStampaDto(richiestaModel));
 		//		return new ByteArrayResource(proxyClient.stampa(json, TEMPLATE_PATH));
 		return new ByteArrayResource(Base64.getDecoder().decode(dummyPdf.getBytes()));
