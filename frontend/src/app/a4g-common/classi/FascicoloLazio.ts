@@ -82,6 +82,15 @@ export class FabbricatiLazio {
   }
 }
 
+export class ComuneDto {
+  codiProv: string;
+	codiComu: string;
+	descComu: string;
+	codiNcap: string;
+	codiComuCapo: string;
+	codiCata: string;
+}
+
 export enum TipoDetenzione {
   MAN = 'MAN',
   DEL = 'DEL'

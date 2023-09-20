@@ -157,6 +157,7 @@ export class AssegnazioneConfigurazioniDialogComponent implements OnInit, OnDest
     try { return datiDomanda.responsabilitaRichieste.responsabilitaDistributore[0].distributori.length > 0; }
     catch(e) { return false; }
   }
+  /*
   private updateProfiliSrt(dati: DatiAnagrafici) {
     forkJoin([
       this.utentiService.getProfiliSrt(dati).pipe(
@@ -172,7 +173,7 @@ export class AssegnazioneConfigurazioniDialogComponent implements OnInit, OnDest
       console.log(err);
     });
   }
-
+  */
   getProfiliSrt(result) {
     this.profiliSrt = [];
     if (result) {
@@ -184,7 +185,7 @@ export class AssegnazioneConfigurazioniDialogComponent implements OnInit, OnDest
       console.log(this.profiliSrt);
     }
   }
-
+  /*
   private updateProfiliAgs(dati: DatiAnagrafici) {
     forkJoin([
       this.utentiService.getProfiliAgs(dati).pipe(
@@ -200,7 +201,7 @@ export class AssegnazioneConfigurazioniDialogComponent implements OnInit, OnDest
       console.log(err);
     });
   }
-
+  */
   getProfiliAgs(result) {
     this.profiliAgs = [];
     if (result) {
@@ -277,8 +278,8 @@ export class AssegnazioneConfigurazioniDialogComponent implements OnInit, OnDest
 
   public open() {
     this.display = true;
-    this.updateProfiliSrt(this.datiDomanda.datiAnagrafici);
-    this.updateProfiliAgs(this.datiDomanda.datiAnagrafici);
+    // this.updateProfiliSrt(this.datiDomanda.datiAnagrafici);
+    // this.updateProfiliAgs(this.datiDomanda.datiAnagrafici);
   }
 
   private getProfiloCaaFormControl(): Profilo {

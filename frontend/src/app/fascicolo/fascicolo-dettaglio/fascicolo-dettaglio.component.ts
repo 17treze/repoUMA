@@ -373,11 +373,11 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
                 this.errorService.showErrorWithMessage(this.UMA_PERSONA_FISICA_DECEDUTA);
                 return EMPTY;
               }
-              if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
-                this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
-                return EMPTY;
-              }
-              this.router.navigate([`uma/${this.fascicoloCorrenteUMA.fascicoloLegacy.cuaa}/richiedente/${TipoRichiedenteUma.richiesta}`]);
+              // if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
+              //   this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
+              //   return EMPTY;
+              // }
+              this.router.navigate([`uma/${this.fascicoloCorrente.cuaa}/richiedente/${TipoRichiedenteUma.richiesta}`]);
               return EMPTY;
             } else {
               return of(richieste);
@@ -468,10 +468,10 @@ export class FascicoloDettaglioComponent implements OnInit, OnDestroy {
             }
           } else { // tipo === ENTE -> caa
             if ((dichiarazioniFiltrate == null || !dichiarazioniFiltrate.length) || (richiestaAutorizzataAnnoCorrente != null && !dichiarazioniFiltrate.find(dc => dc.campagnaRichiesta == this.dateUtilService.getCurrentYear()))) {
-              if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
-                this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
-                return EMPTY;
-              }
+              // if (titolariRapprOrUtente == null || !(titolariRapprOrUtente as Array<PersonaAgsDto>).length) {
+              //   this.errorService.showErrorWithMessage(this.UMA_01_01_BR1_ERR_MSG);
+              //   return EMPTY;
+              // }
               this.router.navigate([`uma/${this.fascicoloCorrente.cuaa}/richiedente/${TipoRichiedenteUma['dichiarazione-consumi']}`]);
               return EMPTY;
             } else {

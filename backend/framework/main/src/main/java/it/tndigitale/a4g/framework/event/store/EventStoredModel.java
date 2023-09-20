@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "A4GT_EVENTSTORED")
+@Table(name = "TAB_AGRI_UMAL_EVENTSTORED")
 public class EventStoredModel extends EntitaDominio {
     @Basic
     @NotNull

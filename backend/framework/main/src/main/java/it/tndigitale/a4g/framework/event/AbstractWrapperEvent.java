@@ -4,7 +4,10 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 
 public abstract class AbstractWrapperEvent<T> implements Event {
     private static final Logger logger = LoggerFactory.getLogger(AbstractWrapperEvent.class);
@@ -15,9 +18,13 @@ public abstract class AbstractWrapperEvent<T> implements Event {
 
     private String username = null;
     
+    @Autowired
+    UtenteComponent utenteComponent;
+    
     public AbstractWrapperEvent() {
     	try {
-    		username = SecurityContextHolder.getContext().getAuthentication().getName();
+    		// username = SecurityContextHolder.getContext().getAuthentication().getName();
+    		this.username = utenteComponent.username();
     	} catch(Exception e) {
     		logger.debug("(SICURO da ignorare) Non riesco a creare il contesto di sessione per {}.", username);
     	}

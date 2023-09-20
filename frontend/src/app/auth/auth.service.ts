@@ -181,7 +181,7 @@ export class AuthService {
       user = JSON.parse(sessionStorage.getItem("user"));
     }
     if (requiredRole && user?.ruoli) {
-      console.log("Ruolo cercato: " + requiredRole.toLowerCase());
+      // console.log("Ruolo cercato: " + requiredRole.toLowerCase());
       for (const ruoloApp of user.ruoli) {
         if (ruoloApp.applicazione == "UMA") {
           for (const ruolo of ruoloApp.ruoli) {
@@ -206,7 +206,7 @@ export class AuthService {
   
   public get userSelectedRole() {
     const ruoloSelezionato = this._userSelectedRole || localStorage.getItem("selectedRole"); // || this.getRoleFromSessionStorage();
-    console.log("Ruolo selezionato: " + ruoloSelezionato);
+    // console.log("Ruolo selezionato: " + ruoloSelezionato);
     return ruoloSelezionato;
   }
 

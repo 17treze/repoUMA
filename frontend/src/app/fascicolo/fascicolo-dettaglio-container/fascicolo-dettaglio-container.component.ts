@@ -226,15 +226,15 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     });
   }
 
+  /*
   private subscribeEredi() {
-    /*
     this.fascicoloDettaglioService.eredi.pipe(
       takeUntil(this.componentDestroyed$)
     ).subscribe((eredi: EredeDto[]) => {
         this.eredi = eredi;
     });
-    */
   }
+  */
 
   private loadFascicolo(cuaa: string, idValidazione: number): void {
     /*
@@ -281,6 +281,43 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         }
       });
     */
+    forkJoin({
+      fascicolo: this.fascicoloService.getFascicoloLazio(cuaa),
+      comuneCapofila: this.fascicoloService.getGetComuniCapofila(cuaa)
+    })
+    .pipe(catchError(error => of(error)))
+    .subscribe(({fascicolo, comuneCapofila}) => {
+      if (fascicolo.data) {
+        console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
+        // inizializzare FascicoloDaCuaa...
+        let fascicoloDaCuaa = new FascicoloDaCuaa();
+        fascicoloDaCuaa.cuaa = fascicolo.data.codiCuaa;
+        fascicoloDaCuaa.denominazione = fascicolo.data.descDeno;
+        fascicoloDaCuaa.dataApertura = this.dateFromString(fascicolo.data.dataAperFasc);
+        fascicoloDaCuaa.dataModifica = this.dateFromString(fascicolo.data.dataElab);
+        fascicoloDaCuaa.dataUltimaValidazione = this.dateFromString(fascicolo.data.dataScheVali);
+        fascicoloDaCuaa.numeScheVali = fascicolo.data.numeScheVali;
+        // da completare con la descrizione
+        this.mandatoCorrente = new MandatoDto();
+        this.mandatoCorrente.denominazione = fascicolo.data.descDete;
+        fascicoloDaCuaa.mandatoDto = this.mandatoCorrente;
+        // iscrizione CCIAA
+        fascicoloDaCuaa.numeIscrRea = fascicolo.data.numeIscrRea;
+        fascicoloDaCuaa.numeIscrRegiImpr = fascicolo.data.numeIscrRegiImpr;
+        // ...
+        if (comuneCapofila) {
+          fascicoloDaCuaa.comuneCapofila = comuneCapofila.descComu;
+        }  
+        // ...
+        this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);
+        this.setItemDropdown();
+      }
+      else {
+        console.log('err11');
+        this.errorService.showErrorWithMessage(fascicolo.text);
+      }
+    });
+    /*
     this.fascicoloService.getFascicoloLazio(cuaa).subscribe((fascicolo: FascicoloLazio) => {
         if (fascicolo.data) {
           console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
@@ -301,7 +338,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           fascicoloDaCuaa.numeIscrRegiImpr = fascicolo.data.numeIscrRegiImpr;
           // ...
           this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);
-          this.setItemDropdown();          
+          this.setItemDropdown();
         }
         else {
           console.log('err11');
@@ -311,6 +348,7 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         console.log('err12');
         this.errorService.showError(error, 'tst-fas-ap');
       });
+    */
   }
 
   public backgroundStato(): string {
@@ -934,16 +972,16 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     return false;
   }
 
+  /*
   private getEredi() {
     // Il SIAN mi pare non li restituisca
-    /*
     this.anagraficaFascicoloService.getEredi(this.cuaa, this.idValidazione)
       .subscribe(res => {
         this.eredi = res;
         this.fascicoloDettaglioService.eredi.next(this.eredi);
       });
-    */
   }
+  */
 
   public canGetMandato(): boolean {
     return !this.isFascicoloChiuso() && !this.isFascicoloSospeso();

@@ -72,9 +72,7 @@ public abstract class ProtocollazioneStrategy {
 	
 	abstract void avviaProtocollo(Long id, ByteArrayResource documento, boolean haFirma);
 	
-	abstract void aggiornaDomanda(ProtocollaDocumentoUmaDto data, String numeroProtocollo);
-	
-	abstract String getFilename(Long idRichiesta);
+	abstract void aggiornaDomanda(ProtocollaDocumentoUmaDto data, String numeroProtocollo, String filename);
 	
 	// Salva le superfici massime - solo per RICHIESTA e RETTIFICA
 	protected void salvaSuperficiMassime(RichiestaCarburanteModel richiesta) {
@@ -181,18 +179,20 @@ public abstract class ProtocollazioneStrategy {
 		eventBus.publishEvent(event);
 	}
 	
-	protected String salvaDocProtocollato(Long id, Integer anno, ByteArrayResource documento) throws IOException {
+	protected String salvaDocProtocollato(Long id, Integer anno, ByteArrayResource documento, String filename) throws IOException {
 		
-		String filename = this.getFilename(id);
-		
-		Path filePath = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/" + anno + "/"
-				+ utenteComponent.username() + "/" + filename);
-		
-		Path parentDir = filePath.getParent();
-		if (!Files.exists(parentDir)) {
-			Files.createDirectories(parentDir);
+		if (id != null && anno != null && documento != null && filename != null) {
+			Path filePath = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/" + 
+					anno + "/" + filename);
+			
+			Path parentDir = filePath.getParent();
+			if (!Files.exists(parentDir)) {
+				Files.createDirectories(parentDir);
+			}
+			Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
+			return filename;
 		}
-		Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
-		return filename;
+		throw new SalvaDocumentoException ("Dati incompleti. Id: " + id + ", anno:" + anno + ", documento: " + 
+				documento + ", filename: " + filename);
 	}
 }

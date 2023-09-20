@@ -15,7 +15,7 @@ import { CaricaDto } from '../amministrazione/gestione-utenze/model/facicoloImpr
 import { FiltroRicercaRichiesteAccessoSistema } from '../amministrazione/gestione-utenze/richieste-accesso-sistema/dto/filtro-ricerca-richieste-accesso-sistema';
 import { RichiesteAccessoSistemaElenco } from '../amministrazione/gestione-utenze/richieste-accesso-sistema/dto/RichiesteAccessoSistemaElenco';
 import { StatoRichiestaCount } from '../amministrazione/gestione-utenze/richieste-accesso-sistema/dto/StatoRichiestaCount';
-import { DatiUtente, ProfiliAgs, ProfiliSrt, Profilo } from '../amministrazione/ricerca-utenti/dto/Profili';
+import { DatiUtente, Profilo } from '../amministrazione/ricerca-utenti/dto/Profili';
 import { Configuration } from '../app.constants';
 import { Utente } from '../auth/user';
 import { DatiAnagrafici } from './classi/datiAnagrafici';
@@ -352,7 +352,7 @@ export class UtentiService {
       this._configuration.UrlStatoRichiestaCount, { params: paramshttp }
     );
   }
-
+  /*
   public getProfiliSrt(datiAnagrafici: DatiAnagrafici): Observable<Array<ProfiliSrt>> {
     let paramshttp = new HttpParams();
     if (datiAnagrafici.nome) {
@@ -403,7 +403,7 @@ export class UtentiService {
       { params: paramshttp }
     );
   }
-
+  */
   public putPresaInCarico(idDomanda: number) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<any>(this._configuration.UrlPresaInCarico

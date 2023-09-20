@@ -91,7 +91,7 @@ public class StampaRichiestaCarburanteService {
 			// return new ByteArrayResource(richiestaModel.getDocumento());
 			Path fileRichiesta = Paths
 					.get(this.pathDownload + this.SUB_DIRECTORY_RICHIESTE + "/" + richiestaModel.getCampagna() + "/"
-							+ utenteComponent.username() + "/" + richiestaModel.getNomeFile());
+							+ richiestaModel.getNomeFile());
 			return new ByteArrayResource(Files.readAllBytes(fileRichiesta));
 		}
 		

@@ -1,37 +1,13 @@
-import { Distributore } from 'src/app/a4g-common/classi/distributore';
-import { SedeCaa } from "src/app/a4g-common/classi/EnteSedeCaa";
+// import { Distributore } from 'src/app/a4g-common/classi/distributore';
+// import { SedeCaa } from "src/app/a4g-common/classi/EnteSedeCaa";
 
-export class Profilo {
-    id: number;
-    identificativo: string;
-    descrizione: string;
-    responsabilita: string;
-    haRuoli: boolean;
-    disabled: boolean;
+export class ComuneCapofila {
+    codiProv: string;
+    codiComu: string;
+    codiCata: string;
+    descComu: string;
 }
 
-export class UtenteBase {
-    identificativo: string;
-    codiceFiscale: string;
-    nome: string;
-    cognome: string;
-}
-
-export class ProfiliUtente {
-    codiceFiscale: string;
-    profiliSrt: ProfiliSrt[];
-    profiliAgs: DatiUtente[];
-    profiliA4g: ProfiliAgs[];
-}
-
-export class Azienda {
-    id: number;
-    idCarica: number;
-    dataAggiornamento: string;
-    cuaa: string;
-}
-
-// aggiunto...
 export class RuoloApplicazione {
     applicazione: string;
     ruoli: Ruolo[];
@@ -53,7 +29,7 @@ export class AziendaDelegata {
     denominazione: string;
 }
 
-export class DatiUtente extends UtenteBase {
+export class DatiUtente {
     id: number;
     nome: string;
     cognome: string;
@@ -72,18 +48,39 @@ export class DatiUtente extends UtenteBase {
     luogoNascita: string;
     dataAbilitazione: string;
     dataDisabilitazione: string;
-    // profili: Profilo[];
-    // sedi: SedeCaa[];
-    // distributori: Distributore[];
-    // aziende: Azienda[];
-    // motivazioneDisattivazione: string;
+    comuniCapofila: ComuneCapofila[];
 }
 
-export class ProfiliSrt extends UtenteBase {
-    ente: string;
-    ruolo: string;
+export class Profilo {
+    id: number;
+    identificativo: string;
+    descrizione: string;
+    responsabilita: string;
+    haRuoli: boolean;
+    disabled: boolean;
 }
 
+export class Azienda {
+    id: number;
+    idCarica: number;
+    dataAggiornamento: string;
+    cuaa: string;
+}
+
+/*
+export class UtenteBase {
+    identificativo: string;
+    codiceFiscale: string;
+    nome: string;
+    cognome: string;
+}
+
+export class ProfiliUtente {
+    codiceFiscale: string;
+    profiliSrt: ProfiliSrt[];
+    profiliAgs: DatiUtente[];
+    profiliA4g: ProfiliAgs[];
+}
 
 export class ProfiliAgs {
     cf: string;
@@ -92,3 +89,9 @@ export class ProfiliAgs {
     nome: string;
     utenza: string;
 }
+
+export class ProfiliSrt extends UtenteBase {
+    ente: string;
+    ruolo: string;
+}
+*/

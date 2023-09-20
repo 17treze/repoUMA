@@ -30,9 +30,9 @@ public class AllegatoConsuntivoModel extends EntitaDominio implements Serializab
 	@Enumerated(EnumType.STRING)
 	private TipoAllegatoConsuntivo tipoAllegato;
 
-	@Lob
-	@Column(name="DOCUMENTO")
-	private byte[] documento;
+	// @Lob
+	// @Column(name="DOCUMENTO")
+	// private byte[] documento;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CONSUNTIVO")
@@ -59,13 +59,13 @@ public class AllegatoConsuntivoModel extends EntitaDominio implements Serializab
 		this.tipoAllegato = tipoAllegato;
 		return this;
 	}
-	public byte[] getDocumento() {
-		return documento;
-	}
-	public AllegatoConsuntivoModel setDocumento(byte[] documento) {
-		this.documento = documento;
-		return this;
-	}
+//	public byte[] getDocumento() {
+//		return documento;
+//	}
+//	public AllegatoConsuntivoModel setDocumento(byte[] documento) {
+//		this.documento = documento;
+//		return this;
+//	}
 	public ConsuntivoConsumiModel getConsuntivoModel() {
 		return consuntivoModel;
 	}

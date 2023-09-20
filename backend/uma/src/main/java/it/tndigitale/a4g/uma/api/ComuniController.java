@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import it.tndigitale.a4g.uma.business.service.comuni.ComuniService;
 import it.tndigitale.a4g.uma.business.service.distributori.DistributoriService;
 import it.tndigitale.a4g.uma.dto.ComuneDto;
+import it.tndigitale.a4g.uma.dto.consumi.DichiarazioneConsumiDto;
 import it.tndigitale.a4g.uma.dto.distributori.DistributoreDto;
 import it.tndigitale.a4g.uma.dto.distributori.PresentaPrelievoDto;
 import it.tndigitale.a4g.uma.dto.richiesta.PrelieviFilter;
@@ -32,10 +33,16 @@ public class ComuniController {
 	@Autowired
 	private ComuniService comuniService;
 
-	@Operation(summary = "Recupera i comuni capofila", description = "Vengono recuperati i comuni capofila")
+	@Operation(summary = "Restituisce i comuni capofila", description = "Vengono recuperati i comuni capofila")
 	@GetMapping("/capofila")
 	public List<ComuneDto> getComuniCapofila() {
 		return comuniService.getComuniCapofila();
 	}
 
+	@Operation(summary = "Restituisce il comune capofila per un soggetto indicato il cuaa", description = "")
+	@GetMapping("/azienda/{cuaa}")
+	public ComuneDto getComuneCapofilaFascicolo(@PathVariable(required = true) String cuaa) {
+		return comuniService.getComuneCapofilaFascicolo(cuaa);
+	}
+	
 }

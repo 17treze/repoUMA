@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Fascicolo } from '../a4g-common/classi/Fascicolo';
-import { FascicoloLazio, TerreniLazio, FabbricatiLazio, MacchineLazio } from '../a4g-common/classi/FascicoloLazio';
+import { FascicoloLazio, TerreniLazio, FabbricatiLazio, MacchineLazio, ComuneDto } from '../a4g-common/classi/FascicoloLazio';
 import { InputFascicolo } from '../a4g-common/classi/InputFascicolo';
 import { FascicoloAgsDto } from '../a4g-common/classi/FascicoloAgsDto';
 import { PaginatorA4G } from '../a4g-common/interfaces/paginator.model';
@@ -28,6 +28,7 @@ export class FascicoloService {
   anagrafica_server = `${this._configuration.anagrafica_server_tn}`;
   urlGetFascicoli = `${this.anagrafica_server_fascicolo}/consultazione/fascicoli/?params=`;
   urlGetFascicoliMiei = `${this.anagrafica_server_fascicolo}/consultazione/mieifascicoli`;
+  uma_server = `${this._configuration.uma_server}`;
 
   public getAccessToken() : string {
     if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
@@ -56,6 +57,10 @@ export class FascicoloService {
     return `${this.anagrafe_unica_lazio}/fascicoloFS6/trovaFascicoloFS6?cuaa=${cuaa}`;
   }
 
+  public getUrlGetComuniCapofila(): string {
+    return `${this.uma_server}/comuni/azienda`;
+  }
+
   public getUrlGetTerreniLazio(cuaa: string): string {
     return `${this.anagrafe_unica_lazio}/fascicoloFS6/leggiConsistenzaFS7?cuaa=${cuaa}`;
   }
@@ -76,6 +81,11 @@ export class FascicoloService {
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     console.log(headers);
     return this.http.get<FascicoloAgsDto>(this.getUrlFascioloLegacy() + `/${cuaa}`, { headers: headers });
+  }
+
+  public getGetComuniCapofila(cuaa: string): Observable<ComuneDto> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<ComuneDto>(this.getUrlGetComuniCapofila() + `/${cuaa}`, { headers: headers });
   }
 
   public getUrlGetListaPaged(testoDaCercare: string): string {

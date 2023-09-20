@@ -10,7 +10,7 @@ public class RecapitoAualDto {
 	private String codiComu;
 	private String descIndi;
 	private String codiProv;
-	private String tipoRecapito;
+	private TipoRecapitoAualDto tipoRecapito;
 	private String dataIniz;
 	private String dataFine;
 	private String descTele;
@@ -50,12 +50,6 @@ public class RecapitoAualDto {
 	}
 	public void setCodiProv(String codiProv) {
 		this.codiProv = codiProv;
-	}
-	public String getTipoRecapito() {
-		return tipoRecapito;
-	}
-	public void setTipoRecapito(String tipoRecapito) {
-		this.tipoRecapito = tipoRecapito;
 	}
 	public String getDataIniz() {
 		return dataIniz;
@@ -110,6 +104,12 @@ public class RecapitoAualDto {
 	}
 	public void setDescComuReca(String descComuReca) {
 		this.descComuReca = descComuReca;
+	}
+	public TipoRecapitoAualDto getTipoRecapito() {
+		return tipoRecapito;
+	}
+	public void setTipoRecapito(TipoRecapitoAualDto tipoRecapito) {
+		this.tipoRecapito = tipoRecapito;
 	}
 
 }

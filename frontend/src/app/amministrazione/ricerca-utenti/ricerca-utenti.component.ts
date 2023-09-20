@@ -8,7 +8,7 @@ import { catchError, takeUntil } from 'rxjs/operators';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
 import { DatiAnagrafici } from 'src/app/utenti/classi/datiAnagrafici';
 import { UtentiService } from 'src/app/utenti/utenti.service';
-import { DatiUtente, ProfiliAgs, ProfiliSrt } from './dto/Profili';
+// import { DatiUtente, ProfiliAgs, ProfiliSrt } from './dto/Profili';
 import { ModificaConfigurazioneUtenteDialogComponent } from './modifica-configurazione-utente-dialog/modifica-configurazione-utente-dialog.component';
 
 class UtenteProfiloPresentationValue {
@@ -88,6 +88,7 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
   }
 
   private eseguiRicerca(nome: string, cognome: string, codiceFiscale: string) {
+    /*
     this.utenti = [];
     this.datiUtente.nome = nome;
     this.datiUtente.cognome = cognome;
@@ -120,6 +121,7 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err);
     });
+    */
   }
 
   public onSubmit(f: NgForm) {
@@ -157,12 +159,12 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
   public onDialogClose(evento) {
   }
 
+  /*
   creaUtenteCompleto(
     profiliSrt: ProfiliSrt[],
     profiliAgs: ProfiliAgs[],
     profiliA4g: DatiUtente[]) {
     let utenteProfilo: Map<string, UtenteProfiloPresentationValue> = new Map<string, UtenteProfiloPresentationValue>();
-    /*
     if (profiliSrt) {
       profiliSrt.forEach(element => {
         if (element) {
@@ -193,8 +195,6 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
         }
       });
     }
-    */
-    /*
     if (profiliA4g) {
       profiliA4g.forEach(element => {
         if (element) {
@@ -219,7 +219,6 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
         }
       });
     }
-    */
     if (Object.keys(utenteProfilo).length === 0) {
       this.messages.add(A4gMessages.getToast('tst', A4gSeverityMessage.warn, A4gMessages.utenteNonTrovato));
     } else {
@@ -241,7 +240,7 @@ export class RicercaUtentiComponent implements OnInit, OnDestroy {
       this.utenti = utentiList;
     }
   }
-
+  */
 
   public downloadUtentiA4gCsv() {
     this.utentiService.getEsportaUtentiA4gCsv().pipe(

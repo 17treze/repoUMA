@@ -1,8 +1,14 @@
 package it.tndigitale.a4g.uma.business.service.consumi;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +19,7 @@ import javax.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +33,7 @@ import it.tndigitale.a4g.uma.business.persistence.entity.TipoConsuntivo;
 import it.tndigitale.a4g.uma.business.persistence.repository.AllegatiConsuntivoDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.ConsuntiviConsumiDao;
 import it.tndigitale.a4g.uma.business.persistence.repository.DichiarazioneConsumiDao;
+import it.tndigitale.a4g.uma.business.service.protocollo.SalvaDocumentoException;
 import it.tndigitale.a4g.uma.dto.consumi.ConsuntivoDto;
 import it.tndigitale.a4g.uma.dto.consumi.InfoAllegatoConsuntivoDto;
 
@@ -34,6 +42,7 @@ public class ConsuntiviService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ConsuntiviService.class);
 	private static final String DICHIARAZIONE_NOT_FOUND = "Nessuna Dichiarazione Consumi trovata per id ";
+	protected static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
 
 	@Autowired
 	private DichiarazioneConsumiDao dichiarazioneConsumiDao;
@@ -44,6 +53,9 @@ public class ConsuntiviService {
 	@Autowired
 	private ConsuntiviConsumiValidator consuntiviConsumiValidator;
 
+	@Value("${pathDownload}")
+	private String pathDownload;
+	
 	public List<ConsuntivoDto> getConsuntivi(Long id) {
 		List<ConsuntivoConsumiModel> consuntiviModel = consuntiviConsumiDao.findByDichiarazioneConsumi_id(id);
 		List<ConsuntivoDto> response = new ArrayList<>();
@@ -157,14 +169,20 @@ public class ConsuntiviService {
 						.setNomeFile(collect.get(0))
 						.setTipoAllegato(TipoAllegatoConsuntivo.valueOf(collect.get(1)))
 						.setDescrizione(collect.get(2))
-						.setDocumento(allegato.getByteArray())
+						// .setDocumento(allegato.getByteArray())
 						.setConsuntivoModel(consutivoSalvato));
+				
+				this.salvaAllegato(id, Calendar.YEAR, allegato, collect.get(0));
 			});
 		} else if (TipoConsuntivo.RECUPERO.equals(consutivoSalvato.getTipoConsuntivo())) {
-			allegati.stream().forEach(allegato -> allegatiModel.add(new AllegatoConsuntivoModel()
-					.setNomeFile(allegato.getFilename())
-					.setDocumento(allegato.getByteArray())
-					.setConsuntivoModel(consutivoSalvato)));
+			allegati.stream().forEach(allegato -> {
+				allegatiModel.add(new AllegatoConsuntivoModel()
+						.setNomeFile(allegato.getFilename())
+						// .setDocumento(allegato.getByteArray())
+						.setConsuntivoModel(consutivoSalvato));
+
+				this.salvaAllegato(id, Calendar.YEAR, allegato, allegato.getFilename());
+			});
 
 		} else { // TipoConsuntivo.CONSUMATO || TipoConsuntivo.RIMANENZA
 			throw new IllegalArgumentException(String.format("Non è possibile salvare allegati al consuntivo %s %s", consuntivo.getTipo(), consuntivo.getCarburante()));
@@ -184,4 +202,27 @@ public class ConsuntiviService {
 		}
 		return consutivoSalvato.getId();
 	}
+	
+	protected String salvaAllegato(Long id, Integer anno, ByteArrayResource documento, String filename)
+	{		
+		try {
+			if (id != null && anno != null && documento != null && filename != null) {
+				Path filePath = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/" + 
+						anno + "/allegati/" + filename);
+				
+				Path parentDir = filePath.getParent();
+				if (!Files.exists(parentDir)) {
+					Files.createDirectories(parentDir);
+				}
+				Files.write(filePath, documento.getByteArray(), StandardOpenOption.CREATE_NEW);
+				return filename;
+			}
+			throw new SalvaDocumentoException ("Dati incompleti. Id: " + id + ", anno:" + anno + ", documento: " + 
+					documento + ", filename: " + filename);
+		}
+		catch (IOException e) {
+			throw new SalvaDocumentoException ("Errore nel salvataggio del file: " + filename);
+		}
+	}
+	
 }

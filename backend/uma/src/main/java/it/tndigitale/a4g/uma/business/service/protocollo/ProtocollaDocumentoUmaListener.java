@@ -37,9 +37,10 @@ public class ProtocollaDocumentoUmaListener {
 			logger.info("Avvio Protocollo per domanda {} . CUAA {} Richiedente {}", data.getTipoDocumentoUma(),
 					data.getCuaa(), data.getNome() + " " + data.getCognome());
 			String numeroProtocollo = "prot" + ThreadLocalRandom.current().nextInt(33, 77); // clientProtocollo.protocolla(docDto);
-			protocollazioneStrategy.aggiornaDomanda(event.getData(), numeroProtocollo);
+			protocollazioneStrategy.aggiornaDomanda(event.getData(), numeroProtocollo, docDto.getDocumentoPrincipale().getFilename());
 		}
 		catch (Exception t) {
+			t.printStackTrace();
 			throw new ProtocollazioneUmaException(t.getMessage());
 		}
 	}

@@ -1,10 +1,15 @@
 package it.tndigitale.a4g.uma.api;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -36,9 +41,13 @@ import it.tndigitale.a4g.uma.dto.consumi.ConsuntivoDto;
 public class ConsuntiviController {
 
 	private static final String NO_CONSUNTIVI = "Non ci sono consuntivi da dichiarare";
+	private static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
 
 	@Autowired
 	private ConsuntiviService consuntiviService;
+	
+	@Value("${pathDownload}")
+	private String pathDownload;
 
 	@Operation(summary = "Recupera i consuntivi dichiarati per una dichiarazione consumi. Recupera anche le informazioni di eventuali allegati", description = "")
 	@PreAuthorize("@abilitazioniComponent.checkRicercaDichiarazioneConsumi(#id)")
@@ -51,12 +60,17 @@ public class ConsuntiviController {
 	@PreAuthorize("@abilitazioniComponent.checkRicercaAllegatiConsuntivoDichiarazioneConsumi(#id, #idConsuntivo,#idAllegato)")
 	@GetMapping("/{id}" + ApiUrls.CONSUNTIVI + "/{idConsuntivo}" + ApiUrls.ALLEGATI + "/{idAllegato}" + ApiUrls.STAMPA)
 	public ResponseEntity<Resource> getAllegatoConsuntivo(@PathVariable(required = true) Long id,
-			@PathVariable(required = true) Long idConsuntivo, @PathVariable(required = true) Long idAllegato) {
+			@PathVariable(required = true) Long idConsuntivo, @PathVariable(required = true) Long idAllegato) throws IOException {
 		AllegatoConsuntivoModel allegatoConsuntivo = consuntiviService.getAllegatoConsuntivo(idAllegato);
+
+		Path fileRichiesta = Paths
+				.get(this.pathDownload + this.SUB_DIRECTORY_RICHIESTE + "/" + Calendar.YEAR + "/"
+						+ allegatoConsuntivo.getNomeFile());
+
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF)
 				.header(HttpHeaders.CONTENT_DISPOSITION,
 						"attachment; filename=".concat(allegatoConsuntivo.getNomeFile()))
-				.body(new ByteArrayResource(allegatoConsuntivo.getDocumento()));
+				.body(new ByteArrayResource(Files.readAllBytes(fileRichiesta)));
 	}
 
 	// bug swagger-ui: https://github.com/springdoc/springdoc-openapi/issues/820 -  workaround: incapsulare il json in un file .json

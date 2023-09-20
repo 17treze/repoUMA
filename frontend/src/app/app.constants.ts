@@ -23,6 +23,8 @@ export class Configuration {
   public a4gproxy_server_V2 = environment.backendUrl + 'a4gproxy/api/v2/';
   public mediator_server = environment.backendUrl + 'fascicolo/mediator/api/v1';
   public siap_basepath = `${environment.agsUrl}/egeosGIG/service`;
+  public uma_server = 'http://localhost:9012/' + 'uma/api/v1';
+
   // END BASE_PATH
 
   public UrlGetEntiCAA = this.a4gutente_server + 'domande/EntiCAA';

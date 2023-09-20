@@ -56,7 +56,7 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 		
 		// trova dati richiedente
-		// SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RICHIESTA);
+		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RICHIESTA);
 		
 		// assicurati che il fascicolo sia valido
 		controlloFascicoloValido(fascicolo);
@@ -75,15 +75,15 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 		salvaSuperficiMassime(richiesta);
 		
 		// Salva la richiesta
-		richiestaCarburanteDao.save(richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA)
+		richiestaCarburanteDao.save(richiesta
 				// .setDocumento(documento.getByteArray())
 				.setFirma(firmaObbligatoria ? Boolean.TRUE : haFirma)
 				.setEntePresentatore(getEntePresentatore(fascicolo)));
 		
 		ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
 				.setDocumento(documento).setId(id).setCuaa(richiesta.getCuaa())
-				.setAnno(richiesta.getCampagna().intValue()).setNome("Nome1") // richiedente.getDescNome())
-				.setCognome("Cognome1") // richiedente.getDescCogn())
+				.setAnno(richiesta.getCampagna().intValue()).setNome(richiedente.getDescNome())
+				.setCognome(richiedente.getDescCogn())
 				.setDescrizioneImpresa(fascicolo.getDescDeno()).setPec(fascicolo.getDescPec())
 				.setTipoDocumentoUma(TipoDocumentoUma.RICHIESTA);
 		
@@ -91,21 +91,19 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 		publish(protocollaRichiestaCarburanteDto);
 	}
 	
-	protected String getFilename(Long idRichiesta) {
-		return String.valueOf(idRichiesta).concat(SUFFISSO_NOME_FILE_RICHIESTA_CARBURANTE).concat(".pdf");
-	}
-	
 	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void aggiornaDomanda(ProtocollaDocumentoUmaDto dati, String numeroProtocollo) {
+	public void aggiornaDomanda(ProtocollaDocumentoUmaDto dati, String numeroProtocollo, String filename) {
 		try {
 			logger.info("Aggiornamento Numero di protocollo {} per domanda {}", numeroProtocollo, dati.getId());
 			RichiestaCarburanteModel richiesta = richiestaCarburanteDao.findById(dati.getId())
 					.orElseThrow(() -> new EntityNotFoundException(
 							String.format("Nessuna richiesta da aggiornare %s", dati.getId())));
 			richiesta.setDataProtocollazione(clock.now());
-			richiesta.setNomeFile(this.salvaDocProtocollato(dati.getId(), dati.getAnno(), dati.getDocumento()));
+			this.salvaDocProtocollato(dati.getId(), dati.getAnno(), dati.getDocumento(), filename);
+			richiesta.setNomeFile(filename);
 			richiesta.setProtocollo(numeroProtocollo);
+			richiesta.setStato(StatoRichiestaCarburante.AUTORIZZATA);
 			richiestaCarburanteDao.save(richiesta);
 		}
 		catch (IOException e) {
