@@ -40,9 +40,9 @@ export class HttpClientClienteUmaService {
     return this.http.get<Array<FatturaClienteDto>>(`${this.urlConsumi()}/${idDichiarazione}/clienti/${idCliente}/allegati`, { headers: headers });
   }
 
-  validaClientiContoterzi(idDichiarazione: number, idFascicolo: number): Observable<void> {
+  validaClientiContoterzi(idDichiarazione: number, cuaa: string): Observable<void> {
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-    return this.http.post<void>(`${this.urlConsumi()}/${idDichiarazione}/clienti/valida?idFascicolo=${idFascicolo}`, {});
+    return this.http.post<void>(`${this.urlConsumi()}/${idDichiarazione}/clienti/valida?cuaa=${cuaa}`, {}, { headers: headers });
   }
 
   getLavorazioniClientiContoTerzi(idDichiarazione: string, idCliente: number): Observable<Array<RaggruppamentoLavorazioneDto>> {
@@ -70,13 +70,13 @@ export class HttpClientClienteUmaService {
     return this.http.get<ClienteDto[]>(`${this.urlConsumi()}/${idDomanda}/clienti`, { headers: headers });
   }
 
-  postClientiContoterzi(idDichiarazione: number, idFascicolo: number, allegati: Array<File>): Observable<any> {
+  postClientiContoterzi(idDichiarazione: number, cuaa: string, allegati: Array<File>): Observable<any> {
     const formInput: FormData = new FormData();
     allegati.forEach(allegato => {
       formInput.append('allegati', allegato);
     });
     let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-    return this.http.post<any>(`${this.urlConsumi()}/${idDichiarazione}/clienti?idFascicolo=${idFascicolo}`, formInput);
+    return this.http.post<any>(`${this.urlConsumi()}/${idDichiarazione}/clienti?cuaa=${cuaa}`, formInput, { headers: headers });
   }
 
   getCliente(idDichiarazione: string, idCliente: number): Observable<ClienteConsumiDto> {

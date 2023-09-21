@@ -53,7 +53,7 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 	private static final String SUFFISSO_NOME_FILE_DICHIARAZIONE_CONSUMI = "_dichiarazioneconsumi";
 	private static final String PREFISSO_OGGETTO_DICHIARAZIONE_CONSUMI = "A4G - DICHIARAZIONE CONSUMI UMA - ";
 	private static final String SUB_DIRECTORY_RICHIESTE = "/richieste-carburante";
-
+	
 	@Autowired
 	private DichiarazioneConsumiDao dichiarazioneConsumiDao;
 	@Autowired
@@ -76,7 +76,8 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 		
 		// trova dati richiedente
-		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), dichiarazioneConsumi.getCfRichiedente(), TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
+		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(),
+				dichiarazioneConsumi.getCfRichiedente(), TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
 		
 		// aggiornamento dichiarazione
 		dichiarazioneConsumiDao.save(dichiarazioneConsumi
@@ -91,8 +92,8 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 		allegati.addAll(estraiAllegatiClienti(dichiarazioneConsumi));
 		
 		ProtocollaDocumentoUmaDto protocollaDocumentoUmaDto = new ProtocollaDocumentoUmaDto().setDocumento(documento)
-				.setId(id).setCuaa(richiesta.getCuaa()).setAnno(richiesta.getCampagna().intValue()).setNome(richiedente.getDescNome())
-				.setCognome(richiedente.getDescCogn())
+				.setId(id).setCuaa(richiesta.getCuaa()).setAnno(richiesta.getCampagna().intValue())
+				.setNome(richiedente.getDescNome()).setCognome(richiedente.getDescCogn())
 				.setDescrizioneImpresa(fascicolo.getDescDeno()).setPec(fascicolo.getDescPec()).setAllegati(allegati) // Aggiungo gli allegati solo se presenti (Dichiarazione Consumi)
 				.setTipoDocumentoUma(TipoDocumentoUma.DICHIARAZIONE_CONSUMI);
 		
@@ -191,17 +192,17 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 									.add(dichiarazioneConsumi.getRichiestaCarburante().getCampagna().toString());
 							// Descrizione inserita dall'operatore
 							try {
-								Path fileRichiesta = Paths
-										.get(this.pathDownload + this.SUB_DIRECTORY_RICHIESTE + "/" + Calendar.YEAR + "/"
-												+ allegato.getNomeFile());
+								Path fileRichiesta = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/"
+										+ Calendar.YEAR + "/" + allegato.getNomeFile());
 								
-								allegati.add(getAllegatoAsByteArrayResource(Files.readAllBytes(fileRichiesta), new StringJoiner("$$")
-										.add((joiner + ".pdf").toString()).add(allegato.getDescrizione()).toString()));
+								allegati.add(getAllegatoAsByteArrayResource(Files.readAllBytes(fileRichiesta),
+										new StringJoiner("$$").add((joiner + ".pdf").toString())
+												.add(allegato.getDescrizione()).toString()));
 								i++;
 							}
 							catch (IOException e) {
 								e.printStackTrace();
-							}							
+							}
 						}
 					}
 					if (entry.getKey().equals(TipoConsuntivo.RECUPERO)) {
@@ -214,13 +215,12 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 										.add(dichiarazioneConsumi.getRichiestaCarburante().getCampagna().toString());
 								try {
 									// Descrizione uguale al nome del file
-									Path fileRichiesta = Paths
-											.get(this.pathDownload + this.SUB_DIRECTORY_RICHIESTE + "/" + Calendar.YEAR + "/"
-													+ allegato.getNomeFile());
+									Path fileRichiesta = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/"
+											+ Calendar.YEAR + "/" + allegato.getNomeFile());
 									
-									allegati.add(
-											getAllegatoAsByteArrayResource(Files.readAllBytes(fileRichiesta), new StringJoiner("$$")
-													.add((joiner + ".pdf").toString()).add(joiner.toString()).toString()));
+									allegati.add(getAllegatoAsByteArrayResource(Files.readAllBytes(fileRichiesta),
+											new StringJoiner("$$").add((joiner + ".pdf").toString())
+													.add(joiner.toString()).toString()));
 									i++;
 								}
 								catch (IOException e) {
@@ -248,10 +248,19 @@ public class ProtocollaDichiarazioneConsumi extends ProtocollazioneStrategy {
 							.add(dichiarazioneConsumi.getRichiestaCarburante().getCuaa())
 							.add(dichiarazioneConsumi.getRichiestaCarburante().getCampagna().toString())
 							.add(allegato.getCliente().getCuaa());
-					// Descrizione uguale al nome del file
-					allegati.add(getAllegatoAsByteArrayResource(allegato.getDocumento(), new StringJoiner("$$")
-							.add((joiner + ".pdf").toString()).add(joiner.toString()).toString()));
-					i++;
+					try {
+						// Descrizione uguale al nome del file
+						Path fileRichiesta = Paths.get(this.pathDownload + SUB_DIRECTORY_RICHIESTE + "/" + Calendar.YEAR
+								+ "/" + allegato.getNomeFile());
+						
+						allegati.add(
+								getAllegatoAsByteArrayResource(Files.readAllBytes(fileRichiesta), new StringJoiner("$$")
+										.add((joiner + ".pdf").toString()).add(joiner.toString()).toString()));
+						i++;
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

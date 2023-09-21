@@ -91,7 +91,7 @@ export class PopupAllegatiClientiContoterziComponent implements OnInit, OnDestro
   salva($event: Event) {
     if (this.modalitaCrea) {
       // Salvataggio del cliente con i suoi allegati
-      this.addCliente(this.cliente.idFascicolo);
+      this.addCliente(this.cliente.cuaa);
     } else {
       // Aggiornamento allegati
       this.postAllegatiSuscription = this.httpClientClienteUmaService.postAllegatiClientiContoterzi(this.idDichiarazione, this.cliente.id, this.fileAllegati).subscribe(response => {
@@ -112,8 +112,8 @@ export class PopupAllegatiClientiContoterziComponent implements OnInit, OnDestro
     document.getElementById('fileCaricato').click();
   }
 
-  addCliente(idFascicolo: number) {
-    this.postClienteSubscription = this.httpClientClienteUmaService.postClientiContoterzi(this.idDichiarazione, idFascicolo, this.fileAllegati).subscribe((result) => {
+  addCliente(cuaa: string) {
+    this.postClienteSubscription = this.httpClientClienteUmaService.postClientiContoterzi(this.idDichiarazione, cuaa, this.fileAllegati).subscribe((result) => {
       this.chiudiPopup.emit();
       this.ripristinaValori();
       this.display = false;

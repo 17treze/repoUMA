@@ -56,6 +56,7 @@ export class ClientiContoTerziComponent implements OnInit, OnDestroy {
     private errorService: ErrorService) { }
 
   ngOnInit() {
+    console.log('localStorage.getItem("UMA_RO_DICH"): ' + localStorage.getItem('UMA_RO_DICH'));
     this.READONLY_MODE = this.indiceUmaService.READONLY_MODE_DICHIARAZIONE || (localStorage.getItem('UMA_RO_DICH') == 'true' ? true : false);
     this.routerSubscription = this.route.params
       .subscribe(params => {

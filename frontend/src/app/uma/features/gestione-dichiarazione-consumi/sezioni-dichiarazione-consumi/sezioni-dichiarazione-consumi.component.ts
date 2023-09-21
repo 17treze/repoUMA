@@ -68,10 +68,8 @@ export class SezioniDichiarazioneConsumiComponent implements OnInit {
   // Le dichiarazioni nello stato in compilazione sono modificabili
   private setPageStatus(dichiarazioneConsumiDto: DichiarazioneConsumiDto) {
     if (dichiarazioneConsumiDto.stato === StatoDichiarazioneConsumiEnum.IN_COMPILAZIONE &&
-      this.authService.userSelectedRole !== AuthService.roleIstruttoreUMA &&
-      this.authService.userSelectedRole !== AuthService.roleAdmin &&
-      this.authService.userSelectedRole !== AuthService.rolePrivate &&
-      this.authService.userSelectedRole !== AuthService.roleCaa) {
+      this.authService.userSelectedRole !== AuthService.roleDistributore &&
+      this.authService.userSelectedRole !== AuthService.roleAdmin) {
       this.indiceUmaService.READONLY_MODE_DICHIARAZIONE = false;
       this.isInCompilazione = true;
       this.mostraScarica = false;

@@ -16,7 +16,6 @@ import { UMA_MESSAGES } from 'src/app/uma/uma.messages';
 import * as FileSaver from 'file-saver';
 import * as _ from 'lodash';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
-import { AnagraficaFascicoloService } from 'src/app/fascicolo/creazione-fascicolo/anagrafica-fascicolo.service';
 import { Configuration } from 'src/app/app.constants';
 import { UtentiService } from 'src/app/utenti/utenti.service';
 import { NavigatorService } from 'src/app/a4g-common/services/navigator.service';
@@ -61,7 +60,6 @@ export class ProtocollazioneComponent implements OnInit, OnDestroy {
     private fileService: FileService,
     private httpClientDomandaUmaService: HttpClientDomandaUmaService,
     private errorService: ErrorService,
-    protected anagraficaFascicoloService: AnagraficaFascicoloService,
     protected _configuration: Configuration,
     protected utentiService: UtentiService,
     private navigatorService: NavigatorService
@@ -164,7 +162,8 @@ export class ProtocollazioneComponent implements OnInit, OnDestroy {
   }
 
   onCloseToastProtocollazione() {
-    this.navigatorService.goToPresentazioneIstanze(this.idFascicolo.toString());
+    // reperire il cuaa, eventualmente con nuova API
+    this.navigatorService.goToPresentazioneIstanze('NTRGRG60L19A040K');
   }
 
   onFileChange(event: Event, tipo: string) {

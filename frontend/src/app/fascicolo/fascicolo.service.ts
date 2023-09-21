@@ -107,7 +107,8 @@ export class FascicoloService {
   public getListaPaged(testoDaCercare: string, paginazione: Paginazione): Observable<PaginatorA4G<Array<RisultatiRicercaClientiDto>>> {
     console.log('ricercaListaPaged ' + testoDaCercare);
     const data: any = { ...paginazione };
-    return this.http.get<PaginatorA4G<Array<RisultatiRicercaClientiDto>>>(this.getUrlGetListaPaged(testoDaCercare), { params: data });
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<PaginatorA4G<Array<RisultatiRicercaClientiDto>>>(this.getUrlGetListaPaged(testoDaCercare), { params: data, headers: headers });
   }
 
   // public getFascicolo(idFascicolo: number): Observable<Fascicolo> {

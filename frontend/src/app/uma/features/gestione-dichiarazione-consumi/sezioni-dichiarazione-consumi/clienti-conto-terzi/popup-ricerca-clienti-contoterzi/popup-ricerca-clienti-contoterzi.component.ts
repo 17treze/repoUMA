@@ -102,7 +102,8 @@ export class PopupRicercaClientiContoterziComponent implements OnInit, OnDestroy
       }
       case "AGGIUNGI": {
         // richiamo servizio put e chiudo popup
-        this.validaClientiSubscription = this.httpClientClienteUmaService.validaClientiContoterzi(this.idDichiarazione, id).subscribe(() => {
+        console.log('clienteSelezionato: ' + valore);
+        this.validaClientiSubscription = this.httpClientClienteUmaService.validaClientiContoterzi(this.idDichiarazione, valore).subscribe(() => {
           this.clienteSelezionato.cuaa = valore;
           this.clienteSelezionato.idFascicolo = id;
           this.addCliente(this.clienteSelezionato);

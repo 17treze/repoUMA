@@ -1,5 +1,7 @@
 package it.tndigitale.a4g.uma.business.service.protocollo;
 
+import java.io.IOException;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.slf4j.Logger;
@@ -16,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import it.tndigitale.a4g.framework.client.custom.DocumentDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto;
 import it.tndigitale.a4g.framework.client.custom.MetadatiDto.TipologiaDocumentoPrincipale;
-import it.tndigitale.a4g.framework.security.model.UtenteComponent;
 import it.tndigitale.a4g.framework.client.custom.MittenteDto;
 import it.tndigitale.a4g.framework.support.PersonaSelector;
 import it.tndigitale.a4g.framework.time.Clock;
@@ -27,7 +28,6 @@ import it.tndigitale.a4g.uma.dto.aual.FascicoloAualDto;
 import it.tndigitale.a4g.uma.dto.aual.SoggettoAualDto;
 import it.tndigitale.a4g.uma.dto.protocollo.ProtocollaDocumentoUmaDto;
 import it.tndigitale.a4g.uma.dto.protocollo.TipoDocumentoUma;
-import java.io.IOException;
 
 @Component("PROTOCOLLA_RICHIESTA")
 public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
@@ -56,7 +56,8 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 		FascicoloAualDto fascicolo = getFascicolo(richiesta.getCuaa());
 		
 		// trova dati richiedente
-		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(), TipoDocumentoUma.RICHIESTA);
+		SoggettoAualDto richiedente = reperisciDatiRichiedente(richiesta.getCuaa(), richiesta.getCfRichiedente(),
+				TipoDocumentoUma.RICHIESTA);
 		
 		// assicurati che il fascicolo sia valido
 		controlloFascicoloValido(fascicolo);
@@ -83,9 +84,8 @@ public class ProtocollaRichiestaCarburante extends ProtocollazioneStrategy {
 		ProtocollaDocumentoUmaDto protocollaRichiestaCarburanteDto = new ProtocollaDocumentoUmaDto()
 				.setDocumento(documento).setId(id).setCuaa(richiesta.getCuaa())
 				.setAnno(richiesta.getCampagna().intValue()).setNome(richiedente.getDescNome())
-				.setCognome(richiedente.getDescCogn())
-				.setDescrizioneImpresa(fascicolo.getDescDeno()).setPec(fascicolo.getDescPec())
-				.setTipoDocumentoUma(TipoDocumentoUma.RICHIESTA);
+				.setCognome(richiedente.getDescCogn()).setDescrizioneImpresa(fascicolo.getDescDeno())
+				.setPec(fascicolo.getDescPec()).setTipoDocumentoUma(TipoDocumentoUma.RICHIESTA);
 		
 		// pubblica evento
 		publish(protocollaRichiestaCarburanteDto);

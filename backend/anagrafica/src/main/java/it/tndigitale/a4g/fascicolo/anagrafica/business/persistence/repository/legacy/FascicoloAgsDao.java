@@ -94,7 +94,7 @@ public class FascicoloAgsDao extends JdbcDaoSupport {
 				: "%".concat(filter.getDenominazione().toUpperCase()).concat("%"));
 		parameters.addValue("offset", pageable.getOffset());
 		parameters.addValue("size", pageable.getPageSize());
-		parameters.addValue("data", LocalDateConverter.to(clock.now()));
+		// parameters.addValue("data", LocalDateConverter.to(clock.now()));
 		
 		List<FascicoloAgsPagedRowMapper.FascicoloAgsPagedRow> resultsRow = namedParameterJdbcTemplate.<FascicoloAgsPagedRowMapper.FascicoloAgsPagedRow> query(
 				sb.toString(), parameters, new FascicoloAgsPagedRowMapper());
