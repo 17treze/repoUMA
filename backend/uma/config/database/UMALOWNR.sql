@@ -106,7 +106,7 @@ grant unlimited tablespace to UMALOWNR;
 	"NOME_FILE" VARCHAR2(50 BYTE), 
 	"DESCRIZIONE_FILE" VARCHAR2(50 BYTE), 
 	"TIPO_DOCUMENTO" VARCHAR2(50 BYTE), 
-	"DOCUMENTO" BLOB
+	-- "DOCUMENTO" BLOB
    );
 --------------------------------------------------------
 --  DDL for Table TAB_AGRI_UMAL_CLIENTE
@@ -248,7 +248,7 @@ grant unlimited tablespace to UMALOWNR;
    (	"ID" NUMBER(20,0), 
 	"VERSIONE" NUMBER(10,0) DEFAULT 0, 
 	"ID_CLIENTE" NUMBER(20,0), 
-	"DOCUMENTO" BLOB, 
+	-- "DOCUMENTO" BLOB, 
 	"NOME_FILE" VARCHAR2(50 BYTE)
    );
 --------------------------------------------------------

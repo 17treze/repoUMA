@@ -39,19 +39,10 @@ export class HomeGuard implements CanActivate {
         console.log("CaricaUtente HomeGuard " + JSON.stringify(this.utente));
         if (this.utente?.ruoli?.length > 0 &&
           this.authService.isUserInRole(AuthService.roleCaa, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleAppag, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleGestoreUtenti, this.utente) ||
+          this.authService.isUserInRole(AuthService.rolePrivate, this.utente) ||
           this.authService.isUserInRole(AuthService.roleAdmin, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleIstruttoreAMF, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleAltroEnte, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleViewerPAT, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleBackOffice, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleViticolo, this.utente) ||
           this.authService.isUserInRole(AuthService.roleIstruttoreUMA, this.utente) || 
           this.authService.isUserInRole(AuthService.roleDistributore, this.utente)
-          // this.authService.isUserInRole(AuthService.roleDogane, this.utente) ||
-          // this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat, this.utente
         ) {
           console.log("SUCCESS (profili)");
           return Promise.resolve(true);

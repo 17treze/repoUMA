@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FascicoloAgsDto } from 'src/app/a4g-common/classi/FascicoloAgsDto';
+import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { Configuration } from 'src/app/app.constants';
 import { OAuthService } from 'angular-oauth2-oidc';
 
@@ -16,17 +16,21 @@ constructor(
   private configuration: Configuration
 ) { } 
 
+anagrafe_unica_lazio = `${this.configuration.anagrafe_unica_lazio}`;
+
 public getAccessToken() {
   return this.oauthService.getAccessToken();
 }
 
-public getFascicoloAgs(cuaa: string): Observable<FascicoloAgsDto> {
-  let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
-  return this.http.get<FascicoloAgsDto>(`${this.urlGetFascicoloAgsFromAnagrafica()}/${cuaa}`, { headers: headers });
+public getFascicoloLazio(cuaa: string): Observable<FascicoloLazio> {
+  console.log('ricercaFascicoloLazio ' + cuaa);
+  // let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+  let headers = new HttpHeaders().append('Content-Type', 'application/json');
+  return this.http.get<FascicoloLazio>(this.getUrlGetFascicoloLazio(cuaa), { headers: headers });
 }
 
-private urlGetFascicoloAgsFromAnagrafica() {
-  return this.configuration.anagrafica_server +"/fascicolo/legacy";
+public getUrlGetFascicoloLazio(cuaa: string): string {
+  return `${this.anagrafe_unica_lazio}/fascicoloFS6/trovaFascicoloFS6?cuaa=${cuaa}`;
 }
 
 }

@@ -77,7 +77,7 @@ public class ClientiController {
 	
 	@Operation(summary = "Elimina il cliente di una dichiarazione consumi by id", description = "")
 	@PreAuthorize("@abilitazioniComponent.checkModificaClientiDichiarazioneConsumi(#id, #idCliente)")
-	@DeleteMapping("/{id}" + ApiUrls.CLIENTI + "/{cuaaCliente}")
+	@DeleteMapping("/{id}" + ApiUrls.CLIENTI + "/{idCliente}")
 	public void eliminaCliente(@PathVariable(required = true)
 	Long id, @PathVariable(required = true)
 	Long idCliente) {

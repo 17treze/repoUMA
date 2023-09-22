@@ -44,17 +44,13 @@
             let-cert
             let-i="rowIndex">
             <tr [pSelectableRowWrapper]="cert">
-              <td>{{ cert.cuaa }}</td>
-              <td>{{ cert.denominazione }}</td>
+              <td>{{ cert.codiCuaa }}</td>
+              <td>{{ cert.descDeno }}</td>
               <td>
-                {{
-                  cert?.detenzione?.sportello?.denominazione
-                    ? cert.detenzione.sportello.denominazione
-                    : ("ND" | translate)
-                }}
+                {{ cert.descDete }}
               </td>
               <td>
-                {{ "FAS_ANA.STATO." + cert.stato | translate }}
+                {{ "FAS_ANA.STATO.VALIDO" | translate }}
               </td>
               <td>
                 <button

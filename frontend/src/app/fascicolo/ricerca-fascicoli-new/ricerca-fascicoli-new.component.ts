@@ -76,7 +76,7 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
   }
 
   visualizzaDettaglioFascicolo(selection: FascicoloDTO) {
-    this.router.navigate([`./cuaa/${selection.cuaa}/dettaglio`], { relativeTo: this.route});
+    this.router.navigate([`./cuaa/${selection.codiCuaa}/dettaglio`], { relativeTo: this.route});
   }
 
   defineTableColumns() {

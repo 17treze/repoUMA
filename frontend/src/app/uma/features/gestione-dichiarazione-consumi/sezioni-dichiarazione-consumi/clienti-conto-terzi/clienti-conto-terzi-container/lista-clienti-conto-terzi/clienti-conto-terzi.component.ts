@@ -101,9 +101,11 @@ export class ClientiContoTerziComponent implements OnInit, OnDestroy {
   }
 
   caricaListaClienti() {
-    this.caricaSubscription = this.httpClientClienteUmaService.getClientiContoterzi(this.idDichiarazione).subscribe((result: ClienteDto[]) => {
-      this.listaClientiContoterzi = result;
-    }, error => this.errorService.showError(error));
+    this.caricaSubscription = this.httpClientClienteUmaService.getClientiContoterzi(this.idDichiarazione)
+      .subscribe((result: ClienteDto[]) => {
+        console.log('Clienti contoterzi: ' + JSON.stringify(result));
+        this.listaClientiContoterzi = result;
+      }, error => this.errorService.showError(error));
   }
 
   deleteClientiContoterzi(clienteContoTerzi: ClienteConsumiDto) {
@@ -129,13 +131,14 @@ export class ClientiContoTerziComponent implements OnInit, OnDestroy {
   onClickButton(tipo: String, cliente: ClienteDto) {
     switch (tipo) {
       case "LAVORAZIONI": {
-        this.getLavorazioniSubscription = this.httpClientClienteUmaService.getLavorazioniClientiContoTerzi(this.idDichiarazione.toString(), cliente.id).subscribe((lavorazioni: Array<RaggruppamentoLavorazioneDto>) => {
-          if (lavorazioni && lavorazioni.length) {
-            this.router.navigate([cliente.id], { relativeTo: this.activeRoute.parent });
-          } else {
-            this.messageService.add(A4gMessages.getToast('tst', A4gSeverityMessage.error, UMA_MESSAGES.noLavorazioniDisponibili));
-          }
-        }, error => this.errorService.showError(error));
+        this.getLavorazioniSubscription = this.httpClientClienteUmaService.getLavorazioniClientiContoTerzi(this.idDichiarazione.toString(), cliente.id)
+          .subscribe((lavorazioni: Array<RaggruppamentoLavorazioneDto>) => {
+            if (lavorazioni && lavorazioni.length) {
+              this.router.navigate([cliente.id], { relativeTo: this.activeRoute.parent });
+            } else {
+              this.messageService.add(A4gMessages.getToast('tst', A4gSeverityMessage.error, UMA_MESSAGES.noLavorazioniDisponibili));
+            }
+          }, error => this.errorService.showError(error));
         break;
       }
       case "ALLEGATI": {

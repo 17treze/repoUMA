@@ -23,24 +23,15 @@ import { FascicoloService } from '../fascicolo/fascicolo.service';
 export class HomeComponent implements OnInit, OnDestroy {
   imagePath: '../../img/documentazione.png';
   fascicoli: Fascicolo[];
-  srTrentoRuoli: string[];
-  agsUtenze: UtenteAgs[];
   roleCAA: boolean = false;
-  // roleAPPAG: boolean = false;
-  // roleGestoreUtenti: boolean = false;
   roleADMIN: boolean = false;
   roleAzienda: boolean = false;
-  // roleIstruttoreAMF: boolean = false;
-  // roleIstruttoreDU: boolean = false;
-  // roleAltroEnte: boolean = false;
-  // roleViewerPAT: boolean = false;
-  // roleBackOffice: boolean = false;
-  // roleViticolo: boolean = false;
   roleIstruttoreUMA: boolean = false;
   roleDistributore: boolean = false;
-  // roleDogane: boolean = false;
-  // roleResponsabileFascicoloPat: boolean = false;
+  rolePrivate: boolean = false;
   utente: Utente;
+  srTrentoRuoli: string[];
+  agsUtenze: UtenteAgs[];
   srTrentoMenu: MenuItem[];
   agsItems: MenuItem[];
   a4GItems: MenuItem[];
@@ -85,20 +76,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log("CaricaUtente HomeComponent " + this.utente?.codiceFiscale);
 
     this.roleCAA = this.authService.isUserInRole(AuthService.roleCaa);
-    // this.roleAPPAG = this.authService.isUserInRole(AuthService.roleAppag);
-    // this.roleGestoreUtenti = this.authService.isUserInRole(AuthService.roleGestoreUtenti);
+    this.rolePrivate = this.authService.isUserInRole(AuthService.rolePrivate);
     this.roleADMIN = this.authService.isUserInRole(AuthService.roleAdmin);
     this.roleAzienda = this.authService.isUserInRole(AuthService.rolePrivate);
-    // this.roleIstruttoreAMF = this.authService.isUserInRole(AuthService.roleIstruttoreAMF);
-    // this.roleIstruttoreDU = this.authService.isUserInRole(AuthService.roleIstruttoreDomandaUnica);
-    // this.roleAltroEnte = this.authService.isUserInRole(AuthService.roleAltroEnte);
-    // this.roleViewerPAT = this.authService.isUserInRole(AuthService.roleViewerPAT);
-    // this.roleBackOffice = this.authService.isUserInRole(AuthService.roleBackOffice);
-    // this.roleViticolo = this.authService.isUserInRole(AuthService.roleViticolo);
     this.roleIstruttoreUMA = this.authService.isUserInRole(AuthService.roleIstruttoreUMA);
     this.roleDistributore = this.authService.isUserInRole(AuthService.roleDistributore);
-    // this.roleDogane = this.authService.isUserInRole(AuthService.roleDogane);
-    // this.roleResponsabileFascicoloPat = this.authService.isUserInRole(AuthService.roleResponsabileFascicoloPat);
 
     if (this.roleAzienda) {
       this.getFascicoliAziendaUtente().then(() => this.caricaCollegamentiUtente());

@@ -5,11 +5,15 @@ export class CambioSportelloPatch {
 }
 
 export interface FascicoloDTO {
-  cuaa: string;
-  id: number;
-  denominazione: string;
-  impresa: PersonaDTO;
-  mandatoDto: MandatoDTO;
+  // cuaa: string;
+  // id: number;
+  // denominazione: string;
+  // impresa: PersonaDTO;
+  // mandatoDto: MandatoDTO;
+  codiAzie: number;
+  codiCuaa: string;
+  descDeno: string;
+  descDete: string;
 }
 
 export interface PersonaDTO {

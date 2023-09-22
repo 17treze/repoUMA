@@ -53,9 +53,9 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
       searchFilter,
       paginazione).subscribe((res: PaginatorA4G<Array<FascicoloDTO>>) => {
         if (origin === 'CUAA') {
-          this.cuaList = res.risultati.map((elem: FascicoloDTO) => elem.cuaa);
+          this.cuaList = res.risultati.map((elem: FascicoloDTO) => elem.codiCuaa);
         } else { // RAGIONE_SOCIALE
-          this.descrizioneImpresaList = res.risultati.map((elem: FascicoloDTO) => elem.denominazione);
+          this.descrizioneImpresaList = res.risultati.map((elem: FascicoloDTO) => elem.descDeno);
         }
       });
   }

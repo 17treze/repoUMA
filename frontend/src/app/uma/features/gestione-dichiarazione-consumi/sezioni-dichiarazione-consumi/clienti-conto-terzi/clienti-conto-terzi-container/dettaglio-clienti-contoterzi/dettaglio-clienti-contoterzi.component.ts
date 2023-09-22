@@ -27,6 +27,8 @@ import { ErrorDTO } from 'src/app/a4g-common/interfaces/error.model';
 import { FabbisognoDto } from 'src/app/uma/core-uma/models/dto/FabbisognoDto';
 import { HttpClientAnagraficaService } from 'src/app/uma/shared-uma/services/http-client-anagrafica.service';
 import { DetenzioniAgsDto, FascicoloAgsDto, TipoDetenzioneAgs } from 'src/app/a4g-common/classi/FascicoloAgsDto';
+import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
+
 @Component({
   selector: 'app-dettaglio-clienti-contoterzi',
   templateUrl: './dettaglio-clienti-contoterzi.component.html',
@@ -91,15 +93,15 @@ export class DettaglioClientiContoterziComponent implements OnInit, OnDestroy {
         }),
         switchMap((cliente: ClienteConsumiDto) => {
           this.cliente = cliente;
-          const getFascicoloAgs$ = this.httpClientAnagraficaService.getFascicoloAgs(this.cliente.cuaa);
+          const getFascicoloLazio$ = this.httpClientAnagraficaService.getFascicoloLazio(this.cliente.cuaa);
           const getLavorazioneObs$ = this.httpClientClienteUmaService.getLavorazioniClientiContoTerzi(this.idDichiarazione, this.cliente.id);
           const getFabbisogniRichiestaClienteObs$ = this.httpClientClienteUmaService.getFabbisogniRichiestaCliente(this.idDichiarazione, this.cliente.id);
           const getFabbisogniContoTerzistaObs$ = this.httpClientClienteUmaService.getFabbisogniContoTerzista(this.idDichiarazione, this.cliente.id);
-          return forkJoin([getFascicoloAgs$, getLavorazioneObs$, getFabbisogniRichiestaClienteObs$, getFabbisogniContoTerzistaObs$]);
+          return forkJoin([getFascicoloLazio$, getLavorazioneObs$, getFabbisogniRichiestaClienteObs$, getFabbisogniContoTerzistaObs$]);
         }))
-      .subscribe(([fascicoloAgs, raggruppamenti, fabbisogniRichiestaCliente, fabbisogniDichiaratiContoTerzista]: [FascicoloAgsDto, Array<RaggruppamentoLavorazioneDto>, Array<DichiarazioneDto>, Array<DichiarazioneDto>]) => {
+      .subscribe(([fascicoloLazio, raggruppamenti, fabbisogniRichiestaCliente, fabbisogniDichiaratiContoTerzista]: [FascicoloLazio, Array<RaggruppamentoLavorazioneDto>, Array<DichiarazioneDto>, Array<DichiarazioneDto>]) => {
         this.initVariables();
-        this.sportelloCliente = this.getDetenzioneFromFascicoloAgs(fascicoloAgs);
+        this.sportelloCliente = this.getDetenzioneFromFascicoloAgs(fascicoloLazio);
 
         this.fabbisogniRichiestaCliente = fabbisogniRichiestaCliente;
         this.raggruppamenti = this.lavorazioniBuiderService.raggruppamentoLavorazioneDtoToRaggruppmanetoLavorazioneViewModel(raggruppamenti, fabbisogniDichiaratiContoTerzista);
@@ -293,7 +295,17 @@ export class DettaglioClientiContoterziComponent implements OnInit, OnDestroy {
     lavorazioneTrovata[fieldToCheck] = '';
   }
 
-  private getDetenzioneFromFascicoloAgs(fascicoloAgs: FascicoloAgsDto): DetenzioniAgsDto {
+  private getDetenzioneFromFascicoloAgs(fascicolo: FascicoloLazio): DetenzioniAgsDto {
+    let detenzioni = new DetenzioniAgsDto();
+    if (fascicolo.data?.descDete) {
+      detenzioni.caa = fascicolo.data?.descDete;
+      detenzioni.tipoDetenzione = 'MANDATO';
+      detenzioni.sportello = fascicolo.data?.descDete;
+      detenzioni.identificativoSportello = fascicolo.data?.descDete;
+      return detenzioni;
+    }
+    return null;
+    /*
     if (!fascicoloAgs || !fascicoloAgs.detenzioni || !fascicoloAgs.detenzioni.length) {
       return null;
     }
@@ -325,6 +337,7 @@ export class DettaglioClientiContoterziComponent implements OnInit, OnDestroy {
     if (mandati && mandati.length === 1) {
       return mandati[0];
     }
+    */
   }
 
   private showDialog($event: any) {

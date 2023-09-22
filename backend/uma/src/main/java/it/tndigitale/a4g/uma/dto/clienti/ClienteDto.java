@@ -1,11 +1,11 @@
 package it.tndigitale.a4g.uma.dto.clienti;
 
 public class ClienteDto {
-	private Long id;
 	private Long idDichiarazioneConsumi;
 	private String cuaa;
 	private String denominazione;
 	private Long  idFascicolo;
+	private Long id;
 
 	public Long getId() {
 		return id;
