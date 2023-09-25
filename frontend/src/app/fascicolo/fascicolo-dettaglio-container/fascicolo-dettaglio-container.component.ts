@@ -25,6 +25,7 @@ import * as FileSaver from 'file-saver';
 import { Firmatario } from '../creazione-fascicolo/dto/FirmatarioDto';
 import { SospensioneFascicolo } from 'src/app/a4g-common/classi/Fascicolo';
 import { ErrorService } from 'src/app/a4g-common/services/error.service';
+import { ComuneCapofila } from '../../amministrazione/ricerca-utenti/dto/Profili';
 
 
 @Component({
@@ -283,10 +284,10 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     */
     forkJoin({
       fascicolo: this.fascicoloService.getFascicoloLazio(cuaa),
-      comuneCapofila: this.fascicoloService.getGetComuniCapofila(cuaa)
+      comuniCapofila: this.fascicoloService.getGetComuniCapofila(cuaa)
     })
     .pipe(catchError(error => of(error)))
-    .subscribe(({fascicolo, comuneCapofila}) => {
+    .subscribe(({fascicolo, comuniCapofila}) => {
       if (fascicolo.data) {
         console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
         // inizializzare FascicoloDaCuaa...
@@ -305,8 +306,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         fascicoloDaCuaa.numeIscrRea = fascicolo.data.numeIscrRea;
         fascicoloDaCuaa.numeIscrRegiImpr = fascicolo.data.numeIscrRegiImpr;
         // ...
-        if (comuneCapofila) {
-          fascicoloDaCuaa.comuneCapofila = comuneCapofila.descComu;
+        fascicoloDaCuaa.comuniCapofila = '';
+        if (comuniCapofila) {
+          comuniCapofila.forEach(cc => {
+            fascicoloDaCuaa.comuniCapofila += cc.descComu + ' ';
+          })
         }  
         // ...
         this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);

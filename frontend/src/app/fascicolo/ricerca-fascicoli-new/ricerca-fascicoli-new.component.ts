@@ -7,6 +7,7 @@ import { FascicoloDTO } from '../shared/fascicolo.model';
 import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazione';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnagraficaFascicoloService } from '../creazione-fascicolo/anagrafica-fascicolo.service';
+import { FiltroRicercaFascicoli } from './ricerca-fascicoli-new.model';
 
 @Component({
   selector: 'app-ricerca-fascicoli-new',
@@ -55,10 +56,14 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
     if (event.sortField) {
       sortOrder = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
     }
-    
+
+    let searchFilter = new FiltroRicercaFascicoli()
+    searchFilter.cuaa = "11111111111";
+    // searchFilter.entiUtenteConnesso = ["103"];
+
     const pagination: Paginazione = this.paginatorService.getPagination(Math.round(event.first / this.elementiPerPagina), this.elementiPerPagina, sortBy, sortOrder || SortDirection.ASC);
     this.anagraficaFascicoloService.getAnagraficaFascicolo(
-      null,
+      searchFilter,
       pagination).subscribe((res: PaginatorA4G<Array<FascicoloDTO>>) => {
         this.elementiTotali = res.count;
         this.fascicoliList = res.risultati;

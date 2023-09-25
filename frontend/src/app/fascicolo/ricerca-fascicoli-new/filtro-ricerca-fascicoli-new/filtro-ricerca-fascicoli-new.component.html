@@ -24,7 +24,6 @@
           formControlName="ragioneSociale"
           minLength="3"
           placeholder="{{ 'DENOMINAZIONE' | translate }}"
-          name="codiceFiscale"
           [suggestions]="descrizioneImpresaList"
           (completeMethod)="querySearch($event, 'RAGIONE_SOCIALE')">
         </p-autoComplete>

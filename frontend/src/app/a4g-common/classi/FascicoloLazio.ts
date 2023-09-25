@@ -12,8 +12,8 @@ export class FascicoloData {
    numeScheVali: string
    numeIscrRea: string;
    numeIscrRegiImpr: string;
-   comuneCapofila: string
-}
+   comuniCapofila: string[];
+  }
 
 export class TerrenoData {
   codiTerr: string

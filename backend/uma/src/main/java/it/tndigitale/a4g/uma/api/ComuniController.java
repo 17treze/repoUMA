@@ -41,7 +41,7 @@ public class ComuniController {
 
 	@Operation(summary = "Restituisce il comune capofila per un soggetto indicato il cuaa", description = "")
 	@GetMapping("/azienda/{cuaa}")
-	public ComuneDto getComuneCapofilaFascicolo(@PathVariable(required = true) String cuaa) {
+	public List<ComuneDto> getComuneCapofilaFascicolo(@PathVariable(required = true) String cuaa) {
 		return comuniService.getComuneCapofilaFascicolo(cuaa);
 	}
 	

@@ -86,6 +86,10 @@ public class UmaTerritorioClient extends AbstractClient {
 	
 	private boolean isColturaValida(TerritorioAualDto terreno) {
 		try {
+			if (terreno.getDataFineCond() == null) {
+				return terreno.getListaUtilizzoTerreno().stream().anyMatch(
+								ut -> ut.getListaUtilizzoSuolo().stream().anyMatch(us -> us.getTipoMantenimento() == null)); // da rivedere!!!
+			}
 			return sdf.parse(terreno.getDataFineCond()).after(new Date())
 					&& terreno.getListaUtilizzoTerreno().stream().anyMatch(
 							ut -> ut.getListaUtilizzoSuolo().stream().anyMatch(us -> us.getTipoMantenimento() == null)); // da rivedere!!!

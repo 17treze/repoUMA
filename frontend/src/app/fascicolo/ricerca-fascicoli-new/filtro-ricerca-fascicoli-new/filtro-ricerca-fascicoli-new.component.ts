@@ -42,10 +42,15 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
 
   public querySearch(event: any, origin: 'CUAA' | 'RAGIONE_SOCIALE'): void {
     let searchFilter = new FiltroRicercaFascicoli()
+    // searchFilter.entiUtenteConnesso = ["103"];
+    // console.log('origin: ' + origin);
+    // console.log('cuaa: ' + this.filtersFormGroup.get('cuaa').value);
+    // console.log('denominazione: ' + this.filtersFormGroup.get('ragioneSociale').value);
+
     if (origin === 'CUAA') {
       searchFilter.cuaa = this.filtersFormGroup.get('cuaa').value
     } else {
-      searchFilter.ragioneSociale = this.filtersFormGroup.get('ragioneSociale').value
+      searchFilter.denominazione = this.filtersFormGroup.get('ragioneSociale').value
     }
     const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');
     
@@ -62,11 +67,16 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
 
   onSubmit() {
     let searchFilter = new FiltroRicercaFascicoli()
+    // searchFilter.entiUtenteConnesso = ["103"];
+
+    // console.log('cuaa: ' + this.filtersFormGroup.get('cuaa').value);
+    // console.log('denominazione: ' + this.filtersFormGroup.get('ragioneSociale').value);
+
     if (this.filtersFormGroup.get('cuaa').value) {
       searchFilter.cuaa = this.filtersFormGroup.get('cuaa').value
     }
     if (this.filtersFormGroup.get('ragioneSociale').value) {
-      searchFilter.ragioneSociale = this.filtersFormGroup.get('ragioneSociale').value
+      searchFilter.denominazione = this.filtersFormGroup.get('ragioneSociale').value
     }
     
     const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');

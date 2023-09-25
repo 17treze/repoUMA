@@ -1,8 +1,7 @@
 export class FiltroRicercaFascicoli {
     cuaa?: string;
-    ragioneSociale?: string;
-    nrProtocollo?: string;
-    sportello?: string;
+    denominazione?: string;
+    entiUtenteConnesso?: string[];
     stato?: string;
 
     public clean() {

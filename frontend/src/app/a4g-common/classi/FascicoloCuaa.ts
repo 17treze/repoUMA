@@ -15,7 +15,7 @@ export class FascicoloDaCuaa { /** Fascicolo DTO */
   idSchedaValidazione: number;
   numeIscrRea: string;
   numeIscrRegiImpr: string;
-  comuneCapofila: string;
+  comuniCapofila: string;
  
   static toDto(inc: any): FascicoloDaCuaa {
     if (!inc) return null;
