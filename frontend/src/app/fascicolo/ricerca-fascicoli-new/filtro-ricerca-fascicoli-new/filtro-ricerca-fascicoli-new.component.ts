@@ -8,6 +8,7 @@ import { Paginazione } from 'src/app/a4g-common/utility/paginazione';
 import { AnagraficaFascicoloService } from '../../creazione-fascicolo/anagrafica-fascicolo.service';
 import { FascicoloDTO } from '../../shared/fascicolo.model';
 import { FiltroRicercaFascicoli } from '../ricerca-fascicoli-new.model';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-filtro-ricerca-fascicoli-new',
@@ -27,7 +28,8 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
   constructor(
     private anagraficaFascicoloService: AnagraficaFascicoloService,
     private messageService: MessageService,
-    private paginatorService: PaginatorService
+    private paginatorService: PaginatorService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -52,6 +54,10 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
     } else {
       searchFilter.denominazione = this.filtersFormGroup.get('ragioneSociale').value
     }
+    let comuniCapofilaUtente = this.authService.getComuniCapofilaUtenteConnesso();
+    if (comuniCapofilaUtente) {
+      searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
+    }
     const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');
     
     this.anagraficaFascicoloService.getAnagraficaFascicolo(
@@ -67,7 +73,7 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
 
   onSubmit() {
     let searchFilter = new FiltroRicercaFascicoli()
-    // searchFilter.entiUtenteConnesso = ["103"];
+    // searchFilter.caaUtenteConnesso = ["103"];
 
     // console.log('cuaa: ' + this.filtersFormGroup.get('cuaa').value);
     // console.log('denominazione: ' + this.filtersFormGroup.get('ragioneSociale').value);
@@ -77,6 +83,10 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
     }
     if (this.filtersFormGroup.get('ragioneSociale').value) {
       searchFilter.denominazione = this.filtersFormGroup.get('ragioneSociale').value
+    }
+    let comuniCapofilaUtente = this.authService.getComuniCapofilaUtenteConnesso();
+    if (comuniCapofilaUtente) {
+      searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
     }
     
     const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');

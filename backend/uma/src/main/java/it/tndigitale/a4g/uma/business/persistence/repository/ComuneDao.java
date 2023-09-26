@@ -16,8 +16,9 @@ public interface ComuneDao extends JpaRepository<ComuneModel, String> {
 	public List<ComuneModel> findAllCapofila();
 
 	@Query(value = "select c.* from tab_agri_umal_comuni c\n"
-			+ "where c.codi_prov = :codiProv and c.codi_comu = (\n"
-			+ "select d.codi_comu_capo from tab_agri_umal_comuni d\n"
-			+ "where d.codi_prov = :codiProv and d.codi_comu = :codiComu)", nativeQuery = true)
-	public ComuneModel findCapofilaComune(@Param("codiProv") String codiProv, @Param("codiComu") String codiComu);
+			+ "where c.codi_prov || c.codi_comu IN (\n"
+			+ "    select distinct d.codi_prov || d.codi_comu_capo from tab_agri_umal_comuni d\n"
+			+ "    where d.codi_prov || d.codi_comu IN (:comuniTerreni)\n"
+			+ ")", nativeQuery = true)
+	public List<ComuneModel> findCapofilaComuni(@Param("comuniTerreni") List<String> comuniTerreni);
 }

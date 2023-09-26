@@ -11,7 +11,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { A4gMessages, A4gSeverityMessage } from 'src/app/a4g-common/a4g-messages';
 import { FascicoloDettaglioService } from './fascicolo-dettaglio.service';
 import { FascicoloDettaglio } from '../shared/fascicolo.model';
-import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
+// import { FascicoloLazio } from 'src/app/a4g-common/classi/FascicoloLazio';
 import { FascicoloService } from '../fascicolo.service';
 // import { MandatoService } from '../mandato.service';
 // import { AnagraficaFascicoloService } from '../creazione-fascicolo/anagrafica-fascicolo.service';
@@ -120,11 +120,11 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         this.idValidazione = 0;
       }
       this.subscribeSezioneData(this.cuaa, this.idValidazione);
-      this.subscribeStatoFascicolo();
+      this.loadFascicolo(this.cuaa, this.idValidazione);
+      // this.subscribeStatoFascicolo();
       // this.subscribeInformazioniFirmatario();
       // this.subscribeEredi();
       // this.loadFirmatario(this.cuaa);
-      this.loadFascicolo(this.cuaa, this.idValidazione);
       // this.getEredi();
       // this.loadDates(this.cuaa);
       if (this.idValidazione !== 0) {
@@ -137,9 +137,9 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     });
   }
 
+  /*
   private loadFirmatario(cuaa: string) {
     // da riscrivere
-    /*
     this.anagraficaFascicoloService.getFirmatario(cuaa).pipe(
       takeUntil(this.componentDestroyed$))
       .subscribe((firmatario: PersonaFisicaConCaricaDto) => {
@@ -147,73 +147,14 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
           this.fascicoloDettaglioService.firmatario.next(firmatario);
         }
       });
-    */
   }
+  */
 
   interruttore() {
     this.activeState = !this.activeState;
   }
 
   private subscribeSezioneData(cuaa: string, idValidazione: number) {
-    /*
-    this.fascicoloDettaglioService.mostraDettaglioSezione.pipe(
-      takeUntil(this.componentDestroyed$)
-    ).subscribe((sezione: string) => {
-      if (sezione === FascicoloDettaglio.DATI_AZIENDA) {
-        this.router.navigate(
-          ['./dati-azienda'], {
-          relativeTo: this.route,
-          queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-          queryParamsHandling: 'merge'
-        });
-      } else if (sezione === FascicoloDettaglio.MODALITA_PAGAMENTO) {
-        this.router.navigate(
-          ['./modalita-pagamento'], {
-          relativeTo: this.route,
-          queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-          queryParamsHandling: 'merge'
-        });
-      } else if (sezione === FascicoloDettaglio.LISTA_MACCHINARI) {
-        this.router.navigate(
-          ['./macchine'], {
-          relativeTo: this.route,
-          queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-          queryParamsHandling: 'merge'
-        });
-      } else if (sezione === FascicoloDettaglio.LISTA_FABBRICATI) {
-        this.router.navigate(
-          ['./fabbricati'], {
-          relativeTo: this.route,
-          queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-          queryParamsHandling: 'merge'
-        });
-      } else if (sezione === FascicoloDettaglio.FASCICOLI_VALIDATI) {
-        this.router.navigate(
-          ['./fascicoli-validati'],
-          {
-            relativeTo: this.route,
-            queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-            queryParamsHandling: 'merge'
-          });
-      } else if (sezione === FascicoloDettaglio.DATI) {
-        this.router.navigate(
-          ['./'],
-          {
-            relativeTo: this.route,
-            queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-            queryParamsHandling: 'merge'
-          });
-      } else if (sezione === FascicoloDettaglio.DATI_SOSPENSIONE) {
-        this.router.navigate(
-          ['./dati-sospensione'],
-          {
-            relativeTo: this.route,
-            queryParams: idValidazione ? { 'id-validazione': idValidazione } : {},
-            queryParamsHandling: 'merge'
-          });
-      }
-    });
-    */
     forkJoin({
       reqTerreni: this.fascicoloService.getTerreniFascicoloLazio(cuaa),
       reqFabbricati: this.fascicoloService.getFabbricatiFascicoloLazio(cuaa),
@@ -227,73 +168,21 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  /*
-  private subscribeEredi() {
-    this.fascicoloDettaglioService.eredi.pipe(
-      takeUntil(this.componentDestroyed$)
-    ).subscribe((eredi: EredeDto[]) => {
-        this.eredi = eredi;
-    });
-  }
-  */
-
   private loadFascicolo(cuaa: string, idValidazione: number): void {
-    /*
-    const mandatiByCuaa$ = this.mandatoService.getMandati(cuaa, idValidazione);
-    const fascicoloByCuaa$ = this.anagraficaFascicoloService.getFascicolo(cuaa, idValidazione);
-    forkJoin(mandatiByCuaa$, fascicoloByCuaa$).pipe(
-      catchError(e => {
-        if (e.status === 404) {
-          this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error,
-            this.translateService.instant('NO_CONTENT')));
-        } else {
-          this.messageService.add(A4gMessages.getToast('fdc-toast', A4gSeverityMessage.error, e));
-        }
-        return EMPTY;
-      })).subscribe((res: Array<Array<MandatoDto> | FascicoloDaCuaa>) => {
-        // cerco tra i mandati, quello con revoca a partire dall'anno futuro
-        if (res[0] && (res[0] as Array<MandatoDto>).length) {
-          (res[0] as Array<MandatoDto>).forEach((mandatoDto: MandatoDto) => {
-            const dataInizio = moment(mandatoDto.dataInizio, 'YYYY-MM-DD');
-            const dataFine = moment(mandatoDto.dataFine, 'YYYY-MM-DD');
-            const year = dataInizio.format('YYYY');
-            const currentYear = moment().format('YYYY');
-            if (parseInt(year, 10) > parseInt(currentYear, 10)) {
-              if (dataInizio.format('DD/MM/YYYY').startsWith('01/01')) { // se esiste un mandato futuro
-                this.mandatoWarning = 'Mandato revocato a partire dal ' + dataInizio.format('DD/MM/YYYY');
-              }
-            }
-            // detenzione corrente
-            if (dataFine.isValid()) {
-              // nel caso in cui sia valorizzata la dataFine controllo che oggi è compreso tra dataInizio e dataFine
-              if (moment(new Date()).isSameOrBefore(dataFine, 'day') && moment(new Date()).isSameOrAfter(dataInizio, 'day')) {
-                this.mandatoCorrente = mandatoDto;
-              }
-            } else { // dataFine = null -> mandato in corso
-              if (moment(new Date()).isSameOrAfter(dataInizio, 'day')) {
-                this.mandatoCorrente = mandatoDto;
-              }
-            }
-          });
-        }
-        if (res[1]) {
-          this.fascicoloDettaglioService.fascicoloCorrente.next(res[1] as FascicoloDaCuaa);
-          this.setItemDropdown();
-        }
-      });
-    */
     forkJoin({
       fascicolo: this.fascicoloService.getFascicoloLazio(cuaa),
       comuniCapofila: this.fascicoloService.getGetComuniCapofila(cuaa)
     })
     .pipe(catchError(error => of(error)))
     .subscribe(({fascicolo, comuniCapofila}) => {
-      if (fascicolo.data) {
+      console.log('fascicolo and comunicapofila emitted');
+      if (fascicolo?.data) {
         console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
         // inizializzare FascicoloDaCuaa...
         let fascicoloDaCuaa = new FascicoloDaCuaa();
         fascicoloDaCuaa.cuaa = fascicolo.data.codiCuaa;
         fascicoloDaCuaa.denominazione = fascicolo.data.descDeno;
+        console.log('prima delle date');
         fascicoloDaCuaa.dataApertura = this.dateFromString(fascicolo.data.dataAperFasc);
         fascicoloDaCuaa.dataModifica = this.dateFromString(fascicolo.data.dataElab);
         fascicoloDaCuaa.dataUltimaValidazione = this.dateFromString(fascicolo.data.dataScheVali);
@@ -307,52 +196,26 @@ export class FascicoloDettaglioContainerComponent implements OnInit, OnDestroy {
         fascicoloDaCuaa.numeIscrRegiImpr = fascicolo.data.numeIscrRegiImpr;
         // ...
         fascicoloDaCuaa.comuniCapofila = '';
+        console.log('comuniCapofila: ' + comuniCapofila);
         if (comuniCapofila) {
           comuniCapofila.forEach(cc => {
             fascicoloDaCuaa.comuniCapofila += cc.descComu + ' ';
           })
-        }  
-        // ...
-        this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);
-        this.setItemDropdown();
+        }
+        console.log('assegnamenti eseguiti: ' + fascicoloDaCuaa);
+        this.fascicoloCorrente = fascicoloDaCuaa;
+        this.reloadDataFascicolo();
       }
       else {
         console.log('err11');
-        this.errorService.showErrorWithMessage(fascicolo.text);
+        if (fascicolo?.text) {
+          this.errorService.showErrorWithMessage(fascicolo?.text);
+        }
       }
+    }, error => {
+      console.log('err12');
+      this.errorService.showErrorWithMessage(error, 'tst-fas-ap');
     });
-    /*
-    this.fascicoloService.getFascicoloLazio(cuaa).subscribe((fascicolo: FascicoloLazio) => {
-        if (fascicolo.data) {
-          console.log('fascicolo.data: ' + JSON.stringify(fascicolo.data));
-          // inizializzare FascicoloDaCuaa...
-          let fascicoloDaCuaa = new FascicoloDaCuaa();
-          fascicoloDaCuaa.cuaa = fascicolo.data.codiCuaa;
-          fascicoloDaCuaa.denominazione = fascicolo.data.descDeno;
-          fascicoloDaCuaa.dataApertura = this.dateFromString(fascicolo.data.dataAperFasc);
-          fascicoloDaCuaa.dataModifica = this.dateFromString(fascicolo.data.dataElab);
-          fascicoloDaCuaa.dataUltimaValidazione = this.dateFromString(fascicolo.data.dataScheVali);
-          fascicoloDaCuaa.numeScheVali = fascicolo.data.numeScheVali;
-          // da completare con la descrizione
-          this.mandatoCorrente = new MandatoDto();
-          this.mandatoCorrente.denominazione = fascicolo.data.descDete;
-          fascicoloDaCuaa.mandatoDto = this.mandatoCorrente;
-          // iscrizione CCIAA
-          fascicoloDaCuaa.numeIscrRea = fascicolo.data.numeIscrRea;
-          fascicoloDaCuaa.numeIscrRegiImpr = fascicolo.data.numeIscrRegiImpr;
-          // ...
-          this.fascicoloDettaglioService.fascicoloCorrente.next(fascicoloDaCuaa as FascicoloDaCuaa);
-          this.setItemDropdown();
-        }
-        else {
-          console.log('err11');
-          this.errorService.showErrorWithMessage(fascicolo.text);
-        }
-      }, error => {
-        console.log('err12');
-        this.errorService.showError(error, 'tst-fas-ap');
-      });
-    */
   }
 
   public backgroundStato(): string {

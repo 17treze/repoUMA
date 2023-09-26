@@ -209,4 +209,14 @@ export class AuthService {
     this._userSelectedRole = role;
     localStorage.setItem("selectedRole", this.userSelectedRole);
   }
+
+  public getComuniCapofilaUtenteConnesso(): string[] {    
+    const user: Utente = JSON.parse(sessionStorage.getItem("user"));
+    let comuniCapofilaUtente: string[] = [];
+    user.comuniCapofila.forEach(cc => {
+      comuniCapofilaUtente.push(cc.codiProv + cc.codiComu);
+    })
+    return comuniCapofilaUtente;
+  }
+
 }

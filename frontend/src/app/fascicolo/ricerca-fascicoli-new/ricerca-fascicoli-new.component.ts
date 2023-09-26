@@ -8,6 +8,7 @@ import { Paginazione, SortDirection } from 'src/app/a4g-common/utility/paginazio
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnagraficaFascicoloService } from '../creazione-fascicolo/anagrafica-fascicolo.service';
 import { FiltroRicercaFascicoli } from './ricerca-fascicoli-new.model';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-ricerca-fascicoli-new',
@@ -30,6 +31,7 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
   constructor(
     private anagraficaFascicoloService: AnagraficaFascicoloService,
     private paginatorService: PaginatorService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) {
   }
@@ -58,8 +60,11 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
     }
 
     let searchFilter = new FiltroRicercaFascicoli()
-    searchFilter.cuaa = "11111111111";
-    // searchFilter.entiUtenteConnesso = ["103"];
+    let comuniCapofilaUtente = this.authService.getComuniCapofilaUtenteConnesso();
+    if (comuniCapofilaUtente) {
+      searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
+    }
+    // searchFilter.caaUtenteConnesso = ["103"];
 
     const pagination: Paginazione = this.paginatorService.getPagination(Math.round(event.first / this.elementiPerPagina), this.elementiPerPagina, sortBy, sortOrder || SortDirection.ASC);
     this.anagraficaFascicoloService.getAnagraficaFascicolo(

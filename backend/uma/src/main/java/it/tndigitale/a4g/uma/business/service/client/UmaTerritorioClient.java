@@ -72,6 +72,35 @@ public class UmaTerritorioClient extends AbstractClient {
 					new TypeReference<RespTerritorioAualDto>() {
 					});
 			// rimuovere le particelle con data fine o con nessun mantenimento e convertire il codice qualità (null -> 000)
+			return responseAual.getData().stream().collect(Collectors.toList());
+		}
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	// al momento della crezione della richiesta di carburante importa le macchine che è possibile utilizzare per richiedere carburante
+	public List<TerritorioAualDto> getColturePerRichiestaCarburante(String cuaa, LocalDateTime data) {
+		
+		final String uri = urlTerritorio + "/leggiConsistenzaFS7?cuaa=" + cuaa;
+		
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			URL url = new URL(uri);
+			HttpURLConnection http = (HttpURLConnection) url.openConnection();
+			http.setRequestProperty("Content-Type", "application/json");
+			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+			logger.info(response.getBody());
+			ObjectMapper objectMapper = new ObjectMapper();
+			RespTerritorioAualDto responseAual = objectMapper.readValue(response.getBody(),
+					new TypeReference<RespTerritorioAualDto>() {
+					});
+			// rimuovere le particelle con data fine o con nessun mantenimento e convertire il codice qualità (null -> 000)
 			return responseAual.getData().stream().filter(item -> isColturaValida(item)).collect(Collectors.toList());
 		}
 		catch (MalformedURLException e) {

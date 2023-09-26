@@ -1,7 +1,8 @@
 export class FiltroRicercaFascicoli {
     cuaa?: string;
     denominazione?: string;
-    entiUtenteConnesso?: string[];
+    caaUtenteConnesso?: string[];
+    comuniCapofilaUtenteConnesso?: string[];
     stato?: string;
 
     public clean() {
