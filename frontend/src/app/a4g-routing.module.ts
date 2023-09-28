@@ -15,12 +15,12 @@ import { HomeGuard } from "./auth/home.guard";
 import { Labels } from "./app.labels";
 import { AmministrazioneComponent } from "./funzionalita/amministrazione/amministrazione.component";
 import { MenuCaaComponent } from "./home-caa/menu-caa/menu-caa.component";
-import { DettaglioDomandeScadenzaComponent } from "./home-caa/scadenze/dettaglio-domande-scadenza/dettaglio-domande-scadenza/dettaglio-domande-scadenza.component";
-import { ScadenzeComponent } from "./home-caa/scadenze/scadenze.component";
+// import { DettaglioDomandeScadenzaComponent } from "./home-caa/scadenze/dettaglio-domande-scadenza/dettaglio-domande-scadenza/dettaglio-domande-scadenza.component";
+// import { ScadenzeComponent } from "./home-caa/scadenze/scadenze.component";
+// import { ScadenzeAppagComponent } from "./funzionalita/scadenze-appag/scadenze-appag.component";
 import { ConfigurazioneUmaComponent } from "./uma/features/configurazione/configurazione.component";
 import { GruppiColtureComponent } from "./uma/features/configurazione/gruppi-colture/gruppi-colture.component";
 import { IbanErratiDuComponent } from "./funzionalita/iban-errati-du/iban-errati-du.component";
-import { ScadenzeAppagComponent } from "./funzionalita/scadenze-appag/scadenze-appag.component";
 import { GestioneAziendeComponent } from './fascicolo/gestione-aziende/gestione-aziende.component';
 import { ErrorPageComponent } from './a4g-common/errorPage/error-page.component';
 import { FascicoloDettaglioContainerComponent } from "./fascicolo/fascicolo-dettaglio-container/fascicolo-dettaglio-container.component";
@@ -31,7 +31,7 @@ import { GestioneConsegneComponent } from "./uma/features/gestione-distributore/
 import { RicercaDomandeComponent } from './funzionalita/ricerca/ricerca-domande/ricerca-domande.component';
 import { RicercaAziendeComponentIstruttoreUMA } from "./funzionalita/ricerca-aziende-istruttore-uma/ricerca-aziende-istruttore-uma.component";
 import { GestioneConsegneComponentIstruttoreUMA } from "./funzionalita/gestione-consegne-istruttore-uma/gestione-consegne-istruttore-uma.component";
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { CoefficientiComponent } from './uma/features/configurazione/coefficienti/coefficienti.component';
 import { GruppiLavorazioneComponent } from './uma/features/configurazione/gruppi-lavorazione/gruppi-lavorazione.component';
 import { LavorazioniComponent } from './uma/features/configurazione/lavorazioni/lavorazioni.component';
@@ -76,7 +76,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'fascicoloAziendale', pathMatch: 'full' },
           { path: 'fascicoloAziendale', component: FascicoloAziendaleComponent },
           { path: 'gestioneAzienda', component: GestioneAziendeComponent },
-          { path: 'scadenze', component: ScadenzeComponent },
+          // { path: 'scadenze', component: ScadenzeComponent },
           { path: 'configurazione', component: ConfigurazioneUmaComponent },
         ]
       },
@@ -129,6 +129,7 @@ const routes: Routes = [
         canLoad: [CrmGuard],
         data: { mybreadcrumb: Labels.fascicoliDaMigrare }
       },
+      /*
       {
         path: 'domandeScadenze',
         component: DettaglioDomandeScadenzaComponent,
@@ -151,6 +152,7 @@ const routes: Routes = [
           },
         ]
       },
+      */
       {
         path: "fascicolo",
         loadChildren: () => import('./fascicolo/fascicolo.module').then(m => m.FascicoloModule), // percorso del  fascicolo.module
@@ -333,8 +335,35 @@ const routes: Routes = [
             path: 'gestioneIstruttoria',
             component: PresentazioneIstanzeIstruttoriaComponent
           },
+          { 
+            path: 'fascicoloAziendale', 
+            component: FascicoloAziendaleComponent,
+            data: { mybreadcrumb: Labels.ricercaFascicoloNew }
+          },
         ],
         data: { mybreadcrumb: '' }
+      },
+      {
+        path: 'ricerca-fascicolo-new',
+        data: {
+          mybreadcrumb: Labels.ricercaFascicolo
+        },
+        children: [
+          {
+            path: '',
+            component: RicercaFascicoliNewComponent,
+            data: { mybreadcrumb: Labels.FASCICOLO_DETTAGLIO },
+          },
+          {
+            path: 'cuaa/:cuaa/dettaglio',
+            component: FascicoloDettaglioContainerComponent,
+            data: {
+              breadcrumbTranslateKey: "FAS_ANA.FASCICOLO_AZIENDALE",
+              mybreadcrumb: Labels.FASCICOLO_AZIENDALE
+            },
+            loadChildren: () => import('./fascicolo/fascicolo-dettaglio/fascicolo-dettaglio.module').then(m => m.FascicoloDettaglioModule)
+          }
+        ]
       },
       {
         path: "consultazioneUMA",
@@ -399,6 +428,7 @@ const routes: Routes = [
         ],
         data: { mybreadcrumb: '' }
       },
+      /*
       {
         path: 'istruttoriaAntimafia',
         loadChildren:
@@ -416,6 +446,7 @@ const routes: Routes = [
           mybreadcrumb: Labels.PAC_14_20
         },
       },
+      */
       // {
       // path: '',
       // loadChildren: () => import('./gis/gis.module').then(m => m.GisModule)
@@ -454,7 +485,7 @@ const routes: Routes = [
           { path: 'gestioneAzienda', component: GestioneAziendeComponent },
           { path: 'gestioneIstruttoria', component: PresentazioneIstanzeIstruttoriaComponent },
           { path: 'amministrazione', component: AmministrazioneComponent },
-          { path: 'scadenzeAppag', component: ScadenzeAppagComponent }
+          // { path: 'scadenzeAppag', component: ScadenzeAppagComponent }
         ],
         data: { mybreadcrumb: '' }
       },

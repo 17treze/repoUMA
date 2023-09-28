@@ -4,9 +4,16 @@ import java.util.List;
 
 public class RespTerritorioAualDto {
 
+	private String code;
 	private String text;
 	private List<TerritorioAualDto> data;
       
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	public String getText() {
 		return text;
 	}

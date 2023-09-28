@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PresentaPrelievoDto } from './../models/dto/PresentaPrelievoDto';
 import { PrelievoDto } from 'src/app/uma/core-uma/models/dto/PrelievoDto';
 import { Injectable } from '@angular/core';
@@ -7,6 +7,7 @@ import { PrelieviFilter } from '../models/dto/PrelieviFilter';
 import { HttpClientUmaCoreService } from './http-client-uma-core.service';
 import { HttpHelperService } from '../../../a4g-common/services/http-helper.service';
 import { DistributoreCarburanteDto } from '../../shared-uma/models/dto/DistributoreCarburanteDto';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,25 @@ export class HttpClientDistributoriService {
 
   constructor(
     private http: HttpClient,
+    private oauthService: OAuthService,
     private httpClientCore: HttpClientUmaCoreService,
     private httpHelperService: HttpHelperService
   ) { }
 
+  public getAccessToken() : string {
+    if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
+      return this.oauthService.getAccessToken();
+    }
+    else {
+      // rimandare al login
+      return '';
+    }
+  }
+
   getPrelieviByDistributore(idDistributore: string, filter?: PrelieviFilter): Observable<Array<PrelievoDto>> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     const queryString = filter != null ? '?' + this.httpHelperService.buildQueryStringFromObject(filter) : '';
-    return this.http.get<Array<PrelievoDto>>(`${this.urlDistributori()}/${idDistributore}/prelievi` + queryString);
+    return this.http.get<Array<PrelievoDto>>(`${this.urlDistributori()}/${idDistributore}/prelievi` + queryString, { headers: headers });
   }
 
   salvaPrelievoByIdentificativoDistributore(identificativoDistributore: string, presentaPrelievoDto: PresentaPrelievoDto): Observable<number> {
@@ -43,7 +56,8 @@ export class HttpClientDistributoriService {
   }
 
   getDistributori(campagna: string): Observable<Array<DistributoreCarburanteDto>> {
-    return this.http.get<Array<DistributoreCarburanteDto>>(`${this.urlDistributori()}?campagna=${campagna}`);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.get<Array<DistributoreCarburanteDto>>(`${this.urlDistributori()}?campagna=${campagna}`, { headers: headers });
   }
 
   private urlDistributori() {

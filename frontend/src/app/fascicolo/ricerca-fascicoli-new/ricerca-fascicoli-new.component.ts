@@ -54,7 +54,7 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
 
   loadList(event: PaginatorEvent) {
     let sortOrder;
-    const sortBy: string = event.sortField || 'id';
+    const sortBy: string = event.sortField || 'descDeno';
     if (event.sortField) {
       sortOrder = event.sortOrder === 1 ? SortDirection.ASC : SortDirection.DESC;
     }
@@ -64,7 +64,6 @@ export class RicercaFascicoliNewComponent implements OnInit, OnDestroy {
     if (comuniCapofilaUtente) {
       searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
     }
-    // searchFilter.caaUtenteConnesso = ["103"];
 
     const pagination: Paginazione = this.paginatorService.getPagination(Math.round(event.first / this.elementiPerPagina), this.elementiPerPagina, sortBy, sortOrder || SortDirection.ASC);
     this.anagraficaFascicoloService.getAnagraficaFascicolo(

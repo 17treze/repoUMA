@@ -16,7 +16,7 @@ export class NavigatorService {
       this.router.navigate(['/']);
     }
     let root: string;
-    if (localStorage.getItem("selectedRole") == 'uma_funzionario_comunale') { root = "funzioniCaa/"; }
+    if (localStorage.getItem("selectedRole") == 'uma_funzionario_comunale') { root = "funzioniPatIstruttoreUMA/"; }
     if (localStorage.getItem("selectedRole") == 'uma_funzionario_regionale') { root = "funzioniPat/"; }
     if (localStorage.getItem("selectedRole") == 'uma_caa') { root = "funzioniCaa/"; }
     if (localStorage.getItem("selectedRole") == 'uma_azienda') { root = "/"; }

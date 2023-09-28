@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClientCoreService } from './http-client-core.service';
 import { HttpHelperService } from './http-helper.service';
+import { Configuration } from 'src/app/app.constants';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,36 @@ export class HttpClientConfigUmaService {
 
   constructor(
     private http: HttpClient,
-    private httpClientCoreService: HttpClientCoreService,
-    private httpHelperService: HttpHelperService
+    private httpHelperService: HttpHelperService,
+    private oauthService: OAuthService,
+    private _configuration: Configuration,
   ) { }
 
+  uma_server = `${this._configuration.uma_server}`;
+
+  public getAccessToken() : string {
+    if (this.oauthService.hasValidAccessToken() && this.oauthService.hasValidIdToken()) {
+      return this.oauthService.getAccessToken();
+    }
+    else {
+      // rimandare al login
+      return '';
+    }
+  }
+
   public getConfigurazioneUma(annoCampagna: string): Observable<string> {
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
     const params = '?' + this.httpHelperService.buildQueryStringFromObject({ annoCampagna });
-    return this.http.get<string>(`${this.urlConfigurazioni()}` + params);
+    return this.http.get<string>(`${this.urlConfigurazioni()}` + params, { headers: headers });
   }
 
   public postConfigurazioneUma(data: Date): Observable<number> {
-    return this.http.post<number>(`${this.urlConfigurazioni()}`, data);
+    let headers = new HttpHeaders().append('Authorization', this.getAccessToken());
+    return this.http.post<number>(`${this.urlConfigurazioni()}`, data, { headers: headers });
   }
 
   private urlConfigurazioni() {
-    return this.httpClientCoreService.HOST + this.httpClientCoreService.BASE_PATH_UMA + this.httpClientCoreService.API_V1 + this.CTX_PATH;
+    return this.uma_server + this.CTX_PATH;
   }
 
 }

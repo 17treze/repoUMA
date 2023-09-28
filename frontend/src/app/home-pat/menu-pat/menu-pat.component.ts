@@ -20,56 +20,48 @@ export class MenuPatComponent implements OnInit {
     this.title = this.route.snapshot.data[A4gCostanti.ROUTE_DATA_BREADCRUMB].toUpperCase();
     this.funzioni = new Array<MenuItem>(
       { routerLink: 'fascicoloAziendale', label: 'Fascicolo Aziendale', visible: this.visibleTabFascicoloAziendale() },
-      { routerLink: 'gestioneAzienda', label: 'Domande', visible: this.visibleTabGestioneAziende() },
+      // { routerLink: 'gestioneAzienda', label: 'Domande', visible: this.visibleTabGestioneAziende() },
       { routerLink: 'gestioneIstruttoria', label: 'Gestione Istruttoria', visible: this.visibleTabGestioneIstruttoria() },
       { routerLink: 'amministrazione', label: 'Amministrazione', visible: this.visibleTabAmministrazione() },
-      { routerLink: 'scadenzeAppag', label: 'Scadenze', visible: this.visibleTabScadenze() },
+      // { routerLink: 'scadenzeAppag', label: 'Scadenze', visible: this.visibleTabScadenze() },
       { routerLink: 'ricercaAziende', label: 'Prelievi di carburante', visible: this.visibleTabRicercaAziende() },
       { routerLink: 'gestioneConsegne', label: 'Validare i prelievi', visible: this.visibleTabGestioneConsegne() },
     );
   }
 
   visibleTabRicercaAziende() {
-    return localStorage.getItem('selectedRole') === 'operatore_distributore';
+    return localStorage.getItem('selectedRole') === 'uma_distributore';
   }
 
   visibleTabGestioneConsegne() {
-    return localStorage.getItem('selectedRole') === 'operatore_distributore';
+    return localStorage.getItem('selectedRole') === 'uma_distributore';
   }
 
   visibleTabScadenze() {
-    return localStorage.getItem('selectedRole') === 'appag'
-      || localStorage.getItem('selectedRole') === 'amministratore'
-      || localStorage.getItem('selectedRole') === 'istruttoredu';
+    return false;
+    // return localStorage.getItem('selectedRole') === 'uma_funzionario_regionale'
+    //   || localStorage.getItem('selectedRole') === 'uma_funzionario_comunale';
   }
 
   visibleTabFascicoloAziendale() {
-    return localStorage.getItem('selectedRole') === 'appag' ||
-      localStorage.getItem('selectedRole') === 'amministratore' ||
-      localStorage.getItem('selectedRole') === 'responsabile_fascicolo_pat';
+    return localStorage.getItem('selectedRole') === 'uma_funzionario_regionale' ||
+      localStorage.getItem('selectedRole') === 'uma_funzionario_comunale' ||
+      localStorage.getItem('selectedRole') === 'uma_azienda' ||
+      localStorage.getItem('selectedRole') === 'uma_caa';
   }
 
   visibleTabGestioneAziende() {
-    return localStorage.getItem('selectedRole') === 'appag' ||
-      localStorage.getItem('selectedRole') === 'amministratore' ||
-      localStorage.getItem('selectedRole') === 'viewer_altro_ente' ||
-      localStorage.getItem('selectedRole') === 'viewer_pat';
+    return localStorage.getItem('selectedRole') === 'uma_funzionario_regionale';
   }
 
   visibleTabGestioneIstruttoria() {
-    return localStorage.getItem('selectedRole') === 'appag'
-      || localStorage.getItem('selectedRole') === 'amministratore'
-      || localStorage.getItem('selectedRole') === 'istruttoreamf'
-      || localStorage.getItem('selectedRole') === 'istruttoredu'
-      || localStorage.getItem('selectedRole') === 'viewer_altro_ente'
-      || localStorage.getItem('selectedRole') === 'viewer_pat'
-      || localStorage.getItem('selectedRole') === 'istruttoreuma';
+    return localStorage.getItem('selectedRole') === 'uma_funzionario_regionale'
+      || localStorage.getItem('selectedRole') === 'uma_funzionario_comunale';
   }
 
   visibleTabAmministrazione() {
-    return localStorage.getItem('selectedRole') === 'gestoreutenti'
-      || localStorage.getItem('selectedRole') === 'appag'
-      || localStorage.getItem('selectedRole') === 'amministratore';
+    return localStorage.getItem('selectedRole') === 'uma_funzionario_regionale'
+      || localStorage.getItem('selectedRole') === 'uma_amministratore';
   }
 
 }

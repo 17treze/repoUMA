@@ -44,10 +44,6 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
 
   public querySearch(event: any, origin: 'CUAA' | 'RAGIONE_SOCIALE'): void {
     let searchFilter = new FiltroRicercaFascicoli()
-    // searchFilter.entiUtenteConnesso = ["103"];
-    // console.log('origin: ' + origin);
-    // console.log('cuaa: ' + this.filtersFormGroup.get('cuaa').value);
-    // console.log('denominazione: ' + this.filtersFormGroup.get('ragioneSociale').value);
 
     if (origin === 'CUAA') {
       searchFilter.cuaa = this.filtersFormGroup.get('cuaa').value
@@ -58,7 +54,7 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
     if (comuniCapofilaUtente) {
       searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
     }
-    const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');
+    const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'descDeno');
     
     this.anagraficaFascicoloService.getAnagraficaFascicolo(
       searchFilter,
@@ -73,10 +69,6 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
 
   onSubmit() {
     let searchFilter = new FiltroRicercaFascicoli()
-    // searchFilter.caaUtenteConnesso = ["103"];
-
-    // console.log('cuaa: ' + this.filtersFormGroup.get('cuaa').value);
-    // console.log('denominazione: ' + this.filtersFormGroup.get('ragioneSociale').value);
 
     if (this.filtersFormGroup.get('cuaa').value) {
       searchFilter.cuaa = this.filtersFormGroup.get('cuaa').value
@@ -89,7 +81,7 @@ export class FiltroRicercaFascicoliNewComponent implements OnInit {
       searchFilter.comuniCapofilaUtenteConnesso = comuniCapofilaUtente;
     }
     
-    const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'id');
+    const paginazione: Paginazione = this.paginatorService.getDefaultPagination(50, 'descDeno');
     this.anagraficaFascicoloService.getAnagraficaFascicolo(
       searchFilter,
       paginazione).subscribe((res: PaginatorA4G<Array<FascicoloDTO>>) => {

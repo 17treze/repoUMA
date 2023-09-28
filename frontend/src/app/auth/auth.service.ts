@@ -39,7 +39,8 @@ export class AuthService {
 
   public static roleCaa = "uma_caa";
   public static rolePrivate = "uma_azienda";
-  public static roleAdmin = "uma_funzionario_regionale";
+  public static roleAdmin = "uma_amministratore";
+  public static roleFunzionarioReg = "uma_funzionario_regionale";
   public static roleIstruttoreUMA = "uma_funzionario_comunale";
   public static roleDistributore = "uma_distributore";
   private _userSelectedRole: string;
