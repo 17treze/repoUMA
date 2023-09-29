@@ -117,6 +117,7 @@ const routes: Routes = [
         loadChildren: () => import('./fascicolo/creazione-fascicolo/creazione-fascicolo.module').then(m => m.CreazioneFascicoloModule),
         data: { mybreadcrumb: Labels.fascicolo }
       },
+      /*
       {
         path: 'revocaOrdinaria',
         loadChildren: () => import('./fascicolo/revoca-ordinaria/revoca-ordinaria.module').then(m => m.RevocaOrdinariaModule), // percorso del revoca-ordinaria.module
@@ -129,7 +130,6 @@ const routes: Routes = [
         canLoad: [CrmGuard],
         data: { mybreadcrumb: Labels.fascicoliDaMigrare }
       },
-      /*
       {
         path: 'domandeScadenze',
         component: DettaglioDomandeScadenzaComponent,
@@ -159,6 +159,7 @@ const routes: Routes = [
         canLoad: [CrmGuard],
         data: { mybreadcrumb: '' }
       },
+      /*
       {
         path: 'richiesteRevocaMandato',
         loadChildren: () => import('./fascicolo/richieste-revoca-mandato/richieste-revoca-mandato.module').then(m => m.RichiesteRevocaMandatoModule),
@@ -179,6 +180,7 @@ const routes: Routes = [
         canLoad: [CrmGuard],
         data: { mybreadcrumb: Labels.ricercaFascicoloPerAcquisizioneMandato }
       },
+      */
       {
         path: "coefficienti",
         component: CoefficientiComponent,
@@ -298,9 +300,16 @@ const routes: Routes = [
               mybreadcrumb: Labels.FASCICOLO_AZIENDALE
             },
             loadChildren: () => import('./fascicolo/fascicolo-dettaglio/fascicolo-dettaglio.module').then(m => m.FascicoloDettaglioModule)
-          }
+          },
         ]
       },
+      {
+        path: "fascicolo",
+        loadChildren: () => import('./fascicolo/fascicolo.module').then(m => m.FascicoloModule), // percorso del  fascicolo.module
+        canLoad: [CrmGuard],
+        data: { mybreadcrumb: '' }
+      },
+      /*
       {
         path: 'richiesteRevocaMandato',
         loadChildren: () => import('./fascicolo/richieste-revoca-mandato/richieste-revoca-mandato.module').then(m => m.RichiesteRevocaMandatoModule),
@@ -308,7 +317,8 @@ const routes: Routes = [
         data: {
           mybreadcrumb: Labels.RICHIESTE_REVOCA_MANDATO
         },
-      }
+      },
+      */
     ]
   },
   {
@@ -364,6 +374,12 @@ const routes: Routes = [
             loadChildren: () => import('./fascicolo/fascicolo-dettaglio/fascicolo-dettaglio.module').then(m => m.FascicoloDettaglioModule)
           }
         ]
+      },
+      {
+        path: "fascicolo",
+        loadChildren: () => import('./fascicolo/fascicolo.module').then(m => m.FascicoloModule), // percorso del  fascicolo.module
+        canLoad: [CrmGuard],
+        data: { mybreadcrumb: '' }
       },
       {
         path: "consultazioneUMA",

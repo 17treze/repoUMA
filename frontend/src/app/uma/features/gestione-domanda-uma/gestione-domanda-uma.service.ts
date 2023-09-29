@@ -33,6 +33,8 @@ export class GestioneDomandaUmaService {
   isInCompilazione(richiesta: RichiestaCarburanteDto, items?: Array<MenuItem>): { inCompilazione: boolean, mostraScarica: boolean } {
     let inCompilazione: boolean = false;
     let mostraScarica: boolean = false;
+    console.log('richiesta.stato: ' + richiesta.stato.toString());
+    console.log('this.authService.userSelectedRole: ' + this.authService.userSelectedRole);
     if (richiesta.stato === StatoDomandaUma.IN_COMPILAZIONE &&
       this.authService.userSelectedRole !== AuthService.roleAdmin) {
       this.indiceUmaService.READONLY_MODE = false;
@@ -42,7 +44,10 @@ export class GestioneDomandaUmaService {
       if (items && items.length) {
         items.push({ label: 'Protocollazione' });
       }
-    } else { // se il ruolo è istruttore UMA oppure la domanda non è in compilazione, visualizzo in sola lettura
+    } 
+    else { 
+      // se il ruolo è istruttore UMA oppure la domanda non è in compilazione, visualizzo in sola lettura
+      // non va più bene: l'istruttore deve poter modificare
       console.log('inCompilazione(2): ' + inCompilazione);
       this.indiceUmaService.READONLY_MODE = true;
       inCompilazione = !this.indiceUmaService.READONLY_MODE;

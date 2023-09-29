@@ -1,7 +1,7 @@
 import { FormatConverterService } from 'src/app/uma/shared-uma/services/format-converter.service';
 import { NavigatorService } from 'src/app/a4g-common/services/navigator.service';
 import { DateUtilService } from 'src/app/a4g-common/services/date-util.service';
-import { NullCheckService } from './../../../../shared-uma/services/null-check.service';
+import { NullCheckService } from '../../../../shared-uma/services/null-check.service';
 import { FormService } from '../../../../../a4g-common/services/form.service';
 import { StepRichiestaCarburante } from 'src/app/uma/core-uma/models/enums/StepRichiestaCarburante.enum';
 import { GestioneDomandaUmaService } from '../../gestione-domanda-uma.service';

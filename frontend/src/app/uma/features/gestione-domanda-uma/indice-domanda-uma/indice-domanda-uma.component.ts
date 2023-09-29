@@ -210,12 +210,6 @@ export class IndiceDomandaUmaComponent implements OnInit {
     if (localStorage.getItem("selectedRole") == 'uma_funzionario_comunale') { root = "funzioniPatIstruttoreUMA/"; }
     if (localStorage.getItem("selectedRole") == 'uma_distributore') { root = "funzioniDistributore/"; }
     if (localStorage.getItem("selectedRole") == 'uma_amministratore') { root = "funzioniPat/"; }
-    // if (localStorage.getItem("selectedRole") == 'amministratore') { root = "funzioniPat/"; }
-    // if (localStorage.getItem("selectedRole") == 'gestoreutenti') { root = "funzioniPat/"; }
-    // if (localStorage.getItem("selectedRole") == 'viewer_pat') { root = "funzioniPatVisualizzatore/"; }
-    // if (localStorage.getItem("selectedRole") == 'istruttoreamf') { root = "funzioniPat/"; }
-    // if (localStorage.getItem("selectedRole") == 'istruttoredu') { root = "funzioniPat/gestioneIstruttoria/"; }
-    // if (localStorage.getItem("selectedRole") == 'viewer_altro_ente') { root = "funzioniOperatoreVisualizzatore/"; }
     this.router.navigate([`${root}fascicolo/${this.idFascicolo.toString()}/presentazioneIstanze`]);
   }
 }

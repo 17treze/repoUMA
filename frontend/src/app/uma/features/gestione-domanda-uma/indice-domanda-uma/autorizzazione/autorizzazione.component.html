@@ -1,0 +1,284 @@
+<p-confirmDialog
+  header="Attenzione"
+  class="ui-dialog-visible"
+  icon="pi pi-exclamation-triangle"
+  acceptIcon
+  rejectIcon
+  key="fabbisogno-dialog"
+  acceptLabel="SI"
+  rejectLabel="NO"
+  acceptButtonStyleClass="m-1 w-25"
+  rejectButtonStyleClass="m-1 w-25">
+</p-confirmDialog>
+<p-toast
+  key="tst-fabbisogno"
+  [style]="{ marginTop: '70px' }"></p-toast>
+<p-toast
+  position="top-center"
+  key="tst-eliminazione"
+  [baseZIndex]="50000"
+  (onClose)="onCloseToastEliminazione()"></p-toast>
+<div class="p-grid ui-fluid">
+  <div class="p-col p-0 w-100">
+    <form
+      class="w-100"
+      novalidate
+      [formGroup]="fabbisogniForm">
+      <div class="p-col p-0">
+        <!-- Prima riga Raggruppamento : Save & Back -->
+        <div class="p-grid w-100">
+          <div class="p-col">
+            <button
+              pButton
+              type="button"
+              class="w-10m"
+              icon="pi pi-chevron-circle-left"
+              iconPos="left"
+              label="INDIETRO"
+              (click)="goPrevStep()"></button>
+          </div>
+          <div class="p-col-fixed p-0">
+            <div class="p-grid m-0">
+              <div
+                class="p-col"
+                *ngIf="inCompilazione">
+                <button
+                  pButton
+                  type="button"
+                  class="w-10m"
+                  label="SALVA"
+                  (click)="saveFabbisogno()"></button>
+              </div>
+              <div
+                *ngIf="inCompilazione"
+                class="p-col">
+                <button
+                  pButton
+                  class="w-10m"
+                  type="button"
+                  icon="pi pi-chevron-circle-right"
+                  iconPos="right"
+                  label="PROCEDI"
+                  (click)="goNextStep()"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seconda riga - Fabbisogno -->
+        <div class="p-grid w-100">
+          <div class="p-col mx-2 mt-2 ui-header">
+            <!-- Griglia Fabbisogno -->
+            <div class="p-grid text-center">
+              <div class="p-col-2"></div>
+              <div class="p-col-1"></div>
+              <div class="p-col p-col-align-center">Gasolio</div>
+              <div class="p-col p-col-align-center">Benzina</div>
+              <div class="p-col p-col-align-center">Gasolio serre</div>
+              <div class="p-col p-col-align-center">Gasolio conto terzi e svincolate</div>
+            </div>
+            <div class="p-grid">
+              <div class="p-col-2 p-col-align-center">Residuo a inizio anno (Lt.)</div>
+              <div class="p-col-1"></div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="residuoGasolio"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="residuoBenzina"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="residuoGasolioSerre"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="residuoGasolioTerzi"
+                  pInputText>
+              </div>
+            </div>
+            <div class="p-grid">
+              <div class="p-col-2 p-col-align-center">Ammissibile (Lt.)</div>
+              <div class="p-col-1"></div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="ammissibileGasolio"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="ammissibileBenzina"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="ammissibileGasolioSerre"
+                  pInputText>
+              </div>
+              <div class="p-col"></div>
+            </div>
+            <div
+              class="p-grid"
+              *ngIf="isRettifica">
+              <div class="p-col-2 p-col-align-center">
+                Quantitativo già prelevato (anno in corso)
+              </div>
+              <div class="p-col-1"></div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="prelevatoGasolio"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="prelevatoBenzina"
+                  pInputText>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  formControlName="prelevatoGasolioSerre"
+                  pInputText>
+              </div>
+              <div class="p-col"></div>
+            </div>
+            <div class="p-grid">
+              <div class="p-col-2 p-col-align-center">Richiesto/Assegnato (Lt.)</div>
+              <div class="p-col-1"></div>
+              <div class="p-col">
+                <input
+                  #inputRefGasolio
+                  [a4gLimitSup]="{limit:'ammissibileGasolio'}"
+                  type="text"
+                  class="text-right"
+                  pattern="^([0-9])+$"
+                  maxlength="7"
+                  formControlName="richiestoGasolio"
+                  pInputText>
+                <div *ngIf="fabbisogniForm.get('richiestoGasolio').invalid && (fabbisogniForm.get('richiestoGasolio').dirty || fabbisogniForm.get('richiestoGasolio').touched)">
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoGasolio').errors.pattern"
+                    severity="error"
+                    text="Formato non valido">
+                  </p-message>
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoGasolio').errors.max"
+                    severity="error"
+                    text="Il carburante richiesto non può superare il carburante ammesso">
+                  </p-message>
+                </div>
+              </div>
+              <div class="p-col">
+                <input
+                  #inputRefBenzina
+                  [a4gLimitSup]="{limit:'ammissibileBenzina'}"
+                  type="text"
+                  class="text-right"
+                  pattern="^([0-9])+$"
+                  maxlength="7"
+                  formControlName="richiestoBenzina"
+                  pInputText>
+                <div *ngIf="fabbisogniForm.get('richiestoBenzina').invalid && (fabbisogniForm.get('richiestoBenzina').dirty || fabbisogniForm.get('richiestoBenzina').touched)">
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoBenzina').errors.pattern"
+                    severity="error"
+                    text="Formato non valido">
+                  </p-message>
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoBenzina').errors.max"
+                    severity="error"
+                    text="Il carburante richiesto non può superare il carburante ammesso">
+                  </p-message>
+                </div>
+              </div>
+              <div class="p-col">
+                <input
+                  #inputRefSerre
+                  [a4gLimitSup]="{limit:'ammissibileGasolioSerre'}"
+                  type="text"
+                  class="text-right"
+                  pattern="^([0-9])+$"
+                  maxlength="7"
+                  formControlName="richiestoGasolioSerre"
+                  pInputText>
+                <div *ngIf="fabbisogniForm.get('richiestoGasolioSerre').invalid && (fabbisogniForm.get('richiestoGasolioSerre').dirty || fabbisogniForm.get('richiestoGasolioSerre').touched)">
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoGasolioSerre').errors.pattern"
+                    severity="error"
+                    text="Formato non valido">
+                  </p-message>
+                  <p-message
+                    *ngIf="fabbisogniForm.get('richiestoGasolioSerre').errors.max"
+                    severity="error"
+                    text="Il carburante richiesto non può superare il carburante ammesso">
+                  </p-message>
+                </div>
+              </div>
+              <div class="p-col">
+                <input
+                  type="text"
+                  class="text-right"
+                  pattern="^([0-9])+$"
+                  maxlength="7"
+                  formControlName="richiestoGasolioTerzi"
+                  pInputText>
+                <div *ngIf="fabbisogniForm.controls['richiestoGasolioTerzi'].invalid && (fabbisogniForm.controls['richiestoGasolioTerzi'].dirty || fabbisogniForm.controls['richiestoGasolioTerzi'].touched)">
+                  <p-message
+                    *ngIf="fabbisogniForm.controls['richiestoGasolioTerzi'].errors.pattern"
+                    severity="error"
+                    text="Formato non valido">
+                  </p-message>
+                </div>
+              </div>
+            </div>
+            <div class="p-grid">
+              <div class="p-col-2">Note</div>
+              <div class="p-col-1"></div>
+              <div class="p-col-9">
+                <textarea
+                  #txtAreaInpuRef
+                  pInputTextarea
+                  class="w-100"
+                  maxlength="500"
+                  placeholder="Scrivi qui eventuali note aggiuntive..."
+                  [rows]="5"
+                  formControlName="note"></textarea>
+                <div *ngIf="fabbisogniForm.get('note').invalid && (fabbisogniForm.get('note').dirty || fabbisogniForm.get('note').touched)">
+                  <p-message
+                    *ngIf="fabbisogniForm.get('note').errors.required"
+                    severity="error"
+                    text="{{umaMessages.mandatory}}">
+                  </p-message>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

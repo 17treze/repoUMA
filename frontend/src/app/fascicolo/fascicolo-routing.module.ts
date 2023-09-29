@@ -28,43 +28,43 @@ export const routes: Routes = [
       mybreadcrumb: Labels.GESTIONE_AZIENDA
     },
     children: [
-      {
-        path: 'presentazioneIstanze',
-        component: PresentazioneIstanzeComponent,
-        data: { mybreadcrumb: '' }
-      },
+      // {
+      //   path: 'presentazioneIstanze',
+      //   component: PresentazioneIstanzeComponent,
+      //   data: { mybreadcrumb: '' }
+      // },
       {
         path: 'rettifiche/:cuaa',
         component: GestioneRettificaDomandaUMAComponent,
         data: { mybreadcrumb: UmaLabels.BREADCRUMB.gestione_rettifica }
       },
-      {
-        path: "antimafia",
-        loadChildren: () => import('./antimafia/antimafia.module').then(m => m.AntimafiaModule),
-        data: { mybreadcrumb: '' }
-      },
-      {
-        path: 'mandato',
-        loadChildren: () => import('./mandato/mandato.module').then(m => m.MandatoModule),
-        data: { mybreadcrumb: Labels.mandato }
-      },
-      {
-        path: 'sintesiDomande',
-        component: SintesiDomandeContainerComponent,
-        data: { mybreadcrumb: Labels.CONSULTAZIONE_ANTIMAFIA },
-        children: [
-          {
-            path: '',
-            component: SintesiDomandeComponent
-          },
-          {
-            path: 'dettaglioDomandeCollegate',
-            component: DettaglioDomandeCollegateComponent,
-            pathMatch: 'full',
-            data: { mybreadcrumb: Labels.DOMANDE_COLLEGATE }
-          }
-        ]
-      }
+      // {
+      //   path: "antimafia",
+      //   loadChildren: () => import('./antimafia/antimafia.module').then(m => m.AntimafiaModule),
+      //   data: { mybreadcrumb: '' }
+      // },
+      // {
+      //   path: 'mandato',
+      //   loadChildren: () => import('./mandato/mandato.module').then(m => m.MandatoModule),
+      //   data: { mybreadcrumb: Labels.mandato }
+      // },
+      // {
+      //   path: 'sintesiDomande',
+      //   component: SintesiDomandeContainerComponent,
+      //   data: { mybreadcrumb: Labels.CONSULTAZIONE_ANTIMAFIA },
+      //   children: [
+      //     {
+      //       path: '',
+      //       component: SintesiDomandeComponent
+      //     },
+      //     {
+      //       path: 'dettaglioDomandeCollegate',
+      //       component: DettaglioDomandeCollegateComponent,
+      //       pathMatch: 'full',
+      //       data: { mybreadcrumb: Labels.DOMANDE_COLLEGATE }
+      //     }
+      //   ]
+      // }
       // {
       //   path: 'domandaunica/domandaintegrativa',
       //   component: DomandaIntegrativaComponent,

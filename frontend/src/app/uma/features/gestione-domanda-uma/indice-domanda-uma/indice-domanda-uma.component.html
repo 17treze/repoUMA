@@ -105,6 +105,13 @@
           [richiestaCarburante]="richiestaCarburante"
           (prevStep)="prevStep($event)"></app-protocollazione>
       </div>
+      <div *ngIf="activeIndex == 4">
+        <app-autorizzazone
+          [inCompilazione]="inCompilazione"
+          [idFascicolo]="idFascicolo"
+          [richiestaCarburante]="richiestaCarburante"
+          (prevStep)="prevStep($event)"></app-autorizzazone>
+      </div>
     </div>
   </div>
 </div>

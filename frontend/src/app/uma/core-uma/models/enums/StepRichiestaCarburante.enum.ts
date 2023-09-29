@@ -2,5 +2,6 @@ export enum StepRichiestaCarburante {
     MACCHINE,
     LAVORAZIONI,
     FABBISOGNO,
-    PROTOCOLLAZIONE
+    PROTOCOLLAZIONE,
+    AUTORIZZAZIONE
 }
